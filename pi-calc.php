@@ -12,3 +12,5 @@ for ($k = 0; $k < $limit; $k++){
 }
                          
 echo "PI calc: " . $piVal;
+
+?>
