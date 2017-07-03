@@ -31,7 +31,7 @@ for ($i = 0; $i < $len; $i++){
 	$subFiles = callGitAPI($urlContents);
 	$subFileCount = count($subFiles);
 	if ($subFileCount > 0){
-		echo "<button onclick='accordion(\"" . $repoName . "\")' class='w3-btn w3-block w3-theme-l". (($i+1) ) ." w3-left-align'>" . $repoName . "</button>
+		echo "<button onclick='accordion(\"" . $repoName . "\")' class='w3-btn w3-block w3-theme-l". ($i+1) ." w3-left-align'>" . $repoName . "</button>
 				<div id='" . $repoName . "' class='w3-container w3-hide'>
 				
 					<ul>";
@@ -39,8 +39,9 @@ for ($i = 0; $i < $len; $i++){
 						$subFileURL = $subFiles[$j]['html_url'];
 						$subFileName = $subFiles[$j]['name'];
 						
-						echo "<li class='w3-btn w3-block w3-theme-d". (($j+1) ). " w3-left-align'>
-							<a href='" . $subFileURL . "'>" . $subFileName . "</a></li>";
+						echo "	<li class='w3-btn w3-block w3-theme-d". ($j+1) . " w3-left-align'>
+									<a href='" . $subFileURL . "'>" . $subFileName . "</a>
+								</li>";
 						
 					}
 					echo "</ul>
@@ -85,5 +86,3 @@ function callGitAPI($url){
 	curl_close ($ch);
 	return json_decode($server_output, true);
 }
-	
-	
