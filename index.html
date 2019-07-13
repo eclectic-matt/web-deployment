@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head><title>Home | Eclectic App Development</title>
+	<meta charset='UTF-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	
+	<link rel='icon' type='image/png' href='https://eclecticapp.xyz/assets/EAD.png'>
+	<meta property='og:image' content='https://eclecticapp.xyz/assets/EAD%20logo%20v2.png' />
+	<meta property='og:image:url' content='https://eclecticapp.xyz/assets/EAD%20logo%20v2.png' />
+	<meta property='og:description' content='Making random bits and bots since a while ago' />
+	<meta property='og:title' content='Home | Eclectic App Development' />
+	<meta property='og:type' content='website' />
+	<meta property='og:url' content='http://eclecticapp.xyz/' />
+	<meta property='og:locale' content='en_us' />	
+    <!--link rel='stylesheet' href='/css/w3.css'-->
+  <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
+	  <!--link rel='stylesheet' href='/css/w3-theme-deep-purple.css'-->
+  <link rel='stylesheet' href='https://www.w3schools.com/lib/w3-theme-deep-purple.css'>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+	<script defer src='/css/fontawesome-all.min.js'></script>
+	<style>
+		html,body,h1,h2,h3,h4,h5 {font-family: 'Open Sans', sans-serif}
+	</style>
+	
+<link rel='stylesheet' href='/css/svg_style.css' />
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "image": [
+		"http://eclecticapp.xyz/assets/EAD.png"
+	 ],
+  "@id": "http://eclecticapp.xyz",
+  "name": "Eclectic App Development",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1 Example Street",
+    "addressLocality": "Brighton",
+    "addressRegion": "Brighton and Hove",
+    "postalCode": "BN1",
+    "addressCountry": "UK"
+  },
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+44-7484-258050",
+    "contactType": "customer service"
+  }],
+  "sameAs": [
+    "https://www.facebook.com/EclecticAppDevelopment/",
+    "https://twitter.com/Eclectic_Matt",
+    "https://plus.google.com/100556176870379354758",
+    "https://www.youtube.com/channel/UC5vVv24w66UOA3J6AEBc8Lw"
+  ]
+}
+</script>
+
+
+
+	<script type='text/javascript' src=''></script>
+</head>
+
+
+<body onload='startTime()' class='w3-dark-grey'>	
+	<header style='z-index:1000'>
+	
+		<div style='z-index:1000' class='w3-top w3-jumbo'>	
+		
+			<ul class='w3-navbar w3-large w3-theme-d5'>
+			
+				<!-- This item will be hidden unless on small screens-->
+				<li class='w3-hide-medium w3-hide-large w3-theme-d5 w3-opennav w3-dropdown-click'>
+					<div class='w3-row' style='width:100%; overflow:hidden;'>
+						<div class='w3-col s2'>
+							<a href='#' class='w3-xlarge w3-left' onclick='openNav("navmenu")'>
+								<i class='fas fa-bars'></i>
+							</a>
+						</div>
+						<div class='w3-col s10'>
+							<h1 class='w3-large'><a class='w3-padding-0' href='/'>Eclectic App Development</a></h1>
+						</div>
+					</div>
+				</li>
+				<!-- These items will be shown unless on a small screen -->				
+				<li class='w3-medium w3-hide-small w3-theme w3-hover-none w3-hover-text-purple'>
+					<a style='display:block; margin:0; padding:0;' href='/'>
+						<img style='display:block; margin:0; padding:0;' width='40' height='40' title='Home' src='/assets/EAD logo v2 64px.png' />
+					</a>
+				</li>
+				<li class='w3-medium w3-hide-small w3-theme-l4 w3-hover-none w3-hover-text-purple w3-dropdown-hover'>
+					<a href='/blog'>Blog</a>
+				</li>
+				
+				<li class='w3-hide-small w3-medium w3-theme-l3 w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/about/'>About</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/about/directory.php'>Directory</a>
+		<a href='/about/timeline.php'>Timeline</a>
+		<a href='/about/openBackpack.php'>OpenBackpack</a>
+		<a href='/about/info.php'>Info</a>
+		<a href='/about/privacyPolicy.php'>PrivacyPolicy</a>
+	</div>
+</li><li class='w3-hide-small w3-medium w3-theme-l2 w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/gadgets/'>Gadgets</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/gadgets/directory.php'>Directory</a>
+		<a href='/gadgets/customClock.php'>CustomClock</a>
+		<a href='/gadgets/fibonacciClock.php'>FibonacciClock</a>
+		<a href='/gadgets/binaryClock.php'>BinaryClock</a>
+		<a href='/gadgets/property.php'>Property</a>
+		<a href='/gadgets/completeGrapher.php'>CompleteGrapher</a>
+		<a href='/gadgets/shakespeareanInsult.php'>ShakespeareanInsult</a>
+		<a href='/gadgets/pdfTools.php'>PdfTools</a>
+	</div>
+</li><li class='w3-hide-small w3-medium w3-theme-l1 w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/games/'>Games</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/games/guesthouse.php'>Guesthouse</a>
+		<a href='/games/directory.php'>Directory</a>
+		<a href='/games/asteroids.php'>Asteroids</a>
+		<a href='/games/idleMiner.php'>IdleMiner</a>
+		<a href='/games/peepCommander.php'>PeepCommander</a>
+		<a href='/games/peepDefence.php'>PeepDefence</a>
+	</div>
+</li><li class='w3-hide-small w3-medium w3-theme w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/youtube/'>Youtube</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/youtube/directory.php'>Directory</a>
+		<a href='/youtube/featured.php'>Featured</a>
+		<a href='/youtube/eclecticGaming.php'>EclecticGaming</a>
+	</div>
+</li><li class='w3-hide-small w3-medium w3-theme-d1 w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/projects/'>Projects</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/projects/directory.php'>Directory</a>
+		<a href='/projects/nlyCnnct.php'>NlyCnnct</a>
+		<a href='/projects/swear.php'>Swear</a>
+		<a href='/projects/backronym.php'>Backronym</a>
+		<a href='/projects/projectTable.php'>ProjectTable</a>
+		<a href='/projects/webTools.php'>WebTools</a>
+		<a href='/projects/quizQuestions.php'>QuizQuestions</a>
+	</div>
+</li>					
+
+			</ul>
+				
+				
+				
+			<!-- This should be shown on nav menu icon click (small) -->
+			<div id='navmenu' class='w3-hide w3-hide-medium w3-hide-large w3-theme-d5'>
+				<ul class='w3-navbar w3-left-align w3-large w3-theme-d5'>
+					<li class='w3-theme-l5 w3-hover-none w3-hover-text-purple'><a href='../'><b>Home</b></a></li>
+					<li class='w3-theme-l4 w3-hover-none w3-hover-text-purple w3-dropdown-hover'>
+						<a href='../blog'>Blog</a>
+					</li>
+
+					<li class='  w3-theme-l3 w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/about/'>About</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/about/directory.php'>Directory</a>
+		<a href='/about/timeline.php'>Timeline</a>
+		<a href='/about/openBackpack.php'>OpenBackpack</a>
+		<a href='/about/info.php'>Info</a>
+		<a href='/about/privacyPolicy.php'>PrivacyPolicy</a>
+	</div>
+</li><li class='  w3-theme-l2 w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/gadgets/'>Gadgets</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/gadgets/directory.php'>Directory</a>
+		<a href='/gadgets/customClock.php'>CustomClock</a>
+		<a href='/gadgets/fibonacciClock.php'>FibonacciClock</a>
+		<a href='/gadgets/binaryClock.php'>BinaryClock</a>
+		<a href='/gadgets/property.php'>Property</a>
+		<a href='/gadgets/completeGrapher.php'>CompleteGrapher</a>
+		<a href='/gadgets/shakespeareanInsult.php'>ShakespeareanInsult</a>
+		<a href='/gadgets/pdfTools.php'>PdfTools</a>
+	</div>
+</li><li class='  w3-theme-l1 w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/games/'>Games</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/games/guesthouse.php'>Guesthouse</a>
+		<a href='/games/directory.php'>Directory</a>
+		<a href='/games/asteroids.php'>Asteroids</a>
+		<a href='/games/idleMiner.php'>IdleMiner</a>
+		<a href='/games/peepCommander.php'>PeepCommander</a>
+		<a href='/games/peepDefence.php'>PeepDefence</a>
+	</div>
+</li><li class='  w3-theme w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/youtube/'>Youtube</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/youtube/directory.php'>Directory</a>
+		<a href='/youtube/featured.php'>Featured</a>
+		<a href='/youtube/eclecticGaming.php'>EclecticGaming</a>
+	</div>
+</li><li class='  w3-theme-d1 w3-hover-none w3-hover-text-purple w3-dropdown-hover' style='z-index:1000'>
+	<a href='/projects/'>Projects</a>
+	<div class='w3-dropdown-content w3-light-green w3-card-4'>
+		<a href='/projects/directory.php'>Directory</a>
+		<a href='/projects/nlyCnnct.php'>NlyCnnct</a>
+		<a href='/projects/swear.php'>Swear</a>
+		<a href='/projects/backronym.php'>Backronym</a>
+		<a href='/projects/projectTable.php'>ProjectTable</a>
+		<a href='/projects/webTools.php'>WebTools</a>
+		<a href='/projects/quizQuestions.php'>QuizQuestions</a>
+	</div>
+</li>			
+				</ul>
+			</div>
+			
+		</div>
+		
+	</header>
+	<script type='text/javascript'>
+		// Used to toggle the menu on smaller screens when clicking on the menu button
+		function openNav(id) {
+			//var x = document.getElementById('navmenu');
+			var x = document.getElementById(id);
+			var main = document.getElementById('main');
+			if (x.className.indexOf('w3-show') == -1) {
+				main.style = 'opacity:0.1;';
+				x.className += ' w3-show';
+			} else { 
+				main.style = 'opacity:1;';
+				x.className = x.className.replace(' w3-show', '');
+			}
+		}
+	</script>
+	<!-- Buffer Box -->
+	<div class='w3-container' style='height:45px'>
+		<!-- NOWT, JUST A BUFFER -->
+	</div>
+
+<main id='main'>
+	
+	<!-- Top Box -->
+	<div class='w3-card-10 w3-container w3-medium w3-center w3-padding-large w3-theme-d3'>
+	
+		<div class='w3-row'>
+		
+			<!--div class='w3-col l4 m2 w3-hide-small w3-panel w3-padding-top'-->
+			<div class='w3-col l4 m2 w3-panel w3-padding-top'>
+				
+        
+				<!-- OLD LOGO - IMG
+				img style='display:block; margin:0; padding:0;' class='w3-image' alt='EAD Logo' src='../assets/EAD logo v2.png' /
+				-->
+				
+				<!-- NEW LOGO AS IMG (NOT WORKING)
+				<img src='./assets/ead_anim_logo.svg' class='w3-image' width='500' height='500' viewbox='0 0 100 100' />
+				-->
+
+			  <!-- EMDEDDED SVG (NOT WORKING) 
+				svg class='w3-image' width='500' height='500' viewbox='0 0 100 100'>
+				<image x='0' y='0' height='500' width='500'  xlink:href='/assets/ead_anim_logo.svg' />
+			  </svg-->
+			  
+			  <!-- SVG AS AN OBJECT (NOT WORKING)
+				object id='ead_anim_logo' width='500' height='500' data='/assets/ead_anim_logo.svg' type='image/svg+xml'></object
+			  -->
+
+			  <!-- DIRECT SVG CODE (WORKING) -->
+			  <svg class='w3-image' width='500' height='500' viewbox='0 0 100 100'>
+
+				<g id='bgCircle'>
+				  <circle cx='50%' cy='50%' r='45%' stroke='#0f6c4f' stroke-width='5%' fill='#a384d8' />
+				</g>
+
+				<g id='letterE' stroke='#590696'>
+				  <path id='pathE' class='endPath' d='M 33,33 A 10 10 0 0 0 33 66' fill='none' stroke-width='2' />
+				  <path id='pathEflick' class='flickPath' d='M 16,50 L 30,50' stroke-width='1' />
+				</g>
+				  
+				<g id='letterA' stroke='#590696'>
+				  <path id='pathA' class='midPath' d='M 33,67 A 10 20 0 0 1 67 67'  fill='none' stroke-width='2' />
+				  <path id='pathAflick' class='flickPath' d='M 35,50 L 50 50 ' fill='none' stroke='#590696' stroke-width='1' />
+				</g>
+				  
+				<g id='letterD' stroke='#590696'>
+				  <path id='pathD' class='endPath' d='M 67,66 A 10 10 0 0 0 66 33' fill='none' stroke-width='2' />
+				  <path id='pathDflick' class='flickPath' d='M 66,32 L 66 45' stroke-width='1' />
+				</g>
+				  
+				<text x='15' y='74.5' fill='#ff0' font-family='Open Sans' font-size='5.75'>
+				  Eclectic App Development
+				</text>          
+						  
+			  </svg>
+		 
+			</div>
+
+	
+			<div class='w3-col l4 m5 w3-panel'>
+				<h2>How's it going?</h2>
+				<p>You've stumbled upon the home page for<br>Eclectic App Development</p>
+
+
+<div class='w3-hover-opacity w3-dropdown-hover w3-panel w3-card-8 w3-theme-l2 w3-padding'>
+
+	<a style='text-decoration:none; font-weight: bold;' href='https://eclecticapp.xyz/games/idleMiner.php'>
+
+		<h3>Featured Content</h3>
+		<img class='w3-hover-opacity w3-padding w3-image' src='https://i2.wp.com/eclecticapp.xyz/blog/wp-content/uploads/2018/02/idle-fossil-fuel-miner-feat-2.png' width='100%' height='60%'/>
+
+			<span class='w3-center w3-dropdown-content w3-animate-bottom' style='top:-150px;'>Featured - Idle Miner</span>
+
+	</a>
+
+</div>			
+				<p>Apart from the featured content in the box above, there's also loads of other stuff across the site.... like <a href='../gadgets/customClock.php'>this clock</a>!</p>
+				<div class='w3-center'>   
+					<canvas id='clockcnv'
+						width='200' 
+						height='200'
+						min-width='100'>
+							Your browser does not support the canvas element - this element is a clock displaying the current time.
+					</canvas>
+				</div>
+				<p>Use the handy navigation menu at the top of the page to find your way around</p>
+
+		
+			</div>
+			
+			<div class='w3-col l4 m5 w3-panel'>
+				
+				<div class='w3-panel w3-theme-d5'><h3><a class='w3-hover-opacity' style='text-decoration:none; font-weight: bold;' href='https://eclecticapp.xyz/blog'>Eclectic Blog</a></h3><em>Latest posts:</em><ul class='w3-ul'><li>
+					<ul class='w3-ul w3-hover-opacity w3-panel w3-theme-l1'>
+						<a style='text-decoration:none; font-weight: bold;' href='https://eclecticapp.xyz/blog/2019/03/25/those-are-the-headlines-god-i-wish-they-werent/'>
+							<li>#1 - Those are the headlines. God I wish they weren’t</li>
+							<li text-align='center'>Posted: <span>25/03/2019</span></li>
+						</a>
+					</ul>
+				</li><li>
+					<ul class='w3-ul w3-hover-opacity w3-panel w3-theme-l2'>
+						<a style='text-decoration:none; font-weight: bold;' href='https://eclecticapp.xyz/blog/2019/03/04/bodge-the-builder-home-maintenance-course/'>
+							<li>#2 - Bodge the Builder – Home Maintenance Course</li>
+							<li text-align='center'>Posted: <span>04/03/2019</span></li>
+						</a>
+					</ul>
+				</li><li>
+					<ul class='w3-ul w3-hover-opacity w3-panel w3-theme-l3'>
+						<a style='text-decoration:none; font-weight: bold;' href='https://eclecticapp.xyz/blog/2019/01/31/reviews-and-re-views/'>
+							<li>#3 - Reviews and Re-views</li>
+							<li text-align='center'>Posted: <span>31/01/2019</span></li>
+						</a>
+					</ul>
+				</li><li>
+					<ul class='w3-ul w3-hover-opacity w3-panel w3-theme-l4'>
+						<a style='text-decoration:none; font-weight: bold;' href='https://eclecticapp.xyz/blog/2019/01/14/elder-scrolls-legends-are-made-and-forgotten/'>
+							<li>#4 - Elder Scrolls Legends are made and forgotten</li>
+							<li text-align='center'>Posted: <span>14/01/2019</span></li>
+						</a>
+					</ul>
+				</li><li>
+					<ul class='w3-ul w3-hover-opacity w3-panel w3-theme-l5'>
+						<a style='text-decoration:none; font-weight: bold;' href='https://eclecticapp.xyz/blog/2019/01/14/south-park-phone-destroyer-fails-to-blow-up/'>
+							<li>#5 - South Park Phone Destroyer fails to blow up</li>
+							<li text-align='center'>Posted: <span>14/01/2019</span></li>
+						</a>
+					</ul>
+				</li></ul></div>
+			</div>
+			
+		</div>
+	
+		<script type ='text/javascript'>
+
+			function startTime(){
+				today=new Date();
+				h=today.getHours();
+				m=today.getMinutes();
+				s=today.getSeconds();
+				ord = '';
+				
+					if (h < 12){
+						ord = 'AM';
+					}else{
+						ord = 'PM';
+						if (h > 12){
+						h-=12;
+						}   
+					}
+					
+				//add a zero in front of numbers<10
+				m=checkTime(m);
+				s=checkTime(s);
+				//document.getElementById('clocktxt').innerHTML='The current time is '+h+':'+m+':'+s+' '+ord;
+				 
+				// Pass time to canvas and draw
+				cnv(h,m,s);
+				// Repeat this at intervals <~ 1000ms
+				t=setTimeout(function(){startTime()},1000);
+			}
+
+			function cnv(hr,mn,sc){
+				// SETUP - NOTE: ALL DERIVED FROM CANVAS WID/HGT
+				var c = document.getElementById('clockcnv');
+				var ctx = c.getContext('2d');
+				cwid = c.width;
+				chgt = c.height;
+				midx = cwid/2;
+				midy = chgt/2; 
+				// Len is the universal scale factor
+				len = 0.95*Math.min(midx,midy);
+
+				// CLOCK FACE
+				ctx.beginPath();
+				ctx.moveTo(midx+len,midy);
+				ctx.strokeStyle = '#000000';
+				ctx.lineWidth = len/20;
+				ctx.arc(midx,midy,len,0,2*Math.PI); 
+				ctx.stroke();
+				ctx.fillStyle = '#A000AA';
+				ctx.fill();
+
+				// HR
+				lenf = 0.5;
+				ctx.strokeStyle = '#FFFFFF';
+				ctx.lineWidth = len/40;
+				ctx.beginPath();
+				ctx.moveTo(midx,midy);
+				//Angle = hr & factor of mn with canvas rotation factor of 3pi/2
+				angh = ((hr + (mn/60)) / 12) * (2*Math.PI) + (3*Math.PI/2);
+				ctx.lineTo(midx + (lenf*len) * Math.cos(angh), midy + (lenf*len) * Math.sin(angh));
+				ctx.stroke();
+				// HR HAND TRI
+				ctx.fillStyle = '#FFFFFF';
+				p1ang = angh - ((3 / 180) * Math.PI);
+				ctx.moveTo(midx + (lenf*len) * Math.cos(p1ang), midy + (lenf*len) * Math.sin(p1ang));
+				p2ang = angh + ((3 / 180) * Math.PI);
+				ctx.lineTo(midx + (lenf*len) * Math.cos(p2ang), midy + (lenf*len) * Math.sin(p2ang));
+				ctx.lineTo(midx + (1.1*lenf*len) * Math.cos(angh), midy + (1.1*lenf*len) * Math.sin(angh));
+				ctx.fill();
+				
+				// MN
+				lenf = 0.75;
+				ctx.strokeStyle = '#000000';
+				ctx.lineWidth = (len/50);
+				ctx.beginPath();
+				ctx.moveTo(midx,midy);
+				angm = (mn/60)* (2*Math.PI) + (3*Math.PI/2);
+				ctx.lineTo(midx + (lenf*len) * Math.cos(angm), midy + (lenf*len) * Math.sin(angm));
+				ctx.stroke();
+				// HR HAND TRI
+				ctx.fillStyle = '#000000';
+				p1ang = angm - ((2 / 180) * Math.PI);
+				ctx.moveTo(midx + (lenf*len) * Math.cos(p1ang), midy + (lenf*len) * Math.sin(p1ang));
+				p2ang = angm + ((2 / 180) * Math.PI);
+				ctx.lineTo(midx + (lenf*len) * Math.cos(p2ang), midy + (lenf*len) * Math.sin(p2ang));
+				ctx.lineTo(midx + (1.1*lenf*len) * Math.cos(angm), midy + (1.1*lenf*len) * Math.sin(angm));
+				ctx.fill();
+
+				// SC
+				lenf = 0.9;
+				ctx.strokeStyle = '#FFFF00';
+				ctx.lineWidth = Math.max(1,len/100);
+				ctx.beginPath();
+				ctx.moveTo(midx,midy);
+				angs = (sc/60)* (2*Math.PI) + (3*Math.PI/2);
+				ctx.lineTo(midx + (lenf*len) * Math.cos(angs), midy + (lenf*len) * Math.sin(angs));
+				ctx.stroke(); 
+				// HR HAND TRI
+				ctx.fillStyle = '#FFFF00';
+				p1ang = angs - ((1 / 180) * Math.PI);
+				ctx.moveTo(midx + (lenf*len) * Math.cos(p1ang), midy + (lenf*len) * Math.sin(p1ang));
+				p2ang = angs + ((1 / 180) * Math.PI);
+				ctx.lineTo(midx + (lenf*len) * Math.cos(p2ang), midy + (lenf*len) * Math.sin(p2ang));
+				ctx.lineTo(midx + (1.1*lenf*len) * Math.cos(angs), midy + (1.1*lenf*len) * Math.sin(angs));
+				ctx.fill();
+
+				// SMALL CIRCLE TO COVER ENDS OF HANDS
+				ctx.beginPath();
+				ctx.lineWidth = 1;
+				ctx.moveTo(midx,midy);
+				// Len/40 is width of HR hand (the widest)
+				ctx.arc(midx,midy,(len/40),0,2*Math.PI);
+				ctx.stroke();
+				ctx.fillStyle = '#000000';
+				ctx.fill();
+
+				// TEXT
+				  if (len > 50){
+				
+						f = (len/10);
+						fv = f.toFixed(0);
+						fontval = fv+'pt Verdana';
+						ctx.font = fontval;
+						// Use strokeText for hollow, fillText for solid numbers
+						ctx.fillStyle = '#FFFFFF';
+				
+						for (i = 1; i < 13; i++){
+							textx = midx + (lenf*len) * Math.cos((i/12)* (2*Math.PI) + (3*Math.PI/2));
+							texty = midy + (lenf*len) * Math.sin((i/12)* (2*Math.PI) + (3*Math.PI/2));
+							// Adjust as text drawn from top left (alignment)
+							textx = textx - 0.06*len;
+							texty = texty + 0.04*len;
+								ctx.fillText(i, textx, texty);
+						}
+				
+					}
+			}
+			 
+			function checkTime(i){
+				if (i<10){
+					i='0' + i;
+				}
+				return i;
+			}
+		</script>
+	</div>
+		
+<!-- Buffer Box -->
+		<div class='w3-container' style='height:55px'>
+			<!-- NOWT, JUST A BUFFER -->
+		</div>
+		
+		<footer class='w3-bottom w3-center'>
+			<div class='w3-card-8 w3-theme-d5'>
+				<div class='w3-row-padding w3-padding-large w3-large social'>
+					<div class='w3-col m2 s1 w3-cell-middle	'>
+						<a href='https://www.facebook.com/EclecticAppDevelopment' title='Facebook Page'><i class='fab fa-facebook'></i></a>
+					</div>
+					<div class='w3-col m2 s1 w3-cell-middle	'>
+						<a href='https://twitter.com/Eclectic_Matt' title='Twitter Page'><i class='fab fa-twitter-square'></i></a>
+					</div>
+					<div class='w3-col s8 m4 w3-tiny w3-cell-middle	'>
+						<em>&copy;2014-2019 Eclectic App Development</em>
+						<br>
+						<em title='Last modification time: Sat 7th July 2018 8:43:06am'>Developed and maintained by Matt Tiernan</em>
+					</div>
+					<div class='w3-col m2 s1 w3-cell-middle	'>
+						<a href='https://plus.google.com/100556176870379354758' title='GooglePlus Page'><i class='fab fa-google-plus-square'></i></a>
+					</div>
+					<div class='w3-col m2 s1 w3-cell-middle	'>
+						<a href='https://www.youtube.com/channel/UC5vVv24w66UOA3J6AEBc8Lw' title='Youtube Channel'><i class='fab fa-youtube-square'></i></a>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		</main>
+		</body>
+		</html>
+		
+		
