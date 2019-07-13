@@ -1,0 +1,23 @@
+.endPath {
+  stroke-dasharray: 55;
+  stroke-dashoffset: 55;
+  animation: dash 3s linear forwards;
+}
+
+.midPath {
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  animation: dash 3s linear forwards;
+}
+
+.flickPath {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  animation: dash 4.5s linear forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
