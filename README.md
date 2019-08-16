@@ -2,7 +2,7 @@
 
 These files relate to the eclectic website: http://eclecticapp.xyz
 
-This is also being deployed on Github pages at: http://eclectic-matt.github.io/web-deployment/
+This is also being deployed on Github pages at: https://eclectic-matt.github.io/web-deployment/
 
 Some files are backups of pages and some are helper files for specific functionality.
 
