@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css' />
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <title>Carcassonne Rules</title>
+
+  <script>
+
+  function showHide(name, state){
+
+    //console.log(name,state);
+    let rulesBoxEl = document.getElementById(name);
+    if (state === true){
+      rulesBoxEl.classList.remove('w3-hide');
+      rulesBoxEl.classList.add('w3-show');
+    }else{
+      rulesBoxEl.classList.remove('w3-show');
+      rulesBoxEl.classList.add('w3-hide');
+    }
+
+  }
+
+  </script>
+</head>
+<body>
+
+  <div class='w3-padding w3-card-8 w3-grey' id='settingsDiv'>
+
+    <h1>Carcassonne Rules</h1>
+    <em>Select the expansions you are playing to show the relevant rules boxes below.</em>
+
+    <div class='w3-card-8 w3-padding-10 w3-margin' id='expansionsDiv'>
+
+      <label for='expChkBaseGame'>Base Game </label><input onchange='showHide("baseGame", this.checked)' type='checkbox' checked></input>
+
+      <h2 class='w3-margin'>Main Expansions</h2>
+
+      <div class='w3-row-padding'>
+
+        <div class='w3-col s12 m6 l4'>
+          <label for='expChkInnsCathedrals'>Inns & Cathedrals </label><input onchange='showHide("innsCathedrals", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4'>
+          <label for='expChkBuildersTraders'>Builders & Traders </label><input onchange='showHide("buildersTraders", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4'>
+          <label for='expChkPrincessDragon'>Princess & Dragon </label><input onchange='showHide("princessDragon", this.checked)' type='checkbox'></input>
+        </div>
+
+      </div>
+
+      <h2 class='w3-margin'>Mini Expansions</h2>
+
+      <label for='expChkTheSchool'>The School </label><input onchange='showHide("theSchool", this.checked)' type='checkbox'></input>
+
+    </div>
+
+  </div>
+
+  <br><br>
+
+  <div class='w3-card-8 w3-padding-10 w3-row-padding' id='rulesDiv'>
+
+    <div id='baseGame' class='w3-col s12 m6 l4 w3-show'>
+      <div class='w3-padding w3-card-8 w3-blue'>
+        <h3>Base Game Rules</h3>
+        <p>Blah blah blah...</p>
+      </div>
+    </div>
+
+    <div id='innsCathedrals' class='w3-col s12 m6 l4 w3-hide w3-small'>
+      <div class='w3-padding w3-card-8 w3-cyan'>
+        <h3>Inns & Cathedrals Rules</h3>
+        <h4>Tiles</h4>
+        <p>The main tiles to note are:</p>
+        <ul>
+          <li><b>Inn Tiles</b> - these have a small building with a small chimney next to a pond</li>
+          <li><b>Cathedral Tiles</b> - these are full city tiles with a large cathedral in the middle</li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds a new meeple - <b>the large "Mega Meeple"</b> - which counts for double when determining a majority on any feature (road, city, field). It does NOT reward double points, it is only counted as two meeples when there are multiple meeples on a feature.</p>
+        <p>This expansion also adds the pink 6th player set of meeples (8 meeples and an abbot).</p>
+        <h4>Scoring</h4>
+        <p>The scoring rules to note are:</p>
+        <ul>
+          <li>A road with an Inn on it is worth <b>double points if completed</b> and it is worth <b>no points if incomplete</b></li>
+          <li>A city with a Cathedral in it is worth <b>double points if completed</b> and it is worth <b>no points if incomplete</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='buildersTraders' class='w3-col s12 m6 l4 w3-hide w3-small'>
+      <div class='w3-padding w3-card-8 w3-red'>
+        <h3>Builders & Traders Rules</h3>
+        <h4>Tiles</h4>
+        <p>The main tiles to note are:</p>
+        <ul>
+          <li><b>Bridge Tiles</b> - these have two roads crossing which do not end, they are continuous through the tile but do not join together</li>
+          <li><b>Goods Tiles</b> - these have a symbol for one of three types of goods - wine, grain and cloth</li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds two new meeples:</p>
+          <ul>
+            <li><b>Builders</b> - these are tall meeples which can be placed on a road or city <b>where you already have a meeple placed</b>. If you extend this feature after placing the Builder on it, you can take a second (additional) turn straight away, placing a tile and meeple as usual. <b>You cannot cause a chain reaction - extending the feature with the Builder will not give you any further turns</b></li>
+            <li><b>Pigs</b> - these are used in fields <b>where you have already placed a farmer</b>. If you have the majority (or tie for majority) in that field then you will score extra points (see scoring below)</li>
+          </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rules to note are:</p>
+        <ul>
+          <li><b>Goods tokens</b> - at the end of the game, the player with the most tokens of each type of goods will gain 10 victory points (tied players both get 10 points)</li>
+          <li><b>Pig meeples </b> - at the end of the game, players with a pig meeple in a field (and a majority of meeples or tie for majority) will score 4 points for each completed city the field touches</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='princessDragon' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-yellow'>
+        <h3>Princess & Dragon Rules</h3>
+        <p>Blah blah blah...</p>
+      </div>
+    </div>
+
+    <div id='theSchool' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-red'>
+        <h3>The School Rules</h3>
+        <p>Blah blah blah...</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
