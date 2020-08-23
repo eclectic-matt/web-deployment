@@ -30,27 +30,33 @@
 
     <h1>Carcassonne Rules</h1>
 
-    <p>This page will show condensed rules for whichever Carcassonne expansions you are playing! You might also be interested in my <a href='https://docs.google.com/spreadsheets/d/1rs2vPSAhNKxGR9xYkJMK2Q07lFrKKik_jN2xpafpBE0/edit?usp=sharing'>Google Sheet for Carcassonne calculations</a> which shows how many tiles and meeples you are using!</p>
+    <p>This page will show condensed rules for whichever Carcassonne expansions you are playing!</p>
+    <p>You might also be interested in my <a href='https://docs.google.com/spreadsheets/d/1rs2vPSAhNKxGR9xYkJMK2Q07lFrKKik_jN2xpafpBE0/edit?usp=sharing'>Google Sheet for Carcassonne calculations</a> which shows how many tiles and meeples you are using!</p>
+    <p>For more detailed rules, and clarifications for specific situations, I would recommend the <a href='https://boardgamegeek.com/filepage/87531/carcassonne-standard-complete-annotated-rules'>Carcassonne Standard Complete Rules on Board Game Geek</a></p>
 
     <p><em>Select the expansions you are playing to show the relevant rules boxes below.</em></p>
 
     <div class='w3-card-8 w3-padding-10 w3-margin' id='expansionsDiv'>
 
-      <label for='expChkBaseGame'>Base Game </label><input onchange='showHide("baseGame", this.checked)' type='checkbox' checked></input>
+      <div class='w3-large w3-margin'>
+
+        <label for='expChkBaseGame'>Base Game </label><input onchange='showHide("baseGame", this.checked)' type='checkbox' checked></input>
+
+      </div>
 
       <h2 class='w3-margin'>Main Expansions</h2>
 
       <div class='w3-row-padding'>
 
-        <div class='w3-col s12 m6 l4'>
+        <div class='w3-col s12 m6 l4 w3-large'>
           <label for='expChkInnsCathedrals'>Inns & Cathedrals </label><input onchange='showHide("innsCathedrals", this.checked)' type='checkbox'></input>
         </div>
 
-        <div class='w3-col s12 m6 l4'>
+        <div class='w3-col s12 m6 l4 w3-large'>
           <label for='expChkBuildersTraders'>Builders & Traders </label><input onchange='showHide("buildersTraders", this.checked)' type='checkbox'></input>
         </div>
 
-        <div class='w3-col s12 m6 l4'>
+        <div class='w3-col s12 m6 l4 w3-large'>
           <label for='expChkPrincessDragon'>Princess & Dragon </label><input onchange='showHide("princessDragon", this.checked)' type='checkbox'></input>
         </div>
 
@@ -58,7 +64,21 @@
 
       <h2 class='w3-margin'>Mini Expansions</h2>
 
-      <label for='expChkTheSchool'>The School </label><input onchange='showHide("theSchool", this.checked)' type='checkbox'></input>
+      <div class='w3-row-padding'>
+
+        <div class='w3-col s12 m6 l4 w3-large'>
+          <label for='expChkTheSchool'>The School </label><input onchange='showHide("theSchool", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-large'>
+          <label for='expChkFruitTrees'>Fruit Trees </label><input onchange='showHide("fruitTrees", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-large'>
+          <label for='expChkBathHouses'>Bath Houses </label><input onchange='showHide("bathHouses", this.checked)' type='checkbox'></input>
+        </div>
+
+      </div>
 
     </div>
 
@@ -69,9 +89,39 @@
   <div class='w3-card-8 w3-padding-10 w3-row-padding' id='rulesDiv'>
 
     <div id='baseGame' class='w3-col s12 m6 l4 w3-show'>
-      <div class='w3-padding w3-card-8 w3-blue'>
+      <div class='w3-padding w3-card-8 w3-blue w3-small'>
         <h3>Base Game Rules</h3>
-        <p>Blah blah blah...</p>
+        <h4>Tiles</h4>
+        <p>The base game has a number of tiles, including:</p>
+        <ul>
+          <li><b>River Tiles</b> - these are used to start the game by forming a central river to build the map from (technically an expansion but included in modern editions of the game)</li>
+          <li><b>City Tiles</b> - these are tiles with walls containing a city</li>
+          <li><b>Road Tiles</b> - these are tiles with a road running through them</li>
+          <li><b>Monastery Tiles</b> - these are churches with a spire, and gardens (multicoloured) also act as monasteries</li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>The base game includes two types of meeple for players:</p>
+        <ul>
+          <li><b>Regular meeples</b> - each player gets 7 meeples which are played on a tile you just placed to claim a feature. Another single meeple is used to track your score</li>
+          <li><b>The Abbot</b> - each player also gets one special meeple which can <b>only be played on a monastery or garden</b> but has the added advantage that they can be picked up <b>before the feature is completed</b> (see scoring)</li>
+        </ul>
+        <h4>Gameplay</h4>
+        <p>On your turn you will do these three things (in order):</p>
+        <ul>
+          <li><b>Place a tile</b> - from any of the available face-down stacks, you flip over and play one tile onto the map. This must join the existing tiles on at least one side, and must "match" any adjacent tiles (so grass meets grass, city meets city etc)</li>
+          <li><b>Place a meeple</b> - you *may* then choose to place a meeple onto the tile you just added. You cannot place your meeple on a feature where there is already a meeple (city, road, field). You must choose which feature (city/road/field/monastery) you are placing your meeple onto - and can only claim one. <em>Note: if you did *not* place a meeple, you *may* instead choose to pick up your Abbot - the only meeple where this is allowed</em></li>
+          <li><b>Score a feature</b> - if the tile you have just placed <b>completes a feature</b>, meaning that a road is closed on both ends, or a city is entirely surrounded by walls etc, then whomever's meeples are on that feature may take the meeple(s) back and score points.</li>
+        </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rules for the base game are:</p>
+        <ul>
+          <li><b>Roads</b> - a road is worth 1 point for each tile it passes through, whether completed or incomplete. As with cities, if a road loops through a tile twice then that tile is only counted once (1 point)</li>
+          <li><b>Cities</b> - a city is worth 2 points for each tile and each shield icon within the city <b>if completed</b>. For incomplete cities, each tile and shield is only worth 1 point</li>
+          <li><b>Monasteries</b> - a monastery/garden is worth 1 point for each tile around it, plus 1 point itself, whether completed or incomplete. These tiles form a 3x3 grid centered on the monastery</li>
+          <li><b>Fields</b> - a field is worth 3 points for each completed city it touches. These are only counted once for each field (even if the field wraps around) and incomplete cities touched by fields score nothing.</li>
+          <li><b>MAJORITY WINS</b> - when determining who scores points where there are multiple meeples on a feature, the player with the most meeples will take the full points. If there is a tie, both players score the full points for that feature.</li>
+        </ul>
+
       </div>
     </div>
 
@@ -97,7 +147,7 @@
     </div>
 
     <div id='buildersTraders' class='w3-col s12 m6 l4 w3-hide w3-small'>
-      <div class='w3-padding w3-card-8 w3-red'>
+      <div class='w3-padding w3-card-8 w3-red w3-grayscale'>
         <h3>Builders & Traders Rules</h3>
         <h4>Tiles</h4>
         <p>The main tiles to note are:</p>
@@ -128,8 +178,52 @@
     </div>
 
     <div id='theSchool' class='w3-col s12 m6 l4 w3-hide'>
-      <div class='w3-padding w3-card-8 w3-lime'>
+      <div class='w3-padding w3-card-8 w3-lime w3-small'>
         <h3>The School Rules</h3>
+        <h4>Tiles</h4>
+        <p>There are only two tiles in this mini-expansion:</p>
+        <ul>
+          <li><b>2 School tiles</b> - these are two tiles which must be placed side-by-side and form a school with 6 roads leading off it. If used <em>without the River expansion</em> then the School is placed beside the original start tile (continuing the road). Our house rule is to play this <em>with the River expansion</em> by placing the School tiles once <b>the first road on a tile <em>after</em> the River has been completed</b></li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds a single meeple:</p>
+          <ul>
+            <li><b>The Teacher</b> - this meeple waits on the School <b>until a road leading to the School has been completed</b> and it then gets taken by that player (see scoring). Once all 6 roads leading to the School have been completed then the Teacher will remain at the School once used for scoring</li>
+          </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rule for the School is:</p>
+        <ul>
+          <li>If a player has the Teacher meeple, then the next time a feature is completed then the Teacher meeple grants the player who has it the same amount of points. If the player holding the meeple is the first to score a feature, they score double points for that feature. If multiple features are scored, only the first will give the holder of the Teacher meeple the same amount of points. Once used for scoring, the meeple returns to the School until the next road leading to the School is completed</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div id='fruitTrees' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-green w3-small'>
+        <h3>Fruit Trees Rules (TO EDIT)</h3>
+        <h4>Tiles</h4>
+        <p>There are only two tiles in this mini-expansion:</p>
+        <ul>
+          <li><b>2 School tiles</b> - these are two tiles which must be placed side-by-side and form a school with 6 roads leading off it. If used <em>without the River expansion</em> then the School is placed beside the original start tile (continuing the road). Our house rule is to play this <em>with the River expansion</em> by placing the School tiles once <b>the first road on a tile <em>after</em> the River has been completed</b></li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds a single meeple:</p>
+          <ul>
+            <li><b>The Teacher</b> - this meeple waits on the School <b>until a road leading to the School has been completed</b> and it then gets taken by that player (see scoring). Once all 6 roads leading to the School have been completed then the Teacher will remain at the School once used for scoring</li>
+          </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rule for the School is:</p>
+        <ul>
+          <li>If a player has the Teacher meeple, then the next time a feature is completed then the Teacher meeple grants the player who has it the same amount of points. If the player holding the meeple is the first to score a feature, they score double points for that feature. If multiple features are scored, only the first will give the holder of the Teacher meeple the same amount of points. Once used for scoring, the meeple returns to the School until the next road leading to the School is completed</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div id='bathHouses' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-aqua w3-small'>
+        <h3>Bath Houses Rules (TO EDIT)</h3>
         <h4>Tiles</h4>
         <p>There are only two tiles in this mini-expansion:</p>
         <ul>
