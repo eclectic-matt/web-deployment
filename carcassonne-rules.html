@@ -38,9 +38,9 @@
 
     <div class='w3-card-8 w3-padding-10 w3-margin' id='expansionsDiv'>
 
-      <div class='w3-large w3-margin'>
+      <div class='w3-xlarge w3-margin'>
 
-        <label for='expChkBaseGame'>Base Game </label><input onchange='showHide("baseGame", this.checked)' type='checkbox' checked></input>
+        <label for='expChkBaseGame'>Base Game </label><input class='w3-check' onchange='showHide("baseGame", this.checked)' type='checkbox' checked></input>
 
       </div>
 
@@ -48,16 +48,16 @@
 
       <div class='w3-row-padding'>
 
-        <div class='w3-col s12 m6 l4 w3-large'>
-          <label for='expChkInnsCathedrals'>Inns & Cathedrals </label><input onchange='showHide("innsCathedrals", this.checked)' type='checkbox'></input>
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkInnsCathedrals'>Inns & Cathedrals </label><input class='w3-check' onchange='showHide("innsCathedrals", this.checked)' type='checkbox'></input>
         </div>
 
-        <div class='w3-col s12 m6 l4 w3-large'>
-          <label for='expChkBuildersTraders'>Builders & Traders </label><input onchange='showHide("buildersTraders", this.checked)' type='checkbox'></input>
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkBuildersTraders'>Builders & Traders </label><input class='w3-check' onchange='showHide("buildersTraders", this.checked)' type='checkbox'></input>
         </div>
 
-        <div class='w3-col s12 m6 l4 w3-large'>
-          <label for='expChkPrincessDragon'>Princess & Dragon </label><input onchange='showHide("princessDragon", this.checked)' type='checkbox'></input>
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkPrincessDragon'>Princess & Dragon </label><input class='w3-check' onchange='showHide("princessDragon", this.checked)' type='checkbox'></input>
         </div>
 
       </div>
@@ -66,16 +66,16 @@
 
       <div class='w3-row-padding'>
 
-        <div class='w3-col s12 m6 l4 w3-large'>
-          <label for='expChkTheSchool'>The School </label><input onchange='showHide("theSchool", this.checked)' type='checkbox'></input>
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkTheSchool'>The School </label><input class='w3-check' onchange='showHide("theSchool", this.checked)' type='checkbox'></input>
         </div>
 
-        <div class='w3-col s12 m6 l4 w3-large'>
-          <label for='expChkFruitTrees'>Fruit Trees </label><input onchange='showHide("fruitTrees", this.checked)' type='checkbox'></input>
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkFruitTrees'>Fruit Trees </label><input class='w3-check' onchange='showHide("fruitTrees", this.checked)' type='checkbox'></input>
         </div>
 
-        <div class='w3-col s12 m6 l4 w3-large'>
-          <label for='expChkBathHouses'>Bath Houses </label><input onchange='showHide("bathHouses", this.checked)' type='checkbox'></input>
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkBathHouses'>Bath Houses </label><input class='w3-check' onchange='showHide("bathHouses", this.checked)' type='checkbox'></input>
         </div>
 
       </div>
@@ -170,10 +170,36 @@
       </div>
     </div>
 
-    <div id='princessDragon' class='w3-col s12 m6 l4 w3-hide'>
+    <div id='princessDragon' class='w3-col s12 m6 l4 w3-hide w3-small'>
       <div class='w3-padding w3-card-8 w3-yellow'>
         <h3>Princess & Dragon Rules</h3>
-        <p>Blah blah blah...</p>
+        <h4>Tiles</h4>
+        <p>There are 30 new tiles in this expansion:</p>
+        <ul>
+          <li><b>6 Volcano Tiles</b> -  a player who places a Volcano tile must immediately move the Dragon meeple to this tile from its current location. The player may not deploy a meeple on this tile, but is allowed to move the Fairy meeple on their turn (see gameplay)</li>
+          <li><b>12 Dragon Tiles</b> - a player who places a tile with a dragon icon may play a meeple onto this tile or move the Fairy during their turn. However, before scoring any features the Dragon must move! (see gameplay). <em>Note: if a Dragon tile is drawn <b>before a Volcano Tile has been played</b> then this tile is *set aside* until a Volcano tile is in play and then any Dragon tiles are mixed into the tile stacks.</em></li>
+          <li><b>6 Magic Portals</b> - these have a magic hole in the ground visible, and allows the player who placed the tile to deploy a meeple onto that tile <b>or on a tile which is already in play on a feature without a meeple!</b></li>
+          <li><b>6 Princess Tiles</b> - these have a tower symbol with a princess inside, and allows the player who placed the tile to play a meeple onto that tile as normal, <b>or if this tile extends a city then that player may instead choose to remove a meeple already in that city!</b> <em>Note: if the player whose meeple was removed also had a builder in the city (and their last meeple was removed) then the Builder is also removed!</em></li>
+          <li><b>Tunnel tiles</b> - these go under another feature and means that both the road and the fields running through the tunnel are continued (not closed)</li>
+          <li><b>City Monastery tiles</b> - these have a monastery within the city and both act as normal, however you must clearly place your meeple on <em>either the monastery or the city</em>, not both features.</li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds two new meeples:</p>
+          <ul>
+            <li><b>The Fairy</b> - this meeple starts at the edge of the playing area and can be moved by other players to offer protection from the dragon (see gameplay). The Dragon meeple <b>cannot enter a tile with the Fairy on it</b>. The Fairy also gives extra points when scoring features (see scoring)</li>
+            <li><b>The Dragon</b> - this moves around the map when a tile with a volcano (see tiles) or a dragon icon (see gameplay) is played</li>
+          </ul>
+        <h4>Gameplay</h4>
+        <p>The Dragon and Fairy will move during the game as follows:</p>
+        <ul>
+          <li><b>Moving the Fairy</b> - if during your turn <b>you did not place any other meeple</b> then you may decide to move the Fairy next to one of your followers. It does not matter how far the Fairy moves.</li>
+          <li><b>Moving the Dragon</b> - after a player places a tile with a Dragon icon but before scoring any features, the game is interrupted and - starting with the player who placed the tile and moving clockwise - <b>the Dragon must be moved one tile horizontally or vertically until it has moved six tiles</b>. It cannot visit the same tile twice, nor can it visit the tile occupied by the Fairy meeple. If the Dragon is moved into a dead end, it stops its movement there. The Dragon will eat all player meeples on tiles it moves through during this movement, with some exceptions (summarised as "everything with flesh and blood, but not the Fairy, the Teacher, those in a Castle or in the City of Carcassonne"). <em>Note: if the last meeple is removed from a road/city/field, then any pig or builder belonging to that player is also removed!</em></li>
+        <h4>Scoring</h4>
+        <p>The scoring rules for the Princess and Dragon are:</p>
+        <ul>
+          <li><b>Fairy Point</b> - the Fairy gives 1 point to the owner of a meeple <b>at the start of their turn</b> if one of their meeples are on the same tile as the Fairy. Using a Builder for a double turn only gives the Fairy point during the first turn.</li>
+          <li><b>Fairy Bonus</b> - when scoring a feature using a meeple on the same tile as the Fairy, then that player gets an additional 3 points (regardless of how many points they score from the feature). The meeple is returned to the owner, while the Fairy remains on the tile.</li>
+        </ul>
       </div>
     </div>
 
