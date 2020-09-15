@@ -37,11 +37,14 @@ function getLocation() {
 /* Show this position on a preview map for checking */
 function showPosition(position) {
   var latlon = position.coords.latitude + "," + position.coords.longitude;
-
-  var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyCsvaeMboDvQD_0OJ0aiJj-nRdFhC2vAh8";
-  console.log(latlon);
-  console.log(img_url);
-  document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+  document.getElementById('iptLocationLat').value = position.coords.latitude;
+  document.getElementById('iptLocationLng').value = position.coords.longitude;
+  
+  /* Apparently all Static Maps APIs are now billed, so fuck that */
+  //var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyCsvaeMboDvQD_0OJ0aiJj-nRdFhC2vAh8";
+  //console.log(latlon);
+  //console.log(img_url);
+  //document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
 }
 </script>
 
