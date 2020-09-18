@@ -25,6 +25,10 @@
       font-size: 2em;
     }
 
+    span.timeline-title {
+      font-size: 1.5em;
+    }
+
 
     .timeline-item{
     	list-style: none;
@@ -201,12 +205,73 @@
     .timeline-desc{
 
     }
+
+
+    /* Tooltip container */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    }
+
+    /* Tooltip text */
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      padding: 5px 0;
+      border-radius: 6px;
+
+      /* Position the tooltip text */
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
+
+      /* Fade in tooltip */
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    /* Tooltip arrow */
+    .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    /* Show the tooltip text when you mouse over the tooltip container */
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
   </style>
   <link rel='stylesheet' href='https://www.w3schools.com/lib/w3-theme-deep-purple.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 	<script>
+
+    function generateGHmap(){
+
+      var cnv = document.getElementById('cnvGHmap');
+      var ctx = cnv.getContext('2d');
+      var mapImg = document.getElementById('ghFullMap');
+      ctx.drawImage(mapImg,0,0,1292,1053,0,0,600,400);
+
+
+    }
+
+
     function updateFilter(text){
       //filterList();
       var input, filter;
@@ -286,7 +351,7 @@
 
 </head>
 
-<body class="w3-dark-grey">
+<body class="w3-dark-grey" onload='generateGHmap()'>
 <main id="main">
 
 	<div id="top" class="timeline-main-title">
@@ -295,29 +360,48 @@
 
 		<div class="w3-panel w3-container">
 			<p>
-			<div class="w3-quarter">
-				<label for="yearSelect">Jump to: </label>
-				<select onchange="window.location.assign('gh-timeline.html#' +  document.getElementById('yearSelect').value);" id="yearSelect" name="Years:">
-					<option class="yearLink">July 2020</option>
-          <option class="yearLink">August 2020</option>
-				</select>
-			</div>
-			<div class="w3-quarter">
-				<label for="tagSelect">Filter: </label>
-				<select onchange="updateFilter(document.getElementById('tagSelect').value);" id="tagSelect" name="Tag:">
-					<option class="tagLink">Scenario</option>
-					<option class="tagLink">Retirement</option>
-					<option class="tagLink">Achievement</option>
-					<!--option class="tagLink">Blog</option-->
-					<option class="tagLink" selected value="">*Clear*</option>
-				</select>
-			</div>
-			<div class="w3-half">
-				<input class="w3-input w3-border" type="text" placeholder="Filter the timeline.." id="filterInput" onkeyup="filterList()">
-			</div>
-		</p>
+  			<div class="w3-quarter">
+  				<label for="yearSelect">Jump to: </label>
+  				<select onchange="window.location.assign('gh-timeline.html#' +  document.getElementById('yearSelect').value);" id="yearSelect" name="Years:">
+  					<option class="yearLink">July 2020</option>
+            <option class="yearLink">August 2020</option>
+  				</select>
+  			</div>
+  			<div class="w3-quarter">
+  				<label for="tagSelect">Filter: </label>
+  				<select onchange="updateFilter(document.getElementById('tagSelect').value);" id="tagSelect" name="Tag:">
+  					<option class="tagLink">Scenario</option>
+  					<option class="tagLink">Retirement</option>
+  					<option class="tagLink">Achievement</option>
+  					<option class="tagLink" selected value="">*Clear*</option>
+  				</select>
+  			</div>
+  			<div class="w3-half">
+  				<input class="w3-input w3-border" type="text" placeholder="Filter the timeline.." id="filterInput" onkeyup="filterList()">
+  			</div>
+  		</p>
 
 		</div>
+
+    <div id='ghMap' class='w3-center' style='height: 425px;'>
+
+      <canvas id='cnvGHmap' width='600' height='400'>
+        Your browser does not support the canvas element
+      </canvas>
+
+      <!--img src="GH-Full-Map.png" alt="Gloomhaven" usemap="#ghMap" width="600" height="400">
+      <svg width="600" height="400" style='z-index: 50; position:relative; top:-400px; left:0px;'>
+        <ellipse class='tooltip' cx="100" cy="150" rx="5" ry="5" style="fill:green; stroke:1px solid black; fill-opacity: 1">
+          <desc class='tooltiptext'>Scenario 1: Black Barrow</desc>
+        </ellipse>
+      </svg>
+      <map name="ghMap">
+        <area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
+        <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
+        <area shape="circle" coords="337,300,44" alt="Cup of coffee" href="coffee.htm">
+      </map-->
+
+    </div>
 
     <div class="timeline-main">
 
@@ -453,7 +537,7 @@
   					<br>
   					<span class="timeline-title">Sc. 67 - Arcane Library</span>
   					<div class="timeline-desc">
-  						<p>The dynamic threesome took over when Tinkerer needed to head off to a friend's birthday.</p>
+  						<p>Attempt #1 - The dynamic trio took over when Tinkerer needed to head off to a friend's birthday.</p>
               <p>Characters:</p>
               <ul>
                 <li>Amber - Spellweaver</li>
@@ -513,6 +597,8 @@
 
 
   </div>
+
+  <img id='ghFullMap' src='GH-Full-Map.png' style='display:none;' />
 </main>
 </body>
 </html>
