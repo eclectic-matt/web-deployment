@@ -16,8 +16,12 @@
       font-weight: normal;
     }
 
-    h1,h2,h3,h4,h5{
+    h1,h2,h3,h4,h5, .timeline-title{
       font-family: 'gloomhavenFont', serif;
+    }
+
+    h1 {
+      font-size: 3em;
     }
 
 
@@ -291,24 +295,24 @@
 			<div class="w3-quarter">
 				<label for="yearSelect">Jump to: </label>
 				<select onchange="window.location.assign('gh-timeline.html#' +  document.getElementById('yearSelect').value);" id="yearSelect" name="Years:">
-					<option class="yearLink">2010</option>
-					<option class="yearLink">2011</option>
+					<option class="yearLink">July 2020</option>
+					<!--option class="yearLink">2011</option>
 					<option class="yearLink">2012</option>
 					<option class="yearLink">2013</option>
 					<option class="yearLink">2014</option>
 					<option class="yearLink">2015</option>
 					<option class="yearLink">2016</option>
-					<option class="yearLink">2017</option>
+					<option class="yearLink">2017</option-->
 				</select>
 			</div>
 			<div class="w3-quarter">
 				<label for="tagSelect">Filter: </label>
 				<select onchange="updateFilter(document.getElementById('tagSelect').value);" id="tagSelect" name="Tag:">
-					<option class="tagLink">Games</option>
-					<option class="tagLink">Work</option>
-					<option class="tagLink">Web</option>
-					<option class="tagLink">Blog</option>
-					<option class="tagLink" selected value="">*Clear*</option>
+					<option class="tagLink">Scenario</option>
+					<option class="tagLink">Retirement</option>
+					<option class="tagLink">Achievement</option>
+					<!--option class="tagLink">Blog</option>
+					<option class="tagLink" selected value="">*Clear*</option-->
 				</select>
 			</div>
 			<div class="w3-half">
@@ -333,7 +337,7 @@
   							<span class="w3-text">Back to top</span>
   						</a>
   					</div>
-  					<div class="timeline-time timeline-title">2010</div>
+  					<div class="timeline-time timeline-title">The Party Begins...</div>
   				</div>
   			</li>
 
@@ -343,13 +347,20 @@
 
   				<div class="timeline-panel">
   					<div class="timeline-point"></div>
-  					<span class="timeline-time">15 August 2010</span> <span class="timeline-tags">Web, Blog, Games</span>
+  					<span class="timeline-time">11 July 2020</span> <span class="timeline-tags">Scenario</span>
   					<br>
-  					<span class="timeline-title">Eclectic Electric Review launched</span>
+  					<span class="timeline-title">Sc. 1 - Black Barrow</span>
   					<div class="timeline-desc">
-  						<p>Launched the <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk">Eclectic Electric Review</a>, a blog for console and mobile games reviews.</p>
-
-  						<p>The first review was for <a href="http://eclectic-review.blogspot.co.uk/2010/08/grand-theft-auto-ballad-of-gay-tony-ps3.html">The Ballad of Gay Tony on Playstation 3</a></p>
+  						<p>Attempt #1 - Got through to the final enemies, but we all exhausted before beating the archers in the last room.</p>
+              <br>
+              <p>Characters:</p>
+              <ul>
+                <li>Amber - Spellweaver</li>
+                <li>Matt - Tinkerer</li>
+                <li>Naomi - Cragheart</li>
+                <li>Oliver - Brute</li>
+              </ul>
+              <p><a href="https://boardgamegeek.com/play/details/44250469">Logged Play Details</a></p>
   					</div>
 
   				</div>
