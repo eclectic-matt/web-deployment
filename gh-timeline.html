@@ -18,11 +18,11 @@
 
     h1,h2,h3,h4,h5, .timeline-title{
       font-family: 'gloomhavenFont', serif;
-      font-size: 3em;
+      font-size: 2em !important;
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 2em;
     }
 
 
@@ -240,7 +240,8 @@
         if (innerSpans.length > 2){
           var tags = innerSpans[1].innerHTML.toUpperCase();
           var title = innerSpans[2].innerHTML.toUpperCase();
-          if (  (tags.indexOf(filter) > -1) ||   (title.indexOf(filter) > -1) ) {
+          console.log('Checking li',i,'Tags/Title',tags,title);
+          if (  (tags.indexOf(filter) > -1) || (title.indexOf(filter) > -1) ) {
             li[i].style.display = '';
           } else {
             li[i].style.display = 'none';
@@ -320,7 +321,7 @@
 			<div class="w3-half">
 				<input class="w3-input w3-border" type="text" placeholder="Filter the timeline.." id="filterInput" onkeyup="filterList()">
 			</div>
-			</p>
+		</p>
 
 		</div>
 
