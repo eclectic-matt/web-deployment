@@ -26,13 +26,13 @@
 </head>
 <body>
 
-  <div class='w3-padding w3-card-8 w3-grey w3-col s12' id='settingsDiv'>
+  <div class='w3-padding w3-card-8 w3-grey w3-col l12 m12 s12' id='settingsDiv'>
 
     <h1>Carcassonne Rules</h1>
 
     <p>This page will show condensed rules for whichever Carcassonne expansions you are playing!</p>
-    <p>You might also be interested in my <a href='https://docs.google.com/spreadsheets/d/1rs2vPSAhNKxGR9xYkJMK2Q07lFrKKik_jN2xpafpBE0/edit?usp=sharing'>Google Sheet for Carcassonne calculations</a> which shows how many tiles and meeples you are using!</p>
-    <p>For more detailed rules, and clarifications for specific situations, I would recommend the <a href='https://boardgamegeek.com/filepage/87531/carcassonne-standard-complete-annotated-rules'>Carcassonne Standard Complete Rules on Board Game Geek</a></p>
+    <p>You might also be interested in my <a href='https://docs.google.com/spreadsheets/d/1rs2vPSAhNKxGR9xYkJMK2Q07lFrKKik_jN2xpafpBE0/edit?usp=sharing' target='_blank'>Google Sheet for Carcassonne calculations</a> which shows how many tiles and meeples you are using!</p>
+    <p>For more detailed rules, and clarifications for specific situations, I would recommend the <a href='https://boardgamegeek.com/filepage/87531/carcassonne-standard-complete-annotated-rules' target='_blank'>Carcassonne Standard Complete Rules on Board Game Geek</a></p>
 
     <p><em>Select the expansions you are playing to show the relevant rules boxes below.</em></p>
 
@@ -59,6 +59,15 @@
         <div class='w3-col s12 m6 l4 w3-xlarge'>
           <label for='expChkPrincessDragon'>Princess & Dragon </label><input class='w3-check' onchange='showHide("princessDragon", this.checked)' type='checkbox'></input>
         </div>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkUnderBigTop'>TO ADD - Under the Big Top </label><input class='w3-check' onchange='showHide("underBigTop", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkCountKingRobber'>TO ADD - Count, King & Robber </label><input class='w3-check' onchange='showHide("countKingRobber", this.checked)' type='checkbox'></input>
+        </div>
+
 
       </div>
 
@@ -199,6 +208,54 @@
         <ul>
           <li><b>Fairy Point</b> - the Fairy gives 1 point to the owner of a meeple <b>at the start of their turn</b> if one of their meeples are on the same tile as the Fairy. Using a Builder for a double turn only gives the Fairy point during the first turn.</li>
           <li><b>Fairy Bonus</b> - when scoring a feature using a meeple on the same tile as the Fairy, then that player gets an additional 3 points (regardless of how many points they score from the feature). The meeple is returned to the owner, while the Fairy remains on the tile.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='countKingRobber' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-deep-blue w3-small'>
+        <h3>Count, King & Robber Rules</h3>
+        <h4>Tiles</h4>
+        <p>There are various new tiles in this expansion:</p>
+        <ul>
+          <li><b>City Bridge tiles</b> - these have two sections of city joined by a bridge, and the two city sections on this tile are <b>not linked when placed</b> but could be linked together through other tiles</li>
+          <li><b>City of Carcassonne tiles</b> - these two large tiles (2x3 size) form the City of Carcassonne when placed together and act as a new starting point for games. They introduce the Count and special scoring options (see gameplay)</li>
+          <li><b>The River II tiles</b> - these are used to form the River as the starting point for games. The River/River II should be used instead of the City of Carcassonne (or vice versa)</li>
+          <li><b>The King tile</b> - this single tile shows a King and Queen illustration and is used as part of the special scoring rules for this expansion (see scoring)</li>
+          <li><b>The Robber tile</b> - this single tile shows a rogueish robber illustration and is used as part of the special scoring rules for this expansion (see scoring)</li>
+          <li><b>5 Shrine tiles</b> - these tiles have a shrine feature which can be claimed and acts similarly to a monastery (see gameplay). Shrine tiles <b>cannot be placed adjacent to more than one monastery</b> (but 1 monastery is legal) and when playing with shrines then a monastery tile <b>cannot be placed adjacent to more than one shrine</b> (but 1 shrine is legal)</li>
+
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds one new meeple:</p>
+          <ul>
+            <li><b>The Count</b> - this meeple starts in the City of Carcassonne </li>
+          </ul>
+        <h4>Gameplay</h4>
+        <p>The rules for fruit trees are as follows:</p>
+        <ul>
+          <li>If you <b>place a meeple</b> on the fruit trees tile, or in later turns if a player <b>places a meeple</b> on a tile adjacent to the fruit trees tile (vertically, horizontally, or diagonally), then they may take one of the two actions at the fruit trees tile:</li>
+          <ol>
+            <li><b>Harvesting</b> - you may take the top fruit token from the stack, immediately flipping it over and scoring the points shown on the underside. You keep this fruit token until you choose to sell it</li>
+            <li><b>Selling</b> - you do not take a fruit token, but instead may sell a set of 1 - 4 tokens you have previously collected. You may only sell one set of tokens with this action, and all of the fruit tokens in the set must be different.</li>
+          </ol>
+        </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rules for the Fruit Trees:</p>
+        <ul>
+          <li><b>Points for sold sets:</b>
+            <ul>
+              <li>1 token - 3 points</li>
+              <li>2 tokens - 6 points</li>
+              <li>3 token - 10 points</li>
+              <li>4 token - 15 points</li>
+            </ul>
+          </li>
+          <li><b>Points for unsold tokens at the end of the game:</b>
+            <ul>
+              <li>1 point each.</li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
