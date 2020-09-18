@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gloomhaven Timeline</title>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <style type='text/css'>
+    html,body,h1,h2,h3,h4,h5 {
+      font-family: 'Open Sans', sans-serif
+    }
+
+    .timeline-item{
+    	list-style: none;
+    	border-left: 1px solid black;
+    	border-top: 1px solid black;
+    	border-right: 10px solid black;
+    	border-bottom: 10px solid black;
+    	border-radius: 25px;
+    	padding: 25px;
+    	margin-bottom: 50px;
+    	/*opacity: 0.05 !important;*/
+    }
+
+    @keyframes jerkIntoView {
+        0% {background-color: #555; opacity: 0.05; transform: scale(0.1) translate3d(0,0,0);}
+        25%{opacity: 0.25; transform: scale(0.5);}
+    	50%{opacity: 0.45; transform: scale(0.9);}
+    	75%{opacity: 0.75; transform: scale(1.5);}
+    	100%{background-color: #a0b; opacity: 1 !important; transform: scale(1) translate3d(0,0,0);}
+    }
+
+    @keyframes fadeIntoView {
+        0% {background-color: #555; opacity: 0.05; transform: scale(0.1) translate3d(0,0,0);}
+        25%{opacity: 0.25;}
+    	50%{opacity: 0.45; transform: scale(0.5);}
+    	75%{opacity: 0.75;}
+    	100%{background-color: #a0b; opacity: 1 !important; transform: scale(1) translate3d(0,0,0);}
+    }
+
+    .timeline-year.inViewport{
+    	background-color: rgb(76, 175, 80);
+    }
+
+    .timeline-year{
+    	margin-top: 20px;
+    	padding-top: 20px;
+    	font-size: 5em;
+    }
+
+    .yearAnchor{
+    	/*padding-bottom: 100px;
+    	margin-bottom: 100px;
+    	content: ' ';*/
+    }
+
+    .inViewport{
+    	background-color: #a0b;
+    	color: yellow;
+    	animation-name: fadeIntoView;
+    	animation-duration: 0.25s;
+    	animation-iteration-count: 1;
+        transition: all 0.5s ease-in-out;
+    	/*margin-bottom: 75px;*/
+    	/*list-style-type: circle;
+    	color: white;*/
+
+    }
+
+    .timeline-heading{
+    	font-size: 2em;
+    	padding: 0 0 20px 0;
+    }
+
+    a.top-link{
+    	border: 1px solid black;
+    	border-radius: 25px;
+    	padding: 10px 15px;
+    	background: #a0b;
+    	width: 25px;
+    	text-decoration: none;
+    }
+
+    a.top-link::after{
+    	content: "\219F";
+    }
+
+    #yearSelect, #tagSelect{
+    	list-style: none inside;
+    }
+
+    #yearSelect li, #tagSelect li{
+    	display: inline;
+    }
+
+    li.tagLink{
+    	/*padding: 10px;*/
+    	text-decoration: none;
+    	margin-left: 1px;
+    	font-size: 1.2em;
+    	font-weight: bolder;
+    }
+
+    li.yearLink{
+    	/*padding: 10px;*/
+    	text-decoration: none;
+    	margin-left: 1px;
+    	font-size: 1.2em;
+    	font-weight: bolder;
+    }
+
+
+    button{
+    	padding: 10px;
+    }
+
+    button a{
+    	text-decoration: none;
+    }
+
+    .timeline-main{
+    	margin: 0 auto;
+    	left: -20px;
+    	position: relative;
+    	padding: 5px 10px;
+    }
+
+    .timeline-list{
+    	list-style: none;
+    }
+
+    .timeline-panel{
+
+    }
+
+    .timeline-point{
+    	float: both;
+    	content: " ";
+    	border-radius:5px;
+    	/*border: 1px solid white;
+    	background: #a0b;*/
+    }
+
+    .timeline-point:hover{
+    	content: " ";
+    	border-radius:5px;
+    	border: 1px solid white;
+    	background: yellow;
+    }
+
+    .timeline-time{
+    	font-size: 0.75em;
+    	font-variant: italic;
+    	font-weight: bolder;
+    }
+
+    .timeline-tags{
+    	font-weight: bold;
+    	font-size: 0.85em;
+    	font-variant: italic;
+    	font-family: 'Console', serif;
+    	border: 1px solid yellow;
+    	/*background: #a2b;*/
+    	padding: 5px;
+    }
+
+    .timeline-title{
+    	font-size: 1.25em;
+    	font-weight: bolder;
+    	color: white;
+    }
+
+    .timeline-main-title{
+    	/*text-align: center;*/
+    	padding: 5px 40px;
+    	font-size: 1.25em;
+    	font-weight: bolder;
+    	color: white;
+    }
+
+    .timeline-filters{
+    	padding: 5px 40px;
+    }
+
+    .timeline-desc{
+
+    }
+  </style>
+  <link rel='stylesheet' href='http://www.w3schools.com/lib/w3-theme-deep-purple.css'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+	<script>
+    function updateFilter(text){
+      filterList();
+      var input, filter;
+      input = document.getElementById('filterInput');
+      if (text.length == 0){
+        input.value = '';
+      } else {
+        input.value = text;
+      }
+      filterList();
+    };
+
+    function filterList( ){
+
+      var input, filter, ul, li, a;
+      input = document.getElementById('filterInput');
+      ul = document.getElementById('timeline-full');
+      li = ul.getElementsByTagName('li');
+      filter = input.value.toUpperCase();
+
+      if (filter.length == 0){
+        for (var i = 0; i < li.length; i++){
+            li[i].style.display = '';
+        }
+        return true;
+      }
+
+      for (var i = 0; i < li.length; i++){
+        var innerSpans = li[i].getElementsByTagName('div')[0].getElementsByTagName('span');
+        if (innerSpans.length > 2){
+          var tags = innerSpans[1].innerHTML.toUpperCase();
+          var title = innerSpans[2].innerHTML.toUpperCase();
+          if (  (tags.indexOf(filter) > -1) ||   (title.indexOf(filter) > -1) ) {
+            li[i].style.display = '';
+          } else {
+            li[i].style.display = 'none';
+          }
+        }
+      }
+
+    };
+
+    (function(){
+
+      'use strict';
+
+      function elementIsInViewport(el){
+
+        var vp = el.getBoundingClientRect();
+        return (
+          vp.top >= 0 &&
+          vp.left >= 0 &&
+          vp.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          vp.right <= (window.innerWidth || document.documentElement.clientWidth )
+        );
+      }
+
+
+      function updateCheck(){
+        var listItems = document.querySelectorAll('ul.timeline li.timeline-item');
+        for (var i = 0; i < listItems.length; i++){
+          if ( elementIsInViewport(listItems[i]) ){
+            listItems[i].classList.add('inViewport');
+          }else{
+            listItems[i].classList.remove('inViewport');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateCheck);
+      window.addEventListener('load', updateCheck);
+      window.addEventListener('resize', updateCheck);
+    })();
+  </script>
+
+</head>
+
+<body class="w3-dark-grey">
+<main id="main">
+
+	<div id="top" class="timeline-main-title">
+		<h1>GLOOMHAVEN TIMELINE</h1>
+	</div>
+
+		<div class="w3-panel w3-container">
+			<p>
+			<div class="w3-quarter">
+				<label for="yearSelect">Jump to: </label>
+				<select onchange="window.location.assign(\'gh-timeline.html#\' +  document.getElementById(\'yearSelect\').value);" id="yearSelect" name="Years:">
+					<option class="yearLink">2010</option>
+					<option class="yearLink">2011</option>
+					<option class="yearLink">2012</option>
+					<option class="yearLink">2013</option>
+					<option class="yearLink">2014</option>
+					<option class="yearLink">2015</option>
+					<option class="yearLink">2016</option>
+					<option class="yearLink">2017</option>
+				</select>
+			</div>
+			<div class="w3-quarter">
+				<label for="tagSelect">Filter: </label>
+				<select onchange="updateFilter(document.getElementById(\'tagSelect\').value);" id="tagSelect" name="Tag:">
+					<option class="tagLink">Games</option>
+					<option class="tagLink">Work</option>
+					<option class="tagLink">Web</option>
+					<option class="tagLink">Blog</option>
+					<option class="tagLink" selected value="">*Clear*</option>
+				</select>
+			</div>
+			<div class="w3-half">
+				<input class="w3-input w3-border" type="text" placeholder="Filter the timeline.." id="filterInput" onkeyup="filterList()">
+			</div>
+			</p>
+
+		</div>
+
+    <div class="timeline-main">
+
+  		<ul id="timeline-full" class="timeline timeline-list">
+
+  			<!-- Timeline YEAR -->
+  			<span class="yearAnchor" id="2010"></span>
+
+  			<li class="timeline-item timeline-year">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-time timeline-title">2010</div>
+  				</div>
+  			</li>
+
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">15 August 2010</span> <span class="timeline-tags">Web, Blog, Games</span>
+  					<br>
+  					<span class="timeline-title">Eclectic Electric Review launched</span>
+  					<div class="timeline-desc">
+  						<p>Launched the <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk">Eclectic Electric Review</a>, a blog for console and mobile games reviews.</p>
+
+  						<p>The first review was for <a href="http://eclectic-review.blogspot.co.uk/2010/08/grand-theft-auto-ballad-of-gay-tony-ps3.html">The Ballad of Gay Tony on Playstation 3</a></p>
+  					</div>
+
+  				</div>
+  			</li>
+
+
+  			<!-- Timeline YEAR -->
+  			<span class="yearAnchor" id="2011"></span>
+
+  			<li class="timeline-item timeline-year">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-time timeline-title">2011</div>
+  				</div>
+  			</li>
+
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">22 May 2011</span> <span class="timeline-tags">Games</span>
+  					<br>
+  					<span class="timeline-title">Brighton Games Trader</span>
+  					<div class="timeline-desc">
+  						<p>Started selling retro consoles and games under the guise <em>Brighton Games Trader</em>.</p>
+  						<p>Sold a number of items and went to numerous car boot sales to make a few quid on the side.</p>
+  						<p>Read more on <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk/2011/05/my-ebay-store-visit-my-page-for-great.html">my old blog post about the eBay store.</a></p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">12 September 2011</span> <span class="timeline-tags">Web, Blog, Games</span>
+  					<br>
+  					<span class="timeline-title">Expanded Eclectic Electric Review</span>
+  					<div class="timeline-desc">
+  						<p>Expanded into CD and film reviews, as well as different review formats.</p>
+  						<p>Kept up a good pace of reviews per month as the year progressed.</p>
+  						<p>Look back to <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk/2011/09/">my review of Elbow\'s <em>The Seldom Seen Kid</em>.</a></p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">29 December 2011</span> <span class="timeline-tags">Web, Blog, Games</span>
+  					<br>
+  					<span class="timeline-title">Top Tens of 2011</span>
+  					<div class="timeline-desc">
+  						<p>Closed 2011 with a summary of games for the year.</p>
+  						<p>Check out <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk/2011/12/bottom-ten-games-of-2011.html">my bottom ten games of 2011.</a></p>
+  						<p>Or on a more positive note, look at <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk/2011/12/top-ten-games-of-2011.html">my top ten games of 2011.</a></p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline YEAR -->
+  			<span class="yearAnchor" id="2012"></span>
+
+  			<li class="timeline-item timeline-year">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-time timeline-title">2012</div>
+  				</div>
+  			</li>
+
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">8 March 2012</span> <span class="timeline-tags">Web, Blog, Games</span>
+  					<br>
+  					<span class="timeline-title">Eclectic Electric Review expands again!</span>
+  					<div class="timeline-desc">
+  						<p>Launched daily short posts for the blog, including gaming news and funnies.</p>
+  						<p>The first was <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk/2012/03/tech-display-kara-daily-dose.html">an update on Quantic Dream\'s project then-called <em>Kara</em></a>.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">1 April 2012</span> <span class="timeline-tags">Web, Blog</span>
+  					<br>
+  					<span class="timeline-title">April Fools!</span>
+  					<div class="timeline-desc">
+  						<p>A blog post goes viral (slightly) and gets a thousand views in a day!</p>
+  						<p>See what the fuss was about at <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk/2012/04/video-google-maps-8-bit-for-nes-010412.html">my April Fools blog post!</a></p>
+  						<p>By this stage, I was combining a bunch of different types of review, such as:</p>
+  								<p>&nbsp;&nbsp;&nbsp; - <a class="timeline-link" href="http://eclectic-review.blogspot.co.uk/2012/05/duke-of-yorks-picturehouse-eurovision.html">event reviews</a></p>
+  								<p>&nbsp;&nbsp;&nbsp; - <a class="timeline-link" href="http://eclectic-review.blogspot.co.uk/2012/03/leonard-cohen-old-ideas-cd-quick.html">CD reviews</a></p>
+  								<p>&nbsp;&nbsp;&nbsp; - <a class="timeline-link" href="http://eclectic-review.blogspot.co.uk/2012/04/pirates-in-adventure-with-scientists.html">film reviews</a></p>
+  								<p>&nbsp;&nbsp;&nbsp; - <a class="timeline-link" href="http://eclectic-review.blogspot.co.uk/2012/05/radiant-defense-android-review.html">and of course game reviews</a></p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">17 June 2012</span> <span class="timeline-tags">Web, Blog</span>
+  					<br>
+  					<span class="timeline-title">Last posts for Eclectic Electric Review</span>
+  					<div class="timeline-desc">
+  						<p>With a heavy heart, due to personal, work and study requirements, I realised I could not carry on and wanted to branch out. My <a class="timeline-link" target="_blank" href="http://eclectic-review.blogspot.co.uk/2012/06/blog-update-170612-daily-dose.html">penultimate blog post says it all....</a> *sobs* The blog remained quite popular, especially with spam bots:</p>
+  						<a href="../assets/eclectic-review-stats.JPG"><img src="../assets/eclectic-review-stats.JPG" width="300" height="200" /></a>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">1 October 2012</span> <span class="timeline-tags">Work</span>
+  					<br>
+  					<span class="timeline-title">Professional Development</span>
+  					<div class="timeline-desc">
+  						<p>Completed several professional develoment courses, such as a part-time AAT Accountancy qualification, the European Computer Driving License, and administrative training.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline YEAR -->
+  			<span class="yearAnchor" id="2013"></span>
+
+  			<li class="timeline-item timeline-year">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-time timeline-title">2013</div>
+  				</div>
+  			</li>
+
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">10 January 2013</span> <span class="timeline-tags">Work</span>
+  					<br>
+  					<span class="timeline-title">New job in further education exams administration</span>
+  					<div class="timeline-desc">
+  						<p>Worked in the exams office for a further education college.</p>
+  						<p>Developed a new section for the exams office on the college intranet, introduced new processes and automated documents for handling examination registrations and bookings.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">20 September 2013</span> <span class="timeline-tags">Work</span>
+  					<br>
+  					<span class="timeline-title">New job in higher education administration</span>
+  					<div class="timeline-desc">
+  						<p>New job in a University office, working with postgraduate taught students.</p>
+  						<p>Among other things, I worked on an office wiki and a redesign of the internal webpages.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+
+  			<!-- Timeline YEAR -->
+  			<span class="yearAnchor" id="2014"></span>
+
+  			<li class="timeline-item timeline-year">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-time timeline-title">2014</div>
+  				</div>
+  			</li>
+
+
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">1 January 2014</span> <span class="timeline-tags">Web, Blog</span>
+  					<br>
+  					<span class="timeline-title">More Learning</span>
+  					<div class="timeline-desc">
+  					<p>Was learning a few bits and pieces to support working needs.</p>
+  					<p>My learning updates made it onto a short-lived personal blog, but I soon moved that onto my own site.</p>
+  					<p>You can read up on it on my blog posts:</p>
+  						<p>&nbsp;&nbsp;&nbsp;- <a href="http://eclecticapp.xyz/blog/2014/01/06/first-learning-update/">January update</a></p>
+  						<p>&nbsp;&nbsp;&nbsp;- <a href="http://eclecticapp.xyz/blog/2014/04/22/first-quarter-update-january-to-april-2014/">April update</a></p>
+  					</div>
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">15 April 2014</span> <span class="timeline-tags">Android</span>
+  					<br>
+  					<span class="timeline-title">Released a basic Android app</span>
+  					<div class="timeline-desc">
+  						<p>Thought I would give it a go, built in a day and then published it.</p>
+  						<p>It's crap, but it's still up on the <a href="https://play.google.com/store/apps/details?id=com.eclecticapps.physicsenginev1">Google Play Store</a>!</p>
+  						<p>Because, why not?</p>
+  					</div>
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">1 June 2014</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Eclectic website launched</span>
+  					<div class="timeline-desc">
+  						<p>First incarnation of my website appeared.</p>
+  						<p>The wayback machine only has later versions but you can <a class="timeline-link" target="_blank" href="https://web.archive.org/web/20150901160034/http://eclecticappdevelopment.co.uk/">check out their archive page</a>.</p>
+  					</div>
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">1 December 2014</span> <span class="timeline-tags">Web, Blog</span>
+  					<br>
+  					<span class="timeline-title">First (self-designed) blog launched</span>
+  					<div class="timeline-desc">
+  						<p>Put a simple blog together, where content in a folder is listed in date order.</p>
+  						<p>The wayback machine has my last post visible in the original format: <a class="timeline-link" target="_blank" href="https://web.archive.org/web/20160402184012/http://eclecticappdevelopment.co.uk/pages/blog">wayback blog archive</a>.</p>
+  						<p>You can also read the posts from the blog on my <a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/blog/category/old/">current Wordpress blog</a>.</p>
+  					</div>
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">10 December 2014</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Complete Grapher launches</span>
+  					<div class="timeline-desc">
+  						<p>A funky tool to display complete graphs (all points joined to all other points).</p>
+  						<p>Have a play with the <a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/gadgets/completeGrapher.php">Complete Grapher</a> and spin some pretty patterns!</p>
+  					</div>
+  				</div>
+  			</li>
+
+  			<!-- Timeline YEAR -->
+  			<span class="yearAnchor" id="2015"></span>
+
+  			<li class="timeline-item timeline-year">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-time timeline-title">2015</div>
+  				</div>
+  			</li>
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">5 January 2015</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Site Redesign</span>
+  					<div class="timeline-desc">
+  						<p>Refreshed the layout of the site, and set up a clearer structure.</p>
+  						<p>This is more or less how the wayback machine stored the site: <a class="timeline-link" target="_blank" href="https://web.archive.org/web/20160313015447/http://eclecticappdevelopment.co.uk/">wayback machine archive</a>.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">1 April 2015</span> <span class="timeline-tags">Web, Games</span>
+  					<span class="timeline-title">Destiny Player Search</span>
+  					<div class="timeline-desc">
+  						<p>A tool for the game "Destiny" which used the <a href='https://www.bungie.net/platform/destiny/help/'>Destiny API</a> to look up players and show progress on certain in-game activities.</p>
+  						<p>Sadly a change to the authentication killed the development of the tool and it is no longer available.</p>
+  						<p>Here is a picture of the gadget in action:</p>
+  						<a href="../assets/Destiny-Player.png">
+  							<img src="../assets/Destiny-Player.png" width="200" height="250" />
+  						</a>
+  					</div>
+
+  				</div>
+  			</li>
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">20 April 2015</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Eclectic Wiki trialled</span>
+  					<div class="timeline-desc">
+  						<p>Was playing with wikis at work so implemented one on my own website to play with it.</p>
+  						<p>You can still see the old front page on the <a class="timeline-link" target="_blank" href="https://web.archive.org/web/20161019011108/http://eclecticappdevelopment.co.uk/wiki/index">
+  						Wayback Machine archive</a> to see how it looked.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">28 April 2015</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Responsive Menus</span>
+  					<div class="timeline-desc">
+  						<p>Tweaked the design of my site to include a responsive layout (different layouts for phone, tablet and desktop).</p>
+  						<p>The site has retained a responsive layout, even though the structure has changed, so it should still play nicely with most screen sizes!</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">1 May 2015</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Clock Around the Rock</span>
+  					<div class="timeline-desc">
+  						<p>Made a couple of funky clock-based gadgets for the site.</p>
+  						<p>The first was a <a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/gadgets/customClock.php">Custom Clock Maker</a>, which allows you to customise some settings and save the Javascript/HTML code to put a clock on your own website!</p>
+  						<p>Next came the <a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/gadgets/binaryClock.php">Binary Clock</a>, which tells you the time in binary!</p>
+  						<p>Finally, the <a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/gadgets/fibonacciClock.php">Fibonnaci Clock</a> was born to show you the time (within 5 minutes) in blocks of 1, 2, 3 and 5!</p>
+
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">1 December 2015</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Busy Learning</span>
+  					<div class="timeline-desc">
+  						<p>Started using <a class="timeline-link" target="_blank" href="https://codeschool.com">Codeschool.com</a> to learn about web frameworks and development opportunities.</p>
+  						<p>Completed a number of short courses, which offer Open Badges - check out my <a class="timeline-link" target="_blank" href="https://backpack.openbadges.org/share/e01a42f9c372bc82bc70761e2489c44e/">Open Backpack</a>, which shows off the completed courses!</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline YEAR -->
+  			<span class="yearAnchor" id="2016"></span>
+  			<li class="timeline-item timeline-year">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-time timeline-title">2016</div>
+  				</div>
+  			</li>
+
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">15 January 2016</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">PDF Tools</span>
+  					<div class="timeline-desc">
+  						<p>Added a new funky tool to the site - <a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/gadgets/pdfTools.php">PDF tools</a> - which allows you to join multiple PDFs, as well as adding page numbers and headings.</p>
+  						<p>This was due to the lack of Adobe Acrobat available on our office PCs and some dodgy T&Cs for other websites offering similar purposes.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">6 April 2016</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Shakespearean Insult Generator</span>
+  					<div class="timeline-desc">
+  						<p>Launched a fun tool to make your own Shakespearean Insults!.</p>
+  						<p>Great fun to share with friends, family and colleagues!</p>
+  						<p>Try making your own on the <a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/gadgets/shakespeareanInsult.php">
+  						Shakespearean Insult Generator</a>!</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">5 September 2016</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">Share Bar tested</span>
+  					<div class="timeline-desc">
+  						<p>Tested the use of a custom-built "share" bar at the bottom of webpages.</p>
+  						<p>Added Facebook/Twitter/Email sharing, but the tool has not yet made it onto the new website.</p>
+  						<p>You can read more about the share bar on my
+  						<a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/blog/2016/09/05/share-bar/">
+  						blog post</a> all about it.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">3 October 2016</span> <span class="timeline-tags">Web, Games</span>
+  					<br>
+  					<span class="timeline-title">Games start to reappear</span>
+  					<div class="timeline-desc">
+  						<p>Started to add new games, including a couple of test builds of games made in
+  						<a class="timeline-link" target="_blank" href="https://www.yoyogames.com/gamemaker">Game Maker</a>.</p>
+  						<p>These are being reintroduced over time, although some older games may not resurface.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline YEAR -->
+  			<span class="yearAnchor" id="2017"></span>
+
+  			<li class="timeline-item timeline-year">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-time timeline-title">2017</div>
+  				</div>
+  			</li>
+
+  				<!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">16 January 2017</span> <span class="timeline-tags">Web, Blog</span>
+  					<br>
+  					<span class="timeline-title">New Wordpress Blog</span>
+  					<div class="timeline-desc">
+  						<p>After trying to maintain my own featureless blog, I thought it was time to move to something more functional and reliable.</p>
+  						<p>Imported my older blog content into the new <a class="timeline-link" target="_blank" href="http://eclecticapp.xyz/blog">
+  						Wordpress blog</a>.<p>
+  						<p>This is now the main resource to get updates and read about all things Eclectic!</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">18 January 2017</span> <span class="timeline-tags">Web</span>
+  					<br>
+  					<span class="timeline-title">New .XYZ domain</span>
+  					<div class="timeline-desc">
+  						<p>Moved to a new domain after being some issues with the old one.</p>
+  						<p>You can see how the site looked on the
+  						<a class="timeline-link" target="_blank" href="https://web.archive.org/web/*/http://eclecticapp.xyz">Wayback Machine archive page</a>.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">25 January 2017</span> <span class="timeline-tags">Work, Web</span>
+  					<br>
+  					<span class="timeline-title">Commit to Get Far 2017</span>
+  					<div class="timeline-desc">
+  						<p>Made a funky tracker for physical activity in my office for a work challenge.</p>
+  						<p>You can see how the team got on at the
+  						<a class="timeline-link" target="_blank" href="https://sites.google.com/view/adqe-ctgf-2017">ADQE Commit to Get Far 2017 Google Site</a>.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">27 January 2017</span> <span class="timeline-tags">Work, Blog</span>
+  					<br>
+  					<span class="timeline-title">University Work Blog (ADQE)</span>
+  					<div class="timeline-desc">
+  						<p>Launched a new blog in my office at work.</p>
+  						<p>The blog gives updates, useful resources and information about the work of our University office.</p>
+  						<p>You can read my posts (if you feel so inclined) on the
+  						<a class="timeline-link" target="_blank" href="http://blogs.sussex.ac.uk/adqe/author/mrt25/">ADQE Blog</a>.</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">May 2017</span> <span class="timeline-tags">Games, Web, Video</span>
+  				 <br>
+  						<span class="timeline-title">Youtube Channel</span>
+  					<div class="timeline-desc">
+  						<p>Started a <a class="timeline-link" target="_blank" href="https://www.youtube.com/channel/UC5vVv24w66UOA3J6AEBc8Lw">Youtube channel</a> and posted a bunch of videos until November 2017 when other priorities took over. May return to this once I have a better plan and could consistently post videos to it. The channel has just reached 10,000 lifetime views and I enjoy making videos, I just needed the time (and computer power/hard drive space) to really create some good content, although I got by with my phone and some useful apps most of the time!</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">July 2018</span> <span class="timeline-tags">Blog, Games, Web</span>
+  				 <br>
+  						<span class="timeline-title">Last Life Club</span>
+  					<div class="timeline-desc">
+  						<p>Wrote a bunch of news stories and some reviews for a popular local gaming website, Last Life Club. Enjoyed writing as part of a team with good variety and approach, with some podcasting and video content. Favourite articles:</p>
+  						<ul>
+  							<li><a href='https://lastlifeclub.com/2017/08/02/minecraft-cross-platform-play/'>Minecrafters unite</a></li>
+  							<li><a href='https://lastlifeclub.com/2017/09/22/red-dead-2-announcement-announced/'>Red Dead 2 announcement announced</a></li>
+  							<li><a href='https://lastlifeclub.com/review/south-park-fractured-but-whole/'>South Park Fractured But Whole</a></li>
+  						</ul>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">August 2018</span> <span class="timeline-tags">Games, Web</span>
+  				 <br>
+  						<span class="timeline-title">Guesthouse game</span>
+  					<div class="timeline-desc">
+  						<p>First version out of the (idle) simulation game where you spend money to build up a guesthouse/hotel, improving rooms and facilities to earn more money and better reviews from guests.</p>
+  						<p>Give the game a try at: <a href='https://eclecticapp.xyz/games/guesthouse.php'>Guesthouse Game</a></p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">August 2018</span> <span class="timeline-tags">Blog, Web</span>
+  				 <br>
+  						<span class="timeline-title">Wordpress Plugin check</span>
+  					<div class="timeline-desc">
+  						<p>Published a plugin for Wordpress for a shared site, to require certain conditions to be met or manually confirmed before a Wordpress post could be submitted.</p>
+  						<p>Read more about it at: <a href='https://eclecticapp.xyz/blog/2017/08/17/wordpress-plugin-check/'>Wordpress Plugin - Check!</a></p>
+  					</div>
+
+  				</div>
+  			</li>
+
+
+  			<!-- Timeline Item -->
+  			<li class="timeline-item">
+  				<div class="timeline-panel">
+
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">TO FOLLOW</span> <span class="timeline-tags">Work, Blog, Games, Web</span>
+  				 <br>
+  						<span class="timeline-title">REST OF 2018 TO FOLLOW</span>
+  					<div class="timeline-desc">
+  						<p>Will update the rest of 2018 as it progresses!</p>
+  					</div>
+
+  				</div>
+  			</li>
+
+  		</ul>
+
+  		<br>
+
+  		<div class="w3-right w3-medium">
+  			<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  				<span class="w3-text">Back to top</span>
+  			</a>
+  		</div>
+
+  	</div>
+
+
+  </div>
+</main>
+</body>
+</html>
+';
+
+include '/home/u545245070/public_html/templates/_bottom.php';
+
+?>
