@@ -6,9 +6,20 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   <style type='text/css'>
-    html,body,h1,h2,h3,h4,h5 {
+    html,bod {
       font-family: 'Open Sans', sans-serif
     }
+
+    @font-face {
+      font-family: gloomhavenFont;
+      src: url(./css/PirataOne-Regular.ttf);
+      font-weight: normal;
+    }
+
+    h1,h2,h3,h4,h5{
+      font-family: 'gloomhavenFont', serif;
+    }
+
 
     .timeline-item{
     	list-style: none;
@@ -186,7 +197,7 @@
 
     }
   </style>
-  <link rel='stylesheet' href='http://www.w3schools.com/lib/w3-theme-deep-purple.css'>
+  <link rel='stylesheet' href='https://www.w3schools.com/lib/w3-theme-deep-purple.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
@@ -279,7 +290,7 @@
 			<p>
 			<div class="w3-quarter">
 				<label for="yearSelect">Jump to: </label>
-				<select onchange="window.location.assign(\'gh-timeline.html#\' +  document.getElementById(\'yearSelect\').value);" id="yearSelect" name="Years:">
+				<select onchange="window.location.assign('gh-timeline.html#' +  document.getElementById('yearSelect').value);" id="yearSelect" name="Years:">
 					<option class="yearLink">2010</option>
 					<option class="yearLink">2011</option>
 					<option class="yearLink">2012</option>
@@ -292,7 +303,7 @@
 			</div>
 			<div class="w3-quarter">
 				<label for="tagSelect">Filter: </label>
-				<select onchange="updateFilter(document.getElementById(\'tagSelect\').value);" id="tagSelect" name="Tag:">
+				<select onchange="updateFilter(document.getElementById('tagSelect').value);" id="tagSelect" name="Tag:">
 					<option class="tagLink">Games</option>
 					<option class="tagLink">Work</option>
 					<option class="tagLink">Web</option>
