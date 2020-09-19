@@ -262,18 +262,140 @@
 	<script>
 
     var objMapPoints = {
-
+      info: {
+        fullWidth: 1292,
+        fullHeight: 1053,
+        scaledWidth: 600,
+        scaledHeight: 400,
+        pointSize: 10
+      },
+      points: [
+        {
+          scenarioNum: 1,
+          scenarioName: "Black Barrow",
+          x: 670,
+          y: 470,
+          completed: true,
+          looted: true
+        },
+        {
+          scenarioNum: 2,
+          scenarioName: "Barrow Crypt",
+          x: 710,
+          y: 475,
+          completed: true,
+          looted: true
+        },
+        {
+          scenarioNum: 3,
+          scenarioName: "Inox Encampment",
+          x: 212,
+          y: 504,
+          completed: true,
+          looted: true
+        }
+      ]
     }
 
     function generateGHmap(){
 
+      // Setup canvas and context
       var cnv = document.getElementById('cnvGHmap');
       var ctx = cnv.getContext('2d');
+      // Draw the PNG image to the canvas
       var mapImg = document.getElementById('ghFullMap');
-      ctx.drawImage(mapImg,0,0,1292,1053,0,0,600,400);
+      ctx.drawImage(mapImg,0,0,objMapPoints.info.fullWidth,objMapPoints.info.fullHeight,0,0,objMapPoints.info.scaledWidth,objMapPoints.info.scaledHeight);
+      // Setup stroke/path settings
+      ctx.fillStyle = '#ff0000';
+      ctx.strokeStyle = '#ffffff';
+      // Setup scaling for points
+      var xScale = objMapPoints.info.scaledWidth / objMapPoints.info.fullWidth;
+      var yScale = objMapPoints.info.scaledHeight / objMapPoints.info.fullHeight;
+      /* Add points to the map
+      points = objMapPoints.points;
+      pCount = points.length;
+      for (var i = 0; i < pCount; i++){
+        let thisX = points[i].x * xScale;
+        let thisY = points[i].y * yScale;
+        let thisName = points[i].scenarioName;
+        ctx.beginPath();
+        ctx.arc(thisX, thisY, 3, 0, 2*Math.PI);
+        ctx.fill();
+        console.log('Drawing point',i,'at',thisX,thisY,'called',thisName);
+      }*/
+      i = 0;
+      while(p = objMapPoints.points[i++]) ctx.rect(p.x * xScale, p.y * yScale, objMapPoints.info.pointSize, objMapPoints.info.pointSize);
+      ctx.fillStyle = 'blue';
+      ctx.fill();
 
+
+      var canvas = document.querySelector('canvas');
+      canvas.onmousemove = function (e){
+
+        // important: correct mouse position:
+        var rect = this.getBoundingClientRect(),
+            x = e.clientX - rect.left,
+            y = e.clientY - rect.top,
+            i = 0, p;
+
+        //console.log('Checking mousemove',x,y);
+
+        var points = objMapPoints.points;
+
+        while (p = points[i++]){
+          ctx.beginPath();
+          //ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
+          ctx.rect(p.x * xScale, p.y * yScale, objMapPoints.info.pointSize, objMapPoints.info.pointSize);
+          if (ctx.isPointInPath(x * xScale, y * yScale)){
+            console.log('Point found',p.scenarioName);
+            ctx.fillStyle = "yellow";
+          }else{
+            ctx.fillStyle = "red";
+          }
+          //ctx.fillStyle = ctx.isPointInPath(x, y) ? "yellow" : "red";
+          ctx.fill();
+        }
+
+
+      }
+
+      canvas.onclick = function(e){
+
+        // important: correct mouse position:
+        var rect = this.getBoundingClientRect(),
+            x = e.clientX - rect.left,
+            y = e.clientY - rect.top,
+            i = 0, p;
+
+        console.log('Checking click',x,y);
+
+        var points = objMapPoints.points;
+
+        while (p = points[i++]){
+          ctx.beginPath();
+          //ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
+          ctx.rect(p.x * xScale, p.y * yScale, objMapPoints.info.pointSize, objMapPoints.info.pointSize);
+          //console.log('Checking if (',x,y,') is in (',p.x * xScale, p.y * yScale, p.x * xScale + objMapPoints.info.pointSize, p.y * yScale + objMapPoints.info.pointSize,')');
+          var withinXrange = ( ( x > (p.x * xScale) ) && ( x < ( (p.x * xScale) + objMapPoints.info.pointSize ) ) );
+          var withinYrange = ( ( y > (p.y * yScale) ) && ( y < ( (p.y * yScale) + objMapPoints.info.pointSize ) ) );
+          //console.log('X match?',withinXrange,'Y match?',withinYrange);
+          if (withinXrange && withinYrange){
+          //if (ctx.isPointInPath(x * xScale, y * yScale)){
+            console.log('Point found',p.scenarioName);
+            document.getElementById('headingScenarioName').innerHTML = p.scenarioNum + ' - ' + p.scenarioName;
+            ctx.fillStyle = "yellow";
+          }else{
+            ctx.fillStyle = "red";
+          }
+          //ctx.fillStyle = ctx.isPointInPath(x, y) ? "yellow" : "red";
+          ctx.fill();
+        }
+
+      }
 
     }
+
+
 
 
     function updateFilter(text){
@@ -392,6 +514,7 @@
       <canvas id='cnvGHmap' width='600' height='400'>
         Your browser does not support the canvas element
       </canvas>
+      <h2 id='headingScenarioName'></h2>
 
       <!--img src="GH-Full-Map.png" alt="Gloomhaven" usemap="#ghMap" width="600" height="400">
       <svg width="600" height="400" style='z-index: 50; position:relative; top:-400px; left:0px;'>
