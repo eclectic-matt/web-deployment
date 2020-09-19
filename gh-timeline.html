@@ -16,7 +16,11 @@
       font-weight: normal;
     }
 
-    h1,h2,h3,h4,h5, .timeline-title{
+    h1,h2,h3,h4,h5{
+      font-family: 'gloomhavenFont', serif;
+    }
+
+    .timeline-title{
       font-family: 'gloomhavenFont', serif;
       font-size: 1em !important;
     }
@@ -26,7 +30,7 @@
     }
 
     h2{
-      font-size: 2.5em;
+      font-size: 3.5em;
       color: "yellow";
     }
 
@@ -353,9 +357,15 @@
         console.log('Drawing point',i,'at',thisX,thisY,'called',thisName);
       }*/
       i = 0;
-      while(p = objMapPoints.points[i++]) ctx.rect(p.x * xScale, p.y * yScale, objMapPoints.info.pointSize, objMapPoints.info.pointSize);
-      ctx.fillStyle = 'blue';
-      ctx.fill();
+      ctx.font = "8px Arial";
+      while(p = objMapPoints.points[i++]){
+        ctx.rect(p.x * xScale, p.y * yScale, objMapPoints.info.pointSize, objMapPoints.info.pointSize);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+        ctx.strokeText(p.scenarioNum,p.x * xScale + (objMapPoints.info.pointSize / 2), p.y * yScale + (objMapPoints.info.pointSize / 2));
+        ctx.stroke();
+      }
+
 
 
       var canvas = document.querySelector('canvas');
@@ -538,7 +548,7 @@
 
 		</div>
 
-    <div id='ghMap' class='w3-center' style='height: 425px;'>
+    <div id='ghMap' class='w3-center' style='height: 475px;'>
 
       <canvas id='cnvGHmap' width='600' height='400'>
         Your browser does not support the canvas element
