@@ -470,17 +470,26 @@
       }
 
       for (var i = 0; i < li.length; i++){
-        var innerSpans = li[i].getElementsByTagName('div')[0].getElementsByTagName('span');
-        if (innerSpans.length > 2){
-          var tags = innerSpans[1].innerHTML.toUpperCase();
-          var title = innerSpans[2].innerHTML.toUpperCase();
-          console.log('Checking li',i,'Tags/Title',tags,title);
-          if (  (tags.indexOf(filter) > -1) || (title.indexOf(filter) > -1) ) {
-            li[i].style.display = '';
-          } else {
-            li[i].style.display = 'none';
+
+        try {
+          var innerSpans = li[i].getElementsByTagName('div')[0].getElementsByTagName('span');
+
+          if (innerSpans.length > 2){
+            var tags = innerSpans[1].innerHTML.toUpperCase();
+            var title = innerSpans[2].innerHTML.toUpperCase();
+            console.log('Checking li',i,'Tags/Title:',tags,'/',title);
+            if (  (tags.indexOf(filter) > -1) || (title.indexOf(filter) > -1) ) {
+              li[i].style.display = '';
+              console.log('Match - display',tags,title);
+            } else {
+              li[i].style.display = 'none';
+              console.log('NO Match - hide',tags,title);
+            }
           }
-        }
+      } catch (e){
+        console.error('Cannot parse - ',li[i].innerHTML);
+      }
+
       }
 
     };
