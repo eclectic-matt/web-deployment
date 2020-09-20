@@ -22,6 +22,10 @@
 
     .timeline-title{
       font-family: 'gloomhavenFont', serif;
+      font-size: 3em !important;
+    }
+
+    .timeline-time.timeline-title{
       font-size: 1em !important;
     }
 
@@ -276,7 +280,7 @@
         fullHeight: 1053,
         scaledWidth: 600,
         scaledHeight: 400,
-        pointSize: 15
+        pointSize: 13
       },
       points: [
         {
@@ -521,6 +525,7 @@
 
 	<div id="top" class="timeline-main-title">
 		<h1>GLOOMHAVEN TIMELINE</h1>
+    <em><a href='https://boardgamegeek.com/plays/thing/174430?userid=2067663'>All Logged Plays on BGG</a></em>
 	</div>
 
 		<div class="w3-panel w3-container">
@@ -548,26 +553,45 @@
 
 		</div>
 
-    <div id='ghMap' class='w3-center' style='height: 475px;'>
+    <div class='w3-row-padding'>
 
-      <canvas id='cnvGHmap' width='600' height='400'>
-        Your browser does not support the canvas element
-      </canvas>
-      <h2 id='headingScenarioName'></h2>
+      <div class='w3-col s12 m12 l6 w3-center'>
 
-      <!--img src="GH-Full-Map.png" alt="Gloomhaven" usemap="#ghMap" width="600" height="400">
-      <svg width="600" height="400" style='z-index: 50; position:relative; top:-400px; left:0px;'>
-        <ellipse class='tooltip' cx="100" cy="150" rx="5" ry="5" style="fill:green; stroke:1px solid black; fill-opacity: 1">
-          <desc class='tooltiptext'>Scenario 1: Black Barrow</desc>
-        </ellipse>
-      </svg>
-      <map name="ghMap">
-        <area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
-        <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
-        <area shape="circle" coords="337,300,44" alt="Cup of coffee" href="coffee.htm">
-      </map-->
+        <h3>Campaign Map</h3>
+        <div id='ghMap' class='w3-center' style='height: 475px;'>
+
+          <canvas id='cnvGHmap' width='600' height='400'>
+            Your browser does not support the canvas element
+          </canvas>
+          <h2 id='headingScenarioName'></h2>
+
+          <!--img src="GH-Full-Map.png" alt="Gloomhaven" usemap="#ghMap" width="600" height="400">
+          <svg width="600" height="400" style='z-index: 50; position:relative; top:-400px; left:0px;'>
+            <ellipse class='tooltip' cx="100" cy="150" rx="5" ry="5" style="fill:green; stroke:1px solid black; fill-opacity: 1">
+              <desc class='tooltiptext'>Scenario 1: Black Barrow</desc>
+            </ellipse>
+          </svg>
+          <map name="ghMap">
+            <area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
+            <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
+            <area shape="circle" coords="337,300,44" alt="Cup of coffee" href="coffee.htm">
+          </map-->
+
+        </div>
+
+      </div>
+
+      <div class='w3-col s12 m12 l6 w3-center'>
+
+        <h3>Summary Statistics</h3>
+        <iframe class='w3-center' width='600' height='400' src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRzHU1fQVHipRqhqgqiPGcPsJ9KrH-kNXoDqRkIgtk7RWL21YkvmsdytwryYQQFa1plQeDVtlurH18N/pubhtml?gid=1923381997&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+      </div>
 
     </div>
+
+
+
+
 
     <div class="timeline-main">
 
@@ -716,20 +740,155 @@
   				</div>
   			</li>
 
+        <!-- Timeline Item -->
+  			<li class="timeline-item">
+
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+  					<span class="timeline-time">20 July 2020</span> <span class="timeline-tags">Scenario</span>
+  					<br>
+  					<span class="timeline-title">Sc. 67 - Arcane Library</span>
+  					<div class="timeline-desc">
+  						<p>Attempt #2 - Another decent attempt but once again bested by the horrors in the Arcane Library!</p>
+              <p>Characters:</p>
+              <ul>
+                <li>Matt - Tinkerer</li>
+                <li>Naomi - Cragheart</li>
+                <li>Oliver - Brute</li>
+              </ul>
+              <p><a href="https://boardgamegeek.com/play/details/44443443">Logged Play Details</a></p>
+  					</div>
+
+  				</div>
+  			</li>
+
+        <!-- Timeline Item -->
+        <li class="timeline-item">
+
+          <div class="timeline-panel">
+            <div class="timeline-point"></div>
+            <span class="timeline-time">20 July 2020</span> <span class="timeline-tags">Scenario</span>
+            <br>
+            <span class="timeline-title">Sc. 9 - Diamond Mine</span>
+            <div class="timeline-desc">
+              <p>Attempt #1 - After failing the Arcane Library we tried our luck down the Diamond Mine... and got beaten by that as well!</p>
+              <p>Characters:</p>
+              <ul>
+                <li>Matt - Tinkerer</li>
+                <li>Naomi - Cragheart</li>
+                <li>Oliver - Brute</li>
+              </ul>
+              <p><a href="https://boardgamegeek.com/play/details/44447088">Logged Play Details</a></p>
+            </div>
+
+          </div>
+        </li>
+
+        <!-- Timeline Item -->
+        <li class="timeline-item">
+
+          <div class="timeline-panel">
+            <div class="timeline-point"></div>
+            <span class="timeline-time">27 July 2020</span> <span class="timeline-tags">Scenario</span>
+            <br>
+            <span class="timeline-title">Sc. 9 - Diamond Mine</span>
+            <div class="timeline-desc">
+              <p>Attempt #2 - Came back to take on the Diamond Mine with our Spellweaver and we absolutely smashed it!</p>
+              <p>Characters:</p>
+              <ul>
+                <li>Amber - Spellweaver</li>
+                <li>Matt - Tinkerer</li>
+                <li>Naomi - Cragheart</li>
+                <li>Oliver - Brute</li>
+              </ul>
+              <p><a href="https://boardgamegeek.com/play/details/44592178">Logged Play Details</a></p>
+            </div>
+
+          </div>
+        </li>
+
+        <!-- Timeline Item -->
+        <li class="timeline-item">
+
+          <div class="timeline-panel">
+            <div class="timeline-point"></div>
+            <span class="timeline-time">27 July 2020</span> <span class="timeline-tags">Scenario</span>
+            <br>
+            <span class="timeline-title">Sc. 11 - Gloomhaven Square A</span>
+            <div class="timeline-desc">
+              <p>Attempt #1 - Too many AI decisions to make, we really needed the app to help track everything. Got to the boss and nabbed the treasure chest after running past everyone and letting our allies do the work. Sadly we were all exhausted before doing even half the damage needed to beat the boss. Plus we were all drunk and tired by then!</p>
+              <p>Characters:</p>
+              <ul>
+                <li>Matt - Tinkerer</li>
+                <li>Naomi - Cragheart</li>
+                <li>Oliver - Brute</li>
+              </ul>
+              <p><a href="https://boardgamegeek.com/play/details/44617929">Logged Play Details</a></p>
+            </div>
+
+          </div>
+        </li>
+
         <!-- Timeline YEAR -->
   			<span class="yearAnchor" id="August%202020"></span>
 
-  			<li class="timeline-item timeline-year">
-  				<div class="timeline-panel">
-  					<div class="timeline-point"></div>
-  					<div class="w3-right w3-medium">
-  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
-  							<span class="w3-text">Back to top</span>
-  						</a>
-  					</div>
-  					<div class="timeline-time timeline-title">First Retirement</div>
-  				</div>
-  			</li>
+        <!-- Timeline Item -->
+        <li class="timeline-item">
+
+          <div class="timeline-panel">
+            <div class="timeline-point"></div>
+            <span class="timeline-time">1 August 2020</span> <span class="timeline-tags">Scenario</span>
+            <br>
+            <span class="timeline-title">Sc. 11 - Gloomhaven Square A</span>
+            <div class="timeline-desc">
+              <p>Attempt #2 - Our tactic of running like a mad bastard worked well. Let the living bones and corpses tank the damage behind us. Ended up knocking out the big boss in a couple of turns, once we got to him. Strangely easy - and now the militaristic rule of Gloomhaven is toppled!</p>
+              <p>Characters:</p>
+              <ul>
+                <li>Matt - Tinkerer</li>
+                <li>Naomi - Cragheart</li>
+                <li>Oliver - Brute</li>
+              </ul>
+              <p><a href="https://boardgamegeek.com/play/details/44617929">Logged Play Details</a></p>
+            </div>
+
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-panel">
+            <div class="timeline-point"></div>
+            <span class="timeline-time">1 August 2020</span> <span class="timeline-tags">Achievement</span>
+            <div class="w3-right w3-medium">
+              <a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+                <span class="w3-text">Back to top</span>
+              </a>
+            </div>
+            <div class="timeline-title">City Rule: Economic</div>
+          </div>
+        </li>
+
+        <!-- Timeline Item -->
+        <li class="timeline-item">
+
+          <div class="timeline-panel">
+            <div class="timeline-point"></div>
+            <span class="timeline-time">6 August 2020</span> <span class="timeline-tags">Scenario</span>
+            <br>
+            <span class="timeline-title">Sc. 4 - Crypt of the Damned</span>
+            <div class="timeline-desc">
+              <p>What we hoped would be a "quick, easy scenario" turned out to be a grind of cultists summoning enemies left, right and centre. Some fantastic moves from Cragheart and Brute, but the Spellweaver was on the point of death from the first opened door and my Tinkerer felt underwhelming until the end. We split in the corridor and I managed to lay enough traps to finish the last enemy with my final card - a single bad modifier would have lost us the game.</p>
+              <p>Characters:</p>
+              <ul>
+                <li>Amber - Spellweaver</li>
+                <li>Matt - Tinkerer</li>
+                <li>Naomi - Cragheart</li>
+                <li>Oliver - Brute</li>
+              </ul>
+              <p><a href="https://boardgamegeek.com/play/details/44808729">Logged Play Details</a></p>
+            </div>
+
+          </div>
+        </li>
 
         <!-- Timeline Item -->
   			<li class="timeline-item">
@@ -744,6 +903,19 @@
               <p>Our newest party member - the <b>Human Sawbones!</b></p>
   					</div>
 
+  				</div>
+  			</li>
+
+        <li class="timeline-item">
+  				<div class="timeline-panel">
+  					<div class="timeline-point"></div>
+            <span class="timeline-time">6 August 2020</span> <span class="timeline-tags">Achievement</span>
+  					<div class="w3-right w3-medium">
+  						<a class="top-link w3-tooltip" alt="Back to Top" href="#top">
+  							<span class="w3-text">Back to top</span>
+  						</a>
+  					</div>
+  					<div class="timeline-title">First Retirement</div>
   				</div>
   			</li>
 
@@ -762,6 +934,16 @@
   	</div>
 
 
+  </div>
+
+  <div class='w3-center w3-container timeline-item'>
+    <h3>Reference Docs</h3>
+    <ul>
+      <li><a target='_blank' href='https://online.flippingbook.com/view/598058/'>Rule Book</a></li>
+      <li><a target='_blank' href='https://online.flippingbook.com/view/145446/13'>Scenario Book</a></li>
+      <li><a target='_blank' href='https://docs.google.com/spreadsheets/d/1Pmentt9caxknuzZiycKTp-aqPB669QzM_7yT2vCsSVk/edit#gid=1917869594'>Tracking Spreadsheet</a></li>
+      <li><a target='_blank' href='https://boardgamegeek.com/plays/thing/174430?userid=2067663'>BGG Logged Plays</a></li>
+    </ul>
   </div>
 
   <img id='ghFullMap' src='GH-Full-Map.PNG' style='display:none;' />
