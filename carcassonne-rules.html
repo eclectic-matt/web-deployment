@@ -22,9 +22,97 @@
 
   }
 
+  var arrLandSurveyRules = [
+    [
+      ["Citizen's Jury", "The meeple majority rule does not apply (all players in a feature score full points)"],
+      ["Bad Neighbourhood", "Tiles in a city with only one edge joined to the city are worth 0 points"],
+      ["Siege", "During scoring each coat of arms gives you 1 extra point"],
+      ["City Wealth", "Cities are worth +3 points when scored"],
+      ["City Poverty", "Cities are worth -3 points when scored"]
+    ],
+    [
+      ["Highway", "During the scoring of a road, you receive 5 points (regardless of length)"],
+      ["Peasant Uprising", "During road scoring, you receive 1 fewer point for each tile showing a farm"],
+      ["Street Fair", "During road scoring, you score twice as many points"],
+      ["Street Poverty", "During road scoring, you receive -3 points (can cause you to lose points!)"]
+    ],
+    [
+      ["Hermit Monastery", "During monastery scoring, you receive 1 fewer point for each city tile"],
+      ["Pilgrimage Route", "During monastery scoring, you receive 1 extra point for each road tile"],
+      ["Monastery Wealth", "During monastery scoring, you receive 3 extra points"]
+    ]
+  ];
+
+  var arrShuffledRules = [[]];
+  var intCityRule = 0, intRoadRule = 0, intMonaRule = 0;
+
+  function startLandSurveyors(){
+
+    for (var i = 0; i < 3; i++){
+      arrShuffledRules[i] = shuffle(arrLandSurveyRules[i]);
+    }
+
+    console.log(arrShuffledRules);
+    console.log(intCityRule, intRoadRule, intMonaRule);
+
+    updateRules();
+
+  }
+
+  function getNewRule(){
+
+    if (intCityRule == (arrShuffledRules[0].length - 1) ){
+      intCityRule = 0;
+    }else{
+      intCityRule++;
+    }
+
+    if (intRoadRule == (arrShuffledRules[1].length - 1) ){
+      intRoadRule = 0;
+    }else{
+      intRoadRule++;
+    }
+
+    if (intMonaRule == (arrShuffledRules[2].length - 1) ){
+      intMonaRule = 0;
+    }else{
+      intMonaRule++;
+    }
+
+    updateRules();
+
+  }
+
+  function updateRules(){
+
+    document.getElementById('landSurveyCityRuleTitle').innerHTML = arrShuffledRules[0][intCityRule][0];
+    document.getElementById('landSurveyCityRuleDesc').innerHTML = arrShuffledRules[0][intCityRule][1];
+
+    document.getElementById('landSurveyRoadRuleTitle').innerHTML = arrShuffledRules[1][intRoadRule][0];
+    document.getElementById('landSurveyRoadRuleDesc').innerHTML = arrShuffledRules[1][intRoadRule][1];
+
+    document.getElementById('landSurveyMonaRuleTitle').innerHTML = arrShuffledRules[2][intMonaRule][0];
+    document.getElementById('landSurveyMonaRuleDesc').innerHTML = arrShuffledRules[2][intMonaRule][1];
+
+  }
+
+  // Function to shuffle array
+  //https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+  function shuffle(a) {
+      var j, x, i;
+      for (i = a.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          x = a[i];
+          a[i] = a[j];
+          a[j] = x;
+      }
+      return a;
+  }
+
+
   </script>
 </head>
-<body>
+<body onload='startLandSurveyors()'>
 
   <div class='w3-padding w3-card-8 w3-grey w3-col l12 m12 s12' id='settingsDiv'>
 
@@ -40,7 +128,13 @@
 
       <div class='w3-xlarge w3-margin'>
 
-        <label for='expChkBaseGame'>Base Game </label><input class='w3-check' onchange='showHide("baseGame", this.checked)' type='checkbox' checked></input>
+        <div class='w3-col s12 m6 l6 w3-xlarge'>
+          <label for='expChkBaseGame'>Base Game </label><input class='w3-check' onchange='showHide("baseGame", this.checked)' type='checkbox' checked></input>
+        </div>
+
+        <div class='w3-col s12 m6 l6 w3-xlarge'>
+          <label for='expChkLandSurveyors'>Land Surveyors (special scoring)</label><input class='w3-check' onchange='showHide("landSurveyors", this.checked)' type='checkbox'></input>
+        </div>
 
       </div>
 
@@ -96,6 +190,37 @@
   <br><br>
 
   <div class='w3-card-8 w3-padding-10 w3-row-padding' id='rulesDiv'>
+
+    <div id='landSurveyors' class='w3-col s12 m12 l12 w3-hide'>
+
+      <div class='w3-padding w3-card-8 w3-green w3-large'>
+        <h3>Land Surveyors (special scoring)</h3>
+        <div class='w3-row-padding w3-container'>
+          <div class='w3-third w3-yellow w3-border w3-padding w3-container w3-cell w3-center'>
+            <h4>City Scoring</h4>
+            <b id='landSurveyCityRuleTitle'></b>
+            <br>
+            <em id='landSurveyCityRuleDesc'></em>
+          </div>
+          <div class='w3-third w3-cyan w3-border w3-padding w3-container w3-cell w3-center'>
+            <h4>Road Scoring</h4>
+            <b id='landSurveyRoadRuleTitle'></b>
+            <br>
+            <em id='landSurveyRoadRuleDesc'></em>
+          </div>
+          <div class='w3-third w3-blue w3-border w3-padding w3-container w3-cell w3-center'>
+            <h4>Monastery Scoring</h4>
+            <b id='landSurveyMonaRuleTitle'></b>
+            <br>
+            <em id='landSurveyMonaRuleDesc'></em>
+          </div>
+        </div>
+        <div class='w3-xlarge w3-center'>
+          <button class='w3-btn w3-xlarge w3-red w3-round' onclick='getNewRule()'>Feature Scored</button>
+        </div>
+      </div>
+
+    </div>
 
     <div id='baseGame' class='w3-col s12 m6 l4 w3-show'>
       <div class='w3-padding w3-card-8 w3-blue w3-small'>
