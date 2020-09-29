@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var objData = {
+  "sales": {
+    "01/2019": 4922209,
+    "02/2019": 4564864,
+    "03/2019": 3415546,
+    "04/2019": 4832045,
+    "05/2019": 3545456,
+    "06/2019": 2544451,
+    "07/2019": 1923545,
+    "08/2019": 1321354,
+    "09/2019": 3001214,
+    "10/2019": 4045565,
+    "11/2019": 5432311,
+    "12/2019": 6404640
+  }
+}
+
+function generateDashboard(){
+  generateGraph('cnvGraph', objData.sales);
+}
+
+const MARGIN_LEFT = 20;
+const MARGIN_RIGHT = 20;
+const MARGIN_TOP = 20;
+const MARGIN_BOTTOM = 20;
+
+function generateGraph(id, data){
+
+  // Parse data for graphing
+  // Presume:
+    // - data in key/value pairs should map to x-y
+
+  var dataPointCount = data.length;
+  var arrXvals = [];
+  var arrYvals = [];
+
+  //https://stackoverflow.com/a/8430374
+  Object.keys(data).forEach(function(key){
+    arrXvals.push(key);
+    arrYvals.push(data[key]);
+  });
+
+  console.log('X arr: ', arrXvals);
+  console.log('Y arr: ', arrYvals);
+
+  var minY = Math.min(...arrYvals);
+  var maxY = Math.max(...arrYvals);
+  var rngY = maxY - minY;
+  console.log(minY, maxY, rngY);
+
+  // Setup canvas element
+  var cnvEl = document.getElementById(id);
+  var ctx = cnvEl.getContext('2d');
+  var w = cnvEl.width;
+  var h = cnvEl.height;
+  ctx.strokeStyle = '#000000';
+  // Draw x-axis
+  ctx.beginPath();
+  ctx.moveTo(MARGIN_LEFT, h - MARGIN_BOTTOM);
+  ctx.lineTo(w - MARGIN_RIGHT, h - MARGIN_BOTTOM);
+  ctx.stroke();
+  ctx.closePath();
+  // Draw y-axis
+  ctx.beginPath();
+  ctx.moveTo(MARGIN_LEFT, h - MARGIN_BOTTOM);
+  ctx.lineTo(MARGIN_LEFT, MARGIN_TOP);
+  ctx.stroke();
+  ctx.closePath();
+
+}
+
+</script>
+</head>
+<body onload='generateDashboard()'>
+
+  <h1>Data Dashboard</h1>
+  <canvas id='cnvGraph' width='600' height='400'>
+    Your browser does not support the canvas element
+  </canvas>
+
+</body>
+</html>
