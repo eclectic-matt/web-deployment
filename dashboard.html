@@ -2,7 +2,7 @@
 <html>
 <head>
 <script>
-var objData = {
+var objSalesInfo = {
   "sales": {
     "01/2019": 4922209,
     "02/2019": 4564864,
@@ -19,14 +19,20 @@ var objData = {
   }
 }
 
+var objData = {};
+
 function generateDashboard(){
-  generateGraph('cnvGraph', objData.sales);
+  generateGraph('cnvGraph', objSalesInfo.sales);
 }
 
+// The margins of the graph
 const MARGIN_LEFT = 20;
 const MARGIN_RIGHT = 20;
 const MARGIN_TOP = 20;
 const MARGIN_BOTTOM = 20;
+// The length of marks on the axes
+const AXIS_POINT_LEN = 10;
+const DEBUG = false;
 
 function generateGraph(id, data){
 
@@ -34,23 +40,32 @@ function generateGraph(id, data){
   // Presume:
     // - data in key/value pairs should map to x-y
 
-  var dataPointCount = data.length;
+  var points = 0; //data.length;
   var arrXvals = [];
   var arrYvals = [];
 
+  // Split key/values into X-Y ranges
   //https://stackoverflow.com/a/8430374
   Object.keys(data).forEach(function(key){
     arrXvals.push(key);
     arrYvals.push(data[key]);
+    points++;
   });
-
-  console.log('X arr: ', arrXvals);
-  console.log('Y arr: ', arrYvals);
 
   var minY = Math.min(...arrYvals);
   var maxY = Math.max(...arrYvals);
   var rngY = maxY - minY;
-  console.log(minY, maxY, rngY);
+  if (DEBUG){
+    console.log('X arr: ', arrXvals);
+    console.log('Y arr: ', arrYvals);
+    console.log(minY, maxY, rngY, points);
+  }
+
+  // Gather key information about the data
+  objData.min = minY;
+  objData.max = maxY;
+  objData.rng = rngY;
+  objData.num = points;
 
   // Setup canvas element
   var cnvEl = document.getElementById(id);
@@ -64,6 +79,24 @@ function generateGraph(id, data){
   ctx.lineTo(w - MARGIN_RIGHT, h - MARGIN_BOTTOM);
   ctx.stroke();
   ctx.closePath();
+
+  // Draw axis labels
+  var xGap = Math.floor(w - MARGIN_LEFT - MARGIN_RIGHT) / points;
+  var startX = MARGIN_LEFT;
+  var startY = h - MARGIN_BOTTOM;
+
+  for (var i = 0; i < points; i++){
+    ctx.beginPath();
+    let thisX = Math.floor(MARGIN_LEFT + (i * xGap));
+    let thisYa = Math.floor(h - MARGIN_BOTTOM + (AXIS_POINT_LEN / 2));
+    let thisYb = Math.floor(h - MARGIN_BOTTOM - (AXIS_POINT_LEN / 2));
+    ctx.moveTo(thisX, thisYa);
+    ctx.lineTo(thisX, thisYb);
+    ctx.stroke();
+    ctx.closePath();
+  }
+
+
   // Draw y-axis
   ctx.beginPath();
   ctx.moveTo(MARGIN_LEFT, h - MARGIN_BOTTOM);
