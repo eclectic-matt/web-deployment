@@ -1,54 +1,54 @@
 function increaseZoom(){
-  zoomLevel++;
-  xMin *= 0.5;
-  yMin *= 0.5;
+  config.zoomLevel++;
+  config.xMin *= 0.5;
+  config.yMin *= 0.5;
   fractalStart();
 }
 
 function decreaseZoom(){
-  if (zoomLevel === 1){ return false }
-  zoomLevel--;
-  xMin *= 2;
-  yMin *= 2;
+  if (config.zoomLevel === 1){ return false }
+  config.zoomLevel--;
+  config.xMin *= 2;
+  config.yMin *= 2;
   fractalStart();
 }
 
 function scrollToLeft(){
-  xMin -= 0.5;
+  config.xMin -= 0.5;
   fractalStart();
 }
 
 function scrollRight(){
-  xMin += 0.5;
+  config.xMin += 0.5;
   fractalStart();
 }
 
 function scrollUp(){
-  yMin -= 0.5;
+  config.yMin -= 0.5;
   fractalStart();
 }
 
 function scrollDown(){
-  yMin += 0.5;
+  config.yMin += 0.5;
   fractalStart();
 }
 
 function changeIterations(){
   // REGISTER A CHANGE IN THE ITERATIONS
-  maxIterations = document.getElementById('iterations').value;
+  config.maxIterations = document.getElementById('iterations').value;
   fractalStart();
 }
 
 function changeColourScheme(){
   // REGISTER A CHANGE IN THE COLOUR SCHEME
-  colourScheme = document.getElementById('colourScheme').value;
-  if (colourScheme === 'Random'){
-    randomCols = getRandomColourScheme();
+  config.colourScheme = document.getElementById('colourScheme').value;
+  if (config.colourScheme === 'Random'){
+    config.randomCols = getRandomColourScheme();
   }
   fractalStart();
 }
 
 function changeFractalType(){
-  fractalType = document.getElementById('fractalType').value;
+  config.fractalType = document.getElementById('fractalType').value;
   fractalStart();
 }

@@ -60,32 +60,38 @@ const LIMIT = 2;
 // THE INITIAL RANGE OF x/y VALUES -2 -> +2
 const RANGE = 4;
 
+// THE CONFIG OBJECT HOLDS ALL SETTINGS
+var config = {};
 // THE INITIAL MINIMUM X VALUE
-var xMin = -2;
+config.xMin = -2;
 // THE INITIAL MINIMUM Y VALUE
-var yMin = -2;
+config.yMin = -2;
+// THE CENTER OF THE CURRENT VIEW
+config.xCenter = 0;
+config.yCenter = 0;
 // THE INITIAL ZOOM LEVEL
-var zoomLevel = 1;
+config.zoomLevel = 1;
 // THE INITIAL COLOUR SCHEME
-var colourScheme = "Ultra Fractal";
+config.colourScheme = 'Ultra Fractal';
 // THE NUMBER OF ITERATIONS TO CHECK (MORE DETAIL)
-var maxIterations = 16;
+config.maxIterations = 16;
 // AN ARRAY OF RANDOM COLOURS
-var randomCols = [];
+config.randomCols = [];
 // THE FRACTAL TYPE TO GENERATE
-var fractalType = 'mandlebrot';
+config.fractalType = 'mandlebrot';
+
 
 // THIS IS THE FUNCTION THAT CALLS THE GENERATOR
 function fractalStart(){
 
   // USUALLY A CHANGE IN ZOOM HAS BEEN MADE
-  document.getElementById('spanZoom').innerHTML = zoomLevel;
+  document.getElementById('spanZoom').innerHTML = config.zoomLevel;
 
     // START TO MEASURE PERFORMANCE
 	  let tStart = performance.now();
 
   // CALL THE FUNCTION GENERATING THE MANDLEBROT SET
-	generateFractal(xMin, yMin, maxIterations, LIMIT, fractalType);
+	generateFractal(config.xMin, config.yMin, config.maxIterations, LIMIT, config.fractalType);
 
     // END TO MEASURE PERFORMANCE
 	  let tEnd = performance.now();
@@ -198,8 +204,8 @@ function julia(x, y, iterations, limit){
 function generateFractal(x0, y0, iterations, limit, type){
 
   // CALCULATE THE RANGE OF VALUES
-  let xRange = RANGE / zoomLevel;
-  let yRange = RANGE / zoomLevel;
+  let xRange = RANGE / config.zoomLevel;
+  let yRange = RANGE / config.zoomLevel;
   // THE MAXIMUM X/Y VALUES
   let xMax = x0 + xRange;
   let yMax = y0 + yRange;
@@ -264,14 +270,14 @@ function generateFractal(x0, y0, iterations, limit, type){
         col = 'rgb(0,0,0)';
       }else{
 
-        if (colourScheme === 'Random'){
+        if (config.colourScheme === 'Random'){
           // Scale all colours to count(array_colours)
-          let colPoint = Math.floor(maxIterations * (i / iterations));
-          col = randomCols[colPoint];
+          let colPoint = Math.floor(config.maxIterations * (i / iterations));
+          col = config.randomCols[colPoint];
         }else{
           // Scale all colours to count(array_colours)
-          let colPoint = Math.floor(maxIterations * (i / iterations));
-          col = ARR_COLOURS[colourScheme][colPoint];
+          let colPoint = Math.floor(config.maxIterations * (i / iterations));
+          col = ARR_COLOURS[config.colourScheme][colPoint];
         }
 
       }
