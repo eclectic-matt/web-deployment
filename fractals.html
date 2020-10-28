@@ -15,12 +15,12 @@
     }
   </style>
 </head>
-<body onload='fractalStart()'>
+<body onload='init()'>
 	<canvas width='100' height='100' id='fractalCnv'>
 		Your browser does not support the canvas element!
 	</canvas>
   <br>
-  <div class='position: relative; left: 100px;'>
+  <div id='view' class='position: relative; left: 100px;'>
     <table style='border: 1px solid black; border-radius: 30px;'>
       <tr>
         <td></td>
@@ -45,17 +45,7 @@
       </tr>
     </table>
   </div>
-	<div>
-		<!--label>Iterations: </label>
-		<select id='iterations' onchange='changeIterations()'>
-			<option value='16' selected>16</option>
-			<option value='32'>32</option>
-			<option value='48'>48</option>
-			<option value='64'>64</option>
-			<option value='80'>80</option>
-			<option value='96'>96</option>
-			<option value='112'>112</option>
-		</select-->
+	<div id='settings'>
 		<label>Colour Scheme: </label>
 		<select id='colourScheme' onchange='changeColourScheme()'>
 			<option value='Ultra Fractal' selected>Ultra Fractal</option>
@@ -68,8 +58,11 @@
 			<option value='mandlebrot' selected>Mandlebrot</option>
 			<option value='julia'>Julia</option>
 			<option value='cubicMandlebrot'>Cubic Mandlebrot</option>
+			<option value='quarticMandlebrot'>Quartic Mandlebrot</option>
 		</select>
-
+	</div>
+	<div id='info'>
+		<span id='coordinates'></span>
 	</div>
 </body>
 </html>

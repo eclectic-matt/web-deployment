@@ -52,3 +52,11 @@ function changeFractalType(){
   config.fractalType = document.getElementById('fractalType').value;
   fractalStart();
 }
+
+function updateCoords(e){
+  coordInfo = document.getElementById('coordinates');
+  x = e.pageX - e.target.offsetLeft;
+  y = e.pageY - e.target.offsetTop;
+  coordInfo.innerHTML = '(' + x + ',' + y + ')';
+
+}
