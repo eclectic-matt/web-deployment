@@ -26,12 +26,13 @@ function generateDashboard(){
 }
 
 // The margins of the graph
-const MARGIN_LEFT = 20;
+const MARGIN_LEFT = 50;
 const MARGIN_RIGHT = 20;
 const MARGIN_TOP = 20;
 const MARGIN_BOTTOM = 20;
 // The length of marks on the axes
 const AXIS_POINT_LEN = 10;
+const AXIS_FONT_STYLE = '8pt Arial';
 const DEBUG = false;
 
 function generateGraph(id, data){
@@ -73,6 +74,7 @@ function generateGraph(id, data){
   var w = cnvEl.width;
   var h = cnvEl.height;
   ctx.strokeStyle = '#000000';
+
   // Draw x-axis
   ctx.beginPath();
   ctx.moveTo(MARGIN_LEFT, h - MARGIN_BOTTOM);
@@ -80,22 +82,30 @@ function generateGraph(id, data){
   ctx.stroke();
   ctx.closePath();
 
-  // Draw axis labels
+  // Calculate X-axis gaps
   var xGap = Math.floor(w - MARGIN_LEFT - MARGIN_RIGHT) / points;
   var startX = MARGIN_LEFT;
   var startY = h - MARGIN_BOTTOM;
 
+  // Draw the X-Axis labels
   for (var i = 0; i < points; i++){
     ctx.beginPath();
+    // X-value of axis mark
     let thisX = Math.floor(MARGIN_LEFT + (i * xGap));
+    // Y-value of the BOTTOM of the axis mark
     let thisYa = Math.floor(h - MARGIN_BOTTOM + (AXIS_POINT_LEN / 2));
+    // Y-value of the TOP of the axis mark
     let thisYb = Math.floor(h - MARGIN_BOTTOM - (AXIS_POINT_LEN / 2));
+    // Draw the axis mark
     ctx.moveTo(thisX, thisYa);
     ctx.lineTo(thisX, thisYb);
     ctx.stroke();
+    // Draw the axis label
+    ctx.font = AXIS_FONT_STYLE;
+    ctx.textAlign = 'center';
+    ctx.fillText(arrXvals[i], thisX, thisYa + (MARGIN_BOTTOM / 2));
     ctx.closePath();
   }
-
 
   // Draw y-axis
   ctx.beginPath();
@@ -103,6 +113,40 @@ function generateGraph(id, data){
   ctx.lineTo(MARGIN_LEFT, MARGIN_TOP);
   ctx.stroke();
   ctx.closePath();
+
+  // Calculate Y-axis gaps
+  var yGap = Math.floor(h - MARGIN_TOP - MARGIN_BOTTOM) / points;
+  var yRngGap = Math.floor(data.rng / points);
+
+  for (var i = 0; i < points; i++){
+    ctx.beginPath();
+    // X-value of LEFT of the axis mark
+    let thisXa = Math.floor(MARGIN_LEFT - (AXIS_POINT_LEN / 2));
+    // X-value of RIGHT of the axis mark
+    let thisXb = Math.floor(MARGIN_LEFT + (AXIS_POINT_LEN / 2));
+    // Y-value of the axis mark !!!!EDIT FROM HERE
+    let thisY = Math.floor(h - (MARGIN_TOP + (i * yGap)));
+    // Draw the axis mark
+    ctx.moveTo(thisXa, thisY);
+    ctx.lineTo(thisXb, thisY);
+    ctx.stroke();
+    // Draw the axis label
+    ctx.font = AXIS_FONT_STYLE;
+    ctx.textAlign = 'center';
+    let thisValue = Math.floor(arrYvals[i]);
+    let thisIncrement = Math.floor( (i / points) * objData.rng);
+    let thisLabel = thisValue + thisIncrement;
+    console.log(thisValue, thisIncrement, thisLabel);
+    ctx.fillText(thisLabel, thisXb - (2 * MARGIN_LEFT / 3), thisY);
+    ctx.closePath();
+  }
+
+  // Plot points
+  for (var i = 0; i < points; i++){
+    //let thisX = Math.floor(MARGIN_LEFT + )
+    //ctx.arc();
+  }
+
 
 }
 
