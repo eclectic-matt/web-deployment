@@ -84,15 +84,12 @@ function resetNumberSettings(){
 
 function downloadImage(){
 
+  // Based on https://stackoverflow.com/a/54869638
   var image = document.getElementById('fractalCnv').toDataURL("image/png", 1.0);
-
   var a = document.createElement('a');
   a.href = image;
   a.download = 'fractal_Z^' + config.indices + '_C=' + config.constantReal + '+' + config.constantImag + 'i.png';
   document.body.appendChild(a);
   a.click();
-
-  //window.location = image; // it will save locally
-
 
 }

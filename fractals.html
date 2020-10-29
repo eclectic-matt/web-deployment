@@ -21,7 +21,7 @@
 		Your browser does not support the canvas element!
 	</canvas>
   <br>
-  <div id='view'>
+  <div id='view' class='w3-padding'>
 
 		<div id='controlsWrapper' class='w3-white' style='width: 225px; border: 1px solid black; border-radius: 30px; position: absolute; left: 575px; top: 478px;'>
 			<!-- TOP ROW - SCROLL UP ONLY -->
@@ -56,26 +56,70 @@
 				<div class='w3-col s3'>&nbsp;</div>
 			</div>
 		</div>
-  </div>
-	<div id='settings'>
 
-		<div class='numberSettings' style='width: 800px;'>
-			<h3>Fractal Formula</h3>
-			<p>Calculating <b>z^<span id='indicesValue'>2</span> + C</b> where C = <b><span id='constantValue'>0 + 0i</span></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Colour Scheme: </label>
-			<select id='colourScheme' onchange='changeColourScheme()'>
-				<option value='Ultra Fractal' selected>Ultra Fractal</option>
-				<option value='Pinky Green'>Pinky Green</option>
-				<option value='Random'>Random</option>
-			</select></p>
-			<p><label>Complex Constant - Real Part: </label><input id='constantReal' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0' />
-			<label>Imaginary Part: </label><input id='constantImag' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0' /></p>
-			<p><label>Power to raise: </label>
-			<input id='indices' onchange='changeIndices()' type='number' min='2' max='100' value='2' />&nbsp;&nbsp;&nbsp;<button class='w3-btn w3-purple w3-border' onclick='resetNumberSettings()'>Reset Numbers</button>&nbsp;&nbsp;&nbsp;<button id='imageBtn' class='w3-btn w3-purple w3-border' target='_blank' onclick='downloadImage()'>Download Image</button></p>
+		<div id='settings'>
+
+			<div id='numberSettings' class='w3-center' style='width: 800px;'>
+				<h3>Fractal Formula</h3>
+				<p>Calculating <b>z^<span id='indicesValue'>2</span> + C</b> where C = <b><span id='constantValue'>0 + 0i</span></b></p>
+
+				<div class='w3-row-padding'>
+					<div class='w3-half'>
+						<label class='w3-right'>Colour Scheme: </label>
+					</div>
+					<div class='w3-half'>
+						<select id='colourScheme' onchange='changeColourScheme()' class='w3-input w3-border'>
+							<option value='Ultra Fractal' selected>Ultra Fractal</option>
+							<option value='Pinky Green'>Pinky Green</option>
+							<option value='Random'>Random</option>
+						</select>
+					</div>
+				</div>
+
+				<div class='w3-row-padding'>
+					<div class='w3-half'>
+						<label class='w3-right'>Complex Constant - Real Part: </label>
+					</div>
+					<div class='w3-half'>
+						<input id='constantReal' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0'  class='w3-input w3-border'/>
+					</div>
+				</div>
+
+				<div class='w3-row-padding'>
+					<div class='w3-half'>
+						<label class='w3-right'>Imaginary Part: </label>
+					</div>
+					<div class='w3-half'>
+						<input id='constantImag' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0'  class='w3-input w3-border'/>
+					</div>
+				</div>
+
+				<div class='w3-row-padding'>
+					<div class='w3-half'>
+						<label class='w3-right'>Power to raise: </label>
+					</div>
+					<div class='w3-half'>
+						<input id='indices' onchange='changeIndices()' type='number' min='2' max='100' value='2' class='w3-input w3-border'/>
+					</div>
+				</div>
+
+				<div class='w3-row-padding'>
+					<div class='w3-half'>
+						<button class='w3-btn w3-purple w3-border' onclick='resetNumberSettings()'>Reset Numbers</button>
+					</div>
+					<div class='w3-half'>
+						<button id='imageBtn' class='w3-btn w3-purple w3-border' target='_blank' onclick='downloadImage()'>Download Image</button>
+					</div>
+				</div>
+
+			</div>
+
 		</div>
 
-	</div>
-	<div id='info'>
-		<p>Mouse Coordinates: <b><span id='coordinates'></span></b> Time taken: <b><span id='timeTaken'></span> ms</b> Zoom Level: <b><span id='spanZoom'>1</span><b></p>
+		<div id='info' class='w3-center'>
+			<p>Mouse Coordinates: <b><span id='coordinates'></span></b> Time taken: <b><span id='timeTaken'></span> ms</b> Zoom Level: <b><span id='spanZoom'>1</span><b></p>
+		</div>
+
 	</div>
 </body>
 </html>
