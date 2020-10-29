@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<script src='./javascript/fractals.js'></script>
 	<script src='./javascript/fractalUI.js'></script>
   <script src='./javascript/complexNumbers.js'></script>
@@ -20,49 +21,61 @@
 		Your browser does not support the canvas element!
 	</canvas>
   <br>
-  <div id='view' class='position: relative; left: 100px;'>
-    <table style='border: 1px solid black; border-radius: 30px;'>
-      <tr>
-        <td></td>
-        <td></td>
-        <td><button onclick='scrollUp()'>&uarr;</button></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><button onclick='scrollToLeft()'>&larr;</button></td>
-        <td><button onclick='increaseZoom()'> + </button></td>
-        <td>Zoom: <span id='spanZoom'>1</span></td>
-        <td><button onclick='decreaseZoom()'> - </button></td>
-        <td><button onclick='scrollRight()'>&rarr;</button></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td><button onclick='scrollDown()'>&darr;</button></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
+  <div id='view'>
+
+		<div id='controlsWrapper' class='w3-white' style='width: 225px; border: 1px solid black; border-radius: 30px; position: absolute; left: 575px; top: 478px;'>
+			<!-- TOP ROW - SCROLL UP ONLY -->
+			<div class='w3-row w3-center'>
+				<div class='w3-col s3'>&nbsp;</div>
+				<div class='w3-col s6'>
+					<button class='w3-btn w3-purple w3-border' onclick='scrollUp()'>&uarr;</button>
+				</div>
+				<div class='w3-col s3'>&nbsp;</div>
+			</div>
+			<!-- MIDDLE ROW - SCROLL LEFT/ZOOM IN/OUT/RIGHT -->
+			<div class='w3-row w3-center'>
+				<div class='w3-col s3'>
+					<button class='w3-btn w3-purple w3-border' onclick='scrollToLeft()'>&larr;</button>
+				</div>
+				<div class='w3-col s3'>
+					<button class='w3-btn w3-purple w3-border' onclick='increaseZoom()'> + </button>
+				</div>
+				<div class='w3-col s3'>
+					<button class='w3-btn w3-purple w3-border' onclick='decreaseZoom()'> - </button>
+				</div>
+				<div class='w3-col s3'>
+					<button class='w3-btn w3-purple w3-border' onclick='scrollToRight()'>&rarr;</button>
+				</div>
+			</div>
+			<!-- BOTTOM ROW - SCROLL DOWN ONLY -->
+			<div class='w3-row w3-center'>
+				<div class='w3-col s3'>&nbsp;</div>
+				<div class='w3-col s6'>
+					<button class='w3-btn w3-purple w3-border' onclick='scrollDown()'>&darr;</button>
+				</div>
+				<div class='w3-col s3'>&nbsp;</div>
+			</div>
+		</div>
   </div>
 	<div id='settings'>
-		<label>Colour Scheme: </label>
-		<select id='colourScheme' onchange='changeColourScheme()'>
-			<option value='Ultra Fractal' selected>Ultra Fractal</option>
-			<option value='Pinky Green'>Pinky Green</option>
-			<option value='Random'>Random</option>
-		</select>
 
-		<label>Fractal Type: </label>
-		<select id='fractalType' onchange='changeFractalType()'>
-			<option value='mandlebrot' selected>Mandlebrot</option>
-			<option value='julia'>Julia</option>
-			<option value='cubicMandlebrot'>Cubic Mandlebrot</option>
-			<option value='quarticMandlebrot'>Quartic Mandlebrot</option>
-		</select>
+		<div class='numberSettings' style='width: 800px;'>
+			<h3>Fractal Formula</h3>
+			<p>Calculating <b>z^<span id='indicesValue'>2</span> + C</b> where C = <b><span id='constantValue'>0 + 0i</span></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Colour Scheme: </label>
+			<select id='colourScheme' onchange='changeColourScheme()'>
+				<option value='Ultra Fractal' selected>Ultra Fractal</option>
+				<option value='Pinky Green'>Pinky Green</option>
+				<option value='Random'>Random</option>
+			</select></p>
+			<p><label>Complex Constant - Real Part: </label><input id='constantReal' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0' />
+			<label>Imaginary Part: </label><input id='constantImag' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0' /></p>
+			<p><label>Power to raise: </label>
+			<input id='indices' onchange='changeIndices()' type='number' min='2' max='100' value='2' />&nbsp;&nbsp;&nbsp;<button class='w3-btn w3-purple w3-border' onclick='resetNumberSettings()'>Reset Numbers</button>&nbsp;&nbsp;&nbsp;<button id='imageBtn' class='w3-btn w3-purple w3-border' target='_blank' onclick='downloadImage()'>Download Image</button></p>
+		</div>
+
 	</div>
 	<div id='info'>
-		<span id='coordinates'></span>
+		<p>Mouse Coordinates: <b><span id='coordinates'></span></b> Time taken: <b><span id='timeTaken'></span> ms</b> Zoom Level: <b><span id='spanZoom'>1</span><b></p>
 	</div>
 </body>
 </html>

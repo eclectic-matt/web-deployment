@@ -80,6 +80,10 @@ config.randomCols = [];
 // THE FRACTAL TYPE TO GENERATE
 config.fractalType = 'mandlebrot';
 
+config.indices = 2;
+config.constantReal = 0;
+config.constantImag = 0;
+
 
 function init(){
   document.getElementById('fractalCnv').onmousemove = function mouseMove(e){
@@ -113,6 +117,8 @@ function fractalStart(){
 
     // END TO MEASURE PERFORMANCE
 	  let tEnd = performance.now();
+    let tTaken = tEnd - tStart;
+    document.getElementById('timeTaken').innerHTML = tTaken.toFixed(3);
     // LOG PERFORMANCE
 	  console.log('Time taken: '+ (tEnd - tStart) +' milliseconds');
 
@@ -135,7 +141,8 @@ function mandlebrot(x, y, iterations, limit, indices){
   // GET A NEW COMPLEX NUMBER FROM INPUT (x0, y0)
 	let c = new Complex(x, y);
   // GET A ZEROED COMPLEX NUMBER TO START ITERATING
-	let z = new Complex(0, 0);
+  let z = new Complex(config.constantReal, config.constantImag);
+	//let z = new Complex(0, 0);
   // COUNT IS THE NUMBER OF ITERATIONS
 	let count = 0;
   // START WITH MODULO = 0
@@ -146,7 +153,7 @@ function mandlebrot(x, y, iterations, limit, indices){
 
 		// CALCULATE Z^indices (z multiplied by z a number of times)
     let zStart = z;
-    for (var i = 0; i < indices; i++){
+    for (var i = 1; i < indices; i++){
       z = z.multiply(zStart);
     }
 		let cResult = z.add(c);
@@ -163,52 +170,6 @@ function mandlebrot(x, y, iterations, limit, indices){
 }
 
 
-function julia(x, y, iterations, limit, indices){
-
-  // GET A NEW COMPLEX NUMBER FROM INPUT (x0, y0)
-  let c = new Complex(x, y);
-  // JULIA USES DIFFERENT NUMBERS TO START ITERATING
-  //let z = new Complex(0, -0.8);
-  //let z = new Complex(0.7269, -0.1889);
-  //let z = new Complex(-0.8, 0.156);
-  //let z = new Complex(0.6, 0.55);
-  let z = new Complex(0.8, 0.6);
-  //let z = new Complex(0, 0);
-
-  // COUNT IS THE NUMBER OF ITERATIONS
-  let count = 0;
-  // START WITH MODULO = 0
-  let cMod = 0;
-
-  // DO LOOP ITERATES UNTIL LIMIT BROKEN OR MAX ITERATIONS
-  do {
-    // CALCULATE Z^2 (z multiplied by z)
-    //let cResult = z.multiply(z).divide(c);
-    //let cResult = z.multiply(z).multiply(z).multiply(z).multiply(z).add(c);
-    let cResult = z.multiply(z).add(c);
-
-    /*
-    //z - ((z3 - 1)/3z2)
-    let cA = z.multiply(z).multiply(z);
-    let justOne = new Complex(1,0);
-    let cB = cA.sub(justOne);
-    let justThree = new Complex(3,0);
-    let cC = z.multiply(z).multiply(justThree);
-    let cResult = cB.divide(cC);
-    */
-
-    cMod = cResult.modulo();
-    // SET Z = CMOD
-    z = cResult;
-    // INCREMENT THE COUNT OF ITERATIONS COMPLETED
-    count++;
-
-  } while ( (cMod <= limit) && (count < iterations) );
-
-  // THEN RETURN THE COUNT (HOW LONG IT TOOK TO BREAK THE LIMIT)
-  return count;
-
-}
 
 // THIS WILL GENERATE A PLOT FROM x0,y0 TO x1,y1
 function generateFractal(x0, y0, iterations, limit, type){
@@ -255,7 +216,8 @@ function generateFractal(x0, y0, iterations, limit, type){
       switch (type){
 
         case 'mandlebrot':
-          i = mandlebrot(x, y, iterations, limit, 1);
+        case 'default':
+          i = mandlebrot(x, y, iterations, limit, config.indices);
           break;
 
         case 'cubicMandlebrot':
@@ -266,7 +228,7 @@ function generateFractal(x0, y0, iterations, limit, type){
           i = mandlebrot(x, y, iterations, limit, 3);
           break;
 
-        case 'default':
+
         case 'julia':
           i = julia(x, y, iterations, limit, 1);
           break;
