@@ -1,8 +1,8 @@
 # web-deployment
 
-These files relate to the eclectic website: http://eclecticapp.xyz
+These files relate to the eclectic website: (formerly eclecticapp.xyz but I no longer own this domain)
 
-This is also being deployed on Github pages at: https://eclectic-matt.github.io/web-deployment/
+This is now being deployed on Github pages at: https://eclectic-matt.github.io/web-deployment/
 
 Some files are backups of pages and some are helper files for specific functionality.
 
