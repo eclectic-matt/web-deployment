@@ -1,36 +1,45 @@
 function increaseZoom(){
   config.zoomLevel++;
-  config.xMin *= 0.5;
-  config.yMin *= 0.5;
+  //config.xMin *= 0.5;
+  //config.yMin *= 0.5;
   fractalStart();
 }
 
 function decreaseZoom(){
   if (config.zoomLevel === 1){ return false }
   config.zoomLevel--;
-  config.xMin *= 2;
-  config.yMin *= 2;
+  //config.xMin *= 2;
+  //config.yMin *= 2;
   fractalStart();
 }
 
 function scrollToLeft(){
-  config.xMin -= 0.5;
+  // CALCULATE THE RANGE OF VALUES
+  let xRange = RANGE / config.zoomLevel;
+  config.xCenter -= (xRange / 4);
   fractalStart();
+  updateCenterCoords();
 }
 
 function scrollToRight(){
-  config.xMin += 0.5;
+  let xRange = RANGE / config.zoomLevel;
+  config.xCenter += (xRange / 4);
   fractalStart();
+  updateCenterCoords();
 }
 
 function scrollUp(){
-  config.yMin -= 0.5;
+  let yRange = RANGE / config.zoomLevel;
+  config.yCenter -= (yRange / 4);
   fractalStart();
+  updateCenterCoords();
 }
 
 function scrollDown(){
-  config.yMin += 0.5;
+  let yRange = RANGE / config.zoomLevel;
+  config.yCenter += (yRange / 4);
   fractalStart();
+  updateCenterCoords();
 }
 
 function changeIterations(){
@@ -54,11 +63,15 @@ function changeFractalType(){
 }
 
 function updateCoords(e){
-  coordInfo = document.getElementById('coordinates');
+  let coordInfo = document.getElementById('coordinates');
   x = e.pageX - e.target.offsetLeft;
   y = e.pageY - e.target.offsetTop;
   coordInfo.innerHTML = '(' + x + ',' + y + ')';
+}
 
+function updateCenterCoords(){
+  let centerInfo = document.getElementById('centerCoords');
+  centerInfo.innerHTML = config.xCenter.toFixed(2) + ', ' + config.yCenter.toFixed(2);
 }
 
 function changeConstant(){
@@ -68,9 +81,9 @@ function changeConstant(){
   fractalStart();
 }
 
-function changeIndices(){
-  config.indices = document.getElementById('indices').value;
-  document.getElementById('indicesValue').innerHTML = config.indices;
+function changeExponent(){
+  config.exponent = document.getElementById('exponent').value;
+  document.getElementById('exponentValue').innerHTML = config.exponent;
   fractalStart();
 }
 
@@ -80,6 +93,13 @@ function resetNumberSettings(){
   document.getElementById('indices').value = 2;
   changeConstant();
   changeIndices();
+}
+
+function resetView(){
+  config.xCenter = 0;
+  config.yCenter = 0;
+  config.zoomLevel = 1;
+  fractalStart();
 }
 
 function downloadImage(){

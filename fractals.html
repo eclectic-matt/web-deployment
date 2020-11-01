@@ -61,20 +61,7 @@
 
 			<div id='numberSettings' class='w3-center' style='width: 800px;'>
 				<h3>Fractal Formula</h3>
-				<p>Calculating <b>z^<span id='indicesValue'>2</span> + C</b> where C = <b><span id='constantValue'>0 + 0i</span></b></p>
-
-				<div class='w3-row-padding'>
-					<div class='w3-half'>
-						<label class='w3-right'>Colour Scheme: </label>
-					</div>
-					<div class='w3-half'>
-						<select id='colourScheme' onchange='changeColourScheme()' class='w3-input w3-border'>
-							<option value='Ultra Fractal' selected>Ultra Fractal</option>
-							<option value='Pinky Green'>Pinky Green</option>
-							<option value='Random'>Random</option>
-						</select>
-					</div>
-				</div>
+				<p>Calculating <b>z^<span id='exponentValue'>2</span> + C</b> where C = <b><span id='constantValue'>0 + 0i</span></b></p>
 
 				<div class='w3-row-padding'>
 					<div class='w3-half'>
@@ -99,25 +86,41 @@
 						<label class='w3-right'>Power to raise: </label>
 					</div>
 					<div class='w3-half'>
-						<input id='indices' onchange='changeIndices()' type='number' min='2' max='100' value='2' class='w3-input w3-border'/>
+						<input id='exponent' onchange='changeExponent()' type='number' min='2' max='100' value='2' class='w3-input w3-border'/>
 					</div>
 				</div>
 
 				<div class='w3-row-padding'>
 					<div class='w3-half'>
-						<button class='w3-btn w3-purple w3-border' onclick='resetNumberSettings()'>Reset Numbers</button>
+						<label class='w3-right'>Colour Scheme: </label>
 					</div>
 					<div class='w3-half'>
-						<button id='imageBtn' class='w3-btn w3-purple w3-border' target='_blank' onclick='downloadImage()'>Download Image</button>
+						<select id='colourScheme' onchange='changeColourScheme()' class='w3-input w3-border'>
+							<option value='Ultra Fractal' selected>Ultra Fractal</option>
+							<option value='Pinky Green'>Pinky Green</option>
+							<option value='Random'>Random</option>
+						</select>
 					</div>
+				</div>
+
+				<div class='w3-row-padding'>
+					<div class='w3-third'>
+						<button class='w3-btn w3-red w3-border' onclick='resetNumberSettings()'>Reset Numbers</button>
+					</div>
+					<div class='w3-third'>
+						<button class='w3-btn w3-yellow w3-border' onclick='resetView()'>Reset View</button>
+					</div>
+					<div class='w3-third'>
+						<button id='imageBtn' class='w3-btn w3-green w3-border' target='_blank' onclick='downloadImage()'>Download Image</button>
+					</div>
+				</div>
+
+				<div id='info' class='w3-center'>
+					<p>Center: <b>(<span id='centerCoords'>0.00, 0.00</span>)</b> Mouse: <b><span id='coordinates'></span></b> Time taken: <b><span id='timeTaken'></span> ms</b> Zoom Level: <b><span id='spanZoom'>1</span><b></p>
 				</div>
 
 			</div>
 
-		</div>
-
-		<div id='info' class='w3-center'>
-			<p>Mouse Coordinates: <b><span id='coordinates'></span></b> Time taken: <b><span id='timeTaken'></span> ms</b> Zoom Level: <b><span id='spanZoom'>1</span><b></p>
 		</div>
 
 	</div>

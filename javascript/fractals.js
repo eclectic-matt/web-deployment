@@ -80,12 +80,20 @@ config.randomCols = [];
 // THE FRACTAL TYPE TO GENERATE
 config.fractalType = 'mandlebrot';
 
-config.indices = 2;
+config.exponent = 2;
 config.constantReal = 0;
 config.constantImag = 0;
 
 
 function init(){
+
+  // SETUP CANVAS ELEMENT
+  let cnv = document.getElementById('fractalCnv');
+  // SET THE WIDTH
+  cnv.width = CNV_WIDTH;
+  // SET THE HEIGHT
+  cnv.height = CNV_HEIGHT;
+
   document.getElementById('fractalCnv').onmousemove = function mouseMove(e){
     coordInfo = document.getElementById('coordinates');
     var rect = e.target.getBoundingClientRect();
@@ -113,7 +121,7 @@ function fractalStart(){
 	  let tStart = performance.now();
 
   // CALL THE FUNCTION GENERATING THE MANDLEBROT SET
-	generateFractal(config.xMin, config.yMin, config.maxIterations, LIMIT, config.fractalType);
+	generateFractal(config.xCenter, config.yCenter, config.maxIterations, LIMIT, config.fractalType);
 
     // END TO MEASURE PERFORMANCE
 	  let tEnd = performance.now();
@@ -172,11 +180,15 @@ function mandlebrot(x, y, iterations, limit, indices){
 
 
 // THIS WILL GENERATE A PLOT FROM x0,y0 TO x1,y1
-function generateFractal(x0, y0, iterations, limit, type){
+function generateFractal(xCenter, yCenter, iterations, limit, type){
 
   // CALCULATE THE RANGE OF VALUES
   let xRange = RANGE / config.zoomLevel;
   let yRange = RANGE / config.zoomLevel;
+
+  let x0 = xCenter - (xRange / 2);
+  let y0 = yCenter - (yRange / 2);
+
   // THE MAXIMUM X/Y VALUES
   let xMax = x0 + xRange;
   let yMax = y0 + yRange;
@@ -189,13 +201,16 @@ function generateFractal(x0, y0, iterations, limit, type){
   //console.log('xInc/yInc = ',xInc,yInc);
 
 	// SETUP CANVAS ELEMENT
-	let cnv = document.getElementById('fractalCnv');
-  // SET THE WIDTH
-	cnv.width = CNV_WIDTH;
-  // SET THE HEIGHT
-	cnv.height = CNV_HEIGHT;
+	//let screenCnv = document.getElementById('fractalCnv');
+  let cnv = document.getElementById('fractalCnv');
   // GET 2D CONTEXT AND ENSURE NO TRANSPARENCY (FOR EFFICIENCY)
-	let ctx = cnv.getContext('2d', { alpha: false });
+	//let screenCtx = screenCnv.getContext('2d', { alpha: false });
+  let ctx = cnv.getContext('2d', { alpha: false });
+
+  /*let cnv = document.createElement('canvas');
+  cnv.width = CNV_WIDTH;
+  cnv.height = CNV_HEIGHT;
+  let ctx = cnv.getContext('2d', {alpha: false });*/
 
   // THE xCoord IS THE ACTUAL PIXEL ON THE CANVAS
 	let xCoord = 0;
@@ -217,7 +232,7 @@ function generateFractal(x0, y0, iterations, limit, type){
 
         case 'mandlebrot':
         case 'default':
-          i = mandlebrot(x, y, iterations, limit, config.indices);
+          i = mandlebrot(x, y, iterations, limit, config.exponent);
           break;
 
         case 'cubicMandlebrot':
@@ -271,6 +286,7 @@ function generateFractal(x0, y0, iterations, limit, type){
   // ACTUALLY DRAW ON THE CANVAS AT THE END
   ctx.fill();
 
+  //screenCtx.drawImage(cnv, 0, 0);
 
 }
 
