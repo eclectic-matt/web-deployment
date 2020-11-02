@@ -87,6 +87,14 @@ function changeExponent(){
   fractalStart();
 }
 
+function changeImageSize(){
+  let newWidth = document.getElementById('imageSize').value.split('x')[0];
+  let newHeight = document.getElementById('imageSize').value.split('x')[1];
+  config.canvasWidth = newWidth;
+  config.canvasHeight = newHeight;
+  init();
+}
+
 function resetNumberSettings(){
   document.getElementById('constantReal').value = 0;
   document.getElementById('constantImag').value = 0;

@@ -79,20 +79,23 @@ config.maxIterations = 16;
 config.randomCols = [];
 // THE FRACTAL TYPE TO GENERATE
 config.fractalType = 'mandlebrot';
-
+// THE EXPONENT IS "N" IN THE FORMULA "Z^N"
 config.exponent = 2;
+// THE CONSTANT IS THE "STARTING POINT" WHERE C = real + imag * i
 config.constantReal = 0;
 config.constantImag = 0;
-
+// THE CANVAS WIDTH AND HEIGHT
+config.canvasWidth = 800;
+config.canvasHeight = 600;
 
 function init(){
 
   // SETUP CANVAS ELEMENT
   let cnv = document.getElementById('fractalCnv');
   // SET THE WIDTH
-  cnv.width = CNV_WIDTH;
+  cnv.width = config.canvasWidth;
   // SET THE HEIGHT
-  cnv.height = CNV_HEIGHT;
+  cnv.height = config.canvasHeight;
 
   document.getElementById('fractalCnv').onmousemove = function mouseMove(e){
     coordInfo = document.getElementById('coordinates');
@@ -104,8 +107,8 @@ function init(){
     let yRange = RANGE / config.zoomLevel;
 
     //elX will be 0 - 800, elY will be 0 - 600
-    var viewX = ( config.xMin + (xRange * (elX / CNV_WIDTH) ) ).toFixed(2);
-    var viewY = ( (config.yMin + yRange) - ((yRange * (elY / CNV_HEIGHT) ) )).toFixed(2);
+    var viewX = ( config.xMin + (xRange * (elX / config.canvasWidth) ) ).toFixed(2);
+    var viewY = ( (config.yMin + yRange) - ((yRange * (elY / config.canvasHeight) ) )).toFixed(2);
     coordInfo.innerHTML = '(' + viewX + ',' + viewY + ')';
   }
   fractalStart();
@@ -193,8 +196,8 @@ function generateFractal(xCenter, yCenter, iterations, limit, type){
   let xMax = x0 + xRange;
   let yMax = y0 + yRange;
   // THE INCREMENT OF X/Y TO CALCULATE
-  let xInc = (xRange / CNV_WIDTH);
-  let yInc = (yRange / CNV_HEIGHT);
+  let xInc = (xRange / config.canvasWidth);
+  let yInc = (yRange / config.canvasHeight);
   //console.log('Range X/Y = ',xRange,yRange);
   //console.log('x0/y0 = ',x0,y0);
   //console.log('xMax/yMax = ',xMax,yMax);

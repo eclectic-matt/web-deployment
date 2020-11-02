@@ -9,7 +9,7 @@
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 	<title>Fractal Generator</title>
-	
+
 	<script src='./javascript/fractals.js'></script>
 	<script src='./javascript/fractalUI.js'></script>
   <script src='./javascript/complexNumbers.js'></script>
@@ -29,105 +29,134 @@
 		Your browser does not support the canvas element!
 	</canvas>
   <br>
-  <div id='view' class='w3-padding'>
+  <div id='view' class='w3-padding w3-col s12'>
 
-		<div id='controlsWrapper' class='w3-white' style='width: 225px; border: 1px solid black; border-radius: 30px; position: absolute; left: 575px; top: 478px;'>
-			<!-- TOP ROW - SCROLL UP ONLY -->
-			<div class='w3-row w3-center'>
-				<div class='w3-col s3'>&nbsp;</div>
-				<div class='w3-col s6'>
-					<button class='w3-btn w3-purple w3-border' onclick='scrollUp()'>&uarr;</button>
-				</div>
-				<div class='w3-col s3'>&nbsp;</div>
-			</div>
-			<!-- MIDDLE ROW - SCROLL LEFT/ZOOM IN/OUT/RIGHT -->
-			<div class='w3-row w3-center'>
-				<div class='w3-col s3'>
-					<button class='w3-btn w3-purple w3-border' onclick='scrollToLeft()'>&larr;</button>
-				</div>
-				<div class='w3-col s3'>
-					<button class='w3-btn w3-purple w3-border' onclick='increaseZoom()'> + </button>
-				</div>
-				<div class='w3-col s3'>
-					<button class='w3-btn w3-purple w3-border' onclick='decreaseZoom()'> - </button>
-				</div>
-				<div class='w3-col s3'>
-					<button class='w3-btn w3-purple w3-border' onclick='scrollToRight()'>&rarr;</button>
-				</div>
-			</div>
-			<!-- BOTTOM ROW - SCROLL DOWN ONLY -->
-			<div class='w3-row w3-center'>
-				<div class='w3-col s3'>&nbsp;</div>
-				<div class='w3-col s6'>
-					<button class='w3-btn w3-purple w3-border' onclick='scrollDown()'>&darr;</button>
-				</div>
-				<div class='w3-col s3'>&nbsp;</div>
-			</div>
-		</div>
+		<div id='settings' class='w3-row'>
 
-		<div id='settings'>
+			<div class='w3-col s12 m6 l6'>
 
-			<div id='numberSettings' class='w3-center' style='width: 800px;'>
-				<h3>Fractal Formula</h3>
-				<p>Calculating <b>z^<span id='exponentValue'>2</span> + C</b> where C = <b><span id='constantValue'>0 + 0i</span></b></p>
-
-				<div class='w3-row-padding'>
-					<div class='w3-half'>
-						<label class='w3-right'>Complex Constant - Real Part: </label>
+				<div id='controlsWrapper' class='w3-white' style='border: 1px solid black; border-radius: 30px;'>
+					<!-- TOP ROW - SCROLL UP ONLY -->
+					<div class='w3-row w3-center'>
+						<div class='w3-col s3'>&nbsp;</div>
+						<div class='w3-col s6'>
+							<button class='w3-btn w3-xlarge w3-purple w3-border' onclick='scrollUp()'>&nbsp;&uarr;&nbsp;</button>
+						</div>
+						<div class='w3-col s3'>&nbsp;</div>
 					</div>
-					<div class='w3-half'>
-						<input id='constantReal' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0'  class='w3-input w3-border'/>
+					<!-- MIDDLE ROW - SCROLL LEFT/ZOOM IN/OUT/RIGHT -->
+					<div class='w3-row w3-center'>
+						<div class='w3-col s3'>
+							<button class='w3-btn w3-xlarge w3-purple w3-border' onclick='scrollToLeft()'>&larr;</button>
+						</div>
+						<div class='w3-col s3'>
+							<button class='w3-btn w3-xlarge w3-purple w3-border' onclick='increaseZoom()'>&nbsp;+&nbsp;</button>
+						</div>
+						<div class='w3-col s3'>
+							<button class='w3-btn w3-xlarge w3-purple w3-border' onclick='decreaseZoom()'>&nbsp;-&nbsp;</button>
+						</div>
+						<div class='w3-col s3'>
+							<button class='w3-btn w3-xlarge w3-purple w3-border' onclick='scrollToRight()'>&rarr;</button>
+						</div>
+					</div>
+					<!-- BOTTOM ROW - SCROLL DOWN ONLY -->
+					<div class='w3-row w3-center'>
+						<div class='w3-col s3'>&nbsp;</div>
+						<div class='w3-col s6'>
+							<button class='w3-btn w3-large w3-purple w3-border' onclick='scrollDown()'>&nbsp;&darr;&nbsp;</button>
+						</div>
+						<div class='w3-col s3'>&nbsp;</div>
 					</div>
 				</div>
 
-				<div class='w3-row-padding'>
-					<div class='w3-half'>
-						<label class='w3-right'>Imaginary Part: </label>
+				<div class='w3-row'>
+					<div class='w3-col s12 m4 l4'>
+						<button class='w3-btn w3-red w3-border' onclick='resetNumberSettings()'>Reset Nums</button>
 					</div>
-					<div class='w3-half'>
-						<input id='constantImag' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0'  class='w3-input w3-border'/>
-					</div>
-				</div>
-
-				<div class='w3-row-padding'>
-					<div class='w3-half'>
-						<label class='w3-right'>Power to raise: </label>
-					</div>
-					<div class='w3-half'>
-						<input id='exponent' onchange='changeExponent()' type='number' min='2' max='100' value='2' class='w3-input w3-border'/>
-					</div>
-				</div>
-
-				<div class='w3-row-padding'>
-					<div class='w3-half'>
-						<label class='w3-right'>Colour Scheme: </label>
-					</div>
-					<div class='w3-half'>
-						<select id='colourScheme' onchange='changeColourScheme()' class='w3-input w3-border'>
-							<option value='Ultra Fractal' selected>Ultra Fractal</option>
-							<option value='Pinky Green'>Pinky Green</option>
-							<option value='Random'>Random</option>
-						</select>
-					</div>
-				</div>
-
-				<div class='w3-row-padding'>
-					<div class='w3-third'>
-						<button class='w3-btn w3-red w3-border' onclick='resetNumberSettings()'>Reset Numbers</button>
-					</div>
-					<div class='w3-third'>
+					<div class='w3-col s12 m4 l4'>
 						<button class='w3-btn w3-yellow w3-border' onclick='resetView()'>Reset View</button>
 					</div>
-					<div class='w3-third'>
+					<div class='w3-col s12 m4 l4'>
 						<button id='imageBtn' class='w3-btn w3-green w3-border' target='_blank' onclick='downloadImage()'>Download Image</button>
 					</div>
 				</div>
 
-				<div id='info' class='w3-center'>
-					<p>Center: <b>(<span id='centerCoords'>0.00, 0.00</span>)</b> Mouse: <b><span id='coordinates'></span></b> Time taken: <b><span id='timeTaken'></span> ms</b> Zoom Level: <b><span id='spanZoom'>1</span><b></p>
+
+			<!-- END controlsWrapper DIV -->
+			</div>
+
+
+
+
+			<div id='valueSettings' class='w3-col s12 m6 l6'>
+
+				<div id='numberSettings' class='w3-center'>
+					<p>Fractal Formula - Calculating <b>z^<span id='exponentValue'>2</span> + C</b></p> <p>where C = <b><span id='constantValue'>0 + 0i</span></b></p>
+
+					<div class='w3-row-padding'>
+						<div class='w3-half'>
+							<label class='w3-right'>Constant - Real Part: </label>
+						</div>
+						<div class='w3-half'>
+							<input id='constantReal' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0'  class='w3-input w3-border'/>
+						</div>
+					</div>
+
+					<div class='w3-row-padding'>
+						<div class='w3-half'>
+							<label class='w3-right'>Constant - Imaginary Part: </label>
+						</div>
+						<div class='w3-half'>
+							<input id='constantImag' onchange='changeConstant()' type='number' min='-10' max='10' step='0.1' value='0'  class='w3-input w3-border'/>
+						</div>
+					</div>
+
+					<div class='w3-row-padding'>
+						<div class='w3-half'>
+							<label class='w3-right'>Power to raise: </label>
+						</div>
+						<div class='w3-half'>
+							<input id='exponent' onchange='changeExponent()' type='number' min='2' max='100' value='2' class='w3-input w3-border'/>
+						</div>
+					</div>
+
+					<div class='w3-row-padding'>
+						<div class='w3-half'>
+							<label class='w3-right'>Colour Scheme: </label>
+						</div>
+						<div class='w3-half'>
+							<select id='colourScheme' onchange='changeColourScheme()' class='w3-input w3-border'>
+								<option value='Ultra Fractal' selected>Ultra Fractal</option>
+								<option value='Pinky Green'>Pinky Green</option>
+								<option value='Random'>Random</option>
+							</select>
+						</div>
+					</div>
+
+					<div class='w3-row-padding'>
+						<div class='w3-half'>
+							<label class='w3-right'>Image Size: </label>
+						</div>
+						<div class='w3-half'>
+							<select id='imageSize' onchange='changeImageSize()' class='w3-input w3-border'>
+								<option value='800x600' selected>800 x 600</option>
+								<option value='1920x1080'>1920 x 1080</option>
+								<option value='400x300'>400 x 300</option>
+							</select>
+						</div>
+					</div>
+
+					<div id='info' class='w3-center'>
+						<p>Center: <b>(<span id='centerCoords'>0.00, 0.00</span>)</b> Mouse: <b><span id='coordinates'></span></b> Time taken: <b><span id='timeTaken'></span> ms</b> Zoom Level: <b><span id='spanZoom'>1</span><b></p>
+					</div>
+
 				</div>
 
+
+			<!-- END valueSettings DIV -->
 			</div>
+
+
 
 		</div>
 
