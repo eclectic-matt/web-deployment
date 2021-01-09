@@ -284,6 +284,8 @@ function updateCoinsCheckboxes(diff){
 
 function updateTerrainType(type){
   selectedTerrainType = type;
+  document.getElementById('terrainSpan').innerHTML = 'Terrain type: ' + terrainTypes[selectedTerrainType]['icon'];
+  document.getElementById('terrainSpan').style.color = terrainTypes[selectedTerrainType]['colour'];
 }
 
 function updateScore(){

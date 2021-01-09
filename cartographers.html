@@ -14,8 +14,9 @@
 }
 
 table {
+  margin: 0 auto;
   max-width: 100%;
-  table-layout : fixed;
+  table-layout: fixed;
   text-align: center;
 }
 
@@ -33,10 +34,12 @@ table {
   max-height:2em;*/
   /*max-width: 9% !important;
   max-height: auto !important;*/
-  width: 50px;
-  height: 50px;
+  width: 2vw;
+  height: 2vw;
+  max-width: 2vw;
+  max-height: 2vw;
   text-align: center;
-  font-size: 2em;
+  font-size: 1vw;
   font-weight: 900;
   overflow: hidden;
   background-color: rgb(214, 203, 171);
@@ -47,22 +50,26 @@ table {
 }
 
 select{
-  font-size: 1.5em;
+  font-size: 1vw;
 }
 
 .largeText {
-  font-size: 1.5em;
+  font-size: 1vw;
 }
 
 #coinsTable{
+  border: 1px solid black;
+  border-collapse: collapse;
   width: 100%;
 }
 
 #coinsTable tr td {
+  border: 1px solid black;
   padding: 5px;
 }
 
 #scoreTable{
+  margin: 0 auto;
   width: 100%;
   border: 1px solid black;
   border-collapse: collapse;
@@ -82,6 +89,8 @@ select{
 }
 
 div.header {
+  margin: 0 auto;
+  text-align: center;
   width: 100%;
 }
 
@@ -90,6 +99,12 @@ div.third {
   margin: 5px 10px;
   text-align: center;
   display: inline;
+}
+
+#terrainSelectDiv{
+  margin: 5px;
+  background-color: '#fff';
+  border: 1px solid black;
 }
 
 </style>
@@ -101,7 +116,7 @@ div.third {
       <b>Cartographers</b>
     </div>
     <div class='third' id='terrainSelectDiv'>
-      <span class='largeText'>Terrain type: </span>
+      <span id='terrainSpan' class='largeText'>Terrain type: </span>
       <select id='terrainSelect' onchange='updateTerrainType(this.value)'>
         <option value='village' style='background-color: #f00' selected>Village</option>
         <option value='forest' style='background-color: #0f0'>Forest</option>
@@ -112,7 +127,7 @@ div.third {
       </select>
     </div>
     <div class='third'>
-      <button onclick='init()' value=''>Reset Game</button>
+      <button onclick='init()' value='' style='background-color: red; color: white;'>Reset Game</button>
     </div>
   </div>
   <br>
