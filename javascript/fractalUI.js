@@ -116,7 +116,7 @@ function downloadImage(){
   var image = document.getElementById('fractalCnv').toDataURL("image/png", 1.0);
   var a = document.createElement('a');
   a.href = image;
-  a.download = 'fractal_Z^' + config.exponent + '_C=' + config.constantReal + '+' + config.constantImag + 'i (position=' + config.xCenter + ',' +config.yCenter + ' zoom=' + config.zoomLevel + ').png';
+  a.download = 'fractal_Z^' + config.exponent + '_C=' + config.constantReal + '+' + config.constantImag + 'i (position=' + config.xCenter.toFixed(2) + ',' + config.yCenter.toFixed(2) + ' zoom=' + config.zoomLevel + ').png';
   document.body.appendChild(a);
   a.click();
 

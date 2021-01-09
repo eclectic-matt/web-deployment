@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Cartographers</title>
+<script src='javascript/cartographers.js'></script>
+<style>
+
+* {
+  font-family: 'Roboto', Roboto, Arial, sans-serif;
+  /*MAKE SURE THIS MATCHES ERASER COLOUR*/
+  background-color: rgb(188, 167, 134);
+}
+
+table {
+  max-width: 100%;
+  table-layout : fixed;
+  text-align: center;
+}
+
+/*tr{
+  display:block;
+  height:2em;
+  min-height:2em;
+  max-height:2em;
+}*/
+
+#mapTable tr td {
+  /*display: table-cell;
+  height:2em;
+  min-height:2em;
+  max-height:2em;*/
+  /*max-width: 9% !important;
+  max-height: auto !important;*/
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 900;
+  overflow: hidden;
+  background-color: rgb(214, 203, 171);
+}
+
+#terrainTypeDiv {
+  background-color: '';
+}
+
+select{
+  font-size: 1.5em;
+}
+
+.largeText {
+  font-size: 1.5em;
+}
+
+#coinsTable{
+  width: 100%;
+}
+
+#coinsTable tr td {
+  padding: 5px;
+}
+
+#scoreTable{
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+#scoreTable tr td{
+  border: 1px solid black;
+  font-weight: 900;
+}
+
+.scoreInput {
+  width: 85%;
+}
+
+#scoreTotal {
+  font-size: 2em;
+}
+
+div.header {
+  width: 100%;
+}
+
+div.third {
+  width: 33% !important;
+  margin: 5px 10px;
+  text-align: center;
+  display: inline;
+}
+
+</style>
+</head>
+<body onload='init()'>
+
+  <div class='header'>
+    <div class='third'>
+      <b>Cartographers</b>
+    </div>
+    <div class='third' id='terrainSelectDiv'>
+      <span class='largeText'>Terrain type: </span>
+      <select id='terrainSelect' onchange='updateTerrainType(this.value)'>
+        <option value='village' style='background-color: #f00' selected>Village</option>
+        <option value='forest' style='background-color: #0f0'>Forest</option>
+        <option value='farm' style='background-color: #d1bf2c'>Farm</option>
+        <option value='water' style='background-color: #00f'>Water</option>
+        <option value='monster' style='background-color: #58387d'>Monster</option>
+        <option value='eraser' style='background-color: #fff'>Eraser</option>
+      </select>
+    </div>
+    <div class='third'>
+      <button onclick='init()' value=''>Reset Game</button>
+    </div>
+  </div>
+  <br>
+<div id='mapWrapperDiv' class='map'></div>
+<div id='coinsWrapperDiv'>
+  <!--h2>Coins</h2-->
+  <table id='coinsTable'>
+    <tr>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
+    </tr>
+  </table>
+</div>
+<div id='scoreWrapperDiv'>
+  <!--h2>Scoring</h2-->
+  <table id='scoreTable'>
+    <tr>
+      <td colspan="3">Spring</td>
+      <td colspan="3">Summer</td>
+      <td colspan="3">Fall</td>
+      <td colspan="3">Winter</td>
+      <td colspan="2">Total</td>
+    </tr>
+    <tr>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='A'></input></td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='B'></input></td>
+      <td style='background-color: #333;'>&nbsp;</td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='B'></input></td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='C'></input></td>
+      <td style='background-color: #333;'>&nbsp;</td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='C'></input></td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='D'></input></td>
+      <td style='background-color: #333;'>&nbsp;</td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='D'></input></td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='A'></input></td>
+      <td style='background-color: #333;'>&nbsp;</td>
+      <td colspan='2' rowspan='2'><span id='scoreTotal'>0</span></td>
+    </tr>
+    <tr>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#65504;'></input></td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input></td>
+      <td style='background-color: #333;'>&nbsp;</td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#65504;'></input></td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input></td>
+      <td style='background-color: #333;'>&nbsp;</td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#65504;'></input></td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input></td>
+      <td style='background-color: #333;'>&nbsp;</td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#65504;'></input></td>
+      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input></td>
+      <td style='background-color: #333;'>&nbsp;</td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

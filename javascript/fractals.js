@@ -219,13 +219,13 @@ function generateFractal(xCenter, yCenter, iterations, limit, type){
 	let xCoord = 0;
 
   // LOOP THROUGH ALL X VALUES IN THE RANGE
-	for (var x = x0; x < xMax; x = x + xInc){
+	for (let x = x0; x < xMax; x = x + xInc){
 
     // FOR EACH ONE, RESET THE yCoord TO 0
 		let yCoord = 0;
 
     // THEN LOOP THROUGH ALL THE Y VALUES
-		for (var y = y0; y < yMax; y = y + yInc){
+		for (let y = y0; y < yMax; y = y + yInc){
 
       // MOVE THE CANVAS PIXEL TO THE NEW COORDINATE
       ctx.moveTo(xCoord, yCoord);
@@ -257,7 +257,7 @@ function generateFractal(xCenter, yCenter, iterations, limit, type){
 			//let col = Math.floor(COL_MAX - (COL_MAX * (i / iterations)));
       //ctx.fillStyle = 'rgb(0, ' + col + ', 0)';
 
-      if (i >= iterations  - 1){
+      if (i >= iterations - 1){
         col = 'rgb(0,0,0)';
       }else{
 
@@ -294,7 +294,7 @@ function generateFractal(xCenter, yCenter, iterations, limit, type){
 }
 
 function getRandomColourScheme(){
-  var arrCols = [];
+  let arrCols = [];
   for (var i = 0; i < 16; i++){
     let thisCol = random_rgb();
     arrCols.push(thisCol);
@@ -304,6 +304,6 @@ function getRandomColourScheme(){
 
 // Adapted from https://stackoverflow.com/a/23095818
 function random_rgb() {
-    var o = Math.round, r = Math.random, s = 255;
+    let o = Math.round, r = Math.random, s = 255;
     return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
 }
