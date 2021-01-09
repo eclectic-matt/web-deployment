@@ -10,6 +10,7 @@ const MAP_COLOUR_FARM = '#d1bf2c';
 const MAP_COLOUR_WATER = '#03d';
 const MAP_COLOUR_MONSTER = '#58387d';
 const MAP_COLOUR_BG = 'rgb(214, 203, 171)';//'rgb(71, 19, 19)';  // MAKE SURE THIS MATCHES * BG-COLOR
+const MAP_COLOUR_ERASER = '#000';
 
 const TERRAIN_TYPE_VILLAGE = 201;
 const TERRAIN_TYPE_FOREST = 202;
@@ -25,6 +26,7 @@ const TERRAIN_ICON_WATER = '&#128167;';// '&#68184;';
 const TERRAIN_ICON_FARM = '&#119067;';
 const TERRAIN_ICON_VILLAGE = '&#127968;';//'&#8962;';
 const TERRAIN_ICON_MONSTER = '&#128126;';
+const TERRAIN_ICON_ERASER = '&#10060;';
 
 var mapElements = {
   'wilderness': {
@@ -54,6 +56,10 @@ var terrainTypes = {
   'monster': {
     'colour': MAP_COLOUR_MONSTER,
     'icon': TERRAIN_ICON_MONSTER
+  },
+  'eraser': {
+    'colour': MAP_COLOUR_ERASER,
+    'icon': TERRAIN_ICON_ERASER
   }
 };
 
@@ -71,6 +77,7 @@ function init(){
 }
 
 function resetElements(){
+  updateTerrainType('village');
   document.getElementById('scoreTotal').innerHTML = 0;
   var inputs = document.getElementsByTagName('input');
   for (var i = 0; i < inputs.length; i++){
