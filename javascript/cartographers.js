@@ -317,6 +317,7 @@ function resizeScreen(){
   for (var i = 0; i < cellCnt; i++){
     cells[i].style.width = cellSize + 'px';
     cells[i].style.height = cellSize + 'px';
+    cells[i].style.fontSize = Math.floor(cellSize / 2) + 'px';
   }
 }
 
@@ -327,12 +328,21 @@ function updateTerrainType(type){
 }
 
 function updateScore(){
-  var spanTotal = document.getElementById('scoreTotal');
+  // ENSURE MONSTER INPUTS ARE NEGATIVE!
+  var monsterInputs = document.getElementsByClassName('monsterInput');
+  var monsterInputCount = monsterInputs.length;
+  for (var i = 0; i < monsterInputCount; i++){
+    if (monsterInputs[i].value > 0){
+      monsterInputs[i].value = -1 * monsterInputs[i].value;
+    }
+  }
   var scoreInputs = document.getElementsByClassName('scoreInput');
+  var scoreInputsCount = scoreInputs.length;
   var total = 0;
-  for (var i = 0; i < scoreInputs.length; i++){
+  for (var i = 0; i < scoreInputsCount; i++){
     var thisScore = (scoreInputs[i].value == '') ? 0 : scoreInputs[i].value;
     total = parseInt(total) + parseInt(thisScore);
   }
+  var spanTotal = document.getElementById('scoreTotal');
   spanTotal.innerHTML = total;
 }
