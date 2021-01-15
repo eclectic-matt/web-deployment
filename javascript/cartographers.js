@@ -67,22 +67,28 @@ var selectedTerrainType = 'village';
 var totalMountainCoins = 0;
 
 function init(){
-
-  // GET SCREEN HEIGHT/WIDTH
-  var scrWidth = screen.availWidth;
-  var scrHeight = screen.availHeight;
-  resetElements();
   generateMapTable();
+  resetElements();
   addMapElements(MAP_TYPE_WILDERNESS);
 }
 
 function resetElements(){
+  // RESIZE FLUSHES WHEN REDRAWING MAP
+  resizeScreen();
+  // RESET SELECTED TERRAIN TYPE
   updateTerrainType('village');
+  document.getElementById('terrainSelect').value = 'village';
+  //
   document.getElementById('scoreTotal').innerHTML = 0;
   var inputs = document.getElementsByTagName('input');
   for (var i = 0; i < inputs.length; i++){
-    inputs[i].value = null;
+    if (inputs[i].checked === true){
+      inputs[i].checked = false;
+    }else{
+      inputs[i].value = null;
+    }
   }
+
 }
 
 function generateMapTable(){
@@ -91,9 +97,9 @@ function generateMapTable(){
   var mapWrapper = document.getElementById('mapWrapperDiv');
   mapWrapper.innerHTML = '';
   // CREATE A TABLE ELEMENT
-  var mapTable = document.createElement('table');
+  var mapTable = document.createElement('div');
   mapTable.id = 'mapTable';
-  mapTable.style.border = '1px solid black';
+  //mapTable.style.border = '1px solid black';
   mapTable.style.borderCollapse = 'collapse';
   // THE CHARACTER FOR THE ROW LABELS (65 = A)
   var rowCharIndex = 65;
@@ -102,8 +108,10 @@ function generateMapTable(){
   for (var r = 0; r < MAP_ROWS; r++){
 
     // CREATE A ROW ELEMENT
-    var mapTR = document.createElement('tr');
-    var labelTD = document.createElement('td');
+    var mapTR = document.createElement('div');
+    mapTR.className = 'w3-row-padding';
+    var labelTD = document.createElement('div');
+    labelTD.className = 'w3-col s1';
     labelTD.style.border = '1px solid black';
     labelTD.style.borderCollapse = 'collapse';
     labelTD.innerHTML = String.fromCharCode(rowCharIndex + r);
@@ -113,11 +121,13 @@ function generateMapTable(){
     for (var c = 0; c < MAP_COLS; c++){
 
       // CREATE A TABLE CELL ELEMENT
-      var mapTD = document.createElement('td');
+      var mapTD = document.createElement('div');
+      mapTD.className = 'w3-col s1';
       mapTD.style.border = '1px solid black';
       mapTD.style.borderCollapse = 'collapse';
       // SET THE ID TO BE A1-K11
       mapTD.id = String.fromCharCode(rowCharIndex + r) + String(c + 1);
+      mapTD.innerHTML = '&nbsp;';
       // APPEND THIS CELL TO THE ROW
       mapTR.appendChild(mapTD);
       // ADD A CLICK LISTENER TO UPDATE THIS CELL
@@ -131,14 +141,17 @@ function generateMapTable(){
   }
 
   // APPEND A ROW AT THE BOTTOM WITH LABELS
-  var mapTR = document.createElement('tr');
-  var labelTD = document.createElement('td');
+  var mapTR = document.createElement('div');
+  mapTR.className = 'w3-row-padding';
+  var labelTD = document.createElement('div');
+  labelTD.className = 'w3-col s1';
   labelTD.style.border = '1px solid black';
   labelTD.style.borderCollapse = 'collapse'
   mapTR.appendChild(labelTD);
 
   for (var c = 0; c < MAP_COLS; c++){
-    var labelTD = document.createElement('td');
+    var labelTD = document.createElement('div');
+    labelTD.className = 'w3-col s1';
     labelTD.style.border = '1px solid black';
     labelTD.style.borderCollapse = 'collapse';
     labelTD.innerHTML = (c + 1);
@@ -165,7 +178,6 @@ function addMapElements(type){
         cellMtn.innerHTML = TERRAIN_ICON_MOUNTAIN + "<span id='" + thisId + "_Coin' style='font-size: 0.6em; margin: 1px; padding: 0; border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span>";
         cellMtn.style.backgroundColor = '#471313';
         cellMtn.classList.add('mountain');
-
       }
       var arrRuins = mapElements.wilderness.ruins;
       for (var i = 0; i < arrRuins.length; i++){
@@ -186,11 +198,13 @@ function updateCell(e){
   // CHECK IF THIS CELL IS A MOUNTAIN
   if (mapElements.wilderness.mountains.includes(thisId)){
     alert('Sorry, you cannot draw onto mountain spaces');
+    return false;
   }else{
     var thisCell = document.getElementById(thisId);
     if (selectedTerrainType === 'eraser'){
       thisCell.style.backgroundColor = MAP_COLOUR_BG;
-      thisCell.className = '';
+      thisCell.className = 'w3-col s1';
+      // LEAVE THE RUINS VISIBLE
       if (!mapElements.wilderness.ruins.includes(thisId)){
         thisCell.innerHTML = '';
       }
@@ -199,7 +213,7 @@ function updateCell(e){
       newColour = terrainTypes[selectedTerrainType]['colour'];
       newIcon = terrainTypes[selectedTerrainType]['icon'];
       thisCell.style.backgroundColor = newColour;
-      thisCell.className = selectedTerrainType;
+      thisCell.classList.add(selectedTerrainType);
       // LEAVE THE RUINS VISIBLE
       if (!mapElements.wilderness.ruins.includes(thisId)){
         thisCell.innerHTML = newIcon;
@@ -231,7 +245,7 @@ function checkMountainCoins(){
         addCoinToTable();
       }
     }else{
-      if (document.getElementById(thisMtn + '_Coin').className !== ''){
+      if (document.getElementById(thisMtn + '_Coin').className !== 'collected'){
         document.getElementById(thisMtn + '_Coin').className = '';
         document.getElementById(thisMtn + '_Coin').style.color = '#000';
         document.getElementById(thisMtn + '_Coin').style.textDecoration = '';
@@ -251,7 +265,7 @@ function isCellFilled(id){
   // RETURN FALSE/EMPTY IF CELL DOESN'T EXIST
   if (!cell) return false;
   //if (cell.style.backgroundColor == MAP_COLOUR_BG){
-  if (cell.className == ''){
+  if (cell.className == 'w3-col s1'){
     console.log('cellEmptyCheck',id,false);
     return false;
   }else{
@@ -260,14 +274,15 @@ function isCellFilled(id){
   }
 }
 
+// NOT IMPLEMENTED
 function addCoinToTable(){
 
 }
-
+// NOT IMPLEMENTED
 function removeCoinFromTable(){
 
 }
-
+// NOT IMPLEMENTED
 function updateCoinsCheckboxes(diff){
   var coinChecks = document.getElementsByClassName('coinCheck');
   if (diff > 0){
@@ -287,6 +302,29 @@ function updateCoinsCheckboxes(diff){
       }
     }
   }
+}
+
+function resizeScreen(){
+
+  const SIZE_SWITCH_WIDTH = 993;
+
+    var w = window.innerWidth;
+    if (w >= SIZE_SWITCH_WIDTH){
+      w = window.innerWidth / 2.2;
+    }
+    var h = window.innerHeight;
+    var l = (w >= h) ? h : w;
+    // We want there to be some padding, plus 12 rows / columns to fit in this maximum length (l)
+    var padding = 0.15;
+    var cellSize = Math.floor( ( (1 - padding) * l) / 12 );
+    console.log('Resize event W',w,'H',h,'L',l,'CellSize',cellSize);
+    var cells = document.getElementsByClassName('s1');
+    var cellCnt = cells.length;
+    for (var i = 0; i < cellCnt; i++){
+      cells[i].style.width = cellSize + 'px';
+      cells[i].style.height = cellSize + 'px';
+    }
+
 }
 
 function updateTerrainType(type){

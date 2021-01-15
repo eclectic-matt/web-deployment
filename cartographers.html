@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width">
 <title>Cartographers</title>
 <script src='javascript/cartographers.js'></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 
 * {
@@ -13,196 +14,219 @@
   background-color: rgb(188, 167, 134);
 }
 
-table {
+/*
+#mapTable {
   margin: 0 auto;
   max-width: 100%;
+  max-height: 60% !important;
   table-layout: fixed;
   text-align: center;
 }
+*/
 
-/*tr{
-  display:block;
-  height:2em;
-  min-height:2em;
-  max-height:2em;
-}*/
+#mapWrapperDiv{
+  padding-left: 2vw;
+}
 
-#mapTable tr td {
-  /*display: table-cell;
-  height:2em;
-  min-height:2em;
-  max-height:2em;*/
-  /*max-width: 9% !important;
-  max-height: auto !important;*/
-  width: 5vw;
-  height: 5vw;
-  max-width: 5vw;
-  max-height: 5vw;
+div.w3-col{
   text-align: center;
-  font-size: 2vw;
+  font-size: 1.8vw;
+  font-weight: 900;
+  overflow: hidden;
+}
+
+div.s1 {
+  text-align: center;
+  font-size: 1.8vw;
   font-weight: 900;
   overflow: hidden;
   background-color: rgb(214, 203, 171);
 }
 
-select{
-  font-size: 2vw;
-}
-
-.largeText {
-  font-size: 2vw;
-}
-
-#coinsTable{
+.coinIconSpan{
   border: 1px solid black;
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 80vw;
+  border-radius:50%;
+  background-color: #a8a632;
+  margin-left: 25px;
 }
 
-#coinsTable tr td {
-  border: 1px solid black;
-  padding: 5px;
-}
 
-#scoreTable{
-  font-size: 1vw;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 80vw;
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-#scoreTable tr td{
-  border: 1px solid black;
-  font-weight: 900;
-}
-
-.scoreInput {
-  width: 85%;
-}
-
-#scoreTotal {
-  font-size: 2vw;
-}
-
-div.header {
-  margin: 0 auto;
-  text-align: center;
-  width: 100%;
-}
-
-div.third {
-  width: 33% !important;
-  margin: 5px 10px;
-  text-align: center;
-  display: inline;
-}
-
-div.half {
-  width: 50% !important;
-  margin: 5px 10px;
-  text-align: center;
-  display: inline;
-}
-
-#terrainSelectDiv{
-  margin: 5px;
-  padding: 10px;
-  background-color: #fff;
-}
-
-#terrainSpan{
-  background-color: #fff;
+div.w3-content {
+  padding: 10px 0;
 }
 
 </style>
 </head>
-<body onload='init()'>
+<body onload='init()' onresize='resizeScreen()'>
 
-  <div class='header'>
-    <div class='half'>
-      <b>Cartographers</b>
+  <!-- FULL WIDTH OF THE DISPLAY -->
+  <div class='w3-row-padding w3-center'>
+
+    <!-- LEFT SIDE OF WIDESCREEN DISPLAY -->
+    <div class='w3-col l6 s12 w3-center'>
+      <div id='mapWrapperDiv' class='map w3-padding-32 w3-center'></div>
     </div>
-    <div class='half' id='terrainSelectDiv'>
-      <span id='terrainSpan' class='largeText'>Terrain type: </span>
-      <select id='terrainSelect' onchange='updateTerrainType(this.value)'>
-        <option value='village' style='background-color: #f00' selected>Village</option>
-        <option value='forest' style='background-color: #0f0'>Forest</option>
-        <option value='farm' style='background-color: #d1bf2c'>Farm</option>
-        <option value='water' style='background-color: #00f'>Water</option>
-        <option value='monster' style='background-color: #58387d'>Monster</option>
-        <option value='eraser' style='background-color: #fff'>Eraser</option>
-      </select>
-    </div>
+
+    <!-- RIGHT SIDE OF WIDESCREEN DISPLAY -->
+    <div class='w3-col l6 s12 w3-center'>
+
+      <!-- TERRAIN SELECT -->
+      <div id='terrainSelectDiv' class='w3-center w3-content'>
+        <span id='terrainSpan' class='w3-xlarge'>Terrain type: </span>
+        <select id='terrainSelect' class='w3-xlarge' onchange='updateTerrainType(this.value)'>
+          <option value='village' style='background-color: #f00' selected>Village</option>
+          <option value='forest' style='background-color: #0f0'>Forest</option>
+          <option value='farm' style='background-color: #d1bf2c'>Farm</option>
+          <option value='water' style='background-color: #00f'>Water</option>
+          <option value='monster' style='background-color: #58387d'>Monster</option>
+          <option value='eraser' style='background-color: #fff'>Eraser</option>
+        </select>
+      </div>
+
+      <!-- COIN TABLE -->
+      <div id='coinsWrapperDiv' class='w3-center w3-content'>
+        <!--h2>Coins</h2-->
+        <div id='coinsTable' class='w3-container'>
+          <div class='w3-col s12 w3-padding'>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s12 w3-padding'>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCORE TABLE -->
+      <div id='scoreWrapperDiv' class='w3-center w3-content'>
+
+        <div class='w3-row-padding w3-xlarge'>
+
+          <div class='w3-col s6'>
+            SCORES
+          </div>
+
+          <div class='w3-col s6'>
+            TOTAL: <b><span id='scoreTotal'>0</span></b>
+          </div>
+
+        </div>
+
+        <div class='w3-row-padding w3-content'>
+
+          <div class='w3-col s4'>
+            Spring
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='A'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='B'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#65504;'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input>
+          </div>
+
+        </div>
+
+        <div class='w3-row-padding w3-content'>
+
+          <div class='w3-col s4'>
+            Summer
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='B'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='C'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#65504;'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input>
+          </div>
+
+        </div>
+
+        <div class='w3-row-padding w3-content'>
+
+          <div class='w3-col s4'>
+            Autumn
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='C'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='D'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#65504;'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input>
+          </div>
+
+        </div>
+
+        <div class='w3-row-padding w3-content'>
+
+          <div class='w3-col s4'>
+            Winter
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='D'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='A'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#65504;'></input>
+          </div>
+
+          <div class='w3-col s2'>
+            <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input>
+          </div>
+
+        </div>
+
+      </div>
+
   </div>
-  <br>
-<div id='mapWrapperDiv' class='map'></div>
-<div id='coinsWrapperDiv'>
-  <!--h2>Coins</h2-->
-  <table id='coinsTable'>
-    <tr>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-      <td><span style='border: 1px solid black; border-radius:50%; background-color: #a8a632'>&#65504;</span><input class='coinCheck' type='checkbox'></input></td>
-    </tr>
-  </table>
+
 </div>
-<div id='scoreWrapperDiv'>
-  <!--h2>Scoring</h2-->
-  <table id='scoreTable'>
-    <tr>
-      <td colspan="3">Spring</td>
-      <td colspan="3">Summer</td>
-      <td colspan="3">Fall</td>
-      <td colspan="3">Winter</td>
-      <td colspan="2">Total</td>
-    </tr>
-    <tr>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='A'></input></td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='B'></input></td>
-      <td style='background-color: #333;'>&nbsp;</td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='B'></input></td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='C'></input></td>
-      <td style='background-color: #333;'>&nbsp;</td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='C'></input></td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='D'></input></td>
-      <td style='background-color: #333;'>&nbsp;</td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='D'></input></td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='A'></input></td>
-      <td style='background-color: #333;'>&nbsp;</td>
-      <td colspan='2' rowspan='2'><span id='scoreTotal'>0</span></td>
-    </tr>
-    <tr>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#65504;'></input></td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input></td>
-      <td style='background-color: #333;'>&nbsp;</td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#65504;'></input></td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input></td>
-      <td style='background-color: #333;'>&nbsp;</td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#65504;'></input></td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input></td>
-      <td style='background-color: #333;'>&nbsp;</td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#65504;'></input></td>
-      <td><input onchange='updateScore()' class='scoreInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input></td>
-      <td style='background-color: #333;'>&nbsp;</td>
-    </tr>
-  </table>
-</div>
+
 <br>
 <br>
-<button onclick="init()" value="" style="background-color: red; color: white;">Reset Game</button>
+<button onclick="confirm('Are you sure? This will clear your map, coins and score?', init(), false)" value="" style="background-color: red; color: white;">Reset Game</button>
 </body>
 </html>
