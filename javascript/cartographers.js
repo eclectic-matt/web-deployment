@@ -78,8 +78,9 @@ function resetElements(){
   // RESET SELECTED TERRAIN TYPE
   updateTerrainType('village');
   document.getElementById('terrainSelect').value = 'village';
-  //
+  // RESET SCORE TOTAL
   document.getElementById('scoreTotal').innerHTML = 0;
+  // RESET ALL SCORE INPUTS
   var inputs = document.getElementsByTagName('input');
   for (var i = 0; i < inputs.length; i++){
     if (inputs[i].checked === true){
@@ -88,7 +89,6 @@ function resetElements(){
       inputs[i].value = null;
     }
   }
-
 }
 
 function generateMapTable(){
@@ -165,11 +165,8 @@ function generateMapTable(){
 }
 
 function addMapElements(type){
-
   var mapTable = document.getElementById('mapTable');
-
   switch (type){
-
     case MAP_TYPE_WILDERNESS:
       var arrMtns = mapElements.wilderness.mountains;
       for (var i = 0; i < arrMtns.length; i++){
@@ -189,7 +186,6 @@ function addMapElements(type){
       }
       break;
   }
-
 }
 
 function updateCell(e){
@@ -305,26 +301,23 @@ function updateCoinsCheckboxes(diff){
 }
 
 function resizeScreen(){
-
   const SIZE_SWITCH_WIDTH = 993;
-
-    var w = window.innerWidth;
-    if (w >= SIZE_SWITCH_WIDTH){
-      w = window.innerWidth / 2.2;
-    }
-    var h = window.innerHeight;
-    var l = (w >= h) ? h : w;
-    // We want there to be some padding, plus 12 rows / columns to fit in this maximum length (l)
-    var padding = 0.15;
-    var cellSize = Math.floor( ( (1 - padding) * l) / 12 );
-    console.log('Resize event W',w,'H',h,'L',l,'CellSize',cellSize);
-    var cells = document.getElementsByClassName('s1');
-    var cellCnt = cells.length;
-    for (var i = 0; i < cellCnt; i++){
-      cells[i].style.width = cellSize + 'px';
-      cells[i].style.height = cellSize + 'px';
-    }
-
+  var w = window.innerWidth;
+  if (w >= SIZE_SWITCH_WIDTH){
+    w = window.innerWidth / 2.2;
+  }
+  var h = window.innerHeight;
+  var l = (w >= h) ? h : w;
+  // We want there to be some padding, plus 12 rows / columns to fit in this maximum length (l)
+  var padding = 0.15;
+  var cellSize = Math.floor( ( (1 - padding) * l) / 12 );
+  console.log('Resize event W',w,'H',h,'L',l,'CellSize',cellSize);
+  var cells = document.getElementsByClassName('s1');
+  var cellCnt = cells.length;
+  for (var i = 0; i < cellCnt; i++){
+    cells[i].style.width = cellSize + 'px';
+    cells[i].style.height = cellSize + 'px';
+  }
 }
 
 function updateTerrainType(type){
@@ -342,5 +335,4 @@ function updateScore(){
     total = parseInt(total) + parseInt(thisScore);
   }
   spanTotal.innerHTML = total;
-
 }

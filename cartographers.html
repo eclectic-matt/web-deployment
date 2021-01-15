@@ -37,7 +37,7 @@ div.w3-col{
 
 div.s1 {
   text-align: center;
-  font-size: 1.8vw;
+  font-size: 1.6vw;
   font-weight: 900;
   overflow: hidden;
   background-color: rgb(214, 203, 171);
@@ -53,6 +53,11 @@ div.s1 {
 
 div.w3-content {
   padding: 10px 0;
+}
+
+select {
+  border: 1px solid black;
+  border-radius: 5%;
 }
 
 </style>
@@ -72,8 +77,8 @@ div.w3-content {
 
       <!-- TERRAIN SELECT -->
       <div id='terrainSelectDiv' class='w3-center w3-content'>
-        <span id='terrainSpan' class='w3-xlarge'>Terrain type: </span>
-        <select id='terrainSelect' class='w3-xlarge' onchange='updateTerrainType(this.value)'>
+        <span id='terrainSpan' class='w3-xxlarge'>Terrain type: </span>
+        <select id='terrainSelect' class='w3-xxlarge' onchange='updateTerrainType(this.value)'>
           <option value='village' style='background-color: #f00' selected>Village</option>
           <option value='forest' style='background-color: #0f0'>Forest</option>
           <option value='farm' style='background-color: #d1bf2c'>Farm</option>
@@ -86,23 +91,44 @@ div.w3-content {
       <!-- COIN TABLE -->
       <div id='coinsWrapperDiv' class='w3-center w3-content'>
         <!--h2>Coins</h2-->
-        <div id='coinsTable' class='w3-container'>
-          <div class='w3-col s12 w3-padding'>
-            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
-            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
-            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
-            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
-            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
-            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+        <div id='coinsTable' class='w3-row-padding w3-border-bottom'>
+          <!-- NEED THESE SPLIT INTO COLS TO ENSURE RESPONSIVENESS-->
+          <div class='w3-col s2 w3-padding'>
             <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
           </div>
-          <div class='w3-col s12 w3-padding'>
+          <div class='w3-col s2 w3-padding'>
             <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
             <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
             <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
             <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
             <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+        </div>
+        <div class='w3-row-padding w3-border-bottom'>
+          <div class='w3-col s2 w3-padding'>
             <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
+            <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
+          </div>
+          <div class='w3-col s2 w3-padding'>
             <span class='coinIconSpan'>&#65504;</span><input class='coinCheck' type='checkbox'></input>
           </div>
         </div>
@@ -111,7 +137,7 @@ div.w3-content {
       <!-- SCORE TABLE -->
       <div id='scoreWrapperDiv' class='w3-center w3-content'>
 
-        <div class='w3-row-padding w3-xlarge'>
+        <div class='w3-row-padding w3-content w3-xlarge w3-border-bottom'>
 
           <div class='w3-col s6'>
             SCORES
@@ -123,7 +149,7 @@ div.w3-content {
 
         </div>
 
-        <div class='w3-row-padding w3-content'>
+        <div class='w3-row-padding w3-content w3-border-bottom'>
 
           <div class='w3-col s4'>
             Spring
@@ -147,7 +173,7 @@ div.w3-content {
 
         </div>
 
-        <div class='w3-row-padding w3-content'>
+        <div class='w3-row-padding w3-content w3-border-bottom'>
 
           <div class='w3-col s4'>
             Summer
@@ -171,7 +197,7 @@ div.w3-content {
 
         </div>
 
-        <div class='w3-row-padding w3-content'>
+        <div class='w3-row-padding w3-content w3-border-bottom'>
 
           <div class='w3-col s4'>
             Autumn
@@ -195,7 +221,7 @@ div.w3-content {
 
         </div>
 
-        <div class='w3-row-padding w3-content'>
+        <div class='w3-row-padding w3-content w3-border-bottom'>
 
           <div class='w3-col s4'>
             Winter
