@@ -415,8 +415,17 @@ div.w3-content {
 
 <br>
 <br>
-<div class='w3-center w3-container'>
-  <button class='w3-button w3-red w3-border' onclick="confirm('Are you sure? This will clear your map, coins and score?', init(), false)" value="" style="background-color: red; color: white;">Reset Game</button>
+<div class='w3-center w3-row-padding'>
+
+  <div class='w3-col s4'>
+    <button class='w3-button w3-red w3-border' onclick="checkReset()" value="">Reset Game</button>
+  </div>
+  <div class='w3-col s4'>
+    <button class='w3-button w3-green w3-border' onclick="saveGame()" value="">Save Game</button>
+  </div>
+  <div class='w3-col s4'>
+    <button class='w3-button w3-blue w3-border' onclick="loadGame()" value="">Load Game</button>
+  </div>
 </div>
 </body>
 </html>

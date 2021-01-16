@@ -383,7 +383,16 @@ function accordion(id) {
 }
 
 function saveGame(){
-  
+
+  var map = getCookie('map');
+  // CHECK FOR OVERWRITE
+  if (map !== ''){
+    var conf = confirm('Saved Data found! Are you sure you want to overwrite this saved data?');
+    if (conf !== true){
+      return false;
+    }
+  }
+
   // A STRING THAT WILL BE SAVED AS A COOKIE
   var saveStr = '';
 
@@ -392,7 +401,7 @@ function saveGame(){
   var cellCnt = cells.length;
   for (var i = 0; i < cellCnt; i++){
     var clsName = cells[i].className.replace('w3-col s1','').trim();
-    if ( ( (clsName !== 'mountain') || (clsName !== 'ruins') ) && (clsName.length > 0) ){
+    if ( (clsName !== 'mountain') && (clsName !== 'ruins') && (clsName.length > 0) ){
       saveStr += cells[i].id.trim();
       saveStr += clsName + ',';
     }
@@ -416,7 +425,11 @@ function saveGame(){
   var scoreCount = scores.length;
   var scoreArray = [];
   for (var i = 0; i < scoreCount; i++){
-    scoreArray[i] = scores[i].value;
+    if (!scores[i].value){
+      scoreArray[i] = 0;
+    }else{
+      scoreArray[i] = scores[i].value;
+    }
   }
   saveStr = scoreArray.join();
   console.log('GAME SAVED');
@@ -424,12 +437,49 @@ function saveGame(){
 }
 
 function loadGame(){
+
+  // LOAD THE MAP
   var map = getCookie('map');
+  // FAIL IF NO MAP DATA
+  if (map == ''){ alert('No Saved Data found!'); return false; }
   console.log(map);
+  var mapArray = map.split(',');
+  var mapCount = mapArray.length;
+  for (var i = 0; i < mapCount; i++){
+    if (mapArray[i].length === 0){ return false; }
+    var cell = mapArray[i].substring(0,2);
+    var feature = mapArray[i].substring(2,mapArray[i].length);
+    console.log('Loading feature at ',cell,feature);
+    if ( (feature !== 'mountain') && (feature !== 'ruins') ){
+      selectedTerrainType = feature;
+      var e = {};
+      e.srcElement = {};
+      e.srcElement.id = cell;
+      updateCell(e);
+    }
+  }
+
+  // LOAD THE COINS
   var coins = getCookie('coins');
   console.log(coins);
+  var coinElements = document.getElementsByClassName('coinCheck');
+  var coinsCount = 18;
+  for (var i = 0; i < coinsCount; i++){
+    if (coins[i] === 1){
+      coinElements[i].checked = true;
+    }
+  }
+
+  // LOAD THE SCORES TABLE
   var scores = getCookie('scores');
+  var scoreCount = scores.count;
   console.log(scores);
+  var scoreElements = document.getElementsByClassName('scoreInput');
+  for (var i = 0; i < scoreCount; i++){
+    scoreElements[i].value = scores[i];
+  }
+
+  alert('Game Loaded!');
 }
 
 // https://www.w3schools.com/js/js_cookies.asp
@@ -454,4 +504,19 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+function checkReset(){
+  var conf = confirm('Are you sure? This will clear your map, coins and score?');
+  if (conf == true){
+    init();
+  }
+}
+
+function checkLoad(){
+  var conf = confirm('Are you sure? This will clear your current map, coins and score?');
+  if (conf == true){
+    init();
+    loadGame();
+  }
 }
