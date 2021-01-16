@@ -82,6 +82,19 @@ div.w3-content {
         </div>
       </div>
 
+      <!-- NAMES DIV -->
+      <div id='namesDiv' class='w3-center w3-content w3-row-padding'>
+
+        <div class='w3-col s12 l6'>
+          Your Name: <input id='yourNameInput' class='w3-input w3-center' type='text'></input>
+        </div>
+
+        <div class='w3-col s12 l6'>
+          Map Name: <input id='mapNameInput' class='w3-input w3-center' type='text'></input>
+        </div>
+
+      </div>
+
       <!-- COIN TABLE -->
       <div id='coinsWrapperDiv' class='w3-center w3-content'>
 
@@ -168,7 +181,7 @@ div.w3-content {
         <div class='w3-row-padding w3-content w3-bottombar'>
 
           <div class='w3-col s12 m4'>
-            Spring
+            Spring (A/B)
           </div>
 
           <div class='w3-col s3 m2'>
@@ -192,7 +205,7 @@ div.w3-content {
         <div class='w3-row-padding w3-content w3-bottombar'>
 
           <div class='w3-col s12 m4'>
-            Summer
+            Summer (B/C)
           </div>
 
           <div class='w3-col s3 m2'>
@@ -216,7 +229,7 @@ div.w3-content {
         <div class='w3-row-padding w3-content w3-bottombar'>
 
           <div class='w3-col s12 m4'>
-            Autumn
+            Autumn (C/D)
           </div>
 
           <div class='w3-col s3 m2'>
@@ -240,7 +253,7 @@ div.w3-content {
         <div class='w3-row-padding w3-content w3-bottombar'>
 
           <div class='w3-col s12 m4'>
-            Winter
+            Winter (D/A)
           </div>
 
           <div class='w3-col s3 m2'>
@@ -417,13 +430,13 @@ div.w3-content {
 <br>
 <div class='w3-center w3-row-padding'>
 
-  <div class='w3-col s4'>
+  <div class='w3-col s12 l4 w3-content'>
     <button class='w3-button w3-red w3-border' onclick="checkReset()" value="">Reset Game</button>
   </div>
-  <div class='w3-col s4'>
+  <div class='w3-col s12 l4 w3-content'>
     <button class='w3-button w3-green w3-border' onclick="saveGame()" value="">Save Game</button>
   </div>
-  <div class='w3-col s4'>
+  <div class='w3-col s12 l4 w3-content'>
     <button class='w3-button w3-blue w3-border' onclick="loadGame()" value="">Load Game</button>
   </div>
 </div>

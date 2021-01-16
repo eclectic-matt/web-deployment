@@ -384,14 +384,20 @@ function accordion(id) {
 
 function saveGame(){
 
-  var map = getCookie('map');
+  var mapName = getCookie('mapName');
   // CHECK FOR OVERWRITE
-  if (map !== ''){
-    var conf = confirm('Saved Data found! Are you sure you want to overwrite this saved data?');
+  if (mapName !== ''){
+    var conf = confirm('Saved Data found - ' + mapName + '! Are you sure you want to overwrite this saved data?');
     if (conf !== true){
       return false;
     }
   }
+
+  // SAVE NAMES
+  var mapName = document.getElementById('mapNameInput').value;
+  setCookie('mapName', mapName, 366);
+  var yourName = document.getElementById('yourNameInput').value;
+  setCookie('yourName', yourName, 366);
 
   // A STRING THAT WILL BE SAVED AS A COOKIE
   var saveStr = '';
@@ -458,6 +464,10 @@ function loadGame(){
       updateCell(e);
     }
   }
+
+  // LOAD THE NAMES
+  document.getElementById('mapNameInput').value = getCookie('mapName');
+  document.getElementById('yourNameInput').value = getCookie('yourName');
 
   // LOAD THE COINS
   var coins = getCookie('coins');
