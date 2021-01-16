@@ -28,6 +28,25 @@ const TERRAIN_ICON_VILLAGE = '&#127968;';//'&#8962;';
 const TERRAIN_ICON_MONSTER = '&#128126;';
 const TERRAIN_ICON_ERASER = '&#10060;';
 
+var scoringDetails = {
+  'Greenbough' : 'Earn ONE reputation star for each ROW and COLUMN with AT LEAST ONE FOREST SPACE. The same forest space may be scored in a row AND a column.',
+  'Treetower': 'Earn ONE reputation star for each FOREST SPACE SURROUNDED ON ALL FOUR SIDES by filled spaces or the edge of the map.',
+  'Canal Lake': 'Earn ONE reputation star for each WATER SPACE adjacent to AT LEAST ONE FARM SPACE. Earn ONE reputation star for each FARM SPACE adjacent to AT LEAST ONE WATER SPACE.',
+  'The Golden Granary': 'Earn ONE reputation star for EACH WATER SPACE adjacent to a RUINS SPACE. Earn THREE reputation stars for EACH FARM SPACE ON A RUINS SPACE.',
+  'Shieldgate': 'Earn TWO reputation stars for EACH VILLAGE SPACE in the SECOND-LARGEST CLUSTER OF VILLAGE SPACES.',
+  'Wildholds': 'Earn EIGHT reputation stars for EACH CLUSTER OF SIX OR MORE VILLAGE SPACES.',
+  'The Cauldrons': 'Earn ONE reputation star for EACH EMPTY SPACE SURROUNDED ON ALL FOUR SIDES by filled spaces or the edge of the map.',
+  'The Broken Road': 'Earn THREE reputation stars for EACH COMPLETE DIAGONAL LINE OF FILLED SPACES that touches the LEFT AND BOTTOM edges of the map.',
+  'Lost Barony': 'Earn THREE reputation stars for EACH SPACE ALONG ONE EDGE OF THE LARGEST SQUARE OF FILLED SPACES.',
+  'Stoneside Forest': 'Earn THREE reputation stars for EACH MOUNTAIN SPACE CONNECTED TO ANOTHER MOUNTAIN SPACE by a cluster of forest spaces.',
+  'Shoreside Expanse': 'Earn THREE reputation stars for EACH CLUSTER OF FARM SPACES NOT ADJACENT TO A WATER SPACE OR THE EDGE OF THE MAP. Earn THREE reputation stars for EACH CLUSTER OF WATER SPACES NOT ADJACENT TO A FARM SPACE OR THE EDGE OF THE MAP.',
+  'Greengold Plains': 'Earn THREE reputation stars for EACH CLUSTER OF VILLAGE SPACES that is ADJACENT TO THREE OR MORE DIFFERENT TERRAIN TYPES.',
+  'Borderlands': 'Earn SIX reputation stars for EACH COMPLETE ROW OR COMPLETE COLUMN OF FILLED SPACES.',
+  'Great City': 'Earn ONE reputation star for EACH VILLAGE SPACE IN THE LARGEST CLUSTER OF VILLAGE SPACES that is NOT ADJACENT TO A MOUNTAIN SPACE.',
+  'Mages Valley': 'Earn TWO reputation stars for EACH WATER SPACE ADJACENT TO A MOUNTAIN SPACE. Earn ONE reputation star for EACH FARM SPACE ADJACENT TO A MOUNTAIN SPACE.',
+  'Sentinel Wood': 'Earn ONE reputation star for EACH FOREST SPACE ADJACENT TO THE EDGE OF THE MAP.'
+}
+
 var mapElements = {
   'wilderness': {
     'mountains': ['B4', 'C9', 'F6', 'I3', 'J8'],
@@ -78,6 +97,8 @@ function resetElements(){
   // RESET SELECTED TERRAIN TYPE
   updateTerrainType('village');
   document.getElementById('terrainSelect').value = 'village';
+  // RESET SCORING SCORING INFO
+  showScoring('Greenbough', 'A');
   // RESET SCORE TOTAL
   document.getElementById('scoreTotal').innerHTML = 0;
   // RESET ALL SCORE INPUTS
@@ -345,4 +366,18 @@ function updateScore(){
   }
   var spanTotal = document.getElementById('scoreTotal');
   spanTotal.innerHTML = total;
+}
+
+function showScoring(scoreCard, card){
+  var scoreText = scoringDetails[scoreCard];
+  document.getElementById('scoringInfoSpan' + card).innerHTML = scoreText;
+}
+
+function accordion(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
 }

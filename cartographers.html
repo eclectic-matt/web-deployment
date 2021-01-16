@@ -14,16 +14,6 @@
   background-color: rgb(188, 167, 134);
 }
 
-/*
-#mapTable {
-  margin: 0 auto;
-  max-width: 100%;
-  max-height: 60% !important;
-  table-layout: fixed;
-  text-align: center;
-}
-*/
-
 #mapWrapperDiv{
   padding-left: 2vw;
 }
@@ -265,6 +255,152 @@ div.w3-content {
           </div>
 
         </div>
+
+      </div>
+
+      <div id='scoringInfoDiv' class='w3-row-padding'>
+        <button onclick='accordion("CardA")' class='w3-button w3-block w3-left-align w3-green w3-center w3-large'>Show/Hide Card A Scoring</button>
+
+        <div id='CardA' class='w3-container w3-hide w3-border'>
+
+          <div class='w3-col s6'>
+            CARD A (Spring / Winter)
+          </div>
+
+          <div class='w3-col s6'>
+            <select id='scoreInfo' onchange='showScoring(this.value, "A")'>
+              <option value='Greenbough'>Greenbough</option>
+              <option value='Treetower'>Treetower</option>
+              <option value='Canal Lake'>Canal Lake</option>
+              <option value='The Golden Granary'>The Golden Granary</option>
+              <option value='Shieldgate'>Shieldgate</option>
+              <option value='Wildholds'>Wildholds</option>
+              <option value='The Cauldrons'>The Cauldrons</option>
+              <option value='The Broken Road'>The Broken Road</option>
+              <option value='Lost Barony'>Lost Barony</option>
+              <option value='Stoneside Forest'>Stoneside Forest</option>
+              <option value='Shoreside Expanse'>Shoreside Expanse</option>
+              <option value='Greengold Plains'>Greengold Plains</option>
+              <option value='Borderlands'>Borderlands</option>
+              <option value='Great City'>Great City</option>
+              <option value='Mages Valley'>Mages Valley</option>
+              <option value='Sentinel Wood'>Sentinel Wood</option>
+            </select>
+          </div>
+
+          <div class='w3-col s12'>
+            <em><span id='scoringInfoSpanA'></span></em>
+          </div>
+        </div>
+
+        <br>
+
+        <button onclick='accordion("CardB")' class='w3-button w3-block w3-left-align w3-blue w3-center w3-large'>Show/Hide Card B Scoring</button>
+
+        <div id='CardB' class='w3-container w3-hide w3-border'>
+
+          <div class='w3-col s6'>
+            CARD B (Spring / Summer)
+          </div>
+
+          <div class='w3-col s6'>
+            <select id='scoreInfo' onchange='showScoring(this.value, "B")'>
+              <option value='Greenbough'>Greenbough</option>
+              <option value='Treetower'>Treetower</option>
+              <option value='Canal Lake'>Canal Lake</option>
+              <option value='The Golden Granary'>The Golden Granary</option>
+              <option value='Shieldgate'>Shieldgate</option>
+              <option value='Wildholds'>Wildholds</option>
+              <option value='The Cauldrons'>The Cauldrons</option>
+              <option value='The Broken Road'>The Broken Road</option>
+              <option value='Lost Barony'>Lost Barony</option>
+              <option value='Stoneside Forest'>Stoneside Forest</option>
+              <option value='Shoreside Expanse'>Shoreside Expanse</option>
+              <option value='Greengold Plains'>Greengold Plains</option>
+              <option value='Borderlands'>Borderlands</option>
+              <option value='Great City'>Great City</option>
+              <option value='Mages Valley'>Mages Valley</option>
+              <option value='Sentinel Wood'>Sentinel Wood</option>
+            </select>
+          </div>
+
+          <div class='w3-col s12'>
+            <em><span id='scoringInfoSpanB'></span></em>
+          </div>
+        </div>
+
+        <br>
+
+        <button onclick='accordion("CardC")' class='w3-button w3-block w3-left-align w3-red w3-center w3-large'>Show/Hide Card C Scoring</button>
+
+        <div id='CardC' class='w3-container w3-hide w3-border'>
+
+          <div class='w3-col s6'>
+            CARD C (Summer / Autumn)
+          </div>
+
+          <div class='w3-col s6'>
+            <select id='scoreInfo' onchange='showScoring(this.value, "C")'>
+              <option value='Greenbough'>Greenbough</option>
+              <option value='Treetower'>Treetower</option>
+              <option value='Canal Lake'>Canal Lake</option>
+              <option value='The Golden Granary'>The Golden Granary</option>
+              <option value='Shieldgate'>Shieldgate</option>
+              <option value='Wildholds'>Wildholds</option>
+              <option value='The Cauldrons'>The Cauldrons</option>
+              <option value='The Broken Road'>The Broken Road</option>
+              <option value='Lost Barony'>Lost Barony</option>
+              <option value='Stoneside Forest'>Stoneside Forest</option>
+              <option value='Shoreside Expanse'>Shoreside Expanse</option>
+              <option value='Greengold Plains'>Greengold Plains</option>
+              <option value='Borderlands'>Borderlands</option>
+              <option value='Great City'>Great City</option>
+              <option value='Mages Valley'>Mages Valley</option>
+              <option value='Sentinel Wood'>Sentinel Wood</option>
+            </select>
+          </div>
+
+          <div class='w3-col s12'>
+            <em><span id='scoringInfoSpanC'></span></em>
+          </div>
+        </div>
+
+        <br>
+
+        <button onclick='accordion("CardD")' class='w3-button w3-block w3-left-align w3-purple w3-center w3-large'>Show/Hide Card D Scoring</button>
+
+        <div id='CardD' class='w3-container w3-hide w3-border'>
+
+          <div class='w3-col s6'>
+            CARD D (Autumn / Winter)
+          </div>
+
+          <div class='w3-col s6'>
+            <select id='scoreInfo' onchange='showScoring(this.value, "D")'>
+              <option value='Greenbough'>Greenbough</option>
+              <option value='Treetower'>Treetower</option>
+              <option value='Canal Lake'>Canal Lake</option>
+              <option value='The Golden Granary'>The Golden Granary</option>
+              <option value='Shieldgate'>Shieldgate</option>
+              <option value='Wildholds'>Wildholds</option>
+              <option value='The Cauldrons'>The Cauldrons</option>
+              <option value='The Broken Road'>The Broken Road</option>
+              <option value='Lost Barony'>Lost Barony</option>
+              <option value='Stoneside Forest'>Stoneside Forest</option>
+              <option value='Shoreside Expanse'>Shoreside Expanse</option>
+              <option value='Greengold Plains'>Greengold Plains</option>
+              <option value='Borderlands'>Borderlands</option>
+              <option value='Great City'>Great City</option>
+              <option value='Mages Valley'>Mages Valley</option>
+              <option value='Sentinel Wood'>Sentinel Wood</option>
+            </select>
+          </div>
+
+          <div class='w3-col s12'>
+            <em><span id='scoringInfoSpanD'></span></em>
+          </div>
+        </div>
+
 
       </div>
 
