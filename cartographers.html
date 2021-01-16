@@ -30,7 +30,7 @@
 
 div.w3-col{
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: 900;
   overflow: hidden;
 }
@@ -73,10 +73,10 @@ div.w3-content {
       <!-- TERRAIN SELECT -->
       <div id='terrainSelectDiv' class='w3-center w3-content w3-row-padding'>
         <div class='w3-col s6'>
-          <span id='terrainSpan' class='w3-xxlarge'>Terrain type: </span>
+          <span id='terrainSpan' class='w3-xlarge'>Terrain type: </span>
         </div>
         <div class='w3-col s6'>
-          <select id='terrainSelect' class='w3-xlarge w3-select w3-center w3-border' onchange='updateTerrainType(this.value)'>
+          <select id='terrainSelect' class='w3-xlarge w3-select w3-center w3-border w3-round' onchange='updateTerrainType(this.value)'>
             <option value='village' style='background-color: #f00' selected>Village</option>
             <option value='forest' style='background-color: #0f0'>Forest</option>
             <option value='farm' style='background-color: #d1bf2c'>Farm</option>
@@ -172,23 +172,23 @@ div.w3-content {
 
         <div class='w3-row-padding w3-content w3-border-bottom'>
 
-          <div class='w3-col s4'>
+          <div class='w3-col s12 m4'>
             Spring
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='A'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='B'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#65504;'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large monsterInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input>
           </div>
 
@@ -196,23 +196,23 @@ div.w3-content {
 
         <div class='w3-row-padding w3-content w3-border-bottom'>
 
-          <div class='w3-col s4'>
+          <div class='w3-col s12 m4'>
             Summer
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='B'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='C'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#65504;'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large monsterInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input>
           </div>
 
@@ -220,23 +220,23 @@ div.w3-content {
 
         <div class='w3-row-padding w3-content w3-border-bottom'>
 
-          <div class='w3-col s4'>
+          <div class='w3-col s12 m4'>
             Autumn
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='C'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='D'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#65504;'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large monsterInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input>
           </div>
 
@@ -244,23 +244,23 @@ div.w3-content {
 
         <div class='w3-row-padding w3-content w3-border-bottom'>
 
-          <div class='w3-col s4'>
+          <div class='w3-col s12 m4'>
             Winter
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='D'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='A'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large' type='number' maxlength='2' size='2' placeholder='&#65504;'></input>
           </div>
 
-          <div class='w3-col s2'>
+          <div class='w3-col s3 m2'>
             <input onchange='updateScore()' class='scoreInput w3-input w3-border w3-round-large monsterInput' type='number' maxlength='2' size='2' placeholder='&#128126;' min='-100' max='0'></input>
           </div>
 
