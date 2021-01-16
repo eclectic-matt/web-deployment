@@ -452,7 +452,7 @@ function loadGame(){
   var mapArray = map.split(',');
   var mapCount = mapArray.length;
   for (var i = 0; i < mapCount; i++){
-    if (mapArray[i].length === 0){ return false; }
+    if (mapArray[i].length === 0){ continue; }
     if ( (mapArray[i].substring(2,3) == '0') || (mapArray[i].substring(2,3) == '1') ){
       var cell = mapArray[i].substring(0,3).trim();
       var feature = mapArray[i].substring(3,mapArray[i].length).replace('mountain', '').replace('ruins','').trim();
@@ -471,27 +471,32 @@ function loadGame(){
   }
 
   // LOAD THE NAMES
-  document.getElementById('mapNameInput').value = getCookie('mapName');
-  document.getElementById('yourNameInput').value = getCookie('yourName');
+  var mapName = getCookie('mapName');
+  document.getElementById('mapNameInput').value = mapName;
+  var yourName = getCookie('yourName');
+  document.getElementById('yourNameInput').value = yourName;
+  console.log('Setting names to',mapName,yourName);
 
   // LOAD THE COINS
   var coins = getCookie('coins');
+  var coinArray = coins.split(',');
   console.log(coins);
   var coinElements = document.getElementsByClassName('coinCheck');
-  var coinsCount = 18;
+  var coinsCount = coinArray.length;
   for (var i = 0; i < coinsCount; i++){
-    if (coins[i] === 1){
-      coinElements[i].checked = true;
+    if (coinArray[i] === 1){
+      coinElements[i].checked = 'checked';
     }
   }
 
   // LOAD THE SCORES TABLE
   var scores = getCookie('scores');
-  var scoreCount = scores.count;
+  var scoreArray = scores.split(',');
+  var scoreCount = scoreArray.count;
   console.log(scores);
   var scoreElements = document.getElementsByClassName('scoreInput');
   for (var i = 0; i < scoreCount; i++){
-    scoreElements[i].value = scores[i];
+    scoreElements[i].value = scoreArray[i];
   }
 
   alert('Game Loaded!');
