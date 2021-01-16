@@ -453,8 +453,13 @@ function loadGame(){
   var mapCount = mapArray.length;
   for (var i = 0; i < mapCount; i++){
     if (mapArray[i].length === 0){ return false; }
-    var cell = mapArray[i].substring(0,2);
-    var feature = mapArray[i].substring(2,mapArray[i].length).replace('mountain', '').replace('ruins','');
+    if ( (mapArray[i].substring(2,3) == '0') || (mapArray[i].substring(2,3) == '1') ){
+      var cell = mapArray[i].substring(0,3);
+      var feature = mapArray[i].substring(3,mapArray[i].length).replace('mountain', '').replace('ruins','');
+    }else{
+      var cell = mapArray[i].substring(0,2);
+      var feature = mapArray[i].substring(2,mapArray[i].length).replace('mountain', '').replace('ruins','');
+    }
     console.log('Loading feature at ',cell,feature);
     if ( feature.length > 0 ){
       selectedTerrainType = feature;
