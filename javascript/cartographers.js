@@ -203,7 +203,7 @@ function addMapElements(type){
         var cellRuin = document.getElementById(thisId);
         cellRuin.innerHTML = TERRAIN_ICON_RUINS;
         cellRuin.style.color = '#d9823b';//'#a19958';
-        cellMtn.classList.add('ruins');
+        cellRuin.classList.add('ruins');
       }
       break;
   }
@@ -283,10 +283,10 @@ function isCellFilled(id){
   if (!cell) return false;
   //if (cell.style.backgroundColor == MAP_COLOUR_BG){
   if (cell.className == 'w3-col s1'){
-    console.log('cellEmptyCheck',id,false);
+    //console.log('cellEmptyCheck',id,false);
     return false;
   }else{
-    console.log('cellEmptyCheck',id,true);
+    //console.log('cellEmptyCheck',id,true);
     return true;
   }
 }
@@ -380,4 +380,78 @@ function accordion(id) {
   } else {
     x.className = x.className.replace(" w3-show", "");
   }
+}
+
+function saveGame(){
+  
+  // A STRING THAT WILL BE SAVED AS A COOKIE
+  var saveStr = '';
+
+  // GO THROUGH THE MAP CELLS TO SAVE CHANGES
+  var cells = document.getElementsByClassName('s1');
+  var cellCnt = cells.length;
+  for (var i = 0; i < cellCnt; i++){
+    var clsName = cells[i].className.replace('w3-col s1','').trim();
+    if ( ( (clsName !== 'mountain') || (clsName !== 'ruins') ) && (clsName.length > 0) ){
+      saveStr += cells[i].id.trim();
+      saveStr += clsName + ',';
+    }
+  }
+  setCookie('map', saveStr, 366);
+
+  // SAVE A STRING OF THE COINS CHECKED
+  var coins = document.getElementsByClassName('coinCheck');
+  var coinsCount = 18;
+  var coinsArray = [];
+  for (var i = 0; i < coinsCount; i++){
+    if (coins[i].checked){
+      coinsArray[i] = 1;
+    }
+  }
+  var saveStr = coinsArray.join();
+  setCookie('coins', saveStr, 366);
+
+  // SAVE A STRING OF THE SCORES
+  var scores = document.getElementsByClassName('scoreInput');
+  var scoreCount = scores.length;
+  var scoreArray = [];
+  for (var i = 0; i < scoreCount; i++){
+    scoreArray[i] = scores[i].value;
+  }
+  saveStr = scoreArray.join();
+  console.log('GAME SAVED');
+  setCookie('scores', saveStr, 366);
+}
+
+function loadGame(){
+  var map = getCookie('map');
+  console.log(map);
+  var coins = getCookie('coins');
+  console.log(coins);
+  var scores = getCookie('scores');
+  console.log(scores);
+}
+
+// https://www.w3schools.com/js/js_cookies.asp
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
