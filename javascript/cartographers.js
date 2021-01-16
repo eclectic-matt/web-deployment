@@ -332,7 +332,7 @@ function resizeScreen(){
   // We want there to be some padding, plus 12 rows / columns to fit in this maximum length (l)
   var padding = 0.15;
   var cellSize = Math.floor( ( (1 - padding) * l) / 12 );
-  console.log('Resize event W',w,'H',h,'L',l,'CellSize',cellSize);
+  //console.log('Resize event W',w,'H',h,'L',l,'CellSize',cellSize);
   var cells = document.getElementsByClassName('s1');
   var cellCnt = cells.length;
   for (var i = 0; i < cellCnt; i++){
