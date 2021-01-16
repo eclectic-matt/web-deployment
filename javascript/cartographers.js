@@ -454,9 +454,9 @@ function loadGame(){
   for (var i = 0; i < mapCount; i++){
     if (mapArray[i].length === 0){ return false; }
     var cell = mapArray[i].substring(0,2);
-    var feature = mapArray[i].substring(2,mapArray[i].length);
+    var feature = mapArray[i].substring(2,mapArray[i].length).replace('mountain', '').replace('ruins','');
     console.log('Loading feature at ',cell,feature);
-    if ( (feature !== 'mountain') && (feature !== 'ruins') ){
+    if ( feature.length > 0 ){
       selectedTerrainType = feature;
       var e = {};
       e.srcElement = {};
