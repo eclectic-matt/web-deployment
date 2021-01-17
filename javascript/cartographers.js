@@ -484,8 +484,8 @@ function loadGame(){
   var coinElements = document.getElementsByClassName('coinCheck');
   var coinsCount = coinArray.length;
   for (var i = 0; i < coinsCount; i++){
-    if (coinArray[i] === 1){
-      coinElements[i].checked = 'checked';
+    if (coinArray[i] == '1'){
+      coinElements[i].checked = true;
     }
   }
 
@@ -496,7 +496,7 @@ function loadGame(){
   console.log(scores);
   var scoreElements = document.getElementsByClassName('scoreInput');
   for (var i = 0; i < scoreCount; i++){
-    scoreElements[i].value = scoreArray[i];
+    scoreElements[i].value = parseInt(scoreArray[i]);
   }
 
   alert('Game Loaded!');
