@@ -496,7 +496,8 @@ function loadGame(){
   console.log(scores);
   var scoreElements = document.getElementsByClassName('scoreInput');
   for (var i = 0; i < scoreCount; i++){
-    scoreElements[i].innerHTML = scoreArray[i].trim();
+    console.log('Score',i,'=',scoreArray[i].trim());
+    scoreElements[i].defaultValue = scoreArray[i].trim();
   }
 
   alert('Game Loaded!');
