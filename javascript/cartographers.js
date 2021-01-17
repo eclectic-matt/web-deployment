@@ -477,7 +477,7 @@ function loadGame(){
   document.getElementById('mapNameInput').value = mapName;
   var yourName = getCookie('yourName');
   document.getElementById('yourNameInput').value = yourName;
-  console.log('Setting names to',mapName,yourName);
+  //console.log('Setting names to',mapName,yourName);
 
   // LOAD THE COINS
   var coins = getCookie('coins');
@@ -501,7 +501,7 @@ function loadGame(){
     //console.log('Score',i,'=',scoreArray[i].trim());
     scoreElements[i].value = scoreArray[i].trim();
   }
-
+  updateScore();
   alert('Game Loaded!');
 }
 
