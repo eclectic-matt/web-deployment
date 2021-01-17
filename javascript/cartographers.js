@@ -233,9 +233,9 @@ function updateCell(e){
       // LEAVE THE RUINS VISIBLE
       if (!mapElements.wilderness.ruins.includes(thisId)){
         thisCell.innerHTML = newIcon;
-        thisCell.className = 'w3-col s1 ruins ' + selectedTerrainType;
-      }else {
         thisCell.className = 'w3-col s1 ' + selectedTerrainType;
+      }else {
+        thisCell.className = 'w3-col s1 ruins ' + selectedTerrainType;
       }
     }
     checkMountainCoins();
