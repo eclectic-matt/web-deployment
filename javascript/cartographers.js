@@ -492,12 +492,12 @@ function loadGame(){
   // LOAD THE SCORES TABLE
   var scores = getCookie('scores');
   var scoreArray = scores.split(',');
-  var scoreCount = scoreArray.count;
+  var scoreCount = scoreArray.length;
   console.log(scores);
   var scoreElements = document.getElementsByClassName('scoreInput');
   for (var i = 0; i < scoreCount; i++){
     console.log('Score',i,'=',scoreArray[i].trim());
-    scoreElements[i].defaultValue = scoreArray[i].trim();
+    scoreElements[i].value = scoreArray[i].trim();
   }
 
   alert('Game Loaded!');
