@@ -230,10 +230,12 @@ function updateCell(e){
       newColour = terrainTypes[selectedTerrainType]['colour'];
       newIcon = terrainTypes[selectedTerrainType]['icon'];
       thisCell.style.backgroundColor = newColour;
-      thisCell.classList.add(selectedTerrainType);
       // LEAVE THE RUINS VISIBLE
       if (!mapElements.wilderness.ruins.includes(thisId)){
         thisCell.innerHTML = newIcon;
+        thisCell.className = 'w3-col s1 ruins ' + selectedTerrainType;
+      }else {
+        thisCell.className = 'w3-col s1 ' + selectedTerrainType;
       }
     }
     checkMountainCoins();
@@ -448,7 +450,7 @@ function loadGame(){
   var map = getCookie('map');
   // FAIL IF NO MAP DATA
   if (map == ''){ alert('No Saved Data found!'); return false; }
-  console.log(map);
+  //console.log(map);
   var mapArray = map.split(',');
   var mapCount = mapArray.length;
   for (var i = 0; i < mapCount; i++){
@@ -460,7 +462,7 @@ function loadGame(){
       var cell = mapArray[i].substring(0,2).trim();
       var feature = mapArray[i].substring(2,mapArray[i].length).replace('mountain', '').replace('ruins','').trim();
     }
-    console.log('Loading feature at',cell,feature);
+    //console.log('Loading feature at',cell,feature);
     if ( feature.length > 0 ){
       selectedTerrainType = feature;
       var e = {};
@@ -480,7 +482,7 @@ function loadGame(){
   // LOAD THE COINS
   var coins = getCookie('coins');
   var coinArray = coins.split(',');
-  console.log(coins);
+  //console.log(coins);
   var coinElements = document.getElementsByClassName('coinCheck');
   var coinsCount = coinArray.length;
   for (var i = 0; i < coinsCount; i++){
@@ -493,10 +495,10 @@ function loadGame(){
   var scores = getCookie('scores');
   var scoreArray = scores.split(',');
   var scoreCount = scoreArray.length;
-  console.log(scores);
+  //console.log(scores);
   var scoreElements = document.getElementsByClassName('scoreInput');
   for (var i = 0; i < scoreCount; i++){
-    console.log('Score',i,'=',scoreArray[i].trim());
+    //console.log('Score',i,'=',scoreArray[i].trim());
     scoreElements[i].value = scoreArray[i].trim();
   }
 
