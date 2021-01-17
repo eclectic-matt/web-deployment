@@ -386,15 +386,6 @@ function accordion(id) {
 
 function saveGame(){
 
-  var mapName = getCookie('mapName');
-  // CHECK FOR OVERWRITE
-  if (mapName !== ''){
-    var conf = confirm('Saved Data found - ' + mapName + '! Are you sure you want to overwrite this saved data?');
-    if (conf !== true){
-      return false;
-    }
-  }
-
   // SAVE NAMES
   var mapName = document.getElementById('mapNameInput').value;
   setCookie('mapName', mapName, 366);
@@ -542,4 +533,16 @@ function checkLoad(){
     init();
     loadGame();
   }
+}
+
+function checkSave(){
+  var mapName = getCookie('mapName');
+  // CHECK FOR OVERWRITE
+  if (mapName !== ''){
+    var conf = confirm('Saved Data found - ' + mapName + '! Are you sure you want to overwrite this saved data?');
+    if (conf !== true){
+      return false;
+    }
+  }
+  saveGame();
 }
