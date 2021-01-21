@@ -97,11 +97,6 @@ function init(){
 function resetElements(){
   // RESIZE FLUSHES WHEN REDRAWING MAP
   resizeScreen();
-  // RESET SELECTED TERRAIN TYPE
-  updateTerrainType('village');
-  document.getElementById('terrainSelect').value = 'village';
-  // RESET SCORING SCORING INFO
-  showScoring('Greenbough', 'A');
   // RESET SCORE TOTAL
   document.getElementById('scoreTotal').innerHTML = 0;
   // RESET ALL SCORE INPUTS
@@ -113,6 +108,23 @@ function resetElements(){
       inputs[i].value = null;
     }
   }
+  // RESET ALL SELECT ELEMENTS
+  var selects = document.getElementsByTagName('select');
+  for (var i = 0; i < selects.length; i++){
+    selects[i].value = null;
+  }
+  // CLEAR ALL RULES SPANS
+  var scoreSpans = document.getElementsByClassName('scoringRulesSpan');
+  for (var i = 0; i < scoreSpans.length; i++){
+    scoreSpans[i].innerHTML = '';
+  }
+  // RESET FIRST SCORING INFO
+  document.getElementById('scoreInfoA').value = 'Greenbough';
+  showScoring('Greenbough', 'A');
+  // RESET SELECTED TERRAIN TYPE
+  updateTerrainType('village');
+  document.getElementById('terrainSelect').value = 'village';
+  // RESET RANDOM ICON INDEX
   selectedIconIndex = 0;
 }
 
@@ -530,6 +542,8 @@ function loadGame(){
 
   for (var i = 0; i < scoreInfoCount; i++){
     if (scoreInfoArray[i].trim() != ''){
+      let scoreSelectId = 'scoreInfo' + scoreSpansArray[i];
+      document.getElementById(scoreSelectId).selected = scoreInfoArray[i];
       showScoring(scoreInfoArray[i],scoreSpansArray[i]);
     }
   }
