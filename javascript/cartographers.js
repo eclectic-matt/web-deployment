@@ -9,7 +9,7 @@ const MAP_COLOUR_FOREST = '#0f0';
 const MAP_COLOUR_FARM = '#d1bf2c';
 const MAP_COLOUR_WATER = '#03d';
 const MAP_COLOUR_MONSTER = '#58387d';
-const MAP_COLOUR_BG = 'rgb(214, 203, 171)';//'rgb(71, 19, 19)';  // MAKE SURE THIS MATCHES * BG-COLOR
+const MAP_COLOUR_BG = 'rgb(214, 203, 171)'; //OLD 'rgb(71, 19, 19)';  // MAKE SURE THIS MATCHES * BG-COLOR
 const MAP_COLOUR_ERASER = '#000';
 
 const TERRAIN_TYPE_VILLAGE = 201;
@@ -21,12 +21,14 @@ const TERRAIN_TYPE_MONSTER = 205;
 const TERRAIN_ICON_MOUNTAIN = '&#8710;';
 const TERRAIN_ICON_RUINS = '&#9619;&#8719;';
 
-const TERRAIN_ICON_FOREST = '&#127794;';
-const TERRAIN_ICON_WATER = '&#128167;';// '&#68184;';
-const TERRAIN_ICON_FARM = '&#119067;';
-const TERRAIN_ICON_VILLAGE = '&#127968;';//'&#8962;';
-const TERRAIN_ICON_MONSTER = '&#128126;';
+const TERRAIN_ICON_FOREST = '🌳,🎄,🌴,🌲'; // Unicode = '&#127794;';
+const TERRAIN_ICON_WATER = '💧,🌊,🐟,💦'; //  unicode='&#128167;' old='&#68184;';
+const TERRAIN_ICON_FARM = '🌾,🚜,🌻,🐂'; //  unicode='&#119067;'
+const TERRAIN_ICON_VILLAGE = '🏠,🏘️,🏡,🏢'; // unicode='&#127968;' old='&#8962;';
+const TERRAIN_ICON_MONSTER = '👾,😈,💀,👽'; // unicode='&#128126;'
 const TERRAIN_ICON_ERASER = '&#10060;';
+
+var debug_random_icons = false;
 
 var scoringDetails = {
   'Greenbough' : 'Earn ONE reputation star for each ROW and COLUMN with AT LEAST ONE FOREST SPACE. The same forest space may be scored in a row AND a column.',
@@ -83,6 +85,7 @@ var terrainTypes = {
 };
 
 var selectedTerrainType = 'village';
+var selectedIconIndex = 0;
 var totalMountainCoins = 0;
 
 function init(){
@@ -110,6 +113,7 @@ function resetElements(){
       inputs[i].value = null;
     }
   }
+  selectedIconIndex = 0;
 }
 
 function generateMapTable(){
@@ -228,7 +232,20 @@ function updateCell(e){
     }else{
       // UPDATE THE COLOUR AND ICON IN THIS CELL
       newColour = terrainTypes[selectedTerrainType]['colour'];
-      newIcon = terrainTypes[selectedTerrainType]['icon'];
+      var icons = terrainTypes[selectedTerrainType]['icon'];
+      // SHOW RANDOM ICONS?
+      if (debug_random_icons){
+        // GET A RANDOM ICON
+        newIcon = icons.split(',')[selectedIconIndex];
+      }else{
+        // GET THE DEFAULT ICON
+        newIcon = icons.split(',')[0];
+      }
+      if (selectedIconIndex >= (icons.split(',').length - 1)){
+        selectedIconIndex = 0;
+      }else{
+        selectedIconIndex++;
+      }
       thisCell.style.backgroundColor = newColour;
       // LEAVE THE RUINS VISIBLE
       if (!mapElements.wilderness.ruins.includes(thisId)){
@@ -416,7 +433,7 @@ function saveGame(){
       coinsArray[i] = 1;
     }
   }
-  var saveStr = coinsArray.join();
+  saveStr = coinsArray.join();
   setCookie('coins', saveStr, 366);
 
   // SAVE A STRING OF THE SCORES
@@ -431,8 +448,19 @@ function saveGame(){
     }
   }
   saveStr = scoreArray.join();
-  console.log('GAME SAVED');
   setCookie('scores', saveStr, 366);
+
+  // SAVE A STRING OF THE SCORE DEFINITIONS
+  var scoreInfos = document.getElementsByClassName('scoreInfo');
+  var scoreInfoCount =  scoreInfos.length;
+  var scoreInfoArray = [];
+  for (var i = 0; i < scoreInfoCount; i++){
+    scoreInfoArray[i] = scoreInfos[i].value;
+  }
+  saveStr = scoreInfoArray.join();
+  setCookie('scoreInfo', saveStr, 366);
+
+  console.log('GAME SAVED');
 }
 
 function loadGame(){
@@ -493,6 +521,19 @@ function loadGame(){
     scoreElements[i].value = scoreArray[i].trim();
   }
   updateScore();
+
+  // LOAD THE SCORING INFO SPANS
+  var scoreInfo = getCookie('scoreInfo');
+  var scoreInfoArray = scoreInfo.split(',');
+  var scoreInfoCount = scoreInfoArray.length;
+  var scoreSpansArray = ['A','B','C','D'];
+
+  for (var i = 0; i < scoreInfoCount; i++){
+    if (scoreInfoArray[i].trim() != ''){
+      showScoring(scoreInfoArray[i],scoreSpansArray[i]);
+    }
+  }
+
   alert('Game Loaded!');
 }
 

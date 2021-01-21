@@ -32,6 +32,7 @@ div.s1 {
   font-weight: 900;
   overflow: hidden;
   background-color: rgb(214, 203, 171);
+  user-select: none;
 }
 
 .coinIconSpan{
@@ -286,7 +287,7 @@ div.w3-content {
           </div>
 
           <div class='w3-col s12 l6'>
-            <select id='scoreInfo' class='w3-xlarge w3-select w3-white w3-center w3-border w3-round' onchange='showScoring(this.value, "A")'>
+            <select id='scoreInfoA' class='w3-xlarge w3-select w3-white w3-center w3-border w3-round scoreInfo' onchange='showScoring(this.value, "A")'>
               <option value='Greenbough'>Greenbough</option>
               <option value='Treetower'>Treetower</option>
               <option value='Canal Lake'>Canal Lake</option>
@@ -322,7 +323,7 @@ div.w3-content {
           </div>
 
           <div class='w3-col s12 l6'>
-            <select id='scoreInfo' class='w3-xlarge w3-select w3-white w3-center w3-border w3-round' onchange='showScoring(this.value, "B")'>
+            <select id='scoreInfoB' class='w3-xlarge w3-select w3-white w3-center w3-border w3-round scoreInfo' onchange='showScoring(this.value, "B")'>
               <option value='Greenbough'>Greenbough</option>
               <option value='Treetower'>Treetower</option>
               <option value='Canal Lake'>Canal Lake</option>
@@ -358,7 +359,7 @@ div.w3-content {
           </div>
 
           <div class='w3-col s12 l6'>
-            <select id='scoreInfo' class='w3-xlarge w3-select w3-white w3-center w3-border w3-round' onchange='showScoring(this.value, "C")'>
+            <select id='scoreInfoC' class='w3-xlarge w3-select w3-white w3-center w3-border w3-round scoreInfo' onchange='showScoring(this.value, "C")'>
               <option value='Greenbough'>Greenbough</option>
               <option value='Treetower'>Treetower</option>
               <option value='Canal Lake'>Canal Lake</option>
@@ -394,7 +395,7 @@ div.w3-content {
           </div>
 
           <div class='w3-col s12 l6'>
-            <select id='scoreInfo' class='w3-xlarge w3-select w3-white w3-center w3-border w3-round' onchange='showScoring(this.value, "D")'>
+            <select id='scoreInfoD' class='w3-xlarge w3-select w3-white w3-center w3-border w3-round scoreInfo' onchange='showScoring(this.value, "D")'>
               <option value='Greenbough'>Greenbough</option>
               <option value='Treetower'>Treetower</option>
               <option value='Canal Lake'>Canal Lake</option>
