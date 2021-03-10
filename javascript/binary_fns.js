@@ -37,23 +37,39 @@
 
 const MAX_INDEX = 53;
 
+/*
+ * dec_to_bin
+ * @dec: the decimal value to convert to binary
+ * @description: output a breakdown of the result in the form "2^16 + 2^8 + 2^2"
+ *
+*/
 function dec_to_bin(dec, desc = false){
 
+  // THE LARGEST POSSIBLE INT IS 2^53 SO THROW ERROR IF TRYING TO CONVERT
   if (dec > Math.pow(2, MAX_INDEX)){
 
     throw "Decimal number too big to convert! Max integer: " + Math.pow(2, MAX_INDEX);
 
+  // ELSE START CONVERTING
   }else{
 
+    // out_bin IS THE NUMBER IN BINARY
     let out_bin = "";
+    // out_text IS THE DESCRIPTION
     let out_text = "";
 
+    // STARTING WITH THE MAX_INDEX, WORK DOWN
     for (let i = MAX_INDEX; i >= 0; i--){
 
+      // IF THE DECIMAL IS GREATER (OR EQUAL) TO THE CURRENT POWER 2^i
       if (dec >= Math.pow(2, i)){
+
         //console.log("Current value left: ",dec,"so subtract ",Math.pow(2, i)," which is 2^"+i);
+        // APPEND A 1 TO THE OUTPUT BINARY NUMBER
         out_bin += "1";
+        // REDUCE THE DECIMAL VALUE BY THIS MUCH
         dec -= Math.pow(2, i);
+        // APPEND THE DESCRIPTION TO THE out_text
         if (out_text !== ""){
           out_text += " + 2^" + i;
         }else{
