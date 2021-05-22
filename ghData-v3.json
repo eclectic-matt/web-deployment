@@ -1,0 +1,2384 @@
+{
+    "plays": [
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 46646622,
+            "date": "2020-11-03",
+            "length": 150,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "61 - Fading Lighthouse\n #bgstats",
+            "scenario": 61,
+            "title": "Fading Lighthouse",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Soothsinger"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Doomstalker"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 46647628,
+            "date": "2020-11-03",
+            "length": 90,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "62 - Pit of Souls \n\n#bgstats",
+            "scenario": 62,
+            "title": "Pit of Souls",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Doomstalker"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 46520646,
+            "date": "2020-10-28",
+            "length": 120,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "79 - Lost Temple",
+            "scenario": 79,
+            "title": "Lost Temple",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Doomstalker"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 46420435,
+            "date": "2020-10-23",
+            "length": 150,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "56 - Bandit's Wood\n\nThe retirement of Grootfruit (Savaas Cragheart) which brings in a new character - Bulbophyllip (Orchid Doomstalker)\n\n{\nRetirement\n- &quot;Grootfruit&quot; (Savaas Cragheart)\n+ &quot;Bulbophyllip (Orchid Doomstalker)\n} #bgstats",
+            "scenario": 56,
+            "title": "Bandits Wood",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Soothsinger"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 46375917,
+            "date": "2020-10-21",
+            "length": 150,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "55 - Foggy Thicket \n\n#bgstats",
+            "scenario": 55,
+            "title": "Foggy Thicket",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Soothsinger"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 46224904,
+            "date": "2020-10-14",
+            "length": 136,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "43 - Drake's Nest\n\nFinal scenario in the Dagger Forest which triggers \n\n{GLOBAL=Water Breathing} #bgstats",
+            "scenario": 43,
+            "title": "Drake Nest",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45998126,
+            "date": "2020-10-03",
+            "length": 135,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "18 - Abandoned Sewers\n\n#bgstats",
+            "scenario": 18,
+            "title": "Abandoned Sewers",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45837891,
+            "date": "2020-09-25",
+            "length": 94,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "41 - Timeworn Tomb \n\n#bgstats",
+            "scenario": 41,
+            "title": "Timeworn Tomb",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Soothsinger"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": false
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45838913,
+            "date": "2020-09-25",
+            "length": 90,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "41 - Timeworn Tomb \n\n(attempt 2) #bgstats",
+            "scenario": 41,
+            "title": "Timeworn Tomb",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Soothsinger"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sunkeeper"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45756754,
+            "date": "2020-09-20",
+            "length": 120,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "32 - Decrepit Wood \n\n#bgstats",
+            "scenario": 32,
+            "title": "Decrepit Wood",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45760230,
+            "date": "2020-09-20",
+            "length": 105,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "33 - Savaas Armory \n\n#bgstats",
+            "scenario": 33,
+            "title": "Savaas Armory",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45764972,
+            "date": "2020-09-20",
+            "length": 105,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "40 - Ancient Defence Network\n\nRetiring: Sawbones - Robert Liston (4 enhancements) at Level 8 #bgstats",
+            "scenario": 40,
+            "title": "Ancient Defence Network",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45682205,
+            "date": "2020-09-16",
+            "length": 180,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "24 - Echo Chamber\n\n#bgstats",
+            "scenario": 24,
+            "title": "Echo Chamber",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Soothsinger"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Beast Tyrant"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45475311,
+            "date": "2020-09-06",
+            "length": 60,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "34 - Scorched Summit \n\n#bgstats",
+            "scenario": 34,
+            "title": "Scorched Summit",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45500397,
+            "date": "2020-09-06",
+            "length": 150,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "10 - Plane of Elemental Power\n\nTinkerer retires after killing his final 2 enemy types (Sun Demon, Flame Demon). \n\nFarewell, Tink (Googly Wrinkla)\n\nHello, Vermling Beast Tyrant (Rattigan Doolittle) ?\n\nFarewell, Spellweaver (Katelaya)\n\nHello, Quatryl Soothsinger (John Slayer) #bgstats",
+            "scenario": 10,
+            "title": "Plane of Elemental Power",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45434089,
+            "date": "2020-09-04",
+            "length": 150,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "25 - Icecrag Ascent\n\n#bgstats",
+            "scenario": 25,
+            "title": "Icecrag Ascent",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45364716,
+            "date": "2020-08-31",
+            "length": 180,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "16 - Mountain Pass\n\n#bgstats",
+            "scenario": 16,
+            "title": "Mountain Pass",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Spellweaver"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45252183,
+            "date": "2020-08-26",
+            "length": 135,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "93 - Sunken Vessel\n\n#bgstats",
+            "scenario": 93,
+            "title": "Sunken Vessel",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 45016832,
+            "date": "2020-08-15",
+            "length": 240,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "81 - Temple of the Eclipse\n\n#bgstats",
+            "scenario": 81,
+            "title": "Temple of the Eclipse",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Spellweaver"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Sawbones"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44808729,
+            "date": "2020-08-06",
+            "length": 210,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "4 - Crypt of the Damned\n\nWhat we hoped would be a &quot;quick, easy scenario&quot; turned out to be a grind of cultists summoning enemies left, right and centre.\n\nSome fantastic moves from Cragheart and Brute, but the Spellweaver was on the point of death from the first opened door and my Tinkerer felt underwhelming until the end.\n\nWe split in the corridor and I managed to lay enough traps to finish the last enemy with my final card - a single bad modifier would have lost us the game.\n\nAfter that, the Brute was forced to retire, so our party now has the Human Sawbones (Oliver) who sounds... interesting ? #bgstats",
+            "scenario": 4,
+            "title": "Crypt of the Damned",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Spellweaver"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44701395,
+            "date": "2020-08-01",
+            "length": 210,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "11 - Gloomhaven Square A\n\nOur tactic of running like a mad bastard worked well. Let the living bones and corpses tank the damage behind us.\n\nEnded up knocking out the big boss in a couple of turns, once we got to him.\n\nStrangely easy - and now the militaristic rule of Gloomhaven is toppled! #bgstats",
+            "scenario": 11,
+            "title": "Gloomhaven Square A",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44592178,
+            "date": "2020-07-27",
+            "length": 150,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "9 - Diamond Mine\n\nWe won! #bgstats",
+            "scenario": 9,
+            "title": "Diamond Mine",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": ""
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": ""
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": ""
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": ""
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44617929,
+            "date": "2020-07-27",
+            "length": 180,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "11 - Gloomhaven Square A\n\nToo many AI decisions to make, we really needed the app to help track everything. \n\nGot to the boss and nabbed the treasure chest after running past everyone and letting our allies do the work.\n\nSadly we were all exhausted before doing even half the damage needed to beat the boss. Plus we were all drunk and tired by then. #bgstats",
+            "scenario": 11,
+            "title": "Gloomhaven Square A",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": false
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44443443,
+            "date": "2020-07-20",
+            "length": 210,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "67 - Arcane Library\n\n#bgstats",
+            "scenario": 67,
+            "title": "Arcane Library",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": false
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44447088,
+            "date": "2020-07-20",
+            "length": 150,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "9 - Diamond Mine #bgstats",
+            "scenario": 9,
+            "title": "Diamond Mine",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": false
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44413080,
+            "date": "2020-07-17",
+            "length": 240,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "3 - Inox Encampment\n\nWe fought hard and eventually got to the last enemies we needed to beat. I had a plan to trap the enemies in a room with a trap, but Amber ran into the middle of that room. She was sacrificed for the good of the party but we all won in the end. #bgstats",
+            "scenario": 3,
+            "title": "Inox Encampment",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Spellweaver"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44443536,
+            "date": "2020-07-17",
+            "length": 180,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "67 - Arcane Library\n\nMatt not playing (at Rich's house) #bgstats",
+            "scenario": 67,
+            "title": "Arcane Library",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": ""
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": ""
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": ""
+                }
+            ],
+            "win": false
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44250469,
+            "date": "2020-07-11",
+            "length": 330,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "1 - Black Barrow\n\nGot through to the final enemies, but we all exhausted before beating the archers in the last room.  #bgstats",
+            "scenario": 1,
+            "title": "Black Barrow",
+            "players": [
+                {
+                    "name": "Amber Tirrell",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Spellweaver"
+                },
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": false
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44255498,
+            "date": "2020-07-11",
+            "length": 90,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "1 - Black Barrow\n\nWe won! Much quicker and lots of gold and XP collected! Straight onto the next scenario - the catacombs!  #bgstats",
+            "scenario": 1,
+            "title": "Black Barrow",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": true
+        },
+        {
+            "type": "scenario",
+            "tags": "scenario",
+            "id": 44260142,
+            "date": "2020-07-11",
+            "length": 180,
+            "location": "Amber and Oliver's House, Workington",
+            "comments": "2 - Barrow Crypts\n\nWe went in hard and although the boss opened all the doors, we killed him and then we managed to hold back the living corpses to win overall! #bgstats",
+            "scenario": 2,
+            "title": "Barrow Lair",
+            "players": [
+                {
+                    "name": "Matt",
+                    "userid": "2067663",
+                    "username": "EclecticMatt",
+                    "role": "Tinkerer"
+                },
+                {
+                    "name": "Naomi Lukianczuk",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Cragheart"
+                },
+                {
+                    "name": "Oliver Burns",
+                    "userid": "0",
+                    "username": "",
+                    "role": "Brute"
+                }
+            ],
+            "win": true
+        }
+    ],
+    "stats": {
+        "playCount": 30,
+        "loggedPlayIds": [
+            46646622,
+            46647628,
+            46520646,
+            46420435,
+            46375917,
+            46224904,
+            45998126,
+            45837891,
+            45838913,
+            45756754,
+            45760230,
+            45764972,
+            45682205,
+            45475311,
+            45500397,
+            45434089,
+            45364716,
+            45252183,
+            45016832,
+            44808729,
+            44701395,
+            44592178,
+            44617929,
+            44443443,
+            44447088,
+            44413080,
+            44443536,
+            44250469,
+            44255498,
+            44260142
+        ],
+        "completedScenarios": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            9,
+            10,
+            11,
+            14,
+            16,
+            18,
+            24,
+            25,
+            32,
+            33,
+            34,
+            40,
+            41,
+            43,
+            55,
+            56,
+            61,
+            62,
+            67,
+            79,
+            81,
+            93
+        ],
+        "playTime": 4670,
+        "available": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            8,
+            9,
+            10,
+            11,
+            12,
+            14,
+            14,
+            16,
+            18,
+            21,
+            22,
+            23,
+            24,
+            25,
+            30,
+            32,
+            33,
+            33,
+            34,
+            41,
+            56,
+            62,
+            64,
+            88
+        ],
+        "unavailable": [
+            8,
+            12,
+            42
+        ]
+    },
+    "scenarioInfo": [
+        {
+            "scenario": 1,
+            "name": "Black Barrow",
+            "grid": "G10",
+            "region": "wider region",
+            "xPos": 905,
+            "yPos": 649,
+            "locks": "",
+            "unlocks": "2",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 2,
+            "name": "Barrow Lair",
+            "grid": "G11",
+            "region": "wider region",
+            "xPos": 960,
+            "yPos": 654,
+            "locks": "",
+            "unlocks": "3,4",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 3,
+            "name": "Inox Encampment",
+            "grid": "G3",
+            "region": "Dagger Forest",
+            "xPos": 288,
+            "yPos": 694,
+            "locks": "",
+            "unlocks": "8,9",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 4,
+            "name": "Crypt of the Damned",
+            "grid": "E11",
+            "region": "Crypts",
+            "xPos": 880,
+            "yPos": 600,
+            "locks": "",
+            "unlocks": "5,6",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 5,
+            "name": "Ruinous Crypt",
+            "grid": "D6",
+            "region": "Crypts",
+            "xPos": 568,
+            "yPos": 408,
+            "locks": "",
+            "unlocks": "14,19{14},*10",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 6,
+            "name": "Decaying Crypt",
+            "grid": "F18",
+            "region": "Crypts",
+            "xPos": 963,
+            "yPos": 480,
+            "locks": "",
+            "unlocks": "8",
+            "unlocked": true,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 7,
+            "name": "Vibrant Grotto",
+            "grid": "C12",
+            "region": "Copperneck Mountains",
+            "xPos": 1093,
+            "yPos": 304,
+            "locks": "",
+            "unlocks": "20",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 8,
+            "name": "Gloomhaven Warehouse",
+            "grid": "C18",
+            "region": "City of Gloomhaven",
+            "xPos": 1559,
+            "yPos": 299,
+            "locks": "3,9",
+            "unlocks": "7{14},13,14",
+            "unlocked": true,
+            "locked": true,
+            "completed": false
+        },
+        {
+            "scenario": 9,
+            "name": "Diamond Mine",
+            "grid": "L2",
+            "region": "Watcher Mountains",
+            "xPos": 220,
+            "yPos": 1121,
+            "locks": "8",
+            "unlocks": "11,12",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 10,
+            "name": "Plane of Elemental Power",
+            "grid": "C7",
+            "region": "wider region",
+            "xPos": 611,
+            "yPos": 365,
+            "locks": "",
+            "unlocks": "22,*21",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 11,
+            "name": "Gloomhaven Square A",
+            "grid": "B16",
+            "region": "City of Gloomhaven",
+            "xPos": 1402,
+            "yPos": 246,
+            "locks": "12,45{35},49{35},50{35}",
+            "unlocks": "16,18",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 12,
+            "name": "Gloomhaven Square B",
+            "grid": "B16",
+            "region": "City of Gloomhaven",
+            "xPos": 1447,
+            "yPos": 220,
+            "locks": "11",
+            "unlocks": "28{6},16,18",
+            "unlocked": true,
+            "locked": true,
+            "completed": false
+        },
+        {
+            "scenario": 13,
+            "name": "Temple of the Seer",
+            "grid": "N3",
+            "region": "Watcher Mountains",
+            "xPos": 367,
+            "yPos": 1320,
+            "locks": "",
+            "unlocks": "15,17,20",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 14,
+            "name": "Frozen Hollow",
+            "grid": "C10",
+            "region": "Copperneck Mountains",
+            "xPos": 902,
+            "yPos": 297,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 15,
+            "name": "Shrine of Strength",
+            "grid": "B11",
+            "region": "Copperneck Mountains",
+            "xPos": 989,
+            "yPos": 253,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 16,
+            "name": "Mountain Pass",
+            "grid": "B6",
+            "region": "Copperneck Mountains",
+            "xPos": 575,
+            "yPos": 287,
+            "locks": "",
+            "unlocks": "*24,25",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 17,
+            "name": "Lost Island",
+            "grid": "K17",
+            "region": "Misty Sea",
+            "xPos": 1559,
+            "yPos": 969,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 18,
+            "name": "Abandoned Sewers",
+            "grid": "C14",
+            "region": "City of Gloomhaven",
+            "xPos": 1291,
+            "yPos": 332,
+            "locks": "",
+            "unlocks": "23,26{23|43},14,43{14}",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 19,
+            "name": "Forgotten Crypt",
+            "grid": "M7",
+            "region": "Crypts, and the Lingering Swamp",
+            "xPos": 665,
+            "yPos": 1168,
+            "locks": "",
+            "unlocks": "27",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 20,
+            "name": "Necromancer's Sanctum",
+            "grid": "H13",
+            "region": "wider region",
+            "xPos": 1149,
+            "yPos": 698,
+            "locks": "",
+            "unlocks": "16,18,28",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 21,
+            "name": "Infernal Throne",
+            "grid": "C7",
+            "region": "wider region",
+            "xPos": 655,
+            "yPos": 326,
+            "locks": "35",
+            "unlocks": "94",
+            "unlocked": true,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 22,
+            "name": "Temple of the Elements",
+            "grid": "K8",
+            "region": "wider region",
+            "xPos": 754,
+            "yPos": 1002,
+            "locks": "",
+            "unlocks": "31{14|31|35},35{10},36{10}",
+            "unlocked": true,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 23,
+            "name": "Deep Ruins",
+            "grid": "C15",
+            "region": "City of Gloomhaven",
+            "xPos": 1352,
+            "yPos": 298,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 24,
+            "name": "Echo Chamber",
+            "grid": "C6",
+            "region": "Copperneck Mountains",
+            "xPos": 513,
+            "yPos": 301,
+            "locks": "",
+            "unlocks": "30,32",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 25,
+            "name": "Icecrag Ascent",
+            "grid": "A5",
+            "region": "Copperneck Mountains",
+            "xPos": 427,
+            "yPos": 208,
+            "locks": "34{33}",
+            "unlocks": "33,*34",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 26,
+            "name": "Ancient Cistern",
+            "grid": "D15",
+            "region": "City of Gloomhaven",
+            "xPos": 1353,
+            "yPos": 354,
+            "locks": "",
+            "unlocks": "22",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 27,
+            "name": "Ruinous Rift",
+            "grid": "E6",
+            "region": "wider region",
+            "xPos": 551,
+            "yPos": 472,
+            "locks": "10,21,35,36",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 28,
+            "name": "Outer Ritual Chamber",
+            "grid": "E4",
+            "region": "Dagger Forest",
+            "xPos": 369,
+            "yPos": 496,
+            "locks": "",
+            "unlocks": "*29",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 29,
+            "name": "Sanctuary of Gloom",
+            "grid": "E3",
+            "region": "Dagger Forest",
+            "xPos": 315,
+            "yPos": 510,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 30,
+            "name": "Shrine of the Depths",
+            "grid": "N15",
+            "region": "Misty Sea",
+            "xPos": 1351,
+            "yPos": 1245,
+            "locks": "",
+            "unlocks": "42",
+            "unlocked": true,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 31,
+            "name": "Plane of Night",
+            "grid": "A16",
+            "region": "City of Gloomhaven",
+            "xPos": 1427,
+            "yPos": 127,
+            "locks": "",
+            "unlocks": "37{43},38,39,43{14}",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 32,
+            "name": "Decrepit Wood",
+            "grid": "L11",
+            "region": "Lingering Swamp",
+            "xPos": 1011,
+            "yPos": 1062,
+            "locks": "",
+            "unlocks": "33,40{33}",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 33,
+            "name": "Savaas Armory",
+            "grid": "A7",
+            "region": "Copperneck Mountains",
+            "xPos": 619,
+            "yPos": 187,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 34,
+            "name": "Scorched Summit",
+            "grid": "A4",
+            "region": "Copperneck Mountains",
+            "xPos": 333,
+            "yPos": 160,
+            "locks": "33{!24|42}",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 35,
+            "name": "Gloomhaven Battlements A",
+            "grid": "A14",
+            "region": "City of Gloomhaven",
+            "xPos": 1250,
+            "yPos": 144,
+            "locks": "31{!21},36",
+            "unlocks": "45",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 36,
+            "name": "Gloomhaven Battlements B",
+            "grid": "B14",
+            "region": "City of Gloomhaven",
+            "xPos": 1283,
+            "yPos": 185,
+            "locks": "21,35",
+            "unlocks": "94",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 37,
+            "name": "Doom Trench",
+            "grid": "G18",
+            "region": "Misty Sea",
+            "xPos": 1578,
+            "yPos": 623,
+            "locks": "",
+            "unlocks": "47,17",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 38,
+            "name": "Slave Pens",
+            "grid": "G2",
+            "region": "Dagger Forest",
+            "xPos": 228,
+            "yPos": 678,
+            "locks": "",
+            "unlocks": "*44,48",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 39,
+            "name": "Treacherous Divide",
+            "grid": "B11",
+            "region": "Copperneck Mountains",
+            "xPos": 944,
+            "yPos": 206,
+            "locks": "",
+            "unlocks": "15,*46",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 40,
+            "name": "Ancient Defence Network",
+            "grid": "F12",
+            "region": "Copperneck Mountains",
+            "xPos": 1064,
+            "yPos": 560,
+            "locks": "",
+            "unlocks": "*41",
+            "unlocked": false,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 41,
+            "name": "Timeworn Tomb",
+            "grid": "F13",
+            "region": "Copperneck Mountains",
+            "xPos": 1133,
+            "yPos": 543,
+            "locks": "42",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 42,
+            "name": "Realm of the Voice",
+            "grid": "C5",
+            "region": "Copperneck Mountains",
+            "xPos": 444,
+            "yPos": 320,
+            "locks": "32,33{!25},40,41",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": true,
+            "completed": false
+        },
+        {
+            "scenario": 43,
+            "name": "Drake Nest",
+            "grid": "D4",
+            "region": "Dagger Forest",
+            "xPos": 335,
+            "yPos": 457,
+            "locks": "32{24}",
+            "unlocks": "64,88",
+            "unlocked": false,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 44,
+            "name": "Tribal Assault",
+            "grid": "F3",
+            "region": "Dagger Forest",
+            "xPos": 310,
+            "yPos": 603,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 45,
+            "name": "Rebel Swamp",
+            "grid": "M9",
+            "region": "Lingering Swamp",
+            "xPos": 823,
+            "yPos": 1151,
+            "locks": "",
+            "unlocks": "49,50",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 46,
+            "name": "Nightmare Peak",
+            "grid": "A11",
+            "region": "Copperneck Mountains",
+            "xPos": 982,
+            "yPos": 147,
+            "locks": "",
+            "unlocks": "51{47|48}",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 47,
+            "name": "Lair of the Unseeing Eye",
+            "grid": "H18",
+            "region": "Misty Sea",
+            "xPos": 1633,
+            "yPos": 680,
+            "locks": "",
+            "unlocks": "51{46|48}",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 48,
+            "name": "Shadow Weald",
+            "grid": "E11",
+            "region": "Dagger Forest",
+            "xPos": 143,
+            "yPos": 509,
+            "locks": "",
+            "unlocks": "51{46|47}",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 49,
+            "name": "Rebel's Stand",
+            "grid": "N7",
+            "region": "Lingering Swamp",
+            "xPos": 677,
+            "yPos": 1251,
+            "locks": "50",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 50,
+            "name": "Ghost Fortress",
+            "grid": "C17",
+            "region": "City of Gloomhaven",
+            "xPos": 1490,
+            "yPos": 249,
+            "locks": "49",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 51,
+            "name": "The Void",
+            "grid": "A15",
+            "region": "City of Gloomhaven",
+            "xPos": 1346,
+            "yPos": 144,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 52,
+            "name": "Noxious Cellar",
+            "grid": "D14",
+            "region": "City of Gloomhaven",
+            "xPos": 1240,
+            "yPos": 354,
+            "locks": "",
+            "unlocks": "53",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 53,
+            "name": "Crypt Basement",
+            "grid": "F11",
+            "region": "Crypts",
+            "xPos": 962,
+            "yPos": 531,
+            "locks": "",
+            "unlocks": "54",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 54,
+            "name": "Palace of Ice",
+            "grid": "D8",
+            "region": "Copperneck Mountains",
+            "xPos": 756,
+            "yPos": 390,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 55,
+            "name": "Foggy Thicket",
+            "grid": "G5",
+            "region": "Dagger Forest",
+            "xPos": 445,
+            "yPos": 671,
+            "locks": "",
+            "unlocks": "*56",
+            "unlocked": false,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 56,
+            "name": "Bandits Wood",
+            "grid": "G4",
+            "region": "Dagger Forest",
+            "xPos": 403,
+            "yPos": 696,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 57,
+            "name": "Investigation",
+            "grid": "D14",
+            "region": "City of Gloomhaven",
+            "xPos": 1280,
+            "yPos": 398,
+            "locks": "",
+            "unlocks": "58",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 58,
+            "name": "Bloody Shack",
+            "grid": "E15",
+            "region": "City of Gloomhaven",
+            "xPos": 1341,
+            "yPos": 459,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 59,
+            "name": "Forgotten Grove",
+            "grid": "F1",
+            "region": "Dagger Forest",
+            "xPos": 112,
+            "yPos": 618,
+            "locks": "",
+            "unlocks": "60",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 60,
+            "name": "Alchemy Lab",
+            "grid": "B15",
+            "region": "City of Gloomhaven",
+            "xPos": 1344,
+            "yPos": 207,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 61,
+            "name": "Fading Lighthouse",
+            "grid": "N11",
+            "region": "Lingering Swamp",
+            "xPos": 1054,
+            "yPos": 1243,
+            "locks": "",
+            "unlocks": "*62",
+            "unlocked": false,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 62,
+            "name": "Pit of Souls",
+            "grid": "D11",
+            "region": "Lingering Swamp",
+            "xPos": 1060,
+            "yPos": 1305,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 63,
+            "name": "Magma Pit",
+            "grid": "M1",
+            "region": "Watcher Mountains",
+            "xPos": 147,
+            "yPos": 1239,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 64,
+            "name": "Underwater Lagoon",
+            "grid": "K16",
+            "region": "Misty Sea",
+            "xPos": 1477,
+            "yPos": 945,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 65,
+            "name": "Sulfur Mine",
+            "grid": "L5",
+            "region": "Watcher Mountains",
+            "xPos": 509,
+            "yPos": 1125,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 66,
+            "name": "Clockwork Grove",
+            "grid": "G14",
+            "region": "Copperneck Mountains",
+            "xPos": 1256,
+            "yPos": 660,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 67,
+            "name": "Arcane Library",
+            "grid": "K2",
+            "region": "wider region",
+            "xPos": 214,
+            "yPos": 998,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 68,
+            "name": "Toxic Moor",
+            "grid": "N8",
+            "region": "Lingering Swamp",
+            "xPos": 771,
+            "yPos": 1287,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 69,
+            "name": "Well of the Unfortunate",
+            "grid": "F8",
+            "region": "wider region",
+            "xPos": 722,
+            "yPos": 568,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 70,
+            "name": "Chained Isle",
+            "grid": "J17",
+            "region": "Misty Sea",
+            "xPos": 1515,
+            "yPos": 868,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 71,
+            "name": "Windswept Highlands",
+            "grid": "F8",
+            "region": "wider region",
+            "xPos": 554,
+            "yPos": 1053,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 72,
+            "name": "Oozing Grove",
+            "grid": "H12",
+            "region": "wider region",
+            "xPos": 1051,
+            "yPos": 717,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 73,
+            "name": "Rockslide Ridge",
+            "grid": "N5",
+            "region": "Watcher Mountains",
+            "xPos": 541,
+            "yPos": 1253,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 74,
+            "name": "Merchant Ship",
+            "grid": "I14",
+            "region": "Misty Sea",
+            "xPos": 1246,
+            "yPos": 832,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 75,
+            "name": "Overgrown Graveyard",
+            "grid": "G12",
+            "region": "wider region",
+            "xPos": 1119,
+            "yPos": 643,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 76,
+            "name": "Harrower Hive",
+            "grid": "L3",
+            "region": "Watcher Mountains",
+            "xPos": 346,
+            "yPos": 1129,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 77,
+            "name": "Vault of Secrets",
+            "grid": "B17",
+            "region": "City of Gloomhaven",
+            "xPos": 1488,
+            "yPos": 176,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 78,
+            "name": "Sacrifice Pit",
+            "grid": "B14",
+            "region": "City of Gloomhaven",
+            "xPos": 1208,
+            "yPos": 214,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 79,
+            "name": "Lost Temple",
+            "grid": "K12",
+            "region": "Lingering Swamp",
+            "xPos": 1113,
+            "yPos": 961,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 80,
+            "name": "Vigil Keep",
+            "grid": "K1",
+            "region": "Watcher Mountains",
+            "xPos": 126,
+            "yPos": 1045,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 81,
+            "name": "Temple of the Eclipse",
+            "grid": "D2",
+            "region": "Dagger Forest",
+            "xPos": 195,
+            "yPos": 429,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 82,
+            "name": "Burning Mountain",
+            "grid": "M6",
+            "region": "Watcher Mountains",
+            "xPos": 572,
+            "yPos": 1220,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 83,
+            "name": "Shadows Within",
+            "grid": "C15",
+            "region": "City of Gloomhaven",
+            "xPos": 1300,
+            "yPos": 281,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 84,
+            "name": "Crystalline Cave",
+            "grid": "D12",
+            "region": "Copperneck Mountains",
+            "xPos": 1088,
+            "yPos": 410,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 85,
+            "name": "Sun Temple",
+            "grid": "M3",
+            "region": "Watcher Mountains",
+            "xPos": 360,
+            "yPos": 1203,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 86,
+            "name": "Harried Village",
+            "grid": "D15",
+            "region": "City of Gloomhaven",
+            "xPos": 1352,
+            "yPos": 411,
+            "locks": "",
+            "unlocks": "87",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 87,
+            "name": "Corrupted Cove",
+            "grid": "I9",
+            "region": "wider region",
+            "xPos": 858,
+            "yPos": 863,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 88,
+            "name": "Plane of Water",
+            "grid": "D16",
+            "region": "City of Gloomhaven",
+            "xPos": 1440,
+            "yPos": 357,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": true,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 89,
+            "name": "Syndicate Hideout",
+            "grid": "C17",
+            "region": "City of Gloomhaven",
+            "xPos": 1482,
+            "yPos": 298,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 90,
+            "name": "Demonic Rift",
+            "grid": "J7",
+            "region": "wider region",
+            "xPos": 648,
+            "yPos": 952,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 91,
+            "name": "Wild Melee",
+            "grid": "E2",
+            "region": "Dagger Forest",
+            "xPos": 210,
+            "yPos": 488,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 92,
+            "name": "Back Alley Brawl",
+            "grid": "C14",
+            "region": "City of Gloomhaven",
+            "xPos": 1249,
+            "yPos": 266,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 93,
+            "name": "Sunken Vessel",
+            "grid": "N17",
+            "region": "Misty Sea",
+            "xPos": 1519,
+            "yPos": 1232,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": true
+        },
+        {
+            "scenario": 94,
+            "name": "Vermling Nest",
+            "grid": "F12",
+            "region": "wider region",
+            "xPos": 1037,
+            "yPos": 609,
+            "locks": "",
+            "unlocks": "*95",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        },
+        {
+            "scenario": 95,
+            "name": "Payment Due",
+            "grid": "G12",
+            "region": "wider region",
+            "xPos": 1108,
+            "yPos": 601,
+            "locks": "",
+            "unlocks": "",
+            "unlocked": false,
+            "locked": false,
+            "completed": false
+        }
+    ],
+    "mapInfo": {
+        "fullWidth": 1873,
+        "fullHeight": 1414,
+        "scaledWidth": 936,
+        "scaledHeight": 707,
+        "fullPointSize": 21,
+        "pointSize": 10,
+        "fontSize": 14,
+        "fontFamily": "Arial"
+    }
+}
