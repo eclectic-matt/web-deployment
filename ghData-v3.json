@@ -1126,7 +1126,12 @@
             56,
             62,
             64,
-            88
+            71,
+            76,
+            82,
+            83,
+            88,
+            90
         ],
         "unavailable": [
             8,
@@ -2054,7 +2059,7 @@
             "yPos": 1053,
             "locks": "",
             "unlocks": "",
-            "unlocked": false,
+            "unlocked": true,
             "locked": false,
             "completed": false
         },
@@ -2067,7 +2072,7 @@
             "yPos": 717,
             "locks": "",
             "unlocks": "",
-            "unlocked": false,
+            "unlocked": true,
             "locked": false,
             "completed": false
         },
@@ -2119,7 +2124,7 @@
             "yPos": 1129,
             "locks": "",
             "unlocks": "",
-            "unlocked": false,
+            "unlocked": true,
             "locked": false,
             "completed": false
         },
@@ -2158,7 +2163,7 @@
             "yPos": 961,
             "locks": "",
             "unlocks": "",
-            "unlocked": false,
+            "unlocked": true,
             "locked": false,
             "completed": true
         },
@@ -2184,7 +2189,7 @@
             "yPos": 429,
             "locks": "",
             "unlocks": "",
-            "unlocked": false,
+            "unlocked": true,
             "locked": false,
             "completed": true
         },
@@ -2197,7 +2202,7 @@
             "yPos": 1220,
             "locks": "",
             "unlocks": "",
-            "unlocked": false,
+            "unlocked": true,
             "locked": false,
             "completed": false
         },
@@ -2210,7 +2215,7 @@
             "yPos": 281,
             "locks": "",
             "unlocks": "",
-            "unlocked": false,
+            "unlocked": true,
             "locked": false,
             "completed": false
         },
@@ -2301,7 +2306,7 @@
             "yPos": 952,
             "locks": "",
             "unlocks": "",
-            "unlocked": false,
+            "unlocked": true,
             "locked": false,
             "completed": false
         },
