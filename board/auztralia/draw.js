@@ -87,20 +87,17 @@ function drawHexagon(ctx, x, y, r, row, col, colour = null){
 			switch(Object.keys(hex.resources)[i]){
 				case 'iron':
 					drawIron(ctx, x - 40, y - 5, 5, hex.resources[Object.keys(hex.resources)[i]]);
-					//drawIron(ctx, x - 30, y - 30, 5, hex.resources[Object.keys(hex.resources)[i]]);
 					break;
 				case 'coal':
 					drawCoal(ctx, x - 20, y - 5, 5, hex.resources[Object.keys(hex.resources)[i]]);
 					break;
 				case 'phos':
 					drawPhos(ctx, x, y - 5, 5, hex.resources[Object.keys(hex.resources)[i]]);
-					//drawPhos(ctx, x - 30, y, 5, hex.resources[Object.keys(hex.resources)[i]]);
 					break;
 				case 'gold':
 					drawGold(ctx, x + 20, y - 5, 5, hex.resources[Object.keys(hex.resources)[i]]);
 					break;
 				case 'olds':
-					//TO DO
 					if (hex.resources[Object.keys(hex.resources)[i]] > 0){
 						var oldOneLevel = Math.min(hex.level - 1 + hex.resources[Object.keys(hex.resources)[i]], 3);
 						drawOldOne(ctx, x + 10, y + 25, 5, oldOneLevel);
