@@ -97,7 +97,7 @@ function drawHexagon(ctx, x, y, r, row, col, colour = null){
 				case 'olds':
 					//TO DO
 					if (hex.resources[Object.keys(hex.resources)[i]] > 0){
-						var oldOneLevel = Math.min(hex.level + hex.resources[Object.keys(hex.resources)[i]], 3);
+						var oldOneLevel = Math.min(hex.level - 1 + hex.resources[Object.keys(hex.resources)[i]], 3);
 						drawOldOne(ctx, x + 10, y + 25, 5, oldOneLevel);
 					}
 					break;
