@@ -55,6 +55,11 @@ function drawHexagon(ctx, x, y, r, row, col, colour = null){
 	if(!isNaN(hex.id)){
 		drawHexId(ctx, x, y, hex.id, hex.setupTile);
 	}
+	//PRINT TRIANGLE ON SETUP TILES
+	if(hex.setupTile){
+		
+		drawTriangle(ctx, x + 1, y + 25, 15, '#666');
+	}
 
 	//PRINT LEVEL IF PRESENT
 	if(hex.level > 0){
@@ -213,9 +218,9 @@ function drawHexId(ctx, x, y, id, setupTile = false){
 	ctx.closePath();
 	ctx.fillStyle = '#000';
 	ctx.fillText(id, x - 20, y + 30);
-	if(setupTile){
+	/*if(setupTile){
 		drawTriangle(ctx, x + 1, y + 25, 15, '#666');
-	}
+	}*/
 }
 
 function drawLevelCircle(ctx, x, y, level, col){
