@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<!--link rel="stylesheet" href="./style.css"-->
+		<script src="./data.js"></script>
+		<script defer src="./setup.js"></script>
+		<script defer src="./draw.js"></script>
+		<style>
+			canvas {
+				border: 10px solid black;
+			}
+			table {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			tr, th, td {
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+<body onload="init()">
+
+	<header class="header">
+		<h1>Auz Setup</h1>
+		<div class="w3-row-padding">
+			<div class="w3-col s3">
+				<button onclick="processNextSetupTile()">Next Setup Tile</button>
+			</div>
+			<div class="w3-col s3">
+				<button onclick="drawAllSetupTiles()">Draw ALL Setup Tiles (5s delay)</button>
+			</div>
+		</div>
+	</header>
+	<canvas id="canvas" width="900" height="500"></canvas>
+	<div id='setupInfo'>
+		<div id='setupTileInfoDiv'>
+			<p id='setupTileInfo'></p>
+		</div>
+	</div>
+	<!--canvas id="canvas" width="1200" height="550"></canvas-->
+</body>
