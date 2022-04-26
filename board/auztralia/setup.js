@@ -1,56 +1,40 @@
 var grid = boards.eastern.grid;
 
-//console.log('Hex 43 coords:',getGridCoordsFromHexId('eastern',43));
-//console.log('Hex at [0,0] id:',getHexIdFromGridCoords('eastern',0,0));
-//setup(grid);
-
-function setup(grid){
-	let limit = 3;
-	let setups = 0;
-	//ITERATE ROWS
-	for(let row = 0; row < grid.length; row++){
-		//ITERATE COLUMNS
-		for(let col = 0; col < grid[row].length; col++){
-			let hex = grid[row][col];
-			//console.log(hex);
-			if (hex.setupTile === true){
-				drawSetupTile(hex);
-				neighbours = getNeighbours(row, col, grid.length - 1, grid[row].length - 1);
-				//console.log('Row',row,'Col',col,neighbours);
-				setups++;
-				if(setups > limit){
-					return false;
-				}
-			}
-		}
-	}
-}
-
 function drawSetupTile(hex){
 
-	var boardName = 'eastern';
+	//var boardName = 'eastern';
 	//console.log('Setting up hex', hex.id);
 	var randomInt = Math.floor(Math.random() * setupTiles.length);
 	var setupTile = setupTiles[randomInt];
+
+	//OUPUT A TABLE SHOWING THE CURRENT SETUP TILE
 	var strOut = '<b>Setup Hex ' + hex.id + '</b><br>';
 	neighbours = getNeighbours(hex.row, hex.col, 7, 10);
 	strOut += '<table>';
 	strOut += '<tr><th>Direction</th><th>Resource</th><th>Hex</th></tr>';
+	
+	//LOOP THROUGH THE ELEMENTS ON THIS SETUP TILE
 	for(let i = 0; i < Object.keys(setupTile).length; i++){
 
 		strOut += '<tr>';
 		strOut += '<td>' + directions[i] + '</td>';
-		strOut += '<td>' + ( (setupTile[i] === null) ? '<em>empty</em>' : '<b>' + setupTile[i] + '</b>' ) + '</td>';
+
+		//IF THERE IS NOTHING TO GIVE ON THIS PART OF THE TILE, PRINT ____
+		strOut += '<td>' + ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' ) + '</td>';
+
+		//IF THE NEIGHBOUR IN THIS DIRECTION IS NOT NULL
 		if(neighbours[i] !== null){
+
 			neighbourHex = getHexByCoords(neighbours[i][0], neighbours[i][1]);
-			//console.log(neighbours[i], neighbourHex);
+			
 			if(neighbourHex === false){
+
 				strOut += '<td><b>' + neighbours[i] + '</b></td>';	
 			}else{
 				strOut += '<td><b>' + neighbourHex.id + '</b></td>';
 			}
 		}else{
-			strOut += '<td>' + neighbours[i] + '</td>';
+			strOut += '<td>No Hex</td>';
 		}
 		strOut += '</tr>';
 	}
@@ -115,6 +99,7 @@ function drawSetupTile(hex){
 }
 
 function giveCoal(hex){
+
 	if(hex === false){
 		return false;
 	}
@@ -131,6 +116,7 @@ function giveCoal(hex){
 }
 
 function giveIron(hex){
+
 	if(hex === false){
 		return false;
 	}
@@ -147,6 +133,7 @@ function giveIron(hex){
 }
 
 function givePhos(hex){
+
 	if(hex === false){
 		return false;
 	}
@@ -163,6 +150,7 @@ function givePhos(hex){
 }
 
 function giveGold(hex){
+
 	if(hex === false){
 		return false;
 	}
@@ -179,6 +167,7 @@ function giveGold(hex){
 }
 
 function giveOldOne(hex){
+
 	if(hex === false){
 		return false;
 	}
@@ -196,54 +185,64 @@ function giveOldOne(hex){
 }
 
 function getHexIdFromGridCoords(row, col){
+
     return getHexByCoords(board, row, col).id;
 }
 function getHexByCoords(row, col){
-	//console.log('ROWS=',grid.length,'ROW',row);
+
 	if(
 		(row >= grid.length) ||
 		(row < 0)
 	){
 		return false;
 	}
-	//console.log('COLS=',grid[row].length,'COL',col);
+
 	if(
 		(col >= grid[row].length) ||
 		(col < 0)
 	){
 		return false;
 	}
+
 	hex = grid[row][col];
 	return hex;
 }
 
 
 function getGridCoordsFromHexId(id){
-    //let grid = boards[board].grid;
-    for(let row = 0; row < grid.length; row++){
-        //ITERATE COLUMNS
-        for(let col = 0; col < grid[row].length; col++){
-            let hex = grid[row][col];
-            if(hex.id === id){
-                let coords = [];
-                coords[0] = row;
-                coords[1] = col;
-                return coords;
-            }
-        }
-    }
+
+	for(let row = 0; row < grid.length; row++){
+
+		//ITERATE COLUMNS
+		for(let col = 0; col < grid[row].length; col++){
+
+			let hex = grid[row][col];
+
+			if(hex.id === id){
+
+				let coords = [];
+				coords[0] = row;
+				coords[1] = col;
+				return coords;
+			}
+		}
+	}
 }
 function getHexById(id){
-    //let grid = boards[board].grid;
-    for(let row = 0; row < grid.length; row++){
-        //ITERATE COLUMNS
-        for(let col = 0; col < grid[row].length; col++){
-            let hex = grid[row][col];
-            if(hex.id === id){
-                return hex;
-            }
-        }
-    }
+
+	for(let row = 0; row < grid.length; row++){
+
+		//ITERATE COLUMNS
+		for(let col = 0; col < grid[row].length; col++){
+
+			let hex = grid[row][col];
+
+			if(hex.id === id){
+
+				return hex;
+			}
+		}
+	}
 }
 
 var arrSetupTiles = [];
@@ -306,108 +305,74 @@ function drawAllSetupTiles(){
 
 function getNeighbours(row, col, maxRow, maxCol){
 
-    //THE RETURN OBJECT
-    neighbours = [];
+	//THE RETURN OBJECT
+	neighbours = [];
 
-    neighbours[0] = [row, col];
+	neighbours[0] = [row, col];
 
-    //1 - UP
-    if(row > 0){
-        neighbours[1] = [row - 1, col];
-    }else{
-        neighbours[1] = null;
-    }
+	//1 - UP
+	if(row > 0){
+		neighbours[1] = [row - 1, col];
+	}else{
+		neighbours[1] = null;
+	}
 
-    //2 - UPPER RIGHT
-    //IF ON ROW 0 AND EVEN (NO UP RIGHT) OR IF ON THE END COL
-    if( ( (row === 0) && (col % 2 === 0) ) || (col === maxCol) ){
+	//2 - UPPER RIGHT
+	//IF ON ROW 0 AND EVEN (NO UP RIGHT) OR IF ON THE END COL
+	if( ( (row === 0) && (col % 2 === 0) ) || (col === maxCol) ){
 
-        neighbours[2] = null;
-    }else{
-        //CHECK IF COLUMN IS EVEN
-        if(col % 2 === 1 && row % 2 === 1){
-            neighbours[2] = [row, col + 1];
-        }else{
-            neighbours[2] = [row - 1, col + 1];
-        }
+		neighbours[2] = null;
+	}else{
+		//CHECK IF COLUMN IS EVEN
+		if(col % 2 === 1 && row % 2 === 1){
+			neighbours[2] = [row, col + 1];
+		}else{
+			neighbours[2] = [row - 1, col + 1];
+		}
+	}
 
+	//3 - LOWER RIGHT
+	if( ( (row === maxRow) && (col % 2 === 1) ) || (col === maxCol) ){
+		neighbours[3] = null;
+	}else{
 
-        /*if(col % 2 === 0){
-            if(row % 2 === 0){
+		if(col % 2 === 1 && row % 2 === 1){
+			neighbours[3] = [row + 1, col + 1];
+		}else{
+			neighbours[3] = [row, col + 1];
+		}
+	}
 
-            }
-            //EVEN
-            neighbours[2] = [row + 1, col + 1];
-        }else{
-            //ODD
-            neighbours[2] = [row, col + 1];
-        }*/
-    }
+	//4 - DOWN
+	if(row < maxRow){
+		neighbours[4] = [row + 1, col];
+	}else{
+		neighbours[4] = null;
+	}
 
-    //3 - LOWER RIGHT
-    if( ( (row === maxRow) && (col % 2 === 1) ) || (col === maxCol) ){
-        neighbours[3] = null;
-    }else{
+	//5 - LOWER LEFT
+	if( ( (row === maxRow) && (col % 2 === 0) ) || (col === 0) ){
+		neighbours[5] = null;
+	}else{
 
-        if(col % 2 === 1 && row % 2 === 1){
-            neighbours[3] = [row + 1, col + 1];
-        }else{
-            neighbours[3] = [row, col + 1];
-        }
+		if(col % 2 === 1 && row % 2 === 1){
+			neighbours[5] = [row + 1, col - 1];
+		}else{
+			neighbours[5] = [row, col - 1];
+		}
+	}
 
+	//6 - UPPER LEFT
+	if( ( (row === 0) && (col % 2 === 0) ) || (col === 0) ){
+		neighbours[6] = null;
+	}else{
 
-        //CHECK IF COLUMN IS EVEN
-        /*if(col % 2 === 0){
-            //EVEN
-            neighbours[3] = [row, col + 1];
-        }else{
-            //ODD
-            neighbours[3] = [row + 1, col + 1];
-        }*/
-    }
+		if(col % 2 === 1 && row % 2 === 1){
+			neighbours[6] = [row, col - 1];
+		}else{
+			neighbours[6] = [row - 1, col - 1];
+		}
+	}
 
-    //4 - DOWN
-    if(row < maxRow){
-        neighbours[4] = [row + 1, col];
-    }else{
-        neighbours[4] = null;
-    }
-
-    //5 - LOWER LEFT
-    if( ( (row === maxRow) && (col % 2 === 0) ) || (col === 0) ){
-        neighbours[5] = null;
-    }else{
-
-        if(col % 2 === 1 && row % 2 === 1){
-            neighbours[5] = [row + 1, col - 1];
-        }else{
-            neighbours[5] = [row, col - 1];
-        }
-
-        /*if(col % 2 === 0){
-            neighbours[5] = [row, col - 1];
-        }else{
-            neighbours[5] = [row -1, col - 1];
-        }*/
-    }
-
-    //6 - UPPER LEFT
-    if( ( (row === 0) && (col % 2 === 0) ) || (col === 0) ){
-        neighbours[6] = null;
-    }else{
-
-        if(col % 2 === 1 && row % 2 === 1){
-            neighbours[6] = [row, col - 1];
-        }else{
-            neighbours[6] = [row - 1, col - 1];
-        }
-
-        /*if(col % 2 === 0){
-            neighbours[6] = [row - 1, col - 1];
-        }else{
-            neighbours[6] = [row, col - 1];
-        }*/
-    }
-
-    return neighbours;
+	return neighbours;
 }
