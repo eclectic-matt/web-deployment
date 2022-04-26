@@ -308,68 +308,93 @@ function getNeighbours(row, col, maxRow, maxCol){
 	//THE RETURN OBJECT
 	neighbours = [];
 
+	//0 - SELF (STORE FOR CONVENIENCE)
 	neighbours[0] = [row, col];
 
+	// 0 1 2 3 4 5 6 7
+	// X   X   X   X
+	//   X   X   X   X
+
 	//1 - UP
+	//IF ON ANY ROW AFTER THE FIRST
 	if(row > 0){
+		//UP ONE ROW
 		neighbours[1] = [row - 1, col];
 	}else{
+		//NO ROW -1
 		neighbours[1] = null;
 	}
 
 	//2 - UPPER RIGHT
-	//IF ON ROW 0 AND EVEN (NO UP RIGHT) OR IF ON THE END COL
-	if( ( (row === 0) && (col % 2 === 0) ) || (col === maxCol) ){
-
+	//IF ON START ROW OR THE END COL
+	if( (row === 0) || (col === maxCol) ){
+		//NO UPPER RIGHT
 		neighbours[2] = null;
 	}else{
-		//CHECK IF COLUMN IS EVEN
-		if(col % 2 === 1 && row % 2 === 1){
+		//CHECK IF COLUMN IS ODD
+		if(col % 2 === 1){
+			//SAME ROW
 			neighbours[2] = [row, col + 1];
 		}else{
+			//UP ONE ROW
 			neighbours[2] = [row - 1, col + 1];
 		}
 	}
 
 	//3 - LOWER RIGHT
+	//IF ON THE BOTTOM ROW AND COLUMN IS ODD, OR THE LAST COLUMN
 	if( ( (row === maxRow) && (col % 2 === 1) ) || (col === maxCol) ){
+		//NO LOWER RIGHT
 		neighbours[3] = null;
 	}else{
-
-		if(col % 2 === 1 && row % 2 === 1){
+		//CHECK IF COLUMN IS ODD
+		if(col % 2 === 1){
+			//DOWN ONE ROW
 			neighbours[3] = [row + 1, col + 1];
 		}else{
+			//SAME ROW
 			neighbours[3] = [row, col + 1];
 		}
 	}
 
 	//4 - DOWN
+	//IF NOT ON THE LAST ROW
 	if(row < maxRow){
+		//DOWN ONE ROW
 		neighbours[4] = [row + 1, col];
 	}else{
+		//NO ROW N+1
 		neighbours[4] = null;
 	}
 
 	//5 - LOWER LEFT
-	if( ( (row === maxRow) && (col % 2 === 0) ) || (col === 0) ){
+	//IF ON THE LAST ROW AND ODD, OR THE FIRST COLUMN
+	if( ( (row === maxRow) && (col % 2 === 1) ) || (col === 0) ){
+		//NO LOWER LEFT
 		neighbours[5] = null;
 	}else{
-
-		if(col % 2 === 1 && row % 2 === 1){
+		//IF COLUMN IS ODD
+		if(col % 2 === 1){
+			//DOWN ONE ROW
 			neighbours[5] = [row + 1, col - 1];
 		}else{
+			//SAME ROW
 			neighbours[5] = [row, col - 1];
 		}
 	}
 
 	//6 - UPPER LEFT
+	//IF ON THE FIRST ROW AND THE COLUMN IS EVEN, OR THE FIRST COLUMN
 	if( ( (row === 0) && (col % 2 === 0) ) || (col === 0) ){
+		//NO UPPER LEFT
 		neighbours[6] = null;
 	}else{
-
-		if(col % 2 === 1 && row % 2 === 1){
+		//IF COLUMN IS ODD
+		if(col % 2 === 1){
+			//SAME ROW
 			neighbours[6] = [row, col - 1];
 		}else{
+			//UP ONE ROW
 			neighbours[6] = [row - 1, col - 1];
 		}
 	}

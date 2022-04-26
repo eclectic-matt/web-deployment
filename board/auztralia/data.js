@@ -81,6 +81,150 @@ var setupTiles = [
 		5: null,
 		6: 'oldOne'
 	},
+	{
+		0: 'gold',
+		1: null,
+		2: null,
+		3: 'oldOne',
+		4: null,
+		5: 'oldOne',
+		6: null
+	},
+	{
+		0: 'coal',
+		1: 'oldOne',
+		2: null,
+		3: 'oldOne',
+		4: null,
+		5: null,
+		6: 'gold'
+	},
+	{
+		0: 'oldOne',
+		1: 'gold',
+		2: null,
+		3: null,
+		4: 'oldOne',
+		5: null,
+		6: 'coal'
+	},
+	{
+		0: 'gold',
+		1: 'iron',
+		2: 'oldOne',
+		3: null,
+		4: null,
+		5: null,
+		6: 'oldOne'
+	},
+	{
+		0: null,
+		1: 'oldOne',
+		2: null,
+		3: null,
+		4: 'oldOne',
+		5: null,
+		6: 'iron'
+	},
+	{
+		0: 'gold',
+		1: null,
+		2: 'oldOne',
+		3: null,
+		4: 'oldOne',
+		5: null,
+		6: 'phos'
+	},
+	{
+		0: 'phos',
+		1: null,
+		2: null,
+		3: null,
+		4: 'oldOne',
+		5: 'coal',
+		6: 'oldOne'
+	},
+	{
+		0: 'oldOne',
+		1: null,
+		2: null,
+		3: 'gold',
+		4: null,
+		5: 'coal',
+		6: 'oldOne'
+	},
+	{
+		0: null,
+		1: 'oldOne',
+		2: 'iron',
+		3: 'oldOne',
+		4: 'phos',
+		5: 'oldOne',
+		6: null
+	},
+	{
+		0: 'iron',
+		1: 'oldOne',
+		2: null,
+		3: 'gold',
+		4: null,
+		5: 'oldOne',
+		6: null
+	},
+	{
+		0: 'oldOne',
+		1: null,
+		2: 'gold',
+		3: null,
+		4: null,
+		5: 'oldOne',
+		6: 'coal'
+	},
+	{
+		0: null,
+		1: 'coal',
+		2: null,
+		3: 'oldOne',
+		4: 'iron',
+		5: null,
+		6: 'oldOne'
+	},
+	{
+		0: 'oldOne',
+		1: 'oldOne',
+		2: null,
+		3: null,
+		4: 'gold',
+		5: null,
+		6: 'coal'
+	},
+	{
+		0: 'oldOne',
+		1: 'oldOne',
+		2: null,
+		3: 'phos',
+		4: 'oldOne',
+		5: null,
+		6: 'coal'
+	},
+	{
+		0: 'oldOne',
+		1: 'iron',
+		2: null,
+		3: 'oldOne',
+		4: 'phos',
+		5: 'coal',
+		6: 'oldOne'
+	},
+	{
+		0: 'oldOne',
+		1: 'iron',
+		2: 'oldOne',
+		3: 'coal',
+		4: null,
+		5: 'oldOne',
+		6: 'coal'
+	}
 ];
 
 var emptyResources = {
@@ -111,6 +255,24 @@ var resources = {
 	"olds": {
 		type: "oldOnes",
 		count: 1
+	}
+};
+
+var oldOnesCounts = {
+	1: {
+		level: 1,
+		count: 15,
+		current: 15
+	},
+	2: {
+		level: 2,
+		count: 10,
+		current: 10
+	},
+	3: {
+		level: 3,
+		count: 10,
+		current: 10
 	}
 };
 
