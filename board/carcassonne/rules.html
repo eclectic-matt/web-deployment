@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css' />
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <title>Carcassonne Rules</title>
+
+  <script>
+
+  function showHide(name, state){
+
+    //console.log(name,state);
+    let rulesBoxEl = document.getElementById(name);
+    if (state === true){
+      rulesBoxEl.classList.remove('w3-hide');
+      rulesBoxEl.classList.add('w3-show');
+    }else{
+      rulesBoxEl.classList.remove('w3-show');
+      rulesBoxEl.classList.add('w3-hide');
+    }
+
+  }
+
+  var arrLandSurveyRules = [
+    [
+      ["Citizen's Jury", "The meeple majority rule does not apply (all players score full points)"],
+      ["Bad Neighbourhood", "Tiles in a city with only one edge joined to the city are worth 0 points"],
+      ["Siege", "During scoring each coat of arms gives you 1 extra point"],
+      ["City Wealth", "During city scoring, players will score 3 additional points than usual"],
+      ["City Poverty", "During city scoring, players will score 3 *fewer* points than usual"]
+    ],
+    [
+      ["Highway", "During the scoring of a road, you receive 5 points (regardless of length)"],
+      ["Peasant Uprising", "During road scoring, you receive 1 fewer point for each tile showing a farm"],
+      ["Street Fair", "During road scoring, you score twice as many points (2x)"],
+      ["Street Poverty", "During road scoring, you receive -3 points (can cause you to lose points!)"]
+    ],
+    [
+      ["Hermit Monastery", "During monastery scoring, you receive 1 fewer point for each city tile"],
+      ["Pilgrimage Route", "During monastery scoring, you receive 1 extra point for each road tile"],
+      ["Monastery Wealth", "During monastery scoring, you receive 3 additional points"]
+    ]
+  ];
+
+  var arrShuffledRules = [[]];
+  var intCityRule = 0, intRoadRule = 0, intMonaRule = 0;
+
+  function startLandSurveyors(){
+
+    for (var i = 0; i < 3; i++){
+      arrShuffledRules[i] = shuffle(arrLandSurveyRules[i]);
+    }
+
+    console.log(arrShuffledRules);
+    console.log(intCityRule, intRoadRule, intMonaRule);
+
+    updateRules();
+
+  }
+
+  function getNewRule(){
+
+    if (intCityRule == (arrShuffledRules[0].length - 1) ){
+      intCityRule = 0;
+    }else{
+      intCityRule++;
+    }
+
+    if (intRoadRule == (arrShuffledRules[1].length - 1) ){
+      intRoadRule = 0;
+    }else{
+      intRoadRule++;
+    }
+
+    if (intMonaRule == (arrShuffledRules[2].length - 1) ){
+      intMonaRule = 0;
+    }else{
+      intMonaRule++;
+    }
+
+    updateRules();
+
+  }
+
+  function updateRules(){
+
+    document.getElementById('landSurveyCityRuleTitle').innerHTML = arrShuffledRules[0][intCityRule][0];
+    document.getElementById('landSurveyCityRuleDesc').innerHTML = arrShuffledRules[0][intCityRule][1];
+
+    document.getElementById('landSurveyRoadRuleTitle').innerHTML = arrShuffledRules[1][intRoadRule][0];
+    document.getElementById('landSurveyRoadRuleDesc').innerHTML = arrShuffledRules[1][intRoadRule][1];
+
+    document.getElementById('landSurveyMonaRuleTitle').innerHTML = arrShuffledRules[2][intMonaRule][0];
+    document.getElementById('landSurveyMonaRuleDesc').innerHTML = arrShuffledRules[2][intMonaRule][1];
+
+  }
+
+  // Function to shuffle array
+  //https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+  function shuffle(a) {
+      var j, x, i;
+      for (i = a.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          x = a[i];
+          a[i] = a[j];
+          a[j] = x;
+      }
+      return a;
+  }
+
+
+  </script>
+</head>
+<body class='w3-col s12 m12 l12' onload='startLandSurveyors()'>
+
+  <div class='w3-padding w3-card-8 w3-grey w3-col l12 m12 s12' id='settingsDiv'>
+
+    <h1>Carcassonne Rules</h1>
+
+    <p>This page will show condensed rules for whichever Carcassonne expansions you are playing!</p>
+    <p>You might also be interested in my <a href='https://docs.google.com/spreadsheets/d/1rs2vPSAhNKxGR9xYkJMK2Q07lFrKKik_jN2xpafpBE0/edit?usp=sharing' target='_blank'>Google Sheet for Carcassonne calculations</a> which shows how many tiles and meeples you are using!</p>
+    <p>For more detailed rules, and clarifications for specific situations, I would recommend the <a href='https://boardgamegeek.com/filepage/87531/carcassonne-standard-complete-annotated-rules' target='_blank'>Carcassonne Standard Complete Rules on Board Game Geek</a></p>
+
+    <p><em>Select the expansions you are playing to show the relevant rules boxes below.</em></p>
+
+    <div class='w3-card-8 w3-padding-10 w3-margin' id='expansionsDiv'>
+
+      <div class='w3-xlarge w3-margin'>
+
+        <div class='w3-col s12 m6 l6 w3-xlarge'>
+          <label for='expChkBaseGame'>Base Game </label><input class='w3-check' onchange='showHide("baseGame", this.checked)' type='checkbox' checked></input>
+        </div>
+
+        <div class='w3-col s12 m6 l6 w3-xlarge'>
+          <label for='expChkLandSurveyors'>Land Surveyors (special scoring)</label><input class='w3-check' onchange='showHide("landSurveyors", this.checked)' type='checkbox'></input>
+        </div>
+
+      </div>
+
+      <h2 class='w3-margin'>Main Expansions</h2>
+
+      <div class='w3-row-padding'>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkInnsCathedrals'>Inns & Cathedrals </label><input class='w3-check' onchange='showHide("innsCathedrals", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkBuildersTraders'>Builders & Traders </label><input class='w3-check' onchange='showHide("buildersTraders", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkPrincessDragon'>Princess & Dragon </label><input class='w3-check' onchange='showHide("princessDragon", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkUnderBigTop'>TO ADD - Under the Big Top </label><input class='w3-check' onchange='showHide("underBigTop", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkCountKingRobber'>TO ADD - Count, King & Robber </label><input class='w3-check' onchange='showHide("countKingRobber", this.checked)' type='checkbox'></input>
+        </div>
+
+
+      </div>
+
+      <h2 class='w3-margin'>Mini Expansions</h2>
+
+      <div class='w3-row-padding'>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkTheSchool'>The School </label><input class='w3-check' onchange='showHide("theSchool", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkFruitTrees'>Fruit Trees </label><input class='w3-check' onchange='showHide("fruitTrees", this.checked)' type='checkbox'></input>
+        </div>
+
+        <div class='w3-col s12 m6 l4 w3-xlarge'>
+          <label for='expChkBathHouses'>Bath Houses </label><input class='w3-check' onchange='showHide("bathHouses", this.checked)' type='checkbox'></input>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <br><br>
+
+  <div class='w3-card-8 w3-padding-10 w3-row-padding' id='rulesDiv'>
+
+    <div id='landSurveyors' class='w3-col s12 m12 l12 w3-hide'>
+
+      <div class='w3-padding w3-card-8 w3-green w3-large'>
+        <h3>Land Surveyors (special scoring)</h3>
+        <div class='w3-row-padding w3-container'>
+          <div class='w3-third w3-yellow w3-border w3-padding w3-container w3-cell w3-center'>
+            <h4>City Scoring</h4>
+            <b id='landSurveyCityRuleTitle'></b>
+            <br>
+            <em id='landSurveyCityRuleDesc'></em>
+          </div>
+          <div class='w3-third w3-cyan w3-border w3-padding w3-container w3-cell w3-center'>
+            <h4>Road Scoring</h4>
+            <b id='landSurveyRoadRuleTitle'></b>
+            <br>
+            <em id='landSurveyRoadRuleDesc'></em>
+          </div>
+          <div class='w3-third w3-blue w3-border w3-padding w3-container w3-cell w3-center'>
+            <h4>Monastery Scoring</h4>
+            <b id='landSurveyMonaRuleTitle'></b>
+            <br>
+            <em id='landSurveyMonaRuleDesc'></em>
+          </div>
+        </div>
+        <div class='w3-xlarge w3-center'>
+          <button class='w3-btn w3-xlarge w3-red w3-round' onclick='getNewRule()'>Feature Scored</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div id='baseGame' class='w3-col s12 m6 l4 w3-show'>
+      <div class='w3-padding w3-card-8 w3-blue w3-small'>
+        <h3>Base Game Rules</h3>
+        <h4>Tiles</h4>
+        <p>The base game has a number of tiles, including:</p>
+        <ul>
+          <li><b>River Tiles</b> - these are used to start the game by forming a central river to build the map from (technically an expansion but included in modern editions of the game)</li>
+          <li><b>City Tiles</b> - these are tiles with walls containing a city</li>
+          <li><b>Road Tiles</b> - these are tiles with a road running through them</li>
+          <li><b>Monastery Tiles</b> - these are churches with a spire, and gardens (multicoloured) also act as monasteries</li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>The base game includes two types of meeple for players:</p>
+        <ul>
+          <li><b>Regular meeples</b> - each player gets 7 meeples which are played on a tile you just placed to claim a feature. Another single meeple is used to track your score</li>
+          <li><b>The Abbot</b> - each player also gets one special meeple which can <b>only be played on a monastery or garden</b> but has the added advantage that they can be picked up <b>before the feature is completed</b> (see scoring)</li>
+        </ul>
+        <h4>Gameplay</h4>
+        <p>On your turn you will do these three things (in order):</p>
+        <ul>
+          <li><b>Place a tile</b> - from any of the available face-down stacks, you flip over and play one tile onto the map. This must join the existing tiles on at least one side, and must "match" any adjacent tiles (so grass meets grass, city meets city etc)</li>
+          <li><b>Place a meeple</b> - you *may* then choose to place a meeple onto the tile you just added. You cannot place your meeple on a feature where there is already a meeple (city, road, field). You must choose which feature (city/road/field/monastery) you are placing your meeple onto - and can only claim one. <em>Note: if you did *not* place a meeple, you *may* instead choose to pick up your Abbot - the only meeple where this is allowed</em></li>
+          <li><b>Score a feature</b> - if the tile you have just placed <b>completes a feature</b>, meaning that a road is closed on both ends, or a city is entirely surrounded by walls etc, then whomever's meeples are on that feature may take the meeple(s) back and score points.</li>
+        </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rules for the base game are:</p>
+        <ul>
+          <li><b>Roads</b> - a road is worth 1 point for each tile it passes through, whether completed or incomplete. As with cities, if a road loops through a tile twice then that tile is only counted once (1 point)</li>
+          <li><b>Cities</b> - a city is worth 2 points for each tile and each shield icon within the city <b>if completed</b>. For incomplete cities, each tile and shield is only worth 1 point</li>
+          <li><b>Monasteries</b> - a monastery/garden is worth 1 point for each tile around it, plus 1 point itself, whether completed or incomplete. These tiles form a 3x3 grid centered on the monastery</li>
+          <li><b>Fields</b> - a field is worth 3 points for each completed city it touches. These are only counted once for each field (even if the field wraps around) and incomplete cities touched by fields score nothing.</li>
+          <li><b>MAJORITY WINS</b> - when determining who scores points where there are multiple meeples on a feature, the player with the most meeples will take the full points. If there is a tie, both players score the full points for that feature.</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div id='innsCathedrals' class='w3-col s12 m6 l4 w3-hide w3-small'>
+      <div class='w3-padding w3-card-8 w3-cyan'>
+        <h3>Inns & Cathedrals Rules</h3>
+        <h4>Tiles</h4>
+        <p>The main tiles to note are:</p>
+        <ul>
+          <li><b>Inn Tiles</b> - these have a small building with a small chimney next to a pond</li>
+          <li><b>Cathedral Tiles</b> - these are full city tiles with a large cathedral in the middle</li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds a new meeple - <b>the large "Mega Meeple"</b> - which counts for double when determining a majority on any feature (road, city, field). It does NOT reward double points, it is only counted as two meeples when there are multiple meeples on a feature.</p>
+        <p>This expansion also adds the pink 6th player set of meeples (8 meeples and an abbot).</p>
+        <h4>Scoring</h4>
+        <p>The scoring rules to note are:</p>
+        <ul>
+          <li>A road with an Inn on it is worth <b>double points if completed</b> and it is worth <b>no points if incomplete</b></li>
+          <li>A city with a Cathedral in it is worth <b>double points if completed</b> and it is worth <b>no points if incomplete</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='buildersTraders' class='w3-col s12 m6 l4 w3-hide w3-small'>
+      <div class='w3-padding w3-card-8 w3-red w3-grayscale'>
+        <h3>Builders & Traders Rules</h3>
+        <h4>Tiles</h4>
+        <p>The main tiles to note are:</p>
+        <ul>
+          <li><b>Bridge Tiles</b> - these have two roads crossing over each other which <em>do not end</em>, they are continuous through the tile but do not join together</li>
+          <li><b>Goods Tiles</b> - these have a symbol for one of three types of goods - wine, grain and cloth</li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds two new meeples:</p>
+          <ul>
+            <li><b>Builders</b> - these are tall meeples which can be placed on a road or city <b>where you already have a meeple placed</b>. If you extend this feature after placing the Builder on it, you can take a second (additional) turn straight away, placing a tile and meeple as usual. <b>You cannot cause a chain reaction - extending the feature with the Builder will not give you any further turns</b></li>
+            <li><b>Pigs</b> - these are used in fields <b>where you have already placed a farmer</b>. If you have the majority (or tie for majority) in that field then you will score extra points (see scoring below)</li>
+          </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rules to note are:</p>
+        <ul>
+          <li><b>Goods tokens</b> - at the end of the game, the player with the most tokens of each type of goods will gain 10 victory points (tied players both get 10 points)</li>
+          <li><b>Pig meeples </b> - at the end of the game, players with a pig meeple in a field (and a majority of meeples or tie for majority) will score 4 points for each completed city the field touches</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='princessDragon' class='w3-col s12 m6 l4 w3-hide w3-small'>
+      <div class='w3-padding w3-card-8 w3-yellow'>
+        <h3>Princess & Dragon Rules</h3>
+        <h4>Tiles</h4>
+        <p>There are 30 new tiles in this expansion:</p>
+        <ul>
+          <li><b>6 Volcano Tiles</b> -  a player who places a Volcano tile must immediately move the Dragon meeple to this tile from its current location. The player may not deploy a meeple on this tile, but is allowed to move the Fairy meeple on their turn (see gameplay)</li>
+          <li><b>12 Dragon Tiles</b> - a player who places a tile with a dragon icon may play a meeple onto this tile or move the Fairy during their turn. However, before scoring any features the Dragon must move! (see gameplay). <em>Note: if a Dragon tile is drawn <b>before a Volcano Tile has been played</b> then this tile is *set aside* until a Volcano tile is in play and then any Dragon tiles are mixed into the tile stacks.</em></li>
+          <li><b>6 Magic Portals</b> - these have a magic hole in the ground visible, and allows the player who placed the tile to deploy a meeple onto that tile <b>or on a tile which is already in play on a feature without a meeple!</b></li>
+          <li><b>6 Princess Tiles</b> - these have a tower symbol with a princess inside, and allows the player who placed the tile to play a meeple onto that tile as normal, <b>or if this tile extends a city then that player may instead choose to remove a meeple already in that city!</b> <em>Note: if the player whose meeple was removed also had a builder in the city (and their last meeple was removed) then the Builder is also removed!</em></li>
+          <li><b>Tunnel tiles</b> - these go under another feature and means that both the road and the fields running through the tunnel are continued (not closed)</li>
+          <li><b>City Monastery tiles</b> - these have a monastery within the city and both act as normal, however you must clearly place your meeple on <em>either the monastery or the city</em>, not both features.</li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds two new meeples:</p>
+          <ul>
+            <li><b>The Fairy</b> - this meeple starts at the edge of the playing area and can be moved by other players to offer protection from the dragon (see gameplay). The Dragon meeple <b>cannot enter a tile with the Fairy on it</b>. The Fairy also gives extra points when scoring features (see scoring)</li>
+            <li><b>The Dragon</b> - this moves around the map when a tile with a volcano (see tiles) or a dragon icon (see gameplay) is played</li>
+          </ul>
+        <h4>Gameplay</h4>
+        <p>The Dragon and Fairy will move during the game as follows:</p>
+        <ul>
+          <li><b>Moving the Fairy</b> - if during your turn <b>you did not place any other meeple</b> then you may decide to move the Fairy next to one of your followers. It does not matter how far the Fairy moves.</li>
+          <li><b>Moving the Dragon</b> - after a player places a tile with a Dragon icon but before scoring any features, the game is interrupted and - starting with the player who placed the tile and moving clockwise - <b>the Dragon must be moved one tile horizontally or vertically until it has moved six tiles</b>. It cannot visit the same tile twice, nor can it visit the tile occupied by the Fairy meeple. If the Dragon is moved into a dead end, it stops its movement there. The Dragon will eat all player meeples on tiles it moves through during this movement, with some exceptions (summarised as "everything with flesh and blood, but not the Fairy, the Teacher, those in a Castle or in the City of Carcassonne"). <em>Note: if the last meeple is removed from a road/city/field, then any pig or builder belonging to that player is also removed!</em></li>
+        <h4>Scoring</h4>
+        <p>The scoring rules for the Princess and Dragon are:</p>
+        <ul>
+          <li><b>Fairy Point</b> - the Fairy gives 1 point to the owner of a meeple <b>at the start of their turn</b> if one of their meeples are on the same tile as the Fairy. Using a Builder for a double turn only gives the Fairy point during the first turn.</li>
+          <li><b>Fairy Bonus</b> - when scoring a feature using a meeple on the same tile as the Fairy, then that player gets an additional 3 points (regardless of how many points they score from the feature). The meeple is returned to the owner, while the Fairy remains on the tile.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='countKingRobber' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-deep-blue w3-small'>
+        <h3>Count, King & Robber Rules</h3>
+        <h4>Tiles</h4>
+        <p>There are various new tiles in this expansion:</p>
+        <ul>
+          <li><b>City Bridge tiles</b> - these have two sections of city joined by a bridge, and the two city sections on this tile are <b>not linked when placed</b> but could be linked together through other tiles</li>
+          <li><b>City of Carcassonne tiles</b> - these two large tiles (2x3 size) form the City of Carcassonne when placed together and act as a new starting point for games. They introduce the Count and special scoring options (see gameplay)</li>
+          <li><b>The River II tiles</b> - these are used to form the River as the starting point for games. The River/River II should be used instead of the City of Carcassonne (or vice versa)</li>
+          <li><b>The King tile</b> - this single tile shows a King and Queen illustration and is used as part of the special scoring rules for this expansion (see scoring)</li>
+          <li><b>The Robber tile</b> - this single tile shows a rogueish robber illustration and is used as part of the special scoring rules for this expansion (see scoring)</li>
+          <li><b>5 Shrine tiles</b> - these tiles have a shrine feature which can be claimed and acts similarly to a monastery (see gameplay). Shrine tiles <b>cannot be placed adjacent to more than one monastery</b> (but 1 monastery is legal) and when playing with shrines then a monastery tile <b>cannot be placed adjacent to more than one shrine</b> (but 1 shrine is legal)</li>
+
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds one new meeple:</p>
+          <ul>
+            <li><b>The Count</b> - this meeple starts in the City of Carcassonne </li>
+          </ul>
+        <h4>Gameplay</h4>
+        <p>The rules for fruit trees are as follows:</p>
+        <ul>
+          <li>If you <b>place a meeple</b> on the fruit trees tile, or in later turns if a player <b>places a meeple</b> on a tile adjacent to the fruit trees tile (vertically, horizontally, or diagonally), then they may take one of the two actions at the fruit trees tile:</li>
+          <ol>
+            <li><b>Harvesting</b> - you may take the top fruit token from the stack, immediately flipping it over and scoring the points shown on the underside. You keep this fruit token until you choose to sell it</li>
+            <li><b>Selling</b> - you do not take a fruit token, but instead may sell a set of 1 - 4 tokens you have previously collected. You may only sell one set of tokens with this action, and all of the fruit tokens in the set must be different.</li>
+          </ol>
+        </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rules for the Fruit Trees:</p>
+        <ul>
+          <li><b>Points for sold sets:</b>
+            <ul>
+              <li>1 token - 3 points</li>
+              <li>2 tokens - 6 points</li>
+              <li>3 token - 10 points</li>
+              <li>4 token - 15 points</li>
+            </ul>
+          </li>
+          <li><b>Points for unsold tokens at the end of the game:</b>
+            <ul>
+              <li>1 point each.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='theSchool' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-lime w3-small'>
+        <h3>The School Rules</h3>
+        <h4>Tiles</h4>
+        <p>There are only two tiles in this mini-expansion:</p>
+        <ul>
+          <li><b>2 School tiles</b> - these are two tiles which must be placed side-by-side and form a school with 6 roads leading off it. If used <em>without the River expansion</em> then the School is placed beside the original start tile (continuing the road). Our house rule is to play this <em>with the River expansion</em> by placing the School tiles once <b>the first road on a tile <em>after</em> the River has been completed</b></li>
+        </ul>
+        <h4>Meeples</h4>
+        <p>This expansion adds a single meeple:</p>
+          <ul>
+            <li><b>The Teacher</b> - this meeple waits on the School <b>until a road leading to the School has been completed</b> and it then gets taken by that player (see scoring). Once all 6 roads leading to the School have been completed then the Teacher will remain at the School once used for scoring</li>
+          </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rule for the School is:</p>
+        <ul>
+          <li>If a player has the Teacher meeple, then the next time a feature is completed then the Teacher meeple grants the player who has it the same amount of points. If the player holding the meeple is the first to score a feature, they score double points for that feature. If multiple features are scored, only the first will give the holder of the Teacher meeple the same amount of points. Once used for scoring, the meeple returns to the School until the next road leading to the School is completed</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div id='fruitTrees' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-green w3-small'>
+        <h3>Fruit Trees Rules</h3>
+        <h4>Tiles</h4>
+        <p>There is one new type of tile in this mini-expansion:</p>
+        <ul>
+          <li><b>6 Fruit Trees tiles</b> - these are tiles which include a small orchard/market which will get a stack of fruit tokens placed upon it (of any type of fruit)</li>
+        </ul>
+        <h4>Gameplay</h4>
+        <p>The rules for fruit trees are as follows:</p>
+        <ul>
+          <li>If you <b>place a meeple</b> on the fruit trees tile, or in later turns if a player <b>places a meeple</b> on a tile adjacent to the fruit trees tile (vertically, horizontally, or diagonally), then they may take one of the two actions at the fruit trees tile:</li>
+          <ol>
+            <li><b>Harvesting</b> - you may take the top fruit token from the stack, immediately flipping it over and scoring the points shown on the underside. You keep this fruit token until you choose to sell it</li>
+            <li><b>Selling</b> - you do not take a fruit token, but instead may sell a set of 1 - 4 tokens you have previously collected. You may only sell one set of tokens with this action, and all of the fruit tokens in the set must be different.</li>
+          </ol>
+        </ul>
+        <h4>Scoring</h4>
+        <p>The scoring rules for the Fruit Trees:</p>
+        <ul>
+          <li><b>Points for sold sets:</b>
+            <ul>
+              <li>1 token - 3 points</li>
+              <li>2 tokens - 6 points</li>
+              <li>3 token - 10 points</li>
+              <li>4 token - 15 points</li>
+            </ul>
+          </li>
+          <li><b>Points for unsold tokens at the end of the game:</b>
+            <ul>
+              <li>1 point each.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id='bathHouses' class='w3-col s12 m6 l4 w3-hide'>
+      <div class='w3-padding w3-card-8 w3-aqua w3-small'>
+        <h3>Bath Houses Rules</h3>
+        <h4>Tiles</h4>
+        <p>There are 6 new tiles in this mini-expansion:</p>
+        <ul>
+          <li><b>Bath House tiles</b> - there are 3 bath houses in cities and 3 bath houses next to roads. During the game setup, include 4 Bath House tiles for 2 players, 5 for 3 players, and all 6 for 4+ players.</li>
+        </ul>
+        <h4>Gameplay</h4>
+        <p>During gameplay, if a Bath House tile is played then <b>you do not place a meeple on the Bath House itself</b>, however you may claim a feature (road/city) on the same tile.</p>
+        <h4>Scoring</h4>
+        <p>The scoring rule for the Bath Houses are:</p>
+        <ul>
+          <li><b>Bath House points</b> - when a feature containing a Bath House is completed and scored, the points shown on the Bath House are added. Multiple Bath Houses get their points added together.</li>
+          <li><b>Visiting a Bath House</b> - when the Bath Houses is scored, and <b>if there is only one meeple involved in the scoring</b> then that meeple is placed sideways in the Bath House immediately after scoring. They are said to be "visiting the Bath House". The key rules for visiting a Bath House are:
+            <ul>
+              <li>A Bath House is free if there is no meeple in it</li>
+              <li>If there are several Bath Houses, you can choose which one your meeple must visit</li>
+              <li>If there are several meeples involved in scoring, all are returned to their owners</li>
+              <li>If there is no free Bath House, then you get your meeple back</li>
+              <li>If there are several scorings caused by the placement of a single tile, then you score these one at a time and the player who placed the tile decides the order these scorings are carried out</li>
+            </ul>
+          </li>
+          <li><b>Getting your meeple back</b> - there are two ways to get your meeple back from a Bath House:
+            <ul>
+              <li><b>For free</b> - if you managed to surround the Bath House tile with other tiles (like a monastery/garden) then you can immediately take your meeple back for free. However, if you place a meeple in a Bath House which is <em>already surrounded by 8 tiles</em> then you cannot take it back for free. If you also notice on a later turn that your Bath House is surrounded by tiles then you have missed your chance to take it back for free!</li>
+              <li><b>Buying back</b> - on your turn, you may instead pay the number of points shown on the Bath House to return your meeple to your supply. This can happen at any point during your turn, so you can use this meeple for claiming features immediately. This means the Bath House is once again free for meeples to visit</li>
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
