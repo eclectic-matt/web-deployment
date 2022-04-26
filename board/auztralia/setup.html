@@ -25,23 +25,65 @@
 
 	<header class="header">
 		<h1>Auz Setup</h1>
-		<div class="w3-row-padding">
+		<div class="w3-row-padding w3-card-8">
 			<div class="w3-col s3">
-				<button onclick="processNextSetupTile()">Next Setup Tile</button>
+				<button class="w3-button w3-green" onclick="processNextSetupTile()">Next Setup Tile</button>
 			</div>
 			<div class="w3-col s3">
-				<button onclick="drawAllSetupTiles()">Draw ALL Setup Tiles (5s delay)</button>
+				<button class="w3-button w3-orange" onclick="drawAllSetupTiles(5000)">Draw ALL Tiles (5s delay)</button>
 			</div>
 			<div class="w3-col s3">
-				<button onclick="reset()">Reset Map</button>
+				<button class="w3-button w3-yellow" onclick="drawAllSetupTiles(0)">Draw ALL Tiles (instant!)</button>
+			</div>
+			<div class="w3-col s3">
+				<button class="w3-button w3-red" onclick="resetMap()">Reset Map</button>
 			</div>
 		</div>
 	</header>
-	<canvas id="canvas" width="900" height="500"></canvas>
-	<div id='setupInfo'>
-		<div id='setupTileInfoDiv'>
-			<p id='setupTileInfo'></p>
+	<div class="w3-row-padding">
+		<div class="w3-col m6 s12">
+			<canvas id="canvas" width="900" height="700"></canvas>
+		</div>
+		<div class="w3-col m6 s12">
+			<div id='setupInfo'>
+				<div id='setupTileInfoDiv'>
+					<p id='setupTileInfo'></p>
+					<br>
+					<table id='setupStepsTable'>
+						<tr>
+							<th>Tile</th>
+							<th colspan="14">Direction/Hex</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th colspan="2">Self</th>
+							<th colspan="2">Up</th>
+							<th colspan="2">Right Up</th>
+							<th colspan="2">Right Down</th>
+							<th colspan="2">Down</th>
+							<th colspan="2">Left Down</th>
+							<th colspan="2">Left Up</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th>Hex</th>
+							<th>Resource</th>
+							<th>Hex</th>
+							<th>Resource</th>
+							<th>Hex</th>
+							<th>Resource</th>
+							<th>Hex</th>
+							<th>Resource</th>
+							<th>Hex</th>
+							<th>Resource</th>
+							<th>Hex</th>
+							<th>Resource</th>
+							<th>Hex</th>
+							<th>Resource</th>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
-	<!--canvas id="canvas" width="1200" height="550"></canvas-->
 </body>

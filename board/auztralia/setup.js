@@ -9,37 +9,79 @@ function drawSetupTile(hex){
 
 	//OUPUT A TABLE SHOWING THE CURRENT SETUP TILE
 	var strOut = '<b>Setup Hex ' + hex.id + '</b><br>';
+	document.getElementById('setupTileInfo').innerHTML = strOut;
+
 	neighbours = getNeighbours(hex.row, hex.col, 7, 10);
-	strOut += '<table>';
-	strOut += '<tr><th>Direction</th><th>Resource</th><th>Hex</th></tr>';
-	
+
+	let thisRow = document.createElement('tr');
+
+	let td = document.createElement('td');
+	td.innerHTML = 21 - setupTiles.length;
+
+	thisRow.appendChild(td);
+
 	//LOOP THROUGH THE ELEMENTS ON THIS SETUP TILE
 	for(let i = 0; i < Object.keys(setupTile).length; i++){
-
-		strOut += '<tr>';
-		strOut += '<td>' + directions[i] + '</td>';
-
-		//IF THERE IS NOTHING TO GIVE ON THIS PART OF THE TILE, PRINT ____
-		strOut += '<td>' + ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' ) + '</td>';
-
+		
 		//IF THE NEIGHBOUR IN THIS DIRECTION IS NOT NULL
 		if(neighbours[i] !== null){
 
+			//GET THE HEX FOR THIS NEIGHBOUR
 			neighbourHex = getHexByCoords(neighbours[i][0], neighbours[i][1]);
-			
+
+			td = document.createElement('td');
+
 			if(neighbourHex === false){
 
-				strOut += '<td><b>' + neighbours[i] + '</b></td>';	
+				//strOut += '<td onclick="drawOntoCanvas(...getGridCoordsFromHexId(' + neighbours[i] + '))">' + neighbour[i] + ' &#128269;</td>';
+				
+				td.innerHTML = neighbour[i];// + ' &#128269';
+				var a = neighbours[i];
+				td.attributes['a'] = a;
+				td.onclick = function(){
+					a = this.attribute('a');
+					console.log('drawingFromHexId',this.innerHTML);
+					//drawOntoCanvas(...getGridCoordsFromHexId(this.innerHTML));
+				}
+
 			}else{
-				strOut += '<td><b>' + neighbourHex.id + '</b></td>';
+
+				//strOut += '<td onclick="drawOntoCanvas(' + neighbours[i][0] + ',' + neighbours[i][1] + ')">' + neighbourHex.id + ' &#128269;</td>';
+				td.innerHTML = neighbourHex.id;// + ' &#128269';
+				var a = neighbours[i][0];
+				var b = neighbours[i][1];
+				td.attributes['a'] = neighbours[i][0];
+				td.attributes['b'] = neighbours[i][1];
+				td.onclick = function(){
+					if ( (this.innerHTML.indexOf('r') >= 0) && (this.innerHTML.indexOf('r') !== false)){
+						row = this.innerHTML.substring(1,this.innerHTML.indexOf('c'));
+						col = this.innerHTML.substring(this.innerHTML.indexOf('c') + 1, 6);
+						console.log('Drawing with row',row,'col',col);
+						drawOntoCanvas(row,col);
+					}else{
+						drawOntoCanvas(...getGridCoordsFromHexId(this.innerHTML));
+					}
+					
+				}
 			}
 		}else{
-			strOut += '<td>No Hex</td>';
+			//strOut += '<td>No Hex</td>';
+			td.innerHTML = 'No Hex';
 		}
-		strOut += '</tr>';
+
+		thisRow.appendChild(td);
+
+		//IF THERE IS NOTHING TO GIVE ON THIS PART OF THE TILE, PRINT ____
+		//strOut += '<td>' + ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' ) + '</td>';
+		td = document.createElement('td');
+		td.innerHTML = ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' );
+
+		thisRow.appendChild(td);
+		//strOut += '</tr>';
 	}
-	strOut += '</table>';
-	document.getElementById('setupTileInfo').innerHTML = strOut;
+	//strOut += '</tr>';
+
+	document.getElementById('setupStepsTable').appendChild(thisRow);
 
 	//CURRENT TILE (setupTile[0])
 	/*if(setupTile[0] !== null){
@@ -96,6 +138,10 @@ function drawSetupTile(hex){
 				break;
 		}
 	}
+}
+
+function resetMap(){
+	window.location.reload();
 }
 
 function giveCoal(hex){
@@ -286,9 +332,9 @@ function processNextSetupTile(){
 	drawOntoCanvas(row, col);
 }
 
-function drawAllSetupTiles(){
+function drawAllSetupTiles(delay){
 	if(arrSetupTiles.length <= 0){
-		alert('No more setup tiles!');
+		alert('Setup Complete!');
 		t = 0;
 		return;
 	}
@@ -298,7 +344,7 @@ function drawAllSetupTiles(){
 	var hex = grid[row][col];
 	drawSetupTile(hex);
 	drawOntoCanvas(row, col);
-	t = setTimeout(drawAllSetupTiles, 5000);
+	t = setTimeout(drawAllSetupTiles, delay);
 }
 
 //drawOntoCanvas();

@@ -5,6 +5,7 @@ function drawOntoCanvas(highlightRow, highlightCol){
 	var ctx = cnv.getContext('2d');
 	ctx.strokeStyle = '#000';
 	ctx.strokeWidth = '5px';
+	//drawHexGrid(ctx, cnv.width, cnv.height, 50, highlightRow, highlightCol);
 	drawHexGrid(ctx, cnv.width, cnv.height, 50, highlightRow, highlightCol);
 }
 
@@ -14,18 +15,27 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 	console.log('Drawing grid',highlightRow, highlightCol);
 	const a = 2 * Math.PI / 6;
 	row = 0;
+	maxRow = grid.length;
+	maxCol = grid[maxRow - 1].length;
 
 	for(let y = r; y + r * Math.sin(a) < height; y += r * Math.sin(a)){
 
 		col = 0;
+		if(row >= maxRow){
+			return true;
+		}
 
 		for(let x = r, j = 0; x + r * (1 + Math.cos(a)) < width; x += r * (1 + Math.cos(a)), y += (-1) ** j++ * r * Math.sin(a)){
 
+			if(col >= maxCol){
+				continue;
+			}
+
 			if ( (row === highlightRow) && (col === highlightCol) ){
-				console.log('Drawing highlight hex!', row, col);
-				drawHexagon(ctx, x, y, r, row, col, '#fca503');
+				//console.log('Drawing highlight hex!', row, col);
+				drawHexagon(ctx, x, y, 0.9*r, row, col, '#fca503');
 			}else{
-				console.log('Drawing normal hex!', row, col);
+				//console.log('Drawing normal hex!', row, col);
 				drawHexagon(ctx, x, y, r, row, col, null);
 			}
 			col++;
@@ -100,7 +110,7 @@ function drawHexagon(ctx, x, y, r, row, col, colour = null){
 				case 'olds':
 					if (hex.resources[Object.keys(hex.resources)[i]] > 0){
 						var oldOneLevel = Math.min(hex.level - 1 + hex.resources[Object.keys(hex.resources)[i]], 3);
-						drawOldOne(ctx, x + 10, y + 25, 5, oldOneLevel);
+						drawOldOne(ctx, x + 10, y - 22, 5, oldOneLevel);
 					}
 					break;
 			}
@@ -195,12 +205,12 @@ function drawGold(ctx, x, y, scale, count){
  */
 function drawOldOne(ctx, x, y, scale, level){
 	ctx.beginPath();
-	ctx.arc (x + (1.5 * scale), y + (0.4 * scale), 1.5 * scale, 0, 2 * Math.PI);
+	ctx.arc (x + (1.5 * scale), y - (1.5 * scale), 1.5 * scale, 0, 2 * Math.PI);
 	ctx.closePath();
 	ctx.fillStyle = "#a0b";
 	ctx.fill();
 	ctx.fillStyle = "#ff0";
-	ctx.fillText(level, x + scale, y + (1.0 * scale));
+	ctx.fillText(level, x + scale, y - scale);
 }
 
 function drawHexId(ctx, x, y, id, setupTile = false){
@@ -214,24 +224,27 @@ function drawHexId(ctx, x, y, id, setupTile = false){
 	ctx.fill();
 	ctx.closePath();
 	ctx.fillStyle = '#000';
-	ctx.fillText(id, x - 20, y + 30);
-	/*if(setupTile){
-		drawTriangle(ctx, x + 1, y + 25, 15, '#666');
-	}*/
+	if(id < 10){
+		ctx.fillText(id, x - 17, y + 28);	
+	}else{
+		ctx.fillText(id, x - 20, y + 28);
+	}
 }
 
 function drawLevelCircle(ctx, x, y, level, col){
+	scale = 5;
 	ctx.beginPath();
 	ctx.fillStyle = '#fff';
-	ctx.arc(x - 20, y - 30, 10, 0, 2 * Math.PI);
+	ctx.arc(x - (4 * scale), y - (6 * scale), 10, 0, 2 * Math.PI);
 	ctx.fill();
 	ctx.fillStyle = col;
 	ctx.moveTo(x - 20, y - 30);
 	ctx.arc(x - 20, y - 30, 8, 0, 2 * Math.PI);
 	ctx.fill();
 	ctx.closePath();
+	ctx.font = '12px Arial';
 	ctx.fillStyle = '#fff';
-	ctx.fillText(level, x - 22, y - 27);
+	ctx.fillText(level, x - 24, y - 26);
 }
 
 function drawTriangle(ctx, x, y, r, col){
