@@ -1,4 +1,5 @@
-==AuZtralia Setup Tool==
+#AuZtralia Setup Tool
+
 A web-based tool which allows for quick setup for the board game AuZtralia.
 
 It's not that much setup, but I didn't like how long it took me to mentally process the placement rules.
@@ -11,4 +12,4 @@ The table will show the resources for each hex, and you can click in the table t
 
 This is now hosted on my Github pages at:
 
-http://eclectic-matt.github.io/web-deployment/board/auztralia/setup.html
+[AuZtralia Setup Tool](http://eclectic-matt.github.io/web-deployment/board/auztralia/setup.html)
