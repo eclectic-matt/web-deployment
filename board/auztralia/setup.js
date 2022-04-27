@@ -7,10 +7,6 @@ options['showAlert'] = false;
 
 function drawSetupTile(hex,setupTile){
 
-	//var boardName = 'eastern';
-	//console.log('Setting up hex', hex.id);
-	//var randomInt = Math.floor(Math.random() * setupTiles.length);
-	//var setupTile = setupTiles[randomInt];
 	var setupTile = setupTiles.pop();
 
 	//OUPUT A TABLE SHOWING THE CURRENT SETUP TILE
@@ -32,11 +28,6 @@ function drawSetupTile(hex,setupTile){
 	//LOOP THROUGH THE ELEMENTS ON THIS SETUP TILE
 	for(let i = 0; i < Object.keys(setupTile).length; i++){
 		
-		//FOREACH, OUTPUT
-		// td.hexId
-		// td.setupTileResource
-
-		//console.log('Process setup tile',setupTile,'step',i);
 		//IF THE NEIGHBOUR IN THIS DIRECTION IS NOT NULL
 		if(neighbours[i] !== null){
 
@@ -58,9 +49,7 @@ function drawSetupTile(hex,setupTile){
 					coords = getGridCoordsFromHexId(parseInt(hexId));
 				}
 				drawOntoCanvas(coords[0],coords[1]);
-				//TO DO - ADD HIGHLIGHT TO MATCHING TABLE CELLS (WITH THIS ID)
-				//var cells = document.getElementsByClassName(hexId);
-				//var cells = document.querySelectorAll('[hex=hexId]');
+				//ADD HIGHLIGHT TO MATCHING TABLE CELLS (WITH THIS ID)
 				highlightTableCells(hexId);
 			}
 		}else{
@@ -72,8 +61,6 @@ function drawSetupTile(hex,setupTile){
 
 		thisRow.appendChild(td);
 
-		//console.log(td.innerHTML,setupTile[i]);
-
 		//IF THERE IS NOTHING TO GIVE ON THIS PART OF THE TILE, PRINT ____
 		td = document.createElement('td');
 		if(setupTile[i] === null){
@@ -81,22 +68,11 @@ function drawSetupTile(hex,setupTile){
 		}else{
 			td.innerHTML = '<b>' + setupTile[i] + '</b>';
 		}
-		//strOut += '<td>' + ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' ) + '</td>';
-		//td.innerHTML = ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' );
 
 		thisRow.appendChild(td);
-		//strOut += '</tr>';
 	}
-	//strOut += '</tr>';
 
 	document.getElementById('setupStepsTable').appendChild(thisRow);
-
-	//CURRENT TILE (setupTile[0])
-	/*if(setupTile[0] !== null){
-		console.log('Neighbour',0,hex.id,'gets ',setupTile[0]);
-	}else{
-		console.log('Neighbour',0,hex.id,'gets nothing');
-	}*/
 
 	//FOR EACH NEIGHBOUR
 	for(let i = 0; i < Object.keys(setupTile).length; i++){
@@ -104,46 +80,34 @@ function drawSetupTile(hex,setupTile){
 		neighbours = getNeighbours(hex.row, hex.col, 7, 10);
 
 		if (neighbours[i] === null){
-		//if(hex.neighbours[i] === null){
-			//console.log('Neighbour',i,'No neighbour');
+
 			continue;
 		}
 		let neighbour = null;
-		//console.log('Add',setupTile[i],'to',hex.neighbours[i]);
+
 		switch(setupTile[i]){
 			case null:
-				//console.log('Neighbour',i,neighbours[i],'gets nothing');
-				//console.log('Neighbour',i,hex.neighbours[i],'gets nothing');
+				//NOTHING TO GIVE!
 				break;
 			case 'coal':
-				//neighbour = getHexByCoords(boardName, hex.neighbours[i][0], hex.neighbours[i][1]);
 				neighbour = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 				neighbour = giveCoal(neighbour);
-				//console.log('Neighbour',i,hex.id,'gets coal');
 				break;
 			case 'gold':
-				//neighbour = getHexByCoords(boardName, hex.neighbours[i][0], hex.neighbours[i][1]);
 				neighbour = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 				neighbour = giveGold(neighbour);
-				//console.log('Neighbour',i,hex.id,'gets gold');
 				break;
 			case 'iron':
-				//neighbour = getHexByCoords(boardName, hex.neighbours[i][0], hex.neighbours[i][1]);
 				neighbour = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 				neighbour = giveIron(neighbour);
-				//console.log('Neighbour',i,hex.getGridCoordsFromHexId,'gets iron');
 				break;
 			case 'phos':
-				//neighbour = getHexByCoords(boardName, hex.neighbours[i][0], hex.neighbours[i][1]);
 				neighbour = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 				neighbour = givePhos(neighbour);
-				//console.log('Neighbour',i,hex.id,'gets phosphorous');
 				break;
 			case 'oldOne':
-				//neighbour = getHexByCoords(boardName, hex.neighbours[i][0], hex.neighbours[i][1]);
 				neighbour = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 				neighbour = giveOldOne(neighbour);
-				//console.log('Neighbour',i,hex.id,'gets an Old One');
 				break;
 		}
 	}
@@ -183,7 +147,6 @@ function giveCoal(hex){
 		return false;
 	}
 	hex.resources.coal += resources.coal.count;
-	//console.log('HEX',hex.id,'NOW HAS ',hex.resources.coal,'COAL');
 	return hex;
 }
 
@@ -200,7 +163,6 @@ function giveIron(hex){
 		return false;
 	}
 	hex.resources.iron += resources.iron.count;
-	//console.log('HEX',hex.id,'NOW HAS ',hex.resources.iron,'IRON');
 	return hex;
 }
 
@@ -217,7 +179,6 @@ function givePhos(hex){
 		return false;
 	}
 	hex.resources.phos += resources.phos.count;
-	//console.log('HEX',hex.id,'NOW HAS ',hex.resources.phos,'PHOS');
 	return hex;
 }
 
@@ -234,7 +195,6 @@ function giveGold(hex){
 		return false;
 	}
 	hex.resources.gold += resources.gold.count;
-	//console.log('HEX',hex.id,'NOW HAS ',hex.resources.gold,'GOLD');
 	return hex;
 }
 
@@ -252,7 +212,6 @@ function giveOldOne(hex){
 		return false;
 	}
 	hex.resources.olds += resources.olds.count;
-	//console.log('HEX',hex.id,'NOW HAS ',hex.resources.olds,'OLD ONES');
 	return hex;
 }
 
@@ -319,7 +278,6 @@ function getHexById(id){
 
 function init(){
 	
-	//board = 'eastern';
 	limit = 3;
 	setups = 0;
 	setupTiles = shuffle(setupTiles);
@@ -361,7 +319,6 @@ function processNextSetupTile(){
 function drawAllSetupTiles(delay){
 
 	iteration++;
-	//console.log('Setup ',iteration);
 	if(arrSetupTiles.length <= 0){
 		if(options['showAlert'] === true){
 			alert('Setup Complete!');

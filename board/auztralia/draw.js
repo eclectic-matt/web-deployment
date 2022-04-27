@@ -1,18 +1,15 @@
 function drawOntoCanvas(highlightRow, highlightCol){
 
-	//console.log('Drawing hex grid now');
 	var cnv = document.getElementById('canvas');
 	var ctx = cnv.getContext('2d');
 	ctx.strokeStyle = '#000';
 	ctx.strokeWidth = '5px';
-	//drawHexGrid(ctx, cnv.width, cnv.height, 50, highlightRow, highlightCol);
 	drawHexGrid(ctx, cnv.width, cnv.height, 50, highlightRow, highlightCol);
 }
 
 //https://eperezcosano.github.io/hex-grid/
 function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 
-	//console.log('Drawing grid',highlightRow, highlightCol);
 	const a = 2 * Math.PI / 6;
 	row = 0;
 	maxRow = grid.length;
@@ -21,21 +18,26 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 	for(let y = r; y + r * Math.sin(a) < height; y += r * Math.sin(a)){
 
 		col = 0;
+		//IF WE HAVE REACHED THE MAX ROW, STOP
 		if(row >= maxRow){
 			return true;
 		}
 
 		for(let x = r, j = 0; x + r * (1 + Math.cos(a)) < width; x += r * (1 + Math.cos(a)), y += (-1) ** j++ * r * Math.sin(a)){
 
+			//IF WE HAVE REACHED THE MAX COLUMN, CONTINUE (NEXT ROW)
 			if(col >= maxCol){
 				continue;
 			}
 
+			//IF THIS ROW IS THE CURRENT HIGHLIGHT ROW
 			if ( (row === highlightRow) && (col === highlightCol) ){
-				//console.log('Drawing highlight hex!', row, col);
+
+				//DRAW THIS HEXAGON WITH A HIGHLIGHT COLOUR
 				drawHexagon(ctx, x, y, 0.9*r, row, col, '#fca503');
 			}else{
-				//console.log('Drawing normal hex!', row, col);
+
+				//DRAW THIS HEXAGON (NORMAL)
 				drawHexagon(ctx, x, y, r, row, col, null);
 			}
 			col++;
@@ -48,10 +50,10 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 //https://eperezcosano.github.io/hex-grid/
 function drawHexagon(ctx, x, y, r, row, col, colour = null){
 
+	//GET THE HEX FROM THE GRID
 	hex = grid[row][col];
-	//console.log('Drawing hexagon at', x, y);
-	let title = hex.id;
 
+	//CONTEXT SETTINGS
 	ctx.lineWidth = 5;
 
 	if (colour === null){
@@ -109,7 +111,9 @@ function drawHexagon(ctx, x, y, r, row, col, colour = null){
 					drawGold(ctx, x + 20, y - 5, 5, hex.resources[Object.keys(hex.resources)[i]]);
 					break;
 				case 'olds':
+					//IF THERE ARE OLD ONES IN THIS HEX
 					if (hex.resources[Object.keys(hex.resources)[i]] > 0){
+						//CALCULATE OLD ONE LEVEL (IF oldOne = 1, oldOneLevel = hex.level, IF oldOne >= 2, oldOneLevel = hex.level + 1)
 						var oldOneLevel = Math.min(hex.level - 1 + hex.resources[Object.keys(hex.resources)[i]], 3);
 						drawOldOne(ctx, x + 10, y - 22, 5, oldOneLevel);
 					}
