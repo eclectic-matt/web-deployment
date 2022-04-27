@@ -6,7 +6,7 @@
 		<script src="./data.js"></script>
 		<script defer src="./setup.js"></script>
 		<script defer src="./draw.js"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=0.5">
 
 		<style>
 			canvas {
@@ -20,11 +20,31 @@
 				border: 1px solid black;
 			}
 			header {
+				width: 100%;
 				padding: 20px;
+			}
+			header div {
+				width: 100%;
 			}
 			td.neighbourHexId{
 				color: blue;
 				text-decoration: underline;
+			}
+			.delayAnim {
+				animation-name: delayProgress;
+				animation-duration: 5s;
+				animation-iteration-count: 14;
+			}
+			@keyframes delayProgress {
+				0%{
+					background-image: linear-gradient('red', 'orange') !important;
+				}
+				50%{
+					background-image: linear-gradient('orange','yellow') !important;
+				}
+				100%{
+					background-image: linear-gradient('yellow', 'green') !important;
+				}
 			}
 		</style>
 	</head>
@@ -32,15 +52,15 @@
 
 	<header class="header">
 		<h1>Auz Setup</h1>
-		<div class="w3-row-padding w3-card-8">
+		<div class="w3-row-padding">
 			<div class="w3-col s3">
-				<button class="w3-button w3-green" onclick="processNextSetupTile()">Next Setup Tile</button>
+				<button class="w3-button w3-green" onclick="processNextSetupTile()">Draw 1 Tile</button>
 			</div>
 			<div class="w3-col s3">
-				<button class="w3-button w3-orange" onclick="drawAllSetupTiles(5000)">Draw ALL Tiles (5s delay)</button>
+				<button id="allTilesDelayBtn" class="w3-button w3-orange" onclick="drawAllSetupTiles(5000)">ALL Tiles (5s delay)</button>
 			</div>
 			<div class="w3-col s3">
-				<button class="w3-button w3-yellow" onclick="drawAllSetupTiles(0)">Draw ALL Tiles (instant!)</button>
+				<button class="w3-button w3-yellow" onclick="drawAllSetupTiles(0)">ALL Tiles (instant!)</button>
 			</div>
 			<div class="w3-col s3">
 				<button class="w3-button w3-red" onclick="resetMap()">Reset Map</button>

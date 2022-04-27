@@ -317,13 +317,14 @@ function processNextSetupTile(){
 }
 
 function drawAllSetupTiles(delay){
-
+	document.getElementById('allTilesDelayBtn').classList.add('delayAnim');
+	console.log('Drawing all tiles', delay)
 	iteration++;
 	if(arrSetupTiles.length <= 0){
 		if(options['showAlert'] === true){
 			alert('Setup Complete!');
 		}
-		t = 0;
+		clearInterval(t);
 		return;
 	}
 	var thisTile = arrSetupTiles.shift();
@@ -332,7 +333,7 @@ function drawAllSetupTiles(delay){
 	var hex = grid[row][col];
 	drawSetupTile(hex,thisTile);
 	drawOntoCanvas(row, col);
-	t = setTimeout(drawAllSetupTiles, delay);
+	t = setTimeout(drawAllSetupTiles, delay, delay);
 }
 
 //https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
