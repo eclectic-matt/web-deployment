@@ -34,7 +34,7 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 			if ( (row === highlightRow) && (col === highlightCol) ){
 
 				//DRAW THIS HEXAGON WITH A HIGHLIGHT COLOUR
-				drawHexagon(ctx, x, y, 0.9*r, row, col, '#fca503');
+				drawHexagon(ctx, x, y, 0.95*r, row, col, '#fca503');
 			}else{
 
 				//DRAW THIS HEXAGON (NORMAL)
