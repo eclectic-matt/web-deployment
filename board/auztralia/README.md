@@ -2,14 +2,27 @@
 
 A web-based tool which allows for quick setup for the board game AuZtralia.
 
-It's not that much setup, but I didn't like how long it took me to mentally process the placement rules.
-
-This tool currently has the Eastern board, and all setup tiles from the base game.
-
-You can click to view each setup tile individually, or automatically draw all the tiles.
-
-The table will show the resources for each hex, and you can click in the table to highlight a hex.
-
 This is now hosted on my Github pages at:
 
 [AuZtralia Setup Tool](http://eclectic-matt.github.io/web-deployment/board/auztralia/setup.html)
+
+## What is this?
+A tool for the board game AuZtralia, which drastically speeds up the game setup.
+It's not that much setup, but I didn't like how long it took me to mentally process the placement rules.
+
+## What is the setup?
+In the physical version, you lay the board out and draw a random setup tile for each hex showing a triangle symbol. This setup tile shows resources and old ones which are placed on neighbouring hexes. There are restrictions to placement, such as coastal hexes (yellow) never getting resources, and coastal/hill hexes (yellow/green) never getting old one tiles.
+
+## How does this tool work?
+Simply click "Draw ALL Tiles" and all required setup tiles will be drawn, their resources allocated to the relevant neighbouring hexes, and then presented in a visual "hex grid" view. Below the grid is a table showing the setup tile drawn in each step, along with the mapped hex ID/grid reference on the map. You can even click those locations in the table, and they will appear highlighted to double-check!
+
+## Is this fully featured?
+No. This tool currently has the Eastern board, and all setup tiles from the base game.
+
+There are a few minor fixes still needed, as follows:
+* better overall styling and responsive layout (desktop/phone)
+* check remaining old ones/resources (unlimited at present)
+* allow solo setup (no tile 14)
+* play on the Western or Tazmania boards
+
+These will be added in the near future.
