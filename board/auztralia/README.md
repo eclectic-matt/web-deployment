@@ -1,4 +1,4 @@
-#AuZtralia Setup Tool
+# AuZtralia Setup Tool
 
 A web-based tool which allows for quick setup for the board game AuZtralia.
 
