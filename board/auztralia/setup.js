@@ -361,7 +361,9 @@ function drawAllSetupTiles(delay){
 	iteration++;
 	console.log('Setup ',iteration);
 	if(arrSetupTiles.length <= 0){
-		alert('Setup Complete!');
+		if(options['showAlert'] === true){
+			alert('Setup Complete!');
+		}
 		t = 0;
 		return;
 	}
