@@ -69,7 +69,7 @@ function drawHexagon(ctx, x, y, r, row, col, colour = null){
 	//PRINT TRIANGLE ON SETUP TILES
 	if(hex.setupTile){
 		
-		drawTriangle(ctx, x + 1, y + 25, 15, '#666');
+		drawTriangle(ctx, x + 15, y + 25, 18, '#666');
 	}
 
 	//PRINT LEVEL IF PRESENT
@@ -255,6 +255,11 @@ function drawTriangle(ctx, x, y, r, col){
 	ctx.lineTo(x+(r/2),y+(r/2));
 	ctx.lineTo(x,y-(r/2));
 	ctx.lineTo(x-(r/2),y+(r/2));
+	ctx.fill();
+	ctx.closePath();
+	ctx.beginPath();
+	ctx.fillStyle = '#fff';
+	ctx.arc(x, y + 1, 2, 0, 2 * Math.PI, false);
 	ctx.fill();
 	ctx.closePath();
 }

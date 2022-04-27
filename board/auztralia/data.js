@@ -59,13 +59,13 @@ var setupTiles = [
 		1: 'oldOne',
 		2: 'gold',
 		3: 'oldOne',
-		4: 'phosphorous',
+		4: 'phos',
 		5: 'coal',
 		6: 'oldOne'
 	},
 	{
 		0: 'oldOne',
-		1: 'phosphourous',
+		1: 'phos',
 		2: 'oldOne',
 		3: 'coal',
 		4: null,

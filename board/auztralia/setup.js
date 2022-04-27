@@ -1,5 +1,9 @@
 var grid = boards.eastern.grid;
 var setupTilesToDraw = 13;
+var arrSetupTiles = [];
+var iteration = 0;
+var options = [];
+options['showAlert'] = false;
 
 function drawSetupTile(hex,setupTile){
 
@@ -68,7 +72,7 @@ function drawSetupTile(hex,setupTile){
 
 		thisRow.appendChild(td);
 
-		console.log(td.innerHTML,setupTile[i]);
+		//console.log(td.innerHTML,setupTile[i]);
 
 		//IF THERE IS NOTHING TO GIVE ON THIS PART OF THE TILE, PRINT ____
 		td = document.createElement('td');
@@ -104,6 +108,7 @@ function drawSetupTile(hex,setupTile){
 			//console.log('Neighbour',i,'No neighbour');
 			continue;
 		}
+		let neighbour = null;
 		//console.log('Add',setupTile[i],'to',hex.neighbours[i]);
 		switch(setupTile[i]){
 			case null:
@@ -128,7 +133,7 @@ function drawSetupTile(hex,setupTile){
 				neighbour = giveIron(neighbour);
 				//console.log('Neighbour',i,hex.getGridCoordsFromHexId,'gets iron');
 				break;
-			case 'phosphorous':
+			case 'phos':
 				//neighbour = getHexByCoords(boardName, hex.neighbours[i][0], hex.neighbours[i][1]);
 				neighbour = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 				neighbour = givePhos(neighbour);
@@ -312,8 +317,6 @@ function getHexById(id){
 	}
 }
 
-var arrSetupTiles = [];
-
 function init(){
 	
 	//board = 'eastern';
@@ -355,11 +358,10 @@ function processNextSetupTile(){
 	drawOntoCanvas(row, col);
 }
 
-var iteration = 0;
 function drawAllSetupTiles(delay){
 
 	iteration++;
-	console.log('Setup ',iteration);
+	//console.log('Setup ',iteration);
 	if(arrSetupTiles.length <= 0){
 		if(options['showAlert'] === true){
 			alert('Setup Complete!');
@@ -387,8 +389,6 @@ function shuffle(a) {
 	}
 	return a;
 }
-
-//drawOntoCanvas();
 
 function getNeighbours(row, col, maxRow, maxCol){
 
