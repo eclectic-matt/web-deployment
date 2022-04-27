@@ -1,80 +1,84 @@
 var grid = boards.eastern.grid;
+var setupTilesToDraw = 13;
 
-function drawSetupTile(hex){
+function drawSetupTile(hex,setupTile){
 
 	//var boardName = 'eastern';
 	//console.log('Setting up hex', hex.id);
-	var randomInt = Math.floor(Math.random() * setupTiles.length);
-	var setupTile = setupTiles[randomInt];
+	//var randomInt = Math.floor(Math.random() * setupTiles.length);
+	//var setupTile = setupTiles[randomInt];
+	var setupTile = setupTiles.pop();
 
 	//OUPUT A TABLE SHOWING THE CURRENT SETUP TILE
 	var strOut = '<b>Setup Hex ' + hex.id + '</b><br>';
 	document.getElementById('setupTileInfo').innerHTML = strOut;
 
-	neighbours = getNeighbours(hex.row, hex.col, 7, 10);
+	let neighbours = getNeighbours(hex.row, hex.col, 7, 10);
 
+	//CREATE A TABLE ROW
 	let thisRow = document.createElement('tr');
 
+	//CREATE THE FIRST TD
 	let td = document.createElement('td');
-	td.innerHTML = 21 - setupTiles.length;
-
+	//THIS TD CONTAINS THE SETUP TILE NUMBER
+	td.innerHTML = setupTilesToDraw - arrSetupTiles.length;
+	//APPEND TO ROW
 	thisRow.appendChild(td);
 
 	//LOOP THROUGH THE ELEMENTS ON THIS SETUP TILE
 	for(let i = 0; i < Object.keys(setupTile).length; i++){
 		
+		//FOREACH, OUTPUT
+		// td.hexId
+		// td.setupTileResource
+
+		//console.log('Process setup tile',setupTile,'step',i);
 		//IF THE NEIGHBOUR IN THIS DIRECTION IS NOT NULL
 		if(neighbours[i] !== null){
 
 			//GET THE HEX FOR THIS NEIGHBOUR
-			neighbourHex = getHexByCoords(neighbours[i][0], neighbours[i][1]);
+			let neighbourHex = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 
 			td = document.createElement('td');
-
-			if(neighbourHex === false){
-
-				//strOut += '<td onclick="drawOntoCanvas(...getGridCoordsFromHexId(' + neighbours[i] + '))">' + neighbour[i] + ' &#128269;</td>';
-				
-				td.innerHTML = neighbour[i];// + ' &#128269';
-				var a = neighbours[i];
-				td.attributes['a'] = a;
-				td.onclick = function(){
-					a = this.attribute('a');
-					console.log('drawingFromHexId',this.innerHTML);
-					//drawOntoCanvas(...getGridCoordsFromHexId(this.innerHTML));
+			td.innerHTML = neighbourHex.id;// + ' &#128269';
+			td.classList = 'neighbourHexId';
+			td.setAttribute('hex',neighbourHex.id);
+			td.setAttribute('row', neighbours[i][0]);
+			td.setAttribute('col', neighbours[i][1]);
+			td.onclick = function(){
+				let hexId = this.getAttribute('hex');
+				let coords = '';
+				if(isNaN(hexId)){
+					coords = getGridCoordsFromHexId(hexId);
+				}else{
+					coords = getGridCoordsFromHexId(parseInt(hexId));
 				}
-
-			}else{
-
-				//strOut += '<td onclick="drawOntoCanvas(' + neighbours[i][0] + ',' + neighbours[i][1] + ')">' + neighbourHex.id + ' &#128269;</td>';
-				td.innerHTML = neighbourHex.id;// + ' &#128269';
-				var a = neighbours[i][0];
-				var b = neighbours[i][1];
-				td.attributes['a'] = neighbours[i][0];
-				td.attributes['b'] = neighbours[i][1];
-				td.onclick = function(){
-					if ( (this.innerHTML.indexOf('r') >= 0) && (this.innerHTML.indexOf('r') !== false)){
-						row = this.innerHTML.substring(1,this.innerHTML.indexOf('c'));
-						col = this.innerHTML.substring(this.innerHTML.indexOf('c') + 1, 6);
-						console.log('Drawing with row',row,'col',col);
-						drawOntoCanvas(row,col);
-					}else{
-						drawOntoCanvas(...getGridCoordsFromHexId(this.innerHTML));
-					}
-					
-				}
+				drawOntoCanvas(coords[0],coords[1]);
+				//TO DO - ADD HIGHLIGHT TO MATCHING TABLE CELLS (WITH THIS ID)
+				//var cells = document.getElementsByClassName(hexId);
+				//var cells = document.querySelectorAll('[hex=hexId]');
+				highlightTableCells(hexId);
 			}
 		}else{
-			//strOut += '<td>No Hex</td>';
+			//NO HEX
+			td = document.createElement('td');
+			td.classList = 'noHexFound';
 			td.innerHTML = 'No Hex';
 		}
 
 		thisRow.appendChild(td);
 
+		console.log(td.innerHTML,setupTile[i]);
+
 		//IF THERE IS NOTHING TO GIVE ON THIS PART OF THE TILE, PRINT ____
-		//strOut += '<td>' + ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' ) + '</td>';
 		td = document.createElement('td');
-		td.innerHTML = ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' );
+		if(setupTile[i] === null){
+			td.innerHTML = '____';	
+		}else{
+			td.innerHTML = '<b>' + setupTile[i] + '</b>';
+		}
+		//strOut += '<td>' + ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' ) + '</td>';
+		//td.innerHTML = ( (setupTile[i] === null) ? '<em>___</em>' : '<b>' + setupTile[i] + '</b>' );
 
 		thisRow.appendChild(td);
 		//strOut += '</tr>';
@@ -142,6 +146,23 @@ function drawSetupTile(hex){
 
 function resetMap(){
 	window.location.reload();
+}
+
+/**
+ * 
+ * @param {string | integer} hexId 
+ */
+function highlightTableCells(hexId){
+	//RESET
+	var allTds = document.getElementsByTagName('td');
+	for(let i = 0; i < allTds.length; i++){
+		allTds[i].style.backgroundColor = '';///'white';
+	}
+	var cells = document.querySelectorAll("td[hex='" + hexId + "']");
+	for(let j = 0; j < cells.length; j++){
+		cells[j].style.backgroundColor = 'yellow';
+		cells[j].nextSibling.style.backgroundColor = 'yellow';
+	}
 }
 
 function giveCoal(hex){
@@ -298,6 +319,7 @@ function init(){
 	//board = 'eastern';
 	limit = 3;
 	setups = 0;
+	setupTiles = shuffle(setupTiles);
 
 	//ITERATE ROWS
 	for(let row = 0; row < grid.length; row++){
@@ -320,6 +342,7 @@ function init(){
 }
 
 function processNextSetupTile(){
+
 	if(arrSetupTiles.length <= 0){
 		alert('No more setup tiles!');
 		return;
@@ -328,11 +351,15 @@ function processNextSetupTile(){
 	row = thisTile[0];
 	col = thisTile[1];
 	var hex = grid[row][col];
-	drawSetupTile(hex);
+	drawSetupTile(hex,thisTile);
 	drawOntoCanvas(row, col);
 }
 
+var iteration = 0;
 function drawAllSetupTiles(delay){
+
+	iteration++;
+	console.log('Setup ',iteration);
 	if(arrSetupTiles.length <= 0){
 		alert('Setup Complete!');
 		t = 0;
@@ -342,9 +369,21 @@ function drawAllSetupTiles(delay){
 	row = thisTile[0];
 	col = thisTile[1];
 	var hex = grid[row][col];
-	drawSetupTile(hex);
+	drawSetupTile(hex,thisTile);
 	drawOntoCanvas(row, col);
 	t = setTimeout(drawAllSetupTiles, delay);
+}
+
+//https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+function shuffle(a) {
+	var j, x, i;
+	for (i = a.length - 1; i > 0; i--) {
+		j = Math.floor(Math.random() * (i + 1));
+		x = a[i];
+		a[i] = a[j];
+		a[j] = x;
+	}
+	return a;
 }
 
 //drawOntoCanvas();

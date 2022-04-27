@@ -12,7 +12,7 @@ function drawOntoCanvas(highlightRow, highlightCol){
 //https://eperezcosano.github.io/hex-grid/
 function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 
-	console.log('Drawing grid',highlightRow, highlightCol);
+	//console.log('Drawing grid',highlightRow, highlightCol);
 	const a = 2 * Math.PI / 6;
 	row = 0;
 	maxRow = grid.length;
@@ -39,6 +39,7 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 				drawHexagon(ctx, x, y, r, row, col, null);
 			}
 			col++;
+
 		}
 		row++;
 	}
