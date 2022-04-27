@@ -306,6 +306,7 @@ function processNextSetupTile(){
 
 	if(arrSetupTiles.length <= 0){
 		alert('No more setup tiles!');
+		document.getElementById('setupTileInfo').innerHTML = '<b style="text-align: center;">Setup Complete!</b>';
 		return;
 	}
 	var thisTile = arrSetupTiles.shift();
@@ -324,6 +325,7 @@ function drawAllSetupTiles(delay){
 		if(options['showAlert'] === true){
 			alert('Setup Complete!');
 		}
+		document.getElementById('setupTileInfo').innerHTML = '<b style="text-align: center;">Setup Complete!</b>';
 		clearInterval(t);
 		return;
 	}
