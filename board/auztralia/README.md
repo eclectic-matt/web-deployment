@@ -37,5 +37,19 @@ There are a few bugs which I've identified in my testing so far, as follows:
 * Unlimited resources (e.g. old ones)
 
 Gold (yellow)
-
 &#128993;
+
+Phos (white)
+&#9675;
+
+Old Ones (purple)
+&#129002;
+
+Null (red X)
+&#120;
+
+Iron (Checkerboard?)
+&#128638;
+
+Coal (black half block)
+&#9604;
