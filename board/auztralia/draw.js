@@ -1,11 +1,73 @@
+hexScale = 20;
+targetWidth = 900;
+targetHeight = 700;
+
 function drawOntoCanvas(highlightRow, highlightCol){
 
 	var cnv = document.getElementById('canvas');
 	var ctx = cnv.getContext('2d');
+
+	//RESET STYLES
 	ctx.strokeStyle = '#000';
 	ctx.strokeWidth = '5px';
-	drawHexGrid(ctx, cnv.width, cnv.height, 50, highlightRow, highlightCol);
+
+	//drawHexGrid(ctx, cnv.width, cnv.height, hexScale, highlightRow, highlightCol);
+	//drawHexGrid(ctx, cnv.width, cnv.height, 50, highlightRow, highlightCol);
+	drawHexGrid(ctx, targetWidth, targetHeight, 50, highlightRow, highlightCol);
 }
+
+function initWindowScale(){
+	var cnv = document.getElementById('canvas');
+	var ctx = cnv.getContext('2d');
+
+	//RESET TRANSFORMS
+	ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+	clearCanvas(ctx,cnv.width,cnv.height);
+
+	//GET SCALE
+	var widthScale = 1 - cnv.width / targetWidth;
+	var heightScale = 1 - cnv.height / targetHeight;
+
+	//APPLY TO CANVAS
+	ctx.scale(widthScale, heightScale);
+	
+	console.log(widthScale,heightScale);
+}
+
+function adjustWindowScale(){
+
+	var cnv = document.getElementById('canvas');
+	var ctx = cnv.getContext('2d');
+
+	//RESET TRANSFORMS
+	ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+	//clearCanvas(ctx,cnv.width,cnv.height);
+
+	//GET SCALE
+	var widthScale = cnv.width / targetWidth;
+	var heightScale = cnv.height / targetHeight;
+
+	//APPLY TO CANVAS
+	ctx.scale(widthScale, heightScale);
+	
+	console.log(cnv.width, cnv.height, widthScale,heightScale);
+
+	//DRAW CANVAS
+	drawOntoCanvas(options['highlightRow'], options['highlightCol']);
+}
+
+window.addEventListener('resize', adjustWindowScale);
+
+function clearCanvas(ctx, w, h){
+	ctx.setTransform(1, 0, 0, 1, 0, 0);
+	//ctx.scale(1,1);
+	ctx.fillStyle = '#fff';
+	ctx.rect(0,0,w,h);
+	ctx.fill();
+}
+
 
 //https://eperezcosano.github.io/hex-grid/
 function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
@@ -15,15 +77,34 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 	maxRow = grid.length;
 	maxCol = grid[maxRow - 1].length;
 
+	//OFFSET FROM EDGES?
+	var xOffset = 0;//100;
+	var yOffset = 0;//100;
+
+	//FOR EACH COLUMN
+	//y starts at r (scale factor, side length)
+	//y plus the next increment must remain below the height
+	//y increments by r * sin(a) = r * sin(60) = sqrt(3)/2 * r
 	for(let y = r; y + r * Math.sin(a) < height; y += r * Math.sin(a)){
 
+		//START A COLUMN INDEX
 		col = 0;
 		//IF WE HAVE REACHED THE MAX ROW, STOP
 		if(row >= maxRow){
 			return true;
 		}
 
+		//FOR EACH ROW
+		//x starts at r (scale factor, )
+		//j starts at 0
+		//x plus the next increment must be less than width
+		//x increments by r * (1 + cos(60)) = r * (1 + 1/2) = 1.5 * r
+		//j increments by 1
+		//y's additional increment is between -r/2 and +r/2 
+		//	(-1 to the power of j[0,1,2] = 1, -1, 1
+		//	((-1) ** j) * r * sin(60) = -1/2 * r OR +1/2 * r)
 		for(let x = r, j = 0; x + r * (1 + Math.cos(a)) < width; x += r * (1 + Math.cos(a)), y += (-1) ** j++ * r * Math.sin(a)){
+
 
 			//IF WE HAVE REACHED THE MAX COLUMN, CONTINUE (NEXT ROW)
 			if(col >= maxCol){
@@ -34,11 +115,11 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 			if ( (row === highlightRow) && (col === highlightCol) ){
 
 				//DRAW THIS HEXAGON WITH A HIGHLIGHT COLOUR
-				drawHexagon(ctx, x, y, 0.95*r, row, col, '#fca503');
+				drawHexagon(ctx, x + xOffset, y + yOffset, 0.95*r, row, col, '#fca503');
 			}else{
 
 				//DRAW THIS HEXAGON (NORMAL)
-				drawHexagon(ctx, x, y, r, row, col, null);
+				drawHexagon(ctx, x + xOffset, y + yOffset, r, row, col, null);
 			}
 			col++;
 
@@ -47,7 +128,6 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 	}
 }
 
-//https://eperezcosano.github.io/hex-grid/
 function drawHexagon(ctx, x, y, r, row, col, colour = null){
 
 	//GET THE HEX FROM THE GRID
@@ -131,6 +211,7 @@ function getHexFillColour(hex){
 	}
 }
 
+//https://eperezcosano.github.io/hex-grid/
 function drawHexagonShape(ctx, x, y, r, col){
 
 	const a = 2 * Math.PI / 6;
@@ -142,12 +223,6 @@ function drawHexagonShape(ctx, x, y, r, col){
 	}
 	ctx.closePath();
 	ctx.stroke();
-	ctx.fill();
-}
-
-function clearCanvas(ctx, w, h){
-	ctx.fillStyle = '#fff';
-	ctx.rect(0,0,w,h);
 	ctx.fill();
 }
 

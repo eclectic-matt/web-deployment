@@ -6,11 +6,15 @@
 		<script src="./data.js"></script>
 		<script defer src="./setup.js"></script>
 		<script defer src="./draw.js"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=0.5">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<style>
-			canvas {
+			/*canvas {
 				border: 10px solid black;
+			}*/
+			canvas {
+				width: 100%;
+				object-fit: contain;
 			}
 			table {
 				border: 1px solid black;
@@ -18,6 +22,8 @@
 			}
 			tr, th, td {
 				border: 1px solid black;
+				padding: 1px !important;
+				margin: 1px !important;
 			}
 			td:nth-child(1){
 				font-weight: bold;
@@ -70,6 +76,8 @@
 	</head>
 <body onload="init()">
 
+	<!--div class="w3-row">
+		<div class="w3-col s12 m6-->
 	<header class="header w3-card-4">
 		<div class="w3-container w3-purple">
 			<h1>AuZtralia Setup Tool</h1>
@@ -140,7 +148,6 @@
 						options['board'] = boardEl.value;
 					}
 
-					console.log(options);
 					init();
 					drawAllSetupTiles(options['delay']);
 				}
@@ -149,15 +156,16 @@
 		</div>
 	</header>
 	<div class="w3-row-padding">
-		<div class="w3-col s12">
+		<div class="w3-col s12 w3-card-4 w3-padding">
 			<canvas id="canvas" width="900" height="700"></canvas>
+			<!--canvas id="canvas"></canvas-->
 		</div>
-		<div class="w3-col s12">
+		<div class="w3-col s12 w3-card-4 w3-padding">
 			<div id='setupInfo'>
 				<div id='setupTileInfoDiv'>
-					<h2 id='setupTileInfo'></h2>
+					<h2 id='setupTileInfo' class="w3-container w3-green"></h2>
 					<br>
-					<table id='setupStepsTable' class="w3-table w3-small">
+					<table id='setupStepsTable' class="w3-table w3-striped w3-tiny">
 						<tr>
 							<th></th>
 							<th colspan="14">Direction/Hex</th>

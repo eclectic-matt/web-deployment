@@ -6,17 +6,17 @@ var iteration = 0;
 var options = [];
 options['showAlert'] = false;
 options['board'] = 'eastern';
+options['highlightRow'] = null;
+options['highlightCol'] = null;
 
 /**
  * INIT AND SETUP STEP FUNCTIONS
  */
 function init(){
 	
+	//THE SELECTED BOARD IS THE NAME OF THE BOARD FROM THE OPTIONS
 	var selectedBoard = options['board'];
 	grid = boards[selectedBoard].grid;
-
-	limit = 3;
-	setups = 0;
 
 	//RESHUFFLE THE *STATIC* LIST OF SETUP TILES
 	setupTiles = shuffle(setupTiles);
@@ -25,13 +25,11 @@ function init(){
 	//THE LIST OF HEXES (row,col) WHICH NEED A SETUP TILE
 	arrSetupHexes = [];
 
-	//CLEAR THE CANVAS AND SETUP TABLE
-	var canvas = document.getElementById('canvas');
-	w = canvas.width;
-	h = canvas.height;
-	ctx = canvas.getContext('2d');
-	clearCanvas(ctx,w,h);
+	//CLEAR THE SETUP TABLE
 	clearSetupTable();
+
+	//UPDATE SCALING NOW AND CLEAR
+	//initWindowScale();
 
 	//ITERATE ROWS
 	for(let row = 0; row < grid.length; row++){
@@ -50,12 +48,15 @@ function init(){
 	}
 	highlightRow = arrSetupHexes[0][0];
 	highlightCol = arrSetupHexes[0][1];
+	options['highlightRow'] = highlightRow;
+	options['highlightCol'] = highlightCol;
 
 	//GENERATE AN ARRAY OF *DYNAMIC* SETUP TILES
 	for(let i = 0; i < arrSetupHexes.length; i++){
 		arrSetupTiles[i] = setupTiles[i];	
 	}
 
+	//DRAW THE CANVAS
 	drawOntoCanvas(highlightRow, highlightCol);
 }
 
@@ -65,37 +66,15 @@ function clearSetupTable(){
 	var infoEl = document.getElementById('setupTileInfo');
 	infoEl.innerHTML = '';
 	//CLEAR TABLE
-	var table = document.getElementById('setupStepsTable');
-	var childCount = table.children.length;
-	//console.log('The table has',childCount,'children');
-	if(childCount > 3){
-		for(let i = 3; i < childCount; i++){
-			//FIXED AT 3 AS NODELIST IS DYNAMIC!!!
-			var child = table.childNodes[3];
-			//console.log(child);
-			table.removeChild(child);
-		}
+	var trs = document.getElementsByClassName('infoTR');
+	var rowCount = trs.length;
+	for(let i = 0; i < rowCount; i++){
+		trs[0].remove();
 	}
 }
 
-/*function processNextSetupTile(){
-
-	if(arrSetupHexes.length <= 0){
-		alert('No more setup tiles!');
-		document.getElementById('setupTileInfo').innerHTML = '<b style="text-align: center;">Setup Complete!</b>';
-		return;
-	}
-	var thisTile = arrSetupHexes.shift();
-	row = thisTile[0];
-	col = thisTile[1];
-	var hex = grid[row][col];
-	drawSetupTile(hex,thisTile);
-	drawOntoCanvas(row, col);
-}*/
-
 function drawAllSetupTiles(delay){
-	//document.getElementById('allTilesDelayBtn').classList.add('delayAnim');
-	//console.log('Drawing all tiles', delay)
+
 	iteration++;
 	if(arrSetupHexes.length <= 0){
 		if(options['showAlert'] === true){
@@ -137,11 +116,13 @@ function drawSetupTile(hex,setupTile){
 
 	//CREATE A TABLE ROW
 	let thisRow = document.createElement('tr');
+	thisRow.classList.add('infoTR');
 
 	//CREATE THE FIRST TD
 	let td = document.createElement('td');
+	td.classList.add('infoTD');
 	//THIS TD CONTAINS THE SETUP TILE NUMBER
-	td.innerHTML = setupTilesToDraw - arrSetupHexes.length;
+	td.innerHTML = setupTilesToDraw - arrSetupTiles.length;
 	//APPEND TO ROW
 	thisRow.appendChild(td);
 
@@ -155,6 +136,7 @@ function drawSetupTile(hex,setupTile){
 			let neighbourHex = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 
 			td = document.createElement('td');
+			td.classList.add('infoTD');
 			td.innerHTML = neighbourHex.id;// + ' &#128269';
 			td.classList = 'neighbourHexId';
 			td.setAttribute('hex',neighbourHex.id);
@@ -175,6 +157,7 @@ function drawSetupTile(hex,setupTile){
 		}else{
 			//NO HEX
 			td = document.createElement('td');
+			td.classList.add('infoTD');
 			td.classList = 'noHexFound';
 			td.innerHTML = 'No Hex';
 		}
@@ -183,6 +166,7 @@ function drawSetupTile(hex,setupTile){
 
 		//IF THERE IS NOTHING TO GIVE ON THIS PART OF THE TILE, PRINT ____
 		td = document.createElement('td');
+		td.classList.add('infoTD');
 		if(setupTile[i] === null){
 			td.innerHTML = '____';	
 		}else{
