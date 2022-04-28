@@ -62,7 +62,6 @@ window.addEventListener('resize', adjustWindowScale);
 
 function clearCanvas(ctx, w, h){
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	//ctx.scale(1,1);
 	ctx.fillStyle = '#fff';
 	ctx.rect(0,0,w,h);
 	ctx.fill();
@@ -78,8 +77,9 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 	maxCol = grid[maxRow - 1].length;
 
 	//OFFSET FROM EDGES?
-	var xOffset = 0;//100;
-	var yOffset = 0;//100;
+	var cnv = document.getElementById('canvas');
+	var xOffset = Math.max(0,cnv.width - targetWidth) / 2;
+	var yOffset = Math.max(0,cnv.height - targetHeight) / 2;
 
 	//FOR EACH COLUMN
 	//y starts at r (scale factor, side length)

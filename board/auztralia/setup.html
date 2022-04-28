@@ -13,6 +13,8 @@
 				border: 10px solid black;
 			}*/
 			canvas {
+				max-width: 900px;
+				max-height: 700px;
 				width: 100%;
 				object-fit: contain;
 			}
@@ -73,98 +75,133 @@
 			label {
 				padding-right: 20px !important;
 			}
+
+			/*https://stackoverflow.com/posts/48677869/timeline
+			.w3-row {
+				display: table !important;
+				width: 100% !important;
+			}
+			.w3-col {
+				display: block !important;
+				padding: 16px !important;
+				float: none !important;
+			}
+
+			@media (min-width: 601px) {
+				.w3-col {
+					display: table-cell !important;
+					width: 50%;
+					
+				}
+			}*/
+
 		</style>
 	</head>
 <body onload="init()">
 
-	<!--div class="w3-row">
-		<div class="w3-col s12 m6-->
-	<header class="header w3-card-4">
-		<div class="w3-container w3-purple">
-			<h1>AuZtralia Setup Tool</h1>
+	<div class="w3-row">
+
+		<div class="w3-col s12 m12 l12">
+			<header class="header w3-card-4">
+				<div class="w3-container w3-purple">
+					<h1>AuZtralia Setup Tool</h1>
+				</div>
+			</header>
 		</div>
-		<!--em>See <a href="https://github.com/eclectic-matt/web-deployment/tree/master/board/auztralia">Github</a></em-->
-		<div id="optionsFormDiv" class="w3-card-4 w3-padding">
-			<form id="optionsForm" class="w3-form" onsubmit="event.preventDefault(); processFormOptions();">
-				
-				<div class="w3-section w3-row">
-					<div class="w3-half w3-right-align">
-						<label for="delay" class="w3-label w3-right-align">Delay between tile draws (seconds): </label>
-					</div>
-					<div class="w3-half">
-						<input name="delay" class="w3-input w3-border" type="number" min="0" max="60" value="0"></input>
-					</div>
-				</div>
 
-				<div class="w3-section w3-row">
-					<div class="w3-half w3-right-align">
-						<label for="solo" class="w3-label ">Solo Play? </label>
-					</div>
-					<div class="w3-half">
-						<input name="solo" class="w3-check w3-border" type="checkbox"></input>
-					</div>
-				</div>
-
-				<div class="w3-section w3-row">
-					<div class="w3-half w3-right-align">
-						<label for="board" class="w3-label w3-padding-large">Board: </label>
-					</div>
-					<div class="w3-half">
-						<select class="w3-select w3-border-round" name="board">
-							<!--option value="" disabled selected>Choose your board</option-->
-							<option value="eastern" selected>Eastern AuZtralia Board</option>
-							<option value="western">Western AuZtralia Board (Warning: in test mode)</option>
-							<option value="tazmania" disabled>TaZmania Board</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="w3-section">
-					<button id="drawSetupBtn" class="w3-btn w3-green">Setup</button>
-					<!--br-->
-					<button id="resetMapBtn" onclick="window.location.reload()" class="w3-btn w3-red w3-right">Reset Map</button>
-				</div>
-			</form>
-			<script>
-				function processFormOptions(){
-					
-					//GET FORM
-					var form = document.getElementById('optionsForm');
-					
-					//GET DELAY, SET
-					var delayEl = form.elements['delay'];
-					//MIN 0s, CONVERT TO MS (* 1000)
-					options['delay'] = Math.max(0,delayEl.value * 1000);
-
-					//GET SOLO, SET
-					var soloEl = form.elements['solo'];
-					options['solo'] = soloEl.checked;
-
-					//GET BOARD, SET
-					var boardEl = form.elements['board'];
-					//QUICK CHECK IF NO BOARD SET
-					if(boardEl.value === ''){
-						options['board'] = 'eastern';
-					}else{
-						options['board'] = boardEl.value;
-					}
-
-					init();
-					drawAllSetupTiles(options['delay']);
-				}
-			</script>
-
+		<div class="w3-col s12 m12 l12">
+			<section id="canvasbox" class="w3-card-4 w3-padding">
+				<canvas id="canvas" width="900" height="700"></canvas>
+				<!--canvas id="canvas"></canvas-->
+			</section>
 		</div>
-	</header>
-	<div class="w3-row-padding">
-		<div class="w3-col s12 w3-card-4 w3-padding">
-			<canvas id="canvas" width="900" height="700"></canvas>
-			<!--canvas id="canvas"></canvas-->
+
+		<div class="w3-col s12 m6 l6">
+			<header class="w3-card-4">
+				<div class="w3-container w3-red">
+					<h1>Settings</h1>
+				</div>
+				<!--em>See <a href="https://github.com/eclectic-matt/web-deployment/tree/master/board/auztralia">Github</a></em-->
+				<div id="optionsFormDiv" class="w3-card-4 w3-padding">
+					<form id="optionsForm" class="w3-form" onsubmit="event.preventDefault(); processFormOptions();">
+						
+						<div class="w3-section w3-row">
+							<div class="w3-half w3-right-align">
+								<label for="delay" class="w3-label w3-right-align">Delay between tile draws (seconds): </label>
+							</div>
+							<div class="w3-half">
+								<input name="delay" class="w3-input w3-border" type="number" min="0" max="60" value="0"></input>
+							</div>
+						</div>
+
+						<div class="w3-section w3-row">
+							<div class="w3-half w3-right-align">
+								<label for="solo" class="w3-label ">Solo Play? </label>
+							</div>
+							<div class="w3-half">
+								<input name="solo" class="w3-check w3-border" type="checkbox"></input>
+							</div>
+						</div>
+
+						<div class="w3-section w3-row">
+							<div class="w3-half w3-right-align">
+								<label for="board" class="w3-label w3-padding-large">Board: </label>
+							</div>
+							<div class="w3-half">
+								<select class="w3-select w3-border-round" name="board">
+									<!--option value="" disabled selected>Choose your board</option-->
+									<option value="eastern" selected>Eastern AuZtralia Board</option>
+									<option value="western">Western AuZtralia Board (Warning: in test mode)</option>
+									<option value="tazmania" disabled>TaZmania Board</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="w3-section">
+							<button id="drawSetupBtn" class="w3-btn w3-green">Setup</button>
+							<!--br-->
+							<button id="resetMapBtn" onclick="resetMap()" class="w3-btn w3-red w3-right">Reset Map</button>
+						</div>
+					</form>
+					<script>
+						function processFormOptions(){
+							
+							//GET FORM
+							var form = document.getElementById('optionsForm');
+							
+							//GET DELAY, SET
+							var delayEl = form.elements['delay'];
+							//MIN 0s, CONVERT TO MS (* 1000)
+							options['delay'] = Math.max(0,delayEl.value * 1000);
+
+							//GET SOLO, SET
+							var soloEl = form.elements['solo'];
+							options['solo'] = soloEl.checked;
+
+							//GET BOARD, SET
+							var boardEl = form.elements['board'];
+							//QUICK CHECK IF NO BOARD SET
+							if(boardEl.value === ''){
+								options['board'] = 'eastern';
+							}else{
+								options['board'] = boardEl.value;
+							}
+
+							init();
+							drawAllSetupTiles(options['delay']);
+						}
+					</script>
+
+				</div>
+			</header>
 		</div>
-		<div class="w3-col s12 w3-card-4 w3-padding">
-			<div id='setupInfo'>
+
+		<div class="w3-col s12 m6 l6">
+			<header id="setupInfo" class="w3-card-4">
 				<div id='setupTileInfoDiv'>
-					<h2 id='setupTileInfo' class="w3-container w3-green"></h2>
+					<div class="w3-container w3-purple">
+						<h2 id='setupTileInfo'>Output Table</h2>
+					</div>
 					<br>
 					<table id='setupStepsTable' class="w3-table-all w3-center-align w3-tiny">
 						<tr>
@@ -200,7 +237,8 @@
 						</tr>
 					</table>
 				</div>
-			</div>
+			</header>
 		</div>
+
 	</div>
 </body>

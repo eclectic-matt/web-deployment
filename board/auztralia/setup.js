@@ -24,6 +24,7 @@ function init(){
 	//arrSetupTiles = JSON.parse(JSON.stringify(setupTiles));
 	//THE LIST OF HEXES (row,col) WHICH NEED A SETUP TILE
 	arrSetupHexes = [];
+	arrSetupTiles = [];
 
 	//CLEAR THE SETUP TABLE
 	clearSetupTable();
@@ -54,7 +55,7 @@ function init(){
 	//GENERATE AN ARRAY OF *DYNAMIC* SETUP TILES
 	for(let i = 0; i < arrSetupHexes.length; i++){
 		arrSetupTiles[i] = setupTiles[i];	
-	}
+	}	
 
 	//DRAW THE CANVAS
 	drawOntoCanvas(highlightRow, highlightCol);
@@ -64,7 +65,7 @@ function clearSetupTable(){
 
 	//CLEAR THE INFO BOX
 	var infoEl = document.getElementById('setupTileInfo');
-	infoEl.innerHTML = '';
+	infoEl.innerHTML = 'Output Table';
 	//CLEAR TABLE
 	var trs = document.getElementsByClassName('infoTR');
 	var rowCount = trs.length;
@@ -226,6 +227,7 @@ function drawSetupTile(hex,setupTile){
 
 function resetMap(){
 	window.location.reload();
+	//reset();
 }
 
 /**
