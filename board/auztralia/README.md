@@ -35,3 +35,7 @@ There are a few bugs which I've identified in my testing so far, as follows:
 * Additional setup tiles drawn between runs (shows tile 1, 13, 1, 2, 3 in the table)
 * Visual fixes for Western Board
 * Unlimited resources (e.g. old ones)
+
+Gold (yellow)
+
+&#128993;
