@@ -168,9 +168,14 @@ function drawSetupTile(hex,setupTile){
 		td = document.createElement('td');
 		td.classList.add('infoTD');
 		if(setupTile[i] === null){
-			td.innerHTML = '____';	
+			td.innerHTML = '____';
 		}else{
-			td.innerHTML = '<b>' + setupTile[i] + '</b>';
+			if(setupTile[i] === 'oldOne'){
+				td.innerHTML = '<b>' + 'Old' + '</b>';
+			}else{
+				td.innerHTML = '<b>' + setupTile[i] + '</b>';
+			}
+			
 		}
 
 		thisRow.appendChild(td);

@@ -290,7 +290,7 @@ function drawGold(ctx, x, y, scale, count){
  */
 function drawOldOne(ctx, x, y, scale, level){
 	ctx.beginPath();
-	ctx.arc (x + (1.5 * scale), y - (1.5 * scale), 1.5 * scale, 0, 2 * Math.PI);
+	ctx.arc (x + (1.5 * scale), y - (1.5 * scale), 2 * scale, 0, 2 * Math.PI);
 	ctx.closePath();
 	ctx.fillStyle = "#a0b";
 	ctx.fill();
