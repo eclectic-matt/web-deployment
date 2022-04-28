@@ -145,6 +145,11 @@ function drawHexagonShape(ctx, x, y, r, col){
 	ctx.fill();
 }
 
+function clearCanvas(ctx, w, h){
+	ctx.fillStyle = '#fff';
+	ctx.rect(0,0,w,h);
+	ctx.fill();
+}
 
 function drawCoal(ctx, x, y, scale, count){
 	ctx.beginPath();

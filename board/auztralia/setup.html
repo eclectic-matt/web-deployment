@@ -63,26 +63,89 @@
 					background-image: linear-gradient('yellow', 'green') !important;
 				}
 			}
+			label {
+				padding-right: 20px !important;
+			}
 		</style>
 	</head>
 <body onload="init()">
 
-	<header class="header">
-		<h1>AuZtralia Setup Tool</h1>
-		<em>See <a href="https://github.com/eclectic-matt/web-deployment/tree/master/board/auztralia">Github</a></em>
-		<div class="w3-row-padding">
-			<div class="w3-col s3">
-				<button class="w3-button w3-green" onclick="processNextSetupTile()">Draw 1 Tile</button>
-			</div>
-			<div class="w3-col s3">
-				<button id="allTilesDelayBtn" class="w3-button w3-orange" onclick="drawAllSetupTiles(5000)">ALL Tiles (5s delay)</button>
-			</div>
-			<div class="w3-col s3">
-				<button class="w3-button w3-yellow" onclick="drawAllSetupTiles(0)">ALL Tiles (instant!)</button>
-			</div>
-			<div class="w3-col s3">
-				<button class="w3-button w3-red" onclick="resetMap()">Reset Map</button>
-			</div>
+	<header class="header w3-card-4">
+		<div class="w3-container w3-purple">
+			<h1>AuZtralia Setup Tool</h1>
+		</div>
+		<!--em>See <a href="https://github.com/eclectic-matt/web-deployment/tree/master/board/auztralia">Github</a></em-->
+		<div id="optionsFormDiv" class="w3-card-4 w3-padding">
+			<form id="optionsForm" class="w3-form" onsubmit="event.preventDefault(); processFormOptions();">
+				
+				<div class="w3-section w3-row">
+					<div class="w3-half w3-right-align">
+						<label for="delay" class="w3-label w3-right-align">Delay between tile draws (seconds): </label>
+					</div>
+					<div class="w3-half">
+						<input name="delay" class="w3-input w3-border" type="number" min="0" max="60" value="0"></input>
+					</div>
+				</div>
+
+				<div class="w3-section w3-row">
+					<div class="w3-half w3-right-align">
+						<label for="solo" class="w3-label ">Solo Play? </label>
+					</div>
+					<div class="w3-half">
+						<input name="solo" class="w3-check w3-border" type="checkbox"></input>
+					</div>
+				</div>
+
+				<div class="w3-section w3-row">
+					<div class="w3-half w3-right-align">
+						<label for="board" class="w3-label w3-padding-large">Board: </label>
+					</div>
+					<div class="w3-half">
+						<select class="w3-select w3-border-round" name="board">
+							<!--option value="" disabled selected>Choose your board</option-->
+							<option value="eastern" selected>Eastern AuZtralia Board</option>
+							<option value="western">Western AuZtralia Board (Warning: in test mode)</option>
+							<option value="tazmania" disabled>TaZmania Board</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="w3-section">
+					<button id="drawSetupBtn" class="w3-btn w3-green">Setup</button>
+					<!--br-->
+					<button id="resetMapBtn" onclick="window.location.reload()" class="w3-btn w3-red w3-right">Reset Map</button>
+				</div>
+			</form>
+			<script>
+				function processFormOptions(){
+					
+					//GET FORM
+					var form = document.getElementById('optionsForm');
+					
+					//GET DELAY, SET
+					var delayEl = form.elements['delay'];
+					//MIN 0s, CONVERT TO MS (* 1000)
+					options['delay'] = Math.max(0,delayEl.value * 1000);
+
+					//GET SOLO, SET
+					var soloEl = form.elements['solo'];
+					options['solo'] = soloEl.checked;
+
+					//GET BOARD, SET
+					var boardEl = form.elements['board'];
+					//QUICK CHECK IF NO BOARD SET
+					if(boardEl.value === ''){
+						options['board'] = 'eastern';
+					}else{
+						options['board'] = boardEl.value;
+					}
+
+					console.log(options);
+					init();
+					drawAllSetupTiles(options['delay']);
+				}
+			</script>
+
 		</div>
 	</header>
 	<div class="w3-row-padding">
@@ -94,9 +157,9 @@
 				<div id='setupTileInfoDiv'>
 					<h2 id='setupTileInfo'></h2>
 					<br>
-					<table id='setupStepsTable'>
+					<table id='setupStepsTable' class="w3-table w3-small">
 						<tr>
-							<th>Tile</th>
+							<th></th>
 							<th colspan="14">Direction/Hex</th>
 						</tr>
 						<tr>
@@ -110,7 +173,7 @@
 							<th colspan="2">Left Up</th>
 						</tr>
 						<tr>
-							<th></th>
+							<th>Tile</th>
 							<th>Hex</th>
 							<th>Resource</th>
 							<th>Hex</th>

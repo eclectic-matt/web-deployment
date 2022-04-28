@@ -1,19 +1,139 @@
 var grid = boards.eastern.grid;
 var setupTilesToDraw = 13;
+var arrSetupHexes = [];
 var arrSetupTiles = [];
 var iteration = 0;
 var options = [];
 options['showAlert'] = false;
+options['board'] = 'eastern';
+
+/**
+ * INIT AND SETUP STEP FUNCTIONS
+ */
+function init(){
+	
+	var selectedBoard = options['board'];
+	grid = boards[selectedBoard].grid;
+
+	limit = 3;
+	setups = 0;
+
+	//RESHUFFLE THE *STATIC* LIST OF SETUP TILES
+	setupTiles = shuffle(setupTiles);
+
+	//arrSetupTiles = JSON.parse(JSON.stringify(setupTiles));
+	//THE LIST OF HEXES (row,col) WHICH NEED A SETUP TILE
+	arrSetupHexes = [];
+
+	//CLEAR THE CANVAS AND SETUP TABLE
+	var canvas = document.getElementById('canvas');
+	w = canvas.width;
+	h = canvas.height;
+	ctx = canvas.getContext('2d');
+	clearCanvas(ctx,w,h);
+	clearSetupTable();
+
+	//ITERATE ROWS
+	for(let row = 0; row < grid.length; row++){
+		
+		//ITERATE COLUMNS
+		for(let col = 0; col < grid[row].length; col++){
+
+			var hex = grid[row][col];
+			hex.resources = JSON.parse(JSON.stringify(emptyResources));
+
+			if(hex.setupTile === true){
+
+				arrSetupHexes.push([row, col]);
+			}
+		}
+	}
+	highlightRow = arrSetupHexes[0][0];
+	highlightCol = arrSetupHexes[0][1];
+
+	//GENERATE AN ARRAY OF *DYNAMIC* SETUP TILES
+	for(let i = 0; i < arrSetupHexes.length; i++){
+		arrSetupTiles[i] = setupTiles[i];	
+	}
+
+	drawOntoCanvas(highlightRow, highlightCol);
+}
+
+function clearSetupTable(){
+
+	//CLEAR THE INFO BOX
+	var infoEl = document.getElementById('setupTileInfo');
+	infoEl.innerHTML = '';
+	//CLEAR TABLE
+	var table = document.getElementById('setupStepsTable');
+	var childCount = table.children.length;
+	//console.log('The table has',childCount,'children');
+	if(childCount > 3){
+		for(let i = 3; i < childCount; i++){
+			//FIXED AT 3 AS NODELIST IS DYNAMIC!!!
+			var child = table.childNodes[3];
+			//console.log(child);
+			table.removeChild(child);
+		}
+	}
+}
+
+/*function processNextSetupTile(){
+
+	if(arrSetupHexes.length <= 0){
+		alert('No more setup tiles!');
+		document.getElementById('setupTileInfo').innerHTML = '<b style="text-align: center;">Setup Complete!</b>';
+		return;
+	}
+	var thisTile = arrSetupHexes.shift();
+	row = thisTile[0];
+	col = thisTile[1];
+	var hex = grid[row][col];
+	drawSetupTile(hex,thisTile);
+	drawOntoCanvas(row, col);
+}*/
+
+function drawAllSetupTiles(delay){
+	//document.getElementById('allTilesDelayBtn').classList.add('delayAnim');
+	//console.log('Drawing all tiles', delay)
+	iteration++;
+	if(arrSetupHexes.length <= 0){
+		if(options['showAlert'] === true){
+			alert('Setup Complete!');
+		}
+		document.getElementById('setupTileInfo').innerHTML = '<b style="text-align: center;">Setup Complete!</b>';
+		clearInterval(t);
+		return;
+	}
+	var thisTile = arrSetupHexes.shift();
+	row = thisTile[0];
+	col = thisTile[1];
+	var hex = grid[row][col];
+	//console.log('Drawing next tile',thisTile,'remaining',arrSetupHexes.length);
+
+	if((hex.id === 14) && (options['solo'] === true)){
+		//NO TILE
+		console.log('Skipping setup tile 14 as solo play selected');
+	}else{
+		drawSetupTile(hex,thisTile);
+		drawOntoCanvas(row, col);
+	}
+	t = setTimeout(drawAllSetupTiles, delay, delay);
+}
 
 function drawSetupTile(hex,setupTile){
 
-	var setupTile = setupTiles.pop();
+	//console.log('Starting setup',)
+	var setupTile = arrSetupTiles.pop();
 
 	//OUPUT A TABLE SHOWING THE CURRENT SETUP TILE
 	var strOut = '<b>Setup Hex ' + hex.id + '</b><br>';
 	document.getElementById('setupTileInfo').innerHTML = strOut;
 
-	let neighbours = getNeighbours(hex.row, hex.col, 7, 10);
+	var [row, col] = getGridCoordsFromHexId(hex.id);
+
+	//let neighbours = getNeighbours(hex.row, hex.col, 7, 10);
+	let neighbours = getNeighbours(row, col, 7, 10);
 
 	//CREATE A TABLE ROW
 	let thisRow = document.createElement('tr');
@@ -21,12 +141,12 @@ function drawSetupTile(hex,setupTile){
 	//CREATE THE FIRST TD
 	let td = document.createElement('td');
 	//THIS TD CONTAINS THE SETUP TILE NUMBER
-	td.innerHTML = setupTilesToDraw - arrSetupTiles.length;
+	td.innerHTML = setupTilesToDraw - arrSetupHexes.length;
 	//APPEND TO ROW
 	thisRow.appendChild(td);
 
-	//LOOP THROUGH THE ELEMENTS ON THIS SETUP TILE
-	for(let i = 0; i < Object.keys(setupTile).length; i++){
+	//LOOP THROUGH THE ELEMENTS ON THIS SETUP TILE (TO maxIndex - 1, redClip)
+	for(let i = 0; i < Object.keys(setupTile).length - 1; i++){
 		
 		//IF THE NEIGHBOUR IN THIS DIRECTION IS NOT NULL
 		if(neighbours[i] !== null){
@@ -74,10 +194,11 @@ function drawSetupTile(hex,setupTile){
 
 	document.getElementById('setupStepsTable').appendChild(thisRow);
 
-	//FOR EACH NEIGHBOUR
-	for(let i = 0; i < Object.keys(setupTile).length; i++){
+	//FOR EACH NEIGHBOUR (maxIndex - 1, redClip)
+	for(let i = 0; i < Object.keys(setupTile).length - 1; i++){
 
-		neighbours = getNeighbours(hex.row, hex.col, 7, 10);
+		//neighbours = getNeighbours(hex.row, hex.col, 7, 10);
+		neighbours = getNeighbours(row, col, 7, 10);
 
 		if (neighbours[i] === null){
 
@@ -113,6 +234,7 @@ function drawSetupTile(hex,setupTile){
 	}
 }
 
+
 function resetMap(){
 	window.location.reload();
 }
@@ -136,22 +258,37 @@ function highlightTableCells(hexId){
 
 function giveCoal(hex){
 
+	//NO COAL ON WESTERN BOARD
+	if(grid.board === grid.western){
+		return false;
+	}
+	//CHECK VALID HEX
 	if(hex === false){
 		return false;
 	}
-	//RESOURCES ARE NEVER PLACED IN COASTAL OR EMPTY HEXES
+	//EASTERN - RESOURCES ARE NEVER PLACED IN COASTAL OR EMPTY HEXES
 	if(
 		(hex.type === 'coastal') ||
 		(hex.type === 'empty')
 	){
 		return false;
 	}
+	//TAZMANIA - NO RESOURCES ON CORNLANDS/LAKES
+	if(
+		(hex.type === 'cornlands') ||
+		(hex.type === 'lakes')
+	){
+		return false;
+	}
+
+	//VALID HEX - GIVE RESOURCES
 	hex.resources.coal += resources.coal.count;
 	return hex;
 }
 
 function giveIron(hex){
 
+	//CHECK VALID HEX
 	if(hex === false){
 		return false;
 	}
@@ -162,12 +299,29 @@ function giveIron(hex){
 	){
 		return false;
 	}
+	//TAZMANIA - NO RESOURCES ON CORNLANDS/LAKES
+	if(
+		(hex.type === 'cornlands') ||
+		(hex.type === 'lakes')
+	){
+		return false;
+	}
+
+	//VALID HEX - GIVE RESOURCES
 	hex.resources.iron += resources.iron.count;
 	return hex;
 }
 
 function givePhos(hex){
 
+	//NO PHOS ON WESTERN/TAZMANIA BOARD
+	if(
+		(grid.board === grid.western) ||
+		(grid.board === grid.tazmania)
+	){
+		return false;
+	}
+	//CHECK VALID HEX
 	if(hex === false){
 		return false;
 	}
@@ -178,6 +332,15 @@ function givePhos(hex){
 	){
 		return false;
 	}
+	//TAZMANIA - NO RESOURCES ON CORNLANDS/LAKES
+	if(
+		(hex.type === 'cornlands') ||
+		(hex.type === 'lakes')
+	){
+		return false;
+	}
+
+	//VALID HEX - GIVE RESOURCES
 	hex.resources.phos += resources.phos.count;
 	return hex;
 }
@@ -194,6 +357,15 @@ function giveGold(hex){
 	){
 		return false;
 	}
+	//TAZMANIA - NO RESOURCES ON CORNLANDS/LAKES
+	if(
+		(hex.type === 'cornlands') ||
+		(hex.type === 'lakes')
+	){
+		return false;
+	}
+
+	//VALID HEX - GIVE RESOURCES
 	hex.resources.gold += resources.gold.count;
 	return hex;
 }
@@ -217,7 +389,7 @@ function giveOldOne(hex){
 
 function getHexIdFromGridCoords(row, col){
 
-    return getHexByCoords(board, row, col).id;
+    return getHexByCoords(row, col).id;
 }
 function getHexByCoords(row, col){
 
@@ -276,68 +448,10 @@ function getHexById(id){
 	}
 }
 
-function init(){
-	
-	limit = 3;
-	setups = 0;
-	setupTiles = shuffle(setupTiles);
 
-	//ITERATE ROWS
-	for(let row = 0; row < grid.length; row++){
-		
-		//ITERATE COLUMNS
-		for(let col = 0; col < grid[row].length; col++){
-
-			var hex = grid[row][col];
-			hex.resources = JSON.parse(JSON.stringify(emptyResources));
-
-			if(hex.setupTile === true){
-
-				arrSetupTiles.push([row, col]);
-			}
-		}
-	}
-	highlightRow = arrSetupTiles[0][0];
-	highlightCol = arrSetupTiles[0][1];
-	drawOntoCanvas(highlightRow, highlightCol);
-}
-
-function processNextSetupTile(){
-
-	if(arrSetupTiles.length <= 0){
-		alert('No more setup tiles!');
-		document.getElementById('setupTileInfo').innerHTML = '<b style="text-align: center;">Setup Complete!</b>';
-		return;
-	}
-	var thisTile = arrSetupTiles.shift();
-	row = thisTile[0];
-	col = thisTile[1];
-	var hex = grid[row][col];
-	drawSetupTile(hex,thisTile);
-	drawOntoCanvas(row, col);
-}
-
-function drawAllSetupTiles(delay){
-	document.getElementById('allTilesDelayBtn').classList.add('delayAnim');
-	console.log('Drawing all tiles', delay)
-	iteration++;
-	if(arrSetupTiles.length <= 0){
-		if(options['showAlert'] === true){
-			alert('Setup Complete!');
-		}
-		document.getElementById('setupTileInfo').innerHTML = '<b style="text-align: center;">Setup Complete!</b>';
-		clearInterval(t);
-		return;
-	}
-	var thisTile = arrSetupTiles.shift();
-	row = thisTile[0];
-	col = thisTile[1];
-	var hex = grid[row][col];
-	drawSetupTile(hex,thisTile);
-	drawOntoCanvas(row, col);
-	t = setTimeout(drawAllSetupTiles, delay, delay);
-}
-
+/**
+ * UTILITY FUNCTIONS
+ */
 //https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
 function shuffle(a) {
 	var j, x, i;

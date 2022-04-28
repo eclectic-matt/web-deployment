@@ -52,7 +52,8 @@ var setupTiles = [
 		3: 'iron',
 		4: null,
 		5: 'oldOne',
-		6: 'coal'
+		6: 'coal',
+		redClip: true
 	},
 	{
 		0: 'oldOne',
@@ -61,7 +62,8 @@ var setupTiles = [
 		3: 'oldOne',
 		4: 'phos',
 		5: 'coal',
-		6: 'oldOne'
+		6: 'oldOne',
+		redClip: false
 	},
 	{
 		0: 'oldOne',
@@ -70,7 +72,8 @@ var setupTiles = [
 		3: 'coal',
 		4: null,
 		5: 'gold',
-		6: null
+		6: null,
+		redClip: false
 	},
 	{
 		0: 'iron',
@@ -79,7 +82,8 @@ var setupTiles = [
 		3: null,
 		4: 'oldOne',
 		5: null,
-		6: 'oldOne'
+		6: 'oldOne',
+		redClip: false
 	},
 	{
 		0: 'gold',
@@ -88,7 +92,8 @@ var setupTiles = [
 		3: 'oldOne',
 		4: null,
 		5: 'oldOne',
-		6: null
+		6: null,
+		redClip: true
 	},
 	{
 		0: 'coal',
@@ -97,7 +102,8 @@ var setupTiles = [
 		3: 'oldOne',
 		4: null,
 		5: null,
-		6: 'gold'
+		6: 'gold',
+		redClip: false
 	},
 	{
 		0: 'oldOne',
@@ -106,7 +112,8 @@ var setupTiles = [
 		3: null,
 		4: 'oldOne',
 		5: null,
-		6: 'coal'
+		6: 'coal',
+		redClip: false
 	},
 	{
 		0: 'gold',
@@ -115,7 +122,8 @@ var setupTiles = [
 		3: null,
 		4: null,
 		5: null,
-		6: 'oldOne'
+		6: 'oldOne',
+		redClip: true
 	},
 	{
 		0: null,
@@ -124,7 +132,8 @@ var setupTiles = [
 		3: null,
 		4: 'oldOne',
 		5: null,
-		6: 'iron'
+		6: 'iron',
+		redClip: true
 	},
 	{
 		0: 'gold',
@@ -133,7 +142,8 @@ var setupTiles = [
 		3: null,
 		4: 'oldOne',
 		5: null,
-		6: 'phos'
+		6: 'phos',
+		redClip: false
 	},
 	{
 		0: 'phos',
@@ -142,7 +152,8 @@ var setupTiles = [
 		3: null,
 		4: 'oldOne',
 		5: 'coal',
-		6: 'oldOne'
+		6: 'oldOne',
+		redClip: true
 	},
 	{
 		0: 'oldOne',
@@ -151,7 +162,8 @@ var setupTiles = [
 		3: 'gold',
 		4: null,
 		5: 'coal',
-		6: 'oldOne'
+		6: 'oldOne',
+		redClip: false
 	},
 	{
 		0: null,
@@ -160,7 +172,8 @@ var setupTiles = [
 		3: 'oldOne',
 		4: 'phos',
 		5: 'oldOne',
-		6: null
+		6: null,
+		redClip: false
 	},
 	{
 		0: 'iron',
@@ -169,7 +182,8 @@ var setupTiles = [
 		3: 'gold',
 		4: null,
 		5: 'oldOne',
-		6: null
+		6: null,
+		redClip: true
 	},
 	{
 		0: 'oldOne',
@@ -178,7 +192,8 @@ var setupTiles = [
 		3: null,
 		4: null,
 		5: 'oldOne',
-		6: 'coal'
+		6: 'coal',
+		redClip: false
 	},
 	{
 		0: null,
@@ -187,7 +202,8 @@ var setupTiles = [
 		3: 'oldOne',
 		4: 'iron',
 		5: null,
-		6: 'oldOne'
+		6: 'oldOne',
+		redClip: true
 	},
 	{
 		0: 'oldOne',
@@ -196,7 +212,8 @@ var setupTiles = [
 		3: null,
 		4: 'gold',
 		5: null,
-		6: 'coal'
+		6: 'coal',
+		redClip: false
 	},
 	{
 		0: 'oldOne',
@@ -205,7 +222,8 @@ var setupTiles = [
 		3: 'phos',
 		4: 'oldOne',
 		5: null,
-		6: 'coal'
+		6: 'coal',
+		redClip: false
 	},
 	{
 		0: 'oldOne',
@@ -214,7 +232,8 @@ var setupTiles = [
 		3: 'oldOne',
 		4: 'phos',
 		5: 'coal',
-		6: 'oldOne'
+		6: 'oldOne',
+		redClip: false
 	},
 	{
 		0: 'oldOne',
@@ -223,7 +242,8 @@ var setupTiles = [
 		3: 'coal',
 		4: null,
 		5: 'oldOne',
-		6: 'coal'
+		6: 'coal',
+		redClip: false
 	}
 ];
 
@@ -303,10 +323,682 @@ const hexTypes = {
 		color: '#fff',
 		fontWeight: '15px',
 		description: 'Tiles with a setup symbol'
+	},
+	'westernFarm': {
+		color: '#00cc66',
+		farmType: 'cow|corn|sheep',
+		description: 'Western Board, all farm types, green'
+	},
+	'westernHill': {
+		color: '#cc0',
+		farmType: null,
+		description: 'Western Board, no farms, yellow'
+	},
+	'cornlands': {
+		color: '#cccc00',
+		farmType: 'corn',
+		description: 'TaZmania Board, Cornlands, no resources, yellow'
+	},
+	'lakes': {
+		color: '#00d',
+		farmType: null,
+		description: 'TaZmania Board - Lakes, no resouces, blue'
 	}
 };
 
+/**
+ * WESTERN AUZ RULES:
+ * DO NOT PLACE ANY COAL OR PHOSPHATES
+ * RESOURCES CAN BE PLACED IN GREEN FARMLAND HEXES
+ * PLACE 3VP AND 5VP TOKENS AS INDICATED
+ * 
+ * TAZMANIA RULES:
+ * DO NOT PLACE ANY PHOSPHATES
+ * NO RESOURCES ARE PLACED IN CORNLANDS OR LAKES
+ * 
+ */
 var boards = {
+	western: {
+		grid: [
+			[
+				/** ROW 0 */
+				{
+					id: 'r0c0',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 1,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 10,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 19,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 27,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 28,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 35,
+					type: 'westernHill',
+					level: 2,
+					vpToken: 3,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 36,
+					type: 'westernHill',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 43,
+					type: 'westernHill',
+					level: 3,
+					vpToken: 3,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 44,
+					type: 'westernHill',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 48,
+					type: 'westernHill',
+					level: 3,
+					vpToken: 5,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 1 */
+				{
+					id: 'r1c0',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 2,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 11,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 12,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 20,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 21,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 29,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 30,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 37,
+					type: 'westernHill',
+					level: 3,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 45,
+					type: 'westernHill',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 49,
+					type: 'westernHill',
+					level: 3,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+			],
+			[
+				/** ROW 2 */
+				{
+					id: 'r2c0',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c1',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 3,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 4,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 13,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 14,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 22,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 31,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 38,
+					type: 'westernHill',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 46,
+					type: 'westernHill',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 50,
+					type: 'westernHill',
+					level: 3,
+					vpToken: 5,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 3 */
+				{
+					id: 'r3c0',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r3c1',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r3c2',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r3c3',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 5,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 15,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 23,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 32,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 39,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 40,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 47,
+					type: 'westernHill',
+					level: 3,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+			],
+			[
+				/** ROW 4 */
+				{
+					id: 'r4c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c1',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c2',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c3',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 6,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 16,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 24,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 25,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 33,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 34,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 41,
+					type: 'westernHill',
+					level: 2,
+					vpToken: 3,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 5 */
+				{
+					id: 'r5c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c1',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c2',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c3',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 7,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 8,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 17,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 18,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 26,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c9',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 42,
+					type: 'westernHill',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 6 */
+				{
+					id: 'r6c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c1',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c2',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c3',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c4',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c5',
+					type: 'westernFarm',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 9,
+					type: 'westernHill',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c7',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c8',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c9',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c10',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			]
+		]
+	},
 	eastern: {
 		grid: [
 			[
