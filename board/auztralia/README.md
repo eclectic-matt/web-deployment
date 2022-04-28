@@ -40,16 +40,16 @@ Gold (yellow)
 &#128993;
 
 Phos (white)
-&#9675;
+&#9634;
 
 Old Ones (purple)
 &#129002;
 
-Null (red X)
+Null ( X)
 &#120;
 
 Iron (Checkerboard?)
-&#128638;
+&#9647;
 
 Coal (black half block)
 &#9604;
