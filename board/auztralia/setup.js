@@ -259,9 +259,9 @@ function highlightTableCells(hexId){
 function giveCoal(hex){
 
 	//NO COAL ON WESTERN BOARD
-	if(grid.board === grid.western){
+	/*if(grid.board === grid.western){
 		return false;
-	}
+	}*/
 	//CHECK VALID HEX
 	if(hex === false){
 		return false;
@@ -315,12 +315,12 @@ function giveIron(hex){
 function givePhos(hex){
 
 	//NO PHOS ON WESTERN/TAZMANIA BOARD
-	if(
+	/*if(
 		(grid.board === grid.western) ||
 		(grid.board === grid.tazmania)
 	){
 		return false;
-	}
+	}*/
 	//CHECK VALID HEX
 	if(hex === false){
 		return false;
