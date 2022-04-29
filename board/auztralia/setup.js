@@ -62,7 +62,7 @@ function init(){
 			(options['difficulty'] === 'insane')
 		){
 			//SKIP - RED CLIP TILES SKIPPED FOR INSANE DIFFICULTY
-			console.log(tileCounter,'This survey tile was skipped due to insane diff', setupTiles[i]);
+			//console.log(tileCounter,'This survey tile was skipped due to insane diff', setupTiles[i]);
 		}else{
 			arrSetupTiles[tileCounter] = setupTiles[tileCounter];
 			tileCounter++;

@@ -22,34 +22,12 @@ No. This tool currently has the Eastern board, and all setup tiles from the base
 There are several changes still needed, as follows:
 * better overall styling and responsive layout (desktop/phone)
 * check remaining old ones/resources (unlimited at present)
-* allow solo setup (no tile 14)
-* play on the Western or Tazmania boards
-* choose difficulty (INSANE, remove Survey tiles with a red clip)
-* form options to select boards, solo, difficulty
+* play on the Tazmania board
 * a key/reference within the page to identify icons
 
 These will be added in the near future.
 
 ## Known Issues
 There are a few bugs which I've identified in my testing so far, as follows:
-* Additional setup tiles drawn between runs (shows tile 1, 13, 1, 2, 3 in the table)
 * Visual fixes for Western Board
 * Unlimited resources (e.g. old ones)
-
-Gold (yellow)
-&#128993;
-
-Phos (white)
-&#9634;
-
-Old Ones (purple)
-&#129002;
-
-Null ( X)
-&#120;
-
-Iron (Checkerboard?)
-&#9647;
-
-Coal (black half block)
-&#9604;
