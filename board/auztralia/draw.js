@@ -84,13 +84,23 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 
 	//OFFSET FROM EDGES?
 	var cnv = document.getElementById('canvas');
-	if(options['board'] === 'tazmania'){
-		var xOffset = Math.max(0,cnv.width - targetWidth) / 2;
-		var yOffset = -85;
-		height += 100;
-	}else{
-		var xOffset = Math.max(0,cnv.width - targetWidth) / 2;
-		var yOffset = Math.max(0,cnv.height - targetHeight) / 2;
+	switch(options['board']){
+		case 'eastern':
+			var xOffset = Math.max(0,cnv.width - targetWidth) / 2;
+			var yOffset = Math.max(0,cnv.height - targetHeight) / 2;
+		break;
+		case 'western':
+			var xOffset = 25;
+			var yOffset = 25;
+			width += xOffset;
+			height += yOffset;
+		break;
+		case 'tazmania':
+			var xOffset = 50;
+			var yOffset = -75;
+			height += 100;
+			width += xOffset;
+		break;
 	}
 	
 
