@@ -52,6 +52,7 @@ function init(){
 	highlightCol = arrSetupHexes[0][1];
 	options['highlightRow'] = highlightRow;
 	options['highlightCol'] = highlightCol;
+	setupTilesToDraw = arrSetupHexes.length;
 
 	var tileCounter = 0;
 	//GENERATE AN ARRAY OF *DYNAMIC* SETUP TILES
