@@ -1,6 +1,7 @@
-hexScale = 20;
+//THE TARGET WIDTH/HEIGHT (CANVAS SCALED TO MATCH)
 targetWidth = 900;
 targetHeight = 700;
+//THE CURRENT WIDTH/HEIGHT (MINOR CHANGES IGNORED)
 currentWidth = 900;
 currentHeight = 700;
 
@@ -22,9 +23,16 @@ function adjustWindowScale(){
 
 	//DO NOT REDRAW FOR SMALL CHANGES (MOBILE SCROLL)
 	if(Math.abs(currentWidth - window.innerWidth) < 10){
+
+		//UPDATE CURRENT WIDTH AND EXIT
 		currentWidth = window.innerWidth;
 		return false;
+	}else{
+
+		//JUST UPDATE CURRENT WIDTH
+		currentWidth = window.innerWidth;
 	}
+	
 	var cnv = document.getElementById('canvas');
 	var ctx = cnv.getContext('2d');
 
@@ -33,14 +41,21 @@ function adjustWindowScale(){
 
 	//clearCanvas(ctx,cnv.width,cnv.height);
 
-	//GET SCALE
-	var widthScale = cnv.width / targetWidth;
-	var heightScale = cnv.height / targetHeight;
+	//CHANGE SCALING (NOT WORKING FOR TAZMANIA)
+	if(options['board'] === 'tazmania'){
+		//USE CUSTOM WIDTH/HEIGHT
+		widthScale = cnv.width / 1200;
+		heightScale = cnv.height / 900;
+	}else{
+		//USE STANDARD TARGETS (900 x 700)
+		widthScale = cnv.width / targetWidth;
+		heightScale = cnv.height / targetHeight;	
+	}
 
 	//APPLY TO CANVAS
 	ctx.scale(widthScale, heightScale);
 	
-	console.log(cnv.width, cnv.height, widthScale,heightScale);
+	//console.log(cnv.width, cnv.height, widthScale,heightScale);
 
 	//DRAW CANVAS
 	drawOntoCanvas(options['highlightRow'], options['highlightCol']);
@@ -64,10 +79,20 @@ function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 	maxRow = grid.length;
 	maxCol = grid[maxRow - 1].length;
 
+	//CLEAR BEFORE DRAW
+	clearCanvas(ctx,targetWidth,targetHeight);
+
 	//OFFSET FROM EDGES?
 	var cnv = document.getElementById('canvas');
-	var xOffset = Math.max(0,cnv.width - targetWidth) / 2;
-	var yOffset = Math.max(0,cnv.height - targetHeight) / 2;
+	if(options['board'] === 'tazmania'){
+		var xOffset = Math.max(0,cnv.width - targetWidth) / 2;
+		var yOffset = -85;
+		height += 100;
+	}else{
+		var xOffset = Math.max(0,cnv.width - targetWidth) / 2;
+		var yOffset = Math.max(0,cnv.height - targetHeight) / 2;
+	}
+	
 
 	//FOR EACH COLUMN
 	//y starts at r (scale factor, side length)

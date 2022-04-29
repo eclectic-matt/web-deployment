@@ -292,7 +292,7 @@ function giveCoal(hex){
 	//TAZMANIA - NO RESOURCES ON CORNLANDS/LAKES
 	if(
 		(hex.type === 'cornlands') ||
-		(hex.type === 'lakes')
+		(hex.type === 'lake')
 	){
 		return false;
 	}
@@ -318,7 +318,7 @@ function giveIron(hex){
 	//TAZMANIA - NO RESOURCES ON CORNLANDS/LAKES
 	if(
 		(hex.type === 'cornlands') ||
-		(hex.type === 'lakes')
+		(hex.type === 'lake')
 	){
 		return false;
 	}
@@ -351,7 +351,7 @@ function givePhos(hex){
 	//TAZMANIA - NO RESOURCES ON CORNLANDS/LAKES
 	if(
 		(hex.type === 'cornlands') ||
-		(hex.type === 'lakes')
+		(hex.type === 'lake')
 	){
 		return false;
 	}
@@ -376,7 +376,7 @@ function giveGold(hex){
 	//TAZMANIA - NO RESOURCES ON CORNLANDS/LAKES
 	if(
 		(hex.type === 'cornlands') ||
-		(hex.type === 'lakes')
+		(hex.type === 'lake')
 	){
 		return false;
 	}
@@ -389,6 +389,13 @@ function giveGold(hex){
 function giveOldOne(hex){
 
 	if(hex === false){
+		return false;
+	}
+	//NEW - CHECK LEVEL FOR OLD ONES?
+	if(
+		(hex.level < 1) &&
+		(hex.type !== 'cornlands')
+	){
 		return false;
 	}
 	//OLD ONES ARE NEVER PLACED IN HILL, COASTAL OR EMPTY HEXES

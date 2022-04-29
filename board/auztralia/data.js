@@ -344,7 +344,17 @@ const hexTypes = {
 		farmType: 'corn',
 		description: 'TaZmania Board, Cornlands, no resources, yellow'
 	},
-	'lakes': {
+	'tazmaniaHill': {
+		color: '#cc0',
+		farmType: 'cow',
+		description: 'TaZmania Board - cows, green'
+	},
+	'tazmaniaOutback': {
+		color: '#ff4d4d',
+		farmType: 'sheep',
+		description: 'TaZmania Board - sheep, red'
+	},
+	'lake': {
 		color: '#00d',
 		farmType: null,
 		description: 'TaZmania Board - Lakes, no resouces, blue'
@@ -363,6 +373,757 @@ const hexTypes = {
  * 
  */
 var boards = {
+	tazmania:{
+		grid: [
+			[
+				/** ROW 0 */
+				{
+					id: 'r0c0',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c1',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c2',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c3',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c4',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c5',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c6',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c7',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c8',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r0c9',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 1 */
+				{
+					id: 'r1c0',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r1c1',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r1c2',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r1c3',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r1c4',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r1c5',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r1c6',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r1c7',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r1c8',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r1c9',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 2 */
+				{
+					id: 'r2c0',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c1',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c2',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c3',
+					type: 'tazmaniaOutback',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c4',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c5',
+					type: 'lake',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c6',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c7',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c8',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r2c9',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 3 */
+				{
+					id: 'r3c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r3c1',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r3c2',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r3c3',
+					type: 'tazmaniaOutback',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r3c4',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r3c5',
+					type: 'tazmaniaOutback',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r3c6',
+					type: 'tazmaniaOutback',
+					level: 2,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r3c7',
+					type: 'tazmaniaOutback',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r3c8',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r3c9',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 4 */
+				{
+					id: 'r4c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c1',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c2',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c3',
+					type: 'tazmaniaOutback',
+					level: 2,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r4c4',
+					type: 'tazmaniaOutback',
+					level: 2,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c5',
+					type: 'tazmaniaOutback',
+					level: 3,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r4c6',
+					type: 'tazmaniaOutback',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c7',
+					type: 'tazmaniaOutback',
+					level: 2,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r4c8',
+					type: 'lake',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r4c9',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 5 */
+				{
+					id: 'r5c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c1',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c2',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c3',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c4',
+					type: 'tazmaniaOutback',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c5',
+					type: 'tazmaniaOutback',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c6',
+					type: 'tazmaniaOutback',
+					level: 3,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c7',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c8',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r5c9',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 6 */
+				{
+					id: 'r6c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c1',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c2',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c3',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c4',
+					type: 'tazmaniaOutback',
+					level: 2,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r6c5',
+					type: 'tazmaniaHill',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c6',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r6c7',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c8',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r6c9',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 7 */
+				{
+					id: 'r7c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r7c1',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r7c2',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r7c3',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r7c4',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r7c5',
+					type: 'tazmaniaOutback',
+					level: 1,
+					vpToken: null,
+					setupTile: true,
+					resources: false
+				},
+				{
+					id: 'r7c6',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r7c7',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r7c8',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r7c9',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			],
+			[
+				/** ROW 8 */
+				{
+					id: 'r8c0',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c1',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c2',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c3',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c4',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c5',
+					type: 'cornlands',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c6',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c7',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c8',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+				{
+					id: 'r8c9',
+					type: 'empty',
+					level: 0,
+					vpToken: null,
+					setupTile: false,
+					resources: false
+				},
+			]
+		]
+	},
 	western: {
 		grid: [
 			[
