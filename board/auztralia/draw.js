@@ -74,30 +74,37 @@ function clearCanvas(ctx, w, h){
 //https://eperezcosano.github.io/hex-grid/
 function drawHexGrid(ctx, width, height, r, highlightRow, highlightCol){
 
+	//CLEAR BEFORE DRAW
+	clearCanvas(ctx,targetWidth,targetHeight);
+
+	//SET UP VARIABLES
 	const a = 2 * Math.PI / 6;
 	row = 0;
 	maxRow = grid.length;
 	maxCol = grid[maxRow - 1].length;
+	//console.log(options['board'],maxRow,maxCol);
 
-	//CLEAR BEFORE DRAW
-	clearCanvas(ctx,targetWidth,targetHeight);
+	//OFFSETS
+	var xOffset = 0;
+	var yOffset = 0;
 
 	//OFFSET FROM EDGES?
 	var cnv = document.getElementById('canvas');
 	switch(options['board']){
 		case 'eastern':
-			var xOffset = Math.max(0,cnv.width - targetWidth) / 2;
-			var yOffset = Math.max(0,cnv.height - targetHeight) / 2;
+			xOffset = Math.max(25,cnv.width - targetWidth) / 2;
+			width += xOffset;
+			yOffset = Math.max(0,cnv.height - targetHeight) / 2;
 		break;
 		case 'western':
-			var xOffset = 25;
-			var yOffset = 25;
+			xOffset = 25;
+			yOffset = 25;
 			width += xOffset;
 			height += yOffset;
 		break;
 		case 'tazmania':
-			var xOffset = 50;
-			var yOffset = -75;
+			xOffset = 50;
+			yOffset = -75;
 			height += 100;
 			width += xOffset;
 		break;
