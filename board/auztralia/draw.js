@@ -1,6 +1,8 @@
 hexScale = 20;
 targetWidth = 900;
 targetHeight = 700;
+currentWidth = 900;
+currentHeight = 700;
 
 function drawOntoCanvas(highlightRow, highlightCol){
 
@@ -16,27 +18,13 @@ function drawOntoCanvas(highlightRow, highlightCol){
 	drawHexGrid(ctx, targetWidth, targetHeight, 50, highlightRow, highlightCol);
 }
 
-function initWindowScale(){
-	var cnv = document.getElementById('canvas');
-	var ctx = cnv.getContext('2d');
-
-	//RESET TRANSFORMS
-	ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-	clearCanvas(ctx,cnv.width,cnv.height);
-
-	//GET SCALE
-	var widthScale = 1 - cnv.width / targetWidth;
-	var heightScale = 1 - cnv.height / targetHeight;
-
-	//APPLY TO CANVAS
-	ctx.scale(widthScale, heightScale);
-	
-	console.log(widthScale,heightScale);
-}
-
 function adjustWindowScale(){
 
+	//DO NOT REDRAW FOR SMALL CHANGES (MOBILE SCROLL)
+	if(Math.abs(currentWidth - window.innerWidth) < 10){
+		currentWidth = window.innerWidth;
+		return false;
+	}
 	var cnv = document.getElementById('canvas');
 	var ctx = cnv.getContext('2d');
 

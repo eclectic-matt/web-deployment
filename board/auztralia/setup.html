@@ -128,10 +128,10 @@
 					<form id="optionsForm" class="w3-form" onsubmit="event.preventDefault(); processFormOptions();">
 						
 						<div class="w3-section w3-row">
-							<div class="w3-col s4 w3-right-align">
+							<div class="w3-col s5 w3-right-align">
 								<label for="board" class="w3-label w3-padding-large">Board: </label>
 							</div>
-							<div class="w3-col s8">
+							<div class="w3-col s7">
 								<select class="w3-select w3-border-round" name="board">
 									<!--option value="" disabled selected>Choose your board</option-->
 									<option value="eastern" selected>Eastern AuZtralia Board</option>
@@ -142,19 +142,19 @@
 						</div>
 
 						<div class="w3-section w3-row">
-							<div class="w3-col s4 w3-right-align">
+							<div class="w3-col s5 w3-right-align">
 								<label for="delay" class="w3-label w3-right-align">Delay (<span id="delaySecondsSpan">0</span>s): </label>
 							</div>
-							<div class="w3-col s8">
+							<div class="w3-col s7">
 								<input name="delay" onchange="updateDelaySecs(this.value)" class="w3-input w3-border" type="range" min="0" max="60" value="0"></input>
 							</div>
 						</div>
 
 						<div class="w3-section w3-row">
-							<div class="w3-col s4 w3-right-align">
+							<div class="w3-col s5 w3-right-align">
 								<label for="solo" class="w3-label ">Solo Play? </label>
 							</div>
-							<div class="w3-col s8">
+							<div class="w3-col s7">
 								<input name="solo" class="w3-check w3-border" type="checkbox"></input>
 							</div>
 						</div>
