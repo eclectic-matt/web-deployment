@@ -320,7 +320,7 @@ const hexTypes = {
 		description: 'Coastal, 1-2 tiles from ocean, yellow'
 	},
 	'empty': {
-		color: '#000',
+		color: '#034499',
 		farmType: 'none',
 		description: 'Empty, no tile, black'
 	},
@@ -355,7 +355,7 @@ const hexTypes = {
 		description: 'TaZmania Board - sheep, red'
 	},
 	'lake': {
-		color: '#00d',
+		color: '#3bdbed',
 		farmType: null,
 		description: 'TaZmania Board - Lakes, no resouces, blue'
 	}
