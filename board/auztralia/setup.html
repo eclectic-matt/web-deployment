@@ -10,9 +10,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<style>
-			/*canvas {
-				border: 10px solid black;
-			}*/
 			#canvas {
 				max-width: 900px;
 				max-height: 700px;
@@ -41,6 +38,7 @@
 			header {
 				width: 100%;
 				padding: 10px;
+				text-align: center;
 			}
 			header div {
 				width: 100%;
@@ -78,26 +76,9 @@
 			label {
 				padding-right: 20px !important;
 			}
-
-			/*https://stackoverflow.com/posts/48677869/timeline
-			.w3-row {
-				display: table !important;
-				width: 100% !important;
+			footer {
+				text-align: center;
 			}
-			.w3-col {
-				display: block !important;
-				padding: 16px !important;
-				float: none !important;
-			}
-
-			@media (min-width: 601px) {
-				.w3-col {
-					display: table-cell !important;
-					width: 50%;
-					
-				}
-			}*/
-
 		</style>
 	</head>
 <body onload="init()">
@@ -121,9 +102,9 @@
 
 		<div class="w3-col s12 m6 l6">
 			<header class="w3-card-4">
-				<div class="w3-container w3-purple">
+				<!--div class="w3-container w3-purple">
 					<h1>Settings</h1>
-				</div>
+				</div-->
 				<div id="optionsFormDiv" class="w3-card-4 w3-padding">
 					<form id="optionsForm" class="w3-form" onsubmit="event.preventDefault(); processFormOptions();">
 						
@@ -264,9 +245,9 @@
 
 		<div class="w3-col s12 m6 l6">
 			<header id="setupInfo" class="w3-card-4">
-				<div class="w3-container w3-purple">
+				<!--div class="w3-container w3-purple"-->
 					<h2 id='setupTileInfo'>Output Table</h2>
-				</div>
+				<!--/div-->
 				<br>
 				<div id="setupInfoDiv">
 					<table id='setupStepsTable' class="w3-table-all w3-center-align w3-tiny">
