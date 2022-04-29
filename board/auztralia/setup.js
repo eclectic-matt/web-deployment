@@ -74,6 +74,11 @@ function clearSetupTable(){
 	}
 }
 
+function updateDelaySecs(val){
+	var delaySecondsSpanEl = document.getElementById('delaySecondsSpan');
+	delaySecondsSpanEl.innerHTML = val;
+}
+
 function drawAllSetupTiles(delay){
 
 	iteration++;
@@ -171,11 +176,13 @@ function drawSetupTile(hex,setupTile){
 		if(setupTile[i] === null){
 			td.innerHTML = '____';
 		}else{
-			if(setupTile[i] === 'oldOne'){
+			let thisIcon = resources[setupTile[i]].fontIcon;
+			td.innerHTML = thisIcon;
+			/*if(setupTile[i] === 'olds'){
 				td.innerHTML = '<b>' + 'Old' + '</b>';
 			}else{
 				td.innerHTML = '<b>' + setupTile[i] + '</b>';
-			}
+			}*/
 			
 		}
 
@@ -216,7 +223,7 @@ function drawSetupTile(hex,setupTile){
 				neighbour = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 				neighbour = givePhos(neighbour);
 				break;
-			case 'oldOne':
+			case 'olds':
 				neighbour = getHexByCoords(neighbours[i][0], neighbours[i][1]);
 				neighbour = giveOldOne(neighbour);
 				break;

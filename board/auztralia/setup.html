@@ -3,6 +3,7 @@
 	<head>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<!--link rel="stylesheet" href="./style.css"-->
+		<script src="https://kit.fontawesome.com/4d890cebdc.js" crossorigin="anonymous"></script>
 		<script src="./data.js"></script>
 		<script defer src="./setup.js"></script>
 		<script defer src="./draw.js"></script>
@@ -21,7 +22,6 @@
 			table {
 				border: 1px solid black;
 				border-collapse: collapse;
-overflow-x: scroll ! important;
 			}
 			tr, th, td {
 				border: 1px solid black;
@@ -45,9 +45,10 @@ overflow-x: scroll ! important;
 			header div {
 				width: 100%;
 			}
-			div.setupTileInfoDiv{
+			#setupInfoDiv{
 				text-align: center !important;
-overflow-x: scroll !important;
+				width: 100%;
+				overflow-x: scroll !important;
 			}
 			h2.setupTileInfo {
 				font-size: '16px Arial';
@@ -126,8 +127,8 @@ overflow-x: scroll !important;
 				<div id="optionsFormDiv" class="w3-card-4 w3-padding">
 					<form id="optionsForm" class="w3-form" onsubmit="event.preventDefault(); processFormOptions();">
 						
-<div class="w3-section w3-row">
-						<div class="w3-col s4 w3-right-align">
+						<div class="w3-section w3-row">
+							<div class="w3-col s4 w3-right-align">
 								<label for="board" class="w3-label w3-padding-large">Board: </label>
 							</div>
 							<div class="w3-col s8">
@@ -142,10 +143,10 @@ overflow-x: scroll !important;
 
 						<div class="w3-section w3-row">
 							<div class="w3-col s4 w3-right-align">
-								<label for="delay" class="w3-label w3-right-align">Delay (s): </label>
+								<label for="delay" class="w3-label w3-right-align">Delay (<span id="delaySecondsSpan">0</span>s): </label>
 							</div>
 							<div class="w3-col s8">
-								<input name="delay" class="w3-input w3-border" type="range" min="0" max="60" value="0"></input>
+								<input name="delay" onchange="updateDelaySecs(this.value)" class="w3-input w3-border" type="range" min="0" max="60" value="0"></input>
 							</div>
 						</div>
 
@@ -193,16 +194,44 @@ overflow-x: scroll !important;
 						}
 					</script>
 
+					<div class="w3-card-8">
+						<table class="w3-table-all">
+							<tr>
+								<th>Resource</th>
+								<th>Icon</th>
+							</tr>
+							<tr>
+								<td>Coal</td>
+								<td><i style="color: black;" class="fa-solid fa-industry"></i></td>
+							</tr>
+							<tr>
+								<td>Iron</td>
+								<td><i style="color: grey;" class="fa-solid fa-ticket-simple"></i></td>
+							</tr>
+							<tr>
+								<td>Gold</td>
+								<td><i style="color: yellow;" class="fa-solid fa-star"></i></td>
+							</tr>
+							<tr>
+								<td>Phos</td>
+								<td><i style="color: white;" class="fa-solid fa-flask-vial"></i></td>
+							</tr>
+							<tr>
+								<td>Old Ones</td>
+								<td><i style="color: purple;" class="fa-brands fa-wolf-pack-battalion"></i></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</header>
 		</div>
 
 		<div class="w3-col s12 m6 l6">
 			<header id="setupInfo" class="w3-card-4">
-					<div class="w3-container w3-purple">
-						<h2 id='setupTileInfo'>Output Table</h2>
-					</div>
-<div id="setupInfoDiv">
+				<div class="w3-container w3-purple">
+					<h2 id='setupTileInfo'>Output Table</h2>
+				</div>
+				<div id="setupInfoDiv">
 					<table id='setupStepsTable' class="w3-table-all w3-center-align w3-tiny">
 						<tr>
 							<th></th>

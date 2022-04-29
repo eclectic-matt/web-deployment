@@ -48,27 +48,27 @@ var setupTiles = [
 	{
 		0: null,
 		1: null,
-		2: 'oldOne',
+		2: 'olds',
 		3: 'iron',
 		4: null,
-		5: 'oldOne',
+		5: 'olds',
 		6: 'coal',
 		redClip: true
 	},
 	{
-		0: 'oldOne',
-		1: 'oldOne',
+		0: 'olds',
+		1: 'olds',
 		2: 'gold',
-		3: 'oldOne',
+		3: 'olds',
 		4: 'phos',
 		5: 'coal',
-		6: 'oldOne',
+		6: 'olds',
 		redClip: false
 	},
 	{
-		0: 'oldOne',
+		0: 'olds',
 		1: 'phos',
-		2: 'oldOne',
+		2: 'olds',
 		3: 'coal',
 		4: null,
 		5: 'gold',
@@ -78,39 +78,39 @@ var setupTiles = [
 	{
 		0: 'iron',
 		1: null,
-		2: 'oldOne',
+		2: 'olds',
 		3: null,
-		4: 'oldOne',
+		4: 'olds',
 		5: null,
-		6: 'oldOne',
+		6: 'olds',
 		redClip: false
 	},
 	{
 		0: 'gold',
 		1: null,
 		2: null,
-		3: 'oldOne',
+		3: 'olds',
 		4: null,
-		5: 'oldOne',
+		5: 'olds',
 		6: null,
 		redClip: true
 	},
 	{
 		0: 'coal',
-		1: 'oldOne',
+		1: 'olds',
 		2: null,
-		3: 'oldOne',
+		3: 'olds',
 		4: null,
 		5: null,
 		6: 'gold',
 		redClip: false
 	},
 	{
-		0: 'oldOne',
+		0: 'olds',
 		1: 'gold',
 		2: null,
 		3: null,
-		4: 'oldOne',
+		4: 'olds',
 		5: null,
 		6: 'coal',
 		redClip: false
@@ -118,19 +118,19 @@ var setupTiles = [
 	{
 		0: 'gold',
 		1: 'iron',
-		2: 'oldOne',
+		2: 'olds',
 		3: null,
 		4: null,
 		5: null,
-		6: 'oldOne',
+		6: 'olds',
 		redClip: true
 	},
 	{
 		0: null,
-		1: 'oldOne',
+		1: 'olds',
 		2: null,
 		3: null,
-		4: 'oldOne',
+		4: 'olds',
 		5: null,
 		6: 'iron',
 		redClip: true
@@ -138,9 +138,9 @@ var setupTiles = [
 	{
 		0: 'gold',
 		1: null,
-		2: 'oldOne',
+		2: 'olds',
 		3: null,
-		4: 'oldOne',
+		4: 'olds',
 		5: null,
 		6: 'phos',
 		redClip: false
@@ -150,48 +150,48 @@ var setupTiles = [
 		1: null,
 		2: null,
 		3: null,
-		4: 'oldOne',
+		4: 'olds',
 		5: 'coal',
-		6: 'oldOne',
+		6: 'olds',
 		redClip: true
 	},
 	{
-		0: 'oldOne',
+		0: 'olds',
 		1: null,
 		2: null,
 		3: 'gold',
 		4: null,
 		5: 'coal',
-		6: 'oldOne',
+		6: 'olds',
 		redClip: false
 	},
 	{
 		0: null,
-		1: 'oldOne',
+		1: 'olds',
 		2: 'iron',
-		3: 'oldOne',
+		3: 'olds',
 		4: 'phos',
-		5: 'oldOne',
+		5: 'olds',
 		6: null,
 		redClip: false
 	},
 	{
 		0: 'iron',
-		1: 'oldOne',
+		1: 'olds',
 		2: null,
 		3: 'gold',
 		4: null,
-		5: 'oldOne',
+		5: 'olds',
 		6: null,
 		redClip: true
 	},
 	{
-		0: 'oldOne',
+		0: 'olds',
 		1: null,
 		2: 'gold',
 		3: null,
 		4: null,
-		5: 'oldOne',
+		5: 'olds',
 		6: 'coal',
 		redClip: false
 	},
@@ -199,15 +199,15 @@ var setupTiles = [
 		0: null,
 		1: 'coal',
 		2: null,
-		3: 'oldOne',
+		3: 'olds',
 		4: 'iron',
 		5: null,
-		6: 'oldOne',
+		6: 'olds',
 		redClip: true
 	},
 	{
-		0: 'oldOne',
-		1: 'oldOne',
+		0: 'olds',
+		1: 'olds',
 		2: null,
 		3: null,
 		4: 'gold',
@@ -216,32 +216,32 @@ var setupTiles = [
 		redClip: false
 	},
 	{
-		0: 'oldOne',
-		1: 'oldOne',
+		0: 'olds',
+		1: 'olds',
 		2: null,
 		3: 'phos',
-		4: 'oldOne',
+		4: 'olds',
 		5: null,
 		6: 'coal',
 		redClip: false
 	},
 	{
-		0: 'oldOne',
+		0: 'olds',
 		1: 'iron',
 		2: null,
-		3: 'oldOne',
+		3: 'olds',
 		4: 'phos',
 		5: 'coal',
-		6: 'oldOne',
+		6: 'olds',
 		redClip: false
 	},
 	{
-		0: 'oldOne',
+		0: 'olds',
 		1: 'iron',
-		2: 'oldOne',
+		2: 'olds',
 		3: 'coal',
 		4: null,
-		5: 'oldOne',
+		5: 'olds',
 		6: 'coal',
 		redClip: false
 	}
@@ -258,27 +258,32 @@ var emptyResources = {
 var resources = {
 	"iron": {
 		type: "iron",
-		count: 3
+		count: 3,
+		fontIcon: '<i style="color: grey;" class="fa-solid fa-ticket-simple"></i>'
 	},
 	"coal": {
 		type: "coal",
-		count: 3
+		count: 3,
+		fontIcon: '<i style="color: black;" class="fa-solid fa-industry"></i>'
 	},
 	"gold": {
 		type: "gold",
-		count: 3
+		count: 3,
+		fontIcon: '<i style="color: yellow; background-color: lightgrey;" class="fa-solid fa-star"></i>'
 	},
 	"phos": {
-		type: "phosphorous",
-		count: 1
+		type: "phosphates",
+		count: 1,
+		fontIcon: '<i style="color: white; background-color: lightgrey;" class="fa-solid fa-flask-vial"></i>'
 	},
 	"olds": {
 		type: "oldOnes",
-		count: 1
+		count: 1,
+		fontIcon: '<i style="color: purple;" class="fa-brands fa-wolf-pack-battalion"></i>'
 	}
 };
 
-var oldOnesCounts = {
+var oldssCounts = {
 	1: {
 		level: 1,
 		count: 15,
