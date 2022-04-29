@@ -6,6 +6,7 @@ var iteration = 0;
 var options = [];
 options['showAlert'] = false;
 options['board'] = 'eastern';
+options['difficulty'] = 'standard';
 options['highlightRow'] = null;
 options['highlightCol'] = null;
 
@@ -52,9 +53,22 @@ function init(){
 	options['highlightRow'] = highlightRow;
 	options['highlightCol'] = highlightCol;
 
+	var tileCounter = 0;
 	//GENERATE AN ARRAY OF *DYNAMIC* SETUP TILES
-	for(let i = 0; i < arrSetupHexes.length; i++){
-		arrSetupTiles[i] = setupTiles[i];	
+	for(let i = 0; i < setupTiles.length; i++){
+		if(
+			(setupTiles[i].redClip === true) &&
+			(options['difficulty'] === 'insane')
+		){
+			//SKIP - RED CLIP TILES SKIPPED FOR INSANE DIFFICULTY
+			console.log(tileCounter,'This survey tile was skipped due to insane diff', setupTiles[i]);
+		}else{
+			arrSetupTiles[tileCounter] = setupTiles[tileCounter];
+			tileCounter++;
+			if(tileCounter >= arrSetupHexes.length){
+				break;
+			}
+		}
 	}	
 
 	//DRAW THE CANVAS
