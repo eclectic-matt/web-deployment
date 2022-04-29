@@ -345,7 +345,7 @@ const hexTypes = {
 		description: 'TaZmania Board, Cornlands, no resources, yellow'
 	},
 	'tazmaniaHill': {
-		color: '#cc0',
+		color: '#00cc66',
 		farmType: 'cow',
 		description: 'TaZmania Board - cows, green'
 	},
