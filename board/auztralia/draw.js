@@ -134,11 +134,13 @@ function drawHexagon(ctx, x, y, r, row, col, colour = null){
 
 	//PRINT NUMBER IF PRESENT
 	if(!isNaN(hex.id)){
+
 		drawHexId(ctx, x, y, hex.id, hex.setupTile);
 	}
+
 	//PRINT TRIANGLE ON SETUP TILES
 	if(hex.setupTile){
-		
+
 		drawTriangle(ctx, x + 15, y + 25, 18, '#666');
 	}
 
@@ -156,6 +158,24 @@ function drawHexagon(ctx, x, y, r, row, col, colour = null){
 				break;
 		}
 		drawLevelCircle(ctx, x, y, hex.level, col);
+	}
+
+	//IF THE HEX HAS A vpToken PROPERTY
+	if(hex.hasOwnProperty('vpToken')){
+		//IF vpToken IS NOT null
+		if(hex.vpToken !== null){
+			//GET THE COLOUR
+			switch(hex.vpToken){
+				case 3:
+					col = '#a00';
+				break;
+				case 5:
+					col = '#a0b';
+				break;
+			}
+			//DRAW A VP ICON
+			drawVPTile(ctx, x + 15, y + 25, 10, col, hex.vpToken);
+		}
 	}
 	
 	//PRINT RESOURCES
@@ -334,4 +354,52 @@ function drawTriangle(ctx, x, y, r, col){
 	ctx.arc(x, y + 1, 2, 0, 2 * Math.PI, false);
 	ctx.fill();
 	ctx.closePath();
+}
+
+function drawVPTile(ctx, x, y, r, col, value){
+	/*ctx.fillStyle = col;
+	ctx.beginPath();
+	ctx.moveTo(x-(r/2),y+(r/2));
+	ctx.lineTo(x+(r/2),y+(r/2));
+	ctx.lineTo(x,y-(r/2));
+	ctx.lineTo(x-(r/2),y+(r/2));
+	ctx.fill();
+	ctx.closePath();
+	ctx.beginPath();
+	ctx.fillStyle = '#fff';
+	ctx.arc(x, y + 1, 2, 0, 2 * Math.PI, false);
+	ctx.fill();
+	ctx.closePath();*/
+	drawHexagonShape(ctx, x, y, r, col);
+	ctx.font = '12px Arial';
+	ctx.fillStyle = '#fff';
+	ctx.fillText(value, x - (r/3), y + (r/2));
+}
+
+function drawTableIcons(){
+
+	//DRAW COAL
+	var coalCnv = document.getElementById('coalIconCnv');
+	coalCtx = coalCnv.getContext('2d');
+	drawCoal(coalCtx,5,5,5,1);
+	//DRAW IRON
+	var ironCnv = document.getElementById('ironIconCnv');
+	ironCtx = ironCnv.getContext('2d');
+	drawIron(ironCtx,5,5,4,1);
+	//DRAW GOLD
+	var goldCnv = document.getElementById('goldIconCnv');
+	goldCtx = goldCnv.getContext('2d');
+	drawGold(goldCtx,0,15,6,1);
+	//DRAW PHOS
+	var phosCnv = document.getElementById('phosIconCnv');
+	phosCtx = phosCnv.getContext('2d');
+	drawPhos(phosCtx,0,9,7,1);
+	//DRAW OLD ONE
+	var oldsCnv = document.getElementById('oldsIconCnv');
+	oldsCtx = oldsCnv.getContext('2d');
+	drawOldOne(oldsCtx,5,20,5,1);
+	//DRAW VP TOKEN
+	var vpCnv = document.getElementById('vpIconCnv');
+	vpCtx = vpCnv.getContext('2d');
+	drawVPTile(vpCtx,12,15,10,'#a00',1);
 }

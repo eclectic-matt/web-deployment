@@ -14,6 +14,9 @@ options['highlightCol'] = null;
  * INIT AND SETUP STEP FUNCTIONS
  */
 function init(){
+
+	//DRAW RESOURCES ON SETTINGS TABLE
+	drawTableIcons();
 	
 	//THE SELECTED BOARD IS THE NAME OF THE BOARD FROM THE OPTIONS
 	var selectedBoard = options['board'];
