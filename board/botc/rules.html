@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<script>
+			function accordion(id){
+				// Add the w3-red class to all opened accordions
+				var x = document.getElementById(id);
+				if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+				x.previousElementSibling.className += " w3-green";
+				} else {
+				x.className = x.className.replace("w3-show", "");
+				x.previousElementSibling.className =
+				x.previousElementSibling.className.replace("w3-green", "");
+				}
+			}
+		</script>
+		<style>
+			.accordion-content{
+				background-color: darkgray;
+			}
+			.accordion-heading {
+				font-family: Georgia, serif;
+				font-size: 20px;
+				font-weight: 900;
+			}
+			h3 {
+				text-decoration: underline;
+			}
+			h4 {
+				font-weight: bolder;
+				font-family: Georgia, serif;
+			}
+			hr, h3.w3-green {
+				padding: 0px;
+				margin: 0px;
+			}
+			/*h4::before{
+				content: "~~"
+			}
+			h4::after{
+				content: "~~"
+			}*/
+		</style>
+	</head>
+	<body>
+		<h1>Blood on the Clocktower</h1>
+		<p>This page provides an overview of the Blood on the Clocktower rules</p>
+		<p>Visit the <a href="#editions">Editions</a> section to see character roles</p>
+
+		<button onclick="accordion('keyTerms')" class="w3-btn w3-block w3-blue accordion-heading">
+			Key Terms</button>
+		<div id="keyTerms" class="w3-hide accordion-content">
+
+			<h3>Character Types</h3>
+			<ul>
+				<li><b>Townsfolk</b> - these are on the good team with helpful abilities</li>
+				<li><b>Outsiders</b> - these are on the good team but have UNhelpful abilities</li>
+				<li><b>Minions</b> - these are on the bad team and have malicious abilities</li>
+				<li><b>Demon</b> - the head of the bad team who kills players</li>
+				<li><b>Character</b> - this is the name of a CHARACTER ROLE (i.e. not a player's name)</li>
+				<li><b>Player</b> - this is the name of a PLAYER (i.e. not a character role)</li>
+			</ul>
+
+			<h3>Conditions</h3>
+			<ul>
+				<li><b>Drunk</b> - your ability does not work and/or you are not the character you think</li>
+				<li><b>Poisoned</b> - your ability does not work</li>
+				<li><b>Executed</b> - you were voted to be killed (even if already dead!)</li>
+				<li><b>Dead</b> - you die and cannot use your ability, but can still talk, and vote once more</li>
+			</ul>
+
+			<h3>Gameflow</h3>
+			<p>The game has two main phases - Night and Day - which alternate until the game end.</p>
+			<ul>
+				<li><b>Night Phase</b> - this is when player abilities activate, and the demon kills a player (not first night)</li>
+				<li><b>Day Phase</b> - this is where players discuss who to nominate and vote to kill (once) and use day abilities</li>
+			</ul>
+			
+		</div>
+
+		<h2 id="editions">Editions</h2>
+		<button onclick="accordion('troubleBrewingEdition')" class="w3-btn w3-block w3-red accordion-heading">
+			Trouble Brewing</button>
+			
+		<div id="troubleBrewingEdition" class="w3-hide w3-center accordion-content">
+			
+			<!-- INTRO SECTION -->
+			<br>
+			<p>
+				<p>Trouble Brewing has a little bit of everything. 
+					Some characters passively receive information, some need to take action to learn who is who, while some simply want to bait the Demon into attacking them. 
+					Both good and evil can gain the upper hand by making well-timed sacrifices. 
+					Trouble Brewing is a relatively straightforward Demon-hunt, but evil has a number of dastardly misinformation tricks up their sleeves, so the good players best question what they think they know if they hope to survive.
+				</p>
+
+				<p>
+					<em>Beginner. Recommended for players and Storytellers new to Blood on the Clocktower or to social deception games.</em>
+				</p>
+
+				<p>
+					<b>Good players</b> will need to figure out who is good and who is evil by using logic and intuition. Some players may want to reveal which character they are and share their information immediately (such as the Chef or Investigator), while others may want to lie about their identity so that the Imp avoids attacking them (such as the Undertaker or Fortune Teller). Some may lie about who they are so that the Imp does attack them (such as the Ravenkeeper or Soldier)! Other good characters gain information by doing something and noticing the effect. Sacrificing one’s life by nominating a Virgin, attempting to kill the Imp as a Slayer and noticing what happens, or deliberately killing good players so that the Undertaker can confirm which character they were—these are all ways to sacrifice life and power to gain information and achieve victory.
+				</p>
+
+				<p>
+					<b>Evil players</b> will need to pretend to be good characters and do so well, giving false information to confuse the good team if necessary. With only true information, the good team will usually find out who is evil with enough time to spare. But with even a little believable falsehood in the air, evil has a chance. The Poisoner and Spy, if they pay attention, can cause huge confusion in the good team’s ranks by using their abilities sneakily. Evil will also need to decide when to make sacrifices. Will the Scarlet Woman kill the Imp to save their team? Will the Imp kill themself to turn a more trustworthy player into the Demon? Will the evil team vote to execute a suspicious Minion in order to look like honorable members of the town? Or will the Baron give obviously false information to make it look like a Poisoner is in the game? Causing confusion about which Minions are in play can be the difference between victory and defeat.
+				</p>
+
+				<b>Wiki Reference:</b> 
+				<a href="https://wiki.bloodontheclocktower.com/Trouble_Brewing">https://wiki.bloodontheclocktower.com/Trouble_Brewing</a>
+			</p>
+
+			<br>
+
+			<hr>
+
+			<!-- TOWNSFOLK SECTION -->
+			<h3 class="w3-green">Townsfolk</h3>
+			
+			<hr>
+			
+			<h4>Washer woman</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"You start knowing that 1 of 2 players is a particular Townsfolk"</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Washerwoman">Washerwoman - Blood on the Clocktower Wiki"</a>
+			</p>
+
+			<hr>
+			<h4>Librarian</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)"</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Librarian">https://wiki.bloodontheclocktower.com/Librarian"</a>
+			</p>
+
+			<hr>
+			<h4>Investigator</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"You start knowing that 1 of 2 players is a particular Minion."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Investigator">https://wiki.bloodontheclocktower.com/Investigator"</a>
+			</p>
+
+			<hr>
+			<h4>Chef</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"You start knowing how many pairs of evil players there are."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Chef">https://wiki.bloodontheclocktower.com/Chef"</a>
+			</p>
+
+			<hr>
+			<h4>Soldier</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"You are safe from the Demon."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Soldier">https://wiki.bloodontheclocktower.com/Soldier"</a>
+			</p>
+
+			<hr>
+			<h4>Empath</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Each night, you learn how many of your 2 alive neighbours are evil."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Empath">https://wiki.bloodontheclocktower.com/Empath"</a>
+			</p>
+
+			<hr>
+			<h4>Fortune Teller</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Fortune_Teller">https://wiki.bloodontheclocktower.com/Fortune_Teller"</a>
+			</p>
+
+			<hr>
+			<h4>Undertaker</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Each night*, you learn which character died by execution today."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Undertaker">https://wiki.bloodontheclocktower.com/Undertaker"</a>
+			</p>
+
+			<hr>
+			<h4>Raven keeper</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"If you die at night, you are woken to choose a player: you learn their character."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Ravenkeeper">https://wiki.bloodontheclocktower.com/Ravenkeeper"</a>
+			</p>
+
+			<hr>
+			<h4>Virgin</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Virgin">https://wiki.bloodontheclocktower.com/Virgin"</a>
+			</p>
+
+			<hr>
+			<h4>Slayer</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Once per game, during the day, publicly choose a player: if they are the Demon, they die."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Slayer">https://wiki.bloodontheclocktower.com/Slayer"</a>
+			</p>
+
+			<hr>
+			<h4>Monk</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Each night*, choose a player (not yourself): they are safe from the Demon tonight."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Monk">https://wiki.bloodontheclocktower.com/Monk"</a>
+			</p>
+
+			<hr>
+			<h4>Mayor</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Mayor">https://wiki.bloodontheclocktower.com/Mayor"</a>
+			</p>
+
+			<hr>
+
+			<!-- OUTSIDER SECTION -->
+			<h3 class="w3-blue">Outsider</h3>
+
+			<h4>Drunk</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"You do not know you are the Drunk. You think you are a Townsfolk character, but you are not."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Drunk">https://wiki.bloodontheclocktower.com/Drunk"</a>
+			</p>
+
+			<hr>
+			<h4>Recluse</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"You might register as evil & as a Minion or Demon, even if dead."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Recluse">https://wiki.bloodontheclocktower.com/Recluse"</a>
+			</p>
+
+			<hr>
+			<h4>Butler</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Butler">https://wiki.bloodontheclocktower.com/Butler"</a>
+			</p>
+
+			<hr>
+			<h4>Saint</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"If you die by execution, your team loses."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Saint">https://wiki.bloodontheclocktower.com/Saint"</a>
+			</p>
+
+			<hr>
+
+			<!-- MINION SECTION -->
+			<h3 class="w3-orange">Minion</h3>
+
+			<h4>Spy</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Each night, you see the Grimoire. You might register as good & as a Townsfolk or Outsider, even if dead."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Spy">https://wiki.bloodontheclocktower.com/Spy"</a>
+			</p>
+
+			<hr>
+			<h4>Baron</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"There are extra Outsiders in play. [+2 Outsiders]"</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Baron">https://wiki.bloodontheclocktower.com/Baron"</a>
+			</p>
+
+			<hr>
+			<h4>Poisoner</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Each night, choose a player: they are poisoned tonight and tomorrow day."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Poisoner">https://wiki.bloodontheclocktower.com/Poisoner"</a>
+			</p>
+
+			<hr>
+			<h4>Scarlet Woman</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don't count)"</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Scarlet_Woman">https://wiki.bloodontheclocktower.com/Scarlet_Woman"</a>
+			</p>
+
+			<hr>
+
+			<!-- DEMON SECTION -->
+			<h3 class="w3-red">Demon</h3>
+			
+			<h4>Imp</h4>
+			<p>
+					<b>Character Text: </b> 
+					<em>"Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp."</em>
+			</p>
+			<p>
+					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Imp">https://wiki.bloodontheclocktower.com/Imp</a>
+			</p>
+
+			<hr>
+
+		</div>
+		
+		<br>
+		
+		<button onclick="accordion('sectsAndVioletsEdition')" class="w3-btn w3-block w3-purple accordion-heading">
+			Sects & Violets</button>
+			
+		<div id="sectsAndVioletsEdition" class="w3-hide w3-center accordion-content">
+			
+		<em>Vibrant spring gives way to a warm and inviting summer. Flowers of every description blossom as far as the eye can see, tenderly nurtured in public gardens and window boxes overlooking the lavish promenade. Birds sing, artists paint and philosophers ponder life's greatest mysteries inside a bustling tavern as a circus pitches its endearingly ragged tent on the edge of town.
+
+As the townsfolk bask in frivolity and mischief, indulging themselves in fine entertainment and even finer wine, dark and clandestine forces are assembling. Witches and cults lurk in majestic ruins on the fringes of the community, hosting secret meetings in underground caves and malevolently plotting the downfall of Ravenswood Bluff and its revelers.
+
+The time is ripe for... Sects & Violets.</em>
+
+<p>Sects & Violets is the craziest of the three editions included in the base set. 
+Good characters get amazing information each and every night. 
+However, the evil team is extremely varied and threatening and can throw massive confusion into the mix. 
+Characters change alignment. 
+Players change characters. 
+Even the evil team can lose track of who is who. 
+This is also the first appearance of madness, which throws all manner of spanners into the works.</p>
+
+<p>Intermediate. 
+Recommended for players who want to do wild and unexpected things, pushing the limits of what can be achieved in a bluffing game.</p>
+
+<p>When playing Sects & Violets…</p>
+
+<p>Good players will almost always have more information than they know what to do with. 
+	Unlike in Trouble Brewing, where the good team can trust most of their information most of the time, the good team in Sects & Violets will need to figure out which Demon is in play to even begin to make sense of what’s going on. 
+		With a Fang Gu in play, all information is true, except for any that pertains to the Demon, who may swap players. 
+			With a No Dashii in play, two Townsfolk are poisoned, but if the good team can deduce which players these are, they’ll have found the Demon. 
+				With a Vigormortis in play, Townsfolk get poisoned when Minions die at night. 
+				With a Vortox in play, all information is false. 
+				Once the good team notices what information is right and what is wrong, they can backtrack and reverse what they thought they knew and begin to learn something valuable.</p>
+
+<p>To confuse things even further, Outsiders will usually want to lie about who they are for most of the game, and maybe even some Townsfolk will want to do the same. 
+An Outsider that dies can cause terrible disadvantages for the good team, so wise Demons will usually want to kill them as soon as possible.</p>
+
+<p>Evil players will want to kill or otherwise remove the threat of the most dangerous Townsfolk as soon as possible. 
+	Demons can only kill once per night, but Minions such as the Pit-Hag, Witch, and Cerenovus can really help thin out the good team’s ranks if the Minion is clever. 
+		Evil players should also consider whether they give true or false information to the group, since the group may reverse-engineer that information depending on which Demon they believe is in play.</p>
+		
+		<h3 class="w3-green">Townsfolk</h3>
+
+				 <hr>
+		
+		<h4>Mayor</h4>
+<p>
+<b>Character Text: </b> 
+<em>"If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Mayor">https://wiki.bloodontheclocktower.com/Mayor"</a>
+</p>
+
+<hr>
+
+<h4>Clockmaker</h4>
+<p>
+<b>Character Text: </b> 
+<em>"You start knowing how many steps from the Demon to its nearest Minion."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Clockmaker">https://wiki.bloodontheclocktower.com/Clockmaker"</a>
+</p>
+
+<hr>
+
+<h4>Dreamer</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, choose a player (not yourself or Travellers): you learn 1 good & 1 evil character, 1 of which is correct."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Dreamer">https://wiki.bloodontheclocktower.com/Dreamer"</a>
+</p>
+
+<hr>
+
+<h4>Snake Charmer</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Snake_Charmer">https://wiki.bloodontheclocktower.com/Snake_Charmer"</a>
+</p>
+
+<hr>
+
+<h4>Mathematician</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, you learn how many players' abilities worked abnormally (since dawn) due to another character's ability"</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Flower Girl</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, you learn if a Demon voted today."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Town Crier</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, you learn if a Minion nominated today."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Oracle</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, you learn how many dead players are evil."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Savant</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each day, you may visit the Storyteller to learn 2 things in private: 1 is true & 1 is false."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Seamstress </h4>
+<p>
+<b>Character Text: </b> 
+<em>"Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Philosopher</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Artist</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Once per game, during the day, privately ask the Storyteller any yes/no question."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Juggler </h4>
+<p>
+<b>Character Text: </b> 
+<em>"On your 1st day, publicly guess up to 5 players' characters. That night, you learn how many you got correct."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Sage</h4>
+<p>
+<b>Character Text: </b> 
+<em>"If the Demon kills you, you learn that it is 1 of 2 players."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+<h3 class="w3-blue">Outsider</h3>
+<hr>
+
+<h4>Mutant</h4>
+<p>
+<b>Character Text: </b> 
+<em>"If you are "mad" about being an Outsider, you might be executed."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Sweetheart</h4>
+<p>
+<b>Character Text: </b> 
+<em>"When you die, 1 player is drunk from now on."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Barber</h4>
+<p>
+<b>Character Text: </b> 
+<em>"If you died today or tonight, the Demon may choose 2 players (not another Demon) to swap characters."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Klutz </h4>
+<p>
+<b>Character Text: </b> 
+<em>"When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+<h3 class="w3-orange">Minion</h3>
+<hr>
+<h4>Evil Twin </h4>
+<p>
+<b>Character Text: </b> 
+<em>"You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Witch</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Cerenovus</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, choose a player & a good character: they are "mad" they are this character tomorrow, or might be executed."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Pit-Hag</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose a player & a character they become (if not in play). If a Demon is made, deaths tonight are arbitrary."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Pit_Hag">https://wiki.bloodontheclocktower.com/Pit_Hag"</a>
+</p>
+
+<hr>
+<h3 class="w3-red">Demon</h3>
+<hr>
+<h4>Fang Gu</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]"</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Vigormortis</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbor. [-1 Outsider]"</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>No Dashii</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose a player: they die. Your 2 Townsfolk neighbours are poisoned."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Vortox</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose a player; they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+</div>
+
+<br>
+
+<button onclick="accordion('badMoonRisingEdition')" class="w3-btn w3-block w3-yellow accordion-heading">
+			Bad Moon Rising</button>
+			
+		<div id="badMoonRisingEdition" class="w3-hide w3-center accordion-content">
+			
+		<em>The sun is swallowed by a jagged horizon as another winter's day surrenders to the night. Flecks of orange and red decay into deeper browns, the forest transforming in silent anticipation of the coming snow.
+
+Ravenous wolves howl from the bowels of a rocky crevasse beyond the town borders, sending birds scattering from their cozy rooks. Travellers hurry into the inn, seeking shelter from the gathering chill. They warm themselves with hot tea, sweet strains of music and hearty ale, unaware that strange and nefarious eyes stalk them from the ruins of this once great city.
+
+Tonight, even the livestock know there is a... Bad Moon Rising.</em>
+
+<p>Bad Moon Rising is a death extravaganza. Demons kill multiple times per night, and Minions get in on the action too. Good players can take great risks to gain reliable information, but may accidentally kill their friends in the process. Luckily, there are many options to keep players alive long past their use-by date. If the good team cannot determine which specific Minions and Demons are in play, however, their doom is all but certain.
+
+Intermediate. Recommended for players who are proactive, dedicated to working as a team, and don’t fear dying.
+
+When playing Bad Moon Rising…</p>
+
+
+<p>Good players will receive little information by being passive. Some Townsfolk abilities require the good team to execute players in order to gain information (such as the Tea Lady or the Pacifist), whilst others encourage good players to take risks that may end in death in order to find out who is who (such as the Gambler or the Gossip). When good players do something, they learn something.
+
+The good team will also need to pay close attention to who died at night, and how. If they ignore this, they risk losing unexpectedly at the end of a day with four, five, or even six players still left alive. However, if they can figure out how each player died at night, they can figure out which evil characters are in play—letting them avoid losing the game to the dreaded Mastermind or the intimidating Po—and get helpful clues on which good characters accidentally killed which players (such as the Moonchild or the Tinker).</p>
+	
+<p>Evil players may feel invincible at first, but they will need to use their abilities with precision and prudence in order to win. The Demon may need to convince the good team that a different Demon is in play to avoid the crippling effects of some good characters (such as the Exorcist or the Courtier), and may need to deliberately not kill to do so. But if the Demon can figure out who to attack and who to avoid attacking (such as the Tea Lady’s neighbours, or the Fool), then the good team is in serious trouble.
+
+The Minions will need to time their abilities well. A well-timed Assassin’s kill, a patient Devil’s Advocate, or a Mastermind that can read a room can pull victory from the jaws of defeat.</p>
+		
+		<h3 class="w3-green">Townsfolk</h3>
+
+				 <hr>
+				
+				<h4>Grandmother</h4>
+<p>
+<b>Character Text: </b> 
+<em>"You start knowing a good player & their character. If the Demon kills them, you die too."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Sailor</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, choose an alive player: either you or they are drunk until dusk. You can't die."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Chambermaid</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, choose 2 alive players (not yourself): you learn how many woke tonight due to their ability."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Exorcist</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Innskeeper</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Gambler</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose a player & guess their character: if you guess wrong, you die."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Gossip</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each day, you may make a public statement. Tonight, if it was true, a player dies."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Courtier</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Once per game, at night, choose a character: they are drunk for 3 nights & 3 days."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Professor</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Minstrel</h4>
+<p>
+<b>Character Text: </b> 
+<em>"When a Minion dies by execution, all other players (except Travellers) are drunk until dusk tomorrow."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Tea Lady</h4>
+<p>
+<b>Character Text: </b> 
+<em>"If both your alive neighbors are good, they can't die."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Pacifist</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Executed good players might not die."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Fool</h4>
+<p>
+<b>Character Text: </b> 
+<em>"The first time you die, you don't."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+<h3 class="w3-blue">Outsiders</h3>
+<hr>
+
+<h4>Goon</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, the 1st player to choose you with their ability is drunk until dusk. You become their alignment."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Lunatic</h4>
+<p>
+<b>Character Text: </b> 
+<em>"You think you are a Demon, but you are not. The Demon knows who you are & who you choose at night."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Tinker</h4>
+<p>
+<b>Character Text: </b> 
+<em>"You might die at any time."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Moonchild</h4>
+<p>
+<b>Character Text: </b> 
+<em>"When you learn that you died, publicly choose 1 alive player. Tonight, if it was a good player, they die."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+<h3 class="w3-orange">Minions</h3>
+<hr>
+
+<h4>Godfather</h4>
+<p>
+<b>Character Text: </b> 
+<em>"You start knowing which Outsiders are in play. If 1 died today, choose a player tonight: they die. [-1 or +1 Outsider]"</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Devil's Advocat</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, choose a living player (different to last night): if executed tomorrow, they don't die."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Assassin</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Once per game, at night*, choose a player: they die, even if for some reason they could not."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Mastermind</h4>
+<p>
+<b>Character Text: </b> 
+<em>"If the Demon dies by execution (ending the game), play for 1 more day. If a player is then executed, their team loses."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+<h3 class="w3-red">Demons</h3>
+<hr>
+
+<h4>Zombuul</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, if no-one died today, choose a player: they die. The 1st time you die, you live but register as dead."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Pukka</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night, choose a player: they are poisoned. The previously poisoned player dies then becomes healthy."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Shabaloth</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+<h4>Po</h4>
+<p>
+<b>Character Text: </b> 
+<em>"Each night*, you may choose a player: they die. If your last choice was no-one, choose 3 players tonight."</em>
+</p>
+<p>
+<b>Wiki Link:</b> <a href="">"</a>
+</p>
+
+<hr>
+
+</div>
+
+	</body>
+</html>
