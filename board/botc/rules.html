@@ -16,6 +16,155 @@
 				x.previousElementSibling.className.replace("w3-green", "");
 				}
 			}
+
+			const editions = [
+				{
+					id: 1,
+					name: "Trouble Brewing",
+					code: "tb",
+					roles: {
+						townsfolk: [],
+						outsider: [],
+						minion: [],
+						demon: [],
+						fabled: [],
+						decoy: [],
+						traveler: []
+					}
+				},
+				{
+					id: 2,
+					name: "Bad Moon Rising",
+					code: "bmr",
+					roles: {
+						townsfolk: [],
+						outsider: [],
+						minion: [],
+						demon: [],
+						fabled: [],
+						decoy: [],
+						traveler: []
+					}
+				},
+				{
+					id: 3,
+					name: "Sects & Violets",
+					code: "snv",
+					roles: {
+						townsfolk: [],
+						outsider: [],
+						minion: [],
+						demon: [],
+						fabled: [],
+						decoy: [],
+						traveler: []
+					}
+				},
+				{
+					id: 4,
+					name: "Experimental",
+					code: "",
+					roles: {
+						townsfolk: [],
+						outsider: [],
+						minion: [],
+						demon: [],
+						fabled: [],
+						decoy: [],
+						traveler: []
+					}
+				}
+			];
+			
+			function load(roles){
+				var roleCount = roles.length;
+				for(var i = 0; i < roleCount; i++){
+					var role = roles[i];
+					//console.log(role.name);
+					switch(role.edition){
+						case 'tb':
+							store = editions[0].roles;
+							assign(store, role);
+						break;
+						case 'bmr':
+							store = editions[1].roles;
+							assign(store, role);
+						break;
+						case 'snv':
+							store = editions[2].roles;
+							assign(store, role);
+						break;
+						case '':
+							store = editions[3].roles;
+							assign(store, role);
+						break;
+						//ETC
+					}
+				}
+				
+				//console.log(editions);
+
+				for(edition in editions){
+
+					console.log('-----------------------');
+					console.log('PROCESSING ',editions[edition].name);
+					console.log('-----------------------');
+
+					let div = document.createElement('div');
+					let header2 = document.createElement('h2');
+					header2.innerHTML = editions[edition].name;
+					div.appendChild(header2);
+
+					for(role in editions[edition].roles){
+
+						let obj = editions[edition].roles[role];
+						//console.log('type', editions[edition].roles[role]);
+						teamsToFill = ['townsfolk','outsider','minion','demon','traveler','fabled','decoy'];
+						Object.entries(obj).forEach(entry => {
+
+							const [key, value] = entry;
+
+							//CHECK IF THIS ROLE IS YET TO BE OUTPUT
+							if(teamsToFill.includes(value.team)){
+								//ADD HEADER
+								console.log('HEADER:',value.team);
+								let header3 = document.createElement('h3');
+								header3.innerHTML = value.team;
+								div.appendChild(header3);
+
+								var ul = document.createElement('ul');
+								div.appendChild(ul);
+
+								//REMOVE FROM TEAMS TO FILL
+								const index = teamsToFill.indexOf(value.team);
+								if (index > -1) { // only splice array when item is found
+									teamsToFill.splice(index, 1); // 2nd parameter means remove one item only
+								}
+							}
+							let li = document.createElement('li');
+							let a = document.createElement('a');
+							a.href = 'https://wiki.bloodontheclocktower.com/' + value.name.replace(' ','_');
+							a.innerHTML = '<b>' + value.name + '</b>';
+							//' <em>"' + value.ability + '"</em>';
+							li.appendChild(a);
+							let em = document.createElement('em');
+							em.innerHTML = ' "' + value.ability + '"';
+							li.appendChild(em);
+							div.appendChild(li);
+
+							//console.log('key:', key, 'value:', value);
+							//console.log(value.name);//,'is a',value.team);
+						});
+						//div.appendChild(ul);
+					}
+					document.getElementById('editionOutput').appendChild(div);
+				}
+
+				function assign(store, role){
+					//console.log(store[`${role.team}`]);
+					store[`${role.team}`].push(role);
+				}
+			}
 		</script>
 		<style>
 			.accordion-content{
@@ -84,928 +233,2436 @@
 		<h2 id="editions">Editions</h2>
 		<button onclick="accordion('troubleBrewingEdition')" class="w3-btn w3-block w3-red accordion-heading">
 			Trouble Brewing</button>
-			
-		<div id="troubleBrewingEdition" class="w3-hide w3-center accordion-content">
-			
-			<!-- INTRO SECTION -->
-			<br>
-			<p>
-				<p>Trouble Brewing has a little bit of everything. 
-					Some characters passively receive information, some need to take action to learn who is who, while some simply want to bait the Demon into attacking them. 
-					Both good and evil can gain the upper hand by making well-timed sacrifices. 
-					Trouble Brewing is a relatively straightforward Demon-hunt, but evil has a number of dastardly misinformation tricks up their sleeves, so the good players best question what they think they know if they hope to survive.
-				</p>
 
-				<p>
-					<em>Beginner. Recommended for players and Storytellers new to Blood on the Clocktower or to social deception games.</em>
-				</p>
-
-				<p>
-					<b>Good players</b> will need to figure out who is good and who is evil by using logic and intuition. Some players may want to reveal which character they are and share their information immediately (such as the Chef or Investigator), while others may want to lie about their identity so that the Imp avoids attacking them (such as the Undertaker or Fortune Teller). Some may lie about who they are so that the Imp does attack them (such as the Ravenkeeper or Soldier)! Other good characters gain information by doing something and noticing the effect. Sacrificing one’s life by nominating a Virgin, attempting to kill the Imp as a Slayer and noticing what happens, or deliberately killing good players so that the Undertaker can confirm which character they were—these are all ways to sacrifice life and power to gain information and achieve victory.
-				</p>
-
-				<p>
-					<b>Evil players</b> will need to pretend to be good characters and do so well, giving false information to confuse the good team if necessary. With only true information, the good team will usually find out who is evil with enough time to spare. But with even a little believable falsehood in the air, evil has a chance. The Poisoner and Spy, if they pay attention, can cause huge confusion in the good team’s ranks by using their abilities sneakily. Evil will also need to decide when to make sacrifices. Will the Scarlet Woman kill the Imp to save their team? Will the Imp kill themself to turn a more trustworthy player into the Demon? Will the evil team vote to execute a suspicious Minion in order to look like honorable members of the town? Or will the Baron give obviously false information to make it look like a Poisoner is in the game? Causing confusion about which Minions are in play can be the difference between victory and defeat.
-				</p>
-
-				<b>Wiki Reference:</b> 
-				<a href="https://wiki.bloodontheclocktower.com/Trouble_Brewing">https://wiki.bloodontheclocktower.com/Trouble_Brewing</a>
-			</p>
-
-			<br>
-
-			<hr>
-
-			<!-- TOWNSFOLK SECTION -->
-			<h3 class="w3-green">Townsfolk</h3>
-			
-			<hr>
-			
-			<h4>Washer woman</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"You start knowing that 1 of 2 players is a particular Townsfolk"</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Washerwoman">Washerwoman - Blood on the Clocktower Wiki"</a>
-			</p>
-
-			<hr>
-			<h4>Librarian</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)"</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Librarian">https://wiki.bloodontheclocktower.com/Librarian"</a>
-			</p>
-
-			<hr>
-			<h4>Investigator</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"You start knowing that 1 of 2 players is a particular Minion."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Investigator">https://wiki.bloodontheclocktower.com/Investigator"</a>
-			</p>
-
-			<hr>
-			<h4>Chef</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"You start knowing how many pairs of evil players there are."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Chef">https://wiki.bloodontheclocktower.com/Chef"</a>
-			</p>
-
-			<hr>
-			<h4>Soldier</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"You are safe from the Demon."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Soldier">https://wiki.bloodontheclocktower.com/Soldier"</a>
-			</p>
-
-			<hr>
-			<h4>Empath</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Each night, you learn how many of your 2 alive neighbours are evil."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Empath">https://wiki.bloodontheclocktower.com/Empath"</a>
-			</p>
-
-			<hr>
-			<h4>Fortune Teller</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Fortune_Teller">https://wiki.bloodontheclocktower.com/Fortune_Teller"</a>
-			</p>
-
-			<hr>
-			<h4>Undertaker</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Each night*, you learn which character died by execution today."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Undertaker">https://wiki.bloodontheclocktower.com/Undertaker"</a>
-			</p>
-
-			<hr>
-			<h4>Raven keeper</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"If you die at night, you are woken to choose a player: you learn their character."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Ravenkeeper">https://wiki.bloodontheclocktower.com/Ravenkeeper"</a>
-			</p>
-
-			<hr>
-			<h4>Virgin</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Virgin">https://wiki.bloodontheclocktower.com/Virgin"</a>
-			</p>
-
-			<hr>
-			<h4>Slayer</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Once per game, during the day, publicly choose a player: if they are the Demon, they die."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Slayer">https://wiki.bloodontheclocktower.com/Slayer"</a>
-			</p>
-
-			<hr>
-			<h4>Monk</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Each night*, choose a player (not yourself): they are safe from the Demon tonight."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Monk">https://wiki.bloodontheclocktower.com/Monk"</a>
-			</p>
-
-			<hr>
-			<h4>Mayor</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Mayor">https://wiki.bloodontheclocktower.com/Mayor"</a>
-			</p>
-
-			<hr>
-
-			<!-- OUTSIDER SECTION -->
-			<h3 class="w3-blue">Outsider</h3>
-
-			<h4>Drunk</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"You do not know you are the Drunk. You think you are a Townsfolk character, but you are not."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Drunk">https://wiki.bloodontheclocktower.com/Drunk"</a>
-			</p>
-
-			<hr>
-			<h4>Recluse</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"You might register as evil & as a Minion or Demon, even if dead."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Recluse">https://wiki.bloodontheclocktower.com/Recluse"</a>
-			</p>
-
-			<hr>
-			<h4>Butler</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Butler">https://wiki.bloodontheclocktower.com/Butler"</a>
-			</p>
-
-			<hr>
-			<h4>Saint</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"If you die by execution, your team loses."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Saint">https://wiki.bloodontheclocktower.com/Saint"</a>
-			</p>
-
-			<hr>
-
-			<!-- MINION SECTION -->
-			<h3 class="w3-orange">Minion</h3>
-
-			<h4>Spy</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Each night, you see the Grimoire. You might register as good & as a Townsfolk or Outsider, even if dead."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Spy">https://wiki.bloodontheclocktower.com/Spy"</a>
-			</p>
-
-			<hr>
-			<h4>Baron</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"There are extra Outsiders in play. [+2 Outsiders]"</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Baron">https://wiki.bloodontheclocktower.com/Baron"</a>
-			</p>
-
-			<hr>
-			<h4>Poisoner</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Each night, choose a player: they are poisoned tonight and tomorrow day."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Poisoner">https://wiki.bloodontheclocktower.com/Poisoner"</a>
-			</p>
-
-			<hr>
-			<h4>Scarlet Woman</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don't count)"</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Scarlet_Woman">https://wiki.bloodontheclocktower.com/Scarlet_Woman"</a>
-			</p>
-
-			<hr>
-
-			<!-- DEMON SECTION -->
-			<h3 class="w3-red">Demon</h3>
-			
-			<h4>Imp</h4>
-			<p>
-					<b>Character Text: </b> 
-					<em>"Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp."</em>
-			</p>
-			<p>
-					<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Imp">https://wiki.bloodontheclocktower.com/Imp</a>
-			</p>
-
-			<hr>
-
+		<div id="editionOutput">
 		</div>
-		
-		<br>
-		
-		<button onclick="accordion('sectsAndVioletsEdition')" class="w3-btn w3-block w3-purple accordion-heading">
-			Sects & Violets</button>
 			
-		<div id="sectsAndVioletsEdition" class="w3-hide w3-center accordion-content">
-			
-		<em>Vibrant spring gives way to a warm and inviting summer. Flowers of every description blossom as far as the eye can see, tenderly nurtured in public gardens and window boxes overlooking the lavish promenade. Birds sing, artists paint and philosophers ponder life's greatest mysteries inside a bustling tavern as a circus pitches its endearingly ragged tent on the edge of town.
+		<script>
+			/**
+			 * ROLES SOURCE: https://github.com/bra1n/townsquare/blob/develop/src/roles.json
+			 * 
+			 *                     GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
 
-As the townsfolk bask in frivolity and mischief, indulging themselves in fine entertainment and even finer wine, dark and clandestine forces are assembling. Witches and cults lurk in majestic ruins on the fringes of the community, hosting secret meetings in underground caves and malevolently plotting the downfall of Ravenswood Bluff and its revelers.
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
 
-The time is ripe for... Sects & Violets.</em>
+                            Preamble
 
-<p>Sects & Violets is the craziest of the three editions included in the base set. 
-Good characters get amazing information each and every night. 
-However, the evil team is extremely varied and threatening and can throw massive confusion into the mix. 
-Characters change alignment. 
-Players change characters. 
-Even the evil team can lose track of who is who. 
-This is also the first appearance of madness, which throws all manner of spanners into the works.</p>
+  The GNU General Public License is a free, copyleft license for
+software and other kinds of works.
 
-<p>Intermediate. 
-Recommended for players who want to do wild and unexpected things, pushing the limits of what can be achieved in a bluffing game.</p>
+  The licenses for most software and other practical works are designed
+to take away your freedom to share and change the works.  By contrast,
+the GNU General Public License is intended to guarantee your freedom to
+share and change all versions of a program--to make sure it remains free
+software for all its users.  We, the Free Software Foundation, use the
+GNU General Public License for most of our software; it applies also to
+any other work released this way by its authors.  You can apply it to
+your programs, too.
 
-<p>When playing Sects & Violets…</p>
+  When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to make sure that you
+have the freedom to distribute copies of free software (and charge for
+them if you wish), that you receive source code or can get it if you
+want it, that you can change the software or use pieces of it in new
+free programs, and that you know you can do these things.
 
-<p>Good players will almost always have more information than they know what to do with. 
-	Unlike in Trouble Brewing, where the good team can trust most of their information most of the time, the good team in Sects & Violets will need to figure out which Demon is in play to even begin to make sense of what’s going on. 
-		With a Fang Gu in play, all information is true, except for any that pertains to the Demon, who may swap players. 
-			With a No Dashii in play, two Townsfolk are poisoned, but if the good team can deduce which players these are, they’ll have found the Demon. 
-				With a Vigormortis in play, Townsfolk get poisoned when Minions die at night. 
-				With a Vortox in play, all information is false. 
-				Once the good team notices what information is right and what is wrong, they can backtrack and reverse what they thought they knew and begin to learn something valuable.</p>
+  To protect your rights, we need to prevent others from denying you
+these rights or asking you to surrender the rights.  Therefore, you have
+certain responsibilities if you distribute copies of the software, or if
+you modify it: responsibilities to respect the freedom of others.
 
-<p>To confuse things even further, Outsiders will usually want to lie about who they are for most of the game, and maybe even some Townsfolk will want to do the same. 
-An Outsider that dies can cause terrible disadvantages for the good team, so wise Demons will usually want to kill them as soon as possible.</p>
+  For example, if you distribute copies of such a program, whether
+gratis or for a fee, you must pass on to the recipients the same
+freedoms that you received.  You must make sure that they, too, receive
+or can get the source code.  And you must show them these terms so they
+know their rights.
 
-<p>Evil players will want to kill or otherwise remove the threat of the most dangerous Townsfolk as soon as possible. 
-	Demons can only kill once per night, but Minions such as the Pit-Hag, Witch, and Cerenovus can really help thin out the good team’s ranks if the Minion is clever. 
-		Evil players should also consider whether they give true or false information to the group, since the group may reverse-engineer that information depending on which Demon they believe is in play.</p>
+  Developers that use the GNU GPL protect your rights with two steps:
+(1) assert copyright on the software, and (2) offer you this License
+giving you legal permission to copy, distribute and/or modify it.
+
+  For the developers' and authors' protection, the GPL clearly explains
+that there is no warranty for this free software.  For both users' and
+authors' sake, the GPL requires that modified versions be marked as
+changed, so that their problems will not be attributed erroneously to
+authors of previous versions.
+
+  Some devices are designed to deny users access to install or run
+modified versions of the software inside them, although the manufacturer
+can do so.  This is fundamentally incompatible with the aim of
+protecting users' freedom to change the software.  The systematic
+pattern of such abuse occurs in the area of products for individuals to
+use, which is precisely where it is most unacceptable.  Therefore, we
+have designed this version of the GPL to prohibit the practice for those
+products.  If such problems arise substantially in other domains, we
+stand ready to extend this provision to those domains in future versions
+of the GPL, as needed to protect the freedom of users.
+
+  Finally, every program is threatened constantly by software patents.
+States should not allow patents to restrict development and use of
+software on general-purpose computers, but in those that do, we wish to
+avoid the special danger that patents applied to a free program could
+make it effectively proprietary.  To prevent this, the GPL assures that
+patents cannot be used to render the program non-free.
+
+  The precise terms and conditions for copying, distribution and
+modification follow.
+
+                       TERMS AND CONDITIONS
+
+  0. Definitions.
+
+  "This License" refers to version 3 of the GNU General Public License.
+
+  "Copyright" also means copyright-like laws that apply to other kinds of
+works, such as semiconductor masks.
+
+  "The Program" refers to any copyrightable work licensed under this
+License.  Each licensee is addressed as "you".  "Licensees" and
+"recipients" may be individuals or organizations.
+
+  To "modify" a work means to copy from or adapt all or part of the work
+in a fashion requiring copyright permission, other than the making of an
+exact copy.  The resulting work is called a "modified version" of the
+earlier work or a work "based on" the earlier work.
+
+  A "covered work" means either the unmodified Program or a work based
+on the Program.
+
+  To "propagate" a work means to do anything with it that, without
+permission, would make you directly or secondarily liable for
+infringement under applicable copyright law, except executing it on a
+computer or modifying a private copy.  Propagation includes copying,
+distribution (with or without modification), making available to the
+public, and in some countries other activities as well.
+
+  To "convey" a work means any kind of propagation that enables other
+parties to make or receive copies.  Mere interaction with a user through
+a computer network, with no transfer of a copy, is not conveying.
+
+  An interactive user interface displays "Appropriate Legal Notices"
+to the extent that it includes a convenient and prominently visible
+feature that (1) displays an appropriate copyright notice, and (2)
+tells the user that there is no warranty for the work (except to the
+extent that warranties are provided), that licensees may convey the
+work under this License, and how to view a copy of this License.  If
+the interface presents a list of user commands or options, such as a
+menu, a prominent item in the list meets this criterion.
+
+  1. Source Code.
+
+  The "source code" for a work means the preferred form of the work
+for making modifications to it.  "Object code" means any non-source
+form of a work.
+
+  A "Standard Interface" means an interface that either is an official
+standard defined by a recognized standards body, or, in the case of
+interfaces specified for a particular programming language, one that
+is widely used among developers working in that language.
+
+  The "System Libraries" of an executable work include anything, other
+than the work as a whole, that (a) is included in the normal form of
+packaging a Major Component, but which is not part of that Major
+Component, and (b) serves only to enable use of the work with that
+Major Component, or to implement a Standard Interface for which an
+implementation is available to the public in source code form.  A
+"Major Component", in this context, means a major essential component
+(kernel, window system, and so on) of the specific operating system
+(if any) on which the executable work runs, or a compiler used to
+produce the work, or an object code interpreter used to run it.
+
+  The "Corresponding Source" for a work in object code form means all
+the source code needed to generate, install, and (for an executable
+work) run the object code and to modify the work, including scripts to
+control those activities.  However, it does not include the work's
+System Libraries, or general-purpose tools or generally available free
+programs which are used unmodified in performing those activities but
+which are not part of the work.  For example, Corresponding Source
+includes interface definition files associated with source files for
+the work, and the source code for shared libraries and dynamically
+linked subprograms that the work is specifically designed to require,
+such as by intimate data communication or control flow between those
+subprograms and other parts of the work.
+
+  The Corresponding Source need not include anything that users
+can regenerate automatically from other parts of the Corresponding
+Source.
+
+  The Corresponding Source for a work in source code form is that
+same work.
+
+  2. Basic Permissions.
+
+  All rights granted under this License are granted for the term of
+copyright on the Program, and are irrevocable provided the stated
+conditions are met.  This License explicitly affirms your unlimited
+permission to run the unmodified Program.  The output from running a
+covered work is covered by this License only if the output, given its
+content, constitutes a covered work.  This License acknowledges your
+rights of fair use or other equivalent, as provided by copyright law.
+
+  You may make, run and propagate covered works that you do not
+convey, without conditions so long as your license otherwise remains
+in force.  You may convey covered works to others for the sole purpose
+of having them make modifications exclusively for you, or provide you
+with facilities for running those works, provided that you comply with
+the terms of this License in conveying all material for which you do
+not control copyright.  Those thus making or running the covered works
+for you must do so exclusively on your behalf, under your direction
+and control, on terms that prohibit them from making any copies of
+your copyrighted material outside their relationship with you.
+
+  Conveying under any other circumstances is permitted solely under
+the conditions stated below.  Sublicensing is not allowed; section 10
+makes it unnecessary.
+
+  3. Protecting Users' Legal Rights From Anti-Circumvention Law.
+
+  No covered work shall be deemed part of an effective technological
+measure under any applicable law fulfilling obligations under article
+11 of the WIPO copyright treaty adopted on 20 December 1996, or
+similar laws prohibiting or restricting circumvention of such
+measures.
+
+  When you convey a covered work, you waive any legal power to forbid
+circumvention of technological measures to the extent such circumvention
+is effected by exercising rights under this License with respect to
+the covered work, and you disclaim any intention to limit operation or
+modification of the work as a means of enforcing, against the work's
+users, your or third parties' legal rights to forbid circumvention of
+technological measures.
+
+  4. Conveying Verbatim Copies.
+
+  You may convey verbatim copies of the Program's source code as you
+receive it, in any medium, provided that you conspicuously and
+appropriately publish on each copy an appropriate copyright notice;
+keep intact all notices stating that this License and any
+non-permissive terms added in accord with section 7 apply to the code;
+keep intact all notices of the absence of any warranty; and give all
+recipients a copy of this License along with the Program.
+
+  You may charge any price or no price for each copy that you convey,
+and you may offer support or warranty protection for a fee.
+
+  5. Conveying Modified Source Versions.
+
+  You may convey a work based on the Program, or the modifications to
+produce it from the Program, in the form of source code under the
+terms of section 4, provided that you also meet all of these conditions:
+
+    a) The work must carry prominent notices stating that you modified
+    it, and giving a relevant date.
+
+    b) The work must carry prominent notices stating that it is
+    released under this License and any conditions added under section
+    7.  This requirement modifies the requirement in section 4 to
+    "keep intact all notices".
+
+    c) You must license the entire work, as a whole, under this
+    License to anyone who comes into possession of a copy.  This
+    License will therefore apply, along with any applicable section 7
+    additional terms, to the whole of the work, and all its parts,
+    regardless of how they are packaged.  This License gives no
+    permission to license the work in any other way, but it does not
+    invalidate such permission if you have separately received it.
+
+    d) If the work has interactive user interfaces, each must display
+    Appropriate Legal Notices; however, if the Program has interactive
+    interfaces that do not display Appropriate Legal Notices, your
+    work need not make them do so.
+
+  A compilation of a covered work with other separate and independent
+works, which are not by their nature extensions of the covered work,
+and which are not combined with it such as to form a larger program,
+in or on a volume of a storage or distribution medium, is called an
+"aggregate" if the compilation and its resulting copyright are not
+used to limit the access or legal rights of the compilation's users
+beyond what the individual works permit.  Inclusion of a covered work
+in an aggregate does not cause this License to apply to the other
+parts of the aggregate.
+
+  6. Conveying Non-Source Forms.
+
+  You may convey a covered work in object code form under the terms
+of sections 4 and 5, provided that you also convey the
+machine-readable Corresponding Source under the terms of this License,
+in one of these ways:
+
+    a) Convey the object code in, or embodied in, a physical product
+    (including a physical distribution medium), accompanied by the
+    Corresponding Source fixed on a durable physical medium
+    customarily used for software interchange.
+
+    b) Convey the object code in, or embodied in, a physical product
+    (including a physical distribution medium), accompanied by a
+    written offer, valid for at least three years and valid for as
+    long as you offer spare parts or customer support for that product
+    model, to give anyone who possesses the object code either (1) a
+    copy of the Corresponding Source for all the software in the
+    product that is covered by this License, on a durable physical
+    medium customarily used for software interchange, for a price no
+    more than your reasonable cost of physically performing this
+    conveying of source, or (2) access to copy the
+    Corresponding Source from a network server at no charge.
+
+    c) Convey individual copies of the object code with a copy of the
+    written offer to provide the Corresponding Source.  This
+    alternative is allowed only occasionally and noncommercially, and
+    only if you received the object code with such an offer, in accord
+    with subsection 6b.
+
+    d) Convey the object code by offering access from a designated
+    place (gratis or for a charge), and offer equivalent access to the
+    Corresponding Source in the same way through the same place at no
+    further charge.  You need not require recipients to copy the
+    Corresponding Source along with the object code.  If the place to
+    copy the object code is a network server, the Corresponding Source
+    may be on a different server (operated by you or a third party)
+    that supports equivalent copying facilities, provided you maintain
+    clear directions next to the object code saying where to find the
+    Corresponding Source.  Regardless of what server hosts the
+    Corresponding Source, you remain obligated to ensure that it is
+    available for as long as needed to satisfy these requirements.
+
+    e) Convey the object code using peer-to-peer transmission, provided
+    you inform other peers where the object code and Corresponding
+    Source of the work are being offered to the general public at no
+    charge under subsection 6d.
+
+  A separable portion of the object code, whose source code is excluded
+from the Corresponding Source as a System Library, need not be
+included in conveying the object code work.
+
+  A "User Product" is either (1) a "consumer product", which means any
+tangible personal property which is normally used for personal, family,
+or household purposes, or (2) anything designed or sold for incorporation
+into a dwelling.  In determining whether a product is a consumer product,
+doubtful cases shall be resolved in favor of coverage.  For a particular
+product received by a particular user, "normally used" refers to a
+typical or common use of that class of product, regardless of the status
+of the particular user or of the way in which the particular user
+actually uses, or expects or is expected to use, the product.  A product
+is a consumer product regardless of whether the product has substantial
+commercial, industrial or non-consumer uses, unless such uses represent
+the only significant mode of use of the product.
+
+  "Installation Information" for a User Product means any methods,
+procedures, authorization keys, or other information required to install
+and execute modified versions of a covered work in that User Product from
+a modified version of its Corresponding Source.  The information must
+suffice to ensure that the continued functioning of the modified object
+code is in no case prevented or interfered with solely because
+modification has been made.
+
+  If you convey an object code work under this section in, or with, or
+specifically for use in, a User Product, and the conveying occurs as
+part of a transaction in which the right of possession and use of the
+User Product is transferred to the recipient in perpetuity or for a
+fixed term (regardless of how the transaction is characterized), the
+Corresponding Source conveyed under this section must be accompanied
+by the Installation Information.  But this requirement does not apply
+if neither you nor any third party retains the ability to install
+modified object code on the User Product (for example, the work has
+been installed in ROM).
+
+  The requirement to provide Installation Information does not include a
+requirement to continue to provide support service, warranty, or updates
+for a work that has been modified or installed by the recipient, or for
+the User Product in which it has been modified or installed.  Access to a
+network may be denied when the modification itself materially and
+adversely affects the operation of the network or violates the rules and
+protocols for communication across the network.
+
+  Corresponding Source conveyed, and Installation Information provided,
+in accord with this section must be in a format that is publicly
+documented (and with an implementation available to the public in
+source code form), and must require no special password or key for
+unpacking, reading or copying.
+
+  7. Additional Terms.
+
+  "Additional permissions" are terms that supplement the terms of this
+License by making exceptions from one or more of its conditions.
+Additional permissions that are applicable to the entire Program shall
+be treated as though they were included in this License, to the extent
+that they are valid under applicable law.  If additional permissions
+apply only to part of the Program, that part may be used separately
+under those permissions, but the entire Program remains governed by
+this License without regard to the additional permissions.
+
+  When you convey a copy of a covered work, you may at your option
+remove any additional permissions from that copy, or from any part of
+it.  (Additional permissions may be written to require their own
+removal in certain cases when you modify the work.)  You may place
+additional permissions on material, added by you to a covered work,
+for which you have or can give appropriate copyright permission.
+
+  Notwithstanding any other provision of this License, for material you
+add to a covered work, you may (if authorized by the copyright holders of
+that material) supplement the terms of this License with terms:
+
+    a) Disclaiming warranty or limiting liability differently from the
+    terms of sections 15 and 16 of this License; or
+
+    b) Requiring preservation of specified reasonable legal notices or
+    author attributions in that material or in the Appropriate Legal
+    Notices displayed by works containing it; or
+
+    c) Prohibiting misrepresentation of the origin of that material, or
+    requiring that modified versions of such material be marked in
+    reasonable ways as different from the original version; or
+
+    d) Limiting the use for publicity purposes of names of licensors or
+    authors of the material; or
+
+    e) Declining to grant rights under trademark law for use of some
+    trade names, trademarks, or service marks; or
+
+    f) Requiring indemnification of licensors and authors of that
+    material by anyone who conveys the material (or modified versions of
+    it) with contractual assumptions of liability to the recipient, for
+    any liability that these contractual assumptions directly impose on
+    those licensors and authors.
+
+  All other non-permissive additional terms are considered "further
+restrictions" within the meaning of section 10.  If the Program as you
+received it, or any part of it, contains a notice stating that it is
+governed by this License along with a term that is a further
+restriction, you may remove that term.  If a license document contains
+a further restriction but permits relicensing or conveying under this
+License, you may add to a covered work material governed by the terms
+of that license document, provided that the further restriction does
+not survive such relicensing or conveying.
+
+  If you add terms to a covered work in accord with this section, you
+must place, in the relevant source files, a statement of the
+additional terms that apply to those files, or a notice indicating
+where to find the applicable terms.
+
+  Additional terms, permissive or non-permissive, may be stated in the
+form of a separately written license, or stated as exceptions;
+the above requirements apply either way.
+
+  8. Termination.
+
+  You may not propagate or modify a covered work except as expressly
+provided under this License.  Any attempt otherwise to propagate or
+modify it is void, and will automatically terminate your rights under
+this License (including any patent licenses granted under the third
+paragraph of section 11).
+
+  However, if you cease all violation of this License, then your
+license from a particular copyright holder is reinstated (a)
+provisionally, unless and until the copyright holder explicitly and
+finally terminates your license, and (b) permanently, if the copyright
+holder fails to notify you of the violation by some reasonable means
+prior to 60 days after the cessation.
+
+  Moreover, your license from a particular copyright holder is
+reinstated permanently if the copyright holder notifies you of the
+violation by some reasonable means, this is the first time you have
+received notice of violation of this License (for any work) from that
+copyright holder, and you cure the violation prior to 30 days after
+your receipt of the notice.
+
+  Termination of your rights under this section does not terminate the
+licenses of parties who have received copies or rights from you under
+this License.  If your rights have been terminated and not permanently
+reinstated, you do not qualify to receive new licenses for the same
+material under section 10.
+
+  9. Acceptance Not Required for Having Copies.
+
+  You are not required to accept this License in order to receive or
+run a copy of the Program.  Ancillary propagation of a covered work
+occurring solely as a consequence of using peer-to-peer transmission
+to receive a copy likewise does not require acceptance.  However,
+nothing other than this License grants you permission to propagate or
+modify any covered work.  These actions infringe copyright if you do
+not accept this License.  Therefore, by modifying or propagating a
+covered work, you indicate your acceptance of this License to do so.
+
+  10. Automatic Licensing of Downstream Recipients.
+
+  Each time you convey a covered work, the recipient automatically
+receives a license from the original licensors, to run, modify and
+propagate that work, subject to this License.  You are not responsible
+for enforcing compliance by third parties with this License.
+
+  An "entity transaction" is a transaction transferring control of an
+organization, or substantially all assets of one, or subdividing an
+organization, or merging organizations.  If propagation of a covered
+work results from an entity transaction, each party to that
+transaction who receives a copy of the work also receives whatever
+licenses to the work the party's predecessor in interest had or could
+give under the previous paragraph, plus a right to possession of the
+Corresponding Source of the work from the predecessor in interest, if
+the predecessor has it or can get it with reasonable efforts.
+
+  You may not impose any further restrictions on the exercise of the
+rights granted or affirmed under this License.  For example, you may
+not impose a license fee, royalty, or other charge for exercise of
+rights granted under this License, and you may not initiate litigation
+(including a cross-claim or counterclaim in a lawsuit) alleging that
+any patent claim is infringed by making, using, selling, offering for
+sale, or importing the Program or any portion of it.
+
+  11. Patents.
+
+  A "contributor" is a copyright holder who authorizes use under this
+License of the Program or a work on which the Program is based.  The
+work thus licensed is called the contributor's "contributor version".
+
+  A contributor's "essential patent claims" are all patent claims
+owned or controlled by the contributor, whether already acquired or
+hereafter acquired, that would be infringed by some manner, permitted
+by this License, of making, using, or selling its contributor version,
+but do not include claims that would be infringed only as a
+consequence of further modification of the contributor version.  For
+purposes of this definition, "control" includes the right to grant
+patent sublicenses in a manner consistent with the requirements of
+this License.
+
+  Each contributor grants you a non-exclusive, worldwide, royalty-free
+patent license under the contributor's essential patent claims, to
+make, use, sell, offer for sale, import and otherwise run, modify and
+propagate the contents of its contributor version.
+
+  In the following three paragraphs, a "patent license" is any express
+agreement or commitment, however denominated, not to enforce a patent
+(such as an express permission to practice a patent or covenant not to
+sue for patent infringement).  To "grant" such a patent license to a
+party means to make such an agreement or commitment not to enforce a
+patent against the party.
+
+  If you convey a covered work, knowingly relying on a patent license,
+and the Corresponding Source of the work is not available for anyone
+to copy, free of charge and under the terms of this License, through a
+publicly available network server or other readily accessible means,
+then you must either (1) cause the Corresponding Source to be so
+available, or (2) arrange to deprive yourself of the benefit of the
+patent license for this particular work, or (3) arrange, in a manner
+consistent with the requirements of this License, to extend the patent
+license to downstream recipients.  "Knowingly relying" means you have
+actual knowledge that, but for the patent license, your conveying the
+covered work in a country, or your recipient's use of the covered work
+in a country, would infringe one or more identifiable patents in that
+country that you have reason to believe are valid.
+
+  If, pursuant to or in connection with a single transaction or
+arrangement, you convey, or propagate by procuring conveyance of, a
+covered work, and grant a patent license to some of the parties
+receiving the covered work authorizing them to use, propagate, modify
+or convey a specific copy of the covered work, then the patent license
+you grant is automatically extended to all recipients of the covered
+work and works based on it.
+
+  A patent license is "discriminatory" if it does not include within
+the scope of its coverage, prohibits the exercise of, or is
+conditioned on the non-exercise of one or more of the rights that are
+specifically granted under this License.  You may not convey a covered
+work if you are a party to an arrangement with a third party that is
+in the business of distributing software, under which you make payment
+to the third party based on the extent of your activity of conveying
+the work, and under which the third party grants, to any of the
+parties who would receive the covered work from you, a discriminatory
+patent license (a) in connection with copies of the covered work
+conveyed by you (or copies made from those copies), or (b) primarily
+for and in connection with specific products or compilations that
+contain the covered work, unless you entered into that arrangement,
+or that patent license was granted, prior to 28 March 2007.
+
+  Nothing in this License shall be construed as excluding or limiting
+any implied license or other defenses to infringement that may
+otherwise be available to you under applicable patent law.
+
+  12. No Surrender of Others' Freedom.
+
+  If conditions are imposed on you (whether by court order, agreement or
+otherwise) that contradict the conditions of this License, they do not
+excuse you from the conditions of this License.  If you cannot convey a
+covered work so as to satisfy simultaneously your obligations under this
+License and any other pertinent obligations, then as a consequence you may
+not convey it at all.  For example, if you agree to terms that obligate you
+to collect a royalty for further conveying from those to whom you convey
+the Program, the only way you could satisfy both those terms and this
+License would be to refrain entirely from conveying the Program.
+
+  13. Use with the GNU Affero General Public License.
+
+  Notwithstanding any other provision of this License, you have
+permission to link or combine any covered work with a work licensed
+under version 3 of the GNU Affero General Public License into a single
+combined work, and to convey the resulting work.  The terms of this
+License will continue to apply to the part which is the covered work,
+but the special requirements of the GNU Affero General Public License,
+section 13, concerning interaction through a network will apply to the
+combination as such.
+
+  14. Revised Versions of this License.
+
+  The Free Software Foundation may publish revised and/or new versions of
+the GNU General Public License from time to time.  Such new versions will
+be similar in spirit to the present version, but may differ in detail to
+address new problems or concerns.
+
+  Each version is given a distinguishing version number.  If the
+Program specifies that a certain numbered version of the GNU General
+Public License "or any later version" applies to it, you have the
+option of following the terms and conditions either of that numbered
+version or of any later version published by the Free Software
+Foundation.  If the Program does not specify a version number of the
+GNU General Public License, you may choose any version ever published
+by the Free Software Foundation.
+
+  If the Program specifies that a proxy can decide which future
+versions of the GNU General Public License can be used, that proxy's
+public statement of acceptance of a version permanently authorizes you
+to choose that version for the Program.
+
+  Later license versions may give you additional or different
+permissions.  However, no additional obligations are imposed on any
+author or copyright holder as a result of your choosing to follow a
+later version.
+
+  15. Disclaimer of Warranty.
+
+  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
+APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT
+HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY
+OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM
+IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF
+ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+  16. Limitation of Liability.
+
+  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS
+THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY
+GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE
+USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF
+DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD
+PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),
+EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGES.
+
+  17. Interpretation of Sections 15 and 16.
+
+  If the disclaimer of warranty and limitation of liability provided
+above cannot be given local legal effect according to their terms,
+reviewing courts shall apply local law that most closely approximates
+an absolute waiver of all civil liability in connection with the
+Program, unless a warranty or assumption of liability accompanies a
+copy of the Program in return for a fee.
+
+                     END OF TERMS AND CONDITIONS
+
+            How to Apply These Terms to Your New Programs
+
+  If you develop a new program, and you want it to be of the greatest
+possible use to the public, the best way to achieve this is to make it
+free software which everyone can redistribute and change under these terms.
+
+  To do so, attach the following notices to the program.  It is safest
+to attach them to the start of each source file to most effectively
+state the exclusion of warranty; and each file should have at least
+the "copyright" line and a pointer to where the full notice is found.
+
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Also add information on how to contact you by electronic and paper mail.
+
+  If the program does terminal interaction, make it output a short
+notice like this when it starts in an interactive mode:
+
+    <program>  Copyright (C) <year>  <name of author>
+    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; type `show c' for details.
+
+The hypothetical commands `show w' and `show c' should show the appropriate
+parts of the General Public License.  Of course, your program's commands
+might be different; for a GUI interface, you would use an "about box".
+
+  You should also get your employer (if you work as a programmer) or school,
+if any, to sign a "copyright disclaimer" for the program, if necessary.
+For more information on this, and how to apply and follow the GNU GPL, see
+<https://www.gnu.org/licenses/>.
+
+  The GNU General Public License does not permit incorporating your program
+into proprietary programs.  If your program is a subroutine library, you
+may consider it more useful to permit linking proprietary applications with
+the library.  If this is what you want to do, use the GNU Lesser General
+Public License instead of this License.  But first, please read
+<https://www.gnu.org/licenses/why-not-lgpl.html>.
+			 * 
+			 * 
+			 **/
+			var roles = [
+				{
+				"id": "washerwoman",
+				"name": "Washerwoman",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 33,
+				"firstNightReminder": "Show the character token of a Townsfolk in play. Point to two players, one of which is that character.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Townsfolk",
+					"Wrong"],
+				"setup": false,
+				"ability": "You start knowing that 1 of 2 players is a particular Townsfolk."
+				},
+				{
+				"id": "librarian",
+				"name": "Librarian",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 34,
+				"firstNightReminder": "Show the character token of an Outsider in play. Point to two players, one of which is that character.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Outsider",
+					"Wrong"],
+				"setup": false,
+				"ability": "You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)"
+				},
+				{
+				"id": "investigator",
+				"name": "Investigator",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 35,
+				"firstNightReminder": "Show the character token of a Minion in play. Point to two players, one of which is that character.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Minion",
+					"Wrong"],
+				"setup": false,
+				"ability": "You start knowing that 1 of 2 players is a particular Minion."
+				},
+				{
+				"id": "chef",
+				"name": "Chef",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 36,
+				"firstNightReminder": "Show the finger signal (0, 1, 2, \u2026) for the number of pairs of neighbouring evil players.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "You start knowing how many pairs of evil players there are."
+				},
+				{
+				"id": "empath",
+				"name": "Empath",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 37,
+				"firstNightReminder": "Show the finger signal (0, 1, 2) for the number of evil alive neighbours of the Empath.",
+				"otherNight": 53,
+				"otherNightReminder": "Show the finger signal (0, 1, 2) for the number of evil neighbours.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night, you learn how many of your 2 alive neighbours are evil."
+				},
+				{
+				"id": "fortuneteller",
+				"name": "Fortune Teller",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 38,
+				"firstNightReminder": "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
+				"otherNight": 54,
+				"otherNightReminder": "The Fortune Teller points to two players. Show the head signal (nod 'yes', shake 'no') for whether one of those players is the Demon.",
+				"reminders": ["Red herring"],
+				"setup": false,
+				"ability": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you."
+				},
+				{
+				"id": "undertaker",
+				"name": "Undertaker",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 55,
+				"otherNightReminder": "If a player was executed today: Show that player\u2019s character token.",
+				"reminders": ["Executed"],
+				"setup": false,
+				"ability": "Each night*, you learn which character died by execution today."
+				},
+				{
+				"id": "monk",
+				"name": "Monk",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 12,
+				"otherNightReminder": "The previously protected player is no longer protected. The Monk points to a player not themself. Mark that player 'Protected'.",
+				"reminders": ["Protected"],
+				"setup": false,
+				"ability": "Each night*, choose a player (not yourself): they are safe from the Demon tonight."
+				},
+				{
+				"id": "ravenkeeper",
+				"name": "Ravenkeeper",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 52,
+				"otherNightReminder": "If the Ravenkeeper died tonight: The Ravenkeeper points to a player. Show that player\u2019s character token.",
+				"reminders": [],
+				"setup": false,
+				"ability": "If you die at night, you are woken to choose a player: you learn their character."
+				},
+				{
+				"id": "virgin",
+				"name": "Virgin",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately."
+				},
+				{
+				"id": "slayer",
+				"name": "Slayer",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "Once per game, during the day, publicly choose a player: if they are the Demon, they die."
+				},
+				{
+				"id": "soldier",
+				"name": "Soldier",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "You are safe from the Demon."
+				},
+				{
+				"id": "mayor",
+				"name": "Mayor",
+				"edition": "tb",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead."
+				},
+				{
+				"id": "butler",
+				"name": "Butler",
+				"edition": "tb",
+				"team": "outsider",
+				"firstNight": 39,
+				"firstNightReminder": "The Butler points to a player. Mark that player as 'Master'.",
+				"otherNight": 67,
+				"otherNightReminder": "The Butler points to a player. Mark that player as 'Master'.",
+				"reminders": ["Master"],
+				"setup": false,
+				"ability": "Each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too."
+				},
+				{
+				"id": "drunk",
+				"name": "Drunk",
+				"edition": "tb",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"remindersGlobal": ["Drunk"],
+				"setup": true,
+				"ability": "You do not know you are the Drunk. You think you are a Townsfolk character, but you are not."
+				},
+				{
+				"id": "recluse",
+				"name": "Recluse",
+				"edition": "tb",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "You might register as evil & as a Minion or Demon, even if dead."
+				},
+				{
+				"id": "saint",
+				"name": "Saint",
+				"edition": "tb",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "If you die by execution, your team loses."
+				},
+				{
+				"id": "poisoner",
+				"name": "Poisoner",
+				"edition": "tb",
+				"team": "minion",
+				"firstNight": 17,
+				"firstNightReminder": "The Poisoner points to a player. That player is poisoned.",
+				"otherNight": 7,
+				"otherNightReminder": "The previously poisoned player is no longer poisoned. The Poisoner points to a player. That player is poisoned.",
+				"reminders": ["Poisoned"],
+				"setup": false,
+				"ability": "Each night, choose a player: they are poisoned tonight and tomorrow day."
+				},
+				{
+				"id": "spy",
+				"name": "Spy",
+				"edition": "tb",
+				"team": "minion",
+				"firstNight": 49,
+				"firstNightReminder": "Show the Grimoire to the Spy for as long as they need.",
+				"otherNight": 68,
+				"otherNightReminder": "Show the Grimoire to the Spy for as long as they need.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night, you see the Grimoire. You might register as good & as a Townsfolk or Outsider, even if dead."
+				},
+				{
+				"id": "scarletwoman",
+				"name": "Scarlet Woman",
+				"edition": "tb",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 19,
+				"otherNightReminder": "If the Scarlet Woman became the Demon today: Show the 'You are' card, then the demon token.",
+				"reminders": ["Demon"],
+				"setup": false,
+				"ability": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don\u2019t count)"
+				},
+				{
+				"id": "baron",
+				"name": "Baron",
+				"edition": "tb",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": true,
+				"ability": "There are extra Outsiders in play. [+2 Outsiders]"
+				},
+				{
+				"id": "imp",
+				"name": "Imp",
+				"edition": "tb",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 24,
+				"otherNightReminder": "The Imp points to a player. That player dies. If the Imp chose themselves: Replace the character of 1 alive minion with a spare Imp token. Show the 'You are' card, then the Imp token.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp."
+				},
+				{
+				"id": "bureaucrat",
+				"name": "Bureaucrat",
+				"edition": "tb",
+				"team": "traveler",
+				"firstNight": 1,
+				"firstNightReminder": "The Bureaucrat points to a player. Put the Bureaucrat's '3 votes' reminder by the chosen player's character token.",
+				"otherNight": 1,
+				"otherNightReminder": "The Bureaucrat points to a player. Put the Bureaucrat's '3 votes' reminder by the chosen player's character token.",
+				"reminders": ["3 votes"],
+				"setup": false,
+				"ability": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow."
+				},
+				{
+				"id": "thief",
+				"name": "Thief",
+				"edition": "tb",
+				"team": "traveler",
+				"firstNight": 1,
+				"firstNightReminder": "The Thief points to a player. Put the Thief's 'Negative vote' reminder by the chosen player's character token.",
+				"otherNight": 1,
+				"otherNightReminder": "The Thief points to a player. Put the Thief's 'Negative vote' reminder by the chosen player's character token.",
+				"reminders": ["Negative vote"],
+				"setup": false,
+				"ability": "Each night, choose a player (not yourself): their vote counts negatively tomorrow."
+				},
+				{
+				"id": "gunslinger",
+				"name": "Gunslinger",
+				"edition": "tb",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each day, after the 1st vote has been tallied, you may choose a player that voted: they die."
+				},
+				{
+				"id": "scapegoat",
+				"name": "Scapegoat",
+				"edition": "tb",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "If a player of your alignment is executed, you might be executed instead."
+				},
+				{
+				"id": "beggar",
+				"name": "Beggar",
+				"edition": "tb",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "You must use a vote token to vote. Dead players may choose to give you theirs. If so, you learn their alignment. You are sober & healthy."
+				},
+				{
+				"id": "grandmother",
+				"name": "Grandmother",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 40,
+				"firstNightReminder": "Show the marked character token. Point to the marked player.",
+				"otherNight": 51,
+				"otherNightReminder": "If the Grandmother\u2019s grandchild was killed by the Demon tonight: The Grandmother dies.",
+				"reminders": ["Grandchild"],
+				"setup": false,
+				"ability": "You start knowing a good player & their character. If the Demon kills them, you die too."
+				},
+				{
+				"id": "sailor",
+				"name": "Sailor",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 11,
+				"firstNightReminder": "The Sailor points to a living player. Either the Sailor, or the chosen player, is drunk.",
+				"otherNight": 4,
+				"otherNightReminder": "The previously drunk player is no longer drunk. The Sailor points to a living player. Either the Sailor, or the chosen player, is drunk.",
+				"reminders": ["Drunk"],
+				"setup": false,
+				"ability": "Each night, choose an alive player: either you or they are drunk until dusk. You can't die."
+				},
+				{
+				"id": "chambermaid",
+				"name": "Chambermaid",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 51,
+				"firstNightReminder": "The Chambermaid points to two players. Show the number signal (0, 1, 2, \u2026) for how many of those players wake tonight for their ability.",
+				"otherNight": 70,
+				"otherNightReminder": "The Chambermaid points to two players. Show the number signal (0, 1, 2, \u2026) for how many of those players wake tonight for their ability.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night, choose 2 alive players (not yourself): you learn how many woke tonight due to their ability."
+				},
+				{
+				"id": "exorcist",
+				"name": "Exorcist",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 21,
+				"otherNightReminder": "The Exorcist points to a player, different from the previous night. If that player is the Demon: Wake the Demon. Show the Exorcist token. Point to the Exorcist. The Demon does not act tonight.",
+				"reminders": ["Chosen"],
+				"setup": false,
+				"ability": "Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight."
+				},
+				{
+				"id": "innkeeper",
+				"name": "Innkeeper",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 9,
+				"otherNightReminder": "The previously protected and drunk players lose those markers. The Innkeeper points to two players. Those players are protected. One is drunk.",
+				"reminders": ["Protected",
+					"Drunk"],
+				"setup": false,
+				"ability": "Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk."
+				},
+				{
+				"id": "gambler",
+				"name": "Gambler",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 10,
+				"otherNightReminder": "The Gambler points to a player, and a character on their sheet. If incorrect, the Gambler dies.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each night*, choose a player & guess their character: if you guess wrong, you die."
+				},
+				{
+				"id": "gossip",
+				"name": "Gossip",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 38,
+				"otherNightReminder": "If the Gossip\u2019s public statement was true: Choose a player not protected from dying tonight. That player dies.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each day, you may make a public statement. Tonight, if it was true, a player dies."
+				},
+				{
+				"id": "courtier",
+				"name": "Courtier",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 19,
+				"firstNightReminder": "The Courtier either shows a 'no' head signal, or points to a character on the sheet. If the Courtier used their ability: If that character is in play, that player is drunk.",
+				"otherNight": 8,
+				"otherNightReminder": "Reduce the remaining number of days the marked player is poisoned. If the Courtier has not yet used their ability: The Courtier either shows a 'no' head signal, or points to a character on the sheet. If the Courtier used their ability: If that character is in play, that player is drunk.",
+				"reminders": ["Drunk 3",
+					"Drunk 2",
+					"Drunk 1",
+					"No ability"],
+				"setup": false,
+				"ability": "Once per game, at night, choose a character: they are drunk for 3 nights & 3 days."
+				},
+				{
+				"id": "professor",
+				"name": "Professor",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 43,
+				"otherNightReminder": "If the Professor has not used their ability: The Professor either shakes their head no, or points to a player. If that player is a Townsfolk, they are now alive.",
+				"reminders": ["Alive",
+					"No ability"],
+				"setup": false,
+				"ability": "Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected."
+				},
+				{
+				"id": "minstrel",
+				"name": "Minstrel",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Everyone drunk"],
+				"setup": false,
+				"ability": "When a Minion dies by execution, all other players (except Travellers) are drunk until dusk tomorrow."
+				},
+				{
+				"id": "tealady",
+				"name": "Tea Lady",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Can not die"],
+				"setup": false,
+				"ability": "If both your alive neighbours are good, they can't die."
+				},
+				{
+				"id": "pacifist",
+				"name": "Pacifist",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Executed good players might not die."
+				},
+				{
+				"id": "fool",
+				"name": "Fool",
+				"edition": "bmr",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "The first time you die, you don't."
+				},
+				{
+				"id": "tinker",
+				"name": "Tinker",
+				"edition": "bmr",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 49,
+				"otherNightReminder": "The Tinker might die.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "You might die at any time."
+				},
+				{
+				"id": "moonchild",
+				"name": "Moonchild",
+				"edition": "bmr",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 50,
+				"otherNightReminder": "If the Moonchild used their ability to target a player today: If that player is good, they die.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "When you learn that you died, publicly choose 1 alive player. Tonight, if it was a good player, they die."
+				},
+				{
+				"id": "goon",
+				"name": "Goon",
+				"edition": "bmr",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Drunk"],
+				"setup": false,
+				"ability": "Each night, the 1st player to choose you with their ability is drunk until dusk. You become their alignment."
+				},
+				{
+				"id": "lunatic",
+				"name": "Lunatic",
+				"edition": "bmr",
+				"team": "outsider",
+				"firstNight": 8,
+				"firstNightReminder": "If 7 or more players: Show the Lunatic a number of arbitrary 'Minions', players equal to the number of Minions in play. Show 3 character tokens of arbitrary good characters. If the token received by the Lunatic is a Demon that would wake tonight: Allow the Lunatic to do the Demon actions. Place their 'attack' markers. Wake the Demon. Show the Demon\u2019s real character token. Show them the Lunatic player. If the Lunatic attacked players: Show the real demon each marked player. Remove any Lunatic 'attack' markers.",
+				"otherNight": 20,
+				"otherNightReminder": "Allow the Lunatic to do the actions of the Demon. Place their 'attack' markers. If the Lunatic selected players: Wake the Demon. Show the 'attack' marker, then point to each marked player. Remove any Lunatic 'attack' markers.",
+				"reminders": ["Attack 1",
+					"Attack 2",
+					"Attack 3"],
+				"setup": false,
+				"ability": "You think you are a Demon, but you are not. The Demon knows who you are & who you choose at night."
+				},
+				{
+				"id": "godfather",
+				"name": "Godfather",
+				"edition": "bmr",
+				"team": "minion",
+				"firstNight": 21,
+				"firstNightReminder": "Show each of the Outsider tokens in play.",
+				"otherNight": 37,
+				"otherNightReminder": "If an Outsider died today: The Godfather points to a player. That player dies.",
+				"reminders": ["Died today",
+					"Dead"],
+				"setup": true,
+				"ability": "You start knowing which Outsiders are in play. If 1 died today, choose a player tonight: they die. [\u22121 or +1 Outsider]"
+				},
+				{
+				"id": "devilsadvocate",
+				"name": "Devil's Advocate",
+				"edition": "bmr",
+				"team": "minion",
+				"firstNight": 22,
+				"firstNightReminder": "The Devil\u2019s Advocate points to a living player. That player survives execution tomorrow.",
+				"otherNight": 13,
+				"otherNightReminder": "The Devil\u2019s Advocate points to a living player, different from the previous night. That player survives execution tomorrow.",
+				"reminders": ["Survives execution"],
+				"setup": false,
+				"ability": "Each night, choose a living player (different to last night): if executed tomorrow, they don't die."
+				},
+				{
+				"id": "assassin",
+				"name": "Assassin",
+				"edition": "bmr",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 36,
+				"otherNightReminder": "If the Assassin has not yet used their ability: The Assassin either shows the 'no' head signal, or points to a player. That player dies.",
+				"reminders": ["Dead",
+					"No ability"],
+				"setup": false,
+				"ability": "Once per game, at night*, choose a player: they die, even if for some reason they could not."
+				},
+				{
+				"id": "mastermind",
+				"name": "Mastermind",
+				"edition": "bmr",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "If the Demon dies by execution (ending the game), play for 1 more day. If a player is then executed, their team loses."
+				},
+				{
+				"id": "zombuul",
+				"name": "Zombuul",
+				"edition": "bmr",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 25,
+				"otherNightReminder": "If no-one died during the day: The Zombuul points to a player. That player dies.",
+				"reminders": ["Died today",
+					"Dead"],
+				"setup": false,
+				"ability": "Each night*, if no-one died today, choose a player: they die. The 1st time you die, you live but register as dead."
+				},
+				{
+				"id": "pukka",
+				"name": "Pukka",
+				"edition": "bmr",
+				"team": "demon",
+				"firstNight": 28,
+				"firstNightReminder": "The Pukka points to a player. That player is poisoned.",
+				"otherNight": 26,
+				"otherNightReminder": "The Pukka points to a player. That player is poisoned. The previously poisoned player dies. ",
+				"reminders": ["Poisoned",
+					"Dead"],
+				"setup": false,
+				"ability": "Each night, choose a player: they are poisoned. The previously poisoned player dies then becomes healthy."
+				},
+				{
+				"id": "shabaloth",
+				"name": "Shabaloth",
+				"edition": "bmr",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 27,
+				"otherNightReminder": "One player that the Shabaloth chose the previous night might be resurrected. The Shabaloth points to two players. Those players die.",
+				"reminders": ["Dead",
+					"Alive"],
+				"setup": false,
+				"ability": "Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated."
+				},
+				{
+				"id": "po",
+				"name": "Po",
+				"edition": "bmr",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 28,
+				"otherNightReminder": "If the Po chose no-one the previous night: The Po points to three players. Otherwise: The Po either shows the 'no' head signal , or points to a player. Chosen players die",
+				"reminders": ["Dead",
+					"3 attacks"],
+				"setup": false,
+				"ability": "Each night*, you may choose a player: they die. If your last choice was no-one, choose 3 players tonight."
+				},
+				{
+				"id": "apprentice",
+				"name": "Apprentice",
+				"edition": "bmr",
+				"team": "traveler",
+				"firstNight": 1,
+				"firstNightReminder": "Show the Apprentice the 'You are' card, then a Townsfolk or Minion token. In the Grimoire, replace the Apprentice token with that character token, and put the Apprentice's 'Is the Apprentice' reminder by that character token.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Is the Apprentice"],
+				"setup": false,
+				"ability": "On your 1st night, you gain a Townsfolk ability (if good), or a Minion ability (if evil)."
+				},
+				{
+				"id": "matron",
+				"name": "Matron",
+				"edition": "bmr",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private."
+				},
+				{
+				"id": "judge",
+				"name": "Judge",
+				"edition": "bmr",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "Once per game, if another player nominated, you may choose to force the current execution to pass or fail."
+				},
+				{
+				"id": "bishop",
+				"name": "Bishop",
+				"edition": "bmr",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Nominate good",
+					"Nominate evil"],
+				"setup": false,
+				"ability": "Only the Storyteller can nominate. At least 1 opposite player must be nominated each day."
+				},
+				{
+				"id": "voudon",
+				"name": "Voudon",
+				"edition": "bmr",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Only you and the dead can vote. They don't need a vote token to do so. A 50% majority is not required."
+				},
+				{
+				"id": "clockmaker",
+				"name": "Clockmaker",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 41,
+				"firstNightReminder": "Show the hand signal for the number (1, 2, 3, etc.) of places from Demon to closest Minion.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "You start knowing how many steps from the Demon to its nearest Minion."
+				},
+				{
+				"id": "dreamer",
+				"name": "Dreamer",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 42,
+				"firstNightReminder": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
+				"otherNight": 56,
+				"otherNightReminder": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night, choose a player (not yourself or Travellers): you learn 1 good and 1 evil character, 1 of which is correct."
+				},
+				{
+				"id": "snakecharmer",
+				"name": "Snake Charmer",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 20,
+				"firstNightReminder": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
+				"otherNight": 11,
+				"otherNightReminder": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
+				"reminders": ["Poisoned"],
+				"setup": false,
+				"ability": "Each night, choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned."
+				},
+				{
+				"id": "mathematician",
+				"name": "Mathematician",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 52,
+				"firstNightReminder": "Show the hand signal for the number (0, 1, 2, etc.) of players whose ability malfunctioned due to other abilities.",
+				"otherNight": 71,
+				"otherNightReminder": "Show the hand signal for the number (0, 1, 2, etc.) of players whose ability malfunctioned due to other abilities.",
+				"reminders": ["Abnormal"],
+				"setup": false,
+				"ability": "Each night, you learn how many players\u2019 abilities worked abnormally (since dawn) due to another character's ability."
+				},
+				{
+				"id": "flowergirl",
+				"name": "Flowergirl",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 57,
+				"otherNightReminder": "Nod 'yes' or shake head 'no' for whether the Demon voted today. Place the 'Demon not voted' marker (remove 'Demon voted', if any).",
+				"reminders": ["Demon voted",
+					"Demon not voted"],
+				"setup": false,
+				"ability": "Each night*, you learn if a Demon voted today."
+				},
+				{
+				"id": "towncrier",
+				"name": "Town Crier",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 58,
+				"otherNightReminder": "Nod 'yes' or shake head 'no' for whether a Minion nominated today. Place the 'Minion not nominated' marker (remove 'Minion nominated', if any).",
+				"reminders": ["Minions not nominated",
+					"Minion nominated"],
+				"setup": false,
+				"ability": "Each night*, you learn if a Minion nominated today."
+				},
+				{
+				"id": "oracle",
+				"name": "Oracle",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 59,
+				"otherNightReminder": "Show the hand signal for the number (0, 1, 2, etc.) of dead evil players.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night*, you learn how many dead players are evil."
+				},
+				{
+				"id": "savant",
+				"name": "Savant",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each day, you may visit the Storyteller to learn 2 things in private: 1 is true & 1 is false."
+				},
+				{
+				"id": "seamstress",
+				"name": "Seamstress",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 43,
+				"firstNightReminder": "The Seamstress either shows a 'no' head signal, or points to two other players. If the Seamstress chose players , nod 'yes' or shake 'no' for whether they are of same alignment.",
+				"otherNight": 60,
+				"otherNightReminder": "If the Seamstress has not yet used their ability: the Seamstress either shows a 'no' head signal, or points to two other players. If the Seamstress chose players , nod 'yes' or shake 'no' for whether they are of same alignment.",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment."
+				},
+				{
+				"id": "philosopher",
+				"name": "Philosopher",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 2,
+				"firstNightReminder": "The Philosopher either shows a 'no' head signal, or points to a good character on their sheet. If they chose a character: Swap the out-of-play character token with the Philosopher token and add the 'Is the Philosopher' reminder. If the character is in play, place the drunk marker by that player.",
+				"otherNight": 2,
+				"otherNightReminder": "If the Philosopher has not used their ability: the Philosopher either shows a 'no' head signal, or points to a good character on their sheet. If they chose a character: Swap the out-of-play character token with the Philosopher token and add the 'Is the Philosopher' reminder. If the character is in play, place the drunk marker by that player.",
+				"reminders": ["Drunk",
+					"Is the Philosopher"],
+				"setup": false,
+				"ability": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk."
+				},
+				{
+				"id": "artist",
+				"name": "Artist",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "Once per game, during the day, privately ask the Storyteller any yes/no question."
+				},
+				{
+				"id": "juggler",
+				"name": "Juggler",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 61,
+				"otherNightReminder": "If today was the Juggler\u2019s first day: Show the hand signal for the number (0, 1, 2, etc.) of 'Correct' markers. Remove markers.",
+				"reminders": ["Correct"],
+				"setup": false,
+				"ability": "On your 1st day, publicly guess up to 5 players' characters. That night, you learn how many you got correct."
+				},
+				{
+				"id": "sage",
+				"name": "Sage",
+				"edition": "snv",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 42,
+				"otherNightReminder": "If the Sage was killed by a Demon: Point to two players, one of which is that Demon.",
+				"reminders": [],
+				"setup": false,
+				"ability": "If the Demon kills you, you learn that it is 1 of 2 players."
+				},
+				{
+				"id": "mutant",
+				"name": "Mutant",
+				"edition": "snv",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "If you are \u201Cmad\u201D about being an Outsider, you might be executed."
+				},
+				{
+				"id": "sweetheart",
+				"name": "Sweetheart",
+				"edition": "snv",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 41,
+				"otherNightReminder": "Choose a player that is drunk.",
+				"reminders": ["Drunk"],
+				"setup": false,
+				"ability": "When you die, 1 player is drunk from now on."
+				},
+				{
+				"id": "barber",
+				"name": "Barber",
+				"edition": "snv",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 40,
+				"otherNightReminder": "If the Barber died today: Wake the Demon. Show the 'This character selected you' card, then Barber token. The Demon either shows a 'no' head signal, or points to 2 players. If they chose players: Swap the character tokens. Wake each player. Show 'You are', then their new character token.",
+				"reminders": ["Haircuts tonight"],
+				"setup": false,
+				"ability": "If you died today or tonight, the Demon may choose 2 players (not another Demon) to swap characters."
+				},
+				{
+				"id": "klutz",
+				"name": "Klutz",
+				"edition": "snv",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses."
+				},
+				{
+				"id": "eviltwin",
+				"name": "Evil Twin",
+				"edition": "snv",
+				"team": "minion",
+				"firstNight": 23,
+				"firstNightReminder": "Wake the Evil Twin and their twin. Confirm that they have acknowledged each other. Point to the Evil Twin. Show their Evil Twin token to the twin player. Point to the twin. Show their character token to the Evil Twin player.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Twin"],
+				"setup": false,
+				"ability": "You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live."
+				},
+				{
+				"id": "witch",
+				"name": "Witch",
+				"edition": "snv",
+				"team": "minion",
+				"firstNight": 24,
+				"firstNightReminder": "The Witch points to a player. If that player nominates tomorrow they die immediately.",
+				"otherNight": 14,
+				"otherNightReminder": "If there are 4 or more players alive: The Witch points to a player. If that player nominates tomorrow they die immediately.",
+				"reminders": ["Cursed"],
+				"setup": false,
+				"ability": "Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability."
+				},
+				{
+				"id": "cerenovus",
+				"name": "Cerenovus",
+				"edition": "snv",
+				"team": "minion",
+				"firstNight": 25,
+				"firstNightReminder": "The Cerenovus points to a player, then to a character on their sheet. Wake that player. Show the 'This character selected you' card, then the Cerenovus token. Show the selected character token. If the player is not mad about being that character tomorrow, they can be executed.",
+				"otherNight": 15,
+				"otherNightReminder": "The Cerenovus points to a player, then to a character on their sheet. Wake that player. Show the 'This character selected you' card, then the Cerenovus token. Show the selected character token. If the player is not mad about being that character tomorrow, they can be executed.",
+				"reminders": ["Mad"],
+				"setup": false,
+				"ability": "Each night, choose a player & a good character: they are \u201Cmad\u201D they are this character tomorrow, or might be executed."
+				},
+				{
+				"id": "pithag",
+				"name": "Pit-Hag",
+				"edition": "snv",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 16,
+				"otherNightReminder": "The Pit-Hag points to a player and a character on the sheet. If this character is not in play, wake that player and show them the 'You are' card and the relevant character token. If the character is in play, nothing happens.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night*, choose a player & a character they become (if not-in-play). If a Demon is made, deaths tonight are arbitrary."
+				},
+				{
+				"id": "fanggu",
+				"name": "Fang Gu",
+				"edition": "snv",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 29,
+				"otherNightReminder": "The Fang Gu points to a player. That player dies. Or, if that player was an Outsider and there are no other Fang Gu in play: The Fang Gu dies instead of the chosen player. The chosen player is now an evil Fang Gu. Wake the new Fang Gu. Show the 'You are' card, then the Fang Gu token. Show the 'You are' card, then the thumb-down 'evil' hand sign.",
+				"reminders": ["Dead",
+					"Once"],
+				"setup": true,
+				"ability": "Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]"
+				},
+				{
+				"id": "vigormortis",
+				"name": "Vigormortis",
+				"edition": "snv",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 32,
+				"otherNightReminder": "The Vigormortis points to a player. That player dies. If a Minion, they keep their ability and one of their Townsfolk neighbours is poisoned.",
+				"reminders": ["Dead",
+					"Has ability",
+					"Poisoned"],
+				"setup": true,
+				"ability": "Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbour. [\u22121 Outsider]"
+				},
+				{
+				"id": "nodashii",
+				"name": "No Dashii",
+				"edition": "snv",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 30,
+				"otherNightReminder": "The No Dashii points to a player. That player dies.",
+				"reminders": ["Dead",
+					"Poisoned"],
+				"setup": false,
+				"ability": "Each night*, choose a player: they die. Your 2 Townsfolk neighbours are poisoned."
+				},
+				{
+				"id": "vortox",
+				"name": "Vortox",
+				"edition": "snv",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 31,
+				"otherNightReminder": "The Vortox points to a player. That player dies.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each night*, choose a player: they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins."
+				},
+				{
+				"id": "barista",
+				"name": "Barista",
+				"edition": "snv",
+				"team": "traveler",
+				"firstNight": 1,
+				"firstNightReminder": "Choose a player, wake them and tell them which Barista power is affecting them. Treat them accordingly (sober/healthy/true info or activate their ability twice).",
+				"otherNight": 1,
+				"otherNightReminder": "Choose a player, wake them and tell them which Barista power is affecting them. Treat them accordingly (sober/healthy/true info or activate their ability twice).",
+				"reminders": ["Sober & Healthy",
+					"Ability twice"],
+				"setup": false,
+				"ability": "Each night, until dusk, 1) a player becomes sober, healthy and gets true info, or 2) their ability works twice. They learn which."
+				},
+				{
+				"id": "harlot",
+				"name": "Harlot",
+				"edition": "snv",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 1,
+				"otherNightReminder": "The Harlot points at any player. Then, put the Harlot to sleep. Wake the chosen player, show them the 'This character selected you' token, then the Harlot token. That player either nods their head yes or shakes their head no. If they nodded their head yes, wake the Harlot and show them the chosen player's character token. Then, you may decide that both players die.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each night*, choose a living player: if they agree, you learn their character, but you both might die."
+				},
+				{
+				"id": "butcher",
+				"name": "Butcher",
+				"edition": "snv",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each day, after the 1st execution, you may nominate again."
+				},
+				{
+				"id": "bonecollector",
+				"name": "Bone Collector",
+				"edition": "snv",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 1,
+				"otherNightReminder": "The Bone Collector either shakes their head no or points at any dead player. If they pointed at any dead player, put the Bone Collector's 'Has Ability' reminder by the chosen player's character token. (They may need to be woken tonight to use it.)",
+				"reminders": ["No ability",
+					"Has ability"],
+				"setup": false,
+				"ability": "Once per game, at night, choose a dead player: they regain their ability until dusk."
+				},
+				{
+				"id": "deviant",
+				"name": "Deviant",
+				"edition": "snv",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "If you were funny today, you cannot die by exile."
+				},
+				{
+				"id": "noble",
+				"name": "Noble",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 44,
+				"firstNightReminder": "Point to 3 players including one evil player, in no particular order.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Seen"],
+				"setup": false,
+				"ability": "You start knowing 3 players, 1 and only 1 of which is evil."
+				},
+				{
+				"id": "bountyhunter",
+				"name": "Bounty Hunter",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 46,
+				"firstNightReminder": "Point to 1 evil player. Wake the townsfolk who is evil and show them the 'You are' card and the thumbs down evil sign.",
+				"otherNight": 64,
+				"otherNightReminder": "If the known evil player has died, point to another evil player. ",
+				"reminders": ["Known"],
+				"setup": true,
+				"ability": "You start knowing 1 evil player. If the player you know dies, you learn another evil player tonight. [1 Townsfolk is evil]"
+				},
+				{
+				"id": "pixie",
+				"name": "Pixie",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 29,
+				"firstNightReminder": "Show the Pixie 1 in-play Townsfolk character token.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Mad",
+					"Has ability"],
+				"setup": false,
+				"ability": "You start knowing 1 in-play Townsfolk. If you were mad that you were this character, you gain their ability when they die."
+				},
+				{
+				"id": "general",
+				"name": "General",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 50,
+				"firstNightReminder": "Show the General thumbs up for good winning, thumbs down for evil winning or thumb to the side for neither.",
+				"otherNight": 69,
+				"otherNightReminder": "Show the General thumbs up for good winning, thumbs down for evil winning or thumb to the side for neither.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night, you learn which alignment the Storyteller believes is winning: good, evil, or neither."
+				},
+				{
+				"id": "preacher",
+				"name": "Preacher",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 14,
+				"firstNightReminder": "The Preacher chooses a player. If a Minion is chosen, wake the Minion and show the 'This character selected you' card and then the Preacher token.",
+				"otherNight": 6,
+				"otherNightReminder": "The Preacher chooses a player. If a Minion is chosen, wake the Minion and show the 'This character selected you' card and then the Preacher token.",
+				"reminders": ["At a sermon"],
+				"setup": false,
+				"ability": "Each night, choose a player: a Minion, if chosen, learns this. All chosen Minions have no ability."
+				},
+				{
+				"id": "king",
+				"name": "King",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 10,
+				"firstNightReminder": "Wake the Demon, show them the 'This character selected you' card, show the King token and point to the King player.",
+				"otherNight": 63,
+				"otherNightReminder": "If there are more dead than living, show the King a character token of a living player.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night, if the dead outnumber the living, you learn 1 alive character. The Demon knows who you are."
+				},
+				{
+				"id": "balloonist",
+				"name": "Balloonist",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 45,
+				"firstNightReminder": "Choose a character type. Point to a player whose character is of that type. Place the Balloonist's Seen reminder next to that character.",
+				"otherNight": 62,
+				"otherNightReminder": "Choose a character type that does not yet have a Seen reminder next to a character of that type. Point to a player whose character is of that type, if there are any. Place the Balloonist's Seen reminder next to that character.",
+				"reminders": ["Seen Townsfolk",
+					"Seen Outsider",
+					"Seen Minion",
+					"Seen Demon",
+					"Seen Traveller"],
+				"setup": true,
+				"ability": "Each night, you learn 1 player of each character type, until there are no more types to learn. [+1 Outsider]"
+				},
+				{
+				"id": "cultleader",
+				"name": "Cult Leader",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 48,
+				"firstNightReminder": "If the cult leader changed alignment, show them the thumbs up good signal of the thumbs down evil signal accordingly.",
+				"otherNight": 66,
+				"otherNightReminder": "If the cult leader changed alignment, show them the thumbs up good signal of the thumbs down evil signal accordingly.",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each night, you become the alignment of an alive neighbour. If all good players choose to join your cult, your team wins."
+				},
+				{
+				"id": "lycanthrope",
+				"name": "Lycanthrope",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 22,
+				"otherNightReminder": "The Lycanthrope points to a living player: if good, they die and no one else can die tonight.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each night*, choose a living player: if good, they die, but they are the only player that can die tonight."
+				},
+				{
+				"id": "amnesiac",
+				"name": "Amnesiac",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 32,
+				"firstNightReminder": "Decide the Amnesiac's entire ability. If the Amnesiac's ability causes them to wake tonight: Wake the Amnesiac and run their ability.",
+				"otherNight": 47,
+				"otherNightReminder": "If the Amnesiac's ability causes them to wake tonight: Wake the Amnesiac and run their ability.",
+				"reminders": ["?"],
+				"setup": false,
+				"ability": "You do not know what your ability is. Each day, privately guess what it is: you learn how accurate you are."
+				},
+				{
+				"id": "nightwatchman",
+				"name": "Nightwatchman",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 47,
+				"firstNightReminder": "The Nightwatchman may point to a player. Wake that player, show the 'This character selected you' card and the Nightwatchman token, then point to the Nightwatchman player.",
+				"otherNight": 65,
+				"otherNightReminder": "The Nightwatchman may point to a player. Wake that player, show the 'This character selected you' card and the Nightwatchman token, then point to the Nightwatchman player.",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "Once per game, at night, choose a player: they learn who you are."
+				},
+				{
+				"id": "engineer",
+				"name": "Engineer",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 13,
+				"firstNightReminder": "The Engineer shows a 'no' head signal, or points to a Demon or points to the relevant number of Minions. If the Engineer chose characters, replace the Demon or Minions with the choices, then wake the relevant players and show them the You are card and the relevant character tokens.",
+				"otherNight": 5,
+				"otherNightReminder": "The Engineer shows a 'no' head signal, or points to a Demon or points to the relevant number of Minions. If the Engineer chose characters, replace the Demon or Minions with the choices, then wake the relevant players and show them the 'You are' card and the relevant character tokens.",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "Once per game, at night, choose which Minions or which Demon is in play."
+				},
+				{
+				"id": "fisherman",
+				"name": "Fisherman",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["No ability"],
+				"setup": false,
+				"ability": "Once per game, during the day, visit the Storyteller for some advice to help you win."
+				},
+				{
+				"id": "huntsman",
+				"name": "Huntsman",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 30,
+				"firstNightReminder": "The Huntsman shakes their head 'no' or points to a player. If they point to the Damsel, wake that player, show the 'You are' card and a not-in-play character token.",
+				"otherNight": 45,
+				"otherNightReminder": "The Huntsman shakes their head 'no' or points to a player. If they point to the Damsel, wake that player, show the 'You are' card and a not-in-play character token.",
+				"reminders": ["No ability"],
+				"setup": true,
+				"ability": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]"
+				},
+				{
+				"id": "alchemist",
+				"name": "Alchemist",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 3,
+				"firstNightReminder": "Show the Alchemist a not-in-play Minion token",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"remindersGlobal": ["Is the Alchemist"],
+				"setup": false,
+				"ability": "You have a not-in-play Minion ability."
+				},
+				{
+				"id": "farmer",
+				"name": "Farmer",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 48,
+				"otherNightReminder": "If a Farmer died tonight, choose another good player and make them the Farmer. Wake this player, show them the 'You are' card and the Farmer character token.",
+				"reminders": [],
+				"setup": false,
+				"ability": "If you die at night, an alive good player becomes a Farmer."
+				},
+				{
+				"id": "magician",
+				"name": "Magician",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 5,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "The Demon thinks you are a Minion. Minions think you are a Demon."
+				},
+				{
+				"id": "choirboy",
+				"name": "Choirboy",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 44,
+				"otherNightReminder": "If the King was killed by the Demon, wake the Choirboy and point to the Demon player.",
+				"reminders": [],
+				"setup": true,
+				"ability": "If the Demon kills the King, you learn which player is the Demon. [+ the King]"
+				},
+				{
+				"id": "poppygrower",
+				"name": "Poppy Grower",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 4,
+				"firstNightReminder": "Do not inform the Demon/Minions who each other are",
+				"otherNight": 3,
+				"otherNightReminder": "If the Poppy Grower has died, show the Minions/Demon who each other are.",
+				"reminders": ["Evil wakes"],
+				"setup": false,
+				"ability": "Minions & Demons do not know each other. If you die, they learn who each other are that night."
+				},
+				{
+				"id": "atheist",
+				"name": "Atheist",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": true,
+				"ability": "The Storyteller can break the game rules & if executed, good wins, even if you are dead. [No evil characters]"
+				},
+				{
+				"id": "cannibal",
+				"name": "Cannibal",
+				"edition": "",
+				"team": "townsfolk",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Poisoned",
+					"Died today"],
+				"setup": false,
+				"ability": "You have the ability of the recently killed executee. If they are evil, you are poisoned until a good player dies by execution."
+				},
+				{
+				"id": "snitch",
+				"name": "Snitch",
+				"edition": "",
+				"team": "outsider",
+				"firstNight": 7,
+				"firstNightReminder": "After Minion info wake each Minion and show them three not-in-play character tokens. These may be the same or different to each other and the ones shown to the Demon.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Minions start knowing 3 not-in-play characters."
+				},
+				{
+				"id": "acrobat",
+				"name": "Acrobat",
+				"edition": "",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 39,
+				"otherNightReminder": "If a good living neighbour is drunk or poisoned, the Acrobat player dies.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each night*, if either good living neighbour is drunk or poisoned, you die."
+				},
+				{
+				"id": "puzzlemaster",
+				"name": "Puzzlemaster",
+				"edition": "",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Drunk",
+					"Guess used"],
+				"setup": false,
+				"ability": "1 player is drunk, even if you die. If you guess (once) who it is, learn the Demon player, but guess wrong & get false info."
+				},
+				{
+				"id": "heretic",
+				"name": "Heretic",
+				"edition": "",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Whoever wins, loses & whoever loses, wins, even if you are dead."
+				},
+				{
+				"id": "damsel",
+				"name": "Damsel",
+				"edition": "",
+				"team": "outsider",
+				"firstNight": 31,
+				"firstNightReminder": "Wake all the Minions, show them the 'This character selected you' card and the Damsel token.",
+				"otherNight": 46,
+				"otherNightReminder": "If selected by the Huntsman, wake the Damsel, show 'You are' card and a not-in-play Townsfolk token.",
+				"reminders": ["Guess used"],
+				"setup": false,
+				"ability": "All Minions know you are in play. If a Minion publicly guesses you (once), your team loses."
+				},
+				{
+				"id": "golem",
+				"name": "Golem",
+				"edition": "",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Can not nominate"],
+				"setup": false,
+				"ability": "You may only nominate once per game. When you do, if the nominee is not the Demon, they die."
+				},
+				{
+				"id": "politician",
+				"name": "Politician",
+				"edition": "",
+				"team": "outsider",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "If you were the player most responsible for your team losing, you change alignment & win, even if dead."
+				},
+				{
+				"id": "widow",
+				"name": "Widow",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 18,
+				"firstNightReminder": "Show the Grimoire to the Widow for as long as they need. The Widow points to a player. That player is poisoned. Wake a good player. Show the 'These characters are in play' card, then the Widow character token.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Poisoned"],
+				"remindersGlobal": ["Knows"],
+				"setup": false,
+				"ability": "On your 1st night, look at the Grimoire and choose a player: they are poisoned. 1 good player knows a Widow is in play."
+				},
+				{
+				"id": "fearmonger",
+				"name": "Fearmonger",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 26,
+				"firstNightReminder": "The Fearmonger points to a player. Place the Fear token next to that player and announce that a new player has been selected with the Fearmonger ability.",
+				"otherNight": 17,
+				"otherNightReminder": "The Fearmonger points to a player. If different from the previous night, place the Fear token next to that player and announce that a new player has been selected with the Fearmonger ability.",
+				"reminders": ["Fear"],
+				"setup": false,
+				"ability": "Each night, choose a player. If you nominate & execute them, their team loses. All players know if you choose a new player."
+				},
+				{
+				"id": "psychopath",
+				"name": "Psychopath",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "Each day, before nominations, you may publicly choose a player: they die. If executed, you only die if you lose roshambo."
+				},
+				{
+				"id": "goblin",
+				"name": "Goblin",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Claimed"],
+				"setup": false,
+				"ability": "If you publicly claim to be the Goblin when nominated & are executed that day, your team wins."
+				},
+				{
+				"id": "mephit",
+				"name": "Mephit",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 27,
+				"firstNightReminder": "Show the Mephit their secret word.",
+				"otherNight": 18,
+				"otherNightReminder": "Wake the 1st good player that said the Mephit's secret word and show them the 'You are' card and the thumbs down evil signal.",
+				"reminders": ["Turns evil",
+					"No ability"],
+				"setup": false,
+				"ability": "You start knowing a secret word. The 1st good player to say this word becomes evil that night."
+				},
+				{
+				"id": "mezepheles",
+				"name": "Mezepheles",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 27,
+				"firstNightReminder": "Show the Mezepheles their secret word.",
+				"otherNight": 18,
+				"otherNightReminder": "Wake the 1st good player that said the Mezepheles' secret word and show them the 'You are' card and the thumbs down evil signal.",
+				"reminders": ["Turns evil",
+					"No ability"],
+				"setup": false,
+				"ability": "You start knowing a secret word. The 1st good player to say this word becomes evil that night."
+				},
+				{
+				"id": "marionette",
+				"name": "Marionette",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 12,
+				"firstNightReminder": "Select one of the good players next to the Demon and place the Is the Marionette reminder token. Wake the Demon and show them the Marionette.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"remindersGlobal": ["Is the Marionette"],
+				"setup": true,
+				"ability": "You think you are a good character but you are not. The Demon knows who you are. [You neighbour the Demon]"
+				},
+				{
+				"id": "boomdandy",
+				"name": "Boomdandy",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "If you are executed, all but 3 players die. 1 minute later, the player with the most players pointing at them dies."
+				},
+				{
+				"id": "lilmonsta",
+				"name": "Lil' Monsta",
+				"edition": "",
+				"team": "demon",
+				"firstNight": 15,
+				"firstNightReminder": "Wake all Minions together, allow them to vote by pointing at who they want to babysit Lil' Monsta.",
+				"otherNight": 35,
+				"otherNightReminder": "Wake all Minions together, allow them to vote by pointing at who they want to babysit Lil' Monsta. Choose a player, that player dies.",
+				"reminders": [],
+				"remindersGlobal": ["Is the Demon",
+					"Dead"],
+				"setup": true,
+				"ability": "Each night, Minions choose who babysits Lil' Monsta's token & \"is the Demon\". A player dies each night*. [+1 Minion]"
+				},
+				{
+				"id": "lleech",
+				"name": "Lleech",
+				"edition": "",
+				"team": "demon",
+				"firstNight": 16,
+				"firstNightReminder": "The Lleech points to a player. Place the Poisoned reminder token.",
+				"otherNight": 34,
+				"otherNightReminder": "The Lleech points to a player. That player dies.",
+				"reminders": ["Dead",
+					"Poisoned"],
+				"setup": false,
+				"ability": "Each night*, choose a player: they die. You start by choosing an alive player: they are poisoned - you die if & only if they die."
+				},
+				{
+				"id": "alhadikhia",
+				"name": "Al-Hadikhia",
+				"edition": "",
+				"team": "demon",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 33,
+				"otherNightReminder": "The Al-Hadikhia chooses 3 players. Announce the first player, wake them to nod yes to live or shake head no to die, kill or resurrect accordingly, then put to sleep and announce the next player. If all 3 are alive after this, all 3 die.",
+				"reminders": ["1", "2", "3",
+					"Chose death",
+					"Chose life"],
+				"setup": false,
+				"ability": "Each night*, choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die."
+				},
+				{
+				"id": "legion",
+				"name": "Legion",
+			"edition": "",
+			"team": "demon",
+			"firstNight": 0,
+			"firstNightReminder": "",
+			"otherNight": 23,
+			"otherNightReminder": "Choose a player, that player dies.",
+			"reminders": ["Dead",
+				"About to die"],
+			"setup": true,
+			"ability": "Each night*, a player might die. Executions fail if only evil voted. You register as a Minion too. [Most players are Legion]"
+			},
+			{
+			"id": "leviathan",
+			"name": "Leviathan",
+			"edition": "",
+			"team": "demon",
+			"firstNight": 54,
+			"firstNightReminder": "Place the Leviathan 'Day 1' marker. Announce 'The Leviathan is in play; this is Day 1.'",
+			"otherNight": 73,
+			"otherNightReminder": "Change the Leviathan Day reminder for the next day.",
+			"reminders": ["Day 1",
+				"Day 2",
+				"Day 3",
+				"Day 4",
+				"Day 5",
+				"Good player executed"],
+			"setup": false,
+			"ability": "If more than 1 good player is executed, you win. All players know you are in play. After day 5, evil wins."
+			},
+			{
+			"id": "riot",
+			"name": "Riot",
+			"edition": "",
+			"team": "demon",
+			"firstNight": 0,
+			"firstNightReminder": "",
+			"otherNight": 0,
+			"otherNightReminder": "",
+			"reminders": [],
+			"setup": true,
+			"ability": "Nominees die, but may nominate again immediately (on day 3, they must). After day 3, evil wins. [All Minions are Riot]"
+			},
+			{
+			"id": "gangster",
+			"name": "Gangster",
+			"edition": "",
+			"team": "traveler",
+			"firstNight": 0,
+			"firstNightReminder": "",
+			"otherNight": 0,
+			"otherNightReminder": "",
+			"reminders": [],
+			"setup": false,
+			"ability": "Once per day, you may choose to kill an alive neighbour, if your other alive neighbour agrees."
+			}
+		];
+
+		load(roles);
 		
-		<h3 class="w3-green">Townsfolk</h3>
-
-				 <hr>
-		
-		<h4>Mayor</h4>
-<p>
-<b>Character Text: </b> 
-<em>"If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Mayor">https://wiki.bloodontheclocktower.com/Mayor"</a>
-</p>
-
-<hr>
-
-<h4>Clockmaker</h4>
-<p>
-<b>Character Text: </b> 
-<em>"You start knowing how many steps from the Demon to its nearest Minion."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Clockmaker">https://wiki.bloodontheclocktower.com/Clockmaker"</a>
-</p>
-
-<hr>
-
-<h4>Dreamer</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, choose a player (not yourself or Travellers): you learn 1 good & 1 evil character, 1 of which is correct."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Dreamer">https://wiki.bloodontheclocktower.com/Dreamer"</a>
-</p>
-
-<hr>
-
-<h4>Snake Charmer</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Snake_Charmer">https://wiki.bloodontheclocktower.com/Snake_Charmer"</a>
-</p>
-
-<hr>
-
-<h4>Mathematician</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, you learn how many players' abilities worked abnormally (since dawn) due to another character's ability"</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Flower Girl</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, you learn if a Demon voted today."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Town Crier</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, you learn if a Minion nominated today."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Oracle</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, you learn how many dead players are evil."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Savant</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each day, you may visit the Storyteller to learn 2 things in private: 1 is true & 1 is false."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Seamstress </h4>
-<p>
-<b>Character Text: </b> 
-<em>"Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Philosopher</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Artist</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Once per game, during the day, privately ask the Storyteller any yes/no question."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Juggler </h4>
-<p>
-<b>Character Text: </b> 
-<em>"On your 1st day, publicly guess up to 5 players' characters. That night, you learn how many you got correct."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Sage</h4>
-<p>
-<b>Character Text: </b> 
-<em>"If the Demon kills you, you learn that it is 1 of 2 players."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-<h3 class="w3-blue">Outsider</h3>
-<hr>
-
-<h4>Mutant</h4>
-<p>
-<b>Character Text: </b> 
-<em>"If you are "mad" about being an Outsider, you might be executed."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Sweetheart</h4>
-<p>
-<b>Character Text: </b> 
-<em>"When you die, 1 player is drunk from now on."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Barber</h4>
-<p>
-<b>Character Text: </b> 
-<em>"If you died today or tonight, the Demon may choose 2 players (not another Demon) to swap characters."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Klutz </h4>
-<p>
-<b>Character Text: </b> 
-<em>"When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-<h3 class="w3-orange">Minion</h3>
-<hr>
-<h4>Evil Twin </h4>
-<p>
-<b>Character Text: </b> 
-<em>"You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Witch</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Cerenovus</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, choose a player & a good character: they are "mad" they are this character tomorrow, or might be executed."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Pit-Hag</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose a player & a character they become (if not in play). If a Demon is made, deaths tonight are arbitrary."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="https://wiki.bloodontheclocktower.com/Pit_Hag">https://wiki.bloodontheclocktower.com/Pit_Hag"</a>
-</p>
-
-<hr>
-<h3 class="w3-red">Demon</h3>
-<hr>
-<h4>Fang Gu</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]"</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Vigormortis</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbor. [-1 Outsider]"</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>No Dashii</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose a player: they die. Your 2 Townsfolk neighbours are poisoned."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Vortox</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose a player; they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-</div>
-
-<br>
-
-<button onclick="accordion('badMoonRisingEdition')" class="w3-btn w3-block w3-yellow accordion-heading">
-			Bad Moon Rising</button>
-			
-		<div id="badMoonRisingEdition" class="w3-hide w3-center accordion-content">
-			
-		<em>The sun is swallowed by a jagged horizon as another winter's day surrenders to the night. Flecks of orange and red decay into deeper browns, the forest transforming in silent anticipation of the coming snow.
-
-Ravenous wolves howl from the bowels of a rocky crevasse beyond the town borders, sending birds scattering from their cozy rooks. Travellers hurry into the inn, seeking shelter from the gathering chill. They warm themselves with hot tea, sweet strains of music and hearty ale, unaware that strange and nefarious eyes stalk them from the ruins of this once great city.
-
-Tonight, even the livestock know there is a... Bad Moon Rising.</em>
-
-<p>Bad Moon Rising is a death extravaganza. Demons kill multiple times per night, and Minions get in on the action too. Good players can take great risks to gain reliable information, but may accidentally kill their friends in the process. Luckily, there are many options to keep players alive long past their use-by date. If the good team cannot determine which specific Minions and Demons are in play, however, their doom is all but certain.
-
-Intermediate. Recommended for players who are proactive, dedicated to working as a team, and don’t fear dying.
-
-When playing Bad Moon Rising…</p>
-
-
-<p>Good players will receive little information by being passive. Some Townsfolk abilities require the good team to execute players in order to gain information (such as the Tea Lady or the Pacifist), whilst others encourage good players to take risks that may end in death in order to find out who is who (such as the Gambler or the Gossip). When good players do something, they learn something.
-
-The good team will also need to pay close attention to who died at night, and how. If they ignore this, they risk losing unexpectedly at the end of a day with four, five, or even six players still left alive. However, if they can figure out how each player died at night, they can figure out which evil characters are in play—letting them avoid losing the game to the dreaded Mastermind or the intimidating Po—and get helpful clues on which good characters accidentally killed which players (such as the Moonchild or the Tinker).</p>
-	
-<p>Evil players may feel invincible at first, but they will need to use their abilities with precision and prudence in order to win. The Demon may need to convince the good team that a different Demon is in play to avoid the crippling effects of some good characters (such as the Exorcist or the Courtier), and may need to deliberately not kill to do so. But if the Demon can figure out who to attack and who to avoid attacking (such as the Tea Lady’s neighbours, or the Fool), then the good team is in serious trouble.
-
-The Minions will need to time their abilities well. A well-timed Assassin’s kill, a patient Devil’s Advocate, or a Mastermind that can read a room can pull victory from the jaws of defeat.</p>
-		
-		<h3 class="w3-green">Townsfolk</h3>
-
-				 <hr>
-				
-				<h4>Grandmother</h4>
-<p>
-<b>Character Text: </b> 
-<em>"You start knowing a good player & their character. If the Demon kills them, you die too."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Sailor</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, choose an alive player: either you or they are drunk until dusk. You can't die."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Chambermaid</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, choose 2 alive players (not yourself): you learn how many woke tonight due to their ability."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Exorcist</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Innskeeper</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Gambler</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose a player & guess their character: if you guess wrong, you die."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Gossip</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each day, you may make a public statement. Tonight, if it was true, a player dies."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Courtier</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Once per game, at night, choose a character: they are drunk for 3 nights & 3 days."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Professor</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Minstrel</h4>
-<p>
-<b>Character Text: </b> 
-<em>"When a Minion dies by execution, all other players (except Travellers) are drunk until dusk tomorrow."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Tea Lady</h4>
-<p>
-<b>Character Text: </b> 
-<em>"If both your alive neighbors are good, they can't die."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Pacifist</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Executed good players might not die."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Fool</h4>
-<p>
-<b>Character Text: </b> 
-<em>"The first time you die, you don't."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-<h3 class="w3-blue">Outsiders</h3>
-<hr>
-
-<h4>Goon</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, the 1st player to choose you with their ability is drunk until dusk. You become their alignment."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Lunatic</h4>
-<p>
-<b>Character Text: </b> 
-<em>"You think you are a Demon, but you are not. The Demon knows who you are & who you choose at night."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Tinker</h4>
-<p>
-<b>Character Text: </b> 
-<em>"You might die at any time."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Moonchild</h4>
-<p>
-<b>Character Text: </b> 
-<em>"When you learn that you died, publicly choose 1 alive player. Tonight, if it was a good player, they die."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-<h3 class="w3-orange">Minions</h3>
-<hr>
-
-<h4>Godfather</h4>
-<p>
-<b>Character Text: </b> 
-<em>"You start knowing which Outsiders are in play. If 1 died today, choose a player tonight: they die. [-1 or +1 Outsider]"</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Devil's Advocat</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, choose a living player (different to last night): if executed tomorrow, they don't die."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Assassin</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Once per game, at night*, choose a player: they die, even if for some reason they could not."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Mastermind</h4>
-<p>
-<b>Character Text: </b> 
-<em>"If the Demon dies by execution (ending the game), play for 1 more day. If a player is then executed, their team loses."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-<h3 class="w3-red">Demons</h3>
-<hr>
-
-<h4>Zombuul</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, if no-one died today, choose a player: they die. The 1st time you die, you live but register as dead."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Pukka</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night, choose a player: they are poisoned. The previously poisoned player dies then becomes healthy."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Shabaloth</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-<h4>Po</h4>
-<p>
-<b>Character Text: </b> 
-<em>"Each night*, you may choose a player: they die. If your last choice was no-one, choose 3 players tonight."</em>
-</p>
-<p>
-<b>Wiki Link:</b> <a href="">"</a>
-</p>
-
-<hr>
-
-</div>
-
+		</script>
 	</body>
 </html>
