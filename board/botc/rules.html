@@ -25,6 +25,36 @@
 				}
 			}
 
+			function tab(id) {
+
+				//console.log('tab',event.target.id);
+				//APPEND _Content TO THE id
+				//id = event.target.id.replaceAll(" ","_") + '_Content';
+				id = id.replaceAll(" ","_") + '_Content';
+				//GET ALL THE TAB CONTENT
+				var x = document.getElementsByClassName("tabContent");
+
+				//ITERATE THROUGH THE TAB CONTENT
+				for (let i = 0; i < x.length; i++) {
+
+					//HIDE ALL ELEMENTS
+					x[i].style.display = "none";
+					//x[i].style.height = "0px !important";
+					//x[i].style.lineHeight = '0';
+					//x[i].style.overflow = 'hidden';
+				}
+				//THEN MAKE THE SELECTED ITEM DISPLAY
+				document.getElementById(id).style.display = "block";
+				document.getElementById(id).style.lineHeight = "2em";
+
+				let tablinks = document.getElementsByClassName('w3-bar-item');
+				for (let i = 0; i < x.length; i++){
+					tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+				}
+				//event.target.className += " w3-red";
+				document.getElementById(id.replaceAll("_Content","")).className += " w3-green";
+			}
+
 			const editions = [
 				{
 					id: 1,
@@ -130,6 +160,26 @@
 						//ETC
 					}
 				}
+
+				let tabBarDiv = document.createElement('div');
+				tabBarDiv.className = "w3-black w3-center w3-row w3-container";
+				document.getElementById('editionOutput').appendChild(tabBarDiv);
+
+				//ITERATE EDITIONS
+				for(edition in editions){
+					//CREATE THE ACCORDION OPEN BUTTON
+					let button = document.createElement('button');
+					//ADD onclick EVENT TO OPEN ACCORDION
+					button.onclick = function (event) {
+						console.log(event.target.id + ' clicked');
+						tab(event.target.id);
+					}
+					button.id = editions[edition].name.replaceAll(" ","_") + '_Edition';
+					//button.className = "w3-btn w3-block w3-" + editions[edition].color  + " accordion-heading";
+					button.className = "w3-btn w3-quarter w3-xlarge w3-block w3-text-" + editions[edition].color  + " w3-bar-item w3-center";
+					button.innerHTML = editions[edition].name;
+					tabBarDiv.appendChild(button);
+				}
 				
 				//ITERATE EDITIONS
 				for(edition in editions){
@@ -138,27 +188,24 @@
 					console.log('PROCESSING ',editions[edition].name);
 					console.log('-----------------------');
 					
-					//CREATE THE ACCORDION OPEN BUTTON
-					let button = document.createElement('button');
-					//ADD onclick EVENT TO OPEN ACCORDION
-					button.onclick = function (event) {
-						//console.log(event.target.id + ' clicked');
-						accordion(event.target.id);
-					}
-					button.id = editions[edition].name.replaceAll(" ","_") + '_Edition';
-					button.className = "w3-btn w3-block w3-" + editions[edition].color  + " accordion-heading";
-					button.innerHTML = editions[edition].name;
 
 					//CREATE THE ACCORDION CONTENT DIV
 					let div = document.createElement('div');
 					div.id = editions[edition].name.replaceAll(" ","_") + '_Edition_Content';
-					div.className = "w3-hide w3-" + editions[edition].color  + " accordion-content";
+					//div.className = "w3-hide w3-" + editions[edition].color  + " accordion-content";
+					div.className = "w3-" + editions[edition].color  + " w3-container tabContent";
 					//console.log(div.id);
 
+
+					div.appendChild(document.createElement('br'));
+
 					//CREATE THE CONTENT HEADER
-					//let header2 = document.createElement('h2');
-					//header2.innerHTML = editions[edition].name;
-					//div.appendChild(header2);
+					let header2 = document.createElement('h2');
+					header2.innerHTML = editions[edition].name;
+
+					div.appendChild(header2);
+
+					div.appendChild(document.createElement('br'));
 					
 					//DIFFICULTY
 					let b = document.createElement('b');
@@ -245,10 +292,12 @@
 						div.appendChild(document.createElement('hr'));
 					}
 					//APPEND THIS BUTTON AND DIV TO THE OUTPUT
-					document.getElementById('editionOutput').appendChild(button);
+					
 					document.getElementById('editionOutput').appendChild(div);
-					document.getElementById('editionOutput').appendChild(document.createElement('br'));
+					//document.getElementById('editionOutput').appendChild(document.createElement('br'));
 				}
+
+				tab('Trouble_Brewing_Edition');
 
 				function assign(store, role){
 					//console.log(store[`${role.team}`]);
@@ -311,7 +360,8 @@
 			Basics</button>
 		<div id="rules_Content" class="w3-hide accordion-content w3-pink">
 
-			<p>Blood on the Clocktower is a social-deduction, hidden-role game where one team is good players (who don't know who each other are) going up against a team of bad players led by the DEMON (who usually DO know who each other are!).</p>
+			<p>Blood on the Clocktower is a deduction/detective game with a social layer and hidden-roles.</p>
+			<p>One team is good players (who don't know who each other are) going up against a team of bad players led by the DEMON (who usually DO know who each other are!).</p>
 			<p>During the day, players will discuss the information they have and try to establish who is lying and potentially a bad player.</p>
 			<p>Every player has a special ability linked to their ROLE - some helpful, others.... less than helpful!</p>
 			<p>Each day, players will have the opportunity to EXECUTE one player, hoping to kill the Demon and win the game.</p>
