@@ -27,10 +27,9 @@
 
 			function tab(id) {
 
-				//console.log('tab',event.target.id);
 				//APPEND _Content TO THE id
-				//id = event.target.id.replaceAll(" ","_") + '_Content';
-				id = id.replaceAll(" ","_") + '_Content';
+				let targetId = id.replaceAll(" ","_") + '_Content';
+
 				//GET ALL THE TAB CONTENT
 				var x = document.getElementsByClassName("tabContent");
 
@@ -44,15 +43,16 @@
 					//x[i].style.overflow = 'hidden';
 				}
 				//THEN MAKE THE SELECTED ITEM DISPLAY
-				document.getElementById(id).style.display = "block";
-				document.getElementById(id).style.lineHeight = "2em";
+				document.getElementById(targetId).style.display = "block";
+				document.getElementById(targetId).style.lineHeight = "2em";
 
 				let tablinks = document.getElementsByClassName('w3-bar-item');
-				for (let i = 0; i < x.length; i++){
+				for (let i = 0; i < tablinks.length; i++){
 					tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
 				}
 				//event.target.className += " w3-red";
-				document.getElementById(id.replaceAll("_Content","")).className += " w3-green";
+				console.log(id);
+				document.getElementById(id).className += " w3-green";
 			}
 
 			const editions = [
@@ -117,7 +117,7 @@
 				{
 					id: 4,
 					name: "Experimental Characters",
-					code: "",
+					code: "exp",
 					color: "deep-orange",
 					description: "Experimental characters are characters which do not yet have a home script. At some point in the future, these may be released as part of official expansion scripts. For now, you are encouraged to experiment with them in your own scripts.",
 					difficulty: "Advanced. Recommended for players and Storytellers who have experienced many games of Blood on the Clocktower.",
@@ -136,6 +136,7 @@
 			];
 			
 			function load(roles){
+
 				var roleCount = roles.length;
 				for(var i = 0; i < roleCount; i++){
 					var role = roles[i];
@@ -176,10 +177,25 @@
 					}
 					button.id = editions[edition].name.replaceAll(" ","_") + '_Edition';
 					//button.className = "w3-btn w3-block w3-" + editions[edition].color  + " accordion-heading";
-					button.className = "w3-btn w3-quarter w3-xlarge w3-block w3-text-" + editions[edition].color  + " w3-bar-item w3-center";
-					button.innerHTML = editions[edition].name;
+					button.className = "w3-btn w3-col-s2 w3-text-" + editions[edition].color  + " w3-border w3-border-" + editions[edition].color + " w3-bar-item w3-center";
+					//button.innerHTML = editions[edition].code.toUpperCase();
+					button.innerHTML = editions[edition].name.toUpperCase();
 					tabBarDiv.appendChild(button);
 				}
+
+				//TEST - ADDING AN "ALL CHARACTERS" SCRIPT
+				let button = document.createElement('button');
+				//ADD onclick EVENT TO OPEN ACCORDION
+				button.onclick = function (event) {
+					console.log(event.target.id + ' clicked');
+					tab(event.target.id);
+				}
+				button.id = 'All_Characters_Edition';
+				//button.className = "w3-btn w3-block w3-" + editions[edition].color  + " accordion-heading";
+				button.className = "w3-btn w3-col-s2 w3-text-white w3-border w3-border-white w3-bar-item w3-center";
+				button.innerHTML = "ALL";
+				tabBarDiv.appendChild(button);
+
 				
 				//ITERATE EDITIONS
 				for(edition in editions){
@@ -206,6 +222,7 @@
 					div.appendChild(header2);
 
 					div.appendChild(document.createElement('br'));
+					div.appendChild(document.createElement('br'));
 					
 					//DIFFICULTY
 					let b = document.createElement('b');
@@ -214,25 +231,34 @@
 					div.appendChild(b);
 
 					div.appendChild(document.createElement('br'));
+					div.appendChild(document.createElement('br'));
 
 					//DESCRIPTION
 					let em = document.createElement('em');
+					em.style.fontSize = '1.5em';
 					em.innerHTML = editions[edition].description;
 					div.appendChild(em);
 
+					div.appendChild(document.createElement('br'));
 					div.appendChild(document.createElement('br'));
 
 					//GOOD PLAYERS
 					let pGood = document.createElement('p');
 					pGood.className = 'w3-green';
+					pGood.style.padding = '25px';
 					pGood.innerHTML = editions[edition].goodDescription;
 					div.appendChild(pGood);
 
+					div.appendChild(document.createElement('br'));
+
 					//EVIL PLAYERS
 					let pEvil = document.createElement('p');
-					pEvil.className = 'w3-dark-gray';
+					pEvil.className = 'w3-pale-red';
+					pEvil.style.padding = '25px';
 					pEvil.innerHTML = editions[edition].evilDescription;
 					div.appendChild(pEvil);
+
+					div.appendChild(document.createElement('br'));
 
 					//LINK
 					let a = document.createElement('a');
@@ -243,6 +269,7 @@
 					div.appendChild(a);
 
 					//SPACER
+					div.appendChild(document.createElement('br'));
 					div.appendChild(document.createElement('br'));
 
 					//ITERATE THROUGH THE ROLES
@@ -291,11 +318,87 @@
 						//ADD DIVIDER BETWEEN ROLE TYPES
 						div.appendChild(document.createElement('hr'));
 					}
-					//APPEND THIS BUTTON AND DIV TO THE OUTPUT
-					
+
+					div.appendChild(document.createElement('br'));
+					//ADD A BACK TO SCRIPTS LINK
+					let backToTopLink = document.createElement('a');
+					backToTopLink.href = '#scripts';
+					backToTopLink.innerHTML = '^ Back to scripts ^'
+					div.appendChild(backToTopLink);
+
+					div.appendChild(document.createElement('br'));
+					div.appendChild(document.createElement('br'));
+
+					//APPEND THIS DIV TO THE OUTPUT
 					document.getElementById('editionOutput').appendChild(div);
 					//document.getElementById('editionOutput').appendChild(document.createElement('br'));
+				} //END iterate editions
+
+				let sortedRoles = roles.sort(function(a,b) {
+					var nameA = a.name.toUpperCase();
+					var nameB = b.name.toUpperCase();
+					return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+				});
+
+				//CREATE THE ACCORDION CONTENT DIV
+				let div = document.createElement('div');
+				div.id = 'All_Characters_Edition_Content';
+				div.className = "w3-white w3-container tabContent";
+
+				let head = document.createElement('h2');
+				head.innerHTML = 'All character roles (alphabetical)';
+				div.appendChild(head);
+
+				for(role in sortedRoles){
+					
+					let obj = sortedRoles[role];
+					console.log('Processing',obj.name);
+
+					//CREATE A LIST ITEM
+					let li = document.createElement('li');
+					switch(obj.team){
+						case 'townsfolk':
+							li.style.color = 'green';
+						break;
+						case 'outsider':
+							li.style.color = 'blue';
+						break;
+						case 'minion':
+							li.style.color = 'red';
+						break;
+						case 'demon':
+							li.style.color = 'red';
+						break;
+						default:
+							li.style.color = 'purple';
+						break;
+					}
+					//AND AN ANCHOR TAG
+					let a = document.createElement('a');
+					a.href = 'https://wiki.bloodontheclocktower.com/' + obj.name.replace(' ','_');
+					a.target = '_blank';
+					a.innerHTML = '<b>' + obj.name + ' (' + obj.team + ')</b>';
+					
+					li.appendChild(a);
+					//CREATE AN EMPHASIS TAG FOR THE ABILITY
+					let em = document.createElement('em');
+					em.innerHTML = ' "' + obj.ability + '"';
+					//STORE ON LI/DIV
+					li.appendChild(em);
+					div.appendChild(li);
 				}
+
+				div.appendChild(document.createElement('br'));
+				//ADD A BACK TO SCRIPTS LINK
+				let backToTopLink = document.createElement('a');
+				backToTopLink.href = '#scripts';
+				backToTopLink.innerHTML = '^ Back to scripts ^'
+				div.appendChild(backToTopLink);
+
+				div.appendChild(document.createElement('br'));
+				div.appendChild(document.createElement('br'));
+
+				document.getElementById('editionOutput').appendChild(div);
 
 				tab('Trouble_Brewing_Edition');
 
@@ -351,48 +454,190 @@
 	<body>
 		<h1>Blood on the Clocktower</h1>
 		<p>This page provides an overview of the Blood on the Clocktower rules</p>
-		<p>Visit the <a href="#editions">Editions</a> section to see character roles</p>
+		<p>Visit the <a onclick="tab('Trouble_Brewing_Edition');" href="#scripts">Scripts</a> section to see character roles</p>
 
 		<h2 id="rules">Rules</h2>
 
+		<div class="w3-row w3-container">
+			<button id="basics" onclick="tab('basics')" class="w3-btn w3-half w3-bar-item w3-text-purple w3-border w3-border-purple">
+				Basics</button>
+		
+			<button id="keyTerms" onclick="tab('keyTerms')" class="w3-btn w3-half w3-bar-item w3-block w3-text-grey w3-border w3-border-grey">
+				Key Terms</button>
+		</div>
 
-		<button onclick="accordion('rules')" class="w3-btn w3-block w3-pink accordion-heading">
-			Basics</button>
-		<div id="rules_Content" class="w3-hide accordion-content w3-pink">
+		<div id="basics_Content" class="w3-container tabContent w3-purple">
 
+			<h2>The Basics</h2>
 			<p>Blood on the Clocktower is a deduction/detective game with a social layer and hidden-roles.</p>
-			<p>One team is good players (who don't know who each other are) going up against a team of bad players led by the DEMON (who usually DO know who each other are!).</p>
-			<p>During the day, players will discuss the information they have and try to establish who is lying and potentially a bad player.</p>
+			<br>
+			<br>
+			<p>One team is <b>good players... who don't know who each other are</b></p>
+			<br>
+			<p>They will be going up against a team of <b>evil players led by the DEMON - and the baddies usually DO know who each other are!</b>.</p>
+			<br><br>
+			<p>During the day, players will discuss the information they have and try to establish who is lying and potentially an evil player.</p>
 			<p>Every player has a special ability linked to their ROLE - some helpful, others.... less than helpful!</p>
-			<p>Each day, players will have the opportunity to EXECUTE one player, hoping to kill the Demon and win the game.</p>
+			<br>
+			<p>Each day, players will have the opportunity to NOMINATE and then EXECUTE one player, hoping to kill the Demon and win the game.</p>
 			<p>Then at night, the Demon will usually get to kill a player, aiming to kill off all the good players.</p>
 			<hr>
 			<h3>Teams</h3>
 			<p>The good team is formed of Townsfolk (who have helpful abilities) and Outsiders (who have unhelpful abilities).</p>
 			<p>The bad team is formed of the Demon (who usually kills each night) and Minions (who help the Demon stay hidden).</p>
-
+			<br>
+			<p>Bear in mind that some good players have reasons to lie (see Empath, Undertaker, Monk, Mayor).</p>
+			<p>At the same time, bear in mind that the evil team will also be lying to cover up their true role!</p>
+			<hr>
+			<h3>Nominating and Executing</h3>
+			<p>Each day, nominations will open and any player who is alive can publicly nominate a player (including themselves).</p>
+			<p>The player does not need to be alive to be nominated or executed, but there isn't often benefit to this.</p>
+			<br>
+			<p>The player who nominated will be given the chance to make the "case for the prosecution" - why the believe they should execute</p>
+			<p>The player who is nominated will then get the chance to make the "case for the defense" - why they should stay alive!</p>
+			<br>
+			<p>If more than half the living player count (rounded up) vote in favour of executing, that player is "on the block".</p>
+			<p>If less than half of the players vote in favour, the player escapes execution - and cannot be nominated again today.</p>
+			<br>
+			<p>The Storyteller will (usually) announce that nominations remain open and other players can nominate.</p>
+			<p>Nominations will remain open for a short time to allow players to put someone else forward.</p>
+			<br>
+			<p>Bear in mind that each living player can only nominate once per day (and dead players cannot nominate).</p>
+			<p>Also remember that votes can be added by dead players - they have 1 single ghost vote for the remainder of the game - use it wisely!</p>
+			<p><em>If another player is nominated (with a player currently "on the block") the following happens:</em></p>
+			<ul>
+				<li>If they receive the same number of votes, the vote ties and neither player is executed tonight.</li>
+				<li>If they receive the more votes, they become "on the block" and will be executed unless a further player is nominated.</li>
+			</ul>
+			<p><b>Executing a player will end the Day phase immediately</b></p>
+			<hr>
+			<h3>Player Abilities</h3>
+			<p>The wording of all player abilities is very specific in its meaning.</p>
+			<p><b>If an ability reads "Each night*" then the * indicates "not on the first night" (which starts the game).</b></p>
+			<p>If an ability reads "1 of 2 players" then you will learn 2 names.</p>
+			<p>If an ability reads "a Minion" then you will a Minion Role.</p>
+			<p>If an ability reads "alive" then any dead players do not count.</p>
+			<p>If an ability reads "publicly" then must announce this when all players are present.</p>
+			<p>If an ability reads "by execution" then Demon kills and other abilities do not trigger this.</p>
+			<br>
+			<p>You are encouraged to ask the Storyteller about your role and ability</p>
+			<p>If you ask publicly, the Storyteller should give a "hypothetical" example if you were (not confirming or denying your role)</p>
+			<p>If you ask privately, the Storyteller will not guide you, but might advise you of some considerations before making choices</p>
+			<p>Bear in mind (depending on your play setup, e.g. in-person) you may not get the opportunity to ask during the first night, so think fast!</p>
+			<hr>
+			<h3>General Advice</h3>
+			<h4>Three key tips for a new GOOD player:</h4>
+			<ol>
+				<li>
+					<p>
+						<b>Read the script carefully</b> - the script will list all the possible roles 
+						<br>
+						and so give you all the information you need to work out who could be lying,
+						<br>
+						what information other people might be getting (and when), 
+						<br>
+						or what devious abilities are being used against you?
+					</p>
+				</li>
+				<li>
+					<p>
+						<b>Give out your information carefully</b> - knowing who to trust will be difficult to start
+						<br>
+						but using cautious approaches like sharing your information with a select group could help
+						<br>
+						to work out who betrays you, or perhaps secretly who is giving out conflicting information?
+					</p>
+				</li>
+				<li>
+					<p>
+						<b>You can only win by killing</b> - the Demon obviously wants as much killing as possible
+						<br>
+						(other than themselves) because it reduces the amount of information the good team will get
+						<br>
+						There is a lot of useful information available by people offering to die 
+						<br>
+						(for example if they have all the information their role will get during this game)
+						<br>
+						or by activating other abilities through nomination and execution.
+						<br>
+						The good team cannot win if they do not execute!
+					</p>
+				</li>
+			</ol>
+			<h4>And then three tips for a new EVIL player:</h4>
+			<ol>
+				<li>
+					<p>
+						<b>Read the script carefully</b> - you will have to pretend to be another role
+						<br>
+						Try to prepare the information your "role" would get in case you want to divulge that to others 
+						<br>
+						You should also look out for roles that could be dangerous which should be eliminated first
+						<br>
+						Be particularly cautious of players who might have information that you are evil or regularly get information
+					</p>
+				</li>
+				<li>
+					<p>
+						<b>Speak to your team AS SOON AS POSSIBLE</b> - but be discreet
+						<br>
+						As the Demon, you will (usually) get bluffs and these could be handy for your Minions too!
+						<br>
+						Your minions might also have abilities which you could coordinate more effectively if discussed
+						<br>
+						However, bear in mind that grouping together as the Evil team looks very suspicious, so take care!
+					</p>
+				</li>
+				<li>
+					<p>
+						<b>Remember that good players lie</b> - this is often a key defense!
+						<br>
+						For various reasons, players might not want to reveal who they are, e.g.
+						<br>
+						It opens them up to the Demon attacking them that night
+						<br>
+						They might be a target for Minion abilities to stop them being useful
+						<br>
+						They want to be nominated/killed/executed at a specific time to get crucial information
+						<br>
+						Try to lay the groundwork with a few players you "trust" and sow a little discontent elsewhere!
+					</p>
+				</li>
+			</ol>
+			<hr>
+			<h3>Poisoning and Drunkeness</h3>
+			<p>Both poisoning and drunkeness have the same effect - your character role ability does not work</p>
+			<p>However, the Storyteller will withhold this information during the game</p>
+			<p>If your role gets information, you will receive information as normal... it will just be wrong</p>
+			<p>If your role is supposed to have an effect... the effect just doesn't happen</p>
+			<p>Use the information you gain to establish if you are poisoned or drunk</p>
+			<p>Bear in mind there are few ways for players to be affected in Trouble Brewing anyway (Outsider:Drunk, Minion:Poisoner)</p>
+			<p>This means that only one or two players are going to be receiving false information/failing to use effects each day</p>
 		</div>
 
-		<br>
+		<div id="keyTerms_Content" class="w3-container tabContent w3-dark-gray">
 
-		<button onclick="accordion('keyTerms')" class="w3-btn w3-block w3-blue accordion-heading">
-			Key Terms</button>
-		<div id="keyTerms_Content" class="w3-hide accordion-content w3-dark-gray">
-
+			<h2>Key Terms</h2>
 			<h3>Character Types</h3>
 			<ul>
+				<li><b>Storyteller</b> - not a player, but will run the game for the players</li>
 				<li><b>Townsfolk</b> - these are on the good team with helpful abilities</li>
 				<li><b>Outsiders</b> - these are on the good team but have UNhelpful abilities</li>
 				<li><b>Minions</b> - these are on the bad team and have malicious abilities</li>
 				<li><b>Demon</b> - the head of the bad team who kills players</li>
 				<li><b>Character</b> - this is the name of a CHARACTER ROLE (i.e. not a player's name)</li>
 				<li><b>Player</b> - this is the name of a PLAYER (i.e. not a character role)</li>
+				<li><em>(rare) Traveller - this is a special character not often for the duration of the game</em></li>
+				<li><em>(rare) Fabled - this is not a character, but a special condition placed upon the game by the Storyteller</em></li>
 			</ul>
 			<hr>
 			<h3>Conditions</h3>
 			<ul>
-				<li><b>Drunk</b> - your ability does not work and/or you are not the character you think</li>
+				<li><b>Drunk</b> - you are not the character you think and so your ability does not work</li>
 				<li><b>Poisoned</b> - your ability does not work</li>
+				<li><b>Healthy and Sober</b> - you are not Posioned or Drunk</li>
+				<li><b>Nominated</b> - you have been nominated for execution by a living player</li>
+				<li><b>On the Block</b> - you have enough votes for execution, awaiting further nominations</li>
 				<li><b>Executed</b> - you were voted to be killed (even if already dead!)</li>
 				<li><b>Dead</b> - you die and cannot use your ability, but can still talk, and vote once more</li>
 			</ul>
@@ -400,13 +645,24 @@
 			<h3>Gameflow</h3>
 			<p>The game has two main phases - Night and Day - which alternate until the game end.</p>
 			<ul>
-				<li><b>Night Phase</b> - this is when player abilities activate, and the demon kills a player (not first night)</li>
+				<li><b>Night Phase</b> - this is when player night abilities activate, and the demon kills a player (not first night)</li>
 				<li><b>Day Phase</b> - this is where players discuss who to nominate and vote to kill (once) and use day abilities</li>
 			</ul>
+			<em>Note that on night one, the Demon will usually NOT kill - this is just for setting up and early information gathering roles</em>
 			<hr>
+			<h3>Game End</h3>
+			<p>The game ends when either:</p>
+			<b>The Demon is killed - good wins</b>
+			<br>
+			<br>
+			<b>There are two living players and one of those is the Demon - evil wins</b>
+			<p>Note that ending a day with 3 living players amounts to the same as the above - the Demon will kill a player that night and end the game</p>
+			<p>For that reason, the Storyteller may end the game immediately with an Evil team win if the Good team can no longer win</p>
+			<p>There are several other rare conditions where a game might end early, but the Storyteller will usually wrap the game up early</p>
+			<p>They will then offer the run down of which player had which actual roles/abilities and the key points from the game</p>
 		</div>
 
-		<h2 id="editions">Editions</h2>
+		<h2 id="scripts">Scripts</h2>
 
 		<div id="editionOutput">
 		</div>
