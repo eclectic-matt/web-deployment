@@ -162,6 +162,10 @@
 					}
 				}
 
+				//==================
+				// OUTPUT SCRIPT
+				// TAB BUTTONS
+				//==================
 				let tabBarDiv = document.createElement('div');
 				tabBarDiv.className = "w3-black w3-center w3-row w3-container";
 				document.getElementById('editionOutput').appendChild(tabBarDiv);
@@ -177,7 +181,8 @@
 					}
 					button.id = editions[edition].name.replaceAll(" ","_") + '_Edition';
 					//button.className = "w3-btn w3-block w3-" + editions[edition].color  + " accordion-heading";
-					button.className = "w3-btn w3-col-s2 w3-text-" + editions[edition].color  + " w3-border w3-border-" + editions[edition].color + " w3-bar-item w3-center";
+					//button.className = "w3-btn w3-col-s2 w3-text-" + editions[edition].color  + " w3-border w3-border-" + editions[edition].color + " w3-bar-item w3-center";
+					button.className = "w3-btn w3-bar-item w3-half w3-text-" + editions[edition].color  + " w3-border w3-border-" + editions[edition].color + " w3-center";
 					//button.innerHTML = editions[edition].code.toUpperCase();
 					button.innerHTML = editions[edition].name.toUpperCase();
 					tabBarDiv.appendChild(button);
@@ -192,7 +197,7 @@
 				}
 				button.id = 'All_Characters_Edition';
 				//button.className = "w3-btn w3-block w3-" + editions[edition].color  + " accordion-heading";
-				button.className = "w3-btn w3-col-s2 w3-text-white w3-border w3-border-white w3-bar-item w3-center";
+				button.className = "w3-btn w3-bar-item w3-half w3-text-white w3-border w3-border-white w3-center";
 				button.innerHTML = "ALL";
 				tabBarDiv.appendChild(button);
 
