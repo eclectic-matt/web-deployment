@@ -18,33 +18,44 @@
 			}
 
 			function parseInsults(text){
+				
+				//SPLIT THE TEXT INTO LINES
 				let lines = text.split('\n');
+
+				//INIT ARRAY OF INSULTS
 				let insults = [];
+				//SPLIT INTO FIRST WORDS, SECOND AND THIRD
 				insults['first'] = [];
 				insults['second'] = [];
 				insults['third'] = [];
+				
+				//ITERATE LINES IN TEXT FILE
 				for(line in lines){
+
+					//SPLIT THE CURRENT LINE (LINES[LINE]) ON SPACES
 					split = lines[line].split(' ');
-					console.log('Parsing ',line);
+					//console.log('Parsing ',line);
+					//STORE THE FIRST, SECOND, THIRDS
 					insults['first'].push(split[0]);
 					insults['second'].push(split[1]);
 					insults['third'].push(split[2]);
 				}
-				counter = insults['first'].length;
 				
-				firstIndex = Math.floor(Math.random() * counter);
-				console.log('firstIndex',firstIndex);
+				//STORE THE COUNT
+				let count = insults['first'].length;
+				
+				//GET A RANDOM INDEX AND WORD FOR EACH PART
+				let firstIndex = Math.floor(Math.random() * count);
 				var first = insults['first'][firstIndex];
-
-				secondIndex = Math.floor(Math.random() * counter); 
-				console.log('secondIndex',secondIndex);
-				var second = insults['second'][Math.floor(Math.random() * counter)];
-
-				thirdIndex =  Math.floor(Math.random() * counter);
-				console.log('thirdIndex',thirdIndex);
-				var third = insults['third'][Math.floor(Math.random() * counter)];
-
+				let secondIndex = Math.floor(Math.random() * count); 
+				var second = insults['second'][secondIndex];
+				let thirdIndex =  Math.floor(Math.random() * count);
+				var third = insults['third'][thirdIndex];
+				
+				//CONCATENATE TO FORM AN INSULT
 				insult = 'Thou ' + first + ' ' + second + ' ' + third;
+
+				//AND UPDATE PAGE
 				document.getElementById('insultHeader').innerHTML = insult;
 				document.getElementById('insultText').innerHTML = insult;
 			}
