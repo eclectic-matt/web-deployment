@@ -32,6 +32,7 @@ var anim = 0;
 var rotate = 0;
 var rotateAngle = 0;
 var rotateInc = 0.01;
+var timer;
 var debug = 0;
 
 function init(){
