@@ -73,7 +73,7 @@ Tower.prototype.update = function(timestamp){
 					this.color, 									// col
 					centreX, 										// x
 					centreY, 										// y
-					2, 												// r
+					0.05 * this.r,									// r
 					bulletTargetPos.x, 								// targetX
 					bulletTargetPos.y, 								// targetY
 					this.bullet_speed, 								// speed

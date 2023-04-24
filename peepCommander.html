@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src='./peepCommand/peepCommand.js'></script>
+	<script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+	<title>Peep Commander</title>
+</head>
+<body onload='init()' class='w3-dark-grey'>
+
+	<main id='main'>
+
+		<div style='margin-left:auto; margin-right:auto;'>
+		<div class='w3-card-10 w3-container w3-medium w3-center w3-padding-large w3-theme-d3'>
+				<h2>Peep Commander</h2>
+				<a href="/">Back to EclecticMatt Home</a>
+			</div>
+		<br>
+		<!--h3 style='color:yellow;'>There is a new version of this game in the Eclectic Users Area where you can record your score! Visit <a href='./users/usersarea'>Eclectic Users Area</a> to try it out!</h3><br-->
+		<div class='w3-container w3-card-10 w3-theme w3-center'>
+			<canvas id='canvas' width='100%' height='auto'>
+				Your browser does not support the canvas element
+			</canvas>
+		</div>
+		<br><hr><br>
+
+		<div class='w3-container w3-card-10 w3-theme-d2 w3-center' id='help'>
+			<br>
+			<h3>Hints</h3>
+			<ul class='w3-ul'>
+				<li>Buy units (loggers, miners and soldiers) by clicking the buildings.</li>
+				<li>You must buy a mine before you can buy an army base.</li>
+				<li>Use the units to their strengths:</li>
+				<li>
+					<ul>
+						<li><strong>Loggers</strong> - GREEN - are cheap and will chop down trees for a little cash</li>
+						<li><strong>Miners</strong> - GREY - are moderately priced and will mine ore for lots of cash</li>
+						<li><strong>Soldiers</strong> - PURPLE - are expensive but will fight off enemies</li>
+					</ul>
+				</li>
+				<li>Bear in mind that you will be up against:</li>
+				<li>
+					<ul>
+						<li><strong>Enemies</strong> - RED - will attack all of your units!</li>
+					</ul>
+				</li>
+				<li><em>The trick of the game is the targeting system ;-)</em></li>
+			</ul>
+			<!--br>
+			<p>The user guide for this game is on the <a href='http://eclecticappdevelopment.co.uk/wiki/index.php?n=Games.Peep' target='blank'>EAD Wiki</a></p>
+			<br-->
+		</div>
+
+	</main>
+</body>
+</html>
