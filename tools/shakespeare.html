@@ -24,15 +24,26 @@
 				insults['second'] = [];
 				insults['third'] = [];
 				for(line in lines){
-					split = line.split(' ');
+					split = lines[line].split(' ');
+					console.log('Parsing ',line);
 					insults['first'].push(split[0]);
 					insults['second'].push(split[1]);
 					insults['third'].push(split[2]);
 				}
 				counter = insults['first'].length;
-				first = insults['first'][Math.floor(Math.random() * counter)];
-				second = insults['second'][Math.floor(Math.random() * counter)];
-				third = insults['third'][Math.floor(Math.random() * counter)];
+				
+				firstIndex = Math.floor(Math.random() * counter);
+				console.log('firstIndex',firstIndex);
+				var first = insults['first'][firstIndex];
+
+				secondIndex = Math.floor(Math.random() * counter); 
+				console.log('secondIndex',secondIndex);
+				var second = insults['second'][Math.floor(Math.random() * counter)];
+
+				thirdIndex =  Math.floor(Math.random() * counter);
+				console.log('thirdIndex',thirdIndex);
+				var third = insults['third'][Math.floor(Math.random() * counter)];
+
 				insult = 'Thou ' + first + ' ' + second + ' ' + third;
 				document.getElementById('insultHeader').innerHTML = insult;
 				document.getElementById('insultText').innerHTML = insult;
