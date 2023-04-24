@@ -1,0 +1,49 @@
+{
+	"q_types": [
+		"unique",
+		"low-high",
+		"counter"
+	],
+	"parameters": [
+		{	
+			"name": "Title", 
+			"unique": true, 
+			"type":"string",
+			"question": [ 
+				"What is the title", 
+				"in"	
+			] 
+		},
+		{"name": "Release Year", "unique": true, "type":"numeric", "low-high": ["films was released earliest","films was released latest"], "question": [ "What was the release year","for the film released in"	] },
+		{"name": "Bond Actor", "unique": false, "type":"string", "question": [ "Which actor played Bond" , "for the film where Bond was played by"	] },
+		{"name": "Director Name", "unique": false, "type":"string", "question": [ "Who was the director", "for the film directed by"	] },
+		{"name": "Bond Girl Side Kick Name", "unique": true, "type":"string", "question": [ "What is the name of the Bond girl side kick", "for the film with side kick girl"	] },
+		{"name": "Bond Girl Side Kick Actress", "unique": true, "type":"string", "question": [ "Which actress played the Bond girl side kick" , "for the film with side kick girl played by actress"	] }
+	],
+	"values": [
+		[1,"Dr. No",1962,"Sean Connery","Terence Young","Honey Ryder","Ursula Andress"],
+		[2,"From Russia with Love",1963,"Sean Connery","Terence Young","Tatiana Romanova","Daniela Bianchi"],
+		[3,"Goldfinger",1964,"Sean Connery","Guy Hamilton","Pussy Galore","Honor Blackman"],
+		[4,"Thunderball",1965,"Sean Connery","Terence Young","Domino Derval","Claudine Auger"],
+		[6,"You Only Live Twice",1967,"Sean Connery","Lewis Gilbert","Kissy Suzuki","Mie Hama"],
+		[7,"On Her Majesty's Secret Service",1969,"George Lazenby","Peter R. Hunt","Teresa di Vicenzo","Diana Rigg"],
+		[8,"Diamonds Are Forever",1971,"Sean Connery","Guy Hamilton","Tiffany Case","Jill St John"],
+		[9,"Live and Let Die",1973,"Roger Moore","Guy Hamilton","Solitaire","Jane Seymour"],
+		[10,"The Man with the Golden Gun",1974,"Roger Moore","Guy Hamilton","Mary Goodnight","Britt Ekland"],
+		[11,"The Spy Who Loved Me",1977,"Roger Moore","Lewis Gilbert","Anya Amasova","Barbara Bach"],
+		[12,"Moonraker",1979,"Roger Moore","Lewis Gilbert","Holly Goodhead","Lois Chiles"],
+		[13,"For Your Eyes Only",1981,"Roger Moore","John Glen","Melina Havelock","Carole Bouquet"],
+		[14,"Octopussy",1983,"Roger Moore","John Glen","Octopussy","Maud Adams"],
+		[16,"A View to a Kill",1985,"Roger Moore","John Glen","Stacey Sutton","Tanya Roberts"],
+		[17,"The Living Daylights",1987,"Timothy Dalton","John Glen","Kara Milovy","Maryam d'Abo"],
+		[18,"Licence to Kill",1989,"Timothy Dalton","John Glen","Pam Bouvier","Carey Lowell"],
+		[19,"GoldenEye",1995,"Pierce Brosnan","Martin Campbell","Natalya Simonova","Izabella Scorupco"],
+		[20,"Tomorrow Never Dies",1997,"Pierce Brosnan","Roger Spottiswoode","Wai Lin","Michelle Yeoh"],
+		[21,"The World Is Not Enough",1999,"Pierce Brosnan","Michael Apted","Dr. Christmas Jones","Denise Richards"],
+		[22,"Die Another Day",2002,"Pierce Brosnan","Lee Tamahori","Giainta 'Jinx' Johnson","Halle Berry"],
+		[23,"Casino Royale",2006,"Daniel Craig","Martin Campbell","Vesper Lynd","Eva Green"],
+		[24,"Quantum of Solace",2008,"Daniel Craig","Marc Forster","Camille Montes","Olga Kurylenko"],
+		[25,"Skyfall",2012,"Daniel Craig","Sam Mendes","Eve Moneypenny","Naomie Harris"],
+		[26,"Spectre",2015,"Daniel Craig","Sam Mendes","Dr. Madeleine Swann","Léa Seydoux"]
+	]
+}

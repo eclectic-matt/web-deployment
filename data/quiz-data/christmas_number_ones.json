@@ -1,0 +1,115 @@
+{
+	"q_types": [
+		"unique",
+		"low-high",
+		"counter"
+	],
+	"parameters": [
+		{
+			"name":"Song Title",
+			"unique":true,
+			"type":"string",
+			"question":	[
+				"What was the song title",
+				"for the song"
+			]
+		},
+		{
+			"name":"Year",
+			"unique":true,
+			"type":"numeric",
+			"low-high": ["songs was released earliest","songs was released latest"], 
+			"question":	[
+				"Which year was it Christmas number one",
+				"that topped the Christmas chart in"
+			]
+		},
+		{
+			"name":"Artist",
+			"unique":false,
+			"type":"string",
+			"question":	[
+				"Which artist",
+				"for the artist/band called"
+			]
+		},
+		{
+			"name":"Weeks at Number One",
+			"unique":false,
+			"type":"numeric",
+			"low-high": ["songs spent the shortest time at number 1","songs spent the longest time at number 1"], 
+			"question":	[
+				"How many Christmas weeks at number one",
+				"which lasted this many weeks at #1 -"
+			]
+		}
+	],
+	"values": [
+		[1,"Here in My Heart",1952,"Al Martino",9],
+		[2,"Answer Me",1953,"Frankie Laine",8],
+		[3,"Let's Have Another Party",1954,"Winifred Atwell",5],
+		[4,"Christmas Alphabet",1955,"Dickie Valentine",3],
+		[5,"Just Walkin' in the Rain",1956,"Johnnie Ray",7],
+		[6,"Mary's Boy Child",1957,"Harry Belafonte",7],
+		[7,"It's Only Make Believe",1958,"Conway Twitty",5],
+		[8,"What Do You Want to Make Those Eyes at Me For?",1959,"Emile Ford and the Checkmates",6],
+		[9,"I Love You",1960,"Cliff Richard and The Shadows",2],
+		[10,"Moon River",1961,"Danny Williams",2],
+		[11,"Return to Sender",1962,"Elvis Presley",3],
+		[12,"I Want to Hold Your Hand",1963,"The Beatles",5],
+		[13,"I Feel Fine",1964,"The Beatles",5],
+		[14,"Day Tripper / 'We Can Work It Out'",1965,"The Beatles",5],
+		[15,"Green, Green Grass of Home",1966,"Tom Jones",7],
+		[16,"Hello, Goodbye",1967,"The Beatles",7],
+		[17,"Lily the Pink",1968,"The Scaffold",3],
+		[18,"Two Little Boys",1969,"Rolf Harris",6],
+		[19,"I Hear You Knocking",1970,"Dave Edmunds",6],
+		[20,"Ernie (The Fastest Milkman in the West)",1971,"Benny Hill",4],
+		[21,"Long Haired Lover from Liverpool",1972,"Jimmy Osmond",5],
+		[22,"Merry Xmas Everybody",1973,"Slade",5],
+		[23,"Lonely This Christmas",1974,"Mud",4],
+		[24,"Bohemian Rhapsody",1975,"Queen",9],
+		[25,"When a Child Is Born (Soleado)",1976,"Johnny Mathis",3],
+		[26,"Mull of Kintyre / 'Girls' School'",1977,"Wings",9],
+		[27,"Mary's Boy Child – Oh My Lord",1978,"Boney M.",4],
+		[28,"Another Brick in the Wall (Part 2)",1979,"Pink Floyd",5],
+		[29,"There's No One Quite Like Grandma",1980,"St Winifred's School Choir",2],
+		[30,"Don't You Want Me",1981,"The Human League",5],
+		[31,"Save Your Love",1982,"Renée and Renato",4],
+		[32,"Only You",1983,"The Flying Pickets",5],
+		[33,"Do They Know It's Christmas?",1984,"Band Aid",5],
+		[34,"Merry Christmas Everyone",1985,"Shakin' Stevens",2],
+		[35,"Reet Petite",1986,"Jackie Wilson",4],
+		[36,"Always on My Mind",1987,"Pet Shop Boys",4],
+		[37,"Mistletoe and Wine",1988,"Cliff Richard",4],
+		[38,"Do They Know It's Christmas? (Original)",1989,"Band Aid II",3],
+		[39,"Saviour's Day",1990,"Cliff Richard",1],
+		[40,"Bohemian Rhapsody / 'These Are the Days of Our Lives'",1991,"Queen",5],
+		[41,"I Will Always Love You",1992,"Whitney Houston",10],
+		[42,"Mr Blobby",1993,"Mr Blobby",2],
+		[43,"Stay Another Day",1994,"East 17",5],
+		[44,"Earth Song",1995,"Michael Jackson",6],
+		[45,"2 Become 1",1996,"Spice Girls",3],
+		[46,"Too Much",1997,"Spice Girls",2],
+		[47,"Goodbye",1998,"Spice Girls",1],
+		[48,"I Have a Dream / 'Seasons in the Sun'",1999,"Westlife",4],
+		[49,"Can We Fix It?",2000,"Bob the Builder",3],
+		[50,"Somethin' Stupid",2001,"Robbie Williams and Nicole Kidman",3],
+		[51,"Sound of the Underground",2002,"Girls Aloud",4],
+		[52,"Mad World",2003,"Michael Andrews and Gary Jules",3],
+		[53,"Do They Know It's Christmas? (20th Anniversary)",2004,"Band Aid 20",4],
+		[54,"That's My Goal",2005,"Shayne Ward",4],
+		[55,"A Moment Like This",2006,"Leona Lewis",4],
+		[56,"When You Believe",2007,"Leon Jackson",3],
+		[57,"Hallelujah",2008,"Alexandra Burke",3],
+		[58,"Killing in the Name",2009,"Rage Against the Machine",1],
+		[59,"When We Collide",2010,"Matt Cardle",3],
+		[60,"Wherever You Are",2011,"Military Wives with Gareth Malone",1],
+		[61,"He Ain't Heavy, He's My Brother",2012,"The Justice Collective",1],
+		[62,"Skyscraper",2013,"Sam Bailey",1],
+		[63,"Something I Need",2014,"Ben Haenow",1],
+		[64,"A Bridge over You",2015,"Lewisham and Greenwich NHS Choir",1],
+		[65,"Rockabye",2016,"Clean Bandit featuring Sean Paul and Anne-Marie",9],
+		[66,"Perfect",2017,"Ed Sheeran",3]
+	]
+}
