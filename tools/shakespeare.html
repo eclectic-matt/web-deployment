@@ -20,18 +20,16 @@
 			function parseInsults(text){
 				let lines = text.split('\n');
 				let insults = [];
-				insults[0] = [];
-				insults[1] = [];
-				insults[2] = [];
-				let counter = 0;
+				insults['first'] = [];
+				insults['second'] = [];
+				insults['third'] = [];
 				for(line in lines){
 					split = line.split(' ');
-					insults[counter][0] = split[0];
-					insults[counter][1] = split[1];
-					insults[counter][2] = split[2];
-					counter++;
+					insults['first'].push(split[0]);
+					insults['second'].push(split[1]);
+					insults['third'].push(split[2]);
 				}
-				counter--;
+				counter = insults['first'].length;
 				first = insults[Math.floor(Math.random() * counter)][0];
 				second = insults[Math.floor(Math.random() * counter)][1];
 				third = insults[Math.floor(Math.random() * counter)][2];
