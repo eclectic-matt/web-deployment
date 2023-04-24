@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Backronym | Eclectic App Development</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<script type='text/javascript' src='../tools/js/backronym.js'></script>
+
+	</head>
+
+	<body class='w3-dark-grey'>";
+
+		<main id='main'>
+			<style>
+					.first-letter {
+						color: red;
+						font-weight: bolder;
+					}
+				</style>
+
+			<!-- Top Box -->
+			<div 
+				class='w3-card-10 w3-container w3-padding-large w3-theme-d3' 
+				style='font-size:1em; width:80%; margin:0 auto; text-align:left;'
+			>
+
+				<h1>Backronym Generator</h1>
+				<a href="/">Back to the EclecticMatt homepage</a>
+				<h3 style='color:yellow; font-size:1.5em;' id='output'></h3>
+				
+				<div class='w3-row-padding w3-padding' style='font-size:1em'>
+					<div class='w3-col s6'>
+						University: <input class='w3-check' type='checkbox' checked='checked' id='uniTerms' >
+					</div>
+					<div class='w3-col s6'>
+						Swears: <input class='w3-check' type='checkbox' id='swearTerms' >
+					</div>
+			</div>
+				<input class='w3-input' 
+					onchange='createBackronym();' 
+					type='text' 
+					id='backronym' 
+					value='ARSE' />
+
+				<br>
+
+				<button onclick='createBackronym()'>Backronym </button>
+				
+				<br>
+				<br>
+				
+				<div class='w3-card-8 w3-theme-l1'>
+					<em>Credit to Emmy Bastin for word suggestions for the Backronym Generator</em>
+				</div>
+				
+			</div>
+		</main>
+	</body>
+</html>
