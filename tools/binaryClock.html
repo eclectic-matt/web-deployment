@@ -3,124 +3,118 @@
 	<head>
 		<title>Binary Clock | Eclectic App Development</title>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	</head>
-	<body>
+		<script type='text/javascript' src='../tools/clocksJS/binary_clock.js'></script>
+		<style type='text/css'>
 
+		.timedot{
+			width:50px;
+			height:50px;
+			padding:10px;
+			border-radius:25px;
+		}
+		.emptydot{
+			width:50px;
+			height:50px;
+			padding:10px;
+			border-radius:25px;
+			font-size:2em;
+			font-weight:bold;
+		}
+
+		.on{
+			background-color:#eee;	
+		}
+
+		.off{
+			background-color:#000;	
+		}
+		.column{
+			width:50px;
+			position:relative;
+			float:left;
+			margin:0;
+		}
+		.slice{
+			width:25px;
+			position:relative;
+			float:left;
+			margin:0;
+		}
+		</style>
+
+	</head>
+
+	<body onload='mainLoop()' class='w3-dark-grey'>
+
+
+		<div class='w3-panel w3-center'>
+				<div class='w3-panel'>
+					<h1>Binary Clock</h1>
+					<a href="/">Back to the EclecticMatt homepage</a>
+				</div>
+				<br>
+				<div id='main' role='main' style='width:450px; height:200px; margin:0 auto;'>
+					<div class='column'>
+						<div class='emptydot'>8</div>
+						<div class='emptydot'>4</div>
+						<div class='emptydot'>2</div>
+						<div class='emptydot'>1</div>
+					</div>
+					<div class='column'>
+						<div class='emptydot'></div>
+						<div class='emptydot'></div>
+						<div class='timedot' id='t10'></div>
+						<div class='timedot' id='t11'></div>
+					</div>
+					<div class='column'>
+						<div class='timedot' id='t20'></div>
+						<div class='timedot' id='t21'></div>
+						<div class='timedot' id='t22'></div>
+						<div class='timedot' id='t23'></div>
+					</div>
+					<div class='slice'>
+					&nbsp;
+					</div>
+					<div class='column'>
+						<div class='emptydot'></div>
+						<div class='timedot' id='t30'></div>
+						<div class='timedot' id='t31'></div>
+						<div class='timedot' id='t32'></div>
+					</div>
+					<div class='column'>
+						<div class='timedot' id='t40'></div>
+						<div class='timedot' id='t41'></div>
+						<div class='timedot' id='t42'></div>
+						<div class='timedot' id='t43'></div>
+					</div>
+					<div class='slice'>
+					&nbsp;
+					</div>
+					<div class='column'>
+						<div class='emptydot'></div>
+						<div class='timedot' id='t50'></div>
+						<div class='timedot' id='t51'></div>
+						<div class='timedot' id='t52'></div>
+					</div>
+					<div class='column'>
+						<div class='timedot' id='t60'></div>
+						<div class='timedot' id='t61'></div>
+						<div class='timedot' id='t62'></div>
+						<div class='timedot' id='t63'></div>
+					</div>
+				</div>
+				<div class='w3-panel w3-center'>
+					<br>
+					<h2 id='time'></h2>
+					<br>
+					<!--p>For more info on how to read the clock, have a look at my <a href='http://eclecticapp.xyz/blog/2015/05/11/clocking-mad/'>blog post on the clocks</a>.</p>
+					<br-->
+					<!--h2 id='convTime'></h2>
+					<br>
+					<h2>To read the clock:</h2>
+					<br-->
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
-
-<body onload='mainLoop()' class='w3-dark-grey'>
-
-
-<script type='text/javascript' src='../tools/clocksJS/binary_clock.js'>
-</script>
-<script type='text/javascript'>
-
-
-</script>
-<style type='text/css'>
-
-.timedot{
-	width:50px;
-	height:50px;
-	padding:10px;
-	border-radius:25px;
-}
-.emptydot{
-	width:50px;
-	height:50px;
-	padding:10px;
-	border-radius:25px;
-	font-size:2em;
-	font-weight:bold;
-}
-
-.on{
-	background-color:#eee;	
-}
-
-.off{
-	background-color:#000;	
-}
-.column{
-	width:50px;
-	position:relative;
-	float:left;
-	margin:0;
-}
-.slice{
-	width:25px;
-	position:relative;
-	float:left;
-	margin:0;
-}
-</style>
-<div class='w3-panel w3-center'>
-		<div class='w3-panel'>
-			<h1>Binary Clock</h1>
-			<a href="/">Back to the EclecticMatt homepage</a>
-		</div>
-		<br>
-		<div id='main' role='main' style='width:450px; height:200px; margin:0 auto;'>
-			<div class='column'>
-				<div class='emptydot'>8</div>
-				<div class='emptydot'>4</div>
-				<div class='emptydot'>2</div>
-				<div class='emptydot'>1</div>
-			</div>
-			<div class='column'>
-				<div class='emptydot'></div>
-				<div class='emptydot'></div>
-				<div class='timedot' id='t10'></div>
-				<div class='timedot' id='t11'></div>
-			</div>
-			<div class='column'>
-				<div class='timedot' id='t20'></div>
-				<div class='timedot' id='t21'></div>
-				<div class='timedot' id='t22'></div>
-				<div class='timedot' id='t23'></div>
-			</div>
-			<div class='slice'>
-			&nbsp;
-			</div>
-			<div class='column'>
-				<div class='emptydot'></div>
-				<div class='timedot' id='t30'></div>
-				<div class='timedot' id='t31'></div>
-				<div class='timedot' id='t32'></div>
-			</div>
-			<div class='column'>
-				<div class='timedot' id='t40'></div>
-				<div class='timedot' id='t41'></div>
-				<div class='timedot' id='t42'></div>
-				<div class='timedot' id='t43'></div>
-			</div>
-			<div class='slice'>
-			&nbsp;
-			</div>
-			<div class='column'>
-				<div class='emptydot'></div>
-				<div class='timedot' id='t50'></div>
-				<div class='timedot' id='t51'></div>
-				<div class='timedot' id='t52'></div>
-			</div>
-			<div class='column'>
-				<div class='timedot' id='t60'></div>
-				<div class='timedot' id='t61'></div>
-				<div class='timedot' id='t62'></div>
-				<div class='timedot' id='t63'></div>
-			</div>
-		</div>
-		<div class='w3-panel w3-center'>
-			<br>
-			<h2 id='time'></h2>
-			<br>
-			<!--p>For more info on how to read the clock, have a look at my <a href='http://eclecticapp.xyz/blog/2015/05/11/clocking-mad/'>blog post on the clocks</a>.</p>
-			<br-->
-			<!--h2 id='convTime'></h2>
-			<br>
-			<h2>To read the clock:</h2>
-			<br-->
-		</div>
-	</div>
-</div>
