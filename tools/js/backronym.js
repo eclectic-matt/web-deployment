@@ -32,9 +32,9 @@ var letters = {
 	
 	'technology':
 		{
-			'A':['Amplified', 'Automated', 'Agile'],
-			'B':['Bluetooth', 'Buckets'],
-			'C':['Crash', 'Console'],
+			'A':['Analogue', 'Automated', 'Agile'],
+			'B':['Bluetooth', 'Buckets', 'Bandwidth', 'Back-End'],
+			'C':['Crash', 'Console', 'Cache', 'Chip', 'Compression'],
 			'D':['Database','Download'],
 			'E':['Erection','Ejaculation','Enema'],
 			'F':['Fuckwit','Frigging','Fartbox'],
