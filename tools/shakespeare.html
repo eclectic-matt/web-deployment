@@ -30,9 +30,9 @@
 					insults['third'].push(split[2]);
 				}
 				counter = insults['first'].length;
-				first = insults[Math.floor(Math.random() * counter)][0];
-				second = insults[Math.floor(Math.random() * counter)][1];
-				third = insults[Math.floor(Math.random() * counter)][2];
+				first = insults['first'][Math.floor(Math.random() * counter)];
+				second = insults['second'][Math.floor(Math.random() * counter)];
+				third = insults['third'][Math.floor(Math.random() * counter)];
 				insult = 'Thou ' + first + ' ' + second + ' ' + third;
 				document.getElementById('insultHeader').innerHTML = insult;
 				document.getElementById('insultText').innerHTML = insult;
