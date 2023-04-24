@@ -32,9 +32,9 @@
 					counter++;
 				}
 				counter--;
-				first = $insults[Math.floor(Math.random() * counter)][0];
-				second = $insults[Math.floor(Math.random() * counter)][1];
-				third = $insults[Math.floor(Math.random() * counter)][2];
+				first = insults[Math.floor(Math.random() * counter)][0];
+				second = insults[Math.floor(Math.random() * counter)][1];
+				third = insults[Math.floor(Math.random() * counter)][2];
 				insult = 'Thou ' + first + ' ' + second + ' third';
 				document.getElementById('insultHeader').innerHTML = insult;
 				document.getElementById('insultText').innerHTML = insult;
