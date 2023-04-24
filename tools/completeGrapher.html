@@ -1,0 +1,193 @@
+<!DOCTYPE html><html>
+<head>
+	<title>Complete Grapher | Eclectic App Development</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script type='text/javascript' src='../tools/completeGrapher.js'></script>
+	<script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+
+</head>
+
+<body onload='init()' class='w3-dark-grey'>
+
+<main id='main'>
+	
+	<!-- Top Box -->
+	<div class='w3-card-10 w3-container w3-medium w3-center w3-padding-large w3-theme-d3'>
+		<h2>Complete Grapher</h2>
+		<a href="/">Back to the EclecticMatt homepage</a>
+	</div>
+	
+	<!-- Content Box -->
+	<div class='w3-panel w3-theme w3-row'>
+		<div class='w3-half w3-panel w3-padding-8 w3-center w3-theme'>   
+			<canvas id = 'canvas' style = '
+				display: inline;
+				width: 350px;
+				height: 350px;'>
+				Your browser does not support the canvas element
+			</canvas>
+		</div>
+		
+		<div class='w3-half w3-row w3-theme-l4 w3-panel'>
+			
+	<!-- Buffer Box -->
+	<div class='w3-container' style='height:15px'>
+		<!-- NOWT, JUST A BUFFER -->
+	</div>
+			<div class='w3-half w3-panel w3-center'>
+				<div class='w3-row'>
+					<div class='w3-half'>
+						<p>Graph type: </p>
+					</div>
+					<div class='w3-half'>
+						<select 
+							class='w3-select'  
+							onchange='typeUpdate(this.value)'
+							id='regSelect'>
+								<option value='regular' selected='selected'>REGULAR</option>
+								<option value='irregular'>IRREGULAR</option>
+								<option value='conch'>CONCH</option>
+								<option value='sine'>MULTI SINE</option>
+								<option value='free'>FREE</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class='w3-half w3-panel w3-center'>
+				<div class='w3-row'>
+					<div class='w3-half'>
+						<p>Points: </p>
+					</div>
+					<div class='w3-half'>
+						<select type='number' class='w3-select'
+						onchange='pointsUpdate(this.value)'	id='pointsSelect'>
+							<option value=1>1</option>
+							<option value=2>2</option>
+							<option value=3>3</option>
+							<option value=4>4</option>
+							<option value=5>5</option>
+							<option value=6>6</option>
+							<option value=7>7</option>
+							<option selected='selected' value=8>8</option>
+							<option value=9>9</option>
+							<option value=10>10</option>
+							<option value=11>11</option>
+							<option value=12>12</option>
+							<option value=13>13</option>
+							<option value=14>14</option>
+							<option value=15>15</option>
+							<option value=16>16</option>
+							<option value=17>17</option>
+							<option value=18>18</option>
+							<option value=19>19</option>
+							<option value=20>20</option>
+							<option value=21>21</option>
+							<option value=22>22</option>
+							<option value=23>23</option>
+							<option value=24>24</option>
+							<option value=25>25</option>
+							<option value=26>26</option>
+							<option value=27>27</option>
+							<option value=28>28</option>
+							<option value=29>29</option>
+							<option value=30>30</option>
+							<option value=31>31</option>
+							<option value=32>32</option>
+							<option value=33>33</option>
+							<option value=34>34</option>
+							<option value=35>35</option>
+							<option value=36>36</option>
+							<option value=37>37</option>
+							<option value=38>38</option>
+							<option value=39>39</option>
+							<option value=40>40</option>
+							<option value=41>41</option>
+							<option value=42>42</option>
+							<option value=43>43</option>
+							<option value=44>44</option>
+							<option value=45>45</option>
+							<option value=46>46</option>
+							<option value=47>47</option>
+							<option value=48>48</option>
+							<option value=49>49</option>
+							<option value=50>50</option>
+							<option value=60>61</option>
+							<option value=61>61</option>
+							<option value=62>62</option>
+							<option value=63>63</option>
+							<option value=64>64</option>
+							<option value=65>65</option>
+							<option value=66>66</option>
+							<option value=67>67</option>
+							<option value=68>68</option>
+							<option value=69>69</option>
+							<option value=70>70</option>
+							<option value=71>71</option>
+							<option value=72>72</option>
+							<option value=73>73</option>
+							<option value=74>74</option>
+							<option value=75>75</option>
+							<option value=76>76</option>
+							<option value=77>77</option>
+							<option value=78>78</option>
+							<option value=79>79</option>
+							<option value=80>80</option>
+							<option value=81>81</option>
+							<option value=82>82</option>
+							<option value=83>83</option>
+							<option value=84>84</option>
+							<option value=85>85</option>
+							<option value=86>86</option>
+							<option value=87>87</option>
+							<option value=88>88</option>
+							<option value=89>89</option>
+							<option value=90>90</option>
+							<option value=91>91</option>
+							<option value=92>92</option>
+							<option value=93>93</option>
+							<option value=94>94</option>
+							<option value=95>95</option>
+							<option value=96>96</option>
+							<option value=97>97</option>
+							<option value=98>98</option>
+							<option value=99>99</option>
+							<option value=100>100</option>
+						</select>
+					</div>
+					
+				</div>
+			</div>
+
+	
+	<div class='w3-row w3-theme-l3 w3-center'>
+		<div class='w3-panel w3-third w3-center'>
+			<button  class='w3-btn-block w3-theme'
+				id='redraw'>Redraw Graph</button>
+		</div>
+		<div class='w3-panel w3-third w3-center'>
+			<button class='w3-btn-block w3-theme' 
+				id='animate'>Animate On</button>
+		</div>
+		<div class='w3-panel w3-third w3-center'>
+			<button class='w3-btn-block w3-theme'
+				id='rotate'>Rotate On</button>
+		</div>
+	</div>
+		
+	<div class='w3-panel w3-container w3-center w3-theme-d3'>
+		<p id='info'>Graphing...</p>
+		<div class='w3-clear'>
+			<button class='w3-btn-block w3-theme w3-center' style='display: block;' 
+			id='graphDownload'>Click to download image<br>Opens in new tab</button>
+			<br>
+		</div>
+	</div>
+	</div>
+	<!-- Buffer Box -->
+	<div class='w3-container' style='height:55px'>
+		<!-- NOWT, JUST A BUFFER -->
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<?php
+
+$path = '/home/u545245070/public_html/data/shakespearean-insults.txt';
+$file = fopen($path,'r');
+$txtFile = fread($file, filesize($path));
+fclose($file);
+$fullTxt =  explode(PHP_EOL,$txtFile);
+//echo $fullTxt;
+$counter = 0;
+$insults = [ [] , [] , [] ];
+foreach ($fullTxt as $line){
+	$splitLine = explode(" ",$line);
+	$insults[$counter][0] = $splitLine[0];
+	$insults[$counter][1] = $splitLine[1];
+	$insults[$counter][2] = $splitLine[2];
+	$counter++;
+	//echo "Line #" . $counter . " - " . $line .PHP_EOL;
+}
+
+$counter--;
+
+$first = $insults[mt_rand(0,$counter)][0];
+$second = $insults[mt_rand(0,$counter)][1];
+$third = trim($insults[mt_rand(0,$counter)][2]);
+
+$insultTxt = "Thou " . $first . " " . $second . " " . $third;
+
+$this_title = "Shakespearean Insult Generator | EAD";
+include '/home/u545245070/public_html/templates/_head.php';
+
+echo "<body class='w3-dark-grey'><style type='text/css'>
+
+@font-face {
+  font-family: Shakespeare;
+  src: url(http://eclecticapp.xyz/css/fonts/ILShakeFest.ttf); 
+}
+  
+</style>";
+
+include '/home/u545245070/public_html/templates/_navbar.php';
+
+
+echo "<div id='main' class='w3-theme w3-panel'>
+		<h1><b>Shakespearean Insult Generator</b></h1>
+		<br>
+		<div class='w3-card-16 w3-center w3-khaki w3-topbar w3-bottombar w3-border-black w3-round-xxlarge'>
+			<h2 style='font-family:Shakespeare;'>" . $insultTxt . "</h2>
+			<div class='w3-card-16 w3-center w3-border-black w3-round-xxlarge'>
+				<h3 style='text-align:center; font-style:italic;'>(" . $insultTxt . ")</h3>
+			</div>
+		</div>
+		<br>
+		<div class='w3-center'>
+			<button class='w3-button w3-green w3-center' value='Generate' onclick='window.location.reload()'>Generate a new insult</button>
+			<br>
+			Source: <a href='http://imgur.com/gallery/ng15UsQ'>http://imgur.com/gallery/ng15UsQ</a>
+			<br>
+			Blog post: <a href='http://eclecticapp.xyz/blog/2016/04/06/shakespearean-insult-generator/'>Shakespearean Insult Generator</a>
+			<br>
+		</div>
+	</div>
+	
+";
+
+include '/home/u545245070/public_html/templates/_bottom.php';
+
+
+?>

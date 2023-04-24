@@ -1,0 +1,231 @@
+<?php
+
+$this_title = 'Fibonacci Clock | Eclectic App Development';
+
+include '/home/u545245070/public_html/templates/_head.php';
+
+echo "<body onload='mainLoop()' class='w3-dark-grey'>";
+
+include '/home/u545245070/public_html/templates/_navbar.php';
+
+echo "
+<script type='text/javascript'>
+
+var hrs = 0;
+var mns = 0;
+var i = 0;
+var x = null;
+//var displayTime = document.getElementById('read-time');
+
+function mainLoop(){
+	fibonacci();
+	timer = setTimeout(function(){mainLoop()},1000);
+}
+
+function fibonacci(){
+	today=new Date();
+	hrs=today.getHours();
+	hrs = (hrs > 12)? hrs-12: hrs;
+	mns=today.getMinutes();
+	mns = Math.floor(mns/5);
+	blue = Math.min(hrs,mns);
+	remain = (mns >= hrs)? 'green': 'red';
+	remVal = Math.abs(mns - hrs);
+	document.getElementById('read-time').innerHTML = hrs + ':' + (5 * mns) + ' ish';
+	if (blue >= 5){
+	  x = document.getElementsByClassName('5');
+		shadeCells(x , 'blue');
+		blue -= 5;
+	}else{
+		x = document.getElementsByClassName('5');
+		shadeCells(x , 'white');
+	}
+
+	if (blue >= 3){
+		//document.getElementById('3').style.background = 'blue';
+		x = document.getElementsByClassName('3');
+		shadeCells(x , 'blue');
+		blue -= 3;
+	}else{
+		x = document.getElementsByClassName('3');
+		shadeCells(x , 'white');
+	}
+
+	if (blue >= 2){
+		//document.getElementById('2').style.background = 'blue';
+		x = document.getElementsByClassName('2');
+		shadeCells(x , 'blue');
+		blue -= 2;
+	}else{
+		x = document.getElementsByClassName('2');
+		shadeCells(x , 'white');
+	}
+
+	if (blue >= 1){
+		//document.getElementById('top1').style.background = 'blue';
+		x = document.getElementsByClassName('top1');
+		shadeCells(x , 'blue');
+		blue -= 1;
+	}else{
+		x = document.getElementsByClassName('top1');
+		shadeCells(x , 'white');
+	}
+
+	if ( (remVal >= 5) && (document.getElementsByClassName('5')[0].style.backgroundColor !== 'blue') ){
+	  x = document.getElementsByClassName('5');
+		shadeCells(x , remain);
+		remVal -= 5;
+	}
+
+	if ( (remVal >= 3) && (document.getElementsByClassName('3')[0].style.backgroundColor !== 'blue') ){
+		//document.getElementById('3').style.background = 'blue';
+		x = document.getElementsByClassName('3');
+		shadeCells(x , remain);
+		remVal -= 3;
+	}
+
+	if ( (remVal >= 2) && (document.getElementsByClassName('2')[0].style.backgroundColor !== 'blue') ){
+		//document.getElementById('2').style.background = 'blue';
+		x = document.getElementsByClassName('2');
+		shadeCells(x , remain);
+		remVal -= 2;
+	}
+
+	if (remVal >= 1){
+		//document.getElementById('bot1').style.background = 'blue';
+		x = document.getElementsByClassName('bot1');
+		shadeCells(x , remain);
+		remVal -= 1;
+		if ( (remVal >= 1) && (document.getElementsByClassName('top1')[0].style.backgroundColor !== 'blue') ){
+			//document.getElementById('top1').style.background = 'blue';
+			x = document.getElementsByClassName('top1');
+			shadeCells(x , remain);
+			remVal -= 1;
+		}
+	}else{
+		x = document.getElementsByClassName('bot1');
+		shadeCells(x , 'white');
+	}
+
+}
+
+function shadeCells(x , col){
+	for (i = 0; i < x.length; i++) {
+	  x[i].style.backgroundColor = col;
+	}
+}
+
+</script>
+<style type='text/css'>
+td.fibonacci{
+	width:50px;
+	height:50px;
+}
+tr.fibonacci{
+	height:50px;
+	width:400px;
+}
+table.fibonacci,#main{
+	margin: 0 auto;
+	width:400px;
+	height:250px;
+}
+
+</style>
+
+<div style='w3-panel w3-center'>
+	<div class='w3-panel'>
+		<h1>Fibonacci Clock</h1>
+		<br>
+		<div id='main' role='main'>
+			<table class='fibonacci'>
+				<tr class='fibonacci'>
+					<td style='border-left:5px solid black; border-top:5px solid black;' class='2 fibonacci'></td>
+					<td style='border-right:5px solid black; border-top:5px solid black;' class='2 fibonacci'></td>
+					<td style='border:5px solid black;' class='top1 fibonacci'></td>
+					<td style='border-left:5px solid black; border-top:5px solid black;' class='5 fibonacci'></td>
+					<td style='border-top:5px solid black;' class='5 fibonacci'></td>
+					<td style='border-top:5px solid black;' class='5 fibonacci'></td>
+					<td style='border-top:5px solid black;' class='5 fibonacci'></td>
+					<td style='border-right:5px solid black; border-top:5px solid black;' class='5 fibonacci'></td>
+				</tr>
+				<tr class='fibonacci'>
+					<td style='border-left:5px solid black; border-bottom:5px solid black;' class='2 fibonacci'></td>
+					<td style='border-right:5px solid black; border-bottom:5px solid black;' class='2 fibonacci'></td>
+					<td style='border:5px solid black;' class='bot1 fibonacci'></td>
+					<td style='border-left:5px solid black;' class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td style='border-right:5px solid black;' class='5 fibonacci'></td>
+				</tr>
+				<tr class='fibonacci'>
+					<td style='border-left:5px solid black; border-top:5px solid black;' class='3 fibonacci'></td>
+					<td style='border-top:5px solid black;' class='3 fibonacci'></td>
+					<td style='border-right:5px solid black; border-top:5px solid black;' class='3 fibonacci'></td>
+					<td style='border-left:5px solid black;' class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td style='border-right:5px solid black;' class='5 fibonacci'></td>
+				</tr>
+				<tr class='fibonacci'>
+					<td style='border-left:5px solid black;' class='3 fibonacci'></td>
+					<td class='3 fibonacci'></td>
+					<td style='border-right:5px solid black;' class='3 fibonacci'></td>
+					<td style='border-left:5px solid black;' class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td class='5 fibonacci'></td>
+					<td style='border-right:5px solid black;' class='5 fibonacci'></td>
+				</tr>
+				<tr class='fibonacci'>
+					<td style='border-left:5px solid black; border-bottom:5px solid black;' class='3 fibonacci'></td>
+					<td style='border-bottom:5px solid black;' class='3 fibonacci'></td>
+					<td style='border-right:5px solid black; border-bottom:5px solid black;' class='3 fibonacci'></td>
+					<td style='border-left:5px solid black; border-bottom:5px solid black;' class='5 fibonacci'></td>
+					<td style='border-bottom:5px solid black;' class='5 fibonacci'></td>
+					<td style='border-bottom:5px solid black;' class='5 fibonacci'></td>
+					<td style='border-bottom:5px solid black;' class='5 fibonacci'></td>
+					<td style='border-right:5px solid black; border-bottom:5px solid black;' class='5 fibonacci'></td>
+				</tr>
+			</table>
+			<br>
+		</div>
+		<div class='w3-panel w3-center'>
+			<br>
+			<h3 id='read-time'></h3>
+			<p>Add up the side length (not total number of squares) for each colour:</p>
+			<p><strong>RED = HOURS ... GREEN = MINUTES ... BLUE = ADD TO BOTH</strong></p>
+			<p><strong>The MINUTES TOTAL = GREEN + BLUE MULTIPLIED BY 5</strong></p>
+			<!--p>(as in, which 'hour marker' is the minute hand passing by?)</p-->
+			<p>For more info on how to read the clock, have a look at my <a href='http://eclecticapp.xyz/blog/2015/05/11/clocking-mad/'>blog post on the clocks</a>.</p>
+			<br>
+			<!--div class='w3-dropdown-hover'>
+				<a href='#'><h4>A long description on how to read the clock</h4></a>
+				<div class='w3-dropdown-content'>
+					<p>The length of the sides of the square gives a value to add.</p>
+					<p>WHITE squares are ignored.</p>
+					<p>RED squares add to the hour value</p>
+					<p>GREEN squares add to the minute value (multiplied by five - so 7 green = 35mins, 9 green = 45mins).</p>
+					<p>The clock only gives times to the nearest 5 mins.</p>
+					<p>BLUE squares add to BOTH hours and mins.</p>
+					<p>You should add greens and blues, then multiply by 5 to get actual minutes.</p>
+					<p>No need to multiply hours, only goes up to 12.</p>
+					<br>
+					<p>e.g.</p>
+					<p>If the 5 square was BLUE, the 3 square was GREEN and all others were white...</p>
+					<p>5 blue means 5 hours and adds 5 to the minute value (times 5).</p>
+					<p>The 3 greens mean another 3 to the minute value, totalling 8.</p>
+					<p>5 hours and 8 minute value (times 5) gives a time of 5:40 AM/PM</p>
+				</div>
+			</div-->
+		</div>
+	</div>
+</div>
+
+";
+		
+include '/home/u545245070/public_html/templates/_bottom.php';
+
+?>

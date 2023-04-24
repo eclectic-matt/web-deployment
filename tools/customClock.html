@@ -1,0 +1,557 @@
+<?php
+
+$this_title = 'Custom Clock | Eclectic App Development';
+$this_desc = 'Create your own custom clock with this tool!';
+
+$this_type = "website";
+$this_locale = "en_us";
+$this_url = "http://" . $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
+
+$partials_folder = '/home/u545245070/public_html/templates/partials/';
+
+include $partials_folder . '_declare.php';
+include $partials_folder . '_meta.php';
+include $partials_folder . '_social.php';
+include $partials_folder . '_styles.php';
+include $partials_folder . '_structured.php';
+include $partials_folder . '_scripts.php';	// NOTE, ALSO CLOSES THE HEAD
+
+echo "<body onload='init();' class='w3-dark-grey'>";
+
+echo "
+	<script src='../gadgets/clocksJS/analogueclock.js'></script>
+	<script type='text/javascript'>
+		function init(){
+			startTime();
+		}
+	</script>
+	<style type='text/css'>
+		.w3-row {
+			min-height: 50px;
+		}
+		.w3-input {
+			min-height: 45px;
+		}
+	</style>
+";
+
+include $partials_folder . '_navbar.php';
+
+echo "<main id='main'>";
+
+echo "<div style='clear:both;'>
+	
+	<div class='w3-card-10 w3-container w3-medium w3-center w3-padding-large w3-theme-d3'>
+		<h2>Custom Clock</h2>
+	</div>
+	
+	<div class='w3-theme w3-panel w3-padding-large w3-center'>
+		<h3 id='clocktxt' style='height:50pt;'>Clock Text</h3>
+        <canvas id='clockcnv' width='500' height='500'>
+        </canvas>
+		<br>
+		<div id='customclock'>
+			<h4><strong>Customise the clock and grab the custom code</strong></h4>
+        </div>
+    </div>
+	
+	<!-- SETTINGS TABLE HERE -->
+    <div class='w3-panel w3-center w3-padding-8 w3-dark-grey'>
+	
+		<form id='clockform' action=''>
+		
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='userwidth'>
+						<span class='w3-hide-small'><strong>Total Width</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Total Width</h3></span>
+					</label>
+				</div>
+				<div class='w3-threequarter'>
+					<input id='userwidth' class='w3-input' name='clockwidth' type='range' min='25' max='800' step='25' value='325'>
+				</div>
+			</div>	
+	
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='userheight'>
+						<span class='w3-hide-small'><strong>Total Height</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Total Height</h3></span>
+					</label>
+				</div>
+				<div class='w3-threequarter'>					
+					<input id='userheight' class='w3-input' name='clockwidth' type='range' min='25' max='800' step='25' value='325'>
+				</div>
+			</div>	
+			<div class='w3-row w3-dark-grey'>
+				&nbsp;
+			</div>
+			<!-- SUB-TABLE HEADINGS --> 
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter '>
+					<span class='w3-hide-small'><strong>SETTING NAME</strong></span>
+					<span class='w3-hide-medium w3-hide-large '><h3>Setting Name</h3></span>
+				</div>
+				<div class='w3-quarter '>
+					<strong>ON/OFF</strong>
+				</div>
+				<div class='w3-quarter '>
+					<strong>SIZE (SOME OPTIONS)</strong>
+				</div>
+				<div class='w3-quarter '>
+					<strong>COLOUR</strong>
+				</div>
+			</div>	
+			
+			<!-- MAIN SETTINGS TABLE (4-cols) -->
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='timeDisplaySet'>
+						<span class='w3-hide-small'><strong>Time Display</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Time Display</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='timeDisplaySet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='timeDisplaySize'>
+						<option value='10'>10pt</option>
+						<option value='15'>15pt</option>
+						<option value='20'>20pt</option>
+						<option value='30' selected>30pt</option>
+						<option value='40'>40pt</option>
+						<option value='50'>50pt</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='timeDisplayCol' type='color' value='#ffffff'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='bgSet'>
+						<span class='w3-hide-small'><strong>Background</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Background</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='bgSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					&nbsp;
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='bgCol' type='color' value='#AAFA00'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='bgBorderSet'>
+						<span class='w3-hide-small'><strong>BG Border</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>BG Border</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='bgBorderSet' type='checkbox'>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='bgBorderSize'>
+						<option value='1'>1px</option>
+						<option value='3'>3px</option>
+						<option value='5' selected>5px</option>
+						<option value='10'>10px</option>
+						<option value='25'>25px</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='bgBorderCol' type='color' value='#000000'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='faceSet'>
+						<span class='w3-hide-small'><strong>Clock Face</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Clock Face</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='faceSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					&nbsp;
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='faceCol' type='color' value='#A000AA'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='fBorderSet'>
+						<span class='w3-hide-small'><strong>Face Border</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Face Border</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='fBorderSet' type='checkbox'>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='fBorderSize'>
+						<option value='1'>1px</option>
+						<option value='3'>3px</option>
+						<option value='5' selected>5px</option>
+						<option value='10'>10px</option>
+						<option value='25'>25px</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='fBorderCol' type='color' value='#000000'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='fNumberSet'>
+						<span class='w3-hide-small'><strong>Face Numbers</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Face Numbers</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='fNumberSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					&nbsp;
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='fNumberCol' type='color' value='#ffffff'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='hourHandSet'>
+						<span class='w3-hide-small'><strong>Hour Hand</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Hour Hand</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='hourHandSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='hourHandSize'>
+						<option value='1'>1px</option>
+						<option value='3' selected>3px</option>
+						<option value='5'>5px</option>
+						<option value='10'>10px</option>
+						<option value='25'>25px</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='hourHandCol' type='color' value='#ffffff'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='hourEndSet'>
+						<span class='w3-hide-small'><strong>Hour Hand End</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Hour Hand End</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='hourEndSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='hourEndSize'>
+						<option value='1'>1</option>
+						<option value='3' selected>3</option>
+						<option value='5'>5</option>
+						<option value='10'>10</option>
+						<option value='25'>25</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='hourEndCol' type='color' value='#ffffff'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='minHandSet'>
+						<span class='w3-hide-small'><strong>Minute Hand</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Minute Hand</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='minHandSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='minHandSize'>
+						<option value='1'>1px</option>
+						<option value='3' selected>3px</option>
+						<option value='5'>5px</option>
+						<option value='10'>10px</option>
+						<option value='25'>25px</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='minHandCol' type='color' value='#000000'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='minEndSet'>
+						<span class='w3-hide-small'><strong>Minute Hand End</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Minute Hand End</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='minEndSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='minEndSize'>
+						<option value='1'>1</option>
+						<option value='3' selected>3</option>
+						<option value='5'>5</option>
+						<option value='10'>10</option>
+						<option value='25'>25</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='minEndCol' type='color' value='#000000'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='secHandSet'>
+						<span class='w3-hide-small'><strong>Second Hand</strong></span>
+						<span class='w3-hide-medium w3-hide-large w3-text-center'><h3>Second Hand</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='secHandSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='secHandSize'>
+						<option value='1' selected>1px</option>
+						<option value='3'>3px</option>
+						<option value='5'>5px</option>
+						<option value='10'>10px</option>
+						<option value='25'>25px</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='secHandCol' type='color' value='#ff0000'>
+				</div>
+			</div>
+			
+			<div class='w3-row w3-theme-l4 w3-border-bottom w3-border-deep-purple'>
+				<div class='w3-quarter'>
+					<label for='secEndSet'>
+						<span class='w3-hide-small'><strong>Second Hand End</strong></span>
+						<span class='w3-hide-medium w3-hide-large '><h3>Second Hand End</h3></span>
+					</label>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-check' id='secEndSet' type='checkbox' checked>
+				</div>
+				<div class='w3-quarter '>
+					<select class='w3-select' id='secEndSize'>
+						<option value='1'>1</option>
+						<option value='3' selected>3</option>
+						<option value='5'>5</option>
+						<option value='10'>10</option>
+						<option value='25'>25</option>
+					</select>
+				</div>
+				<div class='w3-quarter '>
+					<input class='w3-input' id='secEndCol' type='color' value='#ff0000'>
+				</div>
+			</div>
+			
+	<!-- SETTINGS TABLE END -->
+		</form>
+	</div>
+
+	<div class='w3-panel w3-theme-l3 w3-card-8'>
+		<br>
+		<h1><strong>Copy and paste this:</strong></h1>
+		<p>For example, open Notepad, paste this code in and save as &quot;clock.html&quot;</p>
+		<br>
+	</div>";
+			
+			
+// START OF THE CUSTOM CODE
+			
+echo"<div contenteditable='true' 
+            style='padding-left: 2%; 
+                   padding-right: 2%; 
+                   width: 96%;
+                   height: 390px;
+					margin-left:auto;
+					margin-right:auto;
+                   overflow:scroll;             
+                   background-color:DarkGreen;
+                   font-family: monospace;
+                   text-align:left;'>
+                <pre><!--?php include './files/clockcode1.html' ?-->
+&lt;&excl;DOCTYPE html&gt;
+&lt;html&gt;
+&lt;&excl;--Developed by Matt Tiernan.
+Please credit if copying this code for your own use.
+For info see http://eclecticapp.xyz --&gt;
+
+&lt;body onload='startTime()'&gt;
+
+<samp id='usertimehead'></samp>
+    
+&lt;canvas id='clockcnv'
+        
+                <br>
+                <samp id='userclockvals'>width='666' height='666'</samp>
+                <br>
+                    <!--?php include './files/clockcode2.html' ?-->
+		style='
+			padding-left: 0; 
+			padding-right: 0; 
+			margin-left: auto; 
+			margin-right: auto; 
+			display: block; '&gt;
+&lt;/canvas&gt;
+        
+&lt;script type='text/javascript'&gt;
+
+function startTime(){
+    today=new Date();
+    h=today.getHours();
+    m=today.getMinutes();
+    s=today.getSeconds();
+    ord = '';
+    
+        if (h &lt; 12){
+            ord = 'AM';
+        }else{
+            ord = 'PM';
+            if (h &gt; 12){
+            h-=12;
+            }   
+        }
+        
+    //add a zero in front of numbers&lt;10
+    m=checkTime(m);
+    s=checkTime(s);
+	<samp id='usertimedisplay'></samp>
+    
+     
+    // Pass time to canvas and draw
+    cnv(h,m,s);
+    // Repeat this at intervals &lt;~ 1000ms
+    t=setTimeout(function(){startTime()},1000);
+}
+
+function cnv(hr,mn,sc){
+    // SETUP - NOTE: ALL DERIVED FROM CANVAS WID/HGT
+    var c = document.getElementById('clockcnv');
+    var ctx = c.getContext('2d');
+    cwid = c.width;
+    chgt = c.height;
+    midx = cwid/2;
+    midy = chgt/2; 
+    // Len is the universal scale factor
+    len = 0.95*Math.min(midx,midy);
+
+    // CLOCK FACE
+	<samp id='clockbg'></samp>
+	<samp id='bgborder'></samp>
+    ctx.beginPath();
+    ctx.moveTo(midx+len,midy);
+	<samp id='faceborderset'></samp>
+    ctx.arc(midx,midy,len,0,2*Math.PI); 
+    <samp id='faceborderdraw'></samp>
+	<samp id='facebg'></samp>
+
+    // HOUR HAND
+    lenf = 0.5;
+	//Angle = hr & factor of mn with canvas rotation factor of 3pi/2
+    angh = ((hr + (mn/60)) / 12) * (2*Math.PI) + (3*Math.PI/2);
+
+	<samp id='hourhand'></samp>
+
+	// HOUR HAND END
+	<samp id='hourend'></samp>
+    
+    // MINUTE HAND
+    lenf = 0.75;
+	angm = (mn/60)* (2*Math.PI) + (3*Math.PI/2);
+
+	<samp id='minhand'></samp>
+
+	// MINUTE HAND END
+	<samp id='minend'></samp>
+
+    // SECOND HAND
+    lenf = 0.9;
+	angs = (sc/60)* (2*Math.PI) + (3*Math.PI/2);
+	
+	<samp id='sechand'></samp>
+
+	// MINUTE HAND END
+	<samp id='secend'></samp> 
+
+    // SMALL CIRCLE TO COVER ENDS OF HANDS
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.moveTo(midx,midy);
+    // Len/40 is width of HR hand (the widest)
+    ctx.arc(midx,midy,(len/40),0,2*Math.PI);
+    ctx.stroke();
+    ctx.fillStyle = '#000000';
+    ctx.fill();
+
+    // TEXT
+	<samp id='facenumbers'></samp>
+
+	
+}
+ 
+function checkTime(i){
+    if (i&lt;10){
+        i='0' + i;
+    }
+    return i;
+}
+
+
+&lt;/script&gt;
+
+&lt;br&gt;
+
+&lt;div&gt;
+
+    &lt;a style='text-align:center; font-family:verdana; font-size:xx-large;' 
+    href=' http://eclecticapp.xyz'&gt;
+    Create your own custom clock at Eclectic App Development!&lt;/a&gt;
+
+&lt;/div&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+	
+				<br><br>
+				</pre>
+       
+        
+        </div>
+   <br>";
+
+		
+include $partials_folder . '_footer.php';
+
+?>
