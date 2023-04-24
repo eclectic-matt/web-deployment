@@ -9,7 +9,7 @@ var letters = {
 			'E':['Enhancement','Engagement','Education','Empowered','Ethos','Evaluation','Elective','Election','Employee','Exceptional','Experience','Expert','Extension','Economic','Entitlement','Equality','Ethics'],
 			'F':['Facilitation','Facilities','Formative','Foundation','Facilities','Frontline','Format','Fair','Feasibility','Forecast','Formula','Functional','Flexible','Funding','Framework','Faculty'],
 			'G':['Generation','Group','Guidance','Global','Grievance','Goal','Governance','Graphic','Graduate','Graduation','Gender'],
-			'H':['Higher','Holistic','Hierarchical','Handbook','Helpdesk',''],
+			'H':['Higher','Holistic','Hierarchical','Handbook','Helpdesk'],
 			'I':['Implementation','Information','Integration','Impact','Influence','Intermediary','Innovation','International'],
 			'J':['Joint','Job','Judgement','Justification','Joylessness','Juvenile','Jiggling','Junior'],
 			'K':['Knowledge','Key','Keynote','Kit','Know-how','Kudos'],
@@ -28,6 +28,36 @@ var letters = {
 			'X':['Xenial','Xenogeny','Xanadu','eXemplary','eXceptional','eXperience','eXpert','eXtension'],
 			'Y':['Youth','Yearly','Yield'],
 			'Z':['Zenith','Zeitgeist']
+		},
+	
+	'technology':
+		{
+			'A':['Amplified', 'Automated', 'Agile'],
+			'B':['Bluetooth', 'Buckets'],
+			'C':['Crash', 'Console'],
+			'D':['Database','Download'],
+			'E':['Erection','Ejaculation','Enema'],
+			'F':['Fuckwit','Frigging','Fartbox'],
+			'G':['Gits','Goddamned','Gooch'],
+			'H':['Haemorrhoid','Ho','Handjob'],
+			'I':['Idiotic','Imbecile','Ignoramus'],
+			'J':['Jobsworth','Jackass','Jackoff'],
+			'K':['Kootch','Kunt'],
+			'L':['Lameass','Lardass'],
+			'M':['Minge','Munter','Muthafucka'],
+			'N':['Nutsack','Nobwit','Nobhead'],
+			'O':['Orgy','Orgasm'],
+			'P':['Poop','Prickwizard','Pantsniffer'],
+			'Q':['Queef','Queer'],
+			'R':['Rimjob','Runt','Rickroll'],
+			'S':['Shitbiscuit','Smeghead','Scrotumface'],
+			'T':['Turdmunch','Twatnose','Thundercunt'],
+			'U':['Unclefucker','Uterushead'],
+			'V':['Vagina','Vajazzle'],
+			'W':['Wankchasm','Willyface','Whorebag'],
+			'X':['X-rated','eXtreme'],
+			'Y':['Yanked','Yabbos','Yankers'],
+			'Z':['Zoinks','Zoophiliac','Zooerasty']
 		},
 
 	'swear' : 
@@ -71,6 +101,7 @@ function createBackronym(){
 	
 	var useUni = document.getElementById('uniTerms').checked;
 	var useSwear = document.getElementById('swearTerms').checked;
+	var useSwear = document.getElementById('techTerms').checked;
 	
 	for (var i = 0; i < backronymCount; i++){
 		
@@ -89,6 +120,13 @@ function createBackronym(){
     		    //console.log('Add swear');
     		    //console.log(acronymOptions);
     		}
+
+			if (useTech){
+    		    acronymOptions = acronymOptions.concat(letters["technology"][thisLetter]);
+    		    //console.log('Add swear');
+    		    //console.log(acronymOptions);
+    		}
+
     		var numOptions = acronymOptions.length;
     		var randy = Math.floor(Math.random() * numOptions);
     		var word = acronymOptions[randy];
