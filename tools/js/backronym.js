@@ -32,11 +32,11 @@ var letters = {
 	
 	'technology':
 		{
-			'A':['Analogue', 'Automated', 'Agile'],
+			'A':['Analogue', 'Automated', 'Agile','Advanced','Adept','Advert'],
 			'B':['Bluetooth', 'Buckets', 'Bandwidth', 'Back-End'],
 			'C':['Crash', 'Console', 'Cache', 'Chip', 'Compression'],
 			'D':['Database','Download', 'Domain'],
-			'E':['Encryption','Ethernet','Email'],
+			'E':['Encryption','Ethernet','Email','Explode','Erase','E-Commerce'],
 			'F':['Firewall','File','Fidelity'],
 			'G':['Gateway','Graphics','Global','GNU'],
 			'H':['Hardware','Hypertext','Home','Heads','Human'],
@@ -49,8 +49,8 @@ var letters = {
 			'O':['Online','Operating','Object','Oriented'],
 			'P':['Performance','Protocol','Pathway','Processor','PHP'],
 			'Q':['Queue','Quick','Query'],
-			'R':['Read-Only','Resolution','Regex'],
-			'S':['Software','Service','Search','Secure','Socket'],
+			'R':['Read-Only','Resolution','Regex','Recursive','Refresh','Rate','Return'],
+			'S':['Software','Service','Search','Secure','Socket','Structured','Sales','Support'],
 			'T':['Tick','Total','Terrabyte'],
 			'U':['Uniform','Unzip','Undo'],
 			'V':['Version','Virus','Video'],
