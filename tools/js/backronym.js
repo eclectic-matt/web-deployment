@@ -107,48 +107,27 @@ function createBackronym(){
 		
 		var thisLetter = backronym.substr(i,1);
 		
-		    // NEW VERSION 
-    		var acronymOptions = [];
-    		
-    		if (useUni){
-    		    acronymOptions = acronymOptions.concat(letters["uni"][thisLetter]);
-    		    //console.log('Uni Only');
-    		    //console.log(acronymOptions);
-    		}
-    		if (useSwear){
-    		    acronymOptions = acronymOptions.concat(letters["swear"][thisLetter]);
-    		    //console.log('Add swear');
-    		    //console.log(acronymOptions);
-    		}
-
-			if (useTech){
-    		    acronymOptions = acronymOptions.concat(letters["technology"][thisLetter]);
-    		    //console.log('Add swear');
-    		    //console.log(acronymOptions);
-    		}
-
-    		var numOptions = acronymOptions.length;
-    		var randy = Math.floor(Math.random() * numOptions);
-    		var word = acronymOptions[randy];
-    		//console.log(acronymOptions);
-		/*
+		// NEW VERSION 
+		var acronymOptions = [];
 		
-		// OLD VERSION 
-    		var acronymOptions = letters[thisLetter].length;
-    		var randy = Math.floor( Math.random() * acronymOptions);
-    		var word = letters[thisLetter][randy];
-		*/
+		if (useUni){
+			acronymOptions = acronymOptions.concat(letters["uni"][thisLetter]);
+		}
+
+		if (useSwear){
+			acronymOptions = acronymOptions.concat(letters["swear"][thisLetter]);
+		}
+
+		if (useTech){
+			acronymOptions = acronymOptions.concat(letters["technology"][thisLetter]);
+		}
+
+		var numOptions = acronymOptions.length;
+		var randy = Math.floor(Math.random() * numOptions);
+		var word = acronymOptions[randy];
+
 		outputString += word + '<br>';
 	}
 	outputString += '</span>';
 	output.innerHTML = outputString;
-	/*
-	    // REMOVED, NOT WORKING WITH BREAK TAGS/HTML WITHIN SPAN
-    	var elements = document.getElementsByClassName("each-word");
-        for (i=0; i<elements.length; i++){
-            console.log('First letter checks ' + i)
-            elements[i].innerHTML = elements[i].innerHTML.replace(/\\b([a-z])([a-z]+)?\\b/gim, "<span class='first-letter'>$1</span>$2");
-        }
-    */
-	
 }
