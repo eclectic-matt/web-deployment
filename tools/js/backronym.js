@@ -101,7 +101,7 @@ function createBackronym(){
 	
 	var useUni = document.getElementById('uniTerms').checked;
 	var useSwear = document.getElementById('swearTerms').checked;
-	var useSwear = document.getElementById('techTerms').checked;
+	var useTech = document.getElementById('techTerms').checked;
 	
 	for (var i = 0; i < backronymCount; i++){
 		
