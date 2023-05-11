@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel='stylesheet' href='/css/w3.css'>
+		<link rel='stylesheet' href='/css/w3-theme-deep-purple.css'>
+		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+		<!-- Font Awesome Icon Library -->
+		<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
+		<link href="/libraries/font-awesome/css/fontawesome.css" rel="stylesheet">
+		<link href="/libraries/font-awesome/css/brands.css" rel="stylesheet">
+		<link href="/libraries/font-awesome/css/solid.css" rel="stylesheet">
+		<!-- Country flags -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
+
+		<script defer src='/css/fontawesome-all.min.js'></script>
+
+		<style>
+			body {font-size: 16px;}
+			html,body,h1,h2,h3,h4,h5 {font-family: 'Open Sans', sans-serif}
+			h1 {font-size: 1.25rem; font-weight: bolder;}
+			h2{font-size: 1.2rem; font-weight: bold;}
+			h3 {font-size: 1.15rem; font-weight: bold;}
+			h4 {font-style: italic;}
+			h5 {text-decoration: underline; font-size: 1rem; padding-top: 5%; }
+			table { border-collapse: collapse; border: 1px solid white;}
+			th, td {text-align: center !important;}
+			canvas { border: 1px solid white;}
+
+			dialog::backdrop {
+				background: rgba(0, 0, 0, 0.75);
+			}
+
+			/*dialog { width: 100%; }*/
+			
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!--LOAD SCRIPTS-->
+		<script src="/eurovision/js/eurovision.js"></script>
+		<script src="/eurovision/js/modals.js"></script>
+		<script src="/eurovision/js/forms.js"></script>
+		<script src="/eurovision/js/sort.js"></script>
+		<script src="/eurovision/js/saveLoad.js"></script>
+
+
+	</head>
+	<body onload="init()">
+		<div class="w3-container">
+			
+			<!-- MENU -->
+			<div class="w3-row-padding">
+				<div class="w3-col s8 w3-center"><h1>Eurovision Ratings</h1></div>
+				<div class="w3-col s2 w3-center" style="margin-top: 2%;"><button data-open-help><i class="fa-solid fa-question fa-xl"></i></button></div>
+				<div class="w3-col s2 w3-center" style="margin-top: 2%;"><button data-open-modal><i class="fa-solid fa-cog fa-xl"></i></button></div>
+			</div>
+
+			<!--DIALOG-->
+			<dialog help-modal style='z-index: 9999' class="w3-small">
+				<h1>Welcome to the Eurovision Ratings!</h1>
+				<button data-close-help class="w3-red w3-right">Close Help</button>
+				<h2>Help</h2>
+				<p>This list of acts is sorted by their Billing Order on the night</p>
+				<p>You can change the sort order in the settings menu <i class="fa-solid fa-cog"></i></p>
+				<!--br-->
+				<h2>Scores:</h2>
+				<p>This page allows you to allocate 3 different scores to each act:</p>
+				<h3> - Ranking</h3>
+				<p>How YOU would rank this act - from 1st (best) down to 26th (worst)</p>
+				<h3> - Prediction</h3>
+				<p>How you PREDICT this act will be scored in the competition - from 1st (best) to 26th (worst)</p>
+				<h3> - Points</h3>
+				<p>Pretend you are a country and give out 1-8 points, 10 points and 12 points to the best acts!</p>
+				<p><em>There is also a section for you to make notes!</em></p>
+				<!--br-->
+				<h2>Settings</h2>
+				<p>If you only want to score each act once per ranking, turn on "preventDuplicates" in the settings menu <i class="fa-solid fa-cog"></i></p>
+				<p>Please note: this setting will disable any already-chosen options (experimental, use at own risk!)</p>
+				<p>If the mix of colours isn't to your taste, choose the "plain" theme in the settings</p>
+				<!--br-->
+				<h2>Save/Load</h2>
+				<p>This page saves your inputs so you don't lose them!</p>
+				<p>If you want to clear your saved data, use the button in the settings menu <i class="fa-solid fa-cog"></i></p>
+				<br>
+			</dialog>
+
+			<!-- MODAL -->
+			<dialog data-modal>
+				<!--button class="w3-button w3-grey w3-right" data-close-modal>Close Settings</button-->
+				<button class="w3-button w3-grey w3-right" data-close-modal><i class="fa-solid fa-x"></i></button>
+				<br>
+				<h1>Settings</h1>
+				<label for="preventDuplicates">Prevent Duplicates: </label>
+				<input type="checkbox" id="preventDuplicates" name="preventDuplicates" onchange='updateSettings(event)'></input>
+				<br>
+				<label for="eventSelect">Event: </label>
+				<select id="eventSelect" name="eventSelect" onchange='updateSettings(event)'>
+					<option value="Semi Final #1">Semi Final #1</option>
+					<option value="Semi Final #2">Semi Final #2</option>
+					<option value="Grand Final" selected>Grand Final</option>
+				</select>
+				<br>
+				<br>
+
+				<h2>Sort</h2>
+				<label for="sortKey">Sort By: </label>
+				<select id="sortKey" name="sortKey" onchange='updateSettings(event)'>
+					<option value="billing" selected>Running Order</option>
+					<option value="rank">Your Rank</option>
+					<option value="predict">Your Predicted</option>
+					<option value="points">Your Points</option>
+				</select>
+				<br>
+
+				<label for="sortDirection">Direction: </label>
+				<select id="sortDirection" name="sortDirection" onchange='updateSettings(event)'>
+					<option value="ASC" selected>Ascending</option>
+					<option value="DESC">Descending</option>
+				</select>
+
+				<br>
+				<br>
+
+				<h2>Theme</h2>
+				<label for="colourTheme">Theme: </label>
+				<select id="colourTheme" name="colourTheme" onchange='updateSettings(event)'>
+					<option value="default" selected>Varied</option>
+					<option value="plain">Plain</option>
+				</select>
+				<br>
+				<br>
+				<button class="w3-red w3-right" onclick="clearSavedData()">Clear Saved Data</button>
+			</dialog>
+
+			<!-- ACTS GENERATED USING eurovision.js -->
+			<div id="acts"></div>
+
+		</div>
+		<footer class="w3-container w3-padding-32">
+			<br>
+			<h3>Your Scores Summary:</h3>
+			<div id="scoresTable" class="w3-responsive"><em>Will be filled once you adding scores!</em></div>
+		</footer>
+	</body>
+</html>
