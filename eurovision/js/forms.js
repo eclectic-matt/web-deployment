@@ -407,6 +407,7 @@ function updateSettings(ev){
 			//CLEAR DIV AND REGENERATE
 			generateActsList(json, true);
 			updateOrders();
+			loadData();
 		break;
 		case 'sortKey':
 			var key = ev.target.value;
