@@ -7,11 +7,10 @@
 
 var json;
 //DEBUG - LIMIT TO ONE EVENT
-var eventName = 'Semi Final #2';
-//var eventName = 'Grand Final';
+var eventName = 'Grand Final';
+
 var settings = {};
 settings.colourTheme = 'default';
-//settings.colourTheme = 'various';
 
 var dataFile = 'data/2023_acts.json';
 
