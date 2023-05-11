@@ -13,7 +13,7 @@ var settings = {};
 settings.colourTheme = 'default';
 //settings.colourTheme = 'various';
 
-var dataFile = '/data/2023_acts.json';
+var dataFile = 'data/2023_acts.json';
 
 function init(){
 	//console.log('init');
