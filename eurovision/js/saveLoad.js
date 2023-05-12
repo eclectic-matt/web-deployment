@@ -8,9 +8,9 @@ function loadData(){
 	//LOAD SETTINGS
 	//-=-=-=-=-=-=-=
 	//GET SETTING
+	loadSetting('eventSelect');
 	loadSetting('sortKey');
 	loadSetting('sortDirection');
-	loadSetting('eventSelect');
 	loadSetting('preventDuplicates');
 	loadSetting('colourTheme');
 
@@ -26,7 +26,7 @@ function loadData(){
 		keys.forEach( (key) => {
 			dataName = countryId + '-' + key;
 			if( (localStorage.getItem(dataName)) && (localStorage.getItem(dataName) != '') ){
-				console.log('Load Data',dataName,localStorage.getItem(dataName));
+				//console.log('Load Data',dataName,localStorage.getItem(dataName));
 				loadDataItem(countryId, key, localStorage.getItem(dataName));
 			}
 		}, countryId);
@@ -53,10 +53,14 @@ function loadSetting(name){
 		}else{
 			settingsEl.value = settingData;
 		}
-		//FIRE EVENT TO TRIGGER UPDATE
-		var settingsEvent = document.createEvent("Event");
-		settingsEvent.initEvent("change", false, true); 
-		settingsEl.dispatchEvent(settingsEvent);
+
+		//DO NOT TRIGGER EVENT DISPATCH ON eventSelect
+		if(name !== 'eventSelect'){
+			//FIRE EVENT TO TRIGGER UPDATE
+			var settingsEvent = document.createEvent("Event");
+			settingsEvent.initEvent("change", false, true); 
+			settingsEl.dispatchEvent(settingsEvent);
+		}
 	}
 
 }
