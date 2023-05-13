@@ -90,7 +90,7 @@ function loadDataItem(countryId, type, value){
 		if(element){
 			element.value = value;
 			//element.innerHTML += countryIdToName(countryId);
-			document.getElementById('option-' + type + '-' + countryId).innerHTML += ' ' + countryIdToName(countryId);
+			document.getElementById('option-' + type + '-' + value + '-' + countryId).innerHTML += ' ' + countryIdToName(countryId);
 		}
 		let country = document.getElementById(countryId);
 		if(country){
