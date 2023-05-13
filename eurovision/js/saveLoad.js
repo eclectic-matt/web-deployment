@@ -91,6 +91,22 @@ function loadDataItem(countryId, type, value){
 			element.value = value;
 			//element.innerHTML += countryIdToName(countryId);
 			document.getElementById('option-' + type + '-' + value + '-' + countryId).innerHTML += ' ' + countryIdToName(countryId);
+			countries = json.acts;
+			countries.forEach( (country) => {
+				let countryName = country.country;
+				
+				//console.log('countryName', countryName);
+				otherCountry = countryNameToId(countryName);
+				if(otherCountry !== countryId){
+					//console.log('option-' + type + '-' + value + '-' + otherCountry);
+					var otherEl = document.getElementById('option-' + type + '-' + value + '-' + otherCountry);
+					if(otherEl){
+						document.getElementById('option-' + type + '-' + value + '-' + otherCountry).innerHTML += ' ' + countryIdToName(countryId);
+					}
+				}
+
+			}, type, value, countryId);
+		
 		}
 		let country = document.getElementById(countryId);
 		if(country){
