@@ -330,6 +330,13 @@ function generateActsList(json, clearDiv=false){
 			}
 			points.appendChild(option);
 		});
+		//ADD 0 OPTION
+		let option = document.createElement('option');
+		option.id = 'option-points-0-' + idname;
+		option.value = 0;
+		option.innerHTML = 0;
+		points.appendChild(option);
+
 		//ADD EVENT LISTENER AFTER ADDING ELEMENTS
 		points.addEventListener('change', changePoints);
 		pointsCol.appendChild(pointsLabel);

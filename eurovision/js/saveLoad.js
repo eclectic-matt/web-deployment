@@ -65,6 +65,15 @@ function loadSetting(name){
 
 }
 
+function fillOptions(){
+	var ranks = document.querySelector('.rankSelect');
+	Array.from(ranks).forEach( (el) => {
+
+	});
+
+
+}
+
 function clearSavedData(){
 	var confirm = window.confirm('This will clear all saved data - are you sure?');
 	if(confirm === true){
@@ -80,6 +89,8 @@ function loadDataItem(countryId, type, value){
 		let element = document.getElementById('select-' + type + '-' + countryId);
 		if(element){
 			element.value = value;
+			//element.innerHTML += countryIdToName(countryId);
+			document.getElementById('option-' + type + '-' + countryId).innerHTML += ' ' + countryIdToName(countryId);
 		}
 		let country = document.getElementById(countryId);
 		if(country){
