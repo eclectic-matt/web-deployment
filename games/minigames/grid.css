@@ -1,0 +1,44 @@
+table {
+  width: 100%;
+  height: auto;
+  /*display: flex;
+  /*flex-flow: grid;*/
+  table-layout:fixed;
+}
+tr {
+  width: 100%;
+}
+td div.content {
+  aspect-ratio: 1 / 1 ;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: 1px solid black;
+}
+
+td div.content button {
+  text-align: center;
+  align-items: center;
+  font-size: 1rem;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+td div.content button span {
+  text-align: center;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+th {
+  text-align: center;
+  align-items: center;
+}
+
+td{
+  text-align: center;
+  align-items: center;
+}
