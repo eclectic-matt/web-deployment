@@ -39,7 +39,7 @@ class Codeword extends MiniGame
         this.chars = ['A','E','I','O','U'];
         this.description = 'the vowels "A,E,I,O,U"';
       break;
-      case 4:
+      /*case 4:
         this.chars = ['A','B','C','D','E','F'];
       this.description = 'the letters "A - F"';
       break;
@@ -47,11 +47,12 @@ class Codeword extends MiniGame
         this.chars = ['A','B','C','D','E','F','G'];
         this.description = 'the letters "A - G"';
       break;
-      case 6:
+      */
+      case 4:
         this.chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M'];
         this.description = 'the letters "A - M"';
       break;
-      case 7:
+      case 5:
         this.chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         this.description = 'the alphabet "A - Z"';
       break;
