@@ -1,3 +1,11 @@
+
+@media only screen and (min-width: 768px) {
+  table {
+      /* For desktop: */
+      padding: 2% 20%;
+    }
+  }
+  
 table {
   width: 100%;
   height: auto;
