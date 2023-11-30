@@ -13,13 +13,14 @@
   <script src="games/codeword.js" delay></script>
   <script src="games/sudoku.js" delay></script>
   <script src="games/mostcommon.js" delay></script>
+  <script src="games/constraints.js" delay></script>
   <script>
   
     var game;
     
     function init()
     {
-      let game = document.getElementsByName('game')[0].value;
+      game = document.getElementsByName('game')[0].value;
       let difficulty = document.getElementsByName('difficulty')[0].value;
       difficulty = parseInt(difficulty);
       console.log('init', difficulty);
@@ -39,6 +40,9 @@
         case 'mostCommon':
           game = new MostCommon(difficulty);
         break;
+        case 'constraints':
+          game = new Constraints(difficulty);
+        break;
       }
     }
   </script>
@@ -55,8 +59,9 @@
      </div>
     <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
      <select name="game">
-      <option value="mostCommon">Most Common</option>
-      <option value="sudoku">Sudoku</option>
+      <option value="mostCommon">Common</option>
+      <!--option value="sudoku">Sudoku</option-->
+      <option value="constraints" selected>Constraints</option>
       <option value="codeword">Codeword</option>
       <option value="increment">Increment</option>
       <option value="pairs">Pairs</option>
@@ -67,7 +72,14 @@
       <label for="difficulty">Difficulty: </label>
     </div>
      <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
-      <input name="difficulty" type=number min=1 max=5 step=1  placeholder=1 value=1 />
+      <!--input name="difficulty" type=number min=1 max=5 step=1  placeholder=1 value=1 /-->
+      <select name="difficulty">
+        <option value=1>Trivial</option>
+        <option value=2 selected>Easy</option>
+        <option value=3>Normal</option>
+        <option value=4>Hard</option>
+        <option value=5>Hellish</option>
+      </select>
     </div>
     <br>
     <button type=submit>Play Game</button>
