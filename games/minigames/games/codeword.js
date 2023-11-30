@@ -3,10 +3,7 @@ class Codeword extends MiniGame
   
   constructor(difficulty)
   {
-    super(difficulty);
-    this.width = difficulty + 1;
-    this.height = difficulty + 2;
-        
+    super(difficulty);        
     this.selectedColor = '#0dd';
     this.matchedColor = '#0f0';
     this.defaultColor = '#fff';
@@ -49,10 +46,12 @@ class Codeword extends MiniGame
       break;
       */
       case 4:
+        this.codelength = this.difficulty + 2;
         this.chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M'];
         this.description = 'the letters "A - M"';
       break;
       case 5:
+        this.codelength = this.difficulty + 3;
         this.chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         this.description = 'the alphabet "A - Z"';
       break;
