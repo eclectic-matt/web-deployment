@@ -39,7 +39,7 @@ class Codeword extends MiniGame
         this.chars = ['A','E','I','O','U'];
         this.description = 'the vowels "A,E,I,O,U"';
       break;
-      /*case 4:
+      case 4:
         this.chars = ['A','B','C','D','E','F'];
       this.description = 'the letters "A - F"';
       break;
@@ -47,12 +47,11 @@ class Codeword extends MiniGame
         this.chars = ['A','B','C','D','E','F','G'];
         this.description = 'the letters "A - G"';
       break;
-      */
-      case 4:
+      case 6:
         this.chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M'];
         this.description = 'the letters "A - M"';
       break;
-      case 5:
+      case 7:
         this.chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         this.description = 'the alphabet "A - Z"';
       break;
@@ -170,7 +169,8 @@ class Codeword extends MiniGame
     el.appendChild(table);
     
     let submitBtn = document.createElement('button');
-    submitBtn.innerHTML = 'Submit Guess';
+    submitBtn.accessKey = "g";
+    submitBtn.innerHTML = 'Submit Guess (Alt + G)';
     submitBtn.onclick = function(submitBtn){
       this.checkGuess();
     }.bind(this);
@@ -224,7 +224,8 @@ class Codeword extends MiniGame
       }
       tr.appendChild(td);
     }
-    document.getElementById('resultsTable').appendChild(tr);
+    //document.getElementById('resultsTable').appendChild(tr);
+    document.getElementById('resultsTable').insertBefore(tr,document.getElementById('resultsTable').firstChild);
     if(win){
       document.getElementById('resultsHead').innerHTML = 'The code was ' + this.codeword;
       this.win();
@@ -256,4 +257,5 @@ class Codeword extends MiniGame
     let thisLetter = this.chars[thisIndex];
     thisTd.innerHTML = thisLetter;
   }
+
 }
