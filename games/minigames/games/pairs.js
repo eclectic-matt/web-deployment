@@ -1,10 +1,11 @@
+
 class Pairs extends MiniGame
 {
   constructor(difficulty)
   {
     super(difficulty);
-    this.width = difficulty + 1;
-    this.height = difficulty + 2;
+    this.width = Math.max(difficulty, 2);
+    this.height = Math.max(difficulty * 2,2);
         
     this.selectedColor = '#0dd';
     this.matchedColor = '#0f0';
@@ -29,8 +30,6 @@ class Pairs extends MiniGame
     this.values = [];
     this.symbols = ['♠️', '♦️', '♣️', '♥️', '⭕', '➕', '🔲', '🔼','✅','❌','💩','⤵️','🔁','😎','🥰','⚠️','⭐','💦','👀','🌈','🌍','☢️','🔥'];
     
-    
-    this.increment = Math.floor(Math.random() * 5) + 1;
     this.pairsCount = Math.floor(this.width * this.height / 2);
     
     for(let i = 1; i <= this.pairsCount; i++){
@@ -40,7 +39,6 @@ class Pairs extends MiniGame
     }
     
     this.values = this.shuffle(this.values);
-    this.current = this.increment;
     let index = 0;
     
     for(let i = 0; i < this.width; i++)
@@ -50,7 +48,6 @@ class Pairs extends MiniGame
       for(let j = 0; j < this.height; j++)
       {
         this.grid[i][j] = this.values[index];
-        this.current += this.increment;
         index++;
       }
     }
@@ -172,7 +169,7 @@ class Pairs extends MiniGame
     self.selected = null;
   }
   
-  matchEl(el, self){
+  matchEl(el){
     el.disabled = true;
     el.style.backgroundColor = self.matchedColor;
     el.style.color = '#fff';
@@ -182,4 +179,5 @@ class Pairs extends MiniGame
     el.children[0].style.width = '50%';
     el.children[0].style.height = '50%';
   }
+  
 }
