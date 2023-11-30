@@ -120,7 +120,7 @@ class Reflex extends MiniGame
   lose()
   {
     let result = document.createElement('h1');
-    result.innerHTML = 'The target was ' + this.targetLeft.toFixed(2) + ' to ' + (this.targetLeft + this.targetWidth).toFixed(2) + ' and you clicked at ' + this.x.toFixed(2) + '!';
+    result.innerHTML = 'Target: ' + this.targetLeft.toFixed(2) + ' - ' + (this.targetLeft + this.targetWidth).toFixed(2) + '<br>Clicked: ' + this.x.toFixed(2) + '!';
      document.getElementById('main').appendChild(result);
     super.lose();
   }
@@ -128,7 +128,7 @@ class Reflex extends MiniGame
   win()
   {
     let result = document.createElement('h1');
-    result.innerHTML = 'The target was ' + this.targetLeft.toFixed(2) + ' to ' + (this.targetLeft + this.targetWidth).toFixed(2) + ' and you clicked at ' + this.x.toFixed(2) + '!';
+    result.innerHTML = 'Target: ' + this.targetLeft.toFixed(2) + ' - ' + (this.targetLeft + this.targetWidth).toFixed(2) + '<br>Clicked: ' + this.x.toFixed(2) + '!';
      document.getElementById('main').appendChild(result);
     super.win();
   }
