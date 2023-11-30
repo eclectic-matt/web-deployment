@@ -28,26 +28,60 @@ class Codeword extends MiniGame
     
     switch (this.difficulty){
       case 1:
-        this.chars = ['A','B','C','D'];
-        this.description = 'the letters, "A,B,C,D"';
+        this.chars = ['A','B','C'];
+        this.description = 'the letters "A,B,C"';
       break;
       case 2:
-        this.chars = ['A', 'E', 'I', 'O', 'U'];
-        this.description = 'the vowels, "A,E,I,O,U"';
+        this.chars = ['A','B','C','D'];
+        this.description = 'the letters "A,B,C,D"';
       break;
       case 3:
+        this.chars = ['A','E','I','O','U'];
+        this.description = 'the vowels "A,E,I,O,U"';
+      break;
+      case 4:
+        this.chars = ['A','B','C','D','E','F'];
+      this.description = 'the letters "A - F"';
+      break;
+      case 5:
         this.chars = ['A','B','C','D','E','F','G'];
         this.description = 'the letters "A - G"';
       break;
-      case 4:
+      case 6:
         this.chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M'];
         this.description = 'the letters "A - M"';
       break;
-      case 5:
+      case 7:
         this.chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         this.description = 'the alphabet "A - Z"';
       break;
     }
+    
+    /*
+    //BIT TOO HARD
+    switch (this.difficulty) {
+      case 1:
+        this.chars = ['A', 'B', 'C', 'D'];
+        this.description = 'the letters, "A,B,C,D"';
+        break;
+      case 2:
+        this.chars = ['A', 'E', 'I', 'O', 'U'];
+        this.description = 'the vowels, "A,E,I,O,U"';
+        break;
+      case 3:
+        this.chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+        this.description = 'the letters "A - G"';
+        break;
+      case 4:
+        this.chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
+        this.description = 'the letters "A - M"';
+        break;
+      case 5:
+        this.chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        this.description = 'the alphabet "A - Z"';
+        break;
+    }
+    */
     
     for(let i = 0; i < this.codelength; i++){
       let thisCharCode = Math.floor(Math.random() * this.chars.length);
@@ -137,8 +171,8 @@ class Codeword extends MiniGame
     let submitBtn = document.createElement('button');
     submitBtn.innerHTML = 'Submit Guess';
     submitBtn.onclick = function(submitBtn){
-      game.checkGuess();
-    }
+      this.checkGuess();
+    }.bind(this);
     el.appendChild(submitBtn);
     el.appendChild(document.createElement('br'));
     
@@ -156,7 +190,7 @@ class Codeword extends MiniGame
    // this.showReplayButton();
   }
   
-checkGuess()
+  checkGuess()
   {
     if(this.ended) return;
     
