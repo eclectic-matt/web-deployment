@@ -8,7 +8,7 @@ class Targets extends MiniGame {
 		this.targetCount = difficulty * 8;
 		this.clickedCount = 0;
 		//this.speed = difficulty * 2;
-		this.speed = 0.1;
+		this.speed = difficulty * 2;
 		this.startTime = new Date();
 		this.timer = setTimeout(this.tickTimer.bind(this), 250);
 		this.init();
