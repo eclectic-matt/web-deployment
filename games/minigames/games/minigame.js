@@ -98,7 +98,7 @@ class MiniGame
 	    }
 	    //col += '' + col;
 	  }
-	  console.log(col);
+	  //console.log(col);
 	  return col;
 	}
 	

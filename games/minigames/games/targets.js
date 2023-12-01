@@ -5,9 +5,9 @@ class Targets extends MiniGame {
     super(difficulty);
     //this.timer = setTimeout(this.tickTimer.bind(this), 250);
     //THIS IS A PERCENTAGE (MAX 20) OF THE TOTAL WIDTH 
-    this.targetCount = difficulty * 5;
+    this.targetCount = difficulty * 8;
     this.clickedCount = 0;
-    this.speed = difficulty;
+    this.speed = difficulty * 2;
     this.startTime = new Date();
     this.timer = setTimeout(this.tickTimer.bind(this), 250);
     this.init();
