@@ -5,8 +5,8 @@ class Reflex extends MiniGame
     super(difficulty);
     //this.timer = setTimeout(this.tickTimer.bind(this), 250);
     //THIS IS A PERCENTAGE (MAX 20) OF THE TOTAL WIDTH 
-    this.targetWidth = 16 / difficulty;
-    this.speed = difficulty * 1.5;
+    this.targetWidth = 10 / difficulty;
+    this.speed = difficulty * 2.5;
     this.movingLeft = true;
     //x IS A PERCENTAGE OF THE WIDTH WHERE THE "CROSSHAIR" IS
     this.x = 0;

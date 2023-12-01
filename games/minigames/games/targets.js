@@ -13,7 +13,7 @@ class Targets extends MiniGame {
 		this.timer = setTimeout(this.tickTimer.bind(this), 250);
 		this.init();
 	}
-		
+	
 	init()
 	{
 		this.generateTargets();
@@ -29,21 +29,16 @@ class Targets extends MiniGame {
 			target.id = 'target' + i;
 			target.style.width = (200/this.difficulty) + 'px';
 			target.style.height = (200/this.difficulty) + 'px';
-			//target.style.height = 'auto';
 			target.style.position = 'absolute';
 			target.style.top = this.randomInt(0,99) + '%';
 			target.style.left = this.randomInt(0,99) + '%';
 			target.style.borderRadius = '50%';
 			target.style.textAlign = 'center';
 			target.style.verticalAlign = 'center';
-			//target.setAttribute('xDir',(Math.random()>0.5?Math.random():-1*Math.random()));
-			//target.setAttribute('yDir',(Math.random()>0.5?Math.random():-1*Math.random()));
-			target.setAttribute('xDir',(Math.random()>0.5?0.1:-0.1));
-			target.setAttribute('yDir',(Math.random()>0.5?0.1:-0.1));
-			//let randCol = this.randomInt(0,999);
+			target.setAttribute('xDir',(Math.random() > 0.5 ? 1 : -1));
+			target.setAttribute('yDir',(Math.random() > 0.5 ? 1 : -1));
 			let randCol = this.randomColor();
 			target.style.backgroundColor = randCol;
-			//randCol = 999 - randCol;
 			target.style.color = '#fff';
 			target.innerHTML = ' X ';
 			target.padding = '3%';
@@ -91,12 +86,16 @@ class Targets extends MiniGame {
 	{
 		//console.log('move',this.targets.length,'targets');
 		let el = document.getElementById('main');
+		let xPad = (200/this.difficulty);
+		let yPad = (200/this.difficulty);
+
 		//MOVE ALL TARGETS
 		for(let i = 0; i < this.targets.length; i++){
 			//
 			let targetObj = this.targets[i];
 			let target = document.getElementById(targetObj.id);
-			el.removeChild(target);
+			el.removeChild(document.getElementById(targetObj.id));
+
 			let xDir = parseInt(target.getAttribute('xDir'));
 			let yDir = parseInt(target.getAttribute('yDir'));
 			let xPos = target.style.left.replace('%','');
@@ -105,18 +104,18 @@ class Targets extends MiniGame {
 			
 			xPos = parseInt(xPos) + parseInt(xDir);
 			target.style.left = xPos + '%';
-			if( (xPos >= 100) || (xPos <= 0) ){
-			xPos = parseInt(xPos) - parseInt(xDir);
-			target.style.left = xPos + '%';
-			target.setAttribute('xDir', -xDir);
+			if( (xPos >= (100 - xPad)) || (xPos <= (0+xPad)) ){
+				xPos = parseInt(xPos) - parseInt(xDir);
+				target.style.left = xPos + '%';
+				target.setAttribute('xDir', -xDir);
 			}
 			
 			yPos = parseInt(yPos) + parseInt(yDir);
 			target.style.top = yPos + '%'; 
-			if( (yPos >= 100) || (yPos <= 0) ){
-			yPos = parseInt(yPos) - parseInt(yDir);
-			target.style.top = yPos + '%';
-			target.setAttribute('yDir', -yDir);
+			if( (yPos >= (100-yPad)) || (yPos <= (0+yPad)) ){
+				yPos = parseInt(yPos) - parseInt(yDir);
+				target.style.top = yPos + '%';
+				target.setAttribute('yDir', -yDir);
 			}
 			
 			//console.log('new', xPos, yPos, xDir, yDir);
