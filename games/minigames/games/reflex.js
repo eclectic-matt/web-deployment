@@ -1,6 +1,5 @@
 class Reflex extends MiniGame
 {
-  
   constructor(difficulty)
   {
     super(difficulty);

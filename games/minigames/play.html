@@ -15,6 +15,7 @@
   <script src="games/mostcommon.js" delay></script>
   <script src="games/constraints.js" delay></script>
   <script src="games/reflex.js" delay></script>
+  <script src="games/targets.js" delay></script>
   <script>
   
     var game;
@@ -47,6 +48,9 @@
         case 'reflex':
           game = new Reflex(difficulty);
         break;
+        case 'targets':
+          game = new Targets(difficulty);
+        break;
       }
     }
   </script>
@@ -63,13 +67,15 @@
      </div>
     <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
      <select name="game">
+      <option value="targets">Targets</option>
+      <option value="reflex">Reflex</option>
       <option value="mostCommon">Common</option>
       <!--option value="sudoku">Sudoku</option-->
       <!--option value="constraints" selected>Constraints</option-->
       <option value="codeword">Codeword</option>
       <option value="increment">Increment</option>
       <option value="pairs">Pairs</option>
-      <option value="reflex">Reflex</option>
+
      </select>
     </div>
     <br>

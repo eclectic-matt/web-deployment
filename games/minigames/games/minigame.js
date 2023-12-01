@@ -83,4 +83,23 @@ class MiniGame
 	  return Math.floor(Math.random() * (max-min)) + min;
 	}
 	
+	randomAlpha(){
+    return String.fromCharCode(65+Math.floor(26*Math.random()));
+	}
+	
+	randomColor(){
+	  let col = '#';
+	  for (let i = 0; i < 6; i++){
+	    let colIndex = Math.floor(Math.random()*16);
+	    if(colIndex >= 10){
+	      col += String.fromCharCode(65+(colIndex - 10));
+	    }else{
+	      col += colIndex;
+	    }
+	    //col += '' + col;
+	  }
+	  console.log(col);
+	  return col;
+	}
+	
 }
