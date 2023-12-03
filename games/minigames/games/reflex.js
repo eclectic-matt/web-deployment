@@ -5,8 +5,8 @@ class Reflex extends MiniGame
     super(difficulty);
     //this.timer = setTimeout(this.tickTimer.bind(this), 250);
     //THIS IS A PERCENTAGE (MAX 20) OF THE TOTAL WIDTH 
-    this.targetWidth = 10 / difficulty;
-    this.speed = difficulty * 2.5;
+    this.targetWidth = 16 / difficulty;
+    this.speed = difficulty * 1.5;
     this.movingLeft = true;
     //x IS A PERCENTAGE OF THE WIDTH WHERE THE "CROSSHAIR" IS
     this.x = 0;
@@ -76,7 +76,8 @@ class Reflex extends MiniGame
     clickBtn.style.color = '#fff';
     clickBtn.onclick = function(){
       if(this.ended) return;
-      clearTimeout(this.moveTimer);
+      //clearTimeout(this.moveTimer);
+      window.cancelAnimationFrame(this.moveTarget.bind(this));
       if( (this.x >= this.targetLeft) && (this.x <= (this.targetLeft + this.targetWidth)) ){
         this.win();
       }else{
@@ -90,21 +91,29 @@ class Reflex extends MiniGame
     
     el.appendChild(clickBtn);
     
-    this.moveTimer = setTimeout(this.moveTarget.bind(this), 25);
+    //this.moveTimer = setTimeout(this.moveTarget.bind(this), 25);
+    window.requestAnimationFrame(this.moveTarget.bind(this));
   }
   
-  moveTarget()
+  moveTarget(timestamp)
   {
+    if(!this.previous){
+      this.previous = timestamp;
+    }
+    let ms = timestamp - this.previous;
+    //console.log(ms,timestamp, this.previous);
+    this.previous = timestamp;
+    
     //console.log('moving ' + (this.movingLeft ? 'left' : 'right'));
     if(this.movingLeft){
-      this.x += this.speed;
+      this.x += this.speed * (ms / 60);
       if(this.x >= 100){
         //MOVE BACK BY AMOUNT MOVED PAST
         this.x = 100 - (this.x - 100);
         this.movingLeft = false;
       }
     }else{
-      this.x -= this.speed;
+      this.x -= this.speed * (ms / 60);
       if(this.x <= 0){
         //MOVE BACK BY AMOUNT MOVED PAST
         this.x = -this.x;
@@ -113,11 +122,14 @@ class Reflex extends MiniGame
     }
     document.getElementById('targetLine').style.left = this.x + '%';
     //RESET TIMEOUT
-    this.moveTimer = setTimeout(this.moveTarget.bind(this), 25);
+    //this.moveTimer = setTimeout(this.moveTarget.bind(this), 25);
+    
+    window.requestAnimationFrame(this.moveTarget.bind(this));
   }
   
   lose()
   {
+    window.cancelAnimationFrame(this.moveTarget);
     let result = document.createElement('h1');
     result.innerHTML = 'Target: ' + this.targetLeft.toFixed(2) + ' - ' + (this.targetLeft + this.targetWidth).toFixed(2) + '<br>Clicked: ' + this.x.toFixed(2) + '!';
      document.getElementById('main').appendChild(result);
@@ -126,6 +138,7 @@ class Reflex extends MiniGame
   
   win()
   {
+    window.cancelAnimationFrame(this.moveTarget);
     let result = document.createElement('h1');
     result.innerHTML = 'Target: ' + this.targetLeft.toFixed(2) + ' - ' + (this.targetLeft + this.targetWidth).toFixed(2) + '<br>Clicked: ' + this.x.toFixed(2) + '!';
      document.getElementById('main').appendChild(result);
