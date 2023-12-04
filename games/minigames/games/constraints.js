@@ -176,7 +176,7 @@ class Constraints extends MiniGame
       for(let j = -1; j < this.gridSize; j++){
         let td = document.createElement('td');
         if(j==-1){
-          td.innerHTML = i+1;
+          td.innerHTML = '<b>' + (i + 1) + '</b>';
           row.appendChild(td);
         }else{
           //Droppable Area
