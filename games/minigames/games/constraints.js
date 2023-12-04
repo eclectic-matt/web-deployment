@@ -148,6 +148,11 @@ class Constraints extends MiniGame
       //this.constraints[i] = constraint;
     }
     
+    //SHUFFLE CONSTRAINTS LIST
+    this.constraints = this.shuffle([...this.constraints]);
+    //console.log('origConstraints', this.constraints);
+    //this.shuffle(this.constraints);
+    //console.log('shufConstraints', this.constraints);
     //console.log(constraintsArr);
     //this.constraints = constraintsArr;
     //console.log('constraints',this.constraints);
