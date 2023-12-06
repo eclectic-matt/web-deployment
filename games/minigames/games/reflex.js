@@ -33,7 +33,7 @@ class Reflex extends MiniGame
     //CREATE DIV''
     let wrapDiv = document.createElement('div');
     wrapDiv.style.width = '95%';
-    wrapDiv.style.border = '1px solid black';
+    wrapDiv.style.border = '1px solid white';
     wrapDiv.style.position = 'absolute';
     wrapDiv.style.height = '50px';
     wrapDiv.style.margin = 0;
@@ -43,7 +43,7 @@ class Reflex extends MiniGame
     targetLine.id = 'targetLine';
     targetLine.style.width = '1px';
     targetLine.style.height = '50px';
-    targetLine.style.backgroundColor = '#000';
+    targetLine.style.backgroundColor = '#fff';
     targetLine.style.position = 'absolute';
     //targetLine.style.top = '1px';
     targetLine.style.left = '0%';
