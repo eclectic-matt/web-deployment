@@ -17,6 +17,7 @@ class Constraints extends MiniGame
     //MATCH AGAINST THESE
     this.names = ['Bob','Max','Tom','Liz','Sam','Amy','Rod','Zoe','Ken'];
     this.init();
+    this.generateConstraints();
     this.outputGrid();
     //this.showReplayButton();
   }
@@ -41,7 +42,7 @@ class Constraints extends MiniGame
     }
     //SHUFFLE THE ROWS 
     this.grid = this.shuffle(this.grid);
-    console.log(this.grid);
+    //console.log(this.grid);
     
     this.answers = [];
     //GENERATE NAMES (ONE PER ROW)
@@ -59,8 +60,12 @@ class Constraints extends MiniGame
       }
       );
     }
-    console.log('Correct Answers',this.correct);
-    
+    //console.log('Correct Answers',this.correct);
+  }
+  
+  
+  generateConstraints()
+  {
     this.constraints = new Array(this.gridSize);//.fill({});
     
     for(let i = 0; i < this.gridSize; i++){
@@ -68,7 +73,7 @@ class Constraints extends MiniGame
       //INITIALISE THIS CONSTRAINT
       this.constraints[i] = {};
       this.constraints[i].symbol = '';
-      let constraintIndex = this.randomInt(0, this.constraints.length - 1);
+      let constraintIndex = this.randomInt(0, this.constraintTypes.length - 1);
       this.constraints[i].type = this.constraintTypes.splice(constraintIndex, 1)[0];
       //SHORTHAND VARS
       let thisName = this.answers[i];
