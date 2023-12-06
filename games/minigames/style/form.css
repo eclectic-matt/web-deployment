@@ -1,5 +1,7 @@
 * {
   font-family: Roboto, Arial, sans-serif;
+  background-color: black;
+  color: darkcyan;
 }
 input {
   padding: 5%;
