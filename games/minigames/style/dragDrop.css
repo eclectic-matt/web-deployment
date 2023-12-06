@@ -13,7 +13,7 @@
   filter: saturate(10%);
 }*/
 .draggable {
-  font-size: 0.75rem;
+  font-size: 0.5rem;
   border: 1px solid black;
   border-radius: 2px;
   background-color: purple;
@@ -22,17 +22,31 @@
   padding: 10px 5px;
   color: white;
   margin: 10px 2px;
-  width: 25%;
+  max-width: 15%;
+  min-width: 10%;
+  padding-left: 5%;
+  aspect-ratio: 2 / 1;
 }
-div.draggable:nth-child(odd){
+.draggable::before{
+  content: "✊";
+  clear: both;
+  display: hidden;
+}
+/*.draggable:nth-child(odd){
   background-image: linear-gradient(purple, blue);
-}
+}*/
 /*div.target:nth-child(odd){
   background-image: linear-gradient(purple, blue);
 }*/
 .draggable:hover{
   filter: none;
+  padding-left: 2%;
 }
 .draggable:hover::before{
   content: "✊";
+  clear: both;
+}
+
+.target > .draggable::before {
+  content: "";
 }

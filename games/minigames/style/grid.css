@@ -13,9 +13,12 @@ table {
   /*flex-flow: grid;*/
   table-layout:fixed;
 }
+
 tr {
   width: 100%;
+  max-width: 100% !important;
 }
+
 td div.content {
   aspect-ratio: 1 / 1 ;
   display: flex;
@@ -49,5 +52,5 @@ th {
 td{
   text-align: center;
   align-items: center;
-  padding: 0 5%;
+  padding: 2%;
 }

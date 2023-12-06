@@ -13,7 +13,7 @@ class Constraints extends MiniGame
     // Sam is below Liz
     // Amy is right of Sam
     //USE THESE TYPES
-    this.constraintTypes = ['row','col','above','left','below','right'];
+    this.constraintTypes = ['row','col','above','left','below','right', 'vertical-half', 'horizontal-half' ];//, 'diagonal'];//, 'multi-left', 'multi-right', 'multi-above', 'multi-below' ];
     //MATCH AGAINST THESE
     this.names = ['Bob','Max','Tom','Liz','Sam','Amy','Rod','Zoe','Ken'];
     this.init();
@@ -32,7 +32,6 @@ class Constraints extends MiniGame
     
     //INIT GRID
     this.grid = [];
-    
     //GENERATE THE GRID AS ROWS OF CELLS (A VALUE OF 1 BEING THE CORRECT ANSWER)
     for(let i = 0; i < this.gridSize; i++){
       //FILL ROW WITH ZEROES
@@ -43,21 +42,14 @@ class Constraints extends MiniGame
     //SHUFFLE THE ROWS 
     this.grid = this.shuffle(this.grid);
     console.log(this.grid);
-    this.answers = [];
     
+    this.answers = [];
     //GENERATE NAMES (ONE PER ROW)
     for (let i = 0; i < this.gridSize; i++){
       let randomName = this.names.splice(this.randomInt(1, this.names.length - 1),1)[0];
       this.answers.push(randomName);
     }
-    //this.answers = this.shuffle(this.answers);
-    //console.log(this.answers);
-    //this.grid.forEach( (row) => { console.log(row.indexOf(1))});
     
-    //GENERATE CONSTRAINTS
-    //this.constraints = new Array(this.gridSize).fill({});
-    //let constraintsArr = [];
-    this.constraints = [];
     this.correct = [];
     for(let i = 0; i < this.gridSize; i++){
       this.correct.push( {
@@ -69,14 +61,16 @@ class Constraints extends MiniGame
     }
     console.log('Correct Answers',this.correct);
     
+    this.constraints = new Array(this.gridSize);//.fill({});
+    
     for(let i = 0; i < this.gridSize; i++){
       
-      //console.log('correct for row',i,'=',this.answers[i],' col',this.grid[i].indexOf(1));
-      
+      //INITIALISE THIS CONSTRAINT
       this.constraints[i] = {};
       this.constraints[i].symbol = '';
       let constraintIndex = this.randomInt(0, this.constraints.length - 1);
       this.constraints[i].type = this.constraintTypes.splice(constraintIndex, 1)[0];
+      //SHORTHAND VARS
       let thisName = this.answers[i];
       let thisType = this.constraints[i].type;
       let thisCol = this.grid[i].indexOf(1);
@@ -105,7 +99,12 @@ class Constraints extends MiniGame
           }else{
             //let thisCorrect = this.correct.filter( (ans) => { return ans.name == thisName});
             let validAnswers = this.correct.filter( (ans) => { return ans.row > i; });
-            let otherName = validAnswers[this.randomInt(0, validAnswers.length - 1)].name;
+            let belowAnswers = this.constraints.filter( (el) => { return ( (el.player === thisName) && (el.type === thisType) ); });
+            let otherName;
+            if(belowAnswers.length > 0){
+              validAnswers = validAnswers.filter( el => !belowAnswers.includes(el) );
+            }
+            otherName = validAnswers[this.randomInt(0, validAnswers.length - 1)].name;
             this.constraints[i].msg = thisName + ' is above ' + otherName;
             this.constraints[i].constraint = otherName;
           }
@@ -119,7 +118,6 @@ class Constraints extends MiniGame
           }else{
             let validAnswers = this.correct.filter( (ans) => { return ans.row < i; });
             let otherName = validAnswers[this.randomInt(0, validAnswers.length - 1)].name;
-            
             this.constraints[i].msg = thisName + ' is below ' + otherName;
             this.constraints[i].constraint = otherName;
           }
@@ -149,6 +147,34 @@ class Constraints extends MiniGame
             this.constraints[i].msg = thisName + ' is right of ' + otherName;
             this.constraints[i].constraint = otherName;
           }
+        break;
+        
+        case 'horizontal-half':
+          let horizHalf = 'left half'
+          if(thisCol == ( Math.floor(this.gridSize / 2) + 1)){
+            //Show as center column?
+            //horizHalf = 'center column';
+            //Show as a random side if in center
+            horizHalf = (Math.random() > 0.5 ? 'right half' : 'left half' );
+          }else{
+            horizHalf = (thisCol > (this.gridSize / 2) ? 'right half' : 'left half');
+          }
+          this.constraints[i].msg = thisName + ' is in the ' + horizHalf + ' (or center column) of the grid';
+          this.constraints[i].constraint = horizHalf;
+        break;
+        
+        case 'vertical-half':
+          let vertHalf = 'top half'
+          if(i == ( Math.floor(this.gridSize / 2) + 1)){
+            //Show as center row
+            //vertHalf = 'center row';
+            //Show as random
+            vertHalf = (Math.random() > 0.5 ? 'top half' : 'bottom half');
+          }else{
+            vertHalf = (i > (this.gridSize / 2) ? 'bottom half' : 'top half');
+          }
+          this.constraints[i].msg = thisName + ' is in the ' + vertHalf + ' (or center row) of the grid'
+          this.constraints[i].constraint = vertHalf;
         break;
         
         default:
@@ -227,7 +253,7 @@ class Constraints extends MiniGame
     console.log('shufAnswers',shufAns);
     let ansTable = document.createElement('div');
     let ansRow = document.createElement('tr');
-    ansRow.style.width = '100%';
+    ansRow.style.width = '100% !important';
     for(let i = 0; i < this.answers.length; i++){
       let ansTd = document.createElement('td');
       ansTd.id = 'answerDiv' + i;
@@ -240,8 +266,11 @@ class Constraints extends MiniGame
     ansTable.appendChild(ansRow);
     el.appendChild(ansTable);
     
+    el.appendChild(document.createElement('br'));
+    
     let constraintsHead = document.createElement('b');
     constraintsHead.innerHTML = 'Constraints (<span id="matchCount">0</span> out of ' + this.constraints.length + ')';
+    constraintsHead.setAttribute('draggable', false);
     el.appendChild(constraintsHead);
     
     this.updateConstraintsList();
@@ -523,11 +552,90 @@ class Constraints extends MiniGame
             }
             //GET THE OTHER PLAYER (NOT NO-ONE)
             let rightO = this.getGuessColIndex(c.constraint);
-            if(leftP < rightO){
+            console.log('right', rightP, c.player, rightO, c.constraint);
+            if(rightP > rightO){
               c.symbol = '✔️';
               matchCount++;
             }else{
               c.symbol = '❌';
+            }
+          break;
+          
+          case 'horizontal-half':
+            let horizCol = this.getGuessColIndex(c.player);
+            if(horizCol === -1){
+              c.symbol = '?';
+              break;
+            }
+            //NAMED CONSTRAINTS FOR THIS TYPE
+            switch(c.constraint){
+              
+              case 'left half':
+                if (horizCol <= (this.gridSize / 2)){
+                  c.symbol = '✔️';
+                  matchCount++;
+                }else{
+                  c.symbol = '❌';
+                }
+              break;
+              
+              case 'center column':
+                if(horizCol === Math.floor(this.gridSize / 2) + 1){
+                  c.symbol = '✔️';
+                  matchCount++;
+                }else{
+                  c.symbol = '❌';
+                }
+              break;
+              
+              case 'right half':
+                if(horizCol >= (this.gridSize / 2)){
+                  c.symbol = '✔️';
+                  matchCount++;
+                }else{
+                  c.symbol = '❌';
+                }
+              break;
+              
+            }
+          break;
+          
+          case 'vertical-half':
+            let vertRow = this.getGuessRowIndex(c.player);
+            if(vertRow === -1){
+              c.symbol = '?';
+              break;
+            }
+            //NAMED CONSTRAINTS FOR THIS TYPE
+            switch(c.constraint){
+              
+              case 'top half':
+                if (vertRow <= (this.gridSize / 2)){
+                  c.symbol = '✔️';
+                  matchCount++;
+                }else{
+                  c.symbol = '❌';
+                }
+              break;
+              
+              case 'center row':
+                if(vertRow === Math.floor(this.gridSize / 2) + 1){
+                  c.symbol = '✔️';
+                  matchCount++;
+                }else{
+                  c.symbol = '❌';
+                }
+              break;
+              
+              case 'bottom half':
+                if(vertRow >= (this.gridSize / 2)){
+                  c.symbol = '✔️';
+                  matchCount++;
+                }else{
+                  c.symbol = '❌';
+                }
+              break;
+              
             }
           break;
           
@@ -562,6 +670,12 @@ class Constraints extends MiniGame
               c.symbol = '✔️';
               matchCount++;
             }
+          break;
+          
+          default:
+          //IN CASE OF ERRORS
+            c.symbol = '✔️';
+            matchCount++;
           break;
         }
       }
