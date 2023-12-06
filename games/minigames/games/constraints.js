@@ -88,7 +88,7 @@ class Constraints extends MiniGame
         
         case 'col':
           //DISPLAY MESSAGE (NOTE FRIENDLY 1-INDEX COLUMN)
-          this.constraints[i].msg = thisName + ' is in col ' + (thisCol + 1);
+          this.constraints[i].msg = thisName + ' is in column ' + (thisCol + 1);
           this.constraints[i].constraint = thisCol;
         break;
         
@@ -409,8 +409,9 @@ class Constraints extends MiniGame
           
           case 'below':
             //GET PLAYER ROW
-            let guessBelowRow = this.guess.filter( (row) => { return row.indexOf(c.player) != -1 } );
-            guessBelowRow = this.guess.indexOf(guessBelowRow);
+            //let guessBelowRow = this.guess.filter( (row) => { return row.indexOf(c.player) != -1 } );
+            //guessBelowRow = this.guess.indexOf(guessBelowRow);
+            let guessBelowRow = this.getGuessRowIndex(c.player);
             //IF THERE IS NO MATCHING ROW
             if(guessBelowRow === -1){
               //c.player NOT ON BOARD - CANNOT VALIDATE
