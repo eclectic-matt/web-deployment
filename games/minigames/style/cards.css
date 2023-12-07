@@ -1,0 +1,48 @@
+
+.card {
+  width: 10%;
+  height: 15%;
+  background-color: white !important;
+  margin: 8px 0;
+  padding: 16px 16px 50% 0;
+}
+td > .card{
+  background-color: white;
+}
+
+.H,.D{
+  color: red;
+}
+.C,.S{
+  color: black;
+}
+.H::before{
+  content: '♥️';
+  position: absolute;
+  padding: 0 0 0 16px;
+}
+.D::before{
+  content: '♦️';
+  position: absolute;
+  padding: 0 0 0 16px;
+}
+.C::before{
+  content: '♣️';
+  position: absolute;
+  padding: 0 0 0 16px;
+}
+.S::before{
+  content: '♠️';
+  position: absolute;
+  padding: 0 0 0 16px;
+}
+
+button.discard {
+  background-color: green;
+  color: white;
+  font-size: 0.5rem;
+}
+
+button.discard.marked{
+  background-color: red;
+}

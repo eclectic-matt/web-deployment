@@ -79,6 +79,13 @@ class MiniGame
 		return arr;
 	}
 	
+	mode(arr){
+    return arr.sort((a,b) =>
+          arr.filter(v => v===a).length
+        - arr.filter(v => v===b).length
+    ).pop();
+  }
+
 	randomInt(min, max){
 	  return Math.floor(Math.random() * (max-min)) + min;
 	}
