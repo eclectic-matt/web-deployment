@@ -3,8 +3,9 @@
   width: 10%;
   height: 15%;
   background-color: white !important;
-  margin: 8px 0;
-  padding: 16px 16px 50% 0;
+  font-size: 0.75rem;
+  /*top right bottom left*/
+  padding: 2.5rem 2.5rem 1.5rem 0.75rem;
 }
 td > .card{
   background-color: white;
@@ -18,31 +19,33 @@ td > .card{
 }
 .H::before{
   content: '♥️';
-  position: absolute;
-  padding: 0 0 0 16px;
+  
 }
 .D::before{
   content: '♦️';
-  position: absolute;
-  padding: 0 0 0 16px;
 }
 .C::before{
   content: '♣️';
-  position: absolute;
-  padding: 0 0 0 16px;
 }
 .S::before{
   content: '♠️';
-  position: absolute;
-  padding: 0 0 0 16px;
+}
+.H::before,.C::before,.D::before,.S::before{
+  position: relative;
+  top: 0rem;
+  font-size: 0.75rem;
 }
 
 button.discard {
-  background-color: green;
-  color: white;
+  background-color: #6ABDDE;
+  color: black;
   font-size: 0.5rem;
+  width: 100%;
+}
+button.discard span{
+  background-color: #6ABDDE;
 }
 
-button.discard.marked{
-  background-color: red;
+button.discard.marked, button.discard.marked span{
+  background-color: #F8803C;
 }

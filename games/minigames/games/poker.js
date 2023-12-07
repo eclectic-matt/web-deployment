@@ -44,7 +44,7 @@ class Poker extends MiniGame
       }
     }
     this.deck = this.shuffle(this.deck);
-    console.log(this.deck);
+    //console.log(this.deck);
   }
   
   
@@ -57,7 +57,7 @@ class Poker extends MiniGame
           this.cards.push(this.deck.splice(0,1)[0]);
           this.cards[i].markedForDiscard = false;
         }
-        console.log('initialDraw', this.cards);
+        //console.log('initialDraw', this.cards);
         this.cards = this.cards.sort( (a, b) => { return a.value - b.value;});
         this.displayCards();
         this.getCurrentBestHand(this.cards);
@@ -65,7 +65,7 @@ class Poker extends MiniGame
       case 'discard':
         for(let i = 0; i < this.cards.length; i++){
           if(this.cards[i].markedForDiscard){
-            console.log('discarding', this.cards[i]);
+            //console.log('discarding', this.cards[i]);
             this.cards.splice(i,1);
             i -= 1;
           }
@@ -73,7 +73,7 @@ class Poker extends MiniGame
         let drawCount = this.handSize - this.cards.length;
         for(let i = 0; i < drawCount; i++){
           let newCard = this.deck.splice(0,1)[0];
-          console.log('drawing',i,'of',drawCount-1,newCard);
+          //console.log('drawing',i,'of',drawCount-1,newCard);
           this.cards.push(newCard);
         }
         this.cards = this.cards.sort( (a, b) => { return a.value - b.value;});
@@ -83,7 +83,7 @@ class Poker extends MiniGame
         this.play();
       break;
       case 'scoreHand':
-        console.log('scoring now!');
+        //console.log('scoring now!');
         let bestHand = this.getCurrentBestHand(this.cards.slice());
         let score = 0;
         for(let i = 0; i < this.hands.length; i++){
@@ -113,18 +113,18 @@ class Poker extends MiniGame
       
       let discardBtn = document.createElement('button');
       discardBtn.id = 'discardBtn' + i;
+      discardBtn.setAttribute('i', i);
       //discardBtn.innerHTML = 'Discard ' + this.cards[i].name + '' + this.cards[i].suit;
       discardBtn.innerHTML = 'Discard ';
       discardBtn.className = 'discard';
+      discardBtn.onclick = (ev) => {
+        this.discardBtn(ev);
+      }
       
       let discardInner = document.createElement('span');
       discardInner.innerHTML = this.cards[i].name;
       discardInner.className = this.cards[i].suit;
       discardBtn.appendChild(discardInner);
-      
-      discardBtn.onclick = (ev) => {
-        this.discardBtn(ev, i);
-      }
       
       //td.innerHTML = this.cards[i].name + ' ' + this.cards[i].suit;
       td.appendChild(discardBtn);
@@ -167,14 +167,15 @@ class Poker extends MiniGame
     }
   }
   
-  discardBtn(ev, i)
+  discardBtn(ev)
   {
-    console.log('discardBtn', ev.target.className.indexOf('marked'), i, this.cards[i]);
+    let i = ev.target.getAttribute('i');
+    //console.log('discardBtn', ev.target, this.cards[i]);
     let el = document.getElementById('discardBtn' + i);
-    if(el.className.indexOf('marked') === false){
+    if(el.className.indexOf('marked') === -1){
       el.className += ' marked';
-      el.innerHTML += ' ✔️';
-      console.log('discardBtn.target', el);
+      //el.innerHTML += ' ✔️';
+      //console.log('discardBtn.target', el);
     }
     this.cards[i].markedForDiscard = true;
     this.updateRedrawButton();
@@ -182,8 +183,11 @@ class Poker extends MiniGame
   
   redrawBtn(ev)
   {
-    console.log('redrawClick');
-    ev.target.style.display = 'hidden';
+    //console.log('redrawClick');
+    let btn = document.getElementById('redrawBtn');
+    btn.style.display = 'hidden';
+    btn.disabled = true;
+    //ev.target.style.display = 'hidden';
     this.stage = 'discard';
     this.play();
   }
@@ -240,7 +244,7 @@ class Poker extends MiniGame
           if(firstPair !== false){
             let remaining = this.cards.filter( c => { return c.value !== firstPair});
             let twoPair = this.checkOnePair(remaining);
-            console.log('twoPair', firstPair, remaining, twoPair);
+            //console.log('twoPair', firstPair, remaining, twoPair);
             if(twoPair !== false){
               return this.hands[i] + ' - ' + this.getName(twoPair) + ' and ' + this.getName(firstPair);
             }
@@ -279,7 +283,7 @@ class Poker extends MiniGame
       //All cards same suit - return highest
       valid = cards[cards.length - 1].value;
     }
-    console.log('checkFlush',cards, valid);
+    //console.log('checkFlush',cards, valid);
     return valid;
   }
   
@@ -302,7 +306,7 @@ class Poker extends MiniGame
         valid = false;
       }
     }
-    console.log('checkStraight',cards, valid);
+    //console.log('checkStraight',cards, valid);
     if(valid){
       return cards[i].value;
     }
@@ -322,7 +326,7 @@ class Poker extends MiniGame
     if(commonCount === 4){
       returnVal = mostCommon;
     }
-    console.log('fourOfAKind', mostCommon, commonCount, returnVal);
+    //console.log('fourOfAKind', mostCommon, commonCount, returnVal);
     return returnVal;
   }
   
@@ -338,7 +342,7 @@ class Poker extends MiniGame
         returnVal = [threeMatch, values[0]];
       }
     }
-    console.log('fullHouse', threeMatch, returnVal);
+    //console.log('fullHouse', threeMatch, returnVal);
     return returnVal;
   }
   
@@ -351,7 +355,7 @@ class Poker extends MiniGame
     if (commonCount === 3) {
       returnVal = mostCommon;
     }
-    console.log('threeOfAKind', mostCommon, commonCount, returnVal);
+    //console.log('threeOfAKind', mostCommon, commonCount, returnVal);
     return returnVal;
   }
   
@@ -364,106 +368,7 @@ class Poker extends MiniGame
     if (commonCount === 2) {
       returnVal = mostCommon;
     }
-    console.log('onePair', mostCommon, commonCount, returnVal);
+    //console.log('onePair', mostCommon, commonCount, returnVal);
     return returnVal;
-  }
-  
-  /**
-   * Triggered when an answer is dropped in a grid cell.
-   */
-  dropEv(row, col, ans)
-  {
-    console.log('dropEv', row, col, ans);
-    //console.log('guesses', this.guess);
-  }
-  
-  
-  
-  /**
-   * Get the column index (ignoring row) for a player within the guess array.
-   * @param string player The player to search for.
-   * @return int The column index of the selected player (or -1 if not found).
-   */
-  getGuessColIndex(player)
-  {
-    /*console.log('guessCol',this.guess.filter( (row) => { return row.indexOf(player) != -1; }), this.guess.filter( (row) => { return row.indexOf(player) != -1; }).indexOf(player));
-    return this.guess.filter( (row) => { return row.indexOf(player) != -1; }).indexOf(player);*/
-    for(let i=0; i< this.guess.length; i++){
-      if(this.guess[i].includes(player)){
-        return this.guess[i].indexOf(player);
-      }
-    }
-    return -1;
-  }
-  
-  getGuessRowIndex(player)
-  {
-    for(let i = 0; i < this.guess.length; i++){
-      if(this.guess[i].includes(player)){
-        return i;
-      }
-    }
-    return -1;
-  }
-  
-  /**
-   * Get the minimum (lowest) column index containing a guess.
-   * @return int The minimum column index (or -1 if none found).
-   */
-  getGuessMinColIndex()
-  {
-    let minCol = this.gridSize;
-    for(let i = 0; i < this.guess.length; i++){
-      for(let j = 0; j < this.guess[i].length; j++){
-        if( (this.guess[i][j] != 0) && (j < minCol) ){
-          minCol = j;
-        }
-      }
-    }
-    console.log('minCol',minCol,this.guess);
-    return (minCol === this.gridSize ? -1 : minCol);
-  }
-  
-  /**
-   * Get the maximum (largest) column index containing a guess.
-   * @return int the maximum column index (or -1 if none found).
-   */
-  getGuessMaxColIndex()
-  {
-    let maxCol = -1;
-    for(let i = 0; i < this.guess.length; i++){
-      for(let j = 0; j < this.guess[i].length; j++){
-        if( (this.guess[i][j] != 0) && (j > maxCol) ){
-          maxCol = j;
-        }
-      }
-    }
-    console.log('maxCol',maxCol,this.guess);
-    return maxCol;
-  }
-  
-  updateConstraintsList()
-  {
-    let el = document.getElementById('main');
-    let ul;
-    
-    if(!document.getElementById('constraintsList')){
-      ul = document.createElement('ul');
-      ul.id = 'constraintsList';
-    }else{
-      ul = document.getElementById('constraintsList');
-      el.removeChild(ul);
-      ul.innerHTML = '';
-    }
-    
-    for(let i = 0; i < this.constraints.length; i++){
-      let li = document.createElement('li');
-      li.innerHTML = this.constraints[i].msg + ' ' + this.constraints[i].symbol;
-      li.style.fontSize = '0.5rem';
-      li.setAttribute('draggable',false);
-      ul.appendChild(li);
-    }
-    
-    el.appendChild(ul);
   }
 }
