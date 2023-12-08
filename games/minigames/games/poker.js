@@ -29,8 +29,7 @@ class Poker extends MiniGame
       'bet',
       'initialDeal',
       'discard',
-      'scoreHand',
-      'payout'
+      'scoreHand'
     ];
     this.stage = this.stages[0];
     this.play();
@@ -66,7 +65,54 @@ class Poker extends MiniGame
       case 'initialDeal':
         this.cards = [];
         for(let i = 0; i < this.handSize; i++){
+          
+          //WORKING
           this.cards.push(this.deck.splice(0,1)[0]);
+          
+          //TESTS
+          //let testCard = {};
+          
+          //STRAIGHT FLUSH UP TO 5 - PASS
+          //testCard.suit = 'S';
+          //testCard.name = this.names[i];
+          //testCard.value = this.values[i];
+          
+          //STRAIGHT - PASS
+          //testCard.suit = Math.random() > 0.5 ? 'S' : 'D';
+          //testCard.name = this.names[i];
+          //testCard.value = this.values[i];
+          
+          //FLUSH - PASS
+          //testCard.suit = this.suits[0]
+          //testCard.name = this.names[i*2];
+          //testCard.value = this.values[i*2];
+          
+          //FOUR OF A KIND - PASS 
+          /*if(i < this.suits.length){
+            testCard.suit = this.suits[i];
+            testCard.name = this.names[0];
+            testCard.value = this.values[0];
+          }else{
+            testCard.suit = this.suits[0];
+            testCard.name = this.names[1];
+            testCard.value = this.values[1];
+          }*/
+          
+          //FULL HOUSE - PASS
+          /*if(i < (this.suits.length - 1) ){
+            testCard.suit = this.suits[i];
+            testCard.name = this.names[0];
+            testCard.value = this.values[0];
+          }else{
+            testCard.suit = this.suits[i-1];
+            testCard.name = this.names[1];
+            testCard.value = this.values[1];
+          }*/
+          
+          //ADD TO TEST ARRAY
+          //this.cards[i] = {...testCard};
+          
+          //LEAVE HERE - FOR DISCARDS
           this.cards[i].markedForDiscard = false;
         }
         //console.log('initialDraw', this.cards);
@@ -106,7 +152,7 @@ class Poker extends MiniGame
             this.currentScore = (scoreMult * scoreMult) - 1;
           }
         }
-        let currentWin = this.currentBet * this.currentScore;
+        let currentWin = (this.currentBet * this.currentScore) / (this.difficulty * this.difficulty)
         this.cash += currentWin;
         if (this.cash <= 0){
           document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE RUN OUT OF MONEY!';
@@ -192,12 +238,12 @@ class Poker extends MiniGame
     
     let cashTH = document.createElement('th');
     cashTH.style.textAlign = 'left';
-    cashTH.innerHTML = 'Total: £' + parseFloat(this.cash).toFixed(2);
+    cashTH.innerHTML = 'Total: ' + this.currency(this.cash);
     betCashRow.appendChild(cashTH);
     
     let betTH = document.createElement('th');
     betTH.style.textAlign = 'right';
-    betTH.innerHTML = 'Bet: £' + parseFloat(this.currentBet).toFixed(2);
+    betTH.innerHTML = 'Bet: ' + this.currency(this.currentBet);
     betCashRow.appendChild(betTH);
     
     betCashTable.appendChild(betCashRow);
@@ -399,23 +445,38 @@ class Poker extends MiniGame
   {
     //SORT IN PLACE
     cards.sort( (a, b) => { return (a.value - b.value); });
+    console.log(cards);
     let index = cards[0].value;
     let valid = true;
     for(let i = 1; i < cards.length; i++){
-      if(cards[i].name === 'A'){
-        //CHECK VALID AS 1 OR 14
-        if(
-          (14 - index !== i) ||
-          (1 - index !== i)
-        ){
-          valid = false;
-        }
-      }else if(cards[i].value - index != i){
+      //Sorted on value, aces high
+      console.log(i, cards[i].value, index,valid);
+      if(cards[i].value - index != i){
         valid = false;
+        break;
       }
     }
-    //console.log('checkStraight',cards, valid);
-    if(valid){
+    console.log('straightAceHigh', valid);
+    if(!valid){
+      //Check Ace low
+      let aceLow = cards.map(c => { return ( c.value === 14 ? 1 : c.value); });
+      aceLow.sort( (a, b) => { return (a - b); });
+      console.log(aceLow);
+      valid = true;
+      let index = aceLow[0];
+      for (let i = 1; i < aceLow.length; i++) {
+        if (aceLow[i] - index != i) {
+          valid = false;
+          break;
+        }
+      }
+      console.log('straightAceLow', valid, Math.max(...aceLow));
+      if(valid){
+        //Return highest value of aces low values array
+        return Math.max(...aceLow);
+      }
+    }else{
+      // USE TOP VALUE AS RETURN
       return cards[i].value;
     }
     return valid;
