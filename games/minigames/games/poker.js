@@ -257,6 +257,7 @@ class Poker extends MiniGame
   {
     let el = document.getElementById('main');
     let btn = document.createElement('button');
+    btn.className = 'fullBtn';
     btn.innerHTML = 'Continue';
     btn.onclick = () => {
       this.play();
