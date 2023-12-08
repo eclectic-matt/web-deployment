@@ -144,24 +144,16 @@ class Poker extends MiniGame
       case 'scoreHand':
         //console.log('scoring now!');
         let bestHand = this.getCurrentBestHand(this.cards.slice());
-        let score = 0;
-        for(let i = 0; i < this.hands.length; i++){
-          if(bestHand.includes(this.hands[i])){
-            let scoreMult = (this.hands.length - i);
-            //HIGH CARD = (1 * 1) - 1 === 0
-            this.currentScore = (scoreMult * scoreMult) - 1;
-          }
-        }
-        let currentWin = (this.currentBet * this.currentScore) / (this.difficulty * this.difficulty)
-        this.cash += currentWin;
+        let payout = this.getPayout(bestHand, this.currentBet);
+        this.cash += payout;
         if (this.cash <= 0){
-          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE RUN OUT OF MONEY!';
+          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(payout) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE RUN OUT OF MONEY!';
           this.lose();
         }else if(this.cash >= this.winningCash){
-          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE WON THE GAME!';
+          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(payout) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE WON THE GAME!';
           this.win();
         }else{
-          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>';
+          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(payout) + '<br>Total: ' + this.currency(this.cash) + '<br>';
           this.stage = 'bet';
           this.showContinueButton();
       break;
@@ -193,18 +185,62 @@ class Poker extends MiniGame
       let thisBet = this.betAmount * i;
       let opt = document.createElement('option');
       opt.value = thisBet;
+      if (thisBet === this.currentBet){
+        opt.selected = true;
+      }
       opt.innerHTML = '£' + thisBet;
       betInput.appendChild(opt);
     }
     el.appendChild(betInput);
     
+    el.appendChild(document.createElement('br'));
+    el.appendChild(document.createElement('br'));
+    
+    //OUTPUT "PLACE BET" BUTTON
     let betBtn = document.createElement('button');
+    betBtn.id = 'betBtn';
     betBtn.innerHTML = 'Place Bet';
     betBtn.onclick = () => {
       this.betBtn();
     }
     el.appendChild(betBtn);
     
+    el.appendChild(document.createElement('br'));
+    el.appendChild(document.createElement('br'));
+    
+    //OUTPUT HANDS VALUES
+    /*let handsHead = document.createElement('h3');
+    handsHead.innerHTML = 'Hand Payouts:';
+    el.appendChild(handsHead);*/
+    
+    let handsTable = document.createElement('table');
+    handsTable.id = 'handsTable';
+    let trHandsHead = document.createElement('tr');
+    let thHandsName = document.createElement('th');
+    thHandsName.innerHTML = 'Hand';
+    trHandsHead.appendChild(thHandsName);
+    
+    let thHandsAmount = document.createElement('th');
+    thHandsAmount.innerHTML = 'Amount';
+    trHandsHead.appendChild(thHandsAmount);
+    
+    handsTable.appendChild(trHandsHead);
+    
+    for(let i = 0; i < this.hands.length; i++){
+      let tr = document.createElement('tr');
+      tr.style.fontSize = '0.5rem';
+      
+      let tdHand = document.createElement('td');
+      tdHand.innerHTML = this.hands[i];
+      tr.appendChild(tdHand);
+      
+      let payout = this.getPayout(this.hands[i], 1);
+      let tdPayout = document.createElement('td');
+      tdPayout.innerHTML = 'x' + payout;
+      tr.appendChild(tdPayout);
+      handsTable.appendChild(tr);
+    }
+    el.appendChild(handsTable);
   }
   
   betBtn()
@@ -539,5 +575,20 @@ class Poker extends MiniGame
     }
     //console.log('onePair', mostCommon, commonCount, returnVal);
     return returnVal;
+  }
+  
+  getPayout(hand, bet)
+  {
+    let score = 0;
+    for (let i = 0; i < this.hands.length; i++) {
+      if (hand.includes(this.hands[i])) {
+        let scoreMult = (this.hands.length - i);
+        //HIGH CARD = (1 * 1) - 1 === 0
+        score = (scoreMult * scoreMult) - 1;
+        break;
+      }
+    }
+    console.log('hand', hand, score);
+    return (bet * score) / (this.difficulty * this.difficulty);
   }
 }

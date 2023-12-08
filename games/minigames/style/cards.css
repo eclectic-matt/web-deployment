@@ -54,3 +54,26 @@ button.discard.marked, button.discard.marked span{
 .betCashRow th {
   font-size: 0.75rem;
 }
+label, #betInput{
+  width: 50%;
+}
+#betBtn{
+  width: 100%;
+  height: 2rem;
+  background-color: #37C5D1;
+  color: black;
+}
+#handsTable {
+  border: 1px solid #6ABDDE;
+  border-collapse: collapse;
+}
+#handsTable tr td{
+  font-size: 0.5rem;
+  border: 1px solid #6ABDDE;
+  border-collapse: collapse;
+}
+#handsTable tr th{
+ font-size: 0.65rem; 
+ border: 1px solid #6ABDDE;
+ border-collapse: collapse;
+}
