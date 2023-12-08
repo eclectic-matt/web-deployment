@@ -63,6 +63,11 @@ class MiniGame
     document.getElementById('form').style.display = 'block';
   }
   
+  hideForm()
+  {
+    document.getElementById('form').style.display = 'none';
+  }
+  
   //#-#-#-#-#-#-#-#-#
   // UTILITY METHODS
   //#-#-#-#-#-#-#-#-#
@@ -107,6 +112,11 @@ class MiniGame
 	  }
 	  //console.log(col);
 	  return col;
+	}
+	
+	currency(amount, symbol = '£')
+	{
+	  return '£' + parseFloat(amount).toFixed(2);
 	}
 	
 }

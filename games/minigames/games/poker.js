@@ -5,7 +5,12 @@ class Poker extends MiniGame
     super(difficulty);
     
     //SET DIFFICULTY DEFAULTS
+    this.cash = 1000 * (6 - difficulty);
+    this.currentScore = 0;
+    this.currentBet = 0;
+    this.betAmount = 200;
     this.handSize = 5;
+    this.winningCash = 10000 * difficulty;
     this.suits = ['H','C','D','S'];
     this.names = ['A',2,3,4,5,6,7,8,9,10,'J','Q','K'];
     this.values = [14,2,3,4,5,6,7,8,9,10,11,12,13];
@@ -21,13 +26,13 @@ class Poker extends MiniGame
       'High Card'
     ];
     this.stages = [ 
+      'bet',
       'initialDeal',
       'discard',
       'scoreHand',
       'payout'
     ];
     this.stage = this.stages[0];
-    this.init();
     this.play();
   }
   
@@ -51,6 +56,13 @@ class Poker extends MiniGame
   play()
   {
     switch(this.stage){
+      case 'bet':
+        //INITIALISE DECK
+        this.init();
+        this.hideForm();
+        this.showBetForm();
+       //this.play();
+      break;
       case 'initialDeal':
         this.cards = [];
         for(let i = 0; i < this.handSize; i++){
@@ -90,13 +102,84 @@ class Poker extends MiniGame
         for(let i = 0; i < this.hands.length; i++){
           if(bestHand.includes(this.hands[i])){
             let scoreMult = (this.hands.length - i);
-            score = scoreMult * scoreMult;
+            //HIGH CARD = (1 * 1) - 1 === 0
+            this.currentScore = (scoreMult * scoreMult) - 1;
           }
         }
-        document.getElementById('bestHandHead').innerHTML = bestHand + ' which scores: ' + score + '!';
-        this.showReplayButton();
+        let currentWin = this.currentBet * this.currentScore;
+        this.cash += currentWin;
+        if (this.cash <= 0){
+          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE RUN OUT OF MONEY!';
+          this.lose();
+        }
+        if(this.cash >= this.winningCash){
+          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE WON THE GAME!';
+          this.win();
+        }
+        //document.getElementById('bestHandHead').innerHTML = bestHand + ' which scores: ' + score + '!';
+        document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>';
+        this.stage = 'bet';
+        this.showContinueButton();
+        //this.play();
+        //this.showReplayButton();
       break;
+      
     }
+  }
+  
+  showBetForm()
+  {
+    //TAKE INPUT BET
+    let el = document.getElementById('main');
+    el.innerHTML = '';
+    
+    let betInfo = document.createElement('h2');
+    betInfo.innerHTML = 'You currently have £' + parseFloat(this.cash).toFixed(2) + '<br><br>You will win with £' + parseFloat(this.winningCash).toFixed(2);
+    el.appendChild(betInfo);
+    
+    let betLabel = document.createElement('label');
+    betLabel.for = 'betInput';
+    betLabel.innerHTML = 'Bet Amount: ';
+    el.appendChild(betLabel);
+    
+    let betInput = document.createElement('select');
+    betInput.id = 'betInput';
+    let maxBet = 5;
+    for(let i = 1; i <= maxBet; i++){
+      let thisBet = this.betAmount * i;
+      let opt = document.createElement('option');
+      opt.value = thisBet;
+      opt.innerHTML = '£' + thisBet;
+      betInput.appendChild(opt);
+    }
+    el.appendChild(betInput);
+    
+    let betBtn = document.createElement('button');
+    betBtn.innerHTML = 'Place Bet';
+    betBtn.onclick = () => {
+      this.betBtn();
+    }
+    el.appendChild(betBtn);
+    
+  }
+  
+  betBtn()
+  {
+    this.currentBet = parseInt(document.getElementById('betInput').value);
+    this.cash -= this.currentBet;
+    this.stage = 'initialDeal';
+    this.play();
+  }
+  
+  showContinueButton()
+  {
+    let el = document.getElementById('main');
+    let btn = document.createElement('button');
+    btn.innerHTML = 'Continue';
+    btn.onclick = () => {
+      this.play();
+    }
+    el.appendChild(btn);
   }
   
   displayCards()
@@ -104,6 +187,23 @@ class Poker extends MiniGame
     document.getElementById('form').style.display = 'none';
     let el = document.getElementById('main');
     el.innerHTML = '';
+    
+    let betCashTable = document.createElement('table');
+    let betCashRow = document.createElement('tr');
+    betCashRow.className = 'betCashRow';
+    
+    let cashTH = document.createElement('th');
+    cashTH.style.textAlign = 'left';
+    cashTH.innerHTML = 'Total: £' + parseFloat(this.cash).toFixed(2);
+    betCashRow.appendChild(cashTH);
+    
+    let betTH = document.createElement('th');
+    betTH.style.textAlign = 'right';
+    betTH.innerHTML = 'Bet: £' + parseFloat(this.currentBet).toFixed(2);
+    betCashRow.appendChild(betTH);
+    
+    betCashTable.appendChild(betCashRow);
+    el.appendChild(betCashTable);
     
     let cardTable = document.createElement('table');
     let cardRow = document.createElement('tr');

@@ -50,3 +50,7 @@ button.discard span{
 button.discard.marked, button.discard.marked span{
   background-color: #F8803C;
 }
+
+.betCashRow th {
+  font-size: 0.75rem;
+}
