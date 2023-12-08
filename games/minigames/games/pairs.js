@@ -4,8 +4,16 @@ class Pairs extends MiniGame
   constructor(difficulty)
   {
     super(difficulty);
-    this.width = Math.max(difficulty, 2);
-    this.height = Math.max(difficulty * 2,2);
+    if(window.innerWidth >= window.innerHeight){
+      
+      this.width = Math.max(difficulty, 2);
+      this.height = Math.max(difficulty * 2, 2);
+      console.log('landscape', this.width, this.height);
+    }else{
+      this.width = Math.max(difficulty * 2, 2);
+      this.height = Math.max(difficulty, 2);
+      console.log('portrait', this.width, this.height);
+    }
         
     this.selectedColor = '#0dd';
     this.matchedColor = '#0f0';
