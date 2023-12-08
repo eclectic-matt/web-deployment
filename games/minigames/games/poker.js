@@ -146,6 +146,7 @@ class Poker extends MiniGame
         let bestHand = this.getCurrentBestHand(this.cards.slice());
         let payout = this.getPayout(bestHand, this.currentBet);
         this.cash += payout;
+        document.getElementById('cashTotal').innerHTML = this.currency(this.cash);
         if (this.cash <= 0){
           document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(payout) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE RUN OUT OF MONEY!';
           this.lose();
@@ -199,6 +200,7 @@ class Poker extends MiniGame
     //OUTPUT "PLACE BET" BUTTON
     let betBtn = document.createElement('button');
     betBtn.id = 'betBtn';
+    betBtn.className = 'fullBtn';
     betBtn.innerHTML = 'Place Bet';
     betBtn.onclick = () => {
       this.betBtn();
@@ -274,7 +276,7 @@ class Poker extends MiniGame
     
     let cashTH = document.createElement('th');
     cashTH.style.textAlign = 'left';
-    cashTH.innerHTML = 'Total: ' + this.currency(this.cash);
+    cashTH.innerHTML = 'Total: <span id="cashTotal">' + this.currency(this.cash) + '</span>'
     betCashRow.appendChild(cashTH);
     
     let betTH = document.createElement('th');
@@ -326,10 +328,11 @@ class Poker extends MiniGame
     let bestHandHead = document.createElement('h2');
     bestHandHead.id = 'bestHandHead';
     bestHandHead.innerHTML = bestHand;
+    bestHandHead.style.width = '100%';
+    bestHandHead.style.textAlign = 'center';
+    bestHandHead.style.fontSize = '2rem';
     
     el.appendChild(bestHandHead);
-    
-    
     
     //this.showReplayButton();
   }
@@ -340,6 +343,7 @@ class Poker extends MiniGame
     if(!redrawBtn){
       redrawBtn = document.createElement('button');
       redrawBtn.id = 'redrawBtn';
+      redrawBtn.className = 'fullBtn';
       document.getElementById('main').appendChild(redrawBtn);
     }
     let redrawCount = this.cards.filter( c => { return c.markedForDiscard === true; }).length;
@@ -481,23 +485,23 @@ class Poker extends MiniGame
   {
     //SORT IN PLACE
     cards.sort( (a, b) => { return (a.value - b.value); });
-    console.log(cards);
+    //console.log(cards);
     let index = cards[0].value;
     let valid = true;
     for(let i = 1; i < cards.length; i++){
       //Sorted on value, aces high
-      console.log(i, cards[i].value, index,valid);
+      //console.log(i, cards[i].value, index,valid);
       if(cards[i].value - index != i){
         valid = false;
         break;
       }
     }
-    console.log('straightAceHigh', valid);
+    //console.log('straightAceHigh', valid);
     if(!valid){
       //Check Ace low
       let aceLow = cards.map(c => { return ( c.value === 14 ? 1 : c.value); });
       aceLow.sort( (a, b) => { return (a - b); });
-      console.log(aceLow);
+      //console.log(aceLow);
       valid = true;
       let index = aceLow[0];
       for (let i = 1; i < aceLow.length; i++) {
@@ -506,7 +510,7 @@ class Poker extends MiniGame
           break;
         }
       }
-      console.log('straightAceLow', valid, Math.max(...aceLow));
+      //console.log('straightAceLow', valid, Math.max(...aceLow));
       if(valid){
         //Return highest value of aces low values array
         return Math.max(...aceLow);
@@ -588,7 +592,7 @@ class Poker extends MiniGame
         break;
       }
     }
-    console.log('hand', hand, score);
+    //console.log('hand', hand, score);
     return (bet * score) / (this.difficulty * this.difficulty);
   }
 }
