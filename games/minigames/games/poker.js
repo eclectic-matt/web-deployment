@@ -111,18 +111,15 @@ class Poker extends MiniGame
         if (this.cash <= 0){
           document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE RUN OUT OF MONEY!';
           this.lose();
-        }
-        if(this.cash >= this.winningCash){
+        }else if(this.cash >= this.winningCash){
           document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE WON THE GAME!';
           this.win();
-        }
-        //document.getElementById('bestHandHead').innerHTML = bestHand + ' which scores: ' + score + '!';
-        document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>';
-        this.stage = 'bet';
-        this.showContinueButton();
-        //this.play();
-        //this.showReplayButton();
+        }else{
+          document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(currentWin) + '<br>Total: ' + this.currency(this.cash) + '<br>';
+          this.stage = 'bet';
+          this.showContinueButton();
       break;
+        }
       
     }
   }
@@ -133,8 +130,9 @@ class Poker extends MiniGame
     let el = document.getElementById('main');
     el.innerHTML = '';
     
-    let betInfo = document.createElement('h2');
-    betInfo.innerHTML = 'You currently have £' + parseFloat(this.cash).toFixed(2) + '<br><br>You will win with £' + parseFloat(this.winningCash).toFixed(2);
+    let betInfo = document.createElement('h3');
+    betInfo.style.fontSize = '0.95rem';
+    betInfo.innerHTML = 'You currently have ' + this.currency(this.cash) + '<br><br>You will win with ' + this.currency(this.winningCash);
     el.appendChild(betInfo);
     
     let betLabel = document.createElement('label');

@@ -116,7 +116,13 @@ class MiniGame
 	
 	currency(amount, symbol = '£')
 	{
-	  return '£' + parseFloat(amount).toFixed(2);
+	  const options = {
+      style: 'decimal',  // Other options: 'currency', 'percent', etc.
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    };
+	  return symbol + amount.toLocaleString('en-us',options);
+	  //return symbol + parseFloat(amount).toFixed(2);
 	}
 	
 }
