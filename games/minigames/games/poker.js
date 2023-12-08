@@ -60,6 +60,7 @@ class Poker extends MiniGame
         //console.log('initialDraw', this.cards);
         this.cards = this.cards.sort( (a, b) => { return a.value - b.value;});
         this.displayCards();
+        this.updateRedrawButton();
         this.getCurrentBestHand(this.cards);
       break;
       case 'discard':
@@ -118,6 +119,7 @@ class Poker extends MiniGame
       discardBtn.innerHTML = 'Discard ';
       discardBtn.className = 'discard';
       discardBtn.onclick = (ev) => {
+        //ev.stopPropagation();
         this.discardBtn(ev);
       }
       
@@ -147,7 +149,7 @@ class Poker extends MiniGame
     
     el.appendChild(bestHandHead);
     
-    this.updateRedrawButton();
+    
     
     //this.showReplayButton();
   }
@@ -170,14 +172,22 @@ class Poker extends MiniGame
   discardBtn(ev)
   {
     let i = ev.target.getAttribute('i');
+    //console.log(ev.target.tagName);
+    if(ev.target.tagName !== 'BUTTON'){
+      i = ev.target.parentNode.getAttribute('i');
+    }
+    let el = document.getElementById('discardBtn' + String(i));
     //console.log('discardBtn', ev.target, this.cards[i]);
-    let el = document.getElementById('discardBtn' + i);
+    
     if(el.className.indexOf('marked') === -1){
       el.className += ' marked';
       //el.innerHTML += ' ✔️';
       //console.log('discardBtn.target', el);
+    }else{
+      el.className = el.className.replace(' marked','');
     }
-    this.cards[i].markedForDiscard = true;
+    //FLIP MARKED FLAG
+    this.cards[i].markedForDiscard = !this.cards[i].markedForDiscard;
     this.updateRedrawButton();
   }
   
@@ -185,7 +195,7 @@ class Poker extends MiniGame
   {
     //console.log('redrawClick');
     let btn = document.getElementById('redrawBtn');
-    btn.style.display = 'hidden';
+    btn.style.display = 'none';
     btn.disabled = true;
     //ev.target.style.display = 'hidden';
     this.stage = 'discard';
@@ -218,7 +228,7 @@ class Poker extends MiniGame
           let validFull = this.checkFullHouse(cards);
           if(validFull !== false){
             //Matched Full House, split return array
-            return this.hands[i] + ' ' + this.getName(validFull[0]) + ' and ' + this.getName(valid[1]);
+            return this.hands[i] + ' ' + this.getName(validFull[0]) + ' and ' + this.getName(validFull[1]);
           }
         break;
         case 'Flush':

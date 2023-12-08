@@ -35,13 +35,14 @@ td > .card{
   top: 0rem;
   font-size: 0.75rem;
 }
-
-button.discard {
+button[id*='discardBtn'] {
   background-color: #6ABDDE;
   color: black;
   font-size: 0.5rem;
-  width: 100%;
+  width: 123%;
+  padding: 0 10%;
 }
+
 button.discard span{
   background-color: #6ABDDE;
 }
