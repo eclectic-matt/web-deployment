@@ -330,7 +330,7 @@ class Poker extends MiniGame
     bestHandHead.innerHTML = bestHand;
     bestHandHead.style.width = '100%';
     bestHandHead.style.textAlign = 'center';
-    bestHandHead.style.fontSize = '2rem';
+    bestHandHead.style.fontSize = '1.25rem';
     
     el.appendChild(bestHandHead);
     
@@ -517,7 +517,7 @@ class Poker extends MiniGame
       }
     }else{
       // USE TOP VALUE AS RETURN
-      return cards[i].value;
+      return cards[cards.length - 1].value;
     }
     return valid;
   }
