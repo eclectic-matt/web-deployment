@@ -88,14 +88,16 @@ class Reflex extends MiniGame
     el.appendChild(clickBtn);
     
     //this.moveTimer = setTimeout(this.moveTarget.bind(this), 25);
-    window.requestAnimationFrame(this.moveTarget.bind(this));
+    //requestAnimationFrame( () => this.moveTarget() );
+    requestAnimationFrame( this.moveTarget.bind(this) );
   }
   
   fireBtn()
   {
     if (this.ended) return;
     //clearTimeout(this.moveTimer);
-    window.cancelAnimationFrame(this.moveTarget.bind(this));
+    //cancelAnimationFrame(this.moveTarget);
+    //cancelAnimationFrame( this.moveTarget.bind(this) );
     if ((this.x >= this.targetLeft) && (this.x <= (this.targetLeft + this.targetWidth))) {
       this.targetsHit++;
       if (this.targetsHit === this.targetsCount) {
@@ -134,30 +136,37 @@ class Reflex extends MiniGame
         this.movingLeft = true;
       }
     }
-    document.getElementById('targetLine').style.left = this.x + '%';
-    //RESET TIMEOUT
-    //this.moveTimer = setTimeout(this.moveTarget.bind(this), 25);
     
-    window.requestAnimationFrame(this.moveTarget.bind(this));
+    let targetLine =document.getElementById('targetLine');
+    if(targetLine){
+      targetLine.style.left = this.x + '%';
+    }
+    
+    //requestAnimationFrame(this.moveTarget);
+    //requestAnimationFrame( () => this.moveTarget() );
+    requestAnimationFrame( this.moveTarget.bind(this) );
   }
   
   lose()
   {
-    window.cancelAnimationFrame(this.moveTarget);
     let result = document.createElement('h1');
     result.innerHTML = 'Target: ' + this.targetLeft.toFixed(2) + ' - ' + (this.targetLeft + this.targetWidth).toFixed(2) + '<br>Clicked: ' + this.x.toFixed(2) + '!';
      document.getElementById('main').appendChild(result);
     super.lose();
+    //cancelAnimationFrame(this.moveTarget);
+    cancelAnimationFrame(this.moveTarget());
   }
   
   win()
   {
-    window.cancelAnimationFrame(this.moveTarget);
     let result = document.createElement('h1');
     result.innerHTML = 'Target: ' + this.targetLeft.toFixed(2) + ' - ' + (this.targetLeft + this.targetWidth).toFixed(2) + '<br>Clicked: ' + this.x.toFixed(2) + '!';
      document.getElementById('main').appendChild(result);
     let endTime = new Date();
     let totalTime = 1 / ((endTime - this.startTime) * 1000);
     super.win(totalTime);
+    //cancelAnimationFrame(this.moveTarget);
+    //cancelAnimationFrame(this.moveTarget.bind(this))
+    cancelAnimationFrame(this.moveTarget());
   }
 }
