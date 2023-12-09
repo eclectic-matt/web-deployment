@@ -1,16 +1,76 @@
 class MiniGame
 {
   constructor(difficulty){
+    //STORE GAME NAME
+    this.gameName = this.constructor.name;
+    console.log(this.gameName, difficulty);
+    //STORE DIFFICULTY
     this.difficulty = difficulty;
     this.ended = false;
+    this.startTime = new Date();
+    let el = document.getElementById('main');
+    let gameTitle = document.getElementById('gameTitle');
+    if(!gameTitle){
+      //CREATE AND SET TITLE
+      gameTitle = document.createElement('h1');
+      gameTitle.id = 'gameTitle';
+      //Map to difficulty name
+      let thisDiff = 'Trivial';
+      for(const diff of diffDict){
+        if(diff[1] == this.difficulty){
+          thisDiff = diff[0];
+        }
+      }
+      gameTitle.innerHTML = this.gameName + ' (' + thisDiff + ')';
+      document.body.insertBefore(gameTitle, el);
+    }else{
+      //JUST SET TITLE
+      gameTitle.innerHTML = this.gameName + ' (' + diffDict[this.difficulty] + ')';
+    }
+    
+    
   }
   
-  win()
+  //Pass high score to save
+  win(score)
   {
     this.ended = true;
     clearTimeout(this.timer);
     alert('Success!');
     this.showReplayButton();
+    
+    //Save game name
+    let saveName = this.gameName + '-' + this.difficulty;
+    //Load saved data from cookie
+    let loadItem = loadLocalStorageItem(saveName);
+    //Init save object
+    let saveObj = {};
+    saveObj.difficulty = this.difficulty;
+    saveObj.gameName = this.gameName;
+    saveObj.plays = 1;
+    
+    const thisTime = new Date().toLocaleString('en-uk');
+    saveObj.lastPlayDate = thisTime;
+    
+    if(!loadItem || !loadItem.highScore){
+      //New high score
+      saveObj.highScore = score;
+      saveObj.highScoreDate = thisTime;
+    }else{
+      let plays = (loadItem.plays) ? loadItem.plays : 1;
+      saveObj.plays = plays + 1;
+      //Overwrite if better
+      if(loadItem.highScore < score){
+        saveObj.highScore = score;
+        saveObj.highScoreDate = thisTime;
+      }else{
+        saveObj.highScore = loadItem.highScore;
+        saveObj.highScoreDate = loadItem.highScoreDate;
+      }
+    }
+    saveLocalStorageItem(saveName, JSON.stringify(saveObj));
+    
+    //console.log(this.gameName, this.difficulty, score, saveObj, localStorage);
   }
   
   lose()
@@ -50,6 +110,7 @@ class MiniGame
   
   showReplayButton(){
     let replayBtn = document.createElement('button');
+    replayBtn.className = 'fullBtn';
     let self = this;
     replayBtn.onclick = function(self) {
       game.showForm();
@@ -61,6 +122,8 @@ class MiniGame
   showForm(){
     document.getElementById('main').innerHTML = '';
     document.getElementById('form').style.display = 'block';
+    prep();
+    document.getElementById('gameTitle').innerHTML = '';
   }
   
   hideForm()

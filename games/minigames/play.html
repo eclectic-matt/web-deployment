@@ -19,19 +19,108 @@
   <script src="games/reflex.js" delay></script>
   <script src="games/targets.js" delay></script>
   <script src="games/poker.js" delay></script>
-  <script src='../../../libraries/javascript/draggable.js' delay></script>
-  <script src='/web-deployment/libraries/javascript/draggable.js' delay></script>
+  <script src='../../../libraries/javascript/draggable.js'></script>
+  <script src='/web-deployment/libraries/javascript/draggable.js'></script>
+  <script src='../../../libraries/javascript/saveLoad.js'></script>
+  <script src='/web-deployment/libraries/javascript/saveLoad.js'></script>
   <script>
   
     var game;
+    // construct dict object that contains our mapping between strings and classes    
+    const gameDict = new Map([
+      ['Poker', Poker],
+      ['Constraints', Constraints],
+      ['Increment', Increment],
+      ['Pairs', Pairs],
+      ['Codeword', Codeword],
+      ['MostCommon', MostCommon],
+      ['Reflex', Reflex],
+      //['Targets', Targets],
+    ]);
+    
+    const diffDict = new Map([
+      ['Trivial', 1],
+      ['Easy', 2],
+      ['Medium', 3],
+      ['Hard', 4],
+      ['Hellish', 5]      
+    ]);
+    
+    /**
+     * Split dict of games to generate select output.
+     */
+    function prep()
+    {
+      document.getElementById('form').innerHTML = '<h2>MiniGames</h2>';
+      
+      let gamesTable = document.createElement('table');
+      //gamesTable.style.fontSize = '0.5rem';
+      let gamesHeadRow = document.createElement('tr');
+      let thName = document.createElement('th');
+      thName.innerHTML = 'Game';
+      thName.style.fontSize = '0.5rem';
+      thName.style.width = '20%';
+      gamesHeadRow.appendChild(thName);
+      
+      for (const [diff, diffIndex] of diffDict.entries()){
+        let th = document.createElement('th');
+        th.innerHTML = diff;
+        th.style.fontSize = '0.5rem';
+        gamesHeadRow.appendChild(th);
+      }
+      gamesTable.appendChild(gamesHeadRow);
+      
+      //OUTPUT AS SPLIT LIST WITH DIFFICULTIES
+      for (const [name, obj] of gameDict.entries()) {
+        let tr = document.createElement('tr');
+        
+        let td = document.createElement('td');
+        td.innerHTML = name;
+        td.style.fontSize = '0.5rem';
+        tr.appendChild(td);
+        
+        for (const [diff, diffIndex] of diffDict.entries()){
+          let td = document.createElement('td');
+          //td.innerHTML = name + ' (' + diff + ')';
+          let saveName = name + '-' + diffIndex;
+          let load = loadLocalStorageItem(saveName);
+          //console.log(saveName, load);
+          let complete = false;
+          if(load && load.highScoreDate){
+            complete = true;
+          }
+          //let complete = Math.random() > 0.5 ? true : false;
+          td.innerHTML = complete ? '✔️' : '❌';
+          if(complete){
+            td.style.backgroundColor = '#2e2';
+          }
+          td.style.fontSize = '0.5rem';
+          td.onclick = () => {
+            startGame(name, diffIndex);
+          }
+          tr.appendChild(td);
+        }
+        gamesTable.appendChild(tr);
+      }
+      
+      document.getElementById('form').appendChild(gamesTable);
+    }
+    
+    function startGame(name, diff)
+    {
+      //console.log(name, diff, gameDict);
+      game = new(gameDict.get(name))(parseInt(diff));
+    }
     
     function init()
     {
-      game = document.getElementsByName('game')[0].value;
+      let gameName = document.getElementsByName('game')[0].value;
       let difficulty = document.getElementsByName('difficulty')[0].value;
       difficulty = parseInt(difficulty);
-      console.log('init', difficulty);
-      switch(game){
+      //console.log('init', difficulty);
+      let game = new(gameDict.get(gameName))(difficulty);
+      
+      /*switch(game){
         case 'increment':
           game = new Increment(difficulty);
         break;
@@ -59,32 +148,31 @@
         case 'poker':
           game = new Poker(difficulty);
         break;
-      }
+      }*/
     }
   </script>
 </head>
 
-<body>
+<body onload="prep()">
 <main id="main">
   <!-- GAME CONTENT IS INSERTED HERE -->
 </main>
 <div id="form">
-  <form action="" onsubmit="event.preventDefault(); init()">
+  <!--form action="" onsubmit="event.preventDefault(); init()">
     <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
       <label for="game">Select game: </label>
      </div>
     <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
-     <select name="game">
+     <select id="gameSelect" name="game">
       <option value="poker">Poker</option>
       <option value="targets">Targets</option>
       <option value="reflex">Reflex</option>
       <option value="mostCommon">Common</option>
-      <!--option value="sudoku">Sudoku</option-->
       <option value="constraints">Constraints</option>
       <option value="codeword">Codeword</option>
       <option value="increment">Increment</option>
       <option value="pairs">Pairs</option>
-
+      <option value="sudoku">Sudoku</option>
      </select>
     </div>
     <br>
@@ -92,7 +180,6 @@
       <label for="difficulty">Difficulty: </label>
     </div>
      <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
-      <!--input name="difficulty" type=number min=1 max=5 step=1  placeholder=1 value=1 /-->
       <select name="difficulty">
         <option value=1>Trivial</option>
         <option value=2 selected>Easy</option>
@@ -103,7 +190,7 @@
     </div>
     <br>
     <button type=submit>Play Game</button>
-  </form>
+  </form-->
 </div>
 </body>
 

@@ -142,6 +142,8 @@ class Reflex extends MiniGame
     let result = document.createElement('h1');
     result.innerHTML = 'Target: ' + this.targetLeft.toFixed(2) + ' - ' + (this.targetLeft + this.targetWidth).toFixed(2) + '<br>Clicked: ' + this.x.toFixed(2) + '!';
      document.getElementById('main').appendChild(result);
-    super.win();
+    let endTime = new Date();
+    let totalTime = 1 / ((endTime - this.startTime) * 1000);
+    super.win(totalTime);
   }
 }

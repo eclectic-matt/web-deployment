@@ -255,7 +255,7 @@ class Constraints extends MiniGame
     
     //Spread to get copy of answers (do not shuffle original)
     let shufAns = this.shuffle([...this.answers]);
-    console.log('shufAnswers',shufAns);
+    //console.log('shufAnswers',shufAns);
     let ansTable = document.createElement('div');
     let ansRow = document.createElement('tr');
     ansRow.style.width = '100% !important';
@@ -286,7 +286,7 @@ class Constraints extends MiniGame
    */
   dropEv(row, col, ans)
   {
-    console.log('dropEv', row, col, ans);
+    //console.log('dropEv', row, col, ans);
     //console.log('guesses', this.guess);
     
     //REMOVE GUESS FROM PREVIOUS
@@ -324,12 +324,12 @@ class Constraints extends MiniGame
           //This column is correct for this row
           (this.grid[i].indexOf(1) === j) 
         ){
-          console.log('Match - ',this.guess[i][j],i,j);
+          //console.log('Match - ',this.guess[i][j],i,j);
           matchCount++;
         }
       }
     }
-    console.log('Correct Count',matchCount);
+    //console.log('Correct Count',matchCount);
     
     if(matchCount == this.answers.length){
       this.win();
@@ -347,7 +347,7 @@ class Constraints extends MiniGame
       //IS PLAYER SELECTED?
       if( (c.player !== 'no-one') && (this.guess.flat().indexOf(c.player) == -1) ){
         //PLAYER NOT SELECTED AS AN ANSWER
-        console.log(c.player + ' is not on the board');
+        //console.log(c.player + ' is not on the board');
         c.symbol = '?';
         continue;
       }else{
@@ -380,14 +380,14 @@ class Constraints extends MiniGame
           
           case 'row':
             let pRow = this.guess[c.constraint].indexOf(c.player);
-            console.log('row',c.constraint,c.player,pRow);
+            //onsole.log('row',c.constraint,c.player,pRow);
             //GET PLAYER COL
             if(pRow != -1){
-              console.log(c.player + ' is in row ' + c.constraint);
+              //console.log(c.player + ' is in row ' + c.constraint);
               c.symbol = '✔️';
               matchCount++;
             }else{
-              console.log(c.player + ' is NOT in row ' + c.constraint);
+              //console.log(c.player + ' is NOT in row ' + c.constraint);
               c.symbol = '❌';
             }
           break;
@@ -422,7 +422,7 @@ class Constraints extends MiniGame
             //let oRow = this.guess.filter ( (row) => { return row.indexOf(c.constraint) != -1; });
             //oRow = this.guess.indexOf(oRow);
             let oRow = this.getGuessRowIndex(c.constraint);
-            console.log('above', c.player, guessRow, c.contraint, oRow);
+            //console.log('above', c.player, guessRow, c.contraint, oRow);
             if(oRow === -1){
               c.symbol = '?';
               break;
@@ -520,7 +520,7 @@ class Constraints extends MiniGame
             }
             //NOT NO-ONE, GET OTHER COL
             let leftO = this.getGuessColIndex(c.constraint);
-            console.log('left',c.player,leftP,c.constraint,leftO);
+            //console.log('left',c.player,leftP,c.constraint,leftO);
             if(leftP < leftO){
               c.symbol = '✔️';
               matchCount++;
@@ -557,7 +557,7 @@ class Constraints extends MiniGame
             }
             //GET THE OTHER PLAYER (NOT NO-ONE)
             let rightO = this.getGuessColIndex(c.constraint);
-            console.log('right', rightP, c.player, rightO, c.constraint);
+            //console.log('right', rightP, c.player, rightO, c.constraint);
             if(rightP > rightO){
               c.symbol = '✔️';
               matchCount++;
@@ -687,7 +687,9 @@ class Constraints extends MiniGame
       document.getElementById('matchCount').innerHTML = matchCount;
       if(matchCount === this.constraints.length){
         this.updateConstraintsList();
-        this.win();
+        let endTime = new Date();
+        let totalTime = 1 / ((endTime - this.startTime) * 1000);
+        this.win(totalTime);
       }
     }
     
@@ -736,7 +738,7 @@ class Constraints extends MiniGame
         }
       }
     }
-    console.log('minCol',minCol,this.guess);
+    //console.log('minCol',minCol,this.guess);
     return (minCol === this.gridSize ? -1 : minCol);
   }
   
@@ -754,7 +756,7 @@ class Constraints extends MiniGame
         }
       }
     }
-    console.log('maxCol',maxCol,this.guess);
+    //console.log('maxCol',maxCol,this.guess);
     return maxCol;
   }
   

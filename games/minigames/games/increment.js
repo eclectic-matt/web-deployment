@@ -98,7 +98,8 @@ class Increment extends MiniGame
     console.log('checkClick', row, col, this.current);
     if(this.grid[row][col] == this.current){
       if(this.current === this.maxValue){
-        this.win();
+        //this.win();
+        this.win(this.current);
       }else{
         console.log('Correct!',this.current, this.maxValue);
         this.current += Number(this.increment);

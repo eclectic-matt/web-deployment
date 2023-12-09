@@ -141,6 +141,7 @@ class Targets extends MiniGame {
 		let duration = endTime - this.startTime;
 		result.innerHTML = 'win - took ' + duration + 'ms!';
 		document.getElementById('main').appendChild(result);
-		super.win();
+		let totalTime = 1 / ((duration) * 1000);
+		super.win(totalTime);
 	}
 }

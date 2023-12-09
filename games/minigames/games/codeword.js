@@ -7,7 +7,6 @@ class Codeword extends MiniGame
     this.selectedColor = '#0dd';
     this.matchedColor = '#0f0';
     this.defaultColor = '#fff';
-    
     this.timer = setTimeout(this.tickTimer.bind(this), 250);
     this.init();
   }
@@ -228,7 +227,9 @@ class Codeword extends MiniGame
     document.getElementById('resultsTable').insertBefore(tr,document.getElementById('resultsTable').firstChild);
     if(win){
       document.getElementById('resultsHead').innerHTML = 'The code was ' + this.codeword;
-      this.win();
+      let endTime = new Date();
+      let totalTime = 1 / ((endTime - this.startTime) * 1000);
+      this.win(totalTime);
     }
     console.log('result',result);
   }

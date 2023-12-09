@@ -3,6 +3,7 @@ class Poker extends MiniGame
   constructor(difficulty)
   {
     super(difficulty);
+    //console.log('Poker', difficulty);
     
     //SET DIFFICULTY DEFAULTS
     this.cash = 1000 * (6 - difficulty);
@@ -62,13 +63,7 @@ class Poker extends MiniGame
         this.showBetForm();
        //this.play();
       break;
-      case 'initialDeal':
-        this.cards = [];
-        for(let i = 0; i < this.handSize; i++){
-          
-          //WORKING
-          this.cards.push(this.deck.splice(0,1)[0]);
-          
+      case 'testHands':
           //TESTS
           //let testCard = {};
           
@@ -111,8 +106,15 @@ class Poker extends MiniGame
           
           //ADD TO TEST ARRAY
           //this.cards[i] = {...testCard};
+      break;
+      case 'initialDeal':
+        this.cards = [];
+        for(let i = 0; i < this.handSize; i++){
           
-          //LEAVE HERE - FOR DISCARDS
+          //WORKING
+          this.cards.push(this.deck.splice(0,1)[0]);
+          
+          //FOR DISCARDS
           this.cards[i].markedForDiscard = false;
         }
         //console.log('initialDraw', this.cards);
@@ -149,10 +151,10 @@ class Poker extends MiniGame
         document.getElementById('cashTotal').innerHTML = this.currency(this.cash);
         if (this.cash <= 0){
           document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(payout) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE RUN OUT OF MONEY!';
-          this.lose();
+          this.lose(this.cash);
         }else if(this.cash >= this.winningCash){
           document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(payout) + '<br>Total: ' + this.currency(this.cash) + '<br>YOU HAVE WON THE GAME!';
-          this.win();
+          this.win(this.cash);
         }else{
           document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(payout) + '<br>Total: ' + this.currency(this.cash) + '<br>';
           this.stage = 'bet';

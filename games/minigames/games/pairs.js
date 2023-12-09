@@ -8,11 +8,11 @@ class Pairs extends MiniGame
       
       this.width = Math.max(difficulty, 2);
       this.height = Math.max(difficulty * 2, 2);
-      console.log('landscape', this.width, this.height);
+      //console.log('landscape', this.width, this.height);
     }else{
       this.width = Math.max(difficulty * 2, 2);
       this.height = Math.max(difficulty, 2);
-      console.log('portrait', this.width, this.height);
+      //console.log('portrait', this.width, this.height);
     }
         
     this.selectedColor = '#0dd';
@@ -123,7 +123,7 @@ class Pairs extends MiniGame
     
     //CLICKED SELF?
     if(ev.target === this.selected.target){
-      console.log('clicked self', thisSymbol);
+      //console.log('clicked self', thisSymbol);
       //ev.target.innerHTML = '';
       this.deselectEl(ev.target, this);
       return false;
@@ -132,7 +132,7 @@ class Pairs extends MiniGame
     //ELSE, CHECK SYMBOL MATCH
     if(thisSymbol === this.selected.symbol){
       //MATCH
-      console.log('match', thisSymbol);
+      //console.log('match', thisSymbol);
       
       //DISABLE PREVIOUS SELECTION
       this.matchEl(this.selected.target, this);
@@ -144,13 +144,13 @@ class Pairs extends MiniGame
       this.selected = null;
       this.current++;
       if(this.current === this.pairsCount){
-        this.win();
-      }else{
-        console.log('Correct!',this.current);
+        let endTime = new Date();
+        let totalTime = 1 / ((endTime - this.startTime) * 1000);
+        this.win(totalTime);
       }
     }else{
       //NO MATCH
-      console.log('no match', thisSymbol);
+      //console.log('no match', thisSymbol);
       //CLEAR PREVIOUS
       this.deselectEl(this.selected.target, this);
       //SET CURRENT AS SELECTED AND VISIBLE 
@@ -161,7 +161,7 @@ class Pairs extends MiniGame
   selectEl(el, self){
     let thisSymbol = el.getAttribute('symbol');
     //SELECT THIS SYMBOL
-    console.log('init select', thisSymbol);
+    //console.log('init select', thisSymbol);
     self.selected = {symbol: thisSymbol, target: el};
     el.children[0].style.display = 'block';
     el.children[0].style.padding = 0;

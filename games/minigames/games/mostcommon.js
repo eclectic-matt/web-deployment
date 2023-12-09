@@ -136,14 +136,9 @@ class MostCommon extends MiniGame
   
   win(){
     let el = document.getElementById('main');
-    super.win();
+    let endTime = new Date();
+    let totalTime = 1 / ((endTime - this.startTime) * 1000);
+    super.win(totalTime);
   }
   
-  lose(){
-    let answerHead = document.createElement('h2');
-    answerHead.innerHTML = 'The correct symbol was ' + this.correct + ' (x' + this.correctAmount + ')!';
-    document.getElementById('main').appendChild(answerHead);
-    
-    super.lose();
-  }
 }
