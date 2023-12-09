@@ -15,20 +15,23 @@ class MiniGame
       gameTitle = document.createElement('h1');
       gameTitle.id = 'gameTitle';
       //Map to difficulty name
-      let thisDiff = 'Trivial';
-      for(const diff of diffDict){
-        if(diff[1] == this.difficulty){
-          thisDiff = diff[0];
-        }
-      }
+      let thisDiff = this.getDifficultyName(difficulty);
       gameTitle.innerHTML = this.gameName + ' (' + thisDiff + ')';
       document.body.insertBefore(gameTitle, el);
     }else{
       //JUST SET TITLE
-      gameTitle.innerHTML = this.gameName + ' (' + diffDict[this.difficulty] + ')';
+      let thisDiff = this.getDifficultyName(difficulty);
+      gameTitle.innerHTML = this.gameName + ' (' + thisDiff + ')';
     }
     
     
+  }
+  
+  getDifficultyName(difficulty)
+  {
+    let diffNames = Array.from(diffDict.keys());
+    //console.log(diffNames['difficulty',difficulty, (difficulty - 1)]);
+    return diffNames[(difficulty - 1)];
   }
   
   //Pass high score to save
