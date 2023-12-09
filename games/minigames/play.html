@@ -4,21 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Eclectic MiniGames</title>
   <link rel="stylesheet" href="style/grid.css" />
   <link rel="stylesheet" href="style/form.css" />
   <link rel="stylesheet" href="style/dragDrop.css" />
   <link rel="stylesheet" href="style/cards.css" />
   <script src="games/minigame.js"></script>
+  
+  <script src="games/poker.js" delay></script>
+  <script src="games/constraints.js" delay></script>
+  
   <script src="games/increment.js" delay></script>
   <script src="games/pairs.js" delay></script>
   <script src="games/codeword.js" delay></script>
-  <script src="games/sudoku.js" delay></script>
   <script src="games/mostcommon.js" delay></script>
-  <script src="games/constraints.js" delay></script>
   <script src="games/reflex.js" delay></script>
+  
   <script src="games/targets.js" delay></script>
-  <script src="games/poker.js" delay></script>
+  <script src="games/sudoku.js" delay></script>
+
   <script src='../../../libraries/javascript/draggable.js'></script>
   <script src='/web-deployment/libraries/javascript/draggable.js'></script>
   <script src='../../../libraries/javascript/saveLoad.js'></script>
@@ -104,6 +108,21 @@
       }
       
       document.getElementById('form').appendChild(gamesTable);
+      
+      /*
+      let resetBtn = document.createElement('button');
+      resetBtn.innerHTML = 'RESET';
+      let gameName = 'Reflex';
+      resetBtn.onclick = () => {
+        this.gameName + '-' + this.difficulty;
+        let clearObj = {};
+        for(let i = 1; i <= 5; i++){
+          let saveName = gameName + i;
+          saveLocalStorageItem(saveName, JSON.stringify(clearObj));
+        }
+      }
+     document.getElementById('form').appendChild(resetBtn);
+     */
     }
     
     function startGame(name, diff)

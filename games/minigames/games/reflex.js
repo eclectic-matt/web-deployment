@@ -5,8 +5,9 @@ class Reflex extends MiniGame
     super(difficulty);
     //this.timer = setTimeout(this.tickTimer.bind(this), 250);
     //THIS IS A PERCENTAGE (MAX 20) OF THE TOTAL WIDTH 
-    this.targetWidth = 16 / difficulty;
-    this.speed = difficulty * 1.5;
+    
+    this.targetsHit = 0;
+    this.targetsCount = difficulty + 1;
     this.movingLeft = true;
     //x IS A PERCENTAGE OF THE WIDTH WHERE THE "CROSSHAIR" IS
     this.x = 0;
@@ -15,6 +16,8 @@ class Reflex extends MiniGame
   
   init()
   {
+    this.targetWidth = 30 / (this.difficulty + this.targetsHit);
+    this.speed = (this.difficulty + this.targetsHit) * 1.5;
     this.outputPanel();
   }
   
@@ -27,7 +30,7 @@ class Reflex extends MiniGame
 
     //DESCRIPTION
     let head = document.createElement('h2');
-    head.innerHTML = 'Click when the bar below is within the target';
+    head.innerHTML = 'Click when the bar below is within the target (' + (this.targetsHit + 1) + ' of ' + this.targetsCount + ')';
     el.appendChild(head);
         
     //CREATE DIV''
@@ -74,16 +77,9 @@ class Reflex extends MiniGame
     clickBtn.style.height = '3rem';
     clickBtn.style.backgroundColor = '#c22';
     clickBtn.style.color = '#fff';
-    clickBtn.onclick = function(){
-      if(this.ended) return;
-      //clearTimeout(this.moveTimer);
-      window.cancelAnimationFrame(this.moveTarget.bind(this));
-      if( (this.x >= this.targetLeft) && (this.x <= (this.targetLeft + this.targetWidth)) ){
-        this.win();
-      }else{
-        this.lose();
-      }
-    }.bind(this);
+    clickBtn.onclick = () => {
+      this.fireBtn();
+    };
     
     el.appendChild(document.createElement('br'));
     el.appendChild(document.createElement('br'));
@@ -93,6 +89,24 @@ class Reflex extends MiniGame
     
     //this.moveTimer = setTimeout(this.moveTarget.bind(this), 25);
     window.requestAnimationFrame(this.moveTarget.bind(this));
+  }
+  
+  fireBtn()
+  {
+    if (this.ended) return;
+    //clearTimeout(this.moveTimer);
+    window.cancelAnimationFrame(this.moveTarget.bind(this));
+    if ((this.x >= this.targetLeft) && (this.x <= (this.targetLeft + this.targetWidth))) {
+      this.targetsHit++;
+      if (this.targetsHit === this.targetsCount) {
+        this.win();
+      }else{
+        this.init();
+      }
+    }else{
+      //1 miss = loss
+      this.lose();
+    }
   }
   
   moveTarget(timestamp)

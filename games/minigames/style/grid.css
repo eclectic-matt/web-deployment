@@ -17,6 +17,8 @@ table {
 tr {
   width: 100%;
   max-width: 100% !important;
+  margin: 0;
+  padding: 0;
 }
 
 td div.content {
@@ -52,5 +54,38 @@ th {
 td{
   text-align: center;
   align-items: center;
-  padding: 2%;
+  padding: 5% 0;
+}
+
+button.pairsBtn {
+  width: 100%;
+  max-height: 75%;
+  padding: 0;
+  margin: 0;
+}
+td.pairsTd{
+  width: 100%;
+  max-height: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  margin: 0;
+}
+td.pairsTd div.content {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: inherit;
+}
+td.pairsTd div.content button.pairsBtn span{
+  width: 100%;
+  height: auto;
+  max-height: 75%;
+  position: relative;
+  top: 20%;
+  margin: 0;
+  /*font-size: 2rem;*/
+  background-color: inherit;
 }

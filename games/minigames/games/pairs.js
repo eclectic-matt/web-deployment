@@ -17,7 +17,7 @@ class Pairs extends MiniGame
         
     this.selectedColor = '#0dd';
     this.matchedColor = '#0f0';
-    this.defaultColor = '#fff';
+    this.defaultColor = '#000';
     
     this.timer = setTimeout(this.tickTimer.bind(this), 250);
     this.init();
@@ -78,15 +78,21 @@ class Pairs extends MiniGame
     el.appendChild(head);
     
     this.createTimer(el);
+    let fontScale = 8;
+    let fontSize = parseFloat( fontScale / (this.difficulty+1)).toFixed(2) + 'rem';
+    console.log('size', fontSize);
     
     let table = document.createElement('table');
     for(let i = 0; i < this.width; i++){
       let row = document.createElement('tr');
       for(let j = 0; j < this.height; j++){
         let td = document.createElement('td');
+        td.className = 'pairsTd';
         let div = document.createElement('div');
         div.className = "content";
         let btn = document.createElement('button');
+        btn.className = 'pairsBtn';
+        btn.style.fontSize = fontSize;
         btn.onclick = function(btn){
           //console.log('onclick',btn);
           game.checkClick(btn)
@@ -94,6 +100,7 @@ class Pairs extends MiniGame
         btn.setAttribute('symbol',this.grid[i][j]);
         let span = document.createElement('span');
         span.style.display = 'none';
+        span.style.fontSize = fontSize;
         span.innerHTML = this.grid[i][j];
         btn.appendChild(span);
         //btn.innerHTML = this.grid[i][j];
@@ -162,30 +169,30 @@ class Pairs extends MiniGame
     let thisSymbol = el.getAttribute('symbol');
     //SELECT THIS SYMBOL
     //console.log('init select', thisSymbol);
-    self.selected = {symbol: thisSymbol, target: el};
+    this.selected = {symbol: thisSymbol, target: el};
     el.children[0].style.display = 'block';
     el.children[0].style.padding = 0;
     el.children[0].style.margin = 0;
-    el.children[0].style.width = '50%';
-    el.children[0].style.height = '50%';
-    el.style.backgroundColor = self.selectedColor;
+    el.children[0].style.width = '100%';
+    el.children[0].style.height = '100%';
+    el.style.backgroundColor = this.selectedColor;
   }
   
   deselectEl(el, self){
     el.children[0].style.display = 'none';
-    el.style.backgroundColor = self.defaultColor;
-    self.selected = null;
+    el.style.backgroundColor = this.defaultColor;
+    this.selected = null;
   }
   
   matchEl(el){
     el.disabled = true;
-    el.style.backgroundColor = self.matchedColor;
+    el.style.backgroundColor = this.matchedColor;
     el.style.color = '#fff';
     el.children[0].style.display = 'block';
     el.children[0].style.padding = 0;
     el.children[0].style.margin = 0;
-    el.children[0].style.width = '50%';
-    el.children[0].style.height = '50%';
+    el.children[0].style.width = '100%';
+    el.children[0].style.height = '100%';
   }
   
 }

@@ -1,6 +1,7 @@
 class MiniGame
 {
-  constructor(difficulty){
+  constructor(difficulty)
+  {
     //STORE GAME NAME
     this.gameName = this.constructor.name;
     console.log(this.gameName, difficulty);
@@ -111,7 +112,8 @@ class MiniGame
   }
   
   
-  showReplayButton(){
+  showReplayButton()
+  {
     let replayBtn = document.createElement('button');
     replayBtn.className = 'fullBtn';
     let self = this;
@@ -122,7 +124,8 @@ class MiniGame
     document.getElementById('main').appendChild(replayBtn);
   }
   
-  showForm(){
+  showForm()
+  {
     document.getElementById('main').innerHTML = '';
     document.getElementById('form').style.display = 'block';
     prep();
@@ -150,22 +153,26 @@ class MiniGame
 		return arr;
 	}
 	
-	mode(arr){
+	mode(arr)
+	{
     return arr.sort((a,b) =>
           arr.filter(v => v===a).length
         - arr.filter(v => v===b).length
     ).pop();
   }
 
-	randomInt(min, max){
+	randomInt(min, max)
+	{
 	  return Math.floor(Math.random() * (max-min)) + min;
 	}
 	
-	randomAlpha(){
+	randomAlpha()
+	{
     return String.fromCharCode(65+Math.floor(26*Math.random()));
 	}
 	
-	randomColor(){
+	randomColor()
+	{
 	  let col = '#';
 	  for (let i = 0; i < 6; i++){
 	    let colIndex = Math.floor(Math.random()*16);
