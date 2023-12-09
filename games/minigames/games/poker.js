@@ -234,11 +234,19 @@ class Poker extends MiniGame
       
       let tdHand = document.createElement('td');
       tdHand.innerHTML = this.hands[i];
-      tr.appendChild(tdHand);
       
       let payout = this.getPayout(this.hands[i], 1);
       let tdPayout = document.createElement('td');
       tdPayout.innerHTML = 'x' + payout;
+      
+      if(payout >= 1) {
+        tdHand.style.backgroundColor = '#2e2';
+        tdHand.style.color = 'black';
+        tdPayout.style.backgroundColor = '#2e2';
+        tdPayout.style.color = 'black';
+      }
+      
+      tr.appendChild(tdHand);
       tr.appendChild(tdPayout);
       handsTable.appendChild(tr);
     }
