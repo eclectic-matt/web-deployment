@@ -55,7 +55,9 @@
      */
     function prep()
     {
-      document.getElementById('form').innerHTML = '<h2>MiniGames</h2>';
+      document.getElementById('form').innerHTML = '<h2>Eclectic MiniGames</h2>';
+      
+      let gameObj = new MiniGame();
       
       let gamesTable = document.createElement('table');
       //gamesTable.style.fontSize = '0.5rem';
@@ -63,11 +65,13 @@
       let thName = document.createElement('th');
       thName.innerHTML = 'Game';
       thName.style.fontSize = '0.5rem';
-      thName.style.width = '20%';
+      thName.style.width = '30%';
+      thName.style.borderBottom = '1px solid #2e2';
       gamesHeadRow.appendChild(thName);
       
       for (const [diff, diffIndex] of diffDict.entries()){
         let th = document.createElement('th');
+        th.style.borderBottom = '1px solid #2e2';
         th.innerHTML = diff;
         th.style.fontSize = '0.5rem';
         gamesHeadRow.appendChild(th);
@@ -76,21 +80,53 @@
       
       //OUTPUT AS SPLIT LIST WITH DIFFICULTIES
       for (const [name, obj] of gameDict.entries()) {
-        let tr = document.createElement('tr');
         
+        //console.log(name,'lastPlayed',gameObj.getLastPlayedDate(name), gameObj.getHighScore(name));
+        
+        /*
+        let statRow = document.createElement('tr');
+        statRow.style.border = '6px solid #2e2';
+        statRow.style.height = '0.25rem';
+        statRow.style.padding = 0;
+        statRow.style.margin = 0;
+        
+        let statNameTd = document.createElement('td');
+        statNameTd.innerHTML = name;
+        statNameTd.style.fontSize = '0.5rem';
+        statRow.appendChild(statNameTd);
+        
+        let statScoreTd = document.createElement('td');
+        statScoreTd.innerHTML = 'High Score: ' + gameObj.getHighScore(name).toFixed(3);
+        statScoreTd.colSpan = 2;
+        statScoreTd.style.fontSize = '0.5rem';
+        statRow.appendChild(statScoreTd);
+        
+        let statPlayTd = document.createElement('td');
+        statPlayTd.innerHTML = 'Last Play: ' + gameObj.getLastPlayedDate(name);
+        statPlayTd.colSpan = 3;
+        statPlayTd.style.fontSize = '0.5rem';
+        statRow.appendChild(statPlayTd);
+        
+        gamesTable.appendChild(statRow);
+        */
+        
+        let tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid #2e2';
         let td = document.createElement('td');
-        td.innerHTML = name;
+        td.innerHTML = '<span class="gameTableNameSpan">' + name + '</span><br><em>Last Played: ' + gameObj.getLastPlayedDate(name) + '</em>';
         td.style.fontSize = '0.5rem';
+        td.style.borderBottom = '1px solid #2e2';
         tr.appendChild(td);
         
         for (const [diff, diffIndex] of diffDict.entries()){
           let td = document.createElement('td');
+          td.style.borderBottom = '1px solid #2e2';
           //td.innerHTML = name + ' (' + diff + ')';
           let saveName = name + '-' + diffIndex;
           let load = loadLocalStorageItem(saveName);
           //console.log(saveName, load);
           let complete = false;
-          if(load && load.highScoreDate){
+          if(load && (load.wins > 0)){
             complete = true;
           }
           //let complete = Math.random() > 0.5 ? true : false;

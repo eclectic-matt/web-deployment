@@ -89,3 +89,12 @@ td.pairsTd div.content button.pairsBtn span{
   /*font-size: 2rem;*/
   background-color: inherit;
 }
+
+span.gameTableNameSpan{
+  font-size: 0.6rem;
+  font-weight: bolder;
+}
+
+td em {
+  font-size: 0.5rem;
+}

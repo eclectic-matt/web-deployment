@@ -89,7 +89,7 @@ class Reflex extends MiniGame
     
     //this.moveTimer = setTimeout(this.moveTarget.bind(this), 25);
     //requestAnimationFrame( () => this.moveTarget() );
-    requestAnimationFrame( this.moveTarget.bind(this) );
+    this.timer = requestAnimationFrame( this.moveTarget.bind(this) );
   }
   
   fireBtn()
@@ -144,7 +144,7 @@ class Reflex extends MiniGame
     
     //requestAnimationFrame(this.moveTarget);
     //requestAnimationFrame( () => this.moveTarget() );
-    requestAnimationFrame( this.moveTarget.bind(this) );
+    this.timer = requestAnimationFrame( this.moveTarget.bind(this) );
   }
   
   lose()
@@ -154,7 +154,7 @@ class Reflex extends MiniGame
      document.getElementById('main').appendChild(result);
     super.lose();
     //cancelAnimationFrame(this.moveTarget);
-    cancelAnimationFrame(this.moveTarget());
+    cancelAnimationFrame(this.timer);
   }
   
   win()
@@ -167,6 +167,6 @@ class Reflex extends MiniGame
     super.win(totalTime);
     //cancelAnimationFrame(this.moveTarget);
     //cancelAnimationFrame(this.moveTarget.bind(this))
-    cancelAnimationFrame(this.moveTarget());
+    cancelAnimationFrame(this.timer);
   }
 }

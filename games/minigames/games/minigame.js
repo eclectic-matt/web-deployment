@@ -4,7 +4,8 @@ class MiniGame
   {
     //STORE GAME NAME
     this.gameName = this.constructor.name;
-    console.log(this.gameName, difficulty);
+    
+    //console.log(this.gameName, difficulty);
     //STORE DIFFICULTY
     this.difficulty = difficulty;
     this.ended = false;
@@ -16,16 +17,23 @@ class MiniGame
       gameTitle = document.createElement('h1');
       gameTitle.id = 'gameTitle';
       //Map to difficulty name
-      let thisDiff = this.getDifficultyName(difficulty);
-      gameTitle.innerHTML = this.gameName + ' (' + thisDiff + ')';
       document.body.insertBefore(gameTitle, el);
     }else{
       //JUST SET TITLE
+      
+    }
+    if(this.gameName !== 'MiniGame'){
       let thisDiff = this.getDifficultyName(difficulty);
       gameTitle.innerHTML = this.gameName + ' (' + thisDiff + ')';
+      let backBtn = document.createElement('button');
+      backBtn.innerHTML = 'Back to menu';
+      backBtn.className = 'backBtn';
+      backBtn.style.fontSize = '0.5rem';
+      backBtn.onclick = () => {
+        this.showForm();
+      }
+      gameTitle.appendChild(backBtn);
     }
-    
-    
   }
   
   getDifficultyName(difficulty)
@@ -43,8 +51,15 @@ class MiniGame
     alert('Success!');
     this.showReplayButton();
     
+    this.saveGame(score, true);
+    //console.log(this.gameName, this.difficulty, score, saveObj, localStorage);
+  }
+  
+  saveGame(score, win=true)
+  {
     //Save game name
     let saveName = this.gameName + '-' + this.difficulty;
+
     //Load saved data from cookie
     let loadItem = loadLocalStorageItem(saveName);
     //Init save object
@@ -60,21 +75,26 @@ class MiniGame
       //New high score
       saveObj.highScore = score;
       saveObj.highScoreDate = thisTime;
+      if(win){
+        saveObj.wins = 1;
+      }
     }else{
       let plays = (loadItem.plays) ? loadItem.plays : 1;
       saveObj.plays = plays + 1;
-      //Overwrite if better
-      if(loadItem.highScore < score){
-        saveObj.highScore = score;
-        saveObj.highScoreDate = thisTime;
-      }else{
-        saveObj.highScore = loadItem.highScore;
-        saveObj.highScoreDate = loadItem.highScoreDate;
+      if(win){
+        let wins = (loadItem.wins) ? loadItem.wins : 0;
+        saveObj.wins = wins + 1;
+        //Overwrite if better
+        if(loadItem.highScore < score){
+          saveObj.highScore = score;
+          saveObj.highScoreDate = thisTime;
+        }else{
+          saveObj.highScore = loadItem.highScore;
+          saveObj.highScoreDate = loadItem.highScoreDate;
+        }
       }
     }
     saveLocalStorageItem(saveName, JSON.stringify(saveObj));
-    
-    //console.log(this.gameName, this.difficulty, score, saveObj, localStorage);
   }
   
   lose()
@@ -83,6 +103,7 @@ class MiniGame
     this.ended = true;
     alert('Failed!');
     this.showReplayButton();
+    this.saveGame(0, false);
   }
   
   createTimer(el)
@@ -117,8 +138,8 @@ class MiniGame
     let replayBtn = document.createElement('button');
     replayBtn.className = 'fullBtn';
     let self = this;
-    replayBtn.onclick = function(self) {
-      game.showForm();
+    replayBtn.onclick = () => {
+      this.showForm();
     }
     replayBtn.innerHTML = 'Play again?';
     document.getElementById('main').appendChild(replayBtn);
@@ -196,6 +217,66 @@ class MiniGame
     };
 	  return symbol + amount.toLocaleString('en-us',options);
 	  //return symbol + parseFloat(amount).toFixed(2);
+	}
+	
+	//###########
+	// Save/Load 
+	// Utilities
+	//###########
+	
+	getSingleGameData(gameName)
+	{
+	  let data = [];
+	  for(let i = 1; i <= 5; i++){
+	    let saveName = gameName + '-' + i;
+      //Load saved data from cookie
+      let loadItem = loadLocalStorageItem(saveName);
+      if(loadItem){
+        data[i] = {...loadItem};
+      }
+	  }
+	  return data;
+	}
+	
+	getLastPlayedDate(gameName)
+	{
+	  let lastPlayed = new Date('1970-01-01T00:00:00');
+	  //console.log(gameName,'checklastplay',lastPlayed);
+	  for(let i = 1; i <= 5; i++){
+	    let saveName = gameName + '-' + i;
+      //Load saved data from cookie
+      let loadItem = loadLocalStorageItem(saveName);
+      let loadDate = new Date(Date.parse(loadItem.lastPlayDate));
+      //console.log(loadItem, loadDate);
+      if(loadItem && (loadDate > lastPlayed)){
+        lastPlayed = loadDate;
+        //console.log(saveName, 'newer',lastPlayed);
+      }else{
+        //console.log(saveName, 'older',lastPlayed ,loadDate );
+      }
+	  }
+	  return lastPlayed.toLocaleDateString('en-gb');
+	  //console.log(event.toLocaleDateString('de-DE');
+	}
+	
+	getHighScore(gameName)
+	{
+	  let score = 0;
+	  //console.log(gameName,'checkhighscore',score);
+	  for(let i = 1; i <= 5; i++){
+	    let saveName = gameName + '-' + i;
+      //Load saved data from cookie
+      let loadItem = loadLocalStorageItem(saveName);
+      let loadScore = loadItem.highScore;
+      //console.log(loadItem, loadScore);
+      if(loadItem && (loadScore > score)){
+        score = loadScore;
+        //console.log(saveName, 'higher',score);
+      }else{
+        //console.log(saveName, 'lower',score ,loadScore );
+      }
+	  }
+	  return score;
 	}
 	
 }
