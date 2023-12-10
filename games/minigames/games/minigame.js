@@ -241,25 +241,31 @@ class MiniGame
 	
 	getLastPlayedDate(gameName)
 	{
-	  let lastPlayed = new Date('1970-01-01T00:00:00');
-	  //console.log(gameName,'checklastplay',lastPlayed);
+	  //Never played date - unix epoch
+	  const oldDate = new Date('1970-01-01T00:00:00');
+	  //Init last played to never played date
+	  let lastPlayed = oldDate;
+	  //Iterate through difficulties
 	  for(let i = 1; i <= 5; i++){
+	    //Saved as 'GameName-1' etc
 	    let saveName = gameName + '-' + i;
       //Load saved data from cookie
       let loadItem = loadLocalStorageItem(saveName);
+      //Load and parse lastPlayDate
       let loadDate = new Date(Date.parse(loadItem.lastPlayDate));
-      //console.log(loadItem, loadDate);
+      //If data is valid and parsed date and newer
       if(loadItem && (loadDate > lastPlayed)){
+        //Store new date
         lastPlayed = loadDate;
-        //console.log(saveName, 'newer',lastPlayed);
-      }else{
-        //console.log(saveName, 'older',lastPlayed ,loadDate );
       }
 	  }
+	  
+	  //String "Never" if never played 
+	  if(lastPlayed == oldDate){
+	    return 'Never';
+	  }
+	  //Return String "d/m/YY" of last played (any difficulty)
 	  return lastPlayed.getDate() + '/' + (lastPlayed.getMonth() + 1) + '/' + String(lastPlayed.getFullYear()).substr(2,2);
-	  //return lastPlayed.getFullYear() + '-' + (lastPlayed.getMonth() + 1) + '-' + lastPlayed.getDate();
-	  //return lastPlayed.toLocaleDateString('en-gb');
-	  //console.log(event.toLocaleDateString('de-DE');
 	}
 	
 	getHighScore(gameName)
