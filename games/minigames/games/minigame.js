@@ -62,13 +62,14 @@ class MiniGame
 
     //Load saved data from cookie
     let loadItem = loadLocalStorageItem(saveName);
+    console.log(saveName, loadItem);
     //Init save object
     let saveObj = {};
     saveObj.difficulty = this.difficulty;
     saveObj.gameName = this.gameName;
     saveObj.plays = 1;
     
-    const thisTime = new Date().toLocaleString('en-uk');
+    const thisTime = new Date();
     saveObj.lastPlayDate = thisTime;
     
     if(!loadItem || !loadItem.highScore){
@@ -255,7 +256,9 @@ class MiniGame
         //console.log(saveName, 'older',lastPlayed ,loadDate );
       }
 	  }
-	  return lastPlayed.toLocaleDateString('en-gb');
+	  return lastPlayed.getDate() + '/' + (lastPlayed.getMonth() + 1) + '/' + String(lastPlayed.getFullYear()).substr(2,2);
+	  //return lastPlayed.getFullYear() + '-' + (lastPlayed.getMonth() + 1) + '-' + lastPlayed.getDate();
+	  //return lastPlayed.toLocaleDateString('en-gb');
 	  //console.log(event.toLocaleDateString('de-DE');
 	}
 	

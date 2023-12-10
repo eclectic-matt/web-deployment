@@ -158,6 +158,7 @@ class Poker extends MiniGame
         }else{
           document.getElementById('bestHandHead').innerHTML = bestHand + '<br>Payout: ' + this.currency(payout) + '<br>Total: ' + this.currency(this.cash) + '<br>';
           this.stage = 'bet';
+          this.disableDiscardButtons();
           this.showContinueButton();
       break;
         }
@@ -261,6 +262,13 @@ class Poker extends MiniGame
     this.cash -= this.currentBet;
     this.stage = 'initialDeal';
     this.play();
+  }
+  
+  disableDiscardButtons(){
+    let btns = document.getElementsByClassName('discard');
+    for(let i = 0; i < btns.length; i++){
+      btns[i].disabled = true;
+    }
   }
   
   showContinueButton()
