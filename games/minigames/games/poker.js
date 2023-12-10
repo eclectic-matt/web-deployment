@@ -237,7 +237,7 @@ class Poker extends MiniGame
       let tdHand = document.createElement('td');
       tdHand.innerHTML = this.hands[i];
       
-      let payout = this.getPayout(this.hands[i], 1);
+      let payout = this.getPayout(this.hands[i], 1).toFixed(2);
       let tdPayout = document.createElement('td');
       tdPayout.innerHTML = 'x' + payout;
       
