@@ -62,7 +62,11 @@ class Darts extends MiniGame {
     
     //Calculate and store radius values
     //Black backboard (where numbers displayed)
-    this.radiusBackBoard = this.width / 2;
+    if(this.width < this.height){
+     this.radiusBackBoard = this.width / 2;
+    }else{
+      this.radiusBackBoard = this.height / 2;
+    }
     //Outer circle (the full play area)
     this.radiusOuterCircle = this.radiusBackBoard - 20;
     //The size of the circle for the outer double arc
