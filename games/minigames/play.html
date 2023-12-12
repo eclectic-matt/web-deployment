@@ -20,6 +20,8 @@
   <script src="games/mostcommon.js" delay></script>
   <script src="games/reflex.js" delay></script>
   
+  <script src="games/darts.js" delay></script>
+  <script src="games/stacker.js" delay></script>
   <script src="games/targets.js" delay></script>
   <script src="games/sudoku.js" delay></script>
 
@@ -32,6 +34,7 @@
     var game;
     // construct dict object that contains our mapping between strings and classes    
     const gameDict = new Map([
+      ['Darts', Darts],
       ['Poker', Poker],
       ['Constraints', Constraints],
       ['Increment', Increment],
@@ -39,6 +42,7 @@
       ['Codeword', Codeword],
       ['MostCommon', MostCommon],
       ['Reflex', Reflex],
+      //['Stacker', Stacker],
       //['Targets', Targets],
     ]);
     
@@ -81,35 +85,6 @@
       //OUTPUT AS SPLIT LIST WITH DIFFICULTIES
       for (const [name, obj] of gameDict.entries()) {
         
-        //console.log(name,'lastPlayed',gameObj.getLastPlayedDate(name), gameObj.getHighScore(name));
-        
-        /*
-        let statRow = document.createElement('tr');
-        statRow.style.border = '6px solid #2e2';
-        statRow.style.height = '0.25rem';
-        statRow.style.padding = 0;
-        statRow.style.margin = 0;
-        
-        let statNameTd = document.createElement('td');
-        statNameTd.innerHTML = name;
-        statNameTd.style.fontSize = '0.5rem';
-        statRow.appendChild(statNameTd);
-        
-        let statScoreTd = document.createElement('td');
-        statScoreTd.innerHTML = 'High Score: ' + gameObj.getHighScore(name).toFixed(3);
-        statScoreTd.colSpan = 2;
-        statScoreTd.style.fontSize = '0.5rem';
-        statRow.appendChild(statScoreTd);
-        
-        let statPlayTd = document.createElement('td');
-        statPlayTd.innerHTML = 'Last Play: ' + gameObj.getLastPlayedDate(name);
-        statPlayTd.colSpan = 3;
-        statPlayTd.style.fontSize = '0.5rem';
-        statRow.appendChild(statPlayTd);
-        
-        gamesTable.appendChild(statRow);
-        */
-        
         let tr = document.createElement('tr');
         tr.style.borderBottom = '1px solid #2e2';
         let td = document.createElement('td');
@@ -148,13 +123,9 @@
       /*
       let resetBtn = document.createElement('button');
       resetBtn.innerHTML = 'RESET';
-      let gameName = 'Reflex';
       resetBtn.onclick = () => {
-        this.gameName + '-' + this.difficulty;
-        let clearObj = {};
-        for(let i = 1; i <= 5; i++){
-          let saveName = gameName + i;
-          saveLocalStorageItem(saveName, JSON.stringify(clearObj));
+        //let gameName = 'Reflex' || false;
+        this.resetSaveData(gameName);
         }
       }
      document.getElementById('form').appendChild(resetBtn);
@@ -174,36 +145,6 @@
       difficulty = parseInt(difficulty);
       //console.log('init', difficulty);
       let game = new(gameDict.get(gameName))(difficulty);
-      
-      /*switch(game){
-        case 'increment':
-          game = new Increment(difficulty);
-        break;
-        case 'pairs':
-          game = new Pairs(difficulty);
-        break;
-        case 'codeword':
-          game = new Codeword(difficulty);
-        break;
-        case 'sudoku':
-          game = new Sudoku(difficulty);
-        break;
-        case 'mostCommon':
-          game = new MostCommon(difficulty);
-        break;
-        case 'constraints':
-          game = new Constraints(difficulty);
-        break;
-        case 'reflex':
-          game = new Reflex(difficulty);
-        break;
-        case 'targets':
-          game = new Targets(difficulty);
-        break;
-        case 'poker':
-          game = new Poker(difficulty);
-        break;
-      }*/
     }
   </script>
 </head>
@@ -213,39 +154,7 @@
   <!-- GAME CONTENT IS INSERTED HERE -->
 </main>
 <div id="form">
-  <!--form action="" onsubmit="event.preventDefault(); init()">
-    <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
-      <label for="game">Select game: </label>
-     </div>
-    <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
-     <select id="gameSelect" name="game">
-      <option value="poker">Poker</option>
-      <option value="targets">Targets</option>
-      <option value="reflex">Reflex</option>
-      <option value="mostCommon">Common</option>
-      <option value="constraints">Constraints</option>
-      <option value="codeword">Codeword</option>
-      <option value="increment">Increment</option>
-      <option value="pairs">Pairs</option>
-      <option value="sudoku">Sudoku</option>
-     </select>
-    </div>
-    <br>
-    <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
-      <label for="difficulty">Difficulty: </label>
-    </div>
-     <div style="width:50%; padding: 0; margin: 0; float:left; position:relative;">
-      <select name="difficulty">
-        <option value=1>Trivial</option>
-        <option value=2 selected>Easy</option>
-        <option value=3>Normal</option>
-        <option value=4>Hard</option>
-        <option value=5>Hellish</option>
-      </select>
-    </div>
-    <br>
-    <button type=submit>Play Game</button>
-  </form-->
+ <!-- Game selection form inserted here -->
 </div>
 </body>
 

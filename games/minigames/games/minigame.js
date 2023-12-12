@@ -288,4 +288,25 @@ class MiniGame
 	  return score;
 	}
 	
+	resetSaveData(game = false)
+	{
+    let clearObj = {};
+    let saveName = game;
+    if(!game){
+      //CLEAR ALL GAMES SAVES
+      for (const [name, obj] of gameDict.entries()) {
+        for (let i = 1; i <= 5; i++) {
+          saveName = game + i;
+          saveLocalStorageItem(saveName, JSON.stringify(clearObj));
+        }
+      }
+    }else{
+      //CLEAR THIS GAMES SAVE
+      for(let i = 1; i <= 5; i++){
+        saveName = game + i;
+        saveLocalStorageItem(saveName, JSON.stringify(clearObj));
+      }
+    }
+	}
+	
 }
