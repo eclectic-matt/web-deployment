@@ -14,8 +14,9 @@ class Darts extends MiniGame {
   {
     //this.target = this.randomInt(3, 60 * this.dartCount);
     this.target = 0;
-    //end on a double?
+    //end on a double - at least one value must be *2
     this.target += this.randomInt(1,20) * 2;
+    //for the rest, generate random val + modifier (1-3)
     for(let i = 1; i < this.dartCount; i++){
       this.target += this.randomInt(1,20) * this.randomInt(1,3);
     }
@@ -83,6 +84,7 @@ class Darts extends MiniGame {
       this.radiusBackBoard = this.height / 2;
     }
     
+    /*
     //Outer circle (the full play area)
     this.radiusOuterCircle = this.radiusBackBoard - 20;
     //The size of the circle for the outer double arc
@@ -97,6 +99,23 @@ class Darts extends MiniGame {
     this.radiusOuterBull = 10;
     //inner bull
     this.radiusInnerBull = 5;
+    */
+
+    //Outer circle (the full play area)
+    this.radiusOuterCircle = this.radiusBackBoard * 0.95; //5% smaller
+    //The size of the circle for the outer double arc
+    this.radiusOuterDouble = this.radiusOuterCircle;
+    //and the inner double arc
+    this.radiusInnerDouble = this.radiusOuterDouble * 0.95; //5% smaller
+    //and the outer triple arc
+    this.radiusOuterTriple = this.radiusInnerDouble * 0.75;
+    //and the inner triple arc
+    this.radiusInnerTriple = this.radiusOuterTriple * 0.5;
+    //outer bull
+    this.radiusOuterBull = this.radiusInnerTriple * 0.2;
+    //inner bull
+    this.radiusInnerBull = this.radiusOuterBull * 0.5;
+    
     
     //SimplifiedDartBoard
     //bull circle - bigger 1/4 of radius
