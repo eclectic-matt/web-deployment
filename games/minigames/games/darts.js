@@ -1,5 +1,5 @@
 class Darts extends MiniGame {
-  
+
   constructor(difficulty)
   {
     super(difficulty);
@@ -9,7 +9,7 @@ class Darts extends MiniGame {
     this.highlight = false;
     this.init();
   }
-  
+
   init()
   {
     //this.target = this.randomInt(3, 60 * this.dartCount);
@@ -22,32 +22,32 @@ class Darts extends MiniGame {
     }
     this.current = this.target;
     this.throws = this.current + ' -> ';
-    
+
     document.getElementById('form').style.display = 'none';
     let el = document.getElementById('main');
     //CLEAR main
     el.innerHTML = '';
-    
+
     this.endsOnDouble = true;
-    
+
     let targetHead = document.createElement('h2');
     targetHead.innerHTML = 'Target: ' + this.target + ' in ' + this.dartCount + ' darts' + (this.endsOnDouble ? ' (ending on a double)' : '');
     targetHead.id = 'targetHead';
     targetHead.style.fontSize = '0.75rem';
     el.appendChild(targetHead);
-    
+
     let dartHead = document.createElement('h2');
     dartHead.innerHTML = '';
     dartHead.id = 'dartHead';
     dartHead.style.fontSize = '0.75rem';
     el.appendChild(dartHead);
-    
+
     let throwsHead = document.createElement('h2');
     throwsHead.innerHTML = this.throws;
     throwsHead.id = 'throwsHead';
     throwsHead.style.fontSize = '0.5rem';
     el.appendChild(throwsHead);
-    
+
     let cnv = document.createElement('canvas');
     cnv.id = 'cnv';
     this.width = window.innerWidth - (window.innerWidth * 0.05);
@@ -61,8 +61,8 @@ class Darts extends MiniGame {
       this.checkHighlight(event);
     }*/
     el.appendChild(cnv);
-    
-    
+
+
     //Add button to switch
     let switchBtn = document.createElement('button');
     switchBtn.id = 'switchBtn';
@@ -72,10 +72,10 @@ class Darts extends MiniGame {
       this.switchSimplified(ev);
     }
     el.appendChild(switchBtn);
-    
+
     el.appendChild(document.createElement('br'));
     el.appendChild(document.createElement('br'));
-      
+
     //Calculate and store radius values
     //Black backboard (where numbers displayed)
     if(this.width < this.height){
@@ -83,7 +83,7 @@ class Darts extends MiniGame {
     }else{
       this.radiusBackBoard = this.height / 2;
     }
-    
+
     /*
     //Outer circle (the full play area)
     this.radiusOuterCircle = this.radiusBackBoard - 20;
@@ -102,21 +102,21 @@ class Darts extends MiniGame {
     */
 
     //Outer circle (the full play area)
-    this.radiusOuterCircle = this.radiusBackBoard * 0.95; //5% smaller
+    this.radiusOuterCircle = this.radiusBackBoard * 0.90;
     //The size of the circle for the outer double arc
     this.radiusOuterDouble = this.radiusOuterCircle;
     //and the inner double arc
-    this.radiusInnerDouble = this.radiusOuterDouble * 0.95; //5% smaller
+    this.radiusInnerDouble = this.radiusOuterDouble * 0.85;
     //and the outer triple arc
-    this.radiusOuterTriple = this.radiusInnerDouble * 0.75;
+    this.radiusOuterTriple = this.radiusInnerDouble * 0.70;
     //and the inner triple arc
-    this.radiusInnerTriple = this.radiusOuterTriple * 0.5;
+    this.radiusInnerTriple = this.radiusOuterTriple * 0.80;
     //outer bull
-    this.radiusOuterBull = this.radiusInnerTriple * 0.2;
+    this.radiusOuterBull = this.radiusInnerTriple * 0.3;
     //inner bull
     this.radiusInnerBull = this.radiusOuterBull * 0.5;
-    
-    
+
+
     //SimplifiedDartBoard
     //bull circle - bigger 1/4 of radius
     this.radiusSimpleBull = this.radiusBackBoard / 4;
@@ -126,17 +126,17 @@ class Darts extends MiniGame {
     this.radiusSimpleTriple = (3/4 * this.radiusSimpleDouble);
     //single outer - 1/3 of remaining space
     this.radiusSimpleSingle = (1/2 * this.radiusSimpleDouble);
-    
+
     this.drawBoard();
   }
-  
+
   switchSimplified(ev)
   {
     this.simplified = !this.simplified;
     ev.target.innerHTML = (this.simplified ? 'Switch to regular' : 'Switch to simplified');
     this.drawBoard();
   }
-  
+
   drawBoard(highlight = false)
   {
     if(this.simplified){
@@ -145,12 +145,12 @@ class Darts extends MiniGame {
       this.drawDartBoard(highlight);
     }
   }
-  
+
   drawSimplifiedDartBoard(highlight = false)
   {
     let cnv = document.getElementById('cnv');
     let ctx = cnv.getContext('2d');
-    
+
     let width = cnv.width;
     let height = cnv.height;
     let midx = width / 2;
@@ -161,11 +161,11 @@ class Darts extends MiniGame {
     let redCol = '#e22';
     let greenCol = '#2e2';
     let highlightCol = '#a0b';
-    
+
     //Fill BG
     ctx.fillStyle = bgCol;
     ctx.fillRect(0, 0, width, height);
-    
+
     //Draw back board
     ctx.beginPath();
     ctx.fillStyle = blackCol
@@ -173,7 +173,7 @@ class Darts extends MiniGame {
     ctx.arc(midx, midy, this.radiusBackBoard, 0, 2*Math.PI);
     ctx.fill();
     ctx.closePath();
-    
+
     //White Outer Circle
     ctx.beginPath();
     ctx.fillStyle = whiteCol;
@@ -181,7 +181,7 @@ class Darts extends MiniGame {
     ctx.arc(midx, midy, this.radiusOuterCircle, 0, 2*Math.PI);
     ctx.fill();
     ctx.closePath();
-    
+
     //20 Dr Sb Tg Sb 
     //1  Dg Sw Tr Sw
 
@@ -191,23 +191,23 @@ class Darts extends MiniGame {
     let angle = -Math.PI/2;
     //Move back by half a segment angle (20 spans 12 o'clock)
     angle -= angleSeg / 2;
-    
+
     //Draw arcs
     for(let i = 0; i < this.values.length; i++){
-      
+
       //Set colours
       let colourTriple = ( i % 2 === 0 ? redCol : greenCol);
       //let colourDouble = colourTriple;
       //Alternating double/triple colours
       let colourDouble = ( i % 2 === 0 ? greenCol : redCol);
       let colourSingle = ( i % 2 === 0 ? blackCol : whiteCol);
-      
+
       //Init coords
       let startX = midx + this.radiusSimpleDouble * Math.cos(angle);
       let startY = midy + this.radiusSimpleDouble * Math.sin(angle);
       let x = startX;
       let y = startY;
-      
+
       if((highlight) && (highlight.value === this.values[i])){
         if(highlight.modifier === 1) {
           colourSingle = highlightCol;
@@ -231,7 +231,7 @@ class Darts extends MiniGame {
           colourTriple = highlightCol;
         }
       }
-      
+
       //SINGLES (BLACK ONLY, WHITE SINGLES DRAWN BY BACKGROUND)
       if ((i % 2) === 0) {
         ctx.beginPath();
@@ -246,7 +246,7 @@ class Darts extends MiniGame {
         ctx.fill();
         ctx.closePath();
       }
-      
+
       //DOUBLE
       ctx.beginPath();
       ctx.fillStyle = colourDouble;
@@ -266,14 +266,14 @@ class Darts extends MiniGame {
       ctx.fillText(startX, startY, '2x', 20);
       //ctx.fill();
       ctx.closePath();
-      
+
       //TRIPLES
       startX = midx + this.radiusSimpleTriple * Math.cos(angle);
       startY = midy + this.radiusSimpleTriple * Math.sin(angle);
       x = startX;
       y = startY;
       ctx.beginPath();
-      
+
       //OUTER TRIPLE TOP LINE
       ctx.fillStyle = colourTriple;
       ctx.moveTo(x, y);
@@ -296,14 +296,14 @@ class Darts extends MiniGame {
       ctx.fillText(startX, startY, '3x', 20);
       //ctx.fill();
       ctx.closePath();
-      
+
       //SINGLES
       startX = midx + this.radiusSimpleSingle * Math.cos(angle);
       startY = midy + this.radiusSimpleSingle* Math.sin(angle);
       x = startX;
       y = startY;
       ctx.beginPath();
-      
+
       //OUTER SINGLE TOP LINE
       ctx.fillStyle = colourSingle;
       ctx.moveTo(x, y);
@@ -326,7 +326,7 @@ class Darts extends MiniGame {
       ctx.fillText(startX, startY, '1x', 20);
       //ctx.fill();
       ctx.closePath();
-      
+
       //bull
       ctx.moveTo(midx, midy);
       ctx.beginPath();
@@ -334,7 +334,7 @@ class Darts extends MiniGame {
       ctx.fillStyle = whiteCol;
       ctx.fill();
       ctx.closePath();
-      
+
       //Output value
       ctx.beginPath();
       ctx.fillStyle = whiteCol;
@@ -343,24 +343,24 @@ class Darts extends MiniGame {
       fontSize = fontSize.toFixed(0);
       ctx.font = fontSize + 'pt Verdana';
       x = midx + (0.95*(fontWidth/2)) * Math.cos((i/20)* (2*Math.PI) + (3*Math.PI/2));
-			y = midy + (0.95*(fontWidth/2)) * Math.sin((i/20)* (2*Math.PI) + (3*Math.PI/2));
-			//console.log(i, values[i], x, y);
-			// Adjust as text drawn from top left (alignment)
-			x = x - 0.03*fontWidth;
-			y = y + 0.02*fontWidth;
-			ctx.fillText(this.values[i], x, y);
-			//ctx.fill();
+                        y = midy + (0.95*(fontWidth/2)) * Math.sin((i/20)* (2*Math.PI) + (3*Math.PI/2));
+                        //console.log(i, values[i], x, y);
+                        // Adjust as text drawn from top left (alignment)
+                        x = x - 0.03*fontWidth;
+                        y = y + 0.02*fontWidth;
+                        ctx.fillText(this.values[i], x, y);
+                        //ctx.fill();
       ctx.closePath;
 
       angle += angleSeg;
     }
   }
-  
+
   drawDartBoard(highlight = false)
   {
     let cnv = document.getElementById('cnv');
     let ctx = cnv.getContext('2d');
-    
+
     let width = cnv.width;
     let height = cnv.height;
     let midx = width / 2;
@@ -371,11 +371,11 @@ class Darts extends MiniGame {
     let redCol = '#e22';
     let greenCol = '#4e4';
     let highlightCol = '#a0b';
-    
+
     //Fill BG
     ctx.fillStyle = bgCol;
     ctx.fillRect(0, 0, width, height);
-    
+
     //Draw back board
     ctx.beginPath();
     ctx.fillStyle = blackCol
@@ -383,7 +383,7 @@ class Darts extends MiniGame {
     ctx.arc(midx, midy, this.radiusBackBoard, 0, 2*Math.PI);
     ctx.fill();
     ctx.closePath();
-    
+
     //White Outer Circle
     ctx.beginPath();
     ctx.fillStyle = whiteCol;
@@ -391,7 +391,7 @@ class Darts extends MiniGame {
     ctx.arc(midx, midy, this.radiusOuterCircle, 0, 2*Math.PI);
     ctx.fill();
     ctx.closePath();
-    
+
     //20 Dr Sb Tg Sb 
     //1  Dg Sw Tr Sw
 
@@ -401,23 +401,23 @@ class Darts extends MiniGame {
     let angle = -Math.PI/2;
     //Move back by half a segment angle (20 spans 12 o'clock)
     angle -= angleSeg / 2;
-    
+
     //Draw arcs
     for(let i = 0; i < this.values.length; i++){
-      
+
       //Set colours
       let colourTriple = ( i % 2 === 0 ? redCol : greenCol);
       let colourDouble = colourTriple;
       //Alternating double/triple colours
       //let colourDouble = ( i % 2 === 0 ? greenCol : redCol);
       let colourSingle = ( i % 2 === 0 ? blackCol : whiteCol);
-      
+
       //Init coords
       let startX = midx + this.radiusOuterDouble * Math.cos(angle);
       let startY = midy + this.radiusOuterDouble * Math.sin(angle);
       let x = startX;
       let y = startY;
-      
+
       if((highlight) && (highlight.value === this.values[i])){
         if (highlight.modifier === 1){
           colourSingle = highlightCol;
@@ -441,7 +441,7 @@ class Darts extends MiniGame {
           colourTriple = highlightCol;
         }
       }
-      
+
       //SINGLES (BLACK ONLY, WHITE SINGLES DRAWN BY BACKGROUND)
       if ((i % 2) === 0) {
         ctx.beginPath();
@@ -456,7 +456,7 @@ class Darts extends MiniGame {
         ctx.fill();
         ctx.closePath();
       }
-      
+
       //OUTER DOUBLE TOP LINE
       ctx.beginPath();
       ctx.fillStyle = colourDouble;
@@ -469,14 +469,14 @@ class Darts extends MiniGame {
       ctx.lineTo(startX, startY);
       ctx.fill();
       ctx.closePath();
-      
+
       //TRIPLES
       startX = midx + this.radiusOuterTriple * Math.cos(angle);
       startY = midy + this.radiusOuterTriple * Math.sin(angle);
       x = startX;
       y = startY;
       ctx.beginPath();
-      
+
       //OUTER TRIPLE TOP LINE
       ctx.fillStyle = colourTriple;
       ctx.moveTo(x, y);
@@ -492,7 +492,7 @@ class Darts extends MiniGame {
       ctx.lineTo(startX, startY);
       ctx.fill();
       ctx.closePath();
-      
+
       //outer bull
       let colourOuterBull = greenCol;
       if(
@@ -521,7 +521,7 @@ class Darts extends MiniGame {
       ctx.fillStyle = colourInnerBull;
       ctx.fill();
       ctx.closePath();
-      
+
       //Output value
       ctx.beginPath();
       ctx.fillStyle = whiteCol;
@@ -530,12 +530,12 @@ class Darts extends MiniGame {
       fontSize = fontSize.toFixed(0);
       ctx.font = fontSize + 'pt Verdana';
       x = midx + (0.95*(fontWidth/2)) * Math.cos((i/20)* (2*Math.PI) + (3*Math.PI/2));
-			y = midy + (0.95*(fontWidth/2)) * Math.sin((i/20)* (2*Math.PI) + (3*Math.PI/2));
-			//console.log(i, values[i], x, y);
-			// Adjust as text drawn from top left (alignment)
-			x = x - 0.03*fontWidth;
-			y = y + 0.02*fontWidth;
-			ctx.fillText(this.values[i], x, y);
+                        y = midy + (0.95*(fontWidth/2)) * Math.sin((i/20)* (2*Math.PI) + (3*Math.PI/2));
+                        //console.log(i, values[i], x, y);
+                        // Adjust as text drawn from top left (alignment)
+                        x = x - 0.03*fontWidth;
+                        y = y + 0.02*fontWidth;
+                        ctx.fillText(this.values[i], x, y);
       ctx.closePath;
 
       angle += angleSeg;
@@ -549,7 +549,7 @@ class Darts extends MiniGame {
     //console.log('board', distance, angle);
     return { distance: distance, angle: angle };
   }
-  
+
   getDistanceFromMidPoint(x, y)
   {
     const xDist = Math.abs((this.width / 2) - x);
@@ -557,35 +557,35 @@ class Darts extends MiniGame {
     // (a2 + b2 = c2), c2 = a2 + b2, c = root(a2 + b2)
     return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
   }
-  
+
   getAngleFromMidPoint(x, y)
   {
     let midx = (this.width / 2);
     let midy = (this.height / 2);
     return Math.atan2(midy - y, midx - x) * 180 / Math.PI + 180;
   }
-  
+
   detectBoardValue(ev)
   {
     const {x, y} = this.touchCanvas(ev);
     const {distance, angle} = this.getAngleAndDistanceFromMidpoint(x, y);
-  
+
     //THE WIDTH OF EACH SEGMENT
     let segAngle = 2 * Math.PI / 20;
     //ANGLE MUST BE ROTATED BY 90DEG (AND WITHIN 0-360) PLUS ADJUSTED BACK BY HALF A SEGMENT (20 spans 12 o'clock)
     let adjAngle = ((angle + 90 - (segAngle/2)) % 360);
-    
+
     let segNumber = Math.floor(20 * (adjAngle / 360));
     // STORE NUMBER FOR THIS SEGMENT
     let val = this.values[segNumber];
-    
+
     if(this.simplified){
       return this.detectSimplifiedBoard(distance, angle, val);
     }else{
       return this.detectRegularBoard(distance, angle, val);
     }
   }
-  
+
   detectSimplifiedBoard(distance, angle, val)
   {
     /*
@@ -594,10 +594,10 @@ class Darts extends MiniGame {
       --simple single
       --simple bull
     */
-    
+
     let mod = 1;
     let totalVal = val;
-    
+
     if(
      (distance <= this.radiusSimpleDouble) &&
      (distance > this.radiusSimpleTriple)
@@ -637,16 +637,16 @@ class Darts extends MiniGame {
       mod = '';
       return;
     }
-    
+
     if(val !== '' && mod !== ''){
       totalVal *= mod;
     }
-    
+
     let boardValue = { value: val, modifier: mod, totalValue: totalVal };
-    
+
     return boardValue;
   }
-  
+
   detectRegularBoard(distance, angle, val)
   {
     /*
@@ -659,10 +659,10 @@ class Darts extends MiniGame {
     -- outer bull
     -- inner bull
     */
-    
+
     let mod = 1;
     let totalVal = val;
-    
+
     if(
      (parseInt(distance) <= this.radiusOuterDouble) &&
      (parseInt(distance) > this.radiusInnerDouble)
@@ -708,37 +708,37 @@ class Darts extends MiniGame {
       mod = '';
       return;
     }
-    
+
     if(val !== '' && mod !== ''){
       totalVal *= mod;
     }
-    
+
     let boardValue = { value: val, modifier: mod, totalValue: totalVal };
-    
+
     return boardValue;
   }
-  
+
   checkClick(ev)
   {
     //console.log('checkClick', ev);
-    
+
     //Pass to detect method
     let board = this.detectBoardValue(ev);
     if(!board) return;
-    
+
     //Take board values and apply
     const { value, modifier, totalValue } = board;
-    
+
     let targetHead = document.getElementById('targetHead');
     targetHead.innerHTML = 'Target: ' + this.current + ' in ' + this.dartCount + ' darts';
-    
+
     let dartHead = document.getElementById('dartHead');
     dartHead.innerHTML = 'Clicked ' + value + ' (x' + modifier + ') = ' + totalValue;
     if( (modifier !== 2) && (totalValue - this.current === 0) ){
       dartHead.innerHTML += '<br>Note: you must end on a double!';
     }
     dartHead.style.fontSize = '0.75rem';
-    
+
     let confirmBtn = document.createElement('button');
     confirmBtn.onclick = (ev) => {
       this.applyClick(value, modifier, totalValue);
@@ -747,27 +747,27 @@ class Darts extends MiniGame {
     confirmBtn.style.fontSize = '0.75rem';
     confirmBtn.style.marginLeft = '25px';
     dartHead.appendChild(confirmBtn);
-    
+
     let highlight = { value: value, modifier: modifier, totalValue: totalValue };
     this.drawBoard(highlight);
   }
-  
+
   //Confirm target
   applyClick(value, modifier, totalValue)
   {
     this.current -= totalValue;
     this.dartCount--;
-    
+
     let dartHead = document.getElementById('dartHead');
     dartHead.innerHTML = '';
     let span = document.createElement('span');
     span.innerHTML = 'Target: ' + this.current + ' in ' + this.dartCount + ' darts' + '<br>' + 'Clicked ' + value + ' (x' + modifier + ') = ' + totalValue;
     span.style.fontSize = '0.75rem';
     dartHead.appendChild(span);
-    
+
     this.throws += value + 'x' + modifier + ' = ' + this.current + (this.current !== 0 ? ' -> ' : '');
     document.getElementById('throwsHead').innerHTML = this.throws;
-    
+
     if (this.current === 0) {
       if ((this.endsOnDouble === true) && (modifier === 2)) {
         this.win(this.target);
@@ -779,7 +779,7 @@ class Darts extends MiniGame {
       this.lose();
     }
   }
-  
+
   checkHighlight(ev)
   {
     //console.log('checkHighlight', ev);
@@ -787,7 +787,7 @@ class Darts extends MiniGame {
     //Pass to detect method
     const { value, modifier, totalValue } = this.detectBoardValue(ev);
     const highlight = { value: value, modifier: modifier, totalValue: totalValue };
-    
+
     if(JSON.stringify(highlight) === JSON.stringify(this.highlight)){
       //Highlight already applied, do not re-draw
       return false;
@@ -799,12 +799,12 @@ class Darts extends MiniGame {
 
   touchCanvas(e)
   {
-  	e.preventDefault();
+    e.preventDefault();
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-	  //Return as coordinates object
-	  return { x: x, y: y };
+    //Return as coordinates object
+    return { x: x, y: y };
   }
 
 }
