@@ -34,18 +34,24 @@ class Darts extends MiniGame {
     targetHead.innerHTML = 'Target: ' + this.target + ' in ' + this.dartCount + ' darts' + (this.endsOnDouble ? ' (ending on a double)' : '');
     targetHead.id = 'targetHead';
     targetHead.style.fontSize = '0.75rem';
+    targetHead.style.width = '100%';
+    targetHead.style.textAlign = 'center';
     el.appendChild(targetHead);
 
     let dartHead = document.createElement('h2');
-    dartHead.innerHTML = '';
+    dartHead.innerHTML = '&nbsp;';
     dartHead.id = 'dartHead';
     dartHead.style.fontSize = '0.75rem';
+    dartHead.style.width = '100%';
+    dartHead.style.textAlign = 'center';
     el.appendChild(dartHead);
 
     let throwsHead = document.createElement('h2');
-    throwsHead.innerHTML = this.throws;
+    throwsHead.innerHTML = '&nbsp;' + this.throws;
     throwsHead.id = 'throwsHead';
     throwsHead.style.fontSize = '0.5rem';
+    throwsHead.style.width = '100%';
+    throwsHead.style.textAlign = 'center';
     el.appendChild(throwsHead);
 
     let cnv = document.createElement('canvas');
@@ -293,7 +299,7 @@ class Darts extends MiniGame {
       //fontSize = fontSize.toFixed(0);
       //ctx.font = fontSize + 'pt Verdana';
       ctx.fillStyle = whiteCol;
-      ctx.fillText(startX, startY, '3x', 20);
+      ctx.fillText(startX, startY, '3x');
       //ctx.fill();
       ctx.closePath();
 
@@ -327,14 +333,29 @@ class Darts extends MiniGame {
       //ctx.fill();
       ctx.closePath();
 
-      //bull
+      //outer bull - LHS
       ctx.moveTo(midx, midy);
       ctx.beginPath();
-      ctx.arc(midx, midy, this.radiusSimpleBull, 0, 2*Math.PI);
-      ctx.fillStyle = whiteCol;
+      //move to bottom
+      ctx.lineTo(midx, midy - this.radiusSimpleBull);
+      ctx.arc(midx, midy, this.radiusSimpleBull, Math.PI/2, 3 
+      *Math.PI/2);
+      ctx.lineTo(midx, midy);
+      ctx.fillStyle = '#d55';
       ctx.fill();
       ctx.closePath();
 
+      //inner bull - RHS
+      ctx.moveTo(midx, midy);
+      ctx.beginPath();
+      //move to bottom
+      ctx.lineTo(midx, midy + this.radiusSimpleBull);
+      ctx.arc(midx, midy, this.radiusSimpleBull, 3*Math.PI/2, Math.PI/2);
+      ctx.lineTo(midx, midy);
+      ctx.fillStyle = '#5d5';
+      ctx.fill();
+      ctx.closePath();
+      
       //Output value
       ctx.beginPath();
       ctx.fillStyle = whiteCol;
@@ -343,13 +364,13 @@ class Darts extends MiniGame {
       fontSize = fontSize.toFixed(0);
       ctx.font = fontSize + 'pt Verdana';
       x = midx + (0.95*(fontWidth/2)) * Math.cos((i/20)* (2*Math.PI) + (3*Math.PI/2));
-                        y = midy + (0.95*(fontWidth/2)) * Math.sin((i/20)* (2*Math.PI) + (3*Math.PI/2));
-                        //console.log(i, values[i], x, y);
-                        // Adjust as text drawn from top left (alignment)
-                        x = x - 0.03*fontWidth;
-                        y = y + 0.02*fontWidth;
-                        ctx.fillText(this.values[i], x, y);
-                        //ctx.fill();
+      y = midy + (0.95*(fontWidth/2)) * Math.sin((i/20)* (2*Math.PI) + (3*Math.PI/2));
+      //console.log(i, values[i], x, y);
+      // Adjust as text drawn from top left (alignment)
+      x = x - 0.03*fontWidth;
+      y = y + 0.02*fontWidth;
+      ctx.fillText(this.values[i], x, y);
+      //ctx.fill();
       ctx.closePath;
 
       angle += angleSeg;
@@ -635,11 +656,11 @@ class Darts extends MiniGame {
       //OFF BOARD
       val = '';
       mod = '';
-      return;
+      return false;
     }
 
-    if(val !== '' && mod !== ''){
-      totalVal *= mod;
+    if ((val !== '') && (mod !== '')) {
+      totalVal = mod * val;
     }
 
     let boardValue = { value: val, modifier: mod, totalValue: totalVal };
@@ -706,11 +727,11 @@ class Darts extends MiniGame {
       //OFF BOARD
       val = '';
       mod = '';
-      return;
+      return false;
     }
 
-    if(val !== '' && mod !== ''){
-      totalVal *= mod;
+    if( (val !== '') && (mod !== '') ){
+      totalVal = mod * val;
     }
 
     let boardValue = { value: val, modifier: mod, totalValue: totalVal };
@@ -729,14 +750,8 @@ class Darts extends MiniGame {
     //Take board values and apply
     const { value, modifier, totalValue } = board;
 
-    let targetHead = document.getElementById('targetHead');
-    targetHead.innerHTML = 'Target: ' + this.current + ' in ' + this.dartCount + ' darts';
-
     let dartHead = document.getElementById('dartHead');
     dartHead.innerHTML = 'Clicked ' + value + ' (x' + modifier + ') = ' + totalValue;
-    if( (modifier !== 2) && (totalValue - this.current === 0) ){
-      dartHead.innerHTML += '<br>Note: you must end on a double!';
-    }
     dartHead.style.fontSize = '0.75rem';
 
     let confirmBtn = document.createElement('button');
@@ -758,12 +773,11 @@ class Darts extends MiniGame {
     this.current -= totalValue;
     this.dartCount--;
 
+    let targetHead = document.getElementById('targetHead');
+    targetHead.innerHTML = 'Target: ' + this.target + ' in ' + this.dartCount + ' darts' + (this.endsOnDouble ? ' (ending on a double)' : '');
+    
     let dartHead = document.getElementById('dartHead');
-    dartHead.innerHTML = '';
-    let span = document.createElement('span');
-    span.innerHTML = 'Target: ' + this.current + ' in ' + this.dartCount + ' darts' + '<br>' + 'Clicked ' + value + ' (x' + modifier + ') = ' + totalValue;
-    span.style.fontSize = '0.75rem';
-    dartHead.appendChild(span);
+    dartHead.innerHTML = 'Clicked ' + value + ' (x' + modifier + ') = ' + totalValue;
 
     this.throws += value + 'x' + modifier + ' = ' + this.current + (this.current !== 0 ? ' -> ' : '');
     document.getElementById('throwsHead').innerHTML = this.throws;
