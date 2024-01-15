@@ -63,9 +63,12 @@ class Storyteller
 		//ASSIGN CHARACTERS (INCL. MODIFYING SETUP)
 		this.assignRoles(playerCount);
 		//ASSIGN NAMES (REAL INPUTS PLUS SOME GENERATED RANDOM NAMES)
-		this.assignNames(names);
+		//this.assignNames(names);
+		//OUTPUT
+		document.write('<h2>Post setup modifications</h2>');
+		this.outputRoles();
 		//DEBUG OUTPUT
-		console.log("roles\n",this.roles.map((role) => { return role.name + ' is the ' + role.role }).join("\n"));
+		//console.log("roles\n",this.roles.map((role) => { return role.name + ' is the ' + role.role }).join("\n"));
 	}
 
 	loadScript(name){
@@ -280,56 +283,104 @@ class Storyteller
 
 	assignRoles(playerCount)
 	{
+		//==========
+		// INITIAL
+		// PASS
+		//==========
 		this.roles = [];
 		let playersArr = this.getPlayersArray(playerCount);
-		console.log('playersArr', playersArr);
+		//console.log('playersArr', playersArr);
 		for(let i = 0; i < playerCount; i++){
 			let thisType = playersArr[i];
 			let role = this.getRole(thisType);
+			role.name = this.getRandomName();
 			this.roles.push(role);
 		}
 
-		console.log('rolesPreModify',playerCount, JSON.parse(JSON.stringify(this.roles)));
-		// console.log('roles',this.roles.map((role) => { return role.role }).join(', '));
-		//PASS BACK THROUGH TO CHANGE SETUP
+		//OUTPUT FOR DEBUGGING
+		//document.write('<h2>Initial setup</h2>');
+		let span = document.createElement('span');
+		span.innerHTML = '<h2>Initial Setup</h2>';
+		document.body.appendChild(span);
+
+		this.outputRoles();
+		//console.log('roles',this.roles.map((role) => { return role.role }).join(', '));
+		
+		//==========
+		// MODIFIED
+		// SETUP 
+		//(e.g. BARON)
+		//==========
+		//ITERATE THROUGH ROLES
 		for(let roleId in this.roles){
+			//GET THE CURRENT ROLE
 			let role = this.roles[roleId];
+			//CHECK IF THIS ABILITY HAS A TRIGGER, AND THAT TRIGGER IS SETUP
 			if(role.ability.trigger && role.ability.trigger === 'setup'){
-				console.log('modifiesSetup', role);
+				//THIS ROLE MODIFIES SETUP (e.g. BARON)
+				//console.log('modifiesSetup', role);
 				//Store here, e.g. Baron: type=townsfolk, modifiedType=outsider, count=2
 				let setup = role.ability.special;
 				let setupType = setup.type;
 				let modifiedType = setup.modifiedType;
 				let setupCount = setup.count;
-				for(let i=0; i< setupCount; i++){
+				//FOR EACH ROLE TO MODIFY
+				for(let i = 0; i < setupCount; i++){
 					//this.roles.filter( (role) => { return role.type === setupType})[0].type = modifiedType;
+					//GET A NEW ROLE FOR THIS PLAYER
 					let newRole = this.getRole(modifiedType);
-					console.log('setupMod - new role =',newRole);
-					//ITERATE ROLES TO FIND MATCHING ROLE
+					//console.log('setupMod - new role =',newRole);
+					//ITERATE ROLES TO FIND MATCHING ROLE TO REPLACE
 					for(let j = 0; j < this.roles.length; j++){
 						//IF TYPE MATCHES 
 						if(this.roles[j].type === setupType){
 							//REPLACE ROLE
-							console.log('SWAPPING',JSON.parse(JSON.stringify(this.roles[j])), JSON.parse(JSON.stringify(newRole)));
+							//console.log('SWAPPING',JSON.parse(JSON.stringify(this.roles[j])), JSON.parse(JSON.stringify(newRole)));
 							this.roles[j] = JSON.parse(JSON.stringify(newRole));
+							//GETTING NEW ROLE REMOVES NAME 
+							this.roles[j].name = this.getRandomName();
+							//HAVE MADE THIS MODIFICATION, BREAK OUT OF FOR LOOP
+							break;
 						}
 					}
 				}
 			}
-		}
-
-		console.log('rolesPostModify',playerCount, JSON.parse(JSON.stringify(this.roles)));
+		}//END setup modification
 	}
 
-	assignNames(names){
+	outputRoles()
+	{
+		//console.log('this roles', this.roles);
+		for(let i = 0; i < this.roles.length; i++){
+			//document.write(this.roles[i].name + ' is the ' + this.roles[i].role + '<br>');
+			let span = document.createElement('span');
+			span.innerHTML = this.roles[i].name + ' is the ' + this.roles[i].role + '<br>';
+			document.body.appendChild(span);
+	
+			//console.log(this.roles[i].name + ' is the ' + this.roles[i].role);
+		}
+		//document.write('<hr>');
+	}
+
+	/**
+	 * Assign names to the current roles using the supplied names array.
+	 * @param {array} names The array of actual player names to use first (then randomly generated).
+	 * return void No return.
+	 */
+	assignNames(names)
+	{
 		for(let i = 0; i < names.length; i++){
-		this.roles[i].name = names[i];
+			this.roles[i].name = names[i];
 		}
 		for(let i = names.length; i < this.roles.length; i++){
-		this.roles[i].name = this.getRandomName();
+			this.roles[i].name = this.getRandomName();
 		}
 	}
 
+	/**
+	 * Get a random name which has not already been used in the current roles array.
+	 * @return {string} A random name.
+	 */
 	getRandomName(){
 		let names = [
 			'Mat',
