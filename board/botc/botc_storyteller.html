@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <script src="storyteller.js"></script>
+  <script defer>
+  function init(){
+
+	let playerCount = 8;
+	document.write('Setting up an ' + playerCount + ' player game<br>');
+
+    let st;
+    //st = new Storyteller('tb', 5);
+    //st = new Storyteller('tb', 6);
+    //st = new Storyteller('tb', 7);
+    st = new Storyteller('tb', 8);
+
+	//WASHERWOMAN
+	info = st.learnType('townsfolk',2,'Niz');
+    //console.log('washerwoman', info);
+	if(info.possible.length == 0){
+		document.write('The washerwoman learns that there are no other townsfolk<br>');
+	}else{
+		document.write('The washerwoman learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>');
+	}
+
+	//LIBRARIAN
+	info = st.learnType('outsider',2,'Niz');
+	console.log('librarian', info);
+	if(info.possible.length == 0){
+		document.write('The librarian learns that there are no outsiders<br>');
+	}else{
+		document.write('The librarian learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>');
+	}
+	
+	info = st.learnType('minion',2,'Niz');
+	console.log('investigator', info);
+	document.write('The investigator learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>');
+  }
+  </script>
+</head>
+
+<body onload="init()">
+<div id="grimoire">
+  <div class="circle">
+    <div id="empath">
+      
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
