@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <script src="storyteller.js"></script>
+  <script defer>
+  function init(){
+	
+    let st, span;
+	let playerCount = 5;
+	//document.write('Setting up an ' + playerCount + ' player game<br>');
+	span = document.createElement('span');
+	span.innerHTML = 'Setting up an ' + playerCount + ' player game<br>';
+	document.body.appendChild(span);
+
+    st = new Storyteller('tb', playerCount);
+
+	//WASHERWOMAN
+	info = st.learnType('townsfolk',2,'Niz');
+    //console.log('washerwoman', info);
+	if(info.possible.length == 0){
+		//document.write('The washerwoman learns that there are no other townsfolk<br>');
+		span = document.createElement('span');
+		span.innerHTML = 'The washerwoman learns that there are no other townsfolk<br>';
+		document.body.appendChild(span);
+	}else{
+		//document.write('The washerwoman learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>');
+		span = document.createElement('span');
+		span.innerHTML = 'The washerwoman learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>';
+		document.body.appendChild(span);
+	}
+
+	//LIBRARIAN
+	info = st.learnType('outsider',2,'Niz');
+	console.log('librarian', info);
+	if(info.possible.length == 0){
+		//document.write('The librarian learns that there are no outsiders<br>');
+		span = document.createElement('span');
+		span.innerHTML = 'The librarian learns that there are no outsiders<br>';
+		document.body.appendChild(span);
+
+	}else{
+		//document.write('The librarian learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>');
+		span = document.createElement('span');
+		span.innerHTML = 'The librarian learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>';
+		document.body.appendChild(span);
+	}
+	
+	//INVESTIGATOR
+	info = st.learnType('minion',2,'Niz');
+	console.log('investigator', info);
+	//document.write('The investigator learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>');
+	span = document.createElement('span');
+	span.innerHTML = 'The investigator learns that either ' + info.possible[0] + ' or ' + info.possible[1] + ' is the ' + info.info + '<br>';
+	document.body.appendChild(span);
+  }
+  </script>
+	<style>
+		.circle {
+			border-radius: 50%;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+
+<body onload="init()">
+	<div id="grimoire">
+		<div class="circle">
+			<div id="empath">
+				Empath
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
