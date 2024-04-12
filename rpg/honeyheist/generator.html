@@ -66,8 +66,8 @@
 			
 			//ACCESSORY 
 			let accIndex = Math.floor(Math.random() * json.players.outfit.accessory.length);
-			let accItem = json.players.outfit.accessory[accIndex].name;
-			let accMod = json.players.outfit.accessory[accIndex].score;
+			let accItem = json.players.outfit.accessory[accIndex].item;
+			let accMod = json.players.outfit.accessory[accIndex].scoreModifier;
 			
 			//CALCULATE HBS 
 			let hbs = (topDIndex +1) + (topIIndex +1) + (btmDIndex +1) + (btmIIndex +1) + parseInt(accMod);
