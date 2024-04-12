@@ -20,12 +20,30 @@
 		<p id="character"></p>
   <p id="outfit"></p>
   <section id="stats">
-    <div style="width: 25%">Bear: <span id="bearStat">3</span></div>
-    <div style="width: 50%">
-      <button onclick="changeStat('bear')">Bear +</button> 
-    <button onclick="changeStat('criminal')">Criminal +</button> 
-    </div>
-    <div style="width: 25%">Criminal: <span id="criminalStat">3</span></div>
+    <table>
+      <tr>
+        <th colspan="2">
+          Bear
+        </tr>
+        <th colspan="2">
+          Criminal
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <span id="bearStat">3</span>
+        </td>
+        <td>
+          <button onclick="changeStat('bear')">Bear +</button>
+        </td>
+        <td>
+          <button onclick="changeStat('criminal')">Criminal +</button>
+        </td>
+        <td>
+          <span id="criminalStat">3</span>
+        </td>
+      </tr>
+    </table>
   </section>
 	</section>
 
