@@ -46,7 +46,7 @@
 
 				//OUTPUT TO PAGE
 				let charEl = document.getElementById('character');
-				charEl.innerHTML = 'You are ' + descriptor + ' ' + typeAndSkill.name + " bear (special skill: " + typeAndSkill.skill + ') who is this Heist\'s ' + role + ' wearing a ' + hat;
+				charEl.innerHTML = 'You are <em>' + descriptor + ' ' + typeAndSkill.name + '</em> bear (special skill: <em>' + typeAndSkill.skill + '</em>) who is this Heist\'s <b>"' + role + '"</b> wearing a <em>' + hat + '</em> hat';
 		}
 
 		const randomHeist = () => {
