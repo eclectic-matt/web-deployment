@@ -103,6 +103,70 @@
 			"Fez",
 			"Crown",
 			"Roll Twice"
-		]
+		],
+		"outfit": {
+			"top":{
+				"descriptor": [
+					"Fluorescent Yellow",
+					"Very 90s Tie Dyed",
+					"Powder Blue + Frilly",
+					"Black + White Striped",
+					"Beige",
+					"Black"
+				],
+				"item": [
+					"Mittens",
+					"Crop Top",
+					"Tuxedo Jacket/Shirt + bow tie",
+					"T-Shirt",
+					"Jumper",
+					"Trench Coat"
+				]
+			},
+			"bottom": {
+				"descriptor": [
+					"Peach Velour",
+					"Leopard Print",
+					"Tartan",
+					"Black Leather",
+					"Blue Denim",
+					"Grey"
+				],
+				"item": [
+					"Y Fronts",
+					"Knee Length Skirt",
+					"Knickerbockers",
+					"Bell Bottomed Flares",
+					"Cargo Pants",
+					"Smart Trousers"
+				]
+			},
+			"accessory": [
+				{
+					"item": "Pink Cowboy Hat",
+					"scoreModifier": -1
+				},
+				{
+					"item": "Bejewelled Crown",
+					"scoreModifier": -2
+				},
+				{
+					"item": "Badge that says BEAR ’N PROUD",
+					"scoreModifier": -3
+				},
+				{
+					"item": "Tophat + Monocle",
+					"scoreModifier": 1
+				},
+				{
+					"item": "Beautiful Blonde Wig",
+					"scoreModifier": 2
+				},
+				{
+					"item": "Cool Shades",
+					"scoreModifier": 3
+				}
+			]
+		}
 	}
 }
