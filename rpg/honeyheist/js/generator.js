@@ -67,7 +67,7 @@ const randomCharacter = () => {
 	
 	//OUTPUT
 	let outfitEl = document.getElementById('outfit');
-	outfitEl.innerHTML = 'You are wearing a <em>' + topDescriptor + ' ' + topItem + '</em>, <em>' + btmDescriptor + ' ' + btmItem + '</em> and a <em>' + accItem + '</em>. Your Human Believability Score (HBS): <b>' + hbs + '</b>.';
+	outfitEl.innerHTML = 'Your clothing: a <em>' + topDescriptor + ' ' + topItem + '</em>, <em>' + btmDescriptor + ' ' + btmItem + '</em> and a <em>' + accItem + '</em>. Your Human Believability Score (HBS): <b>' + hbs + '</b>.';
 }
 
 const randomHeist = () => {
