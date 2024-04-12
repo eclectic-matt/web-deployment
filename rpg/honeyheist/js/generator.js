@@ -99,7 +99,7 @@ const randomHeist = () => {
 
 	//OUTPUT
 	let heistEl = document.getElementById('heist');
-	heistEl.innerHTML = '<h2>HesitCon 2017</h2><p>Organizer: ' + organizer + '</p><p>Location: ' + locationAdjective + ' ' + locationDescription + ".</p><p>Prize: " + prize + '</p><p><em>Secret: ' + secret + '</em></p>The security features are: <ul><li>' + security1 + '</li><li> ' + security2 + '</li></ul>';
+	heistEl.innerHTML = '<h2>HeistCon 2017</h2><p>Organizer: ' + organizer + '</p><p>Location: ' + locationAdjective + ' ' + locationDescription + ".</p><p>Prize: " + prize + '</p><p><em>Secret: ' + secret + '</em></p>The security features are: <ul><li>' + security1 + '</li><li> ' + security2 + '</li></ul>';
 
 }
 
