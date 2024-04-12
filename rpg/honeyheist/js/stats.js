@@ -9,10 +9,16 @@ const changeStat = (stat) => {
     case 'bear':
       bear++;
       criminal--;
+      if(bear === 6){
+        alert('End - you go full bear!');
+      }
     break;
     case 'criminal':
       bear--;
       criminal++;
+      if(criminal === 6){
+        alert('End - you go full crim!');
+      }
     break;
   }
   criminalEl.innerHTML = criminal;
