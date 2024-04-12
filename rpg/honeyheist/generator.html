@@ -51,12 +51,30 @@
   //DISGUISE AND HBS 
 
   //TOP
-  let topDIndex = Math.floor(Math.random() * json.players.outfit.topDescriptor.length);
-				let topDescriptor = json.players.outfit.topDescriptor[topDIndex];
+  let topDIndex = Math.floor(Math.random() * json.players.outfit.top.descriptor.length);
+				let topDescriptor = json.players.outfit.top.descriptor[topDIndex];
 
-  let topIIndex = Math.floor(Math.random() * json.players.outfit.topItem.length);
-				let topItem = json.players.outfit.topItem[topDIndex];
+  let topIIndex = Math.floor(Math.random() * json.players.outfit.top.item.length);
+				let topItem = json.players.outfit.top.item[topIIndex];
 
+ //BOTTOM
+  let btmDIndex = Math.floor(Math.random() * json.players.outfit.bottom.descriptor.length);
+				let btmDescriptor = json.players.outfit.bottom.descriptor[btmDIndex];
+
+  let btmIIndex = Math.floor(Math.random() * json.players.outfit.bottom.item.length);
+				let btmItem = json.players.outfit.bottom.item[btmIIndex];
+
+  //ACCESSORY 
+  let accIndex = Math.floor(Math.random() * json.players.outfit.accessory.length);
+				let accItem = json.players.outfit.accessory[accIndex].name;
+   let accMod = json.players.outfit.accessory[accIndex].score;
+
+  //CALCULATE HBS 
+  let hbs = (topDIndex +1) + (topIIndex +1) + (btmDIndex +1) + (btmIIndex +1) + accMod;
+  
+  //OUTPUT
+  let outfitEl = document.getElementById('outfit');
+outfitEl.innerHTML = 'You are wearing a ' + topDescriptor + ' ' + topItem + ', a ' + btmDescriptor + ' ' + btmItem + ' and a ' + accItem + '. Your Human Believability Score (HBS): ' + hbs;
 		}
 
 		const randomHeist = () => {
@@ -121,6 +139,7 @@
 	<section id="characterSection">
 		<h1>Character</h1>
 		<p id="character"></p>
+  <p id="outfit"></p>
 	</section>
 
 	<section id="heistSection">
