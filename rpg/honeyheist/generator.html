@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="./data/honeyHeist.json"></script>
+	<script>
+
+		var json;
+
+		const loadData = () => {
+			getJSON("./data/honeyHeist.json", storeData);
+		}
+
+		const storeData = (status, data) => {
+			json = data;
+			console.log(json);
+		}
+
+		const randomCharacter = () => {
+				//console.log('data loaded', data);
+
+				
+				//SECTIONS TO GENERATE
+				//descriptor
+				let dIndex = Math.floor(Math.random() * json.players.descriptor.length);
+				let descriptor = json.players.descriptor[dIndex];
+
+				//typeAndSkill
+				let tIndex = Math.floor(Math.random() * json.players.typeAndSkill.length);
+				let typeAndSkill = json.players.typeAndSkill[tIndex];
+
+				//role
+				let rIndex = Math.floor(Math.random() * json.players.role.length);
+				let role = json.players.role[tIndex];
+
+				//hat
+				let hIndex = Math.floor(Math.random() * json.players.hat.length);
+				let hat = json.players.hat[hIndex];
+
+				//NICE GRAMMAR FORMAT FOR DESCRIPTOR
+				if(["a","e","i","o","u"].includes(descriptor.slice(0, 1).toLowerCase())){
+					descriptor = "an " + descriptor;
+				}else{
+					descriptor = "a " + descriptor
+				}
+
+				//OUTPUT TO PAGE
+				let charEl = document.getElementById('character');
+				charEl.innerHTML = 'You are ' + descriptor + ' ' + typeAndSkill.name + " bear (special skill: " + typeAndSkill.skill + ') who is this Heist\'s ' + role + ' wearing a ' + hat;
+		}
+
+		const randomHeist = () => {
+			let oIndex = Math.floor(Math.random() * json.GM.conventionOrganizer.length);
+			let organizer = json.GM.conventionOrganizer[oIndex];
+
+			let lAdjIndex = Math.floor(Math.random() * json.GM.conventionLocation.adjective.length);
+			let locationAdjective = json.GM.conventionLocation.adjective[lAdjIndex];
+
+			let lDesIndex = Math.floor(Math.random() * json.GM.conventionLocation.description.length);
+			let locationDescription = json.GM.conventionLocation.description[lDesIndex];
+
+			let pIndex = Math.floor(Math.random() * json.GM.heistPrize.length);
+			let prize = json.GM.heistPrize[pIndex];
+
+			let sIndex = Math.floor(Math.random() * json.GM.heistSecret.length);
+			let secret = json.GM.heistSecret[sIndex];
+
+			let secIndex1 = Math.floor(Math.random() * json.GM.securityFeatures.length);
+			let security1 = json.GM.securityFeatures[secIndex1];
+
+			let secIndex2 = secIndex1;
+			let security2 = '';
+
+			while(secIndex2 === secIndex1){
+				secIndex2 = Math.floor(Math.random() * json.GM.securityFeatures.length);
+				security2 = json.GM.securityFeatures[secIndex2];
+			}
+
+			//OUTPUT
+			let heistEl = document.getElementById('heist');
+			heistEl.innerHTML = '<h2>HesitCon 2017</h2><p>Organizer: ' + organizer + '</p><p>Location: ' + locationAdjective + ' ' + locationDescription + ".</p><p>Prize: " + prize + '</p><p><em>Secret: ' + secret + '</em></p><br>The security features are: <ul><li>' + security1 + '</li><li> ' + security2 + '</li></ul>';
+
+		}
+
+		const getJSON = function(url, callback) {
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', url, true);
+			xhr.responseType = 'json';
+			xhr.onload = function() {
+				var status = xhr.status;
+				if (status === 200) {
+					callback(null, xhr.response);
+				} else {
+					callback(status, xhr.response);
+				}
+			};
+			xhr.send();
+		};
+
+	</script>
+</head>
+<body onload="loadData()">
+
+	<section id="menu">
+		<button style="float:left;" onclick="randomCharacter()">Generate Random Character</button>
+
+		<button style="float:right;" onclick="randomHeist()">Generate Random Heist</button>
+	</section>
+	<br>
+	<br>
+	<section id="characterSection">
+		<h1>Character</h1>
+		<p id="character"></p>
+	</section>
+
+	<section id="heistSection">
+		<h1>Heist</h1>
+		<p id="heist"></p>
+	</section>
+</body>
+</html>
