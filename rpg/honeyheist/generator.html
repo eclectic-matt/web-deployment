@@ -17,64 +17,64 @@
 		}
 
 		const randomCharacter = () => {
-				//console.log('data loaded', data);
+			//console.log('data loaded', data);
 
-				
-				//SECTIONS TO GENERATE
-				//descriptor
-				let dIndex = Math.floor(Math.random() * json.players.descriptor.length);
-				let descriptor = json.players.descriptor[dIndex];
+			
+			//SECTIONS TO GENERATE
+			//descriptor
+			let dIndex = Math.floor(Math.random() * json.players.descriptor.length);
+			let descriptor = json.players.descriptor[dIndex];
 
-				//typeAndSkill
-				let tIndex = Math.floor(Math.random() * json.players.typeAndSkill.length);
-				let typeAndSkill = json.players.typeAndSkill[tIndex];
+			//typeAndSkill
+			let tIndex = Math.floor(Math.random() * json.players.typeAndSkill.length);
+			let typeAndSkill = json.players.typeAndSkill[tIndex];
 
-				//role
-				let rIndex = Math.floor(Math.random() * json.players.role.length);
-				let role = json.players.role[tIndex];
+			//role
+			let rIndex = Math.floor(Math.random() * json.players.role.length);
+			let role = json.players.role[tIndex];
 
-				//hat
-				let hIndex = Math.floor(Math.random() * json.players.hat.length);
-				let hat = json.players.hat[hIndex];
+			//hat
+			let hIndex = Math.floor(Math.random() * json.players.hat.length);
+			let hat = json.players.hat[hIndex];
 
-				//NICE GRAMMAR FORMAT FOR DESCRIPTOR
-				if(["a","e","i","o","u"].includes(descriptor.slice(0, 1).toLowerCase())){
-					descriptor = "an " + descriptor;
-				}else{
-					descriptor = "a " + descriptor
-				}
+			//NICE GRAMMAR FORMAT FOR DESCRIPTOR
+			if(["a","e","i","o","u"].includes(descriptor.slice(0, 1).toLowerCase())){
+				descriptor = "an " + descriptor;
+			}else{
+				descriptor = "a " + descriptor
+			}
 
-				//OUTPUT TO PAGE
-				let charEl = document.getElementById('character');
-				charEl.innerHTML = 'You are <em>' + descriptor + ' ' + typeAndSkill.name + '</em> bear (special skill: <em>' + typeAndSkill.skill + '</em>) who is this Heist\'s <b>"' + role + '"</b> wearing a <em>' + hat + '</em> hat';
+			//OUTPUT TO PAGE
+			let charEl = document.getElementById('character');
+			charEl.innerHTML = 'You are <em>' + descriptor + ' ' + typeAndSkill.name + '</em> bear (special skill: <em>' + typeAndSkill.skill + '</em>) who is this Heist\'s <b>"' + role + '"</b> wearing a <em>' + hat + '</em> hat';
 
-  //DISGUISE AND HBS 
-
-  //TOP
-  let topDIndex = Math.floor(Math.random() * json.players.outfit.top.descriptor.length);
-				let topDescriptor = json.players.outfit.top.descriptor[topDIndex];
-
-  let topIIndex = Math.floor(Math.random() * json.players.outfit.top.item.length);
-				let topItem = json.players.outfit.top.item[topIIndex];
-
- //BOTTOM
-  let btmDIndex = Math.floor(Math.random() * json.players.outfit.bottom.descriptor.length);
-				let btmDescriptor = json.players.outfit.bottom.descriptor[btmDIndex];
-
-  let btmIIndex = Math.floor(Math.random() * json.players.outfit.bottom.item.length);
-				let btmItem = json.players.outfit.bottom.item[btmIIndex];
-
-  //ACCESSORY 
-  let accIndex = Math.floor(Math.random() * json.players.outfit.accessory.length);
-				let accItem = json.players.outfit.accessory[accIndex].name;
-   let accMod = json.players.outfit.accessory[accIndex].score;
-
-  //CALCULATE HBS 
-  let hbs = (topDIndex +1) + (topIIndex +1) + (btmDIndex +1) + (btmIIndex +1) + accMod;
-  
-  //OUTPUT
-  let outfitEl = document.getElementById('outfit');
-outfitEl.innerHTML = 'You are wearing a ' + topDescriptor + ' ' + topItem + ', a ' + btmDescriptor + ' ' + btmItem + ' and a ' + accItem + '. Your Human Believability Score (HBS): ' + hbs;
+			//DISGUISE AND HBS 
+			
+			//TOP
+			let topDIndex = Math.floor(Math.random() * json.players.outfit.top.descriptor.length);
+			let topDescriptor = json.players.outfit.top.descriptor[topDIndex];
+			
+			let topIIndex = Math.floor(Math.random() * json.players.outfit.top.item.length);
+			let topItem = json.players.outfit.top.item[topIIndex];
+			
+			//BOTTOM
+			let btmDIndex = Math.floor(Math.random() * json.players.outfit.bottom.descriptor.length);
+			let btmDescriptor = json.players.outfit.bottom.descriptor[btmDIndex];
+			
+			let btmIIndex = Math.floor(Math.random() * json.players.outfit.bottom.item.length);
+			let btmItem = json.players.outfit.bottom.item[btmIIndex];
+			
+			//ACCESSORY 
+			let accIndex = Math.floor(Math.random() * json.players.outfit.accessory.length);
+			let accItem = json.players.outfit.accessory[accIndex].name;
+			let accMod = json.players.outfit.accessory[accIndex].score;
+			
+			//CALCULATE HBS 
+			let hbs = (topDIndex +1) + (topIIndex +1) + (btmDIndex +1) + (btmIIndex +1) + parseInt(accMod);
+			
+			//OUTPUT
+			let outfitEl = document.getElementById('outfit');
+			outfitEl.innerHTML = 'You are wearing a ' + topDescriptor + ' ' + topItem + ', a ' + btmDescriptor + ' ' + btmItem + ' and a ' + accItem + '. Your Human Believability Score (HBS): ' + hbs;
 		}
 
 		const randomHeist = () => {
