@@ -1,0 +1,108 @@
+{
+	"GM": {
+		"conventionOrganizer": [
+			"Cunning and Sly",
+			"Greedy and Wicked",
+			"Clueless and Exploitable",
+			"Maybe too obsessed with honey",
+			"A spoiled trust-fund kid",
+			"Ruthless and Corrupt"
+		],
+		"conventionLocation": {
+			"adjective": [
+				"Creepy",
+				"Busy",
+				"Run-Down",
+				"Beautiful",
+				"Dangerous",
+				"Lavish"
+			],
+			"description": [
+				"Lakeside Camp",
+				"Fishing Village",
+				"Metropolitan City",
+				"Convention Centre",
+				"Truck Convoy",
+				"Wilderness Retreat"
+			]
+		},
+		"heistPrize": [
+			"Ultradense megahoney from especially posh bees.",
+			"A briefcase of pure manuka extract worth $5m.",
+			"The Queen of All Bees, Once Exiled, Now Returned.",
+			"Black Orchid Honey, which turns anyone who eats it into a goth.",
+			"Abraham Lincoln’s beehive, thought to be haunted by his ghost.",
+			"Miss Universe 2017–an especially attractive Bee."
+		],
+		"heistSecret": [
+			"This place is rigged to blow!",
+			"The cops are en route!",
+			"Look – a rival team of bears!",
+			"They’ve been set up!",
+			"The prize is a fake!",
+			"The bees are angry!"
+		],
+		"securityFeatures": [
+			"Armed Guards.",
+			"Electronically locked doors.",
+			"Laser tripwire grids.",
+			"CCTV network.",
+			"“Impenetrable” Vault.",
+			"Poison Gas."
+		]
+	},
+	"players": {
+		"descriptor": [
+			"Rookie",
+			"Washed-Up",
+			"Retired",
+			"Unhinged",
+			"Slick",
+			"Incompetent"
+		],
+		"typeAndSkill": [
+			{
+				"name": "Grizzly",
+				"skill": "Terrify"
+			},
+			{
+				"name": "Polar",
+				"skill": "Swim"
+			},
+			{
+				"name": "Panda",
+				"skill": "Eat anything that looks like bamboo"
+			},
+			{
+				"name": "Black",
+				"skill": "Climb"
+			},
+			{
+				"name": "Sun",
+				"skill": "Sense Honey"
+			},
+			{
+				"name": "Honey Badger",
+				"skill": "Carnage"
+			}
+		],
+		"role": [
+			"Muscle",
+			"Brains",
+			"Driver",
+			"Hacker",
+			"Thief",
+			"Face"
+		],
+		"hat": [
+			"Trilby",
+			"Top",
+			"Bowler",
+			"Flat-Cap",
+			"Cowboy",
+			"Fez",
+			"Crown",
+			"Roll Twice"
+		]
+	}
+}
