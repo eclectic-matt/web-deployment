@@ -47,6 +47,16 @@
 				//OUTPUT TO PAGE
 				let charEl = document.getElementById('character');
 				charEl.innerHTML = 'You are <em>' + descriptor + ' ' + typeAndSkill.name + '</em> bear (special skill: <em>' + typeAndSkill.skill + '</em>) who is this Heist\'s <b>"' + role + '"</b> wearing a <em>' + hat + '</em> hat';
+
+  //DISGUISE AND HBS 
+
+  //TOP
+  let topDIndex = Math.floor(Math.random() * json.players.outfit.topDescriptor.length);
+				let topDescriptor = json.players.outfit.topDescriptor[topDIndex];
+
+  let topIIndex = Math.floor(Math.random() * json.players.outfit.topItem.length);
+				let topItem = json.players.outfit.topItem[topDIndex];
+
 		}
 
 		const randomHeist = () => {
