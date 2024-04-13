@@ -20,16 +20,69 @@ const updateOptions = (data) => {
    select.appendChild(option);
 });
 
-select = document.getElementById('type');
-  data.players.typeAndSkill.forEach( (type) => {
+select = document.getElementById('type'); data.players.typeAndSkill.forEach( (type) => {
    let option = document.createElement('option');
    option.value = type.name;
    option.innerHTML = type.name;
    select.appendChild(option);
 });
 
+select = document.getElementById('role');
+data.players.role.forEach( (role) => {
+   let option = document.createElement('option');
+   option.value = role;
+   option.innerHTML = role;
+   select.appendChild(option);
+});
+
+select = document.getElementById('hat');
+data.players.hat.forEach( (hat) => {
+   let option = document.createElement('option');
+   option.value = hat;
+   option.innerHTML = hat;
+   select.appendChild(option);
+});
+
+select = document.getElementById('topDescriptor');
+data.players.outfit.top.descriptor.forEach( (name) => {
+   let option = document.createElement('option');
+   option.value = name;
+   option.innerHTML = name;
+   select.appendChild(option);
+});
+
+select = document.getElementById('topItem');
+data.players.outfit.top.item.forEach( (name) => {
+   let option = document.createElement('option');
+   option.value = name;
+   option.innerHTML = name;
+   select.appendChild(option);
+});
+
+select = document.getElementById('btmDescriptor');
+data.players.outfit.bottom.descriptor.forEach( (name) => {
+   let option = document.createElement('option');
+   option.value = name;
+   option.innerHTML = name;
+   select.appendChild(option);
+});
+
+select = document.getElementById('btmItem');
+data.players.outfit.bottom.item.forEach( (name) => {
+   let option = document.createElement('option');
+   option.value = name;
+   option.innerHTML = name;
+   select.appendChild(option);
+});
 
 
+select = document.getElementById('accessory');
+data.players.outfit.accessory.forEach( (name) => {
+   let option = document.createElement('option');
+   option.value = accessory.name;
+   option.innerHTML = accessory.name;
+   select.appendChild(option);
+});
 
 }
 
