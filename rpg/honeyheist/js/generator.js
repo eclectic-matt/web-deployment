@@ -57,7 +57,7 @@ if(hIndex === (json.players.hat.length - 1)){
 	}
 
 	//OUTPUT TO PAGE
-	let charEl = document.getElementById('character');
+	let charEl = document.getElementById('generatedCharacter');
 	charEl.innerHTML = 'You are <em>' + descriptor + ' ' + typeAndSkill.name + '</em> bear (special skill: <em>' + typeAndSkill.skill + '</em>) who is this Heist\'s <b>"' + role + '"</b> wearing a <em>' + hat + '</em> hat';
 
 	//DISGUISE AND HBS 
