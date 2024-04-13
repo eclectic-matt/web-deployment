@@ -67,6 +67,7 @@ const addPlayer = () => {
   let bearNameTd = document.createElement('td');
   let bearNameEl = document.createElement('input');
   bearNameEl.innerHTML = 'Name';
+  bearNameEl.value = 'Name';
   bearNameTd.appendChild(bearNameEl);
   row.appendChild(bearNameTd);
 
@@ -80,14 +81,14 @@ const addPlayer = () => {
   let bearBtnTd = document.createElement('td');
   let bearBtn = document.createElement('button');
   bearBtn.innerHTML = '+ Bear';
-  bearBtn.onclick = "changePlayerStat(newPlayerId, 'bear')";
+  bearBtn.onclick = function(){ changePlayerStat(newPlayerId, 'bear')};
   bearBtnTd.appendChild(bearBtn);
   row.appendChild(bearBtnTd);
 
   let crimBtnTd = document.createElement('td');
   let crimBtn = document.createElement('button');
   crimBtn.innerHTML = '+ Crim';
-  crimBtn.onclick = "changePlayerStat(newPlayerId, 'criminal')";
+  crimBtn.onclick = function(){ changePlayerStat(newPlayerId, 'criminal') };
   crimBtnTd.appendChild(crimBtn);
   row.appendChild(crimBtnTd);
 
