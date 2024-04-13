@@ -38,7 +38,7 @@ if(hIndex === (json.players.hat.length - 1)){
   hat = json.players.hat[hIndex1];
   
   //REMOVE CURRENT HAT AND ROLL AGAIN
-  let otherHats = json.players.hat.filter( (h) = { return ((h !== hat) && (hat !== "Roll Twice")); });
+  let otherHats = json.players.hat.filter( (h) = { return ((h !== hat) && (h !== "Roll Twice")); });
   //GET ANOTHER HAT
   hIndex2 = Math.floor(Math.random() *   otherHats.length);
   //CONCAT THIS HAT
