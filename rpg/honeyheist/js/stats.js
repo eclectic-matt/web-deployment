@@ -69,7 +69,7 @@ const addPlayer = () => {
   bearStatEl.id = 'bearStat' + newPlayerId;
   bearStatEl.innerHMTL = '3';
   bearStatTd.appendChild(bearStatEl);
-  row.appendChil(bearStatTd);
+  row.appendChild(bearStatTd);
 
   let bearBtnTd = document.createElement('td');
   let bearBtn = document.createElement('button');
@@ -90,7 +90,7 @@ const addPlayer = () => {
   crimStatEl.id = 'criminalStat' + newPlayerId;
   crimStatEl.innerHTML = '3';
   crimStatTd.appendChild(crimStatEl);
-  row.appendChil(crimStatTd);
+  row.appendChild(crimStatTd);
 
   let endTextTd = document.createElement('td');
   let endTextEl = document.createElement('b');
