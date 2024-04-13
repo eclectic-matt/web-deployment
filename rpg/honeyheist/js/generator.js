@@ -99,10 +99,13 @@ const randomCharacter = () => {
 	//typeAndSkill
 	let tIndex = Math.floor(Math.random() * json.players.typeAndSkill.length);
 	let typeAndSkill = json.players.typeAndSkill[tIndex];
+document.getElementById('type').selectedIndex = (tIndex + 1);
+document.getElementById('skill').innerHTML = typeAndSkill.skill;
 
 	//role
 	let rIndex = Math.floor(Math.random() * json.players.role.length);
 	let role = json.players.role[tIndex];
+document.getElementById('role').selectedIndex = (rIndex + 1);
 
 	//hat
 	let hIndex = Math.floor(Math.random() * json.players.hat.length);
@@ -125,6 +128,7 @@ if(hIndex === (json.players.hat.length - 1)){
 }else{
    //STORE SINGLE HAT 
    hat = json.players.hat[hIndex];
+document.getElementById('hat').selectedIndex = (hIndex + 1);
 }
 
 	//NICE GRAMMAR FORMAT FOR DESCRIPTOR
@@ -135,29 +139,35 @@ if(hIndex === (json.players.hat.length - 1)){
 	}
 
 	//OUTPUT TO PAGE
-	let charEl = document.getElementById('generatedCharacter');
-	charEl.innerHTML = 'You are <em>' + descriptor + ' ' + typeAndSkill.name + '</em> bear (special skill: <em>' + typeAndSkill.skill + '</em>) who is this Heist\'s <b>"' + role + '"</b> wearing a <em>' + hat + '</em> hat';
+	//let charEl = document.getElementById('generatedCharacter');
+	//charEl.innerHTML = 'You are <em>' + descriptor + ' ' + typeAndSkill.name + '</em> bear (special skill: <em>' + typeAndSkill.skill + '</em>) who is this Heist\'s <b>"' + role + '"</b> wearing a <em>' + hat + '</em> hat';
 
 	//DISGUISE AND HBS 
 	
 	//TOP
 	let topDIndex = Math.floor(Math.random() * json.players.outfit.top.descriptor.length);
 	let topDescriptor = json.players.outfit.top.descriptor[topDIndex];
+document.getElementById('topDescriptor').selectedIndex = (topDIndex + 1);
 	
 	let topIIndex = Math.floor(Math.random() * json.players.outfit.top.item.length);
 	let topItem = json.players.outfit.top.item[topIIndex];
+document.getElementById('topItem').selectedIndex = (topIIndex + 1);
 	
 	//BOTTOM
 	let btmDIndex = Math.floor(Math.random() * json.players.outfit.bottom.descriptor.length);
 	let btmDescriptor = json.players.outfit.bottom.descriptor[btmDIndex];
+document.getElementById('btmDescriptor').selectedIndex = (btmDIndex + 1);
 	
 	let btmIIndex = Math.floor(Math.random() * json.players.outfit.bottom.item.length);
 	let btmItem = json.players.outfit.bottom.item[btmIIndex];
+document.getElementById('btmItem').selectedIndex = (btmIIndex + 1);
 	
 	//ACCESSORY 
 	let accIndex = Math.floor(Math.random() * json.players.outfit.accessory.length);
 	let accItem = json.players.outfit.accessory[accIndex].item;
 	let accMod = json.players.outfit.accessory[accIndex].scoreModifier;
+document.getElementById('accessory').selectedIndex = (accIndex + 1);
+document.getElementById('accessoryModifier').innerHTML = accMod;
 	
 	//CALCULATE HBS 
 	let hbs = (topDIndex +1) + (topIIndex +1) + (btmDIndex +1) + (btmIIndex +1) + parseInt(accMod);
