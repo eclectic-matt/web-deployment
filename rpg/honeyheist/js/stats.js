@@ -41,14 +41,14 @@ let endTextEl = document.getElementById('endText' + playerId);
       bear++;
       criminal--;
       if(bear === 6){
-        endTextEl.innerHTML = 'BEAR!;
+        endTextEl.innerHTML = 'BEAR!';
       }
     break;
     case 'criminal':
       bear--;
       criminal++;
       if(criminal === 6){
-        endTextEl.innerHTML = 'CRIM!;
+        endTextEl.innerHTML = 'CRIM!';
       }
     break;
   }
