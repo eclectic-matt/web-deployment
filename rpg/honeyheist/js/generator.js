@@ -20,6 +20,17 @@ const updateOptions = (data) => {
    select.appendChild(option);
 });
 
+select = document.getElementById('type');
+  data.players.typeAndSkill.forEach( (type) => {
+   let option = document.createElement('option');
+   option.value = type.name;
+   option.innerHTML = type.name;
+   select.appendChild(option);
+});
+
+
+
+
 }
 
 const randomCharacter = () => {
