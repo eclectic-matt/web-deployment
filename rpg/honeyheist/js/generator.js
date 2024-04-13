@@ -42,7 +42,7 @@ if(hIndex === (json.players.hat.length - 1)){
   //GET ANOTHER HAT
   let hIndex2 = Math.floor(Math.random() *   otherHats.length);
   //CONCAT THIS HAT
-  hat += ' and a ' + json.players.hat[hIndex2];
+  hat += ' and a ' + otherHats[hIndex2];
   
 }else{
    //STORE SINGLE HAT 
