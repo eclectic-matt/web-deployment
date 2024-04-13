@@ -6,7 +6,20 @@ const loadData = () => {
 
 const storeData = (status, data) => {
 	json = data;
-	console.log(json);
+	//console.log(json);
+ updateOptions(data);
+}
+
+const updateOptions = (data) => {
+
+  let descriptorSelect = document.getElementById('descriptor');
+  data.players.descriptor.forEach( (name) => {
+   let option = document.createElement(option);
+   option.value = name;
+   option.innerHMTL = option;
+   select.appendChild(option);
+}, select)
+
 }
 
 const randomCharacter = () => {
