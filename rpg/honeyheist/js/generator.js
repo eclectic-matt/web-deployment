@@ -171,10 +171,11 @@ document.getElementById('accessoryModifier').innerHTML = accMod;
 	
 	//CALCULATE HBS 
 	let hbs = (topDIndex +1) + (topIIndex +1) + (btmDIndex +1) + (btmIIndex +1) + parseInt(accMod);
+document.getElementById('HBS').innerHTML = hbs;
 	
 	//OUTPUT
-	let outfitEl = document.getElementById('outfit');
-	outfitEl.innerHTML = '<p>Your clothing: a <em>' + topDescriptor + ' ' + topItem + '</em>, <em>' + btmDescriptor + ' ' + btmItem + '</em> and a <em>' + accItem + '</em>.</p><p>Your Human Believability Score (HBS): <b>' + hbs + '</b>.</p>';
+	//let outfitEl = document.getElementById('outfit');
+	//outfitEl.innerHTML = '<p>Your clothing: a <em>' + topDescriptor + ' ' + topItem + '</em>, <em>' + btmDescriptor + ' ' + btmItem + '</em> and a <em>' + accItem + '</em>.</p><p>Your Human Believability Score (HBS): <b>' + hbs + '</b>.</p>';
 }
 
 const randomHeist = () => {
