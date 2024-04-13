@@ -1,7 +1,7 @@
 var json;
 
 const loadData = () => {
-	getJSON("./data/honeyHeist.json", storeData);
+	getJSON('./data/honeyHeist.json', storeData);
 }
 
 const storeData = (status, data) => {
@@ -38,7 +38,7 @@ if(hIndex === (json.players.hat.length - 1)){
   hat = json.players.hat[hIndex1];
   
   //REMOVE CURRENT HAT AND ROLL AGAIN
-  let otherHats = json.players.hat.filter( (h) = { return ((h !== hat) && (h !== "Roll Twice")); });
+  let otherHats = json.players.hat.filter( (h) => { return ((h !== hat) && (h !== 'Roll Twice')); });
   //GET ANOTHER HAT
   let hIndex2 = Math.floor(Math.random() *   otherHats.length);
   //CONCAT THIS HAT
@@ -50,10 +50,10 @@ if(hIndex === (json.players.hat.length - 1)){
 }
 
 	//NICE GRAMMAR FORMAT FOR DESCRIPTOR
-	if(["a","e","i","o","u"].includes(descriptor.slice(0, 1).toLowerCase())){
-		descriptor = "an " + descriptor;
+	if(['a','e','i','o','u'].includes(descriptor.slice(0, 1).toLowerCase())){
+		descriptor = 'an ' + descriptor;
 	}else{
-		descriptor = "a " + descriptor
+		descriptor = 'a ' + descriptor
 	}
 
 	//OUTPUT TO PAGE
