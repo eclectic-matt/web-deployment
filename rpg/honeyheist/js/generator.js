@@ -14,7 +14,7 @@ const updateOptions = (data) => {
 
   let select = document.getElementById('descriptor');
   data.players.descriptor.forEach( (name) => {
-   let option = document.createElement(option);
+   let option = document.createElement('option');
    option.value = name;
    option.innerHTML = option;
    select.appendChild(option);
