@@ -113,9 +113,19 @@ const addPlayer = () => {
   playerTableEl.appendChild(row);
 }
 
-const changeType = () => {
-  const type = document.getElementById('type');
-  let tIndex = type.selectedIndex - 1;
+const updateType = (ev) => {
+  
+  //const type = document.getElementById('type');
+  //let tIndex = type.selectedIndex - 1;
+  let tIndex = ev.target.selectedIndex - 1;
   let typeAndSkill = json.players.typeAndSkill[tIndex];
 document.getElementById('skill').innerHTML = typeAndSkill.skill;
 }
+
+const updateAccessory = (ev) => {
+ 
+  let accIndex = ev.target.selectedIndex - 1;
+  let accessory = json.players.outfit.accessory[accIndex];
+document.getElementById('accessoryModifier').innerHTML = accessory.scoreModifier;
+}
+
