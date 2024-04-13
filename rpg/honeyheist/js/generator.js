@@ -30,6 +30,7 @@ const randomCharacter = () => {
 	//descriptor
 	let dIndex = Math.floor(Math.random() * json.players.descriptor.length);
 	let descriptor = json.players.descriptor[dIndex];
+ document.getElementById('descriptor').selectedIndex = dIndex;
 
 	//typeAndSkill
 	let tIndex = Math.floor(Math.random() * json.players.typeAndSkill.length);
