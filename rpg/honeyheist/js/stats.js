@@ -68,6 +68,7 @@ const addPlayer = () => {
   let bearNameEl = document.createElement('input');
   bearNameEl.innerHTML = 'Name';
   bearNameEl.value = 'Name';
+  bearNameEl.class = 'w3-small';
   bearNameTd.appendChild(bearNameEl);
   row.appendChild(bearNameTd);
 
