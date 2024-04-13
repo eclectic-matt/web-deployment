@@ -64,6 +64,12 @@ const addPlayer = () => {
   
   let row = document.createElement('tr');
   
+  let bearNameTd = document.createElement('td');
+  let bearNameEl = document.createElement('input');
+  bearNameEl.innerHTML = 'Name';
+  bearNameTd.appendChild(bearNameEl);
+  row.appendChild(bearNameTd);
+
   let bearStatTd = document.createElement('td');
   let bearStatEl = document.createElement('b');
   bearStatEl.id = 'bearStat' + newPlayerId;
