@@ -101,3 +101,10 @@ const addPlayer = () => {
 
   playerTableEl.appendChild(row);
 }
+
+const changeType = () => {
+  const type = document.getElementById('type');
+  let tIndex = type.selectedIndex - 1;
+  let typeAndSkill = json.players.typeAndSkill[tIndex];
+document.getElementById('skill').innerHTML = typeAndSkill.skill;
+}
