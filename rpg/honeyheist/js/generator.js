@@ -28,7 +28,16 @@ const randomCharacter = () => {
 
 	//hat
 	let hIndex = Math.floor(Math.random() * json.players.hat.length);
-	let hat = json.players.hat[hIndex];
+	let hat = '';
+
+//HANDLE ROLL TWICE HATS
+while(hIndex === (json.players.hat.length - 1)){
+  //ROLL AGAIN AND CONCATENATE
+  hIndex = Math.floor(Math.random() * json.players.hat.length);
+  hat += json.players.hat[hIndex] + ' ';
+}
+
+hat += json.players.hat[hIndex];
 
 	//NICE GRAMMAR FORMAT FOR DESCRIPTOR
 	if(["a","e","i","o","u"].includes(descriptor.slice(0, 1).toLowerCase())){
