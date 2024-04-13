@@ -31,13 +31,19 @@ const randomCharacter = () => {
 	let hat = '';
 
 //HANDLE ROLL TWICE HATS
-while(hIndex === (json.players.hat.length - 1)){
-  //ROLL AGAIN AND CONCATENATE
-  hIndex = Math.floor(Math.random() * json.players.hat.length);
-  hat += json.players.hat[hIndex] + ' ';
-}
+if(hIndex === (json.players.hat.length - 1)){
 
-hat += json.players.hat[hIndex];
+  //ROLL AGAIN AND CONCATENATE
+  hIndex1 = Math.floor(Math.random() * json.players.hat.length - 1);
+  hat += json.players.hat[hIndex];
+  //REMOVE CURRENT HAT AND ROLL TWICE
+  let otherHats = json.players.hat.filter( (h) = { return ((h !== hat) && (hat !== "Roll Twice")); });
+
+  hIndex2 = Math.floor(Math.random() *   otherHats.length);
+  
+  hat += ' and a ' + json.players.hat[hIndex2];
+  
+}
 
 	//NICE GRAMMAR FORMAT FOR DESCRIPTOR
 	if(["a","e","i","o","u"].includes(descriptor.slice(0, 1).toLowerCase())){
