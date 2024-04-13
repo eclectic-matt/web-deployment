@@ -12,7 +12,7 @@ const storeData = (status, data) => {
 
 const updateOptions = (data) => {
 
-  let descriptorSelect = document.getElementById('descriptor');
+  let select = document.getElementById('descriptor');
   data.players.descriptor.forEach( (name) => {
    let option = document.createElement(option);
    option.value = name;
