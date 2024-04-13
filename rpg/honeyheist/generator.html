@@ -15,6 +15,33 @@
 
 		<button class="w3-button w3-green" style="float:right;" onclick="randomHeist()" href="#heistSection">Generate Heist</button>
 	</section>
+
+
+<section id="panels">
+
+  <div class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" onclick="openPanel('character')">Character</button>
+  <button class="w3-bar-item w3-button" onclick="openPanel('reference')">Reference</button>
+  <button class="w3-bar-item w3-button" onclick="openPanel('heist')">Heist</button>
+</div>
+
+<div id="character" class="panel">
+  <h2>London</h2>
+  <p>London is the capital of England.</p>
+</div>
+
+<div id="reference" class="panel" style="display:none">
+  <h2>Paris</h2>
+  <p>Paris is the capital of France.</p>
+</div>
+
+<div id="heist" class="panel" style="display:none">
+  <h2>Tokyo</h2>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+</section>
+
 	<section id="characterSection">
 		<h1>Character</h1>
 
