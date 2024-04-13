@@ -17,8 +17,8 @@ const updateOptions = (data) => {
    let option = document.createElement(option);
    option.value = name;
    option.innerHTML = option;
-   this.appendChild(option);
-}, select)
+   select.appendChild(option);
+});
 
 }
 
