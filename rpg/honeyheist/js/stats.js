@@ -127,5 +127,33 @@ const updateAccessory = (ev) => {
   let accIndex = ev.target.selectedIndex - 1;
   let accessory = json.players.outfit.accessory[accIndex];
 document.getElementById('accessoryModifier').innerHTML = accessory.scoreModifier;
+
+  let hbsEl = document.getElementById('HBS');
+  hbsEl.innerHTML = getHBS();
 }
 
+const getHBS = () => {
+  //top desc 
+  let topDEl = document.getElementById('topDescription');
+  let tDIndex = topDEl.selectedIndex - 1;
+
+  //top item 
+  let topIEl = document.getElementById('topItem');
+  let tIIndex = topIEl.selectedIndex - 1;
+
+  //btm desc 
+  let btmDEl = document.getElementById('btmDescription');
+  let bDIndex = btmDEl.selectedIndex - 1;
+
+  //btm item 
+  let btmIEl = document.getElementById('btmItem');
+  let bIIndex = btmIEl.selectedIndex - 1;
+
+  //acc mod 
+  let accEl = document.getElementById('accessory');
+  let accIndex = accEl.selectedIndex - 1;
+  let accMod = json.outfit.accessory[accIndex].scoreModifier; 
+
+  return (tDIndex + tIIndex + bDIndex + bIIndex + accMod);
+
+}
