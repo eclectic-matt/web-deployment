@@ -88,7 +88,7 @@ data.players.outfit.accessory.forEach( (accessory) => {
 
 const randomCharacter = () => {
 	//console.log('data loaded', data);
-
+ openPanel('character');
 	
 	//SECTIONS TO GENERATE
 	//descriptor
@@ -179,6 +179,9 @@ document.getElementById('HBS').innerHTML = hbs;
 }
 
 const randomHeist = () => {
+
+ openPanel('heist');
+
 	let oIndex = Math.floor(Math.random() * json.GM.conventionOrganizer.length);
 	let organizer = json.GM.conventionOrganizer[oIndex];
 
