@@ -28,7 +28,7 @@ const changeStat = (stat) => {
 }
 
 //FOR GAME SHEET
-changePlayerStat => (playerId) => {
+changePlayerStat => (playerId, stat) => {
   let bearEl = document.getElementById('bearStat' + playerId);
   let bear = parseInt(bearEl.innerHTML);
 
@@ -65,20 +65,39 @@ const addPlayer = () => {
   let row = document.createElement('tr');
   
   let bearStatTd = document.createElement('td');
-
   let bearStatEl = document.createElement('b');
   bearStatEl.id = 'bearStat' + newPlayerId;
   bearStatEl.innerHMTL = '3';
   bearStatTd.appendChild(bearStatEl);
   row.appendChil(bearStatTd);
 
-  let bearBtnTd = 
+  let bearBtnTd = document.createElement('td');
   let bearBtn = document.createElement('button');
   bearBtn.innerHTML = '+ Bear';
+  bearBtn.onclick = changePlayerStat(newPlayerId, 'bear');
   bearBtnTd.appendChild(bearBtn);
   row.appendChild(bearBtnTd);
 
-  //-----
+  let crimBtnTd = document.createElement('td');
+  let crimBtn = document.createElement('button');
+  crimBtn.innerHTML = '+ Crim';
+  crimBtn.onclick = changePlayerStat(newPlayerId, 'criminal');
+  crimBtnTd.appendChild(crimBtn);
+  row.appendChild(crimBtnTd);
+
+  let crimStatTd = document.createElement('td');
+  let crimStatEl = document.createElement('b');
+  crimStatEl.id = 'criminalStat' + newPlayerId;
+  crimStatEl.innerHTML = '3';
+  crimStatTd.appendChild(crimStatEl);
+  row.appendChil(crimStatTd);
+
+  let endTextTd = document.createElement('td');
+  let endTextEl = document.createElement('b');
+  endTextEl.id = 'endText' + newPlayerId;
+  endTextEl.innerHTML = '';
+  endTextTd.appendChild(endTextEl);
+  row.appendChild(endTextTd);
 
   playerTableEl.appendChild(row);
 }
