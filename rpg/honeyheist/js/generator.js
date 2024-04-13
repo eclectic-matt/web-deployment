@@ -77,7 +77,7 @@ data.players.outfit.bottom.item.forEach( (name) => {
 
 
 select = document.getElementById('accessory');
-data.players.outfit.accessory.forEach( (name) => {
+data.players.outfit.accessory.forEach( (accessory) => {
    let option = document.createElement('option');
    option.value = accessory.name;
    option.innerHTML = accessory.name;
