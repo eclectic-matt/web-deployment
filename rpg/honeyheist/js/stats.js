@@ -67,7 +67,7 @@ const addPlayer = () => {
   let bearStatTd = document.createElement('td');
   let bearStatEl = document.createElement('b');
   bearStatEl.id = 'bearStat' + newPlayerId;
-  bearStatEl.innerHMTL = '3';
+  bearStatEl.innerHTML = '3';
   bearStatTd.appendChild(bearStatEl);
   row.appendChild(bearStatTd);
 
