@@ -67,8 +67,7 @@ const addPlayer = () => {
   let bearNameTd = document.createElement('td');
   bearNameTd.style = 'width:30%';
   let bearNameEl = document.createElement('input');
-  bearNameEl.innerHTML = 'Name';
-  bearNameEl.value = 'Name';
+  bearNameEl.placeholder = 'Name';
   bearNameEl.className = 'w3-input w3-small';
   bearNameTd.appendChild(bearNameEl);
   row.appendChild(bearNameTd);
