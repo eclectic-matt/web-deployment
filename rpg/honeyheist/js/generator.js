@@ -210,7 +210,7 @@ const randomHeist = () => {
 
 	//OUTPUT
 	let heistEl = document.getElementById('generatedHeist');
-	heistEl.innerHTML = '<h2>HoneyCon 2017</h2><p><b>Organizer: </b>' + organizer + '</p><p><b>Location: </b>' + locationAdjective + ' ' + locationDescription + ".</p><p><b>Prize: </b>" + prize + '</p><p><em>Secret: ' + secret + '</em></p>The security features are: <ul><li><b>' + security1 + '</b></li><li><b>' + security2 + '</b></li></ul>';
+	heistEl.innerHTML = '<h2>HoneyCon 2017</h2><p><b>Organizer: </b>' + organizer + '</p><p><b>Location: </b>' + locationAdjective + ' ' + locationDescription + ".</p><p><b>Prize: </b>" + prize + '</p><p><em>Secret: ' + secret + '</em></p><b>Security features: </b><ul><li><b>' + security1 + '</b></li><li><b>' + security2 + '</b></li></ul>';
 
 }
 
