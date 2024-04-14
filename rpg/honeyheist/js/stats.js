@@ -82,7 +82,7 @@ const addPlayer = () => {
 
   let bearBtnTd = document.createElement('td');
   let bearBtn = document.createElement('button');
-  bearBtn.class = "w3-btn w3-brown";
+  bearBtn.className = "w3-btn w3-brown";
   bearBtn.innerHTML = '+ Bear';
   bearBtn.onclick = function(){ changePlayerStat(newPlayerId, 'bear')};
   //bearBtn.onclick = "changePlayerStat(" + newPlayerId + ", 'bear')";
@@ -91,7 +91,7 @@ const addPlayer = () => {
 
   let crimBtnTd = document.createElement('td');
   let crimBtn = document.createElement('button');
-  crimBtn.class = "w3-btn w3-grey";
+  crimBtn.className = "w3-btn w3-grey";
   crimBtn.innerHTML = '+ Crim';
   crimBtn.onclick = function(){ changePlayerStat(newPlayerId, 'criminal') };
   //crimBtn.onclick = "changePlayerStat( " + newPlayerId + ", 'criminal')";
