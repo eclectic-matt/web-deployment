@@ -42,6 +42,8 @@ let endTextEl = document.getElementById('endText' + playerId);
       criminal--;
       if(bear === 6){
         endTextEl.innerHTML = 'BEAR!';
+      }else{
+        endTextEl.innerHTML = '';
       }
     break;
     case 'criminal':
@@ -49,6 +51,8 @@ let endTextEl = document.getElementById('endText' + playerId);
       criminal++;
       if(criminal === 6){
         endTextEl.innerHTML = 'CRIM!';
+      }else{
+        endTextEl.innerHTML = '';
       }
     break;
   }
