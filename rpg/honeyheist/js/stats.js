@@ -166,7 +166,7 @@ const getHBS = () => {
   //acc mod 
   let accEl = document.getElementById('accessory');
   let accIndex = accEl.selectedIndex - 1;
-  let accMod = json.players.outfit.accessory[accIndex].scoreModifier; 
+  let accMod = parseInt(json.players.outfit.accessory[accIndex].scoreModifier); 
 
   return (tDIndex + tIIndex + bDIndex + bIIndex + accMod);
 
