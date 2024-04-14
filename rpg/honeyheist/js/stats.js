@@ -28,7 +28,7 @@ const changeStat = (stat) => {
 }
 
 //FOR GAME SHEET
-changePlayerStat => (playerId, stat) => {
+const changePlayerStat = (playerId, stat) => {
   let bearEl = document.getElementById('bearStat' + playerId);
   let bear = parseInt(bearEl.innerHTML);
 
