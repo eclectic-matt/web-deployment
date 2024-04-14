@@ -1,239 +1,221 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Honey Heist RPG | by Eclectic-Matt</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Honey Heist RPG | by Eclectic-Matt</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<script src="./data/honeyHeist.json"></script>
 	<script src="./js/generator.js"></script>
- <script src="./js/stats.js"></script>
-<script src="./js/panels.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="./js/stats.js"></script>
+	<script src="./js/panels.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body onload="loadData()" class="w3-yellow w3-padding-4">
-
-	<section id="menu" class="w3-bar">
-	 	<button class="w3-bar-item w3-padding-8 w3-orange" onclick="randomCharacter()">Random Bear</button>
-  
-		<button class="w3-bar-item w3-padding-8 w3-red" onclick="randomHeist()" href="#heistSection">Random Heist</button>
-
-	</section>
+	
+<section id="menu" class="w3-bar">
+	<button class="w3-bar-item w3-padding-8 w3-orange" onclick="randomCharacter()">Random Bear</button>
+	<button class="w3-bar-item w3-padding-8 w3-red" onclick="randomHeist()" href="#heistSection">Random Heist</button>
+</section>
 
 <br>
 
 <section id="panels">
-  <div class="w3-bar w3-orange">
-  
-<button class="w3-bar-item w3-button w3-brown" onclick="openPanel('reference')">Info</button>
 
-  <button class="w3-bar-item w3-button w3-brown" onclick="openPanel('character')">Character</button>
+	<div class="w3-bar w3-orange">
+		<button class="w3-bar-item w3-button w3-brown" onclick="openPanel('reference')">Info</button>
+		<button class="w3-bar-item w3-button w3-brown" onclick="openPanel('character')">Character</button>
+		<button class="w3-bar-item w3-button w3-brown" onclick="openPanel('heist')">Heist</button>
+		<button class="w3-bar-item w3-button w3-brown" onclick="openPanel('game')">Game</button>
+	</div>
 
-  <button class="w3-bar-item w3-button w3-brown" onclick="openPanel('heist')">Heist</button>
+	<div id="reference" class="panel">
+		<section class="w3-brown w3-padding">
+			<h2>Summary</h2>
+			<b>It’s Honeycon 2017. You are going to undertake the greatest heist the world has ever seen. Two Things.</b>
+			<ul>
+			<li>One: You have a complex plan that requires precise timing.</li>
+			<li>Two: You are a GODDAMN BEAR.</li>
+			</ul>
 
-  <button class="w3-bar-item w3-button w3-brown" onclick="openPanel('game')">Game</button>
-</div>
+			<h2>Actions</h2>
+			<p>When you act, and the outcome is in doubt, roll a D6:</p>
+			<ul>
+			<li>If it’s <b>equal to or under the relevant stat, you succeed.</b></li>
+			<li>If it’s <b>over the stat, you fail.</b>
+			</ul>
+			<p>If you’re using <b>your bear special-skill</b> or <b>doing something related to your role</b>, roll 2 D6 and pick the lowest.</p>
 
-<div id="reference" class="panel">
-<section class="w3-brown w3-padding">
-<h2>Summary</h2>
-<b>It’s Honeycon 2017. You are going to undertake the greatest heist the world has ever seen. Two Things.</b>
-<ul>
-<li>One: You have a complex plan that requires precise timing.</li>
-<li>Two: You are a GODDAMN BEAR.</li>
-</ul>
+			<h2>Changing Stats</h2>
+			<ul>
+			<li><b>Frustration:</b> When the plan fails and you run into difficulty, move one point from Criminal into Bear.</li>
+			<li><b>Eat Honey:</b> You can voluntarily move one point of Criminal into Bear by eating a load of honey.</li>
+			<li><b>Greed:</b> When the plan goes off without a hitch, move one point from Bear into Criminal.</li>
+			<li><b>Flashback:</b> You can voluntarily move one point from Bear to Criminal by doing a flashback scene in which you and the other bears plan out the heist over coffee and cigarettes in the back room of a seedy bar.</li>
+			</ul>
+				
+			<h2>The End</h2>
+			<ul>
+			<li>If your <b>criminal stat ever reaches 6</b>, you are lured into a life of crime and betray the party.</li>
+			<li>If your <b>bear stat ever reaches 6</b>, you flip out bearstyle and lose it. Presumable to be picked up by animal control in half an hour or so.</li>
+			</ul>
 
-<h2>Actions</h2>
-<p>When you act, and the outcome is in doubt, roll a D6:</p>
-<ul>
-<li>If it’s <b>equal to or under the relevant stat, you succeed.</b></li>
-<li>If it’s <b>over the stat, you fail.</b>
-</ul>
-<p>If you’re using <b>your bear special-skill</b> or <b>doing something related to your role</b>, roll 2 D6 and pick the lowest.</p>
+			<h2>HBS - Human Believeability Score</h2>
+			<p>Each part of your outfit contributes to your "Human Believeability Score" - the two parts of your top and the two parts of your bottom clothing are added together (the least believeable adding 1 up to the most believeable adding 6).</p>
+			<p>Your accessory then adds or removes points from your score (-3 up to +3) as shown in the Accessory Modifier section.</p>
+			<p>If a human was to check how believeable your outfit is, the GM will roll 4 dice and compare this to your HBS - a higher number means that they detect you are actually a bear in disguise and all hell breaks loose!</p>
+				
+			<h2>Credit</h2>
+			All credit for Honey Heist to <em>Grant Howitt</em> - buy a copy and get this wonderful one-page RPG at <a href="https://gshowitt.itch.io/honey-heist">itch.io - Honey Heist</a> and support him on <a href="https://www.patreon.com/gshowitt">Patreon</a> for more stuff like this!
+		</section>
+	</div>
 
-<h2>Changing Stats</h2>
-<ul>
-<li><b>Frustration:</b> When the plan fails and you run into difficulty, move one point from Criminal into Bear.</li>
-<li><b>Eat Honey:</b> You can voluntarily move one point of Criminal into Bear by eating a load of honey.</li>
-<li><b>Greed:</b> When the plan goes off without a hitch, move one point from Bear into Criminal.</li>
-<li><b>Flashback:</b> You can voluntarily move one point from Bear to Criminal by doing a flashback scene in which you and the other bears plan out the heist over coffee and cigarettes in the back room of a seedy bar.</li>
-</ul>
-	
-<h2>The End</h2>
-<ul>
-<li>If your <b>criminal stat ever reaches 6</b>, you are lured into a life of crime and betray the party.</li>
-<li>If your <b>bear stat ever reaches 6</b>, you flip out bearstyle and lose it. Presumable to be picked up by animal control in half an hour or so.</li>
-</ul>
+	<div id="character" class="panel" style="display:none">
+		<div id="generated" class="w3-orange w3-border-black w3-center w3-padding">
+			<h2>Character Sheet</h2>
+			<table class="w3-table w3-border w3-bordered w3-small">
+				<tr>
+					<td>Name: </td>
+					<td>
+					<input type="text" id="playerName"></input>
+				</tr>
+				<tr>
+					<td>Descriptor: </td>
+					<td>
+						<select id="descriptor">
+							<option disabled selected>-- DESCRIPTOR --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Bear Type: </td>
+					<td>
+						<select id="type" onchange="updateType(event)">
+							<option disabled selected>-- TYPE --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold">Skill: </td>
+					<td id="skill" style="font-weight: bold"></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold">Role: </td>
+					<td>
+						<select id="role" style="font-weight: bold">
+							<option disabled selected>-- ROLE --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Hat: </td>
+					<td>
+						<select id="hat">
+							<option disabled selected>-- HAT --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Top: </td>
+					<td>
+						<select id="topDescriptor" onchange="updateHBS(event)">
+							<option disabled selected>-- TOP --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Top Item: </td>
+					<td>
+						<select id="topItem" onchange="updateHBS(event)">
+							<option disabled selected>-- TOP ITEM --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Bottom: </td>
+					<td>
+						<select id="btmDescriptor" onchange="updateHBS(event)">
+							<option disabled selected>-- BOTTOM  --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Bottom Item: </td>
+					<td>
+						<select id="btmItem" onchange="updateHBS(event)">
+							<option disabled selected>-- BOTTOM ITEM --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Accessory: </td>
+					<td>
+						<select id="accessory" onchange="updateAccessory(event)">
+							<option selected>No Accessory</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Acc. Mod: </td>
+					<td id="accessoryModifier"></td>
+				</tr>
+				<tr>
+					<td title="Human Believeability Score" style="font-weight: bold">HBS: </td>
+					<td id="HBS" style="font-weight: bold"></td>
+				</tr>
+			</table>
 
-<h2>HBS - Human Believeability Score</h2>
-<p>Each part of your outfit contributes to your "Human Believeability Score" - the two parts of your top and the two parts of your bottom clothing are added together (the least believeable adding 1 up to the most believeable adding 6).</p>
-<p>Your accessory then adds or removes points from your score (-3 up to +3) as shown in the Accessory Modifier section.</p>
-<p>If a human was to check how believeable your outfit is, the GM will roll 4 dice and compare this to your HBS - a higher number means that they detect you are actually a bear in disguise and all hell breaks loose!</p>
-	
-<h2>Credit</h2>
-All credit for Honey Heist to <em>Grant Howitt</em> - buy a copy and get this wonderful one-page RPG at <a href="https://gshowitt.itch.io/honey-heist">itch.io - Honey Heist</a> and support him on <a href="https://www.patreon.com/gshowitt">Patreon</a> for more stuff like this!
-</section>
-</div>
-
-<div id="character" class="panel" style="display:none">
-
- <section id="generated" class="w3-orange w3-border-black w3-center w3-padding">
-
-  <h2>Character Sheet</h2>
-  <table class="w3-table w3-border w3-bordered w3-small">
-
-   <tr>
-     <td>Name: </td>
-     <td>
-       <input type="text" id="playerName"></input>
-   </tr>
-   <tr>
-     <td>Descriptor: </td>
-     <td>
-       <select id="descriptor">
-         <option disabled selected>-- DESCRIPTOR --</option>
-       </select>
-   </tr>
-   <tr>
-     <td>Bear Type: </td>
-     <td>
-       <select id="type" onchange="updateType(event)">
-         <option disabled selected>-- TYPE --</option>
-       </select>
-     </td>
-    </tr>
-
-    <tr>
-     <td style="font-weight: bold">Skill: </td>
-     <td id="skill" style="font-weight: bold"></td>
-    </tr>
-
-    <tr>
-     <td style="font-weight: bold">Role: </td>
-     <td>
-      <select id="role" style="font-weight: bold">
-       <option disabled selected>-- ROLE --</option>
-       </select>
-     </td>
-    </tr>
-
-    <tr>
-     <td>Hat: </td>
-     <td>
-      <select id="hat">
-       <option disabled selected>-- HAT --</option>
-       </select>
-     </td>
-    </tr>
-
-    <tr>
-     <td>Top: </td>
-     <td>
-      <select id="topDescriptor" onchange="updateHBS(event)">
-       <option disabled selected>-- TOP --</option>
-       </select>
-     </td>
-    </tr>
-
-    <tr>
-     <td>Top Item: </td>
-     <td>
-      <select id="topItem" onchange="updateHBS(event)">
-       <option disabled selected>-- TOP ITEM --</option>
-       </select>
-     </td>
-    </tr>
-
-    <tr>
-     <td>Bottom: </td>
-     <td>
-      <select id="btmDescriptor" onchange="updateHBS(event)">
-       <option disabled selected>-- BOTTOM  --</option>
-       </select>
-     </td>
-    </tr>
-
-    <tr>
-     <td>Bottom Item: </td>
-     <td>
-      <select id="btmItem" onchange="updateHBS(event)">
-       <option disabled selected>-- BOTTOM ITEM --</option>
-       </select>
-     </td>
-    </tr>
-
-   <tr>
-     <td>Accessory: </td>
-     <td>
-      <select id="accessory" onchange="updateAccessory(event)">
-       <option selected>No Accessory</option>
-       </select>
-     </td>
-    </tr>
-
-    <tr>
-     <td>Acc. Mod: </td>
-     <td id="accessoryModifier"></td>
-    </tr>
-
-    <tr>
-     <td title="Human Believeability Score" style="font-weight: bold">HBS: </td>
-     <td id="HBS" style="font-weight: bold"></td>
-    </tr>
-
-   </table>
-
-<section id="stats">
-    <table style="width: 100%" class="w3-table w3-bordered w3-border w3-orange">
-      <tr>
-        <th style="text-align: center; width: 50%;" class="w3-large">
-          Bear = <b id="bearStat" class="w3-large">3</b>
-        </th>
-        <th style="text-align: center; width: 50%;" class="w3-large">
-          Criminal = <b id="criminalStat" class="w3-large">3</b>
-        </th>
-      </tr>
-      <tr>
-        <td class="w3-right-align">
-          <button class="w3-btn w3-brown w3-block" onclick="changeStat('bear')">Bear +</button>
-        </td>
-        <td class="w3-left-align">
-          <button class="w3-btn w3-grey w3-block"  onclick="changeStat('criminal')">Criminal +</button>
-        </td>
-      </tr>
-      <tr class="w3-small">
-        <td>
-          <em class="w3-center">Use to maul stuff, run & climb, shrug off damage, scare people, and generally do bear stuff.</em>
-        </td>
-        <td>
-          <em class="w3-center">Use to do anything not directly related to being a bear.</em>
-        </td>
-      </tr>
-    </table>
-  </section>
-
-</div>
+			<section id="stats">
+				<table style="width: 100%" class="w3-table w3-bordered w3-border w3-orange">
+					<tr>
+						<th style="text-align: center; width: 50%;" class="w3-large">
+							Bear = <b id="bearStat" class="w3-large">3</b>
+						</th>
+							<th style="text-align: center; width: 50%;" class="w3-large">Criminal = <b id="criminalStat" class="w3-large">3</b>
+						</th>
+					</tr>
+					<tr>
+						<td class="w3-right-align">
+							<button class="w3-btn w3-brown w3-block" onclick="changeStat('bear')">Bear +</button>
+						</td>
+						<td class="w3-left-align">
+							<button class="w3-btn w3-grey w3-block"  onclick="changeStat('criminal')">Criminal +</button>
+						</td>
+					</tr>
+					<tr class="w3-small">
+						<td>
+							<em class="w3-center">Use to maul stuff, run & climb, shrug off damage, scare people, and generally do bear stuff.</em>
+						</td>
+						<td>
+							<em class="w3-center">Use to do anything not directly related to being a bear.</em>
+						</td>
+					</tr>
+				</table>
+			</section>
+		</div>
+	</div>
 
 
-<div id="heist" class="panel" style="display:none">
-  <section class="w3-red w3-padding">
-  	<h1>Heist</h1>
-		 <p id="generatedHeist"></p>
-  </section>
-</div>
+	<div id="heist" class="panel" style="display:none">
+		<section class="w3-red w3-padding">
+			<h1>Heist</h1>
+			<p id="generatedHeist"></p>
+		</section>
+	</div>
 
-<div id="game" class="panel" style="display:none">
-  <section class="w3-black w3-padding w3-border-white">
-  <h1>Game</h1>
-  <table id="playerTable" style="width:100%">
-    <tr>
-      <th>Name</th>
-      <th colspan="2">Bear</th>
-      <th colspan="2">Criminal</th>
-      <th>End?</th>
-    </tr>
-  </table>
-  <button class="w3-btn w3-green" onclick="addPlayer()">Add Player</button>
-  </section>
-</div>
+	<div id="game" class="panel" style="display:none">
+		<section class="w3-black w3-padding w3-border-white">
+			<h1>Game</h1>
+			<table id="playerTable" style="width:100%">
+				<tr>
+					<th>Name</th>
+					<th colspan="2">Bear</th>
+					<th colspan="2">Criminal</th>
+					<th>End?</th>
+				</tr>
+			</table>
+			<br>
+			<button class="w3-btn w3-green" onclick="addPlayer()">Add Player</button>
+		</section>
+	</div>
 
 </section>
 
