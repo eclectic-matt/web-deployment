@@ -149,22 +149,27 @@ const updateHBS = (ev) => {
 const getHBS = () => {
   //top desc 
   let topDEl = document.getElementById('topDescriptor');
-  let tDIndex = topDEl.selectedIndex - 1;
+  //THE SCORES ARE 1-INDEXED, SO NO NEED TO SUBTRACT HERE
+  let tDIndex = topDEl.selectedIndex;
 
   //top item 
   let topIEl = document.getElementById('topItem');
-  let tIIndex = topIEl.selectedIndex - 1;
+  //THE SCORES ARE 1-INDEXED, SO NO NEED TO SUBTRACT HERE
+  let tIIndex = topIEl.selectedIndex;
 
   //btm desc 
   let btmDEl = document.getElementById('btmDescriptor');
-  let bDIndex = btmDEl.selectedIndex - 1;
+  //THE SCORES ARE 1-INDEXED, SO NO NEED TO SUBTRACT HERE
+  let bDIndex = btmDEl.selectedIndex ;
 
   //btm item 
   let btmIEl = document.getElementById('btmItem');
-  let bIIndex = btmIEl.selectedIndex - 1;
+  //THE SCORES ARE 1-INDEXED, SO NO NEED TO SUBTRACT HERE
+  let bIIndex = btmIEl.selectedIndex;
 
   //acc mod 
   let accEl = document.getElementById('accessory');
+  //THIS ONE IS TO GET FROM THE JSON ARRAY, SO DO SUBTRACT!
   let accIndex = accEl.selectedIndex - 1;
   let accMod = parseInt(json.players.outfit.accessory[accIndex].scoreModifier);
 
