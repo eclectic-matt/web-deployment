@@ -134,7 +134,7 @@ document.getElementById('accessoryModifier').innerHTML = accessory.scoreModifier
 
 const getHBS = () => {
   //top desc 
-  let topDEl = document.getElementById('topDescription');
+  let topDEl = document.getElementById('topDescriptor');
   let tDIndex = topDEl.selectedIndex - 1;
 
   //top item 
@@ -142,7 +142,7 @@ const getHBS = () => {
   let tIIndex = topIEl.selectedIndex - 1;
 
   //btm desc 
-  let btmDEl = document.getElementById('btmDescription');
+  let btmDEl = document.getElementById('btmDescriptor');
   let bDIndex = btmDEl.selectedIndex - 1;
 
   //btm item 
