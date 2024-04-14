@@ -40,7 +40,7 @@ let endTextEl = document.getElementById('endText' + playerId);
     case 'bear':
       bear++;
       criminal--;
-      if(bear === 6){
+      if(bear >= 6){
         endTextEl.innerHTML = 'BEAR!';
       }else{
         endTextEl.innerHTML = '';
@@ -49,7 +49,7 @@ let endTextEl = document.getElementById('endText' + playerId);
     case 'criminal':
       bear--;
       criminal++;
-      if(criminal === 6){
+      if(criminal >= 6){
         endTextEl.innerHTML = 'CRIM!';
       }else{
         endTextEl.innerHTML = '';
@@ -134,11 +134,15 @@ document.getElementById('skill').innerHTML = typeAndSkill.skill;
 const updateAccessory = (ev) => {
  
   let accIndex = ev.target.selectedIndex - 1;
-  let accessory = json.players.outfit.accessory[accIndex];
-document.getElementById('accessoryModifier').innerHTML = accessory.scoreModifier;
+  if(accIndex === -1){
+        document.getElementById('accessoryModifier').innerHTML = 0;
+  }else{
+    let accessory = json.players.outfit.accessory[accIndex];
+  document.getElementById('accessoryModifier').innerHTML = accessory.scoreModifier;
 
    let hbsEl = document.getElementById('HBS');
   hbsEl.innerHTML = getHBS();
+  }
 }
 
 const updateHBS = (ev) => {
@@ -169,9 +173,14 @@ const getHBS = () => {
 
   //acc mod 
   let accEl = document.getElementById('accessory');
+  let accMod = 0;
   //THIS ONE IS TO GET FROM THE JSON ARRAY, SO DO SUBTRACT!
   let accIndex = accEl.selectedIndex - 1;
-  let accMod = parseInt(json.players.outfit.accessory[accIndex].scoreModifier);
+if(accIndex === -1){
+    accMod = 0;
+  }else{
+    accMod = parseInt(json.players.outfit.accessory[accIndex].scoreModifier);
+}
 
   //DEBUGGING
   console.log('tDIndex: ' + tDIndex);
