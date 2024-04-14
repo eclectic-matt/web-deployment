@@ -73,9 +73,9 @@ const addPlayer = () => {
   row.appendChild(bearNameTd);
 
   let bearStatTd = document.createElement('td');
+  bearStatTd.style.textAlign = "center";
   let bearStatEl = document.createElement('b');
   bearStatEl.id = 'bearStat' + newPlayerId;
-  bearStatEl.style.textAlign = "center";
   bearStatEl.innerHTML = '3';
   bearStatTd.appendChild(bearStatEl);
   row.appendChild(bearStatTd);
@@ -101,9 +101,9 @@ const addPlayer = () => {
   row.appendChild(crimBtnTd);
 
   let crimStatTd = document.createElement('td');
+  crimStatTd.style.textAlign = "center";
   let crimStatEl = document.createElement('b');
   crimStatEl.id = 'criminalStat' + newPlayerId;
-  crimStatEl.style.textAlign = "center";
   crimStatEl.innerHTML = '3';
   crimStatTd.appendChild(crimStatEl);
   row.appendChild(crimStatTd);
