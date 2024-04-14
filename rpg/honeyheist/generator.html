@@ -87,7 +87,7 @@ All credit for Honey Heist to <em>Grant Howitt</em> - buy a copy and get this wo
    <tr>
      <td>Type: </td>
      <td>
-       <select id="type" onchange="updateType()">
+       <select id="type" onchange="updateType(this, ev)">
          <option disabled selected>-- TYPE --</option>
        </select>
      </td>
@@ -155,7 +155,7 @@ All credit for Honey Heist to <em>Grant Howitt</em> - buy a copy and get this wo
    <tr>
      <td>Accessory: </td>
      <td>
-      <select id="accessory" onchange="updateAccessory()">
+      <select id="accessory" onchange="updateAccessory(this, ev)">
        <option disabled selected>-- ACCESSORY --</option>
        </select>
      </td>
