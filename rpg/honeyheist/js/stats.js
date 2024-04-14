@@ -130,6 +130,11 @@ const updateAccessory = (ev) => {
   let accessory = json.players.outfit.accessory[accIndex];
 document.getElementById('accessoryModifier').innerHTML = accessory.scoreModifier;
 
+   let hbsEl = document.getElementById('HBS');
+  hbsEl.innerHTML = getHBS();
+}
+
+const updateHBS = (ev) => {
   let hbsEl = document.getElementById('HBS');
   hbsEl.innerHTML = getHBS();
 }
