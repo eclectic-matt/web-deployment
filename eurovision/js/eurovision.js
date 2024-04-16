@@ -1,9 +1,13 @@
 //GOOGLE SHEET TO GENERATE acts.json
 //https://docs.google.com/spreadsheets/d/1lme7mH1AtvpYvDCoz1h_Ae7fdv2ijn_X67Z2-1opPB8/edit#gid=0
 
+//2023
 //https://eurovision.tv/event/liverpool-2023/participants
 //https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2023#Format
 
+//2024
+//https://eurovision.tv/event/malmo-2024/first-semi-final
+//https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2024
 
 var json;
 //DEBUG - LIMIT TO ONE EVENT
@@ -12,7 +16,9 @@ var eventName = 'Grand Final';
 var settings = {};
 settings.colourTheme = 'default';
 
-var dataFile = 'data/2023_acts.json';
+//LAST YEAR
+//var dataFile = 'data/2023_acts.json';
+var dataFile = 'data/2024_acts.json';
 
 function init(){
 	//console.log('init');

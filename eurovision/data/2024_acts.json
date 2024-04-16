@@ -1,0 +1,580 @@
+{
+	"meta": {
+		"final": {
+			"start": "2024-05-11 20:00:00",
+			"location": "Malmö Arena, Malmö, Sweden"
+		}
+	},
+	"acts": [
+		{
+			"country": "Norway",
+			"artist": "Gåte",
+			"countryFlagCode": "no",
+			"bgColor": "indigo",
+			"song": "Ulveham",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 15
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Malta",
+			"artist": "Sarah Bonnici",
+			"bgColor": "red",
+			"countryFlagCode": "mt",
+			"song": "Loop",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 1
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Serbia",
+			"artist": "Teya Dora",
+			"bgColor": "blue",
+			"countryFlagCode": "rs",
+			"song": "Ramonda",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 2
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Latvia",
+			"artist": "Dons",
+			"bgColor": "win8-crimson",
+			"countryFlagCode": "lv",
+			"song": "Hollow",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 9
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Portugal",
+			"artist": "Iolanda",
+			"bgColor": "red",
+			"countryFlagCode": "pt",
+			"song": "Grito",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 14
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Ireland",
+			"artist": "Bambie Thug",
+			"bgColor": "green",
+			"countryFlagCode": "ie",
+			"song": "Doomsday Blue",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 4
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Croatia",
+			"artist": "Baby Lasagna",
+			"bgColor": "blue",
+			"countryFlagCode": "hr",
+			"song": "Rim Tim Tagi Dim",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 7
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Switzerland",
+			"artist": "Nemo",
+			"bgColor": "red",
+			"countryFlagCode": "ch",
+			"song": "The Code",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 4
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Israel",
+			"artist": "Eden Golan",
+			"bgColor": "white",
+			"countryFlagCode": "il",
+			"song": "Hurricane",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 14
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Moldova",
+			"artist": "Natalia Barbu",
+			"bgColor": "yellow",
+			"countryFlagCode": "md",
+			"song": "In the Middle",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 11
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Sweden",
+			"artist": "Marcus & Martinus",
+			"bgColor": "blue",
+			"countryFlagCode": "se",
+			"song": "Unforgettable",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 1
+			}
+		},
+		{
+			"country": "Azerbaijan",
+			"artist": "Fahree feat. Ilkin Dovlatov",
+			"bgColor": "red",
+			"countryFlagCode": "az",
+			"song": "Özünlə apar",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 12
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Czechia",
+			"artist": "Aiko",
+			"bgColor": "white",
+			"countryFlagCode": "cz",
+			"song": "Pedestal",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 5
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Netherlands",
+			"artist": "Joost Klein",
+			"bgColor": "orange",
+			"countryFlagCode": "nl",
+			"song": "Europapa",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 16
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Finland",
+			"artist": "Windows95man",
+			"bgColor": "white",
+			"countryFlagCode": "fi",
+			"song": "No Rules!",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 10
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Denmark",
+			"artist": "Saba",
+			"bgColor": "red",
+			"countryFlagCode": "dk",
+			"song": "Sand",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 7
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Armenia",
+			"artist": "Ladaniva",
+			"bgColor": "orange",
+			"countryFlagCode": "am",
+			"song": "Jako",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 8
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Romania",
+			"artist": "???",
+			"bgColor": "yellow",
+			"countryFlagCode": "ro",
+			"song": "???",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Estonia",
+			"artist": "5miinust and Puuluup",
+			"bgColor": "blue",
+			"countryFlagCode": "ee",
+			"song": "(Nendest) narkootikumidest ei tea me (küll) midagi",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 13
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Belgium",
+			"artist": "Mustii",
+			"bgColor": "red",
+			"countryFlagCode": "be",
+			"song": "Before the Party's Over",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 12
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Cyprus",
+			"artist": "Silia Kapsis",
+			"bgColor": "white",
+			"countryFlagCode": "cy",
+			"song": "Liar",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 1
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Iceland",
+			"artist": "Hera Björk",
+			"bgColor": "blue",
+			"countryFlagCode": "is",
+			"song": "Scared of Heights",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 8
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Greece",
+			"artist": "Marina Satti",
+			"bgColor": "aqua",
+			"countryFlagCode": "gr",
+			"song": "Zari",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 3
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Poland",
+			"artist": "Luna",
+			"bgColor": "red",
+			"countryFlagCode": "pl",
+			"song": "The Tower",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 6
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Slovenia",
+			"artist": "Raiven",
+			"bgColor": "blue",
+			"countryFlagCode": "si",
+			"song": "Veronika",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 9
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Georgia",
+			"artist": "Nutsa Buzaladze",
+			"bgColor": "white",
+			"countryFlagCode": "ge",
+			"song": "Firefighter",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 11
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "San Marino",
+			"artist": "Megara",
+			"bgColor": "blue",
+			"countryFlagCode": "sm",
+			"song": "11:11",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 10
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Austria",
+			"artist": "Kaleen",
+			"bgColor": "white",
+			"countryFlagCode": "at",
+			"song": "We Will Rave",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 6
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Albania",
+			"artist": "Besa",
+			"bgColor": "red",
+			"countryFlagCode": "al",
+			"song": "Titan",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 2
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Lithuania",
+			"artist": "Silvester Belt",
+			"bgColor": "green",
+			"countryFlagCode": "lt",
+			"song": "Luktelk",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 3
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Australia",
+			"artist": "Electric Fields",
+			"bgColor": "blue",
+			"countryFlagCode": "au",
+			"song": "One Milkali (One Blood)",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 13
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "France",
+			"artist": "Slimane",
+			"bgColor": "red",
+			"countryFlagCode": "fr",
+			"song": "Mon amour",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Italy",
+			"artist": "Angelina Mango",
+			"bgColor": "green",
+			"countryFlagCode": "it",
+			"song": "La noia",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Spain",
+			"artist": "Nebulossa",
+			"bgColor": "yellow",
+			"countryFlagCode": "es",
+			"song": "Zorra",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Germany",
+			"artist": "Isaak",
+			"bgColor": "black",
+			"countryFlagCode": "de",
+			"song": "Always on the Run",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Ukraine",
+			"artist": "Alyona Alyona and Jerry Heil",
+			"bgColor": "blue",
+			"countryFlagCode": "ua",
+			"song": "Teresa & Maria",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 5
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "United Kingdom",
+			"artist": "Olly Alexander",
+			"bgColor": "red",
+			"countryFlagCode": "gb",
+			"song": "Dizzy",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Luxembourg",
+			"artist": "Tali",
+			"bgColor": "blue",
+			"countryFlagCode": "lu",
+			"song": "Fighter",
+			"language": "Unknown",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 15
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		}
+	]
+}
