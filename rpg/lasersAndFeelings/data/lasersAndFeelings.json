@@ -45,10 +45,16 @@
             "Fightercraft"
         ],
         "problem": [
-            "Fuel Hog (always needs energy crystals)",
-            "Only One Medical Pod (and Captain Darcy is in it)",
-            "Horrible Circuit Breakers (in battle, consoles tend to explode on the bridge)",
-            "Grim Reputation (Captain Darcy did some bad stuff in the past)."
+            "Fuel Hog",
+            "Only One Medical Pod",
+            "Horrible Circuit Breakers",
+            "Grim Reputation"
+        ],
+        "problemDetails": [
+          "always needs energy crystals",
+          "and Captain Darcy is in it",
+          "in battle, consoles tend to explode on the bridge",
+          "Captain Darcy did some bad stuff in the past"
         ]
     },
     "adventure": {
