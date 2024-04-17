@@ -121,6 +121,10 @@ const randomAdventure = () => {
 	//threat
 	let threatIndex = Math.floor(Math.random() * json.adventure.threat.length);
 	let threat = json.adventure.threat[threatIndex];
+ let want = ' wants to ';
+ if(threat.slice(-1,1) === 's'){
+   want = ' want to ';
+ }
 	
 	//aim
 	let aimIndex = Math.floor(Math.random() * json.adventure.aim.length);
@@ -137,5 +141,5 @@ const randomAdventure = () => {
 
 	//OUTPUT
 	let advEl = document.getElementById('generatedAdventure');
-	advEl.innerHTML = '<h2>Adventure</h2><p>' + threat + ' wants to ' + aim + ' the ' + target + ' which will ' + result;
+	advEl.innerHTML = '<p>' + threat + want + aim + ' the ' + target + ' which will ' + result;
 }
