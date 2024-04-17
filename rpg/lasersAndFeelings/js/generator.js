@@ -68,7 +68,17 @@ const updateOptions = (data) => {
 		select.appendChild(option);
 	});
 
-	
+}
+
+const updateProblemDetail = (event) => {
+
+   let index = event.target.selectedIndex;
+   let detail = '';
+   if(index > 0){
+     detail = json.adventure.problemDetails[index - 1];
+   }
+   document.getElementById('problemDetail').innerHTML = detail;
+
 }
 
 const randomCharacter = () => {
