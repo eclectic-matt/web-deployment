@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lasers and Feelings RPG | by Eclectic-Matt</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="./data/lasersAndFeelings.json"></script>
+	<script src="./js/generator.js"></script>
+	<script src="/javascript/json.js"></script>
+	<script src="/javascript/panels.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body onload="loadData()" class="w3-yellow w3-padding-4">
+	
+<section id="menu" class="w3-bar">
+	<button class="w3-bar-item w3-padding-8 w3-blue" onclick="randomCharacter()">Random Char</button>
+	<button class="w3-bar-item w3-padding-8 w3-green" onclick="randomShip()">Random Ship</button>
+	<button class="w3-bar-item w3-padding-8 w3-red" onclick="randomAdventure()" href="#adventureSection">Random Adventure</button>
+</section>
+
+<br>
+
+<section id="panels">
+
+	<div class="w3-bar w3-orange">
+		<button class="w3-bar-item w3-button w3-grey" onclick="openPanel('reference')">Info</button>
+		<button class="w3-bar-item w3-button w3-blue" onclick="openPanel('character')">Character</button>
+		<button class="w3-bar-item w3-button w3-green" onclick="openPanel('ship')">Ship</button>
+		<button class="w3-bar-item w3-button w3-red" onclick="openPanel('adventure')">Adventure</button>
+	</div>
+
+	<div id="reference" class="panel">
+		<section class="w3-grey w3-padding">
+			<h2>Summary</h2>
+			<b>YOU ARE THE CREW OF THE INTERSTELLAR SCOUT SHIP RAPTOR.</b>
+			<p>Your mission is to explore uncharted regions of space, deal with aliens both friendly and deadly, and defend the Consortium worlds against space dangers.</p>
+			<p>CAPTAIN DARCY has been overcome by the strange psychic entity known as Something Else, leaving you to fend for yourselves while he recovers in a medical pod.</p>
+
+			<h2>Rolling the Dice</h2>
+			<p>When you do something risky, roll <b>1d6</b> to find out how it goes.</p>
+			<p>Roll <b>+1d</b> if you’re prepared and <b>+1d</b> if you’re an expert.</p>
+			<p>(The GM tells you how many dice to roll, based on your character and the situation.)</p>
+			<br>
+			<p>Roll your dice and compare each die result to your number:</p>
+			<ul>
+			<li>If you’re using <b>LASERS</b> (science, reason), you want to roll under your number.</li>
+			<li>If you’re using <b>FEELINGS</b> (rapport, passion), you want to roll over your number.</li>
+			</ul>
+			
+			<h3>Results</h3>
+			<ul>
+			<li>If none of your dice succeed, it goes wrong. The GM says how things get worse somehow.</li>
+			<li>1 => If one die succeeds, you barely manage it. The GM inflicts a complication, harm, or cost.</li>
+			<li>2 => If two dice succeed, you do it well. Good job!</li>
+			<li>3 => If three dice succeed, you get a critical success! The GM tells you some extra effect you get.</li>
+			<li>If you <b>roll your number exactly</b>, you have <em>LASER FEELINGS</em>. You get a special insight into what’s going on (see below). Note: A roll of LASER FEELINGS counts as a success.</li>
+
+			<h4>Laser Feelings</h4> 
+			<p>Ask the GM a question and they’ll answer you honestly. Some good questions:</p>
+			<ul>
+				<li><em>What are they really feeling?</em></li>
+				<li><em>Who’s behind this?</em></li>
+				<li><em>How could I get them to _____?</em></li>
+				<li><em>What should I be on the lookout for?</em></li>
+				<li><em>What’s the best way to _____?</em></li>
+				<li><em>What’s really going on here?</em></li>
+			</ul>
+
+			<h4>Helping</h4>
+			<p>If you want to help someone else who’s rolling, say how you try to help and make a roll.</p>
+			<p>If you succeed, give them <b>+1d</b></p>
+
+			<h2>Credit</h2>
+			All credit for Lasers and Feelings to <em>John Harper</em> - buy a copy and get this wonderful one-page RPG at <a href="https://johnharper.itch.io/lasers-feelings">itch.io - Lasers and Feelings</a> and check him out on <a href="https://johnharper.itch.io/">Itch.io</a> for more stuff like this!
+		</section>
+	</div>
+
+	<div id="character" class="panel" style="display:none">
+		<div id="generated" class="w3-blue w3-border-black w3-center w3-padding">
+			<h2>Character Sheet</h2>
+			<table class="w3-table w3-border w3-bordered w3-small">
+				<tr>
+					<td>Name: </td>
+					<td>
+					<input type="text" id="playerName"></input>
+				</tr>
+				<tr>
+					<td>Style: </td>
+					<td>
+						<select id="style">
+							<option disabled selected>-- STYLE --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Role: </td>
+					<td>
+						<select id="role">
+							<option disabled selected>-- ROLE --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Number: </td>
+					<td>
+						<select id="number">
+							<option disabled selected>-- NUMBER --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Goal: </td>
+					<td>
+						<select id="goal">
+							<option disabled selected>-- GOAL --</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div id="ship" class="panel" style="display:none">
+		<section class="w3-green w3-padding">
+			<h1>Ship</h1>
+			<table class="w3-table w3-border w3-bordered w3-small">
+				<tr>
+					<td>Name: </td>
+					<td>
+					<input type="text" id="playerName"></input>
+				</tr>
+				<tr>
+					<td>Strength 1: </td>
+					<td>
+						<select id="strength1">
+							<option disabled selected>-- STRENGTH 1 --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Strength 2: </td>
+					<td>
+						<select id="strength2">
+							<option disabled selected>-- STRENGTH 2 --</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Problem: </td>
+					<td>
+						<select id="problem">
+							<option disabled selected>-- PROBLEM --</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</section>
+	</div>
+
+	<div id="adventure" class="panel" style="display:none">
+		<section class="w3-red w3-padding">
+			<h1>Adventure</h1>
+			<p id="generatedAdventure"></p>
+		</section>
+	</div>
+
+</section>
+
+</body>
+</html>
