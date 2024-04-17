@@ -122,7 +122,7 @@ const randomAdventure = () => {
 	let threatIndex = Math.floor(Math.random() * json.adventure.threat.length);
 	let threat = json.adventure.threat[threatIndex];
  let want = ' wants to ';
- if(threat.slice(-1,1) === 's'){
+ if(threat.slice(-1) === 's'){
    want = ' want to ';
  }
 	
