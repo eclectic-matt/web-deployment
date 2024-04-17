@@ -1,35 +1,35 @@
 {
     "player": {
         "style": [
-            "Alien", 
-            "Android", 
-            "Dangerous", 
-            "Heroic", 
-            "Hot-Shot", 
+            "Alien",
+            "Android",
+            "Dangerous",
+            "Heroic",
+            "Hot-Shot",
             "Intrepid",
             "Savvy"
         ],
         "role": [
             "Doctor",
-            "Envoy", 
-            "Engineer", 
-            "Explorer", 
-            "Pilot", 
+            "Envoy",
+            "Engineer",
+            "Explorer",
+            "Pilot",
             "Scientist",
             "Soldier"
         ],
         "number": [
-            2, 
-            3, 
-            4, 
+            2,
+            3,
+            4,
             5
         ],
         "goal": [
             "Become Captain",
-            "Meet New Aliens", 
-            "Shoot Bad Guys", 
-            "Find New Worlds", 
-            "Solve Weird Space Mysteries", 
+            "Meet New Aliens",
+            "Shoot Bad Guys",
+            "Find New Worlds",
+            "Solve Weird Space Mysteries",
             "Prove Yourself",
             "Keep Being Awesome"
         ]
@@ -47,7 +47,7 @@
         "problem": [
             "Fuel Hog (always needs energy crystals)",
             "Only One Medical Pod (and Captain Darcy is in it)",
-            "Horrible Circuit Breakers (in battle, consoles tend to explode on the bridge)", 
+            "Horrible Circuit Breakers (in battle, consoles tend to explode on the bridge)",
             "Grim Reputation (Captain Darcy did some bad stuff in the past)."
         ]
     },
@@ -82,7 +82,7 @@
             "Enslave a planet",
             "Start a war / invasion",
             "Rip a hole in reality",
-            "Fix Everything"    
+            "Fix Everything"
         ]
     }
 }

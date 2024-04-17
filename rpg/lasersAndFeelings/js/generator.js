@@ -1,7 +1,7 @@
 var json;
 
 const loadData = () => {
-	getJSON('./data/laserAndFeelings.json', storeData);
+	getJSON('./data/lasersAndFeelings.json', storeData);
 }
 
 const storeData = (status, data) => {
