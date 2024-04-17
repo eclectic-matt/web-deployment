@@ -1,0 +1,88 @@
+{
+    "player": {
+        "style": [
+            "Alien", 
+            "Android", 
+            "Dangerous", 
+            "Heroic", 
+            "Hot-Shot", 
+            "Intrepid",
+            "Savvy"
+        ],
+        "role": [
+            "Doctor",
+            "Envoy", 
+            "Engineer", 
+            "Explorer", 
+            "Pilot", 
+            "Scientist",
+            "Soldier"
+        ],
+        "number": [
+            2, 
+            3, 
+            4, 
+            5
+        ],
+        "goal": [
+            "Become Captain",
+            "Meet New Aliens", 
+            "Shoot Bad Guys", 
+            "Find New Worlds", 
+            "Solve Weird Space Mysteries", 
+            "Prove Yourself",
+            "Keep Being Awesome"
+        ]
+    },
+    "ship": {
+        "strengths": [
+            "Fast",
+            "Nimble", 
+            "Well-Armed",
+            "Powerful Shields",
+            "Superior Sensors", 
+            "Cloaking Device", 
+            "Fightercraft"
+        ],
+        "problem": [
+            "Fuel Hog (always needs energy crystals)",
+            "Only One Medical Pod (and Captain Darcy is in it)",
+            "Horrible Circuit Breakers (in battle, consoles tend to explode on the bridge)", 
+            "Grim Reputation (Captain Darcy did some bad stuff in the past)."
+        ]
+    },
+    "adventure": {
+        "threat": [
+            "Zorgon the Conqueror",
+            "The Hive Armada",
+            "Rogue Captain",
+            "Space Pirates",
+            "Cyber Zombies",
+            "Alien Brain Worms"
+        ],
+        "aim": [
+            "Destroy / Corrupt",
+            "Steal / Capture",
+            "Bond with",
+            "Protect / Empower",
+            "Build / Synthesize",
+            "Pacify / Occupy"
+        ],
+        "target": [
+            "Space Pirate King/Queen",
+            "Void Crystals",
+            "Star Dreadnought",
+            "Quantum Tunnel",
+            "Ancient Space Ruin",
+            "Alien Artifact"
+        ],
+        "result": [
+            "Destroy a solar system",
+            "Reverse time",
+            "Enslave a planet",
+            "Start a war / invasion",
+            "Rip a hole in reality",
+            "Fix Everything"    
+        ]
+    }
+}
