@@ -123,7 +123,7 @@ const randomShip = () => {
 
 	//problem details
 	let detail = json.ship.problemDetails[pIndex];
-	document.getElementById('problemDetail').value = detail;
+	document.getElementById('problemDetail').innerHTML = detail;
 
 }
 
