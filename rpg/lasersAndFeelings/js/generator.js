@@ -67,17 +67,16 @@ const updateOptions = (data) => {
 		option.innerHTML = name;
 		select.appendChild(option);
 	});
-
 }
 
 const updateProblemDetail = (event) => {
 
-   let index = event.target.selectedIndex;
-   let detail = '';
-   if(index > 0){
-     detail = json.adventure.problemDetails[index - 1];
-   }
-   document.getElementById('problemDetail').innerHTML = detail;
+	let index = event.target.selectedIndex;
+	let detail = '';
+	if(index > 0){
+		detail = json.ship.problemDetails[index - 1];
+	}
+	document.getElementById('problemDetail').innerHTML = detail;
 
 }
 
@@ -121,6 +120,11 @@ const randomShip = () => {
 	//problem
 	let pIndex = Math.floor(Math.random() * json.ship.problem.length);
 	document.getElementById('problem').selectedIndex = (pIndex + 1);
+
+	//problem details
+	let detail = json.ship.problemDetails[pIndex];
+	document.getElementById('problemDetail').value = detail;
+
 }
 
 
