@@ -44,20 +44,21 @@
 			<p>When you do something risky, roll <b>1d6</b> to find out how it goes.</p>
 			<p>Roll <b>+1d</b> if you’re prepared and <b>+1d</b> if you’re an expert.</p>
 			<p>(The GM tells you how many dice to roll, based on your character and the situation.)</p>
-			<br>
+  	<p>If you want to <em>help someone else who’s rolling</em>, say how you try to help and make a roll - if you succeed, give them <b>+1d</b></p>
 			<p>Roll your dice and compare each die result to your number:</p>
 			<ul>
-			<li>If you’re using <b>LASERS</b> (science, reason), you want to roll under your number.</li>
-			<li>If you’re using <b>FEELINGS</b> (rapport, passion), you want to roll over your number.</li>
+			<li>If you’re using <b>LASERS</b> (science, reason), you want to <b>roll under your number</b>.</li>
+			<li>If you’re using <b>FEELINGS</b> (rapport, passion), you want to <b>roll over your number</b>.</li>
 			</ul>
 			
 			<h3>Results</h3>
 			<ul>
-			<li>If none of your dice succeed, it goes wrong. The GM says how things get worse somehow.</li>
-			<li>1 => If one die succeeds, you barely manage it. The GM inflicts a complication, harm, or cost.</li>
-			<li>2 => If two dice succeed, you do it well. Good job!</li>
-			<li>3 => If three dice succeed, you get a critical success! The GM tells you some extra effect you get.</li>
+			<li>If <b>none of your dice succeed</b>, it goes wrong. The GM says how things get worse somehow.</li>
+			<li>If <b>one die succeeds</b>, you barely manage it. The GM inflicts a complication, harm, or cost.</li>
+			<li>If <b>two dice succeed</b>, you do it well. Good job!</li>
+			<li>If <b>three dice succeed</b>, you get a critical success! The GM tells you some extra effect you get.</li>
 			<li>If you <b>roll your number exactly</b>, you have <em>LASER FEELINGS</em>. You get a special insight into what’s going on (see below). Note: A roll of LASER FEELINGS counts as a success.</li>
+  </ul>
 
 			<h4>Laser Feelings</h4> 
 			<p>Ask the GM a question and they’ll answer you honestly. Some good questions:</p>
@@ -70,12 +71,8 @@
 				<li><em>What’s really going on here?</em></li>
 			</ul>
 
-			<h4>Helping</h4>
-			<p>If you want to help someone else who’s rolling, say how you try to help and make a roll.</p>
-			<p>If you succeed, give them <b>+1d</b></p>
-
 			<h2>Credit</h2>
-			All credit for Lasers and Feelings to <em>John Harper</em> - buy a copy and get this wonderful one-page RPG at <a href="https://johnharper.itch.io/lasers-feelings">itch.io - Lasers and Feelings</a> and check him out on <a href="https://johnharper.itch.io/">Itch.io</a> for more stuff like this!
+			All credit for Lasers and Feelings to <em>John Harper</em> - buy a copy and get this wonderful one-page RPG at <a href="https://johnharper.itch.io/lasers-feelings">itch.io - Lasers and Feelings</a> and check him out on <a href="https://johnharper.itch.io/">Itch.io</a> and support him on <a href="https://patreon.com/johnharper">Patreon</a> for more stuff like this!
 		</section>
 	</div>
 
@@ -104,11 +101,11 @@
 						</select>
 					</td>
 				</tr>
-				<tr>
-					<td>Number: </td>
+				<tr class="w3-large w3-center">
+					<td><b>Number: </b></td>
 					<td>
-						<select id="number">
-							<option disabled selected>-- NUMBER --</option>
+						<select id="number"><b>
+							<option disabled selected>-- NUMBER --</option></b>
 						</select>
 					</td>
 				</tr>
@@ -121,6 +118,20 @@
 					</td>
 				</tr>
 			</table>
+   <table>
+     <tr>
+       <th>LASERS</th>
+       <th>FEELINGS</th>
+     </tr>
+     <tr>
+       <td>Used for: <em>reason; technology; science; cold rationality; calm, precise action</em>.</td>
+       <td>Used for: <em>rapport; intuition; diplomacy; seduction; wild, passionate action</em>.</td>
+     </tr>
+     <tr>
+       <td>Roll <b>under your number</b></td>
+       <td>Roll <b>over your number</b></td>
+     </tr>
+   </table>
 		</div>
 	</div>
 
@@ -152,11 +163,15 @@
 				<tr>
 					<td>Problem: </td>
 					<td>
-						<select id="problem">
+						<select id="problem" onchange="updateProblemDetail(event)">
 							<option disabled selected>-- PROBLEM --</option>
 						</select>
 					</td>
 				</tr>
+   <tr>
+     <td>Problem Detail: </td>
+     <td><em id="problemDetail"></em></td>
+   </tr>
 			</table>
 		</section>
 	</div>
