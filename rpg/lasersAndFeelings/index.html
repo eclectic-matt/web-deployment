@@ -17,9 +17,9 @@
 <br><br>
 
 <section id="menu" class="w3-bar">
-	<button class="w3-bar-item w3-padding-8 w3-blue" onclick="randomCharacter()">Get Char</button>
-	<button class="w3-bar-item w3-padding-8 w3-green" onclick="randomShip()">Get Ship</button>
-	<button class="w3-bar-item w3-padding-8 w3-red" onclick="randomAdventure()" href="#adventureSection">Get Story</button>
+	<button class="w3-bar-item w3-padding-8 w3-indigo" onclick="randomCharacter()">Get Char</button>
+	<button class="w3-bar-item w3-padding-8 w3-blue" onclick="randomShip()">Get Ship</button>
+	<button class="w3-bar-item w3-padding-8 w3-light-blue" onclick="randomAdventure()" href="#adventureSection">Get Story</button>
 </section>
 
 <br>
@@ -27,14 +27,14 @@
 <section id="panels">
 
 	<div class="w3-bar w3-purple">
-		<button class="w3-bar-item w3-button w3-grey" onclick="openPanel('reference')">Info</button>
-		<button class="w3-bar-item w3-button w3-blue" onclick="openPanel('character')">Character</button>
-		<button class="w3-bar-item w3-button w3-green" onclick="openPanel('ship')">Ship</button>
-		<button class="w3-bar-item w3-button w3-red" onclick="openPanel('adventure')">Adventure</button>
+		<button class="w3-bar-item w3-button w3-cyan" onclick="openPanel('reference')">Info</button>
+		<button class="w3-bar-item w3-button w3-indigo" onclick="openPanel('character')">Character</button>
+		<button class="w3-bar-item w3-button w3-blue" onclick="openPanel('ship')">Ship</button>
+		<button class="w3-bar-item w3-button w3-light-blue" onclick="openPanel('adventure')">Story</button>
 	</div>
 
 	<div id="reference" class="panel">
-		<section class="w3-grey w3-padding">
+		<section class="w3-cyan w3-padding">
 			<h2>Summary</h2>
 			<b>YOU ARE THE CREW OF THE INTERSTELLAR SCOUT SHIP RAPTOR.</b>
 			<p>Your mission is to explore uncharted regions of space, deal with aliens both friendly and deadly, and defend the Consortium worlds against space dangers.</p>
@@ -77,7 +77,7 @@
 	</div>
 
 	<div id="character" class="panel" style="display:none">
-		<div id="generated" class="w3-blue w3-border-black w3-center w3-padding">
+		<div id="generated" class="w3-indigo w3-border-black w3-center w3-padding">
 			<h2>Character Sheet</h2>
 			<table class="w3-table w3-border w3-bordered w3-small">
 				<tr>
@@ -137,7 +137,7 @@
 	</div>
 
 	<div id="ship" class="panel" style="display:none">
-		<section class="w3-green w3-padding">
+		<section class="w3-blue w3-padding">
 			<h1>Ship</h1>
 			<table class="w3-table w3-border w3-bordered w3-small">
 				<tr>
@@ -181,7 +181,7 @@
 	</div>
 
 	<div id="adventure" class="panel" style="display:none">
-		<section class="w3-red w3-padding">
+		<section class="w3-light-blue w3-padding">
 			<h1>Adventure</h1>
 			<p id="generatedAdventure"></p>
 		</section>
