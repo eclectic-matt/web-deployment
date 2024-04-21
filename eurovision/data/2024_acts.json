@@ -12,8 +12,8 @@
 			"countryFlagCode": "no",
 			"bgColor": "indigo",
 			"song": "Ulveham",
-			"language": "Unknown",
-   "youtubeVideoId": "UipzszlJwRQ",
+			"language": "unknown",
+			"youtubeVideoId": "UipzszlJwRQ",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 15
@@ -28,7 +28,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "mt",
 			"song": "Loop",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "l6eS60n4wg8",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 1
@@ -43,7 +44,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "rs",
 			"song": "Ramonda",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "lWzPO6nPpwU",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 2
@@ -58,7 +60,8 @@
 			"bgColor": "win8-crimson",
 			"countryFlagCode": "lv",
 			"song": "Hollow",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "p8FNO0DtBng",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 9
@@ -73,7 +76,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "pt",
 			"song": "Grito",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "K5wDGhcDSpQ",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 14
@@ -88,7 +92,8 @@
 			"bgColor": "green",
 			"countryFlagCode": "ie",
 			"song": "Doomsday Blue",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "ZGRXRrlIspY",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 4
@@ -103,7 +108,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "hr",
 			"song": "Rim Tim Tagi Dim",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "xTBrVNZtnys",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 7
@@ -118,7 +124,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "ch",
 			"song": "The Code",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "kiGDvM14Kwg",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 4
@@ -133,7 +140,8 @@
 			"bgColor": "white",
 			"countryFlagCode": "il",
 			"song": "Hurricane",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "lJYn09tuPw4",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 14
@@ -148,7 +156,8 @@
 			"bgColor": "yellow",
 			"countryFlagCode": "md",
 			"song": "In the Middle",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "Jom9sNL5whs",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 11
@@ -163,7 +172,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "se",
 			"song": "Unforgettable",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "yekc8t0rJqA",
 			"semiFinal": {
 					"eventNumber": 0,
 					"billingNumber": 0
@@ -178,7 +188,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "az",
 			"song": "Özünlə apar",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "NNhAk4rVgNc",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 12
@@ -193,7 +204,8 @@
 			"bgColor": "white",
 			"countryFlagCode": "cz",
 			"song": "Pedestal",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "_iTcX6NlAqA",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 5
@@ -208,7 +220,8 @@
 			"bgColor": "orange",
 			"countryFlagCode": "nl",
 			"song": "Europapa",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "gT2wY0DjYGo",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 16
@@ -223,7 +236,8 @@
 			"bgColor": "white",
 			"countryFlagCode": "fi",
 			"song": "No Rules!",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "8Wi7fhswoBA",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 10
@@ -238,7 +252,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "dk",
 			"song": "Sand",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "3pCtdFnv9eQ",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 7
@@ -253,7 +268,8 @@
 			"bgColor": "orange",
 			"countryFlagCode": "am",
 			"song": "Jako",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "_6xfmW0Fc40",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 8
@@ -268,7 +284,8 @@
 			"bgColor": "yellow",
 			"countryFlagCode": "ro",
 			"song": "???",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "ugJ5n7S2GKI",
 			"semiFinal": {
 					"eventNumber": 0,
 					"billingNumber": 0
@@ -283,7 +300,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "ee",
 			"song": "(Nendest) narkootikumidest ei tea me (küll) midagi",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "zY6RbPaTNUc",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 13
@@ -298,7 +316,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "be",
 			"song": "Before the Party's Over",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "WCe9zrWEFNc",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 12
@@ -313,7 +332,8 @@
 			"bgColor": "white",
 			"countryFlagCode": "cy",
 			"song": "Liar",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "8q5QozrtEPA",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 1
@@ -328,7 +348,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "is",
 			"song": "Scared of Heights",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "OouUsCZ3xkM",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 8
@@ -343,7 +364,8 @@
 			"bgColor": "aqua",
 			"countryFlagCode": "gr",
 			"song": "Zari",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "uTYalXf184A",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 3
@@ -358,7 +380,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "pl",
 			"song": "The Tower",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "IhvDkF9XZx0",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 6
@@ -373,7 +396,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "si",
 			"song": "Veronika",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "uWcSsi7SliI",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 9
@@ -388,7 +412,8 @@
 			"bgColor": "white",
 			"countryFlagCode": "ge",
 			"song": "Firefighter",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "blMwY8Jabyk",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 11
@@ -403,7 +428,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "sm",
 			"song": "11:11",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "9NcAJtfhpWA",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 10
@@ -418,7 +444,8 @@
 			"bgColor": "white",
 			"countryFlagCode": "at",
 			"song": "We Will Rave",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "Kqda15G4T-4",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 6
@@ -433,7 +460,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "al",
 			"song": "Titan",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "nrjFhjpm7D8",
 			"semiFinal": {
 					"eventNumber": 2,
 					"billingNumber": 2
@@ -448,7 +476,8 @@
 			"bgColor": "green",
 			"countryFlagCode": "lt",
 			"song": "Luktelk",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "OrL668EQRu0",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 3
@@ -463,7 +492,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "au",
 			"song": "One Milkali (One Blood)",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "tJ2IaHxCvdw",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 13
@@ -478,7 +508,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "fr",
 			"song": "Mon amour",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "tfoOop2HXxQ",
 			"semiFinal": {
 					"eventNumber": 0,
 					"billingNumber": 0
@@ -493,7 +524,8 @@
 			"bgColor": "green",
 			"countryFlagCode": "it",
 			"song": "La noia",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "TO85laH-ATY",
 			"semiFinal": {
 					"eventNumber": 0,
 					"billingNumber": 0
@@ -508,7 +540,8 @@
 			"bgColor": "yellow",
 			"countryFlagCode": "es",
 			"song": "Zorra",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "LJFpexlj9Bs",
 			"semiFinal": {
 					"eventNumber": 0,
 					"billingNumber": 0
@@ -523,7 +556,8 @@
 			"bgColor": "black",
 			"countryFlagCode": "de",
 			"song": "Always on the Run",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "8b5gcgXcWgk",
 			"semiFinal": {
 					"eventNumber": 0,
 					"billingNumber": 0
@@ -538,7 +572,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "ua",
 			"song": "Teresa & Maria",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "k_8cNbF8FLI",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 5
@@ -553,7 +588,8 @@
 			"bgColor": "red",
 			"countryFlagCode": "gb",
 			"song": "Dizzy",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "mvs92WfR8lM",
 			"semiFinal": {
 					"eventNumber": 0,
 					"billingNumber": 0
@@ -568,7 +604,8 @@
 			"bgColor": "blue",
 			"countryFlagCode": "lu",
 			"song": "Fighter",
-			"language": "Unknown",
+			"language": "unknown",
+			"youtubeVideoId": "6CNuXpdyYmE",
 			"semiFinal": {
 					"eventNumber": 1,
 					"billingNumber": 15
