@@ -188,6 +188,16 @@ function generateActsList(json, clearDiv=false){
 		songTitle.className = 'w3-padding-8';
 		songTitle.innerHTML = 'Song: ' + act.song;
 
+  //NEW - SONG VIDEO IFRAME
+  var songVid = document.createElement('iframe');
+songVid.width = 560;
+songVid height = 315;
+songVid.src = act.youtubeVideo;
+songVid.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+songVid.setAttribute('frameBorder', '0');
+songVid.setAttribute('allowFullScreen', true);
+
+
 		//YOUR SCORES
 		// RANKING = 1 to 26
 		// PREDICTION = 1 to 26
@@ -404,6 +414,7 @@ function generateActsList(json, clearDiv=false){
 		countryDiv.appendChild(head);
 		countryDiv.appendChild(artist);
 		countryDiv.appendChild(songTitle);
+  countryDiv.appendChild(songVid);
 		countryDiv.appendChild(scoresInfo);
 		countryDiv.appendChild(scoresRow);
 		countryDiv.appendChild(notes);
