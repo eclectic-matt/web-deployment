@@ -340,12 +340,12 @@ function updateTheme(theme){
 			case 'plain':
 				//REMOVE CUSTOM COLOURS 
 				el.classList.remove(className);
-				//SET w3-black
-				el.classList.add('w3-black');
+				//SET PLAIN COLOUR
+				el.classList.add('w3-purple');
 			break;
 			case 'default':
-				//REMOVE w3-black
-				el.classList.remove('w3-black');
+				//REMOVE PLAIN COLOUR
+				el.classList.remove('w3-purple');
 				//SET CUSTOM COLOUR
 				el.classList.add(className);
 			break;

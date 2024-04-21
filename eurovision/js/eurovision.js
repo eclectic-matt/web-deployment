@@ -188,16 +188,16 @@ function generateActsList(json, clearDiv=false){
 		songTitle.className = 'w3-padding-8';
 		songTitle.innerHTML = 'Song: ' + act.song;
 
-  //NEW - SONG VIDEO IFRAME
-  var songVid = document.createElement('iframe');
-if(act.youtubeVideoId){
-  songVid.width = 560;
-  songVid.height = 315;
-  songVid.src = 'https://www.youtube.com/embed/' + act.youtubeVideoId;
-  songVid.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-  songVid.setAttribute('frameBorder', '0');
-  songVid.setAttribute('allowFullScreen', true);
-}
+		//NEW - SONG VIDEO IFRAME
+		var songVid = document.createElement('iframe');
+		if(act.youtubeVideoId){
+			songVid.width = 560;
+			songVid.height = 315;
+			songVid.src = 'https://www.youtube.com/embed/' + act.youtubeVideoId;
+			songVid.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+			songVid.setAttribute('frameBorder', '0');
+			songVid.setAttribute('allowFullScreen', true);
+		}
 
 
 		//YOUR SCORES
@@ -416,7 +416,7 @@ if(act.youtubeVideoId){
 		countryDiv.appendChild(head);
 		countryDiv.appendChild(artist);
 		countryDiv.appendChild(songTitle);
-  countryDiv.appendChild(songVid);
+		countryDiv.appendChild(songVid);
 		countryDiv.appendChild(scoresInfo);
 		countryDiv.appendChild(scoresRow);
 		countryDiv.appendChild(notes);
