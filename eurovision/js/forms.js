@@ -4,7 +4,6 @@ var preventDuplicates = false;
 //DEFAULT COLOUR
 const defaultThemeColour = 'w3-deep-purple';
 
-
 /**
  * Remove the disabled status from all options.
  */
@@ -36,7 +35,6 @@ function disableOption(className, id, countryName, scoreValue){
 	Array.from(selects).forEach( (el) => {
 		//SKIP THIS COUNTRY'S SELECTS
 		if (el.id !== id){
-			//console.log('not this country', el.name);
 			options = el.options;
 			for(let i = 0; i < options.length; i++){
 				let optVal = options[i].value;
@@ -45,7 +43,6 @@ function disableOption(className, id, countryName, scoreValue){
 					options[i].disabled = true;
 				}
 			}
-			//console.log(options);
 		}
 	});
 }
@@ -54,33 +51,27 @@ function updateSelects(className, id, countryName, scoreValue){
 	let selects = document.getElementsByClassName(className);
 	Array.from(selects).forEach( (el) => {
 		//SKIP THIS COUNTRY'S SELECTS
-		//if (el.id !== id){
-			//console.log('not this country', el.name);
-			options = el.options;
-			for(let i = 0; i < options.length; i++){
-				let optVal = options[i].value;
-				//IF THIS OPTION MATCHES
-				if (optVal == scoreValue){
-					//IF ANOTHER COUNTRY ALREADY ADDED
-					if(options[i].innerHTML !== options[i].value){
-						//CONCAT
-						options[i].innerHTML = options[i].innerHTML + ' ' + countryName;
-					}else{
-						//SET AS COUNTRY
-						options[i].innerHTML = options[i].value + ' - ' + countryName;
-					}
+		options = el.options;
+		for(let i = 0; i < options.length; i++){
+			let optVal = options[i].value;
+			//IF THIS OPTION MATCHES
+			if (optVal == scoreValue){
+				//IF ANOTHER COUNTRY ALREADY ADDED
+				if(options[i].innerHTML !== options[i].value){
+					//CONCAT
+					options[i].innerHTML = options[i].innerHTML + ' ' + countryName;
+				}else{
+					//SET AS COUNTRY
+					options[i].innerHTML = options[i].value + ' - ' + countryName;
 				}
 			}
-			//console.log(options);
-		//}
+		}
 	});
-
 }
 
 
 function changePoints(ev){
 	let select = ev.target;
-	//console.log(select.id,'is now',select.value);
 
 	var countryId = select.id.replace('select-points-','');
 	var el = document.getElementById(countryId);
@@ -112,7 +103,6 @@ function changePoints(ev){
 
 function changePredict(ev){
 	let select = ev.target;
-	//console.log(select.id,'is now',select.value);
 
 	var countryId = select.id.replace('select-predict-','');
 	var el = document.getElementById(countryId);
@@ -144,22 +134,12 @@ function changePredict(ev){
 
 function changeRanking(ev){
 	let select = ev.target;
-	//console.log(select.id,'is now',select.value);
 	var countryId = select.id.replace('select-rank-','');
-
-	/*
-	saveDataItem(key, value);
-	var localStoreKey = countryId + '-rank';
-	var localStoreValue = select.value;
-	localStorage.setItem(localStoreKey, localStoreValue);
-	*/
 
 	saveDataItem(countryId + '-rank', select.value);
 
 	var el = document.getElementById(countryId);
 	el.setAttribute('rank',select.value);
-
-	//updateScoresData('rank',select.name,select.value);
 
 	//REMOVE THIS COUNTRY FROM *OTHER* POINTS VALUES
 	removeSelected('rankSelect', select.id, select.name, select.value);
@@ -173,14 +153,6 @@ function changeRanking(ev){
 	//THEN UPDATE ALL SELECTS TO SHOW THIS COUNTRY ATTACHED TO THIS VALUE (CONCAT IF DUPLICATES ALLOWED)
 	updateSelects('rankSelect',  select.id, select.name, select.value);
 	
-	//STORE THE COUNTRY VALUE AND NAME
-	//let countryScore = select.value;
-	//let countryName = select.name;
-
-	//if(preventDuplicates){
-	//	updateSelects('rankSelect', select.id, countryName, countryScore);
-	//}
-
 	//UPDATE SORT ORDER AND ORDER BOXES NEXT TO COUNTRIES
 	var direction = document.getElementById('sortDirection').value;
 	var key = document.getElementById('sortKey').value;
@@ -194,7 +166,6 @@ function changeRanking(ev){
 
 function changeNotes(ev){
 	let textarea = ev.target;
-	//console.log(select.id,'is now',select.value);
 	var countryId = textarea.id.replace('notes-','');
 
 	saveDataItem(countryId + '-notes', textarea.value);
@@ -205,7 +176,6 @@ function updateOrders(){
 	let orderBoxes = document.getElementsByClassName('orderBox');
 	Array.from(orderBoxes).forEach( (el) => {
 		let countryId = el.id.replace('order-','');
-		//console.log(countryId);
 		let country = document.getElementById(countryId);
 		let order = country.getAttribute(key);
 		el.innerHTML = '<span class="w3-small">' + key + ':</span> ' + order;
@@ -246,9 +216,7 @@ function updateScoresTable(){
 			}
 			scores.points[points].push(country);
 		}
-		//console.log(el.id, el.getAttribute('rank'), el.getAttribute('predict'), el.getAttribute('points'));
 	}, scores);
-	//console.log(scores);
 	
 	var scoresTableDiv = document.getElementById('scoresTable');
 	scoresTableDiv.innerHTML = '';
@@ -337,7 +305,6 @@ function updateTheme(theme){
 		data = getActObjectFromCountry(country);
 		bgColour = data.bgColour;
 		className = 'w3-' + bgColour;
-		//console.log(country,className);
 		switch(theme){
 			case 'plain':
 				//REMOVE CUSTOM COLOURS 
@@ -362,7 +329,6 @@ function updateTheme(theme){
 		data = getActObjectFromCountry(country);
 		bgColour = data.bgColour;
 		className = 'w3-' + bgColour;
-		//console.log(country,className);
 		switch(theme){
 			case 'plain':
 				//REMOVE CUSTOM COLOURS 
@@ -397,15 +363,12 @@ function updateSettings(ev){
 	switch(ev.target.name){
 		case 'preventDuplicates':
 			preventDuplicates = ev.target.checked;
-			//console.log('Settings','preventDuplicates',preventDuplicates);
 			if(!preventDuplicates){
-				//console.log('Settings','removingDisabledOptions');
 				removeDisabled();
 			}
 		break;
 		case 'eventSelect':
 			eventName = ev.target.value;
-			//console.log('Settings','eventSelect',eventName);
 			//CLEAR DIV AND REGENERATE
 			generateActsList(json, true);
 			updateOrders();
@@ -429,7 +392,6 @@ function updateSettings(ev){
 		case 'colourTheme':
 			var theme = ev.target.value;
 			settings.colourTheme = theme;
-			//generateActsList(json, true);
 			updateTheme(theme);
 			updateOrders();
 		break;

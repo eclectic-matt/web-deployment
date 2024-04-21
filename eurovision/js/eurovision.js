@@ -21,17 +21,17 @@ settings.colourTheme = 'default';
 
 //LAST YEAR
 //var dataFile = 'data/2023_acts.json';
+//CURRENT YEAR
 var dataFile = 'data/2024_acts.json';
 
+//
 let maxFrameWidth = Math.floor( 0.75 * window.innerWidth );
 if(window.innerWidth > 600){
   maxFrameWidth = Math.floor(0.75 * window.innerWidth / 2);
 }
 let maxFrameHeight = Math.floor(maxFrameWidth / 1.7);
 
-
 function init(){
-	//console.log('init');
 	initModal();
 	json = asyncAPIcall(dataFile, showActs, showError);
 }
@@ -50,16 +50,10 @@ function asyncAPIcall(url, apiSuccess, apiFailure){
 }
 
 function showActs(url, response){
-	//console.log(url, response);
 	json = JSON.parse(response);
-
 	generateActsList(json);
-
 	updateOrders();
-
 	loadData();
-
-	//sortElements('acts','billing','DESC');
 }
 
 function generateActsList(json, clearDiv=false){
@@ -71,7 +65,6 @@ function generateActsList(json, clearDiv=false){
 	}
 
 	for(let act in json.acts){
-		//console.log(act);
 		act = json.acts[act];
 
 		var countryWrapper = document.createElement('div');
@@ -142,8 +135,7 @@ function generateActsList(json, clearDiv=false){
 			//console.log('button click', ev, name);
 			showHideCountries(idname + '-inner');
 		}
-		//countryButton.append(flagSpan);
-		//countryButton.append(countrySpan);
+
 		var key = document.getElementById('sortKey').value;
 		switch(key){
 			case 'billing':
@@ -159,21 +151,6 @@ function generateActsList(json, clearDiv=false){
 				order = countryWrapper.getAttribute('points');
 			break;
 		}
-
-		//order = order.padStart(3,' ');
-		//order = order.padEnd(5,' ');
-
-		//countryButton.innerHTML = '<span class="w3-border w3-padding-small orderBox" id="order-' + idname + '">' + order + '</span>&nbsp;&nbsp;<span class="fi fi-' + act.countryFlagCode + '"></span>&nbsp;&nbsp;' + name;
-		
-		/*countryButton.innerHTML = '<div class="w3-row">';
-		countryButton.innerHTML += '	<div class="w3-col s2">';
-		countryButton.innerHTML += '		<span class="w3-border w3-padding-small orderBox" id="order-' + idname + '">' + order + '</span>';
-		countryButton.innerHTML += '	</div>';
-		countryButton.innerHTML += '	<div class="w3-col s2">';
-		countryButton.innerHTML += '		<span class="fi fi-' + act.countryFlagCode + '"></span>';
-		countryButton.innerHTML += '	</div>';
-		countryButton.innerHTML += '	<div class="w3-col s8">' + name + '</div>';
-		countryButton.innerHTML += '</div>';*/
 		
 		countryButton.innerHTML = `
 			<div class="w3-row">
@@ -185,8 +162,6 @@ function generateActsList(json, clearDiv=false){
 				</div>
 			<div class="w3-col s6">` + name + `</div>
 		</div>`;
-
-		//actsDiv.appendChild(countryButton);
 
 		//MAKE DIV HEAD
 		var head = document.createElement('h2');
@@ -338,10 +313,6 @@ function generateActsList(json, clearDiv=false){
 				option.id = 'option-points-' + (val + 1) + '-' + idname;
 				option.value = thisVal;
 				option.innerHTML = thisVal;
-				//DISPLAY FORWARDS (0=1,1=2 etc)
-				//option.id = 'option-points-' + (val + 1) + '-' + idname;
-				//option.value = (val + 1);
-				//option.innerHTML = (val + 1);
 			}else{
 				//NO "8" POINTS, SO GIVE 10
 				if(val === 1){
@@ -432,9 +403,6 @@ function generateActsList(json, clearDiv=false){
 		countryDiv.appendChild(notes);
 		countryDiv.appendChild(dataTable);
 
-		//ADD COUNTRY DIV TO ACTS
-		//actsDiv.appendChild(countryDiv);
-
 		//ADD ALL TOGETHER
 		countryWrapper.appendChild(countryButton);
 		countryWrapper.appendChild(countryDiv);
@@ -453,18 +421,12 @@ function generateActsList(json, clearDiv=false){
 
 function showHideCountries(name){
 	
-	//console.log('showing',name);
 	//HIDE ALL COUNTRIES
 	hideOtherCountries();
 
 	//THEN JUST SHOW THIS COUNTRY
 	var child = document.getElementById(name);
 	child.classList.remove('w3-hide');
-	//IF W3-HIDE IS FOUND
-	//if (child.className.indexOf('w3-hide') !== -1) {
-		//REMOVE W3-HIDE FOR THIS COUNTRY
-		//child.className = child.className.replace('w3-hide', '');
-	//}
 }
 
 function hideOtherCountries(){
