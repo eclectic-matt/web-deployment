@@ -13,6 +13,9 @@ var json;
 //DEBUG - LIMIT TO ONE EVENT
 var eventName = 'Grand Final';
 
+//DEFAULT COLOUR
+const defaultTheme = 'w3-purple';
+
 var settings = {};
 settings.colourTheme = 'default';
 
@@ -124,7 +127,7 @@ function generateActsList(json, clearDiv=false){
 				countryButton.className = countryButton.className + ' w3-' + act.bgColor;
 			}
 		}else{
-			countryButton.className = countryButton.className + ' w3-black';
+			countryButton.className = countryButton.className + ' ' + defaultTheme;
 		}
 		countryButton.name = name;
 		
