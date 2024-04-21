@@ -64,9 +64,9 @@ function generateActsList(json, clearDiv=false){
 		actsDiv.innerHTML = '';
 	}
 
-	let actsHeading = document.createElement('h2');
+	/*let actsHeading = document.createElement('h2');
 	actsHeading.innerHTML = 'Acts List:';
-	actsDiv.appendChild(actsHeading);
+	actsDiv.appendChild(actsHeading);*/
 
 	for(let act in json.acts){
 		act = json.acts[act];
@@ -391,7 +391,7 @@ function generateActsList(json, clearDiv=false){
 		var countryDiv = document.createElement('div');
 		countryDiv.id = idname + '-inner';
 		countryDiv.name = name;
-		var animateClass = 'w3-animate-zoom';
+		//var animateClass = 'w3-animate-zoom';
 		countryDiv.className = 'w3-hide w3-card w3-center countryDivs'; // + animateClass;
 		if(act.bgColor !== undefined){
 			countryDiv.className = countryDiv.className + ' w3-' + act.bgColor;
