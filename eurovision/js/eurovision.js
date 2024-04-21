@@ -74,9 +74,9 @@ function generateActsList(json, clearDiv=false){
 		actsDiv.innerHTML = '';
 	}
 
-	/*let actsHeading = document.createElement('h2');
-	actsHeading.innerHTML = 'Acts List:';
-	actsDiv.appendChild(actsHeading);*/
+	let actsHeading = document.createElement('h2');
+	actsHeading.innerHTML = 'Acts List - ' + eventName;
+	actsDiv.appendChild(actsHeading);
 
 	for(let act in json.acts){
 		act = json.acts[act];
