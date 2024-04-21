@@ -23,8 +23,8 @@ settings.colourTheme = 'default';
 //var dataFile = 'data/2023_acts.json';
 var dataFile = 'data/2024_acts.json';
 
-let maxFrameWidth = window.innerWidth / 2;
-let maxFrameHeight = maxFrameWidth / 1.7;
+let maxFrameWidth = Math.floor(window.innerWidth / 2);
+let maxFrameHeight = Math.floor(maxFrameWidth / 1.7);
 
 function init(){
 	//console.log('init');
