@@ -14,7 +14,7 @@ var json;
 var eventName = 'Grand Final';
 
 //DEFAULT COLOUR
-const defaultTheme = 'w3-purple';
+const defaultTheme = 'w3-deep-purple';
 
 var settings = {};
 settings.colourTheme = 'default';

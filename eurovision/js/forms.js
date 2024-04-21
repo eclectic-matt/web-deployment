@@ -1,6 +1,8 @@
 //DEBUG
 var preventDuplicates = false;
 
+//DEFAULT COLOUR
+const defaultThemeColour = 'w3-deep-purple';
 
 
 /**
@@ -341,11 +343,11 @@ function updateTheme(theme){
 				//REMOVE CUSTOM COLOURS 
 				el.classList.remove(className);
 				//SET PLAIN COLOUR
-				el.classList.add('w3-purple');
+				el.classList.add(defaultThemeColour);
 			break;
 			case 'default':
 				//REMOVE PLAIN COLOUR
-				el.classList.remove('w3-purple');
+				el.classList.remove(defaultThemeColour);
 				//SET CUSTOM COLOUR
 				el.classList.add(className);
 			break;
@@ -365,12 +367,12 @@ function updateTheme(theme){
 			case 'plain':
 				//REMOVE CUSTOM COLOURS 
 				el.classList.remove(className);
-				//SET w3-black
-				el.classList.add('w3-black');
+				//SET defaultThemeColour
+				el.classList.add(defaultThemeColour);
 			break;
 			case 'default':
-				//REMOVE w3-black
-				el.classList.remove('w3-black');
+				//REMOVE defaultThemeColour
+				el.classList.remove(defaultThemeColour);
 				//SET CUSTOM COLOUR
 				el.classList.add(className);
 			break;
