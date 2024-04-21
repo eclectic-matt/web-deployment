@@ -192,7 +192,7 @@ function generateActsList(json, clearDiv=false){
   var songVid = document.createElement('iframe');
 if(act.youtubeVideoId){
   songVid.width = 560;
-  songVid height = 315;
+  songVid.height = 315;
   songVid.src = 'https://www.youtube.com/embed/' + act.youtubeVideoId;
   songVid.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
   songVid.setAttribute('frameBorder', '0');
