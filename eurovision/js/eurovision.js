@@ -59,6 +59,10 @@ function showActs(url, response){
 function generateActsList(json, clearDiv=false){
 
 	var actsDiv = document.getElementById('acts');
+
+	let actsHeading = document.createElement('h2');
+	actsHeading.innerHTML = 'Acts List:';
+	actsDiv.appendChild(actsHeading);
 	
 	if(clearDiv){
 		actsDiv.innerHTML = '';
