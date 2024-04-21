@@ -23,6 +23,9 @@ settings.colourTheme = 'default';
 //var dataFile = 'data/2023_acts.json';
 var dataFile = 'data/2024_acts.json';
 
+let maxFrameWidth = window.innerWidth / 2;
+let maxFrameHeight = maxFrameWidth / 1.7;
+
 function init(){
 	//console.log('init');
 	initModal();
@@ -194,8 +197,8 @@ function generateActsList(json, clearDiv=false){
 		//NEW - SONG VIDEO IFRAME
 		var songVid = document.createElement('iframe');
 		if(act.youtubeVideoId){
-			songVid.width = 560;
-			songVid.height = 315;
+			songVid.width = maxFrameWidth;
+			songVid.height = maxFrameHeight;
 			songVid.src = 'https://www.youtube.com/embed/' + act.youtubeVideoId;
 			songVid.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
 			songVid.setAttribute('frameBorder', '0');
