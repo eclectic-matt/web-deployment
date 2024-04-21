@@ -10,8 +10,18 @@
 //https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2024
 
 var json;
-//DEBUG - LIMIT TO ONE EVENT
-var eventName = 'Grand Final';
+//DEFAULT TO GRAND FINAL
+let eventName = 'Grand Final';
+
+const semiFinal1Date = Date.parse('2024-05-08 00:00:00');
+const semiFinal2Date = Date.parse('2024-05-10 00:00:00');
+//IF DATE IS BEFORE SF1
+if(Date.now() < semiFinal1Date){
+  eventName = 'Semi Final #1';
+//ELSE IF DATE BEFORE SF2
+}else if(Date.now() < semiFinal2Date){
+  eventName = 'Semi Final #2';
+}//ELSE Grand Final!
 
 //DEFAULT COLOUR
 const defaultTheme = 'w3-deep-purple';
