@@ -23,6 +23,7 @@ if(Date.now() < semiFinal1Date){
   eventName = 'Semi Final #2';
 }//ELSE Grand Final!
 
+
 //DEFAULT COLOUR
 const defaultTheme = 'w3-deep-purple';
 
@@ -79,6 +80,7 @@ function generateActsList(json, clearDiv=false){
 	actsDiv.appendChild(actsHeading);
 actsDiv.innerHTML = '<h2>Acts List - ' + eventName + '</h2>';*/
   document.getElementById('eventName'). innerHTML = eventName;
+  document.getElementById('eventSelect').value = eventName;
 
 	for(let act in json.acts){
 		act = json.acts[act];
