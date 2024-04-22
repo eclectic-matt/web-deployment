@@ -45,6 +45,8 @@ let maxFrameHeight = Math.floor(maxFrameWidth / 1.7);
 function init(){
 	initModal();
 	json = asyncAPIcall(dataFile, showActs, showError);
+	//SET EVENT NAME ON FIRST LOAD
+	document.getElementById('eventSelect').value = eventName;
 }
 function asyncAPIcall(url, apiSuccess, apiFailure){
 	var xmlHttp = new XMLHttpRequest();
