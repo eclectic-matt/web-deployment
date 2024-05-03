@@ -3,7 +3,6 @@ function saveDataItem(key, val){
 }
 
 function loadData(){
-
 	//-=-=-=-=-=-=-=
 	//LOAD SETTINGS
 	//-=-=-=-=-=-=-=
@@ -62,15 +61,6 @@ function loadSetting(name){
 			settingsEl.dispatchEvent(settingsEvent);
 		}
 	}
-
-}
-
-function fillOptions(){
-	var ranks = document.querySelector('.rankSelect');
-	Array.from(ranks).forEach( (el) => {
-
-	});
-
 
 }
 

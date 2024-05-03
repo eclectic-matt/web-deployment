@@ -282,7 +282,7 @@ function updateScoresTable(){
 
 //UTILITY TO GET PROPER CASE COUNTRY NAMES
 String.prototype.toProperCase = function () {
-    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
 
 function countryNameToId(name){
@@ -396,4 +396,12 @@ function updateSettings(ev){
 			updateOrders();
 		break;
 	}
+}
+
+//NOT USED?
+function fillOptions(){
+	var ranks = document.querySelector('.rankSelect');
+	Array.from(ranks).forEach( (el) => {
+
+	});
 }

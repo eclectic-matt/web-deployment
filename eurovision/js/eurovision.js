@@ -13,17 +13,6 @@ var json;
 //DEFAULT TO GRAND FINAL
 let eventName = 'Grand Final';
 
-const semiFinal1Date = Date.parse('2024-05-08 00:00:00');
-const semiFinal2Date = Date.parse('2024-05-10 00:00:00');
-//IF DATE IS BEFORE SF1
-if(Date.now() < semiFinal1Date){
-  eventName = 'Semi Final #1';
-//ELSE IF DATE BEFORE SF2
-}else if(Date.now() < semiFinal2Date){
-  eventName = 'Semi Final #2';
-}//ELSE Grand Final!
-
-
 //DEFAULT COLOUR
 const defaultTheme = 'w3-deep-purple';
 
@@ -35,19 +24,30 @@ settings.colourTheme = 'default';
 //CURRENT YEAR
 var dataFile = 'data/2024_acts.json';
 
-//
-let maxFrameWidth = Math.floor( 0.75 * window.innerWidth );
-if(window.innerWidth > 600){
-  maxFrameWidth = Math.floor(0.75 * window.innerWidth / 2);
-}
-let maxFrameHeight = Math.floor(maxFrameWidth / 1.7);
+let maxFrameWidth = 0;
+let maxFrameHeight = 0;
+window.onresize = handleScreenResize;
 
 function init(){
+	//DATE CHECK / EVENT SETUP
+	const semiFinal1Date = Date.parse('2024-05-08 00:00:00');
+	const semiFinal2Date = Date.parse('2024-05-10 00:00:00');
+	//IF DATE IS BEFORE SF1
+	if(Date.now() < semiFinal1Date){
+		eventName = 'Semi Final #1';
+	//ELSE IF DATE BEFORE SF2
+	}else if(Date.now() < semiFinal2Date){
+		eventName = 'Semi Final #2';
+	}//ELSE Grand Final!
+
 	initModal();
 	json = asyncAPIcall(dataFile, showActs, showError);
 	//SET EVENT NAME ON FIRST LOAD
 	document.getElementById('eventSelect').value = eventName;
+	//SET UP SCREEN SIZE ON PAGE LOAD
+	handleScreenResize();
 }
+
 function asyncAPIcall(url, apiSuccess, apiFailure){
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = () => { 
@@ -60,6 +60,16 @@ function asyncAPIcall(url, apiSuccess, apiFailure){
 	}
 	xmlHttp.open('GET', url, true);
 	xmlHttp.send(null);
+}
+
+function handleScreenResize(){
+	//DETERMINE SCREEN ORIENTATION
+	maxFrameWidth = Math.floor( 0.75 * window.innerWidth );
+	if(window.innerWidth > 600){
+		Math.floor(0.75 * window.innerWidth / 2);
+	}
+	maxFrameHeight = Math.floor(maxFrameWidth / 1.7);
+	console.log('resize', maxFrameWidth, maxFrameHeight);
 }
 
 function showActs(url, response){
@@ -77,12 +87,14 @@ function generateActsList(json, clearDiv=false){
 		actsDiv.innerHTML = '';
 	}
 
-	/*let actsHeading = document.createElement('h2');
-	actsHeading.innerHTML = 'Acts List - ' + eventName;
-	actsDiv.appendChild(actsHeading);
-actsDiv.innerHTML = '<h2>Acts List - ' + eventName + '</h2>';*/
-  document.getElementById('eventName'). innerHTML = eventName;
-  document.getElementById('eventSelect').value = eventName;
+	/*
+		let actsHeading = document.createElement('h2');
+		actsHeading.innerHTML = 'Acts List - ' + eventName;
+		actsDiv.appendChild(actsHeading);
+		actsDiv.innerHTML = '<h2>Acts List - ' + eventName + '</h2>';
+	*/
+	document.getElementById('eventName'). innerHTML = eventName;
+	document.getElementById('eventSelect').value = eventName;
 
 	for(let act in json.acts){
 		act = json.acts[act];
@@ -92,7 +104,7 @@ actsDiv.innerHTML = '<h2>Acts List - ' + eventName + '</h2>';*/
 		//ONLY ADD IF MATCHING THIS EVENT?
 		switch(eventName){
 			case 'Semi Final #1':
-				//PASSED
+				//CHECK IF ACT IN THIS SEMI-FINAL
 				if(act.semiFinal.eventNumber !== 1){
 					//NOT IN THIS SEMI-FINAL, SKIP
 					continue;
