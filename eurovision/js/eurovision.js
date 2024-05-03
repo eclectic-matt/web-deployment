@@ -69,7 +69,14 @@ function handleScreenResize(){
 		Math.floor(0.75 * window.innerWidth / 2);
 	}
 	maxFrameHeight = Math.floor(maxFrameWidth / 1.7);
-	console.log('resize', maxFrameWidth, maxFrameHeight);
+	
+	//console.log('resize', maxFrameWidth, maxFrameHeight);
+
+	//RESIZE THE IFRAMES
+	document.getElementsByClassName('ytIframe').forEach( (frame) => {
+		frame.width = maxFrameWidth;
+		frame.height = maxFrameHeight;
+	});
 }
 
 function showActs(url, response){
@@ -154,11 +161,16 @@ function generateActsList(json, clearDiv=false){
 		//MAKE ACCORDION BUTTON
 		var countryButton = document.createElement('button');
 		countryButton.className = 'countryButtons w3-btn-block w3-border w3-xlarge w3-margin-4';
+		//IF THE COLOUR THEME IS DEFAULT (VARIED, NOT PLAIN)
 		if(settings.colourTheme === 'default'){
 			if(act.bgColor !== undefined){
 				countryButton.className = countryButton.className + ' w3-' + act.bgColor;
+			}else{
+				//NO COUNTRY COLOUR - SET AS DEFAULT THEME COLOUR
+				countryButton.className = countryButton.className + ' ' + defaultTheme;
 			}
 		}else{
+			//PLAIN THEME - SET AS DEFAULT THEME COLOUR
 			countryButton.className = countryButton.className + ' ' + defaultTheme;
 		}
 		countryButton.name = name;
@@ -208,6 +220,7 @@ function generateActsList(json, clearDiv=false){
 		//NEW - SONG VIDEO IFRAME
 		var songVid = document.createElement('iframe');
 		if(act.youtubeVideoId){
+			songVid.className = 'ytIframe';
 			songVid.width = maxFrameWidth;
 			songVid.height = maxFrameHeight;
 			songVid.src = 'https://www.youtube.com/embed/' + act.youtubeVideoId;
