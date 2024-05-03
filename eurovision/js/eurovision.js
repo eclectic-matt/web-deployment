@@ -73,7 +73,8 @@ function handleScreenResize(){
 	//console.log('resize', maxFrameWidth, maxFrameHeight);
 
 	//RESIZE THE IFRAMES
-	document.getElementsByClassName('ytIframe').forEach( (frame) => {
+	let frames = document.getElementsByClassName('ytIframe');
+	Array.from(frames).forEach( (frame) => {
 		frame.width = maxFrameWidth;
 		frame.height = maxFrameHeight;
 	});
