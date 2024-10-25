@@ -1,0 +1,66 @@
+
+/*
+	4x4 grid:
+	vertical streets | | | | = W2, W1, C, E1, E2
+	horizontal street  ====  = N2, N1, M, S1, S2
+*/
+
+let names = [
+	['W', 'CW', 'C', 'CE', 'E'],
+	['N', 'NM', 'M', 'SM', 'S']
+];
+
+let grid = {};
+grid.size.x = 4;
+grid.size.y = 4;
+for(let y = 0; y <= grid.size.y; y++){
+	for(let x = 0; x <= grid.size.x; x++){
+		//y=0, x=0;
+		//y=0, x=1;
+		//...
+		//y=1, x=0;
+		//....
+		//y=4, x=4;
+		
+	}
+}
+
+
+
+
+//====
+//source: https://fireship.io/courses/javascript/interview-graphs/
+// DATA
+const airports = 'PHX BKK OKC JFK LAX MEX EZE HEL LOS LAP LIM'.split(' ');
+
+const routes = [
+    ['PHX', 'LAX'],
+    ['PHX', 'JFK'],
+    ['JFK', 'OKC'],
+    ['JFK', 'HEL'],
+    ['JFK', 'LOS'],
+    ['MEX', 'LAX'],
+    ['MEX', 'BKK'],
+    ['MEX', 'LIM'],
+    ['MEX', 'EZE'],
+    ['LIM', 'BKK'],
+];
+
+
+// The graph
+const adjacencyList = new Map();
+
+// Add node
+function addNode(airport) {
+    adjacencyList.set(airport, []);
+}
+
+// Add edge, undirected
+function addEdge(origin, destination) {
+    adjacencyList.get(origin).push(destination);
+    adjacencyList.get(destination).push(origin);
+}
+
+// Create the Graph
+airports.forEach(addNode);
+routes.forEach(route => addEdge(...route))
