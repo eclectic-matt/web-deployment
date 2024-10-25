@@ -1,86 +1,92 @@
 class Graph 
 {
-  id = '';
-  name = '';
-  nodes = [];
-  edges = [];
-  
-  constructor(id='g1',name='graph'){
-    this.id = id;
-    this.name = name;
-  }
-  
-  //====================
-  // NODE FUNCTIONS
-  //====================
-  createNode(name=false){
-    let id = this.getNextId('node');
-    if(!name){
-      name = id;
-    }
-    let node = new Node(id, name);
-    this.addNode(node);
-    return node;
-  }
-  addNode(node){
-    this.nodes.push(node);
-  }
-  removeNode(node){
-    this.nodes = this.nodes.splice(this.nodes.indexOf(node),1);
-  }
-  getNodes(){
-    return this.nodes;
-  }
-  
-  //====================
-  // EDGE FUNCTIONS
-  //====================
-  createEdge(startNode, endNode, name=false){
-    let id = this.getNextId('edge');
-    if(name == false){
-      name = id;
-    }
-    let edge = new Edge(id, name, startNode, endNode, 1, 10);
-    this.edges.push(edge);
-    return edge;
-  }
-  addEdge(edge){
-    this.edges.push(edge);
-  }
-  removeEdge(edge){
-    this.edges = this.edges.splice(this.edges.indexOf(edge),1);
-  }
-  getEdges(){
-    return this.edges;
-  }
-  getEdgeBetween(current, node){
-    return this.edges.find( (el) => {
-      return ( 
-        (el.getNodes()[0].id == current.id && el.getNodes()[1].id == node.id)
-        ||
-        (el.getNodes()[0].id == node.id && el.getNodes()[1].id == current.id)
-      );
-    });
-  }
-  
-  //===================
-  // UTILITY FUNCTIONS
-  //===================
-  getNextId(type='edge'){
-    switch(type){
-      case 'edge':
-      default:
-        return 'e' + this.edges.length + 1;
-      break;
-      case 'node':
-        return 'n' + this.nodes.length;
-      break;
-    }
-  }
-  
-  //====================
-  // TRAVERSAL FUNCTIONS
-  //====================
+	id = '';
+	name = '';
+	nodes = [];
+	edges = [];
+	
+	constructor(id='g1',name='graph'){
+		this.id = id;
+		this.name = name;
+	}
+	
+	//====================
+	// NODE FUNCTIONS
+	//====================
+	createNode(name=false){
+		let id = this.getNextId('node');
+		if(!name){
+		name = id;
+		}
+		let node = new Node(id, name);
+		this.addNode(node);
+		return node;
+	}
+	addNode(node){
+		this.nodes.push(node);
+	}
+	removeNode(node){
+		this.nodes = this.nodes.splice(this.nodes.indexOf(node),1);
+	}
+	getNodes(){
+		return this.nodes;
+	}
+	getNodeById(nodeId){
+		console.log('graphNodes',this.nodes);
+		let found = this.nodes.find( (node) => node.id == nodeId);
+		console.log('graphFind', found);
+		return found;
+	}
+	
+	//====================
+	// EDGE FUNCTIONS
+	//====================
+	createEdge(startNode, endNode, name=false){
+		let id = this.getNextId('edge');
+		if(name == false){
+		name = id;
+		}
+		let edge = new Edge(id, name, startNode, endNode, 1, 10);
+		this.edges.push(edge);
+		return edge;
+	}
+	addEdge(edge){
+		this.edges.push(edge);
+	}
+	removeEdge(edge){
+		this.edges = this.edges.splice(this.edges.indexOf(edge),1);
+	}
+	getEdges(){
+		return this.edges;
+	}
+	getEdgeBetween(current, node){
+		return this.edges.find( (el) => {
+		return ( 
+			(el.getNodes()[0].id == current.id && el.getNodes()[1].id == node.id)
+			||
+			(el.getNodes()[0].id == node.id && el.getNodes()[1].id == current.id)
+		);
+		});
+	}
+
+	//===================
+	// UTILITY FUNCTIONS
+	//===================
+	getNextId(type='edge'){
+		switch(type){
+			case 'edge':
+			default:
+				return 'e' + this.edges.length + 1;
+			break;
+			case 'node':
+				return 'n' + this.nodes.length;
+			break;
+		}
+	}
+	
+	//====================
+	// TRAVERSAL FUNCTIONS
+	//====================
 	traverse(start, end, algo='A*'){
 		switch(algo){
 			case 'A*':
@@ -97,60 +103,44 @@ class Graph
 	{
 		let explored = [];
 		let openSet = new Set();
-		openSet.add(start);
+		openSet.add(start.id);
 		let cameFrom = new Map();
 		
 		let gScore = new Map();
-		gScore.set(start,0);
+		gScore.set(start.id,0);
 		let fScore = new Map();//with default value of Infinity
-		fScore.set(start,this.h(start));
-		console.log('fScoreSet',start, this.h(start));
+		fScore.set(start.id,this.h(start));
+		console.log('fScoreSet',start.id, this.h(start));
 		
 		while(openSet.size !== 0)
 		{
-		//current = Math.min(...fScore);
-		//let [keys, scores] = fScore.entries();
-		/*let scores = fScore.values();
-		console.log('scores',scores);
-		let keys = fScore.keys();
-		let minScore = Math.min(scores);
-		console.log('minscore',minScore);
-		current = keys[scores.indexOf(minScore)];
-		*/
-
-		let scores = Array.from(fScore.values());
-		let minScore = Math.min.apply(null, scores.filter(Boolean));
-		let keys = fScore.keys();
-		let current = keys[scores.indexOf(minScore)];
-		console.log('current', current);
-		
-		/*
-		let iterVals = nodes.values();
-		let vals = Array.from(iterVals);
-		console.log(vals);
-		let minVal = Math.min.apply(null, vals.filter(Boolean));
-		console.log(minVal);
-		*/
-
-		
-		if(current == end){
-			return this.recreatePath(cameFrom, current);
-		}
-		
-		openSet.delete(current);
-		current.getNeighbours().forEach( (n) => {
-			let e = this.getEdgeBetween(current, n);
-			let tentativeGScore = gScore.set(current, e.flow);
-			if(tentativeGScore < gScore.get(n)){
-				cameFrom.set(n,current);
-				gScore.set(n,tentativeGScore);
-				fScore.set(n,tentativeGScore + this.h(n, current));
-				if(!openSet.includes(n)){
-					openSet.add(n);
-				}
+			let scores = Array.from(fScore.values());
+			let minScore = Math.min.apply(null, scores.filter(Boolean));
+			let keys = Array.from(fScore.keys());
+			console.log('keys', keys);
+			let currentKey = keys[scores.indexOf(minScore)];
+			let current = this.getNodeById(currentKey);
+			console.log('current', current);
+			
+			if(current.id == end.id){
+				return this.recreatePath(cameFrom, current);
 			}
-		});
+			
+			openSet.delete(current);
+			current.getNeighbours().forEach( (n) => {
+				let e = this.getEdgeBetween(current, n);
+				let tentativeGScore = gScore.set(current, e.flow);
+				if(tentativeGScore < gScore.get(n)){
+					cameFrom.set(n,current);
+					gScore.set(n,tentativeGScore);
+					fScore.set(n,tentativeGScore + this.h(n, current));
+					if(!openSet.includes(n)){
+						openSet.add(n);
+					}
+				}
+			});
 		}
+
 		//REACHED THIS POINT WITHOUT PATH REACHING end - EXIT false
 		return false;
 	}
