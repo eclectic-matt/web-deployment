@@ -1,11 +1,15 @@
 class GridGraph extends Graph 
 {
+  rows = 0;
+  cols = 0;
   constructor(rowCount, colCount, name = false)
   {
     if (!name) {
       name = 'grid';
     }
     super(name, name + 'Graph');
+    this.rows = rowCount;
+    this.cols = colCount;
     /*let rowStreets = Array.fill(rowCount);
     let colStreets = Array.fill(colCount);*/
     for (let row = 0; row < rowCount; row++) {

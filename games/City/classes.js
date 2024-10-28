@@ -1,7 +1,7 @@
 function init(){
 
-let rows = 7;
-let cols = 7;
+let rows = 8;
+let cols = 8;
 let graph = new GridGraph(rows, cols, 'gridGraph');
 console.log('Generating a',rows,'by',cols,'grid graph = ', (rows*cols) + ' nodes and',((rows-1)*(rows))+((cols-1)*(cols)),'edges');
 
