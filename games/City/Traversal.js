@@ -21,7 +21,19 @@ class Traversal {
 			if (e.id && (curr.id == e.id)) {
 				//console.log(path);
 				//return this.recreatePath(visited, curr.id);
-				return this.outputPath(graph, visited);
+				let path = Array.from(visited.values());
+				let parentPath = new Set();
+				for(let i = 0; i < path.length; i++){
+				  let cNode = graph.getNodeById(path[i]);
+				  //console.log(i, cNode.parent);
+				  if(cNode.parent && visited.has(cNode.parent.id)){
+				    parentPath.add(cNode.parent.id);
+				  }
+				}
+				console.log('parentPath',Array.from(parentPath.values()));
+				return this.outputPath(graph, parentPath);
+				
+				//return this.outputPath(graph, visited);
 				//return path;
 			}
 			let n = curr.getNeighbours();
@@ -30,7 +42,7 @@ class Traversal {
 				if (!visited.has(neighbour.id)) {
 					//console.log('bfs addN', neighbour.id);
 					visited.add(neighbour.id);
-					//neighbour.parent = curr;
+					neighbour.parent = curr;
 					queue.push(neighbour);
 				}
 			}
@@ -122,45 +134,42 @@ class Traversal {
 	}
 
 	static recreatePath(cameFrom, current) {
-		//console.log('recreatePath',Array.from(cameFrom.keys()).join(','),current);
-		/*if(typeof cameFrom == 'object'){
-		  return Array.from(cameFrom.keys()).join(',');
-		}else{
-		  console.log(typeof cameFrom);
-		  return cameFrom;
-		}*/
-
-
 		return [Array.from(cameFrom.values()).join('->'), cameFrom.size];
 		let path = current;
 		while (cameFrom.has(current)) {
-			//current = cameFrom[current];
-			//cameFrom.shift()
-			//cameFrom.splice(cameFrom.indexOf(current));
-			//current = cameFrom.delete(current);
 			cameFrom.delete(current);
 			current = this.getLastValue(cameFrom);
-			//current = current.id;
-			//path.unshift(current);
 			path += ',' + current;
-			//path.splice(path.indexOf(current), 1);
 		}
 		return path;
 	}
 
-	static outputPath(graph, path) {
+	static outputPath(graph, path) 
+	{
 		let nodes = Array.from(path.values());
+		console.log('opPath',nodes)
+		const delayMs = 2000;
 		//console.log('og', nodes);
 		let index = 0;
+		
 		while (nodes.length !== 0) {
-			let node = nodes.splice(0, 1);
+		  
+			let node = nodes.splice(0, 1)[0];
 			//console.log('out', node, index);
 			let options = {};
 			options.rowSize = graph.rows;
 			options.colSize = graph.cols;
-			options.highlightNode = node[0];
+			options.highlightNode = node;
+			
+			if(nodes.length > 0){
+			  console.log('edgebtw',graph.getNodeById(nodes[0]),graph.getNodeById(node));
+			  let edge = graph.getEdgeBetween(graph.getNodeById(nodes[0]), graph.getNodeById(node));
+			  options.highlightEdge = edge.id;
+			}
+			
 			let cnv = document.getElementById('graphs');
-			setTimeout(this.drawGraph, index * 1000, graph, cnv, options);
+			
+			setTimeout(this.drawGraph, index * delayMs, graph, cnv, options);
 			//this.drawGraph(graph,cnv,options);
 			index++;
 		}
@@ -221,62 +230,135 @@ class Traversal {
 				//Reset styles
 				ctx.strokeStyle = '#000';
 				ctx.fillStyle = '#000';
+		    ctx.lineWidth = 1;
 
-				let x = (col * xSpace) + xMargin;
-				let y = (row * ySpace) + yMargin;
+				let x = (col*xSpace) + xMargin;
+				let y = (row*ySpace) + yMargin;
+				
+				ctx.moveTo(x, y);
 
 				let node = nodeGrid[row][col];
 				ctx.beginPath();
+				
+				let highlight=false;
 				if (options.highlightNode && (options.highlightNode == node.id)) {
-					console.log('highlight', node.id);
-					ctx.strokeStyle = '#f00';
-					ctx.fillStyle = '#f00';
-					ctx.moveTo(x, y);
-					ctx.arc(x, y, nodeSize, 2 * Math.PI, 0, 2 * Math.PI, false);
-					ctx.stroke();
-					ctx.fill();
-				} else {
-					ctx.strokeStyle = '#000';
-					//Draw node 
-					ctx.moveTo(x, y);
-					ctx.arc(x, y, nodeSize, 2 * Math.PI, 0, 2 * Math.PI, false);
-					ctx.stroke();
+				  highlight = true;
 				}
-
-				ctx.fillText(node.id, x, y);
-				ctx.closePath();
+				
+			  Traversal.drawNode(ctx, node, x, y, nodeSize, highlight);
+				
 				drawn.push(node);
+				
 				let neighbours = node.getNeighbours();
+				
+				let oName = node.name;
+				const re = /grid\[(\d+),(\d+)\]/;
+				
 				//bool flag if every neighbour has been drawn
 				let neighboursDrawn = (drawn, neighbours) => target.every(v => drawn.includes(v));
+				
 				if (neighboursDrawn) {
-					//if(drawn.contains(neighbours[0]) && drawn.has(neighbours[1])){
 
-					//console.log('drawing neighbour edges', neighbours);
-					//Draw edges - right + down
-					ctx.beginPath();
-					ctx.moveTo(x + nodeSize, y);
-					let rX = ((col + 1) * xSpace) + xMargin - nodeSize;
-					let rY = (row * ySpace) + yMargin;
-					ctx.lineTo(rX, rY);
-					ctx.stroke();
-					ctx.closePath();
-
-					let edgeR = graph.getEdgeBetween(node, neighbours[0]);
-					ctx.fillText(edgeR.id, rX + 10, rY + 10);
-					//down 
-					ctx.beginPath();
-					ctx.moveTo(x, y + nodeSize);
-					let dX = (col * xSpace) + xMargin;
-					let dY = ((row + 1) * ySpace) + yMargin - nodeSize;
-					ctx.lineTo(dX, dY);
-					ctx.stroke();
-					ctx.closePath();
-					let edgeD = graph.getEdgeBetween(node, neighbours[1]);
-					ctx.fillText(edgeD.id, dX + 10, dY + 10);
+          if(col !== (options.colSize -1)){
+            
+  					//Draw edges - right
+					  let start = {};
+  					start.x = x + nodeSize;
+  					start.y = y;
+  					let end = {};
+  					end.x = ((col + 1) * xSpace) + xMargin - nodeSize;
+  					end.y = y;
+  					//let edge = graph.getEdgeBetween(node, neighbours[1]);
+  					//right name 
+            let matches = node.name.match(re);
+            //console.log(node.name, matches);
+            let cName = 'grid[' + (matches[1]) + ',' + (parseInt(matches[2])+1) + ']';
+  					let edge = graph.getEdgeBetween(node, graph.getNodeByName(cName));
+  					let highlight = false;
+  					if(options.highlightEdge && (options.highlightEdge == edge.id)){
+  					  highlight = true;
+  					}
+  					Traversal.drawEdge(ctx, edge, start, end, highlight);
+          }
+          
+          if(row !== (options.rowSize - 1)){
+  					//down
+  					let start = {};
+  					start.x = x;
+  					start.y = y + nodeSize;
+  					let end = {};
+  					end.x = x;
+  					end.y = ((row + 1) * ySpace) + yMargin - nodeSize;
+  					//let edge = graph.getEdgeBetween(node, neighbours[0]);
+  					
+            let matches = node.name.match(re);
+            //console.log(node.name, matches);
+            let rName = 'grid[' + (parseInt(matches[1]) +1) + ',' + matches[2] + ']';
+           
+            let edge = graph.getEdgeBetween(node, graph.getNodeByName(rName));
+  					let highlight = false;
+  					if (options.highlightEdge && (options.highlightEdge == edge.id)) {
+  					  highlight = true;
+  					}
+  					Traversal.drawEdge(ctx, edge, start, end, highlight);
+          }
 				}
 			}
 		}
+	}
+	
+	static drawEdge(ctx, edge, start, end, highlight=false){
+	  ctx.beginPath();
+	  ctx.moveTo(start.x, start.y);
+	  if(highlight){
+	    //HIGHLIGHT
+	    ctx.fillStyle = '#f00';
+	    ctx.strokeStyle = '#f00';
+	    ctx.lineWidth = 5;
+	  }else{
+	    //DEFAULT
+	    ctx.fillStyle = '#000';
+	    ctx.strokeStyle = '#000';
+	    ctx.lineWidth = 2;
+	  }
+	  ctx.lineTo(end.x, end.y);
+	  ctx.stroke();
+	  ctx.fillText(edge.id, (end.x + start.x)/2, (end.y + start.y)/2);
+	  //ctx.fill();
+	  ctx.closePath();
+	  ctx.fillStyle = '#000';
+	  ctx.strokeStyle = '#000';
+	  ctx.lineWidth = 2;
+	  //return true;
+	}
+	
+	static drawNode(ctx, node, x, y, r, highlight=false){
+	  if(highlight){
+			ctx.strokeStyle = '#f00';
+		  ctx.fillStyle = '#f00';
+		  ctx.lineWidth = 1;
+					
+			ctx.arc(x, y, r, 2 * Math.PI, 0, 2 * Math.PI, false);
+			ctx.stroke();
+			ctx.fill();
+					
+				} else {
+				  
+			ctx.fillStyle = '#000';
+		  ctx.strokeStyle = '#000';
+		  ctx.lineWidth = 1;
+			//Draw node 
+			//ctx.moveTo(x, y);
+			ctx.arc(x, y, r, 2 * Math.PI, 0, 2 * Math.PI, false);
+			//ctx.fill();
+			ctx.stroke();
+		}
+				
+		ctx.closePath();
+		ctx.strokeStyle = '#f00';
+		ctx.fillStyle = '#f00';
+		ctx.lineWidth = 1;
+		ctx.fillText(node.id, x-7, y+2)
 	}
 
 }
