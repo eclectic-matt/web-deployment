@@ -5,42 +5,42 @@ class Graph
 	nodes = [];
 	edges = [];
 	streetNames = [
-	  'Main',
-	  'Downtown',
-	  'High',
-	  'Low',
-	  'Old',
-	  'New',
-	  'Ship',
-	  'Port',
-	  'Harbour',
-	  'Long',
-	  'Little',
-	  'Butcher',
-	  'Baker',
-	  'Fish',
-	  'Market',
-	  'King',
-	  'Queen',
-	  'Crown',
-	  'Prince',
-	  'Princess',
-	  'Earl',
-	  'Duke',
-	  'Oak',
-	  'Birch',
-	  'Elm',
-	  'Willow',
-	  'Pine'
+		'Main',
+		'Downtown',
+		'High',
+		'Low',
+		'Old',
+		'New',
+		'Ship',
+		'Port',
+		'Harbour',
+		'Long',
+		'Little',
+		'Butcher',
+		'Baker',
+		'Fish',
+		'Market',
+		'King',
+		'Queen',
+		'Crown',
+		'Prince',
+		'Princess',
+		'Earl',
+		'Duke',
+		'Oak',
+		'Birch',
+		'Elm',
+		'Willow',
+		'Pine'
 	];
 	streetTypes = [
-	  'Avenue',
-	  'Road',
-	  'Lane',
-	  'Street',
-	  'Way',
-	  'Court',
-	  'Close'
+		'Avenue',
+		'Road',
+		'Lane',
+		'Street',
+		'Way',
+		'Court',
+		'Close'
 	];
 	
 	constructor(id='g1',name='graph'){
@@ -73,7 +73,7 @@ class Graph
 		return this.nodes.find( (node) => node.id == nodeId);
 	}
 	getNodeByName(name){
-	  return this.nodes.find( (node) => node.name == name); 
+		return this.nodes.find( (node) => node.name == name); 
 	}
 	
 	//====================
@@ -82,7 +82,7 @@ class Graph
 	createEdge(startNode, endNode, name=false){
 		let id = this.getNextId('edge');
 		if(name == false){
-		  name = id;
+			name = id;
 		}
 		let edge = new Edge(id, name, startNode, endNode, 1, 10);
 		this.edges.push(edge);
@@ -99,18 +99,12 @@ class Graph
 	}
 	getEdgeBetween(current, node){
 		return this.edges.find( (el) => {
-  		 return ( 
-  			(el.getNodes()[0].id == current.id && el.getNodes()[1].id == node.id)
-  			||
-  			(el.getNodes()[0].id == node.id && el.getNodes()[1].id == current.id)
-  		);
+			return ( 
+				(el.getNodes()[0].id == current.id && el.getNodes()[1].id == node.id)
+				||
+				(el.getNodes()[0].id == node.id && el.getNodes()[1].id == current.id)
+			);
 		});
-	}
-	
-	getNewStreetName()
-	{
-	  //Remove a streetName from the list and append a random street type
-	  return (this.streetNames.shift() + ' ' + this.streetTypes[Math.floor(Math.random() * this.streetTypes.length)]);
 	}
 
 	//===================
@@ -128,5 +122,9 @@ class Graph
 			break;
 		}
 	}
-	
+	getNewStreetName()
+	{
+		//Remove a streetName from the list and append a random street type
+		return (this.streetNames.shift() + ' ' + this.streetTypes[Math.floor(Math.random() * this.streetTypes.length)]);
+	}
 }
