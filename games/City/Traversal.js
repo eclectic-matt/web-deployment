@@ -92,10 +92,10 @@ class Traversal
 					
 					if (newDistance < distances[neighbour.id]) {
 						distances[neighbour.id] = newDistance;
-						if (end.id && (end.id == neighbour.id)) {
+						/*if (end.id && (end.id == neighbour.id)) {
 						  //End specified and found
 							return [ visited, distances ];
-						}
+						}*/
 					}
 				}
 			}
