@@ -1,8 +1,48 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<script src="classes.js"></script>
-	</head>
-	<body>
-	</body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ES8 Project</title>
+
+  <script src="//unpkg.com/systemjs@0.19.47/dist/system.js"></script>
+  <script src="class/Edge.js"></script>
+  <script src="class/Node.js"></script>
+  <script src="class/Graph.js"></script>
+  <script src="class/GridGraph.js"></script>
+  <script src="class/Traversal.js"></script>
+  <script src="classes.js"></script>
+</head>
+
+<body onload="init()">
+  <form method="GET" onsubmit="return false;">
+    
+    <label for="algorithm">Algorithm: </label>
+    <select id="algorithm">
+      <option value="dfs" >Depth-First Search</option>
+      <option value="bfs" selected>Breadth-First Search</option>
+      <option value="dijkstra">Dijkstra</option>
+      </select>
+    <br><br>
+    <label for="gridSize">Grid Size: </label>
+       <input id="gridSize" type=number min=2 max=20 value=6 onchange="updateNodeIds(this.value)" />
+    <br><br>
+    <label for="startNodeId">Start Node: </label>
+       <select id="startNodeId">
+       </select>
+    <br><br>
+    <label for="endNodeId">End Node: </label>
+    <select id="endNodeId">
+    </select>
+    <br><br>
+    <label for="delayS">Delay (s): </label>
+    <input id="delayS" type=number min="0.1" max="10" value="1" />
+    <br><br>
+    <button style=width:100% type=button onclick="handleParams(this.parentElement);">Submit</button>
+  </form>
+  <script src="config.js"></script>
+  <canvas id="graphs" width="380" height="380"></canvas>
+</body>
 </html>
