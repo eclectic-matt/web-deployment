@@ -17,7 +17,7 @@ function init(){
   let sIdx = document.getElementById('startNodeId').selectedIndex;
   let eIdx = document.getElementById('endNodeId').selectedIndex;
   
-  let delayMs = parseInt(document.getElementById('delayS').value) * 1000;
+  let delayMs = parseFloat(document.getElementById('delayS').value) * 1000;
   //console.log('delayS',document.getElementById('delayS').value);
   
   let graph = new GridGraph(rows, cols, 'gridGraph');
