@@ -85,11 +85,9 @@ class Traversal
 			visited.add(closestNode.id);
 			let neighbours = closestNode.getNeighbours();
 			for (let neighbour of neighbours) {
-			  
 				if (!visited.has(neighbour.id)) {
 					let edge = graph.getEdgeBetween(closestNode, neighbour);
 					let newDistance = distances[closestNode.id] + edge.getWeight();
-					
 					if (newDistance < distances[neighbour.id]) {
 						distances[neighbour.id] = newDistance;
 						/*if (end.id && (end.id == neighbour.id)) {
@@ -112,6 +110,7 @@ class Traversal
 	static recreatePath(cameFrom, current)
 	{
 		return [Array.from(cameFrom.values()).join('->'), cameFrom.size];
+		//OLD VERSION BELOW:
 		let path = current;
 		while (cameFrom.has(current)) {
 			cameFrom.delete(current);
@@ -123,68 +122,71 @@ class Traversal
 	
 	static backwardsWalk(visited, s, e)
 	{
-	  //Get the path
-    let path = Array.from(visited.values());
-    let minPath = [];
-    let currentNode = e;
-    let checks = path.length;
-        
-    //Perform a backwards, neighbours search of the visited nodes, skipping neighbours where possible
-        
-    //Remove end from path (don't match end)
-    path.splice(-1);
-    while(path.length > 0 && checks > 0) {
-          
-      //safety loop
-      checks--;
-          
-      minPath.push(currentNode.id);
-      if(currentNode.id == s.id){ break;
-      }
-      //get neighbours of current node 
-      let n = currentNode.getNeighbours();
-      //find neighbour which is lower in the visted list 
-      let nIds = n.map( (node) => { return node.id});
-      //minNeighbour (index in neighbours)
-      let minNeighbour = false;
-      //minIdx (index of neighbour id within paths array)
-      let minIdx = -1;
-      //Iterate neighbour ids
-      for(let i=0;i<nIds.length;i++){
-        //get the index within path of this neighbour
-        let pIdx = path.indexOf(nIds[i]);
-        //If found in path
-        if(pIdx !== -1){
-          //and minIdx=false
-          if(minIdx === -1){
-            //use this as minIdx
-            minIdx = pIdx;
-            minNeighbour = i;
-          }else{
-            if(pIdx < minIdx){
-              minIdx = pIdx;
-              minNeighbour = i;
-              }
-            }
-          }
-        }
-        //
-        if(minNeighbour!==false){
-          //Set current to min neighbour
-          currentNode = n[minNeighbour];
-          //Remove path elements smaller than the current node
-          path.splice(minIdx);
-        }
-      }
-        
-      //Add start Id onto path (again?)
-      minPath.push(s.id);
-      minPath.reverse();
-      let setMinPath = new Set();
-      for(let id of minPath){
-        setMinPath.add(id);
-      }
-      return setMinPath;
+		//Get the path
+		let path = Array.from(visited.values());
+		let minPath = [];
+		let currentNode = e;
+		let checks = path.length;
+			
+		//Perform a backwards, neighbours search of the visited nodes, skipping neighbours where possible
+			
+		//Remove end from path (don't match end)
+		path.splice(-1);
+
+		while(path.length > 0 && checks > 0) {
+			
+			//safety loop
+			checks--;
+			
+			minPath.push(currentNode.id);
+			if(currentNode.id == s.id){ 
+				break;
+			}
+
+			//get neighbours of current node 
+			let n = currentNode.getNeighbours();
+			//find neighbour which is lower in the visted list 
+			let nIds = n.map( (node) => { return node.id});
+			//minNeighbour (index in neighbours)
+			let minNeighbour = false;
+			//minIdx (index of neighbour id within paths array)
+			let minIdx = -1;
+			//Iterate neighbour ids
+			for(let i=0;i<nIds.length;i++){
+				//get the index within path of this neighbour
+				let pIdx = path.indexOf(nIds[i]);
+				//If found in path
+				if(pIdx !== -1){
+					//and minIdx=false
+					if(minIdx === -1){
+						//use this as minIdx
+						minIdx = pIdx;
+						minNeighbour = i;
+					}else{
+						if(pIdx < minIdx){
+							minIdx = pIdx;
+							minNeighbour = i;
+						}
+					}
+				}
+			}
+			//
+			if(minNeighbour!==false){
+				//Set current to min neighbour
+				currentNode = n[minNeighbour];
+				//Remove path elements smaller than the current node
+				path.splice(minIdx);
+			}
+		}
+		
+		//Add start Id onto path (again?)
+		minPath.push(s.id);
+		minPath.reverse();
+		let setMinPath = new Set();
+		for(let id of minPath){
+			setMinPath.add(id);
+		}
+		return setMinPath;
 	}
 	
 	
@@ -204,7 +206,7 @@ class Traversal
 			options.highlight.path = allNodes;
 			options.highlight.current = node;
 			if(distances){
-			  options.distances = distances;
+				options.distances = distances;
 			}
 			let cnv = document.getElementById('graphs');
 			let t = setTimeout(this.drawGraph, index * delayMs, graph, cnv, options);
@@ -258,7 +260,7 @@ class Traversal
 				let nodeHighlight = (nodeIndex <= currentIndex);
 				let nodeName = (nodeHighlight ? (nodeIndex + 1) : node.name);
 				if(options.distances){
-				  nodeName = options.distances[node.id];
+					nodeName = options.distances[node.id];
 				}
 				
 				let scaledIndex = Math.floor(nodeIndex / (options.highlight.path.length - 1) * 16);
@@ -339,8 +341,8 @@ class Traversal
 		ctx.lineTo(end.x, end.y);
 		ctx.stroke();
 		/*if(Math.floor(end.x - start.x) > 10){
-		  ctx.fontStyle = Math.floor(end.x - start.x) + ' px';
-		  ctx.fillText(edge.id, (end.x + start.x)/2 - 5, (end.y + start.y)/2 - 2);
+			ctx.fontStyle = Math.floor(end.x - start.x) + ' px';
+			ctx.fillText(edge.id, (end.x + start.x)/2 - 5, (end.y + start.y)/2 - 2);
 		}*/
 		//ctx.fill();
 		ctx.closePath();
@@ -365,16 +367,12 @@ class Traversal
 		ctx.fillStyle = '#fff';
 		ctx.lineWidth = 1;
 		if(r > 5){
-		  ctx.fillText(options.nodeName, x-7, y+2);
+			ctx.fillText(options.nodeName, x-7, y+2);
 		}
 	}
 
-
-
-
-
-
-  static outputGraph(graph)
+	//OLD - NO LONGER USED
+	static outputGraph(graph)
 	{
 		console.log('NODES (' + graph.nodes.length + ' total)');
 		for (let i = 0; i < graph.nodes.length; i++) {

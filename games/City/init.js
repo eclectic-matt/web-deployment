@@ -4,7 +4,7 @@ const handleParams = (form) => {
   return false;
 }
 var timers = [];
- 
+
 function init(){
   clearTimers(timers);
   //console.log(document.getElementById('gridSize').value, document.getElementById('algorithm').value);
