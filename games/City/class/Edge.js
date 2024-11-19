@@ -16,6 +16,7 @@ class Edge
 		this.end = end;
 		this.flow = flow;
 		this.capacity = capacity;
+		this.calcWeight();
 		start.edges.push(this);
 		end.edges.push(this);
 	}

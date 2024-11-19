@@ -76,6 +76,9 @@ function init(){
       console.log('djikstra from', nodeOne.id,'to',nodePenultimate.id,'=>');
       Traversal.djikstra(graph, nodeOne, nodePenultimate);*/
     break;
+    case 'weightedDijkstra':
+      //NEED A NEW GridGraph METHOD
+    break;
   }
 
   updateNodeIds(gridSize, sIdx, eIdx);

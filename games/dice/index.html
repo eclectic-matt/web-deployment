@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dice</title>
+  <script src="dice.js"></script>
+  <style>
+    .dieBox {
+      background-color: grey;
+      border: 5px outset black;
+      width: 100%;
+      min-width: 300px;
+      height: 100%;
+      min-height: 300px;
+    }
+    .die {
+      width: 20%;
+      min-width: 75px;
+      height: auto;
+      min-height: 75px;
+      font-size: 5em;
+      border: 1px solid black;
+      background-color: #fff;
+      margin: 25px;
+      padding: 5px 15px;
+    }
+    .rolling {
+      animation-name: rollAnim;
+      animation-duration: 0.5s;
+      width: 20%;
+      min-width: 75px;
+      height: auto;
+      min-height: 75px;
+      font-size: 5em;
+      border: 1px solid black;
+      margin: 25px;
+      padding: 5px 15px;
+      background-color: #fff;
+    }
+    @keyframes rollAnim {
+      0% {
+        background-color: white;
+      }
+      25% {
+        background-color: yellow;
+      }
+      50% {
+        background-color: greenyellow;
+      }
+      75% {
+        background-color: yellow;
+      }
+      100%{
+        background-color: white;
+      }
+    }
+  </style>
+  <script>
+    let initOrientation = {
+      absolute: undefined,
+      alpha: undefined,
+      beta: undefined,
+      gamma: undefined
+    };
+    
+    const handleOrientation = (event) => {
+      const absolute = event.absolute;
+      const alpha = event.alpha;
+      const beta = event.beta;
+      const gamma = event.gamma;
+      //First time?
+      if (initOrientation.alpha === undefined) {
+        //init
+        initOrientation.alpha = alpha;
+        initOrientation.beta = beta;
+        initOrientation.gamma = gamma;
+      }else{
+        //Determine large motion
+        if(
+          (Math.abs(initOrientation.alpha - alpha) > 50) ||
+          (Math.abs(initOrientation.beta - beta) > 50) ||
+          (Math.abs(initOrientation.gamma - gamma) > 50)
+        ){
+          //console.log('BIGchange', absolute, alpha, beta, gamma);
+          rollAllDice();
+          
+        }
+      }
+    }
+    
+    
+    
+    window.addEventListener("deviceorientation", handleOrientation, true);
+
+  </script>
+</head>
+
+<body onload="init()">
+<div id="diceTray" class="dieBox">
+  
+</div>
+</body>
+
+</html>
