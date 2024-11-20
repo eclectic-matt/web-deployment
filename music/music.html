@@ -76,6 +76,8 @@ class Music {
 		let scale = document.getElementsByName('scale')[0].value;
 		//USE getScaleNotes TO GET THE TRANSPOSED NOTES FOR THIS SCALE
 		let scaleNotes = this.getScaleNotes(key,scale);
+		//OUTPUT NOTES TO SCALE NOTES DIV
+		document.getElementById('scaleNotesDiv').innerHTML = 'NOTES: ' + scaleNotes.join(" ");
 		//GET THE ARRAY INDEX OF THE ROOT NOTE
 		let startNoteIndex = this.notes.indexOf(key);
 		//MAP TO AN OCTAVE (RETURNS E4, F4, G4 etc)
@@ -135,5 +137,10 @@ playMusicalScale = () => {
 		<option value="harmonicMinor">harmonicMinor</option>
 	</select>
 	<button id="playScale" onclick="playMusicalScale()">Play Scale</button>
+
+	<br>
+
+	<div id="scaleNotesDiv">
+	</div>
 </body>
 </html>
