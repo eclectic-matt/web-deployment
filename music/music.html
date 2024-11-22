@@ -334,6 +334,12 @@ const showTab = (tabName) => {
         background: green;
         color: white;
         width: 90%;
+        margin: 5%;
+    }
+    button.nav {
+        font-size: 1.0em;
+        width: auto;
+        position: relative;
         margin: 0 5%;
     }
 </style>
@@ -342,6 +348,11 @@ const showTab = (tabName) => {
 <body onload="init()">
     
     <h1>Music Playground</h1>
+    
+    <menu id="navbar">
+        <button class="nav" onclick="showTab('scales')">Playground</button>
+        <button class="nav" onclick="showTab('gameSetup')">Game</button>
+    </menu>
     
     <section id="scales" style="display: block;" class="tab">
         Key: 
