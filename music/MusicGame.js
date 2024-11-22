@@ -86,7 +86,7 @@ class MusicGame
         
         const wrap = document.createElement('div');
         
-        const head = document.createElement('h2');
+        const head = document.createElement('h4');
         head.innerHTML = question;
         wrap.appendChild(head);
         
@@ -105,6 +105,19 @@ class MusicGame
             }
             wrap.appendChild(ansBtn);
         }
+
+		//ADD A "PLAY AGAIN" BUTTON?
+		let playAgainBtn = document.createElement('button');
+		playAgainBtn.innerHTML = 'Play Scale Again';
+		playAgainBtn.style.backgroundColor = '#00f';
+		playAgainBtn.style.color = '#fff';
+		playAgainBtn.style.margin = '10% 5%';
+		playAgainBtn.onclick = function(){
+			let music = new Music();
+			music.playScale(key, answer, 250);
+		}
+		wrap.appendChild(playAgainBtn);
+
         out.appendChild(wrap);
     }
     
@@ -116,12 +129,19 @@ class MusicGame
 		let returnOpts = [];
 		returnOpts.push(correct);
 		let correctIndex = list.indexOf(correct);
+		//REMOVE THE CORRECT ANSWER FROM THE LIST
+		list.splice(list.indexOf(correct), 1);
 
 		//ITERATE FROM 0 TO COUNT-1 (CORRECT WILL BE OPTION 0)
 		for(let i = 0; i < count - 1; i++){
 			let randomIndex = list.indexOf(correct); 
 			while(randomIndex == correctIndex){
 				randomIndex = Math.floor(Math.random() * list.length);
+				//IF WE ALREADY HAVE THIS OPTION
+				if(returnOpts.includes(list[randomIndex])){
+					//FORCE IT TO CHECK AGAIN
+					randomIndex = correctIndex;
+				}
 			}
 			let selectedOption = list.splice(randomIndex, 1);
 			returnOpts.push(selectedOption[0]);

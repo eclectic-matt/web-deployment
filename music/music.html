@@ -96,6 +96,13 @@ const showTab = (tabName) => {
     h1 { 
         margin: 2px 5%;
     }
+    h4 {
+        padding: 0;
+        margin: 0;
+    }
+    #navbar {
+        background-color: #000;
+    }
 </style>
 
 </head>
@@ -160,14 +167,14 @@ const showTab = (tabName) => {
         Game Type: 
         <select id="gameType" name="gameType">
             <option value="key">Key Guess </option>
-            <option value="scale">Scale Guess</option>
+            <option value="scale" selected>Scale Guess</option>
             <option value="pitch">Pitch Guess</option>
         </select>
         
         Difficulty: 
         <select id="difficulty" name="difficulty ">
             <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
+            <option value="medium" selected>Medium</option>
             <option value="hard">Hard</option>
         </select>
         
@@ -178,7 +185,7 @@ const showTab = (tabName) => {
     </section>
     
     <section id="game" style="display: none;" class="tab">
-        <h2>Game</h2>
+        <!--h2>Game</h2-->
         <div id="gameOutput">
             
         </div>
