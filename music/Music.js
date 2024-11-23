@@ -1,5 +1,8 @@
 class Music 
 {
+	//STORE THE CURRENT TIMEOUTS, CLEAR BEFORE PLAYING
+	timeouts = [];
+	
     //THE NAMES OF THE NOTES
     notes = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
 
@@ -124,6 +127,7 @@ class Music
     }
 
     playScale = (key, scale, duration=250) => {
+    	this.clearTimeouts();
         //CONSTANTS 
         const startOctave = 4;
         //FORCE INT DURATION
@@ -153,7 +157,34 @@ class Music
         //FOR EACH NOTE (Eb4, F4, A5 etc)
         scaleNotes.forEach( (note, index) => {
             //SET A TIMEOUT BASED ON THE INDEX (i.e. WAIT LONGER FOR LATER NOTES)
-            setTimeout(this.playNote, index * duration, note, duration);
+            this.timeouts.push(setTimeout(this.playNote, index * duration, note, duration));
         });
+    }
+    
+    playChord = (notes) => {
+    	for(let note of notes){
+    		if(
+    			(parseInt(note.slice(-1)) > 0) &&
+    			(parseInt(note.slice(-1)) < 8)
+    		){
+    			//octave set
+    		}else{
+    			//Set octave
+    			note += '4';
+    		}
+    		this.playNote(note, 200);
+    	}
+    }
+    
+    playSong = (chordsArr, duration) => {
+    	chordsArr.forEach( (chord, index) => {
+			this.timeouts.push(setTimeout(this.playChord, index * duration, chord, duration));
+    	});
+    }
+    
+    clearTimeouts = () => {
+    	this.timeouts.forEach( (t) => {
+    		clearTimeout(t);
+    	})
     }
 }
