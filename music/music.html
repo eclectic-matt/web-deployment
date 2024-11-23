@@ -213,7 +213,7 @@ updateRTTTL = (opt) => {
 }
 
 playRTTTL = () => {
-	let song = document.getElementById('rtttl').innerHTML;
+	let song = document.getElementById('rtttl').value;
 	let p = new SongPlayer();
 	p.playRTTTLSong(song);
 }
