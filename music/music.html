@@ -6,6 +6,9 @@
 <script src="Music.js"></script>
 <script src="MusicGame.js"></script>
 <script>
+//Globally-scoped stuff
+var game = new MusicGame();
+var context = new AudioContext();
 
 const outputScaleOptions = () => {
     let scaleEl = document.getElementById('scale');
@@ -18,8 +21,6 @@ const outputScaleOptions = () => {
         scaleEl.appendChild(opt);
     })
 }
-
-var context = new AudioContext();
 
 //LITTLE HELPER FUNCTION TO CALL THE MUSIC CLASS
 playMusicalScale = () => {
@@ -47,7 +48,7 @@ const init = () => {
 
 const playGame = () => {
     console.log('game started!');
-    let game = new MusicGame();
+    //let game = new MusicGame();
     const gameType = document.getElementById('gameType').value;
     game.setType(gameType);
     const difficulty = document.getElementById('difficulty').value;
@@ -82,26 +83,53 @@ const showTab = (tabName) => {
         margin: 0 5%;
     }
     button {
+        font-size: 0.7em;
+        padding: 2%;
         background: green;
         color: white;
         width: 90%;
         margin: 10px 5%;
     }
     button.nav {
-        font-size: 1.0em;
+        font-size: 0.8em;
+        padding: 1%;
         width: auto;
         position: relative;
-        margin: 0 5%;
+        margin: 0 5px;
+        text-align: center;
     }
     h1 { 
         margin: 2px 5%;
+        font-size: 1.5em;
+    }
+    h4, h5, p {
+        padding: 5%;
+        margin: 0;
+    }
+    h2 {
+    	font-size: 1.3em;
+    }
+    h3 {
+    	font-size: 1.2rem;
     }
     h4 {
-        padding: 0;
-        margin: 0;
+    	font-size: 0.7em;
+    }
+    h5 {
+    	font-size: 1.0em;
+    }
+    p, span {
+    	font-size: 0.8em
     }
     #navbar {
         background-color: #000;
+    }
+    #hud #lives {
+    	position: relative;
+    	float: right;
+    }
+    button.answer:hover, button.answer:visited {
+    	background-color: red;
     }
 </style>
 
