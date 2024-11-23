@@ -5,10 +5,178 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="Music.js"></script>
 <script src="MusicGame.js"></script>
+<script src="SongPlayer.js"></script>
 <script>
 //Globally-scoped stuff
 var game = new MusicGame();
 var context = new AudioContext();
+
+const notes = ['A4', 'B4', 'C4'];
+//D–A–Bm–G
+const chords = {
+	A: {
+		major: ['A', 'Db', 'E'],
+		minor: ['A', 'C', 'E']
+	},
+	Bb: {
+		major: ['Bb', 'D', 'F'],
+		minor: ['Bb', 'Db', 'F']
+	},
+	B: {
+		major : ['B', 'Eb', 'Gb'],
+		minor: ['B', 'D', 'Gb']
+	},
+	//This is just B but here for completeness
+	Cb: {
+		major: ['B', 'Eb', 'Gb'],
+		minor: ['B', 'D', 'Gb']
+	},
+	// Starts here...
+	C: {
+		major: ['C', 'E', 'G'],
+		minor: ['C', 'Eb', 'G']
+	},
+	Db: {
+		major: ['Db', 'F', 'Ab'],
+		minor: ['Db', 'E', 'Ab']
+	},
+	D: {
+		major: ['D', 'Gb', 'A'],
+		minor: ['D', 'F', 'A']
+	},
+	Eb: {
+		major: ['Eb', 'G', 'Bb'],
+		minor: ['Eb', 'Gb', 'Bb']
+	},
+	E: {
+		major: ['E', 'Ab', 'B'],
+		minor: ['E', 'G', 'B']
+	},
+	//This is just E but here for completeness?
+	Fb: {
+		major: ['E', 'Ab', 'B'],
+		minor: ['E', 'G', 'B']
+	},
+	F: {
+		major: ['F', 'A', 'C'],
+		minor: ['F', 'Ab', 'C']
+	},
+	Gb: {
+		major: ['Gb', 'Bb', 'Db'],
+		minor: ['Gb', 'A', 'Db']
+	},
+	G: {
+		major: ['G', 'B', 'D'],
+		minor: ['G', 'Bb', 'D']
+	},
+	Ab: {
+		major: ['Ab', 'C', 'Eb'],
+		minor: ['Ab', 'Cb', 'F']
+	}
+}
+
+let fourChords = [
+	chords['D']['major'],
+	chords['A']['major'],
+	chords['B']['minor'],
+	chords['G']['major'],
+	//
+	chords['E']['major'],
+	chords['A']['minor'],
+	chords['D']['major'],
+	chords['G']['major']
+	//chords['Db']['major']
+];
+
+const Dbmin = chords['Db']['minor'];
+const Dmaj = chords['D']['major'];
+const Amaj = chords['A']['major'];
+const Bmin = chords['B']['minor'];
+const Gmaj = chords['G']['major'];
+const fourCh = [
+	Dmaj,
+	Amaj,
+	Bmin,
+	Gmaj
+];
+
+//see https://en.m.wikipedia.org/wiki/SCORE_(software)
+/*
+ Db5W - A Db on octave 5 played as a Whole note
+ C3H - A C on octave 3 played as a Half note (minim)
+ B2Q - A B octave 2 Quarter note (crochet)
+ Fb3E - An Fb octave 3 Eight note (quaver)
+ B3S - A B octave 3 Sixteenth note (semiquaver)
+ RE - A Rest played as an Eighth note
+ 
+ B3E/C3E/D3E/F3E
+ 
+ //Duration - extract the last char
+ let duration = note.slice(-1);
+ //Octave - second to last char
+ let octave = note.slice(-2, 1);
+ //key - first 1/2 chars, find the octave and count up to it
+ let key = note.substr(0, note.indexOf(octave) - 1);
+*/
+
+const playRandomSong = () => {
+	const song = {
+		//CHANNEL 1
+		bass: {
+			settings: {
+				wave: 'square',
+				gain: 3
+				//....
+			},
+			notes: [
+				"B3W",
+				"C3W",
+				"E3H",
+				"F3H",
+				"G3W"
+			]
+		},
+		//CHANNEL 2
+		melody: {
+			settings: {
+				wave: 'saw',
+				gain: 6
+				//...
+			},
+			notes: [
+				"E4W",
+				"F4H",
+				"G4H",
+				"A4W",
+				"B4H",
+				"C4H",
+				"E4Q",
+				"G4Q",
+				"F4Q",
+				"E4Q"
+			]
+		},
+		//...CHANNEL N
+		settings: {
+			bpm: 30
+			//...
+		}
+	}
+}
+
+
+const ringtoneExamples = [
+'JingleBell:d=8,o=5,b=112:32p,a,a,4a,a,a,4a,a,c6,f.,16g,2a,a#,a#,a#.,16a#,a#,a,a.,16a,a,g,g,a,4g,4c6',
+'Halloween:d=4,o=5,b=180:8d6,8g,8g,8d6,8g,8g,8d6,8g,8d#6,8g,8d6,8g,8g,8d6,8g,8g,8d6,8g,8d#6,8g,8c#6,8f#,8f#,8c#6,8f#,8f#,8c#6,8f#,8d6,8f#,8c#6,8f#,8f#,8c#6,8f#,8f#,8c#6,8f#,8d6,8f#',
+'Auld L S:d=4,o=6,b=101:g5,c,8c,c,e,d,8c,d,8e,8d,c,8c,e,g,2a,a,g,8e,e,c,d,8c,d,8e,8d,c,8a5,a5,g5,2c'
+]
+
+let chordPlayer = new Music();
+
+//chordPlayer.playChord(chords['d']['major']);
+//chordPlayer.playSong(fourChords, 500);
+chordPlayer.playSong(fourCh, 500);
+
 
 const outputScaleOptions = () => {
     let scaleEl = document.getElementById('scale');
@@ -20,6 +188,34 @@ const outputScaleOptions = () => {
         opt.innerHTML = k;
         scaleEl.appendChild(opt);
     })
+}
+
+outputRingtoneOptions = () => {
+	let songNames = ringtoneExamples.map( (str) => {
+		return str.split(':')[0];
+	});
+	let exampleEl = document.getElementById('examples');
+	songNames.forEach( (k) => {
+		let opt = document.createElement('option');
+		opt.value = k;
+		opt.innerHTML = k;
+		exampleEl.appendChild(opt);
+	})
+}
+
+updateRTTTL = (opt) => {
+	let name = opt.value;
+	let song = ringtoneExamples.find( (el) => {
+		let sName = el.split(':')[0];
+		return sName == name;
+	});
+	document.getElementById('rtttl').innerHTML = song;
+}
+
+playRTTTL = () => {
+	let song = document.getElementById('rtttl').innerHTML;
+	let p = new SongPlayer();
+	p.playRTTTLSong(song);
 }
 
 //LITTLE HELPER FUNCTION TO CALL THE MUSIC CLASS
@@ -43,6 +239,7 @@ playMusicalScale = () => {
 
 const init = () => {
     outputScaleOptions();
+    outputRingtoneOptions();
     showTab('gameSetup');
 }
 
@@ -75,11 +272,19 @@ const showTab = (tabName) => {
     body {
         margin: 1% 5%;
     }
-    input, select{
+    input, select {
         background: #ddd;
         color: #000;
         width: 90%;
         height: 2em;
+        margin: 0 5%;
+    }
+    textarea {
+    	height: 9em;
+    	font-size: 0.9em;
+    	background: #ddd;
+        color: #000;
+        width: 90%;
         margin: 0 5%;
     }
     button {
@@ -141,6 +346,7 @@ const showTab = (tabName) => {
     <menu id="navbar">
         <button class="nav" onclick="showTab('scales')">Playground</button>
         <button class="nav" onclick="showTab('gameSetup')">Game</button>
+        <button class="nav" onclick="showTab('ringtones')">Ringtone</button>
     </menu>
     
     <section id="scales" style="display: block;" class="tab">
@@ -186,6 +392,8 @@ const showTab = (tabName) => {
         <div id="scaleNotesDiv">
         </div>
         
+        <button onclick="playRandomSong()">Random Song</button>
+        
     </section>
     
     <section id="gameSetup" style="display: block;" class="tab">
@@ -217,6 +425,19 @@ const showTab = (tabName) => {
         <div id="gameOutput">
             
         </div>
+    </section>
+    
+    <section id="ringtones" style="display: none;" class="tab">
+        <h2>RTTTL (Ringtones)</h2>
+        
+        Examples: 
+        <select id="examples" onchange="updateRTTTL(this)">
+        	
+        </select>
+        
+        <textarea id="rtttl">Paste an RTTTL string here!</textarea>
+        
+        <button id="playRTTTL" onclick="playRTTTL()">Play Ringtone</button>
     </section>
 </body>
 </html>
