@@ -4,7 +4,10 @@ class MusicGame
     difficulty = "easy";
     lives = 3;
     level = 0;
+    music = undefined;
+    //timeouts = [];
     notes = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+    
     
     setType = (type) => {
         this.type = type;
@@ -18,6 +21,7 @@ class MusicGame
     	this.lives = 3;
     	this.level = 0;
         this.getNewQuestion();
+        this.music = new Music();
     }
     
     getNewQuestion = () => {
@@ -311,6 +315,8 @@ class MusicGame
             if(data.options[i] === data.answer){
                 //ansBtn.style.backgroundColor = '#0f0';
                 ansBtn.onclick = function(){
+                	//this.music.playScale('C','major',20);
+                    //setTimeout(alert, 25, 'correct!');
                     alert('correct!');
                     this.getNewQuestion();
                 }.bind(this);
@@ -330,9 +336,9 @@ class MusicGame
 		playAgainBtn.style.color = '#fff';
 		playAgainBtn.style.margin = '10% 5%';
 		playAgainBtn.onclick = function(){
-			let music = new Music();
-			music.playScale(data.key, data.scale, 250);
-		}
+			//let music = new Music();
+			this.music.playScale(data.key, data.scale, 250);
+		}.bind(this);
 		wrap.appendChild(playAgainBtn);
 
         out.appendChild(wrap);
