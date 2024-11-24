@@ -32,6 +32,7 @@ class SongPlayer
 		if (!this.music) {
 			this.music = new Music();
 		}
+		this.clearTimeouts()
 		const songParts = song.split(':');
 		console.log(songParts);
 		const title = songParts[0];
@@ -109,7 +110,7 @@ class SongPlayer
 			}
 		}
 		if(noteParts.dotting == '.'){
-			durationInt *= 1.5;
+			durationInt /= 1.5;
 		}
 		//let durationInt = note.substring(0,1);
 		let duration = (this.wholeDuration / durationInt) * 3000;
@@ -154,6 +155,12 @@ class SongPlayer
 				return 'Ab';
 			break;
 		}
+	}
+	
+	clearTimeouts = () => {
+		this.timeouts.forEach( (t) => {
+			clearTimeout(t);
+		})
 	}
 }
  
