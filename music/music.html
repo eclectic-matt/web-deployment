@@ -10,6 +10,8 @@
 //Globally-scoped stuff
 var game = new MusicGame();
 var context = new AudioContext();
+let chordPlayer = new Music();
+let songPlayer = new SongPlayer();
 
 const notes = ['A4', 'B4', 'C4'];
 //D–A–Bm–G
@@ -133,7 +135,9 @@ const playRandomSong = () => {
 				"C3W",
 				"E3H",
 				"F3H",
-				"G3W"
+				"G3W",
+				"E3H",
+				"F3H"
 			]
 		},
 		//CHANNEL 2
@@ -162,6 +166,7 @@ const playRandomSong = () => {
 			//...
 		}
 	}
+	songPlayer.playSong(song);
 }
 
 
@@ -206,9 +211,12 @@ const ringtoneExamples = [
     'MahnaMahna:d=16,o=6,b=125:c#,c.,b5,8a#.5,8f.,4g#,a#,g.,4d#,8p,c#,c.,b5,8a#.5,8f.,g#.,8a#.,4g,8p,c#,c.,b5,8a#.5,8f.,4g#,f,g.,8d#.,f,g.,8d#.,f,8g,8d#.,f,8g,d#,8c,a#5,8d#.,8d#.,4d#,8d#.',
     'LeisureSuit:d=16,o=6,b=56:f.5,f#.5,g.5,g#5,32a#5,f5,g#.5,a#.5,32f5,g#5,32a#5,g#5,8c#.,a#5,32c#,a5,a#.5,c#.,32a5,a#5,32c#,d#,8e,c#.,f.,f.,f.,f.,f,32e,d#,8d,a#.5,e,32f,e,32f,c#,d#.,c#',
     'MissionImp:d=16,o=6,b=95:32d,32d#,32d,32d#,32d,32d#,32d,32d#,32d,32d,32d#,32e,32f,32f#,32g,g,8p,g,8p,a#,p,c7,p,g,8p,g,8p,f,p,f#,p,g,8p,g,8p,a#,p,c7,p,g,8p,g,8p,f,p,f#,p,a#,g,2d,32p,a#,g,2c#,32p,a#,g,2c,a#5,8c,2p,32p,a#5,g5,2f#,32p,a#5,g5,2f,32p,a#5,g5,2e,d#,8d',
+    //
+    'Mozart:d=16,o=5,b=125:16d#,c#,c,c#,8e,8p,f#,e,d#,e,8g#,8p,a,g#,g,g#,d#6,c#6,c6,c#6,d#6,c#6,c6,c#6,4e6,8c#6,8e6,32b,32c#6,d#6,8c#6,8b,8c#6,32b,32c#6,d#6,8c#6,8b,8c#6,32b,32c#6,d#6,8c#6,8b,8a#,4g#,d#,32c#,c,c#,8e,8p,f#,e,d#,e,8g#,8p,a,g#,g,g#,d#6,c#6,c6,c#6,d#6,c#6,c6,c#6,4e6,8c#6,8e6,32b,32c#6,d#6,8c#6,8b,8c#6,32b,32c#6,d#6,8c#6,8b,8c#6,32b,32c#6,d#6,8c#6,8b,8a#,4g#',
+    //Source: https://huggingface.co/datasets/cosimoiaia/RTTTL-Ringtones?row=78
+    'whatsup:d=32,o=5,b=45:16g#,a#,8g#,16f6,c#,8c#.,g#,16g#,f#,16f,16f6,c#6,16c#6,8f#.6,g#6,g#6,c#6,d#6,d#6,16f6,c#6',
+    'SweetChild:d=8,o=5,b=140:c,c6,g,f,f6,g,e6,g,c,c6,g,f,f6,g,e6,g,d,c6,g,f,f6,g,e6,g,d,c6,g,f,f6,g,e6,g,f,c6,g,f,f6,g,e6,g,f,c6,g,f,f6,g,e6,g,c,c6,g,f,f6,g,e6,g,c,c6,g,f,f6,g,e6,g'
 ]
-
-let chordPlayer = new Music();
 
 //chordPlayer.playChord(chords['d']['major']);
 //chordPlayer.playSong(fourChords, 500);
@@ -246,7 +254,7 @@ updateRTTTL = (opt) => {
 		let sName = el.split(':')[0];
 		return sName == name;
 	});
-	document.getElementById('rtttl').innerHTML = song;
+	document.getElementById('rtttl').value = song;
 }
 
 playRTTTL = () => {
