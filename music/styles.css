@@ -1,93 +1,128 @@
-    * {
-        background: #333;
-        color: #fff;
-        font-size: 1.2em;
-    }
-    body {
-        margin: 1% 5%;
-    }
-    input, select {
-        background: #ddd;
-        color: #000;
-        width: 90%;
-        height: 2em;
-        margin: 0 5%;
-    }
-    textarea {
-    	height: 9em;
-    	font-size: 0.9em;
-    	background: #ddd;
-        color: #000;
-        width: 90%;
-        margin: 0 5%;
-    }
-    button {
-        font-size: 0.7em;
-        padding: 2%;
-        background: green;
-        color: white;
-        width: 90%;
-        margin: 10px 5%;
-    }
-    button.nav {
-        font-size: 0.6em;
-        padding: 1%;
-        width: auto;
-        position: relative;
-        margin: 0 2px;
-        text-align: center;
-    }
-    h1 { 
-        margin: 2px 5%;
-        font-size: 1.5em;
-    }
-    h4, h5, p {
-        padding: 5%;
-        margin: 0;
-    }
-    h2 {
-    	font-size: 1.3em;
-    }
-    h3 {
-    	font-size: 1.2rem;
-    }
-    h4 {
-    	font-size: 0.7em;
-    }
-    h5 {
-    	font-size: 1.0em;
-    }
-    p, span {
-    	font-size: 0.8em
-    }
-    #navbar {
-        background-color: #222;
-        padding: 0;
-        margin: 0;
-    }
-    #hud #lives {
-    	position: relative;
-    	float: right;
-    }
-    button.answer:hover, button.answer:visited {
-    	background-color: red;
-    }
-    
-    table {
-    	border-collapse: collapse;
-    }
-    table, tr, td, th {
-    	border: 1px solid white;
-    	font-size: 1em;
-    }
-    /*
-    // Accidentals column
-    td:last-child{
-    	font-size: 0.5em;
-    }
-    */
-    /* Root column */
-    td:first-child, th:first-child{
-    	background-color: #666;
-    	color: #ff0;
-    }
+* {
+	background: #333;
+	color: #fff;
+	font-size: 1.2em;
+}
+
+body {
+	margin: 1% 5%;
+}
+
+input,
+select {
+	background: #ddd;
+	color: #000;
+	width: 90%;
+	height: 2em;
+	margin: 0 5%;
+}
+
+textarea {
+	height: 9em;
+	font-size: 0.9em;
+	background: #ddd;
+	color: #000;
+	width: 90%;
+	margin: 0 5%;
+}
+
+button {
+	font-size: 0.7em;
+	padding: 2%;
+	background-color: green;
+	color: white;
+	width: 90%;
+	margin: 10px 5%;
+}
+
+button.nav {
+	font-size: 0.6em;
+	padding: 1%;
+	width: auto;
+	position: relative;
+	margin: 0 2px;
+	text-align: center;
+}
+
+h1 {
+	margin: 2px 5%;
+	font-size: 1.5em;
+}
+
+h4,
+h5,
+p {
+	padding: 5%;
+	margin: 0;
+}
+
+h2 {
+	font-size: 1.3em;
+}
+
+h3 {
+	font-size: 1.2rem;
+}
+
+h4 {
+	font-size: 0.7em;
+}
+
+h5 {
+	font-size: 1.0em;
+}
+
+p,
+span {
+	font-size: 0.8em
+}
+
+#navbar {
+	background-color: #222;
+	padding: 0;
+	margin: 0;
+}
+
+#hud #lives {
+	position: relative;
+	float: right;
+}
+
+button.answer:hover,
+button.answer:visited {
+	background-color: red;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table,
+tr,
+td,
+th {
+	border: 1px solid white;
+	font-size: 1em;
+}
+
+/*
+// Accidentals column
+td:last-child{
+	font-size: 0.5em;
+}
+*/
+
+/* Root column */
+td:first-child,
+th:first-child {
+	/*background-color: #666;*/
+	color: #ff0;
+}
+
+tr:nth-child(odd) td {
+	background-color: #333;
+}
+
+tr:nth-child(even) td {
+	background-color: #222;
+}
