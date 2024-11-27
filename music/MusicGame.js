@@ -30,9 +30,11 @@ class MusicGame
     	switch(this.type){
             case 'key':
                 questionData = this.getNewKeyQuestion();
+                //
             break;
             case 'scale':
                 questionData = this.getNewScaleQuestion();
+                //playScale(data.key, data.answer);
             break;
             case 'pitch':
             default:
@@ -131,7 +133,7 @@ class MusicGame
             default:
                 //major, in order
                 options = [
-                	'A','B','C','D','E','F'
+                	'A','C','E','G'
             	];
                 answer = options[Math.floor(Math.random() * options.length)];
                 key = answer;
@@ -143,16 +145,7 @@ class MusicGame
             case 'medium':
                 //other scales, in order
 				options = [
-					'major',
-					'minor',
-					'harmonicMajor',
-					'harmonicMinor',
-					'bluesMinorPentatonic',
-					'bluesMajorPentatonic',
-					'majorPentatonic',
-					'minorPentatonic',
-					'tritone',
-					'wholeTone'
+					'A','B','C','D','E','F','G'
 				];
 				//GET A SMALLER LIST OF OPTIONS, INCLUDING THE CORRECT ANSWER
 				answer = options[Math.floor(Math.random() * options.length)];
@@ -160,38 +153,18 @@ class MusicGame
 				key = this.notes[Math.floor(Math.random() * this.notes.length)];
 				//key = 'C';
 				scale = 'major';
-				question = 'What scale is this (key: ' + key + ')?';
+				question = 'What key is this?';
             break;
             case 'hard':
                 //other scales, NOT in order?
-                options = [
-                	'istrian',
-                	'locrian',
-                	'phrygian', 
-                	'mixolydian', 
-                	'augmented', 
-                	'dorian', 
-                	'doubleHarmonic', 
-                	'enigmatic', 
-                	'harmonicMajor', 
-                	'harmonicMinor', 
-                	'bluesMinorPentatonic',
-                	'bluesMajorPentatonic', 
-                	'persian', 
-                	'prometheus', 
-                	'scaleOfHarmonics', 
-                	'tritone', 
-                	'wholeTone', 
-                	'ukranianDorian', 
-                	'yo'
-                ];
+                options = [...this.notes];
                 //GET A SMALLER LIST OF OPTIONS, INCLUDING THE CORRECT ANSWER
                 answer = options[Math.floor(Math.random() * options.length)];
                 options = this.getOptions(4, options, answer);
                 key = this.notes[Math.floor(Math.random() * this.notes.length)];
                 //key = 'C';
                 scale = 'major';
-                question = 'What scale is this (key: ' + key + ')?';
+                question = 'What key is this?';
             break;
         }
         
@@ -213,29 +186,23 @@ class MusicGame
     		default:
     			//major, in order
     			options = [
-                    	'major',
-                    	'minor',
-                    	'majorPentatonic',
-                    	'minorPentatonic'
+                    	'200',
+                    	'400',
+                    	'600',
+                    	'800'
                 	];
     			answer = options[Math.floor(Math.random() * options.length)];
     			//key = 'C';
     			key = this.notes[Math.floor(Math.random() * this.notes.length)];
-    			question = 'What scale is this (key: ' + key + ')?';
+    			question = 'What pitch is this?';
     			break;
     		case 'medium':
     			//other scales, in order
     			options = [
-    					'major',
-    					'minor',
-    					'harmonicMajor',
-    					'harmonicMinor',
-    					'bluesMinorPentatonic',
-    					'bluesMajorPentatonic',
-    					'majorPentatonic',
-    					'minorPentatonic',
-    					'tritone',
-    					'wholeTone'
+    					'200',
+    					'300',
+    					'400',
+    					'500'
     				];
     			//GET A SMALLER LIST OF OPTIONS, INCLUDING THE CORRECT ANSWER
     			answer = options[Math.floor(Math.random() * options.length)];
@@ -293,7 +260,7 @@ class MusicGame
         console.log('ui', data);
         //Play the scale and show div of answers
         let music = new Music();
-        music.playScale(data.key, data.answer, 250);
+        music.playScale(data.key, data.scale, 250);
         
         const out = document.getElementById('gameOutput');
         out.innerHTML = null;
