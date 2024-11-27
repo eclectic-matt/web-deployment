@@ -3,6 +3,9 @@ class Music
 	//STORE THE CURRENT TIMEOUTS, CLEAR BEFORE PLAYING
 	timeouts = [];
 	
+	//FOR THE PIANO, ADD OSCILLATORS TO SUSTAIN HERE
+	sustains = [];
+	
     //THE NAMES OF THE NOTES
     notes = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
 
@@ -80,10 +83,10 @@ class Music
     /**
      * Play a note of the set key for duration ms.
      * @param {string} key The note and octave in the form, e.g. C4, or Db5.
-     * @param {string|int} duration The duration of the note in ms.
+     * @param {string|int|boolean} duration The duration of the note in ms (default: false to sustain).
      * @return void.
      */
-    playNote = (key, duration) => {
+    playNote = (key, duration=false) => {
         //CALCULATE THE REQUIRED FREQUENCY
         let frequency = this.calcFrequency(key);
 
@@ -103,11 +106,22 @@ class Music
 
 		//START THE OSCILLATOR
         oscillator.start();
-
-        // Beep for duration milliseconds
-        setTimeout(function () {
-            oscillator.stop();
-        }, duration);
+        
+        if(duration){
+	        // Beep for duration milliseconds
+	        setTimeout(function () {
+	            oscillator.stop();
+	        }, duration);
+        }else{
+        	//Add to sustains array (remove with endSustain)
+        	this.sustains[key] = oscillator;
+        	//No timeout to stop, manually clear this!
+        }
+    }
+    
+    endSustain = (key) => {
+    	if(this.sustains.indexOf(key) == false) return false;
+    	this.sustains[key].stop();
     }
 
     getScaleNotes(key, scaleName) {
