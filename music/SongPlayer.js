@@ -4,6 +4,7 @@ class SongPlayer
 	bpm = 120;
 	wholeDuration = 0.5;
 	timeouts = [];
+	currentSong = '';
 	
 	playSong = (song) => {
 		if(!this.music){
@@ -32,7 +33,8 @@ class SongPlayer
 		if (!this.music) {
 			this.music = new Music();
 		}
-		this.clearTimeouts()
+		this.clearTimeouts();
+		this.currentSong = song;
 		const songParts = song.split(':');
 		console.log(songParts);
 		const title = songParts[0];
@@ -47,12 +49,14 @@ class SongPlayer
 		this.wholeDuration = this.calcBeatDuration(parseInt(matches.bpm));
 		
 		const notes = songParts[2].split(',');
-		console.log(title, matches.bpm, this.defaultDuration, this.defaultOctave);
+		console.log('title=',title,'bpm=',matches.bpm,'defaultDur=',this.defaultDuration,'defaultOct=',this.defaultOctave,'wholeDur=',this.wholeDuration);
 		let timeIndex = 0;
-			notes.forEach( (note) => {
+			notes.forEach( (note, index) => {
 				const noteData = this.extractRTTTLNote(note);
+				
 				//console.log(name, note, noteData);
 				this.timeouts.push(setTimeout(this.music.playNote, timeIndex, noteData.keyOctave, noteData.duration));
+				this.timeouts.push(setTimeout(this.highlightTone, timeIndex, index));
 				timeIndex += noteData.duration;
 			})
 	}
@@ -97,7 +101,7 @@ class SongPlayer
 			durationInt = this.defaultDuration;
 		}
 		let key = noteParts.key.toUpperCase();
-		let octave = 200; //Out of hearing range
+		let octave = 400; //Out of hearing range
 		//Pause?
 		if(key === 'P'){
 			key = 'G';
@@ -120,7 +124,7 @@ class SongPlayer
 			key += octave;
 			octave = note.substring(3,4);
 		}*/
-		console.log(note, duration, key, octave);
+		//console.log(note, duration, key, octave);
 		return {
 			duration: duration,
 			octave: octave,
@@ -157,10 +161,48 @@ class SongPlayer
 		}
 	}
 	
+	convertFlats = (note) => {
+		if(note.indexOf('b') == -1) return note;
+		switch(note){
+			case 'Ab':
+				return 'G#';
+			break;
+			case 'Bb':
+				return 'A#';
+			break;
+			case 'Cb':
+				return 'B';
+			break;
+			case 'Db':
+				return 'C#';
+			break;
+			case 'Eb':
+				return 'D#';
+			break;
+			case 'Fb':
+				return 'E';
+			break;
+			case 'Gb':
+			default:
+				return 'F#';
+			break;
+		}
+	}
+	
 	clearTimeouts = () => {
 		this.timeouts.forEach( (t) => {
 			clearTimeout(t);
 		})
+	}
+	
+	highlightTone = (toneIndex) => {
+		let song = this.currentSong;
+		let tones= song.split(':')[2].split(',');
+		//tones[toneIndex] = '<span color:"red;">' + tones[toneIndex] + '</span>';
+		tones[toneIndex] = '👉' + tones[toneIndex] + '👈';
+		let newTones = tones.join(',');
+		let newSong = song.split(':')[0] + ':' + song.split(':')[1] + ':' + newTones;
+		document.getElementById('rtttl').value = newSong;
 	}
 }
  
