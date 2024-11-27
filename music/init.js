@@ -337,7 +337,7 @@ outputPianoKeys = () => {
 	const octaveCount = 2;
 	const keyCount = 7 * octaveCount;
 	const keyWidth = (width / keyCount).toFixed(3);
-	console.log('width',width,'keyCount', keyCount, 'keyWidth', keyWidth);
+	//console.log('width',width,'keyCount', keyCount, 'keyWidth', keyWidth);
 	const minOctave = 3;
 	const minNote = "C";
 	const notePattern = [
