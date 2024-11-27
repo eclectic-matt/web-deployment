@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--script src="music.js"></script-->
+<title>Music Playground</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="Music.js"></script>
 <script src="MusicGame.js"></script>
@@ -10,6 +10,16 @@
 <link rel="stylesheet" href="styles.css" />
 <script>
 
+const highlightTab = (name) => {
+	const btns = document.getElementsByClassName('nav');
+    for(let i = 0; i < btns.length; i++){
+        if(btns[i].value == name){
+        	btns[i].style.backgroundColor = 'red';
+        }else{
+        	btns[i].style.backgroundColor = 'green';
+        }
+    }	
+}
 
 const showTab = (tabName) => {
     const tabs = document.getElementsByClassName('tab');
@@ -17,6 +27,7 @@ const showTab = (tabName) => {
         tabs[i].style.display = 'none';
     }
     document.getElementById(tabName).style.display = 'block';
+    highlightTab(tabName);
 }
 
 const init = () => {
@@ -38,11 +49,11 @@ const init = () => {
     <h1>Music</h1>
     
     <menu id="navbar">
-        <button class="nav" onclick="showTab('scales')">Scales</button>
-        <button class="nav" onclick="showTab('gameSetup')">Game</button>
-        <button class="nav" onclick="showTab('ringtones')">Ringtone</button>
-        <button class="nav" onclick="showTab('piano')">Piano</button>
-        <button class="nav" onclick="showTab('scaleTable')">Table</button>
+        <button class="nav" value="scales" onclick="showTab('scales')">Scales</button>
+        <button class="nav" value="gameSetup" onclick="showTab('gameSetup')">Game</button>
+        <button class="nav" value="ringtones" onclick="showTab('ringtones')">Ringtone</button>
+        <button class="nav" value="piano" onclick="showTab('piano')">Piano</button>
+        <button class="nav" value="scaleTable" onclick="showTab('scaleTable')">Table</button>
     </menu>
     
     <section id="scales" style="display: block;" class="tab">
