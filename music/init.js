@@ -324,9 +324,11 @@ const createHTMLElement = (tag='p', innerHTML='', id=false) => {
 	return el;
 }
 
+/*
+//No longer used?
 const playNote = (note) => {
 	chordPlayer.playNote(note, 250);
-}
+}*/
 
 outputPianoKeys = () => {
 	const piano = document.getElementById('piano');
@@ -372,10 +374,17 @@ outputPianoKeys = () => {
 			whiteKeyBtn.style.backgroundColor = "#fff";
 			whiteKeyBtn.style.border = "1px solid black";
 			
-			whiteKeyBtn.onmouseover = (event) => {
+			/*whiteKeyBtn.onmouseover = (event) => {
 				console.log('whiteClick', event.target.id);
 				playNote(event.target.id);
+			}*/
+			whiteKeyBtn.ontouchstart = (event) => {
+				music.playNote(event.target.id);
 			}
+			whiteKeyBtn.ontouchend = (event) => {
+				music.endSustain(event.target.id);
+			}
+			
 			piano.appendChild(whiteKeyBtn);
 			//console.log('white',notePattern[1][noteIndex] + octave, keyWidth, ( ( (7 * (octave - minOctave) ) + noteIndex) * keyWidth ) + 'px' );
 			
@@ -400,9 +409,15 @@ outputPianoKeys = () => {
 				blackKeyBtn.style.backgroundColor = "#000";
 				blackKeyBtn.style.border = "1px solid grey";
 				
-				blackKeyBtn.onmouseover = (event) => {
+				/*blackKeyBtn.onmouseover = (event) => {
 					console.log('blackClick', event.target.id);
 					playNote(event.target.id);
+				}*/
+				blackKeyBtn.ontouchstart = (event) => {
+					music.playNote(event.target.id);
+				}
+				blackKeyBtn.ontouchend = (event) => {
+					music.endSustain(event.target.id);
 				}
 				piano.appendChild(blackKeyBtn);
 			}
