@@ -86,3 +86,8 @@
     	font-size: 0.5em;
     }
     */
+    /* Root column */
+    td:first-child, th:first-child{
+    	background-color: #666;
+    	color: #ff0;
+    }
