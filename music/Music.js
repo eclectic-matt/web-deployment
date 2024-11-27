@@ -122,7 +122,6 @@ class Music
             //notes.push(['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'][noteIndex]);
             notes.push(this.notes[noteIndex]);
         }
-
         return notes;
     }
 
