@@ -1,59 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--script src="music.js"></script-->
+<title>Music Playground</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="Music.js"></script>
 <script src="MusicGame.js"></script>
+<script src="SongPlayer.js"></script>
+<script src="init.js"></script>
+<link rel="stylesheet" href="styles.css" />
 <script>
 
-const outputScaleOptions = () => {
-    let scaleEl = document.getElementById('scale');
-    scaleEl.innerHTML = '';
-    let music = new Music();
-    Object.keys(music.scales).forEach( (k) => {
-        let opt = document.createElement('option');
-        opt.value = k;
-        opt.innerHTML = k;
-        scaleEl.appendChild(opt);
-    })
-}
-
-var context = new AudioContext();
-
-//LITTLE HELPER FUNCTION TO CALL THE MUSIC CLASS
-playMusicalScale = () => {
-    //GET THE SELECTED KEY AND SCALE NAME
-    let key = document.getElementsByName('key')[0].value;
-    let scale = document.getElementsByName('scale')[0].value;
-    let duration = document.getElementsByName('duration')[0].value;
-    let basePitch = document.getElementsByName('basePitch')[0].value;
-    //GET AN INSTANCE OF THE MUSIC CLASS
-    let music = new Music();
-    //SET THE BASE PITCH
-    music.setBasePitch(basePitch);
-    //PLAY THE SELECTED SCALE (AudioContext)
-    music.playScale(key, scale, duration);
-    //GET THE NOTES OF THIS SCALE TO OUTPUT TO THE SCREEN
-    let scaleNotes = music.getScaleNotes(key,scale);
-    //OUTPUT NOTES TO SCALE NOTES DIV
-    document.getElementById('scaleNotesDiv').innerHTML = 'NOTES: ' + scaleNotes.join(" ");
-}
-
-const init = () => {
-    outputScaleOptions();
-    showTab('gameSetup');
-}
-
-const playGame = () => {
-    console.log('game started!');
-    let game = new MusicGame();
-    const gameType = document.getElementById('gameType').value;
-    game.setType(gameType);
-    const difficulty = document.getElementById('difficulty').value;
-    game.setDifficulty(difficulty);
-    game.start();
-    showTab('game');
+const highlightTab = (name) => {
+	const btns = document.getElementsByClassName('nav');
+    for(let i = 0; i < btns.length; i++){
+        if(btns[i].value == name){
+        	btns[i].style.backgroundColor = 'red';
+        }else{
+        	btns[i].style.backgroundColor = 'green';
+        }
+    }	
 }
 
 const showTab = (tabName) => {
@@ -62,57 +27,33 @@ const showTab = (tabName) => {
         tabs[i].style.display = 'none';
     }
     document.getElementById(tabName).style.display = 'block';
+    highlightTab(tabName);
+}
+
+const init = () => {
+    outputScaleOptions();
+    outputRingtoneOptions();
+    outputPianoKeys();
+    outputScaleTable('major');
+    showTab('gameSetup');
 }
 </script>
 
 <style>
-    * {
-        background: #333;
-        color: #fff;
-        font-size: 1.2em;
-    }
-    body {
-        margin: 1% 5%;
-    }
-    input, select{
-        background: #ddd;
-        color: #000;
-        width: 90%;
-        height: 2em;
-        margin: 0 5%;
-    }
-    button {
-        background: green;
-        color: white;
-        width: 90%;
-        margin: 10px 5%;
-    }
-    button.nav {
-        font-size: 1.0em;
-        width: auto;
-        position: relative;
-        margin: 0 5%;
-    }
-    h1 { 
-        margin: 2px 5%;
-    }
-    h4 {
-        padding: 0;
-        margin: 0;
-    }
-    #navbar {
-        background-color: #000;
-    }
+
 </style>
 
 </head>
 <body onload="init()">
     
-    <h1>Music Playground</h1>
+    <h1>Music</h1>
     
     <menu id="navbar">
-        <button class="nav" onclick="showTab('scales')">Playground</button>
-        <button class="nav" onclick="showTab('gameSetup')">Game</button>
+        <button class="nav" value="scales" onclick="showTab('scales')">Scales</button>
+        <button class="nav" value="gameSetup" onclick="showTab('gameSetup')">Game</button>
+        <button class="nav" value="ringtones" onclick="showTab('ringtones')">Ringtone</button>
+        <button class="nav" value="piano" onclick="showTab('piano')">Piano</button>
+        <button class="nav" value="scaleTable" onclick="showTab('scaleTable')">Table</button>
     </menu>
     
     <section id="scales" style="display: block;" class="tab">
@@ -158,6 +99,8 @@ const showTab = (tabName) => {
         <div id="scaleNotesDiv">
         </div>
         
+        <button onclick="playRandomSong()">Random Song</button>
+        
     </section>
     
     <section id="gameSetup" style="display: block;" class="tab">
@@ -168,7 +111,7 @@ const showTab = (tabName) => {
         <select id="gameType" name="gameType">
             <option value="key">Key Guess </option>
             <option value="scale" selected>Scale Guess</option>
-            <option value="pitch">Pitch Guess</option>
+            <!--option value="pitch">Pitch Guess</option-->
         </select>
         
         Difficulty: 
@@ -188,6 +131,47 @@ const showTab = (tabName) => {
         <!--h2>Game</h2-->
         <div id="gameOutput">
             
+        </div>
+    </section>
+    
+    <section id="ringtones" style="display: none;" class="tab">
+        <h2>RTTTL (Ringtones)</h2>
+        
+        Examples: 
+        <select id="examples" onchange="updateRTTTL(this)">
+        	
+        </select>
+        
+         <br><br>
+        
+        <textarea id="rtttl">Paste an RTTTL string here!</textarea>
+        
+        <br><br>
+        
+        <button id="playRTTTL" onclick="playRTTTL()">Play Ringtone</button>
+    </section>
+    
+    <section id="piano" style="display: none;" class="tab">
+        <h2>Piano</h2>
+        <div id="piano">
+        	<!-- filled by outputPianoKeys() -->
+        </div>
+    </section>
+    
+    <section id="scaleTable" style="display: none;" class="tab">
+        <h2>Scales</h2>
+        <select id="showSharps" onchange="outputScaleTable('major');">
+        	<option value="true">Sharps</option>
+        	<option value="false">Flats</option>
+        </select>
+        <br>
+        Scale: 
+        <select id="scaleChange" name="scale" onchange="outputScaleTable(this.value);">
+                <!-- filled by outputScaleOptions -->
+        </select>
+        <br><br>
+        <div id="scalesTable">
+        	
         </div>
     </section>
 </body>
