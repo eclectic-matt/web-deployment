@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Two Card Game</title>
+	<style>
+		card {
+			border: 5px outline black;
+		}
+		
+		table.development {
+			width: 100%;
+			height: 50%;
+			border-collapse: collapse;
+			border: 1px solid black;
+		}
+		table.development tr {
+			height: 50%;
+		}
+		table.development tr td {
+			width: 25%;
+			border: 1px solid black;
+		}
+		input.resource {
+			width: 50%;
+		}
+		td > label {
+			width: 120%;
+		}
+		td {
+			border: 1px solid black;
+		}
+		#north {
+			background-color: #0ff;
+		}
+	</style>
+	<script src="js/init.js"></script>
+</head>
+
+<body onload="init()">
+<card id="developmentCard">
+	<table class="development">
+		<tr>
+			<td rowspan="2" id="west">West</td>
+			<td colspan="2" id="north">
+				<!--h2>Supercomputer</h2-->
+			</td>
+			<td rowspan="2" id="east">East</td>
+		</tr>
+		<tr>
+			<td colspan="2" id="south">South</td>
+		</tr>
+	</table>
+</card>
+
+<br>
+
+<card id="workerCard">
+	<!--table class="workers">
+		<tr>
+			<td><label for="r1">Metal 🔩:</label></td>
+			<td><input name="r1" value="0" class="resource" type="number" ></input></td>
+			<td rowspan="3">Gain 🔩</td>
+			<td rowspan="3">Rotate</td>
+			<td rowspan="3">Develop</td>
+			<td rowspan="3">Gain 💡</td>
+		</tr>
+		<tr>
+			<td><label for="r2">Knowledge 💡:</label></td>
+			<td><input name="r2" class="resource" type="number" value="0"></input></td>
+		</tr>
+		<tr>
+			<td><label for="r3">Robotics 🤖:</label></td>
+			<td><input name="r3" class="resource" type="number" value="0"></input></td>
+		</tr>
+		<tr>
+			<td colspan="2">Gain 💡</td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+		</tr>
+		<tr>
+			<td colspan="2">Develop</td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+		</tr>
+		<tr>
+			<td colspan="2">Gain 🔩</td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+		</tr>
+		<tr>
+			<td colspan="2">Rotate</td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+			<td><input type="checkbox"></input></td>
+		</tr>
+	</table-->
+</card>
+
+
+<button onclick="rotateCard()">Rotate Card!</button>
+
+</body>
+
+</html>
