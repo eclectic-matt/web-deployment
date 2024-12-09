@@ -1,0 +1,246 @@
+[
+	{
+		"resources": {
+			"K": {
+				"name": "Knowledge",
+				"icon": "💡",
+				"value": 0
+			},
+			"M": {
+				"name": "Metal",
+				"icon": "🔩",
+				"value": 0
+			},
+			"R": {
+				"name": "Robotics",
+				"icon": "🤖",
+				"value": 0
+			}
+		},
+		
+		"workers": {
+			"rows": [
+				{
+					"action": "Gain",
+					"type": "M"
+				},
+				{
+					"action": "Develop",
+					"type": null
+				},
+				{
+					"action": "Rotate",
+					"type": null
+				},
+				{
+					"action": "Gain",
+					"type": "K"
+				}
+			],
+			"cols": [
+				{
+					"action": "Rotate",
+					"type": null
+				},
+				{
+					"action": "Gain",
+					"type": "M"
+				},
+				{
+					"action": "Gain",
+					"type": "R"
+				},
+				{
+					"action": "Develop",
+					"type": null
+				}
+			],
+			"placed": [
+				[false, false, false, false],
+				[false, false, false, false],
+				[false, false, false, false],
+				[false, false, false, false]
+			]
+		},
+		
+		"development": {
+			
+			
+			"north": {
+				"name": "Supercomputer",
+				"isWonder": true,
+				"points": 50,
+				"stages": [
+					{
+						"id": 0,
+						"complete": false,
+						"requires": [
+							{
+								"type": "K",
+								"amount": 2
+							},
+							{
+								"type": "M",
+								"amount": 4
+							}
+						]
+					},
+					{
+						"id": 1,
+						"complete": false,
+						"requires": [
+								{
+									"type": "K",
+									"amount": 4
+								},
+								{
+									"type": "M",
+									"amount": 6
+								}
+						]
+					},
+					{ 
+						"id": 2,
+						"complete": false,
+						"requires": [
+
+								{
+									"type": "K",
+									"amount": 8
+								},
+								{
+									"type": "R",
+									"amount": 7
+								}
+						]
+					}
+				]
+			},
+			
+			
+			"east": {
+				"name": "Microchip",
+				"isWonder": false,
+				"points": 45,
+				"stages": [
+					{
+						"id": 0,
+						"complete": false,
+						"requires": [
+								{
+									"type": "K",
+									"amount": 4
+								},
+								{
+									"type": "M",
+									"amount": 6
+								}
+						]
+					},
+					{ 
+						"id": 1,
+						"complete": false,
+						"requires": [
+								{
+									"type": "K",
+									"amount": 5
+								},
+								{
+									"type": "R",
+									"amount": 6
+								}
+						]
+					}
+				]
+			},
+			
+			
+			"south": {
+				"name": "Solid State Drive",
+				"isWonder": false,
+				"points": 60,
+				"stages": [
+					{
+						"id": 0,
+						"complete": false,
+						"requires": [
+								{
+									"type": "K",
+									"amount": 5
+								},
+								{
+									"type": "M",
+									"amount": 7
+								}
+						]
+					},
+					{
+						"id": 1,
+						"complete": false,
+						"requires": [
+								{
+									"type": "R",
+									"amount": 5
+								},
+								{
+									"type": "M",
+									"amount": 8
+								}
+						]
+					},
+					{ 
+						"id": 2,
+						"complete": false,
+						"requires": [
+								{
+									"type": "K",
+									"amount": 9
+								},
+								{
+									"type": "R",
+									"amount": 8
+								}
+						]
+					}
+				]
+			},
+			
+			"west": {
+				"name": "Transistor",
+				"isWonder": false,
+				"points": 55,
+				"stages": [
+					{
+						"id": 0,
+						"complete": false,
+						"requires": [
+								{
+									"type": "M",
+									"amount": 6
+								},
+								{
+									"type": "R",
+									"amount": 7
+								}
+						]
+					},
+					{
+						"id": 1,
+						"complete": false,
+						"requires": [
+								{
+									"type": "K",
+									"amount": 8
+								},
+								{
+									"type": "R",
+									"amount": 9
+								}
+						]
+					}
+				]
+			}
+			
+		}
+	}
+]

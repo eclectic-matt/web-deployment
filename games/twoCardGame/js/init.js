@@ -1,3 +1,4 @@
+/*
 const cards = [
 	{
 		resources: {
@@ -244,10 +245,58 @@ const cards = [
 		}
 	}
 ];
+*/
 
-let currentDevelopment = "north";
-let orientations = ["north", "east", "south", "west"];
-const currentCard = cards[0];
+/**
+ * NOTES: 
+ * A card game played using 2 cards. Using this panel to test/record plays during development.
+ * Rules:
+ * each turn, place 1 worker on the worker card. The space you place this worker relates to a row and column:
+ * - you gain the benefits of BOTH the row and column
+ * - these benefits are multiplied by the number of workers in that row or column
+ * e.g. row="Gain Metal" (2 workers in this row), col="Rotate" (1 worker in this row) => you gain 2 Metal and may rotate 1 time. 
+ * You may only develop (complete stages on the development card) for the active (top) development - you must rotate the card to develop other parts of the development card.
+ */
+
+//GLOBAL SCOPED
+var cards = undefined;
+var currentDevelopment = "north";
+var orientations = ["north", "east", "south", "west"];
+var currentCard = undefined;	//cards[0];
+
+const getJSON = function(url, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onload = function() {
+		//console.log('jsonLoaded', xhr.response);
+		var status = xhr.status;
+		if (status === 200) {
+			callback(null, xhr.response);
+		} else {
+			callback(status, xhr.response);
+		}
+	};
+	xhr.send();
+};
+
+const setCurrentCard = (card) => {
+	currentCard = card;
+}
+
+//NOW RESOLVED IN A CALLBACK FROM getJson -> (xhr.status, xhr.response)
+const init = (status, cardData) => {
+	//console.log('init', cardData);
+	cards = cardData;
+	currentDevelopment = "north";
+	orientations = ["north", "east", "south", "west"];
+	//currentCard = cards[0];
+	setCurrentCard(cards[0]);
+	generateCards(currentCard);
+}
+
+//LOAD THE JSON DATA CONTAINING THE CARDS FOR THIS, PASS THIS TO init()
+getJSON('./js/cards.json', init);
 
 const rotateCard = (clockwise=false) => {
 	if(clockwise){
@@ -271,24 +320,23 @@ const generateDevelopment = (id, card, dev) =>
 	//const dev = card.development[id];
 	//console.log(id, dev);
 	const head = document.createElement('h2');
+	head.style.textAlign = 'center';
 	head.innerHTML = dev.name;
 	if (dev.isWonder){
 		head.innerHTML += " 🌟";
 	}
 	el.appendChild(head);
 	const stagesTable = document.createElement('table');
+	stagesTable.style.width = '100%';
 	const stagesRow = document.createElement('tr');
 	for(let i = 0; i < dev.stages.length; i++){
 		const stage = dev.stages[i];
-		//console.log(stage);
 		const stageTd = document.createElement('td');
 		let output = [];
 		for(let r = 0; r < stage.requires.length; r++){
 			const require = dev.stages[i].requires[r];
-			//console.log(id, 'requires', require.type, 'resources', card.resources);
 			const resource = card.resources[require.type];
 			const icon = resource.icon;
-			//console.log(resource.name, 'icon', icon, 'resource', resource);
 			output.push(require.amount.toString() + ' ' + icon);
 		}
 		const requireSpan = document.createElement('span');
@@ -297,19 +345,27 @@ const generateDevelopment = (id, card, dev) =>
 		//Add checkbox
 		const requireBox = document.createElement('input');
 		requireBox.type = "checkbox";
-		requireBox.id = id + '-' + i;
+		requireBox.id = dev.name + '-' + i;
 		requireBox.onclick = (ev) => {
-			//console.log('click', ev);
 			const [devId, devStage] = ev.target.id.split('-');
-			//console.log(devId, devStage, currentCard);
-			currentCard.development[devId].stages[devStage].complete = true;
-			//console.log('updated', currentCard);
+			//GET THE NAMES (KEYS) OF THE CURRENT CARD'S DEVELOPMENT OBJECT
+			let devNames = Object.keys(currentCard.development);
+			//SEARCH THE DEVELOPMENT NAMES TO GET THE MATCHING OBJECT
+			let currentDevName = devNames.filter( (devName) => {
+				return (currentCard.development[devName].name === devId);
+			}, devId)[0];
+			//LOAD THE OBJECT ASSOCIATED WITH THE MATCHED DEVELOPMENT NAME
+			let currentDev = currentCard.development[currentDevName];
+			//PASS TO HANDLER
+			handleDevelopmentClicked(currentDevName, devStage);
 		}
+		//ONLY THE CURRENT "NORTH" DEVELOPMENT 
 		if(id === 'north'){
 			requireBox.disabled = false;
 		}else{
 			requireBox.disabled = true;
 		}
+		//MARK AS CHECKED IF ALREADY COMPLETED THIS STAGE (STORED VIA handleDevelopmentClicked())
 		if(dev.stages[i].complete){
 			requireBox.checked = true;
 		}
@@ -340,7 +396,7 @@ const generateWorkerCard = (card) => {
 	
 	const workers = card.workers;
 	const resources = card.resources;
-	console.log('w', workers, 'r', resources);
+	//console.log('w', workers, 'r', resources);
 	
 	const table = document.createElement('table');
 	table.className = 'workers';
@@ -354,9 +410,10 @@ const generateWorkerCard = (card) => {
 	
 	//DISPLAY RESOURCE 1 IN A ROW
 	let resourceOneTd = document.createElement('td');
-	resourceOneTd.style.width = "60%";
+	resourceOneTd.style.width = "50%";
 	let resourceOneLabel = document.createElement('label');
 	resourceOneLabel.innerHTML = resourceOne.name + ' ' + resourceOne.icon + ':';
+	resourceOneLabel.style.width = '50%';
 	resourceOneTd.appendChild(resourceOneLabel);
 	let resourceOneInput = document.createElement('input');
 	resourceOneInput.type = 'number';
@@ -364,6 +421,9 @@ const generateWorkerCard = (card) => {
 	resourceOneInput.max = 12;
 	resourceOneInput.value = resourceOne.value;
 	resourceOneInput.id = resourceOne.name;
+	resourceOneInput.style.width = '50%';
+	//resourceOneInput.style.textAlign = 'right';
+	resourceOneInput.style.float = 'right';
 	resourceOneInput.className = 'resource';
 	resourceOneTd.appendChild(resourceOneInput);
 	topRow.appendChild(resourceOneTd);
@@ -373,7 +433,8 @@ const generateWorkerCard = (card) => {
 		const action = workers.cols[i].action;
 		const actionType = workers.cols[i].type;
 		let colTd = document.createElement('td');
-		colTd.rowspan = 3;
+		colTd.rowSpan = '3';
+		colTd.style.verticalAlign = 'bottom';
 		colTd.innerHTML = action;
 		if(actionType){
 			switch(action){
@@ -393,6 +454,7 @@ const generateWorkerCard = (card) => {
 	let resourceTwoTd = document.createElement('td');
 	let resourceTwoLabel = document.createElement('label');
 	resourceTwoLabel.innerHTML = resourceTwo.name + ' ' + resourceTwo.icon + ':';
+	resourceTwoLabel.style.width = '50%';
 	resourceTwoTd.appendChild(resourceTwoLabel);
 	let resourceTwoInput = document.createElement('input');
 	resourceTwoInput.type = 'number';
@@ -400,6 +462,8 @@ const generateWorkerCard = (card) => {
 	resourceTwoInput.max = 12;
 	resourceTwoInput.value = resourceTwo.value;
 	resourceTwoInput.id = resourceTwo.name;
+	resourceTwoInput.style.width = '50%';
+	resourceTwoInput.style.float = 'right';
 	resourceTwoInput.className = 'resource';
 	resourceTwoTd.appendChild(resourceTwoInput);
 	rowTwo.appendChild(resourceTwoTd);
@@ -411,6 +475,7 @@ const generateWorkerCard = (card) => {
 	let resourceThreeTd = document.createElement('td');
 	let resourceThreeLabel = document.createElement('label');
 	resourceThreeLabel.innerHTML = resourceThree.name + ' ' + resourceThree.icon + ':';
+	resourceThreeLabel.style.width = '50%';
 	resourceThreeTd.appendChild(resourceThreeLabel);
 	let resourceThreeInput = document.createElement('input');
 	resourceThreeInput.type = 'number';
@@ -418,6 +483,8 @@ const generateWorkerCard = (card) => {
 	resourceThreeInput.max = 12;
 	resourceThreeInput.value = resourceThree.value;
 	resourceThreeInput.id = resourceThree.name;
+	resourceThreeInput.style.width = '50%';
+	resourceThreeInput.style.float = 'right';
 	resourceThreeInput.className = 'resource';
 	resourceThreeTd.appendChild(resourceThreeInput);
 	rowThree.appendChild(resourceThreeTd);
@@ -428,7 +495,9 @@ const generateWorkerCard = (card) => {
 		const actionType = workers.rows[i].type;
 		let row = document.createElement('tr');
 		let rowResourceTd = document.createElement('td');
+		//rowResourceTd.colSpan = 3;
 		rowResourceTd.innerHTML = action;
+		rowResourceTd.style.textAlign = 'right';
 		if(actionType){
 			switch(action){
 				case 'Gain':
@@ -440,13 +509,18 @@ const generateWorkerCard = (card) => {
 		row.appendChild(rowResourceTd);
 		for(let j = 0; j < workers.cols.length; j++){
 			let rowCheckTd = document.createElement('td');
+			rowCheckTd.style.align = 'center';
 			let rowCheckInput = document.createElement('input');
 			rowCheckInput.id = 'r' + i + 'c' + j;
+			//rowCheckInput.style.margin = '0 5%';
 			rowCheckInput.type = 'checkbox';
 			rowCheckInput.checked = (workers.placed[i][j] === false ? false : true);
 			rowCheckInput.onclick = (event) => {
+				//WORKER SPACE CHECKED - PREVENT UN-CHECKING AND RE-CHECKING THIS WORKER
+				event.target.disabled = true;
 				handleCheckedWorker(event.target.id);
 			}
+			rowCheckInput.style.width = rowCheckTd.style.width;
 			rowCheckTd.appendChild(rowCheckInput);
 			row.appendChild(rowCheckTd);
 		}
@@ -476,13 +550,13 @@ const getActionText = (actionData) => {
 	return output;
 }
 
-init = () => {
-	generateCards(currentCard);
-}
-
+/**
+ * Handles a worker location being checked.
+ * @param {string} id The ID of the worker (which is in "r0c0" format).
+ */
 const handleCheckedWorker = (id) => {
 	const [row, col] = id.substring(1,2) + id.substring(3,4);
-	console.log(id, row, col );
+	//console.log(id, row, col );
 	currentCard.workers.placed[row][col] = 1;
 	let rowAct = currentCard.workers.rows[row];
 	//let rowText = rowAct + 
@@ -494,6 +568,15 @@ const handleCheckedWorker = (id) => {
 		return el[col];
 	});
 	let colMult = colVals.reduce((partialSum, a) => partialSum + a, 0);
-	console.log(rowAct,rowMult,colAct, colMult);
+	//console.log(rowAct,rowMult,colAct, colMult);
 	alert('You ' + rowText + ' X ' + rowMult + ' (row) and ' + colText + ' X ' + colMult + ' (col)');
 }
+
+const handleDevelopmentClicked = (id, stage) => {
+	//SET THIS STAGE AS COMPLETE
+	currentCard.development[id].stages[stage].complete = true;
+	//ALERT FOR 
+	alert('Devlopment clicked - ' + currentCard.development[id].name + ', stage: ' + stage);
+}
+
+

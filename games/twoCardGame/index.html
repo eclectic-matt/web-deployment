@@ -6,10 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Two Card Game</title>
 	<style>
-		card {
-			border: 5px outline black;
+		div.card {
+			border: 5px outline purple;
+			background-color: darkgray;
 		}
-		
 		table.development {
 			width: 100%;
 			height: 50%;
@@ -39,75 +39,35 @@
 	<script src="js/init.js"></script>
 </head>
 
-<body onload="init()">
-<card id="developmentCard">
+<!--body onload="init()"-->
+<body>
+<div id="developmentCard" class="card">
+	<!-- WILL BE FILLED IN MY generateDevelopmentCard() -->
 	<table class="development">
 		<tr>
+			<!-- THIS IS A NARROW BUT TALL LEFT (WEST) SECTION -->
 			<td rowspan="2" id="west">West</td>
-			<td colspan="2" id="north">
-				<!--h2>Supercomputer</h2-->
-			</td>
+			<!-- THIS IS A WIDE BUT SHORT TOP (NORTH) SECTION -->
+			<td colspan="2" id="north">North</td>
+			<!-- THIS IS A NARROW BUT TALL RIGHT (EAST) SECTION -->
 			<td rowspan="2" id="east">East</td>
 		</tr>
 		<tr>
+			<!-- THIS IS A WIDE BUT SHORT BOTTOM (SOUTH) SECTION -->
 			<td colspan="2" id="south">South</td>
 		</tr>
 	</table>
-</card>
+</div>
 
 <br>
 
-<card id="workerCard">
-	<!--table class="workers">
-		<tr>
-			<td><label for="r1">Metal 🔩:</label></td>
-			<td><input name="r1" value="0" class="resource" type="number" ></input></td>
-			<td rowspan="3">Gain 🔩</td>
-			<td rowspan="3">Rotate</td>
-			<td rowspan="3">Develop</td>
-			<td rowspan="3">Gain 💡</td>
-		</tr>
-		<tr>
-			<td><label for="r2">Knowledge 💡:</label></td>
-			<td><input name="r2" class="resource" type="number" value="0"></input></td>
-		</tr>
-		<tr>
-			<td><label for="r3">Robotics 🤖:</label></td>
-			<td><input name="r3" class="resource" type="number" value="0"></input></td>
-		</tr>
-		<tr>
-			<td colspan="2">Gain 💡</td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-		</tr>
-		<tr>
-			<td colspan="2">Develop</td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-		</tr>
-		<tr>
-			<td colspan="2">Gain 🔩</td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-		</tr>
-		<tr>
-			<td colspan="2">Rotate</td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-			<td><input type="checkbox"></input></td>
-		</tr>
-	</table-->
-</card>
+<div id="workerCard" class="card">
+	<!-- WILL BE FILLED IN MY generateWorkerCard() -->
+</div>
 
 
-<button onclick="rotateCard()">Rotate Card!</button>
+<button onclick="rotateCard(true)">Rotate Card (CW)!</button>
+<button onclick="rotateCard(false)">Rotate Card (CCW)!</button>
 
 </body>
 
