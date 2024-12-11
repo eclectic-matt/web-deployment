@@ -69,14 +69,20 @@
 					let modal = $('loadCanvasModal');
 					modal.style.display = 'block';
 					modal.style.zIndex = 100;
+					modal.innerHTML = null;
 					cnvData.forEach( (data, index) => {
-						console.log('loading data', index, data);
+						//console.log('loading data', index, data);
+						let previewHead = document.createElement('h2');
+						previewHead.innerHTML = 'Saved Canvas ' + (index + 1);
+						modal.appendChild(previewHead);
 						let previewCnv = document.createElement('canvas');
 						previewCnv.id = index;
+						previewCnv.width = window.innerWidth;
+						previewCnv.height = window.innerHeight;
 						previewPad = new SignaturePad(previewCnv);
 						previewPad.fromData(data);
 						previewCnv.onclick = (ev) => {
-							console.log('LOADING SAVED CANVAS', ev.target.id);
+							//console.log('LOADING SAVED CANVAS', ev.target.id);
 							loadCanvasId(ev.target.id);
 						}
 						modal.appendChild(previewCnv);
@@ -95,7 +101,7 @@
 		 * @return void Applies changes in browser.
 		 */
 		const loadCanvasId = (id) => {
-			console.log('CANVAS LOAD', id);
+			//console.log('CANVAS LOAD', id);
 			if(!cnvData[id]){
 				alert('No data to load!');
 				return false;
