@@ -2,89 +2,101 @@
 <html>
 
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Two Card Game</title>
-        <style>
-                div.card {
-                        border: 5px outline purple;
-                        background-color: darkgray;
-                }
-                table.development {
-                        width: 100%;
-                        height: 50%;
-                        border-collapse: collapse;
-                        border: 1px solid black;
-                }
-                table.development tr {
-                        height: 50%;
-                }
-                table.development tr td {
-                        width: 25%;
-                        border: 1px solid black;
-                }
-                input.resource {
-                    max-width: 30%;
-                }
-                td > label {
-                        width: 120%;
-                }
-                label {
-                  font-size: 0.8rem;
-                }
-                td {
-                        border: 1px solid black;
-                }
-                #north {
-                        background-color: #0ff;
-                }
-                div.card h2 {
-                	font-size: 1rem;
-                }
-                p#currentGains {
-                	background-color: red;
-                	color: white;
-                }
-                #undo {
-                	display: none;
-                }
-        </style>
-        <script src="js/init.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Two Card Game</title>
+	<style>
+		div.card {
+			border: 5px outline purple;
+			background-color: darkgray;
+		}
+
+		table.development {
+			width: 100%;
+			height: 50%;
+			border-collapse: collapse;
+			border: 1px solid black;
+		}
+
+		table.development tr {
+			height: 50%;
+		}
+
+		table.development tr td {
+			width: 25%;
+			border: 1px solid black;
+		}
+
+		input.resource {
+			max-width: 30%;
+		}
+
+		td>label {
+			width: 120%;
+		}
+
+		label {
+			font-size: 0.8rem;
+		}
+
+		td {
+			border: 1px solid black;
+		}
+
+		#north {
+			background-color: #0ff;
+		}
+
+		div.card h2 {
+			font-size: 1rem;
+		}
+
+		p#currentGains {
+			background-color: red;
+			color: white;
+		}
+
+		#undo {
+			display: none;
+		}
+	</style>
+	<script src="js/init.js"></script>
 </head>
 
 <!--body onload="init()"-->
+
 <body>
-<div id="developmentCard" class="card">
-        <!-- WILL BE FILLED IN MY generateDevelopmentCard() -->
-        <table class="development">
-                <tr>
-                        <!-- THIS IS A NARROW BUT TALL LEFT (WEST) SECTION -->
-                        <td rowspan="2" id="west">West</td>
-                        <!-- THIS IS A WIDE BUT SHORT TOP (NORTH) SECTION -->
-                        <td colspan="2" id="north">North</td>
-                        <!-- THIS IS A NARROW BUT TALL RIGHT (EAST) SECTION -->
-                        <td rowspan="2" id="east">East</td>
-                </tr>
-                <tr>
-                        <!-- THIS IS A WIDE BUT SHORT BOTTOM (SOUTH) SECTION -->
-                        <td colspan="2" id="south">South</td>
-                </tr>
-        </table>
-</div>
+	<div id="developmentCard" class="card">
+		<!-- WILL BE FILLED IN MY generateDevelopmentCard() -->
+		<table class="development">
+			<tr>
+				<!-- THIS IS A NARROW BUT TALL LEFT (WEST) SECTION -->
+				<td rowspan="2" id="west">West</td>
+				<!-- THIS IS A WIDE BUT SHORT TOP (NORTH) SECTION -->
+				<td colspan="2" id="north">North</td>
+				<!-- THIS IS A NARROW BUT TALL RIGHT (EAST) SECTION -->
+				<td rowspan="2" id="east">East</td>
+			</tr>
+			<tr>
+				<!-- THIS IS A WIDE BUT SHORT BOTTOM (SOUTH) SECTION -->
+				<td colspan="2" id="south">South</td>
+			</tr>
+		</table>
+	</div>
 
-<br>
+	<br>
 
-<div id="workerCard" class="card">
-        <!-- WILL BE FILLED IN MY generateWorkerCard() -->
-</div>
+	<div id="workerCard" class="card">
+		<!-- WILL BE FILLED IN MY generateWorkerCard() -->
+	</div>
 
-<div>
-	<p id="currentGains"></p>
-</div>
+	<div>
+		<p id="currentGains"></p>
+	</div>
 
-<button onclick="rotateCard(true)">Rotate Card (CW)!</button>
-<button onclick="rotateCard(false)">Rotate Card (CCW)!</button>
-<button onclick="undo()" id="undo">Undo</button>
+	<button onclick="rotateCard(true)">Rotate Card (CW)!</button>
+	<button onclick="rotateCard(false)">Rotate Card (CCW)!</button>
+	<button onclick="undo()" id="undo">Undo</button>
 
 </body>
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- SIGNATURE PAD - SOURCE: https://github.com/szimek/signature_pad -->
+	<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+	<title>Big Fat Quiz</title>
+	<script>
+		//THE CANVAS HTML ELEMENT
+		var cnvEl = undefined;
+		//STORED CANVAS DATA (ARRAY OF CANVASES)
+		var cnvData = [];
+		//SIGNATURE PAD OBJECT
+		var signaturePad = undefined;
+
+		//LITTLE HELPER FUNCTION TO REMAP getElementById SIMILAR TO JQUERY
+		const $ = (id) => document.getElementById(id);
+
+		//TRIGGERED BY WINDOW RESIZE EVENTS
+		const resizeCanvas = () => { 
+			cnvEl.width = window.innerWidth;
+			cnvEl.height = window.innerHeight - 50;
+		}
+
+		//INITIALIZE THE CANVAS ELEMENT SETTINGS 
+		const init = () => {
+			//INITIALIZE THE CANVAS (THE HTML ELEMENT IS STORED AS cnvEl)
+			cnvEl = document.getElementById('canvas');
+			const canvas = document.querySelector("canvas");
+
+			signaturePad = new SignaturePad(canvas);
+
+			//ADD WINDOW RESIZE EVENT LISTENER
+			window.addEventListener('resize', resizeCanvas, false);
+			
+			//TRIGGER THE RESIZE FUNCTION ONCE WINDOW LOADED
+			resizeCanvas();
+
+			//THE CLEAR BUTTON
+			var clearEl = $('clear-canvas');
+			var saveEl = $('save-canvas');
+			var loadEl = $('load-canvas');
+
+			//button#clear-canvas clicked
+			clearEl.onclick = () => {
+				//canvas.clear();
+				signaturePad.clear();
+			};
+
+			//button#save-canvas clicked
+			saveEl.onclick = () => {
+				const data = signaturePad.toData();
+				cnvData.push(data);
+				console.log(data);
+			}
+
+			//button#load-canvas clicked
+			loadEl.onclick = () => {
+				if(!cnvData[0]){
+					alert('No data to load!');
+					return false;
+				}
+				//IF THERE ARE SAVED CANVASES TO LOAD - DISPLAY MODAL TO PICK ONE...
+				if(cnvData.length > 1){
+					//SHOW LOAD CANVAS MODAL
+					let modal = $('loadCanvasModal');
+					modal.style.display = 'block';
+					modal.style.zIndex = 100;
+					cnvData.forEach( (data, index) => {
+						console.log('loading data', index, data);
+						let previewCnv = document.createElement('canvas');
+						previewCnv.id = index;
+						previewPad = new SignaturePad(previewCnv);
+						previewPad.fromData(data);
+						previewCnv.onclick = (ev) => {
+							console.log('LOADING SAVED CANVAS', ev.target.id);
+							loadCanvasId(ev.target.id);
+						}
+						modal.appendChild(previewCnv);
+					});
+				}else{
+					//LOAD THE ONLY STORED DATA
+					const data = cnvData[0];
+					signaturePad.fromData(data);
+				}
+			}
+		}
+
+		/**
+		 * Where multiple stored canvases are found - this loads by the index of the cnvData array.
+		 * @param int id The cnvData index to load.
+		 * @return void Applies changes in browser.
+		 */
+		const loadCanvasId = (id) => {
+			console.log('CANVAS LOAD', id);
+			if(!cnvData[id]){
+				alert('No data to load!');
+				return false;
+			}
+			const data = cnvData[id];
+			signaturePad.fromData(data);
+			let modal = $('loadCanvasModal');
+			modal.style.display = 'none';
+		}
+	</script>
+	<style>
+		canvas {
+			border: 1px solid black;
+			width: 100%;
+			height: 90%;
+		}
+		#controls button { 
+			padding: 0 10px;
+			margin: 5px 25px;
+		}
+		#loadCanvasModal { 
+			display: none;
+			z-index: 100;
+			width: 100%;
+			height: auto;
+			position: absolute;
+			border: 1px solid black;
+			background-color: blueviolet;
+		}
+	</style>
+</head>
+
+<body onload="init()">
+<div id="main">
+	<div id="controls">
+		<!--button id="clear" onclick="clearCanvas()">Clear</button-->
+		<button id="clear-canvas">Clear</button>
+		<!--button id="save" onclick="saveCanvas()">Save</button-->
+		<button id="save-canvas">Save</button>
+		<!--button id="load" onclick="loadCanvas()">Load</button-->
+		<button id="load-canvas">Load</button>
+	</div>
+	<div id="loadCanvasModal" style="display:none;">
+		<h2>Load Canvas</h2>
+		<div id="loadCanvasOptions"></div>
+	</div>
+	<div id="canvasWrapper">
+		<canvas id="canvas" width="100%" height="auto"></canvas>
+	</div>
+</div>
+</body>
+
+</html>

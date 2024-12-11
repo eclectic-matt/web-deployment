@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- OLD VERSION, FREE DRAWING MODE WORKED -->
+	<!--script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.4.0/fabric.min.js'></script-->
+	<!-- NEWEST VERSION, MORE CONFIG, NOT WORKING AS EXPECTED -->
+	<!--script src="https://cdn.jsdelivr.net/npm/fabric@6.4.3/dist/index.js"></script-->
+	<!-- SIGNATURE PAD - SOURCE: https://github.com/szimek/signature_pad -->
+	<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+	<title></title>
+	<script>
+		//THE CANVAS HTML ELEMENT
+		var cnvEl = undefined;
+		//THE FABRIC CANVAS OBJECT
+		//var canvas = undefined;
+		//STORED CANVAS DATA (ARRAY OF CANVASES)
+		var cnvData = [];
+
+		const $ = (id) => document.getElementById(id);
+
+		//TRIGGERED BY WINDOW RESIZE EVENTS
+		const resizeCanvas = () => { 
+			cnvEl.width = window.innerWidth;
+			cnvEl.height = window.innerHeight - 50;
+			let canvases = document.getElementsByTagName('canvas');
+			//.forEach( (el) => {
+			for(let el of canvases){
+				console.log('resize', el.id, window.innerWidth, window.innerHeight);
+				el.width = window.innerWidth;
+				el.height = window.innerHeight - 50;
+			}
+		}
+
+
+		//INITIALIZE THE CANVAS ELEMENT SETTINGS 
+		const init = () => {
+			//INITIALIZE THE CANVAS (THE HTML ELEMENT IS STORED AS cnvEl)
+			cnvEl = document.getElementById('canvas');
+			const canvas = document.querySelector("canvas");
+
+			const signaturePad = new SignaturePad(canvas);
+
+
+			/*const canvas = new fabric.Canvas(cnvEl, {
+				isDrawingMode: true,
+			});*/
+
+			//ADD WINDOW RESIZE EVENT LISTENER
+			window.addEventListener('resize', resizeCanvas, false);
+			
+			//TRIGGER THE RESIZE FUNCTION ONCE WINDOW LOADED
+			resizeCanvas();
+
+			//INITIALIZE THE FABRIC.JS CANVAS
+			//canvas = new fabric.Canvas('canvas');
+			/*canvas = (window.canvas = new fabric.Canvas(cnvEl));
+			canvas.isDrawingMode = true;
+			canvas.freeDrawingBrush.width = 2;
+			canvas.freeDrawingBrush.color = "#ff0000";*/
+
+			//BASED ON: https://fabricjs.com/demos/free-drawing/
+			var clearEl = $('clear-canvas');
+
+			clearEl.onclick = function () {
+				canvas.clear();
+			};
+
+			/*
+			canvas.isDrawingMode = true;
+			canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+			fabric.Object.prototype.transparentCorners = false;
+
+			if (canvas.freeDrawingBrush) {
+				canvas.freeDrawingBrush.color = '#000';//drawingColorEl.value;
+				canvas.freeDrawingBrush.width = 2;//parseInt(drawingLineWidthEl.value, 10) || 1;
+				canvas.freeDrawingBrush.shadow = new fabric.Shadow({
+					blur: 0,//parseInt(drawingShadowWidth.value, 10) || 0,
+					offsetX: 0,
+					offsetY: 0,
+					affectStroke: true,
+					color: '#000'//drawingShadowColorEl.value,
+				});
+			}
+			*/
+		}
+
+		/*
+		const clearCanvas = () => {
+			//canvas.clear();
+			//canvas.dispose();
+			
+			//canvas.clearContext(canvas.getContext('2d'));
+			//canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height);
+			const rect = new fabric.Rect({ width: 100, height: 100, fill: 'white' });
+			canvas.add(rect);
+			canvas.requestRenderAll();
+			console.log('canvas cleared');
+			ctx.fillStyle = "#fff";
+			ctx.fillRect(0, 0, cnv.width, cnv.height);
+		}*/
+
+		const saveCanvas = () => {
+			//const cnvData = ctx.getData();
+			//const currentCanvas = canvas.toObject();
+			const currentCanvas = canvas.toJSON();
+			cnvData.push(currentCanvas);
+			console.log(currentCanvas);
+		}
+
+		const loadCanvas = () => {
+			//var json = canvas.toJSON();
+			const json = cnvData[0];
+			if(!json){
+				alert('No data to load!');
+			}
+			console.log('loading', json);
+			//CLEAR THE CANVAS
+			//canvas.clear();
+			//canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height);
+			//canvas.dispose();
+			canvas.clearContext(canvas.getContext('2d'));
+
+			//LOAD THE STORED CANVAS DATA
+			canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
+		}
+
+		/*
+		const cnvTouchStart = (e) => {
+			//convert to cnv coords
+			e.preventDefault();
+			const x = e.changedTouches[0].pageX - (e.target.offsetLeft + e.target.parentElement.offsetLeft);
+			const y = e.changedTouches[0].pageY - (e.target.offsetTop + e.target.parentElement.offsetTop);
+	
+			//var thisCtx = document.getElementById(e.target.id).getContext('2d');
+			ctx.arc()
+			console.log(x,y);
+			//handleClick(ctx, x, y);
+			//line start?
+		}
+
+		const cnvTouchEnd = (e) => {
+			//convert to cnv coords
+		}
+		//const 
+		*/
+
+		/*$('drawing-mode-selector').onchange = function () {
+			if (this.value === 'hline') {
+			canvas.freeDrawingBrush = vLinePatternBrush;
+			} else if (this.value === 'vline') {
+			canvas.freeDrawingBrush = hLinePatternBrush;
+			} else if (this.value === 'square') {
+			canvas.freeDrawingBrush = squarePatternBrush;
+			} else if (this.value === 'diamond') {
+			canvas.freeDrawingBrush = diamondPatternBrush;
+			} else if (this.value === 'texture') {
+			canvas.freeDrawingBrush = texturePatternBrush;
+			} else {
+			canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](canvas);
+			}
+
+			if (canvas.freeDrawingBrush) {
+			canvas.freeDrawingBrush.color = drawingColorEl.value;
+			canvas.freeDrawingBrush.width =
+				parseInt(drawingLineWidthEl.value, 10) || 1;
+			canvas.freeDrawingBrush.shadow = new fabric.Shadow({
+				blur: parseInt(drawingShadowWidth.value, 10) || 0,
+				offsetX: 0,
+				offsetY: 0,
+				affectStroke: true,
+				color: drawingShadowColorEl.value,
+			});
+			}
+		};
+
+		drawingColorEl.onchange = function () {
+			canvas.freeDrawingBrush.color = this.value;
+		};
+		drawingShadowColorEl.onchange = function () {
+			canvas.freeDrawingBrush.shadow.color = this.value;
+		};
+		drawingLineWidthEl.onchange = function () {
+			canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+			this.previousSibling.querySelector('span').innerHTML = this.value;
+		};
+		drawingShadowWidth.onchange = function () {
+			canvas.freeDrawingBrush.shadow.blur = parseInt(this.value, 10) || 0;
+			this.previousSibling.querySelector('span').innerHTML = this.value;
+		};
+		drawingShadowOffset.onchange = function () {
+			canvas.freeDrawingBrush.shadow.offsetX = parseInt(this.value, 10) || 0;
+			canvas.freeDrawingBrush.shadow.offsetY = parseInt(this.value, 10) || 0;
+			this.previousSibling.querySelector('span').innerHTML = this.value;
+		};*/
+
+		
+
+
+
+
+	</script>
+	<style>
+		canvas {
+			border: 1px solid black;
+			width: 100%;
+			height: 90%;
+		}
+		#controls button { 
+			padding: 0 10px;
+			margin: 5px 25px;
+		}
+	</style>
+</head>
+
+<body onload="init()">
+<div id="main">
+	<div id="controls">
+		<!--button id="clear" onclick="clearCanvas()">Clear</button-->
+		<button id="clear-canvas">Clear</button>
+		<button id="save" onclick="saveCanvas()">Save</button>
+		<button id="load" onclick="loadCanvas()">Load</button>
+	</div>
+	<div id="canvasWrapper">
+		<canvas id="canvas" width="100%" height="auto"></canvas>
+	</div>
+</div>
+</body>
+
+</html>
