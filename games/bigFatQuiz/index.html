@@ -70,6 +70,24 @@
 				}
 			}
 
+			//ALSO ADD A CLEAR DATA AND A SUBMIT BUTTON TO THIS ROW?
+			let clearBtn = document.createElement('button');
+			clearBtn.onclick = () => {
+				checkConfirm('THIS WILL DELETE ALL SAVED CANVASES', clearBackup);
+			}
+			clearBtn.className = 'clearBtn qBtn';
+			clearBtn.innerHTML = 'Delete Data';
+			qNumsEl.appendChild(clearBtn);
+
+			let submitBtn = document.createElement('button');
+			submitBtn.onclick = () => {
+				//THIS SHOULD SUBMIT - 
+				backupCnvData();
+			}
+			submitBtn.className = 'saveBtn qBtn';
+			submitBtn.innerHTML = 'Submit Answers';
+			qNumsEl.appendChild(submitBtn);
+
 			//SHOW WE ARE ON QUESTION 1
 			highlightBtn(currentQuestionNumber);
 			//INITIALIZE THE CANVAS (THE HTML ELEMENT IS STORED AS cnvEl)
@@ -79,7 +97,7 @@
 
 			//CHECK FOR STORED DATA?
 			if(window.localStorage.getItem('cnvData')){
-				console.log('LOADING STORED CANVASES', window.localStorage.getItem('cnvData'));
+				//console.log('LOADING STORED CANVASES', window.localStorage.getItem('cnvData'));
 				cnvData = JSON.parse(window.localStorage.getItem('cnvData'));
 				//THEN LOAD Q1 CANVAS
 				loadCanvasId(1);
@@ -103,14 +121,14 @@
 		 * @return void Applies changes in browser.
 		 */
 		const loadCanvasId = (id) => {
-			console.log('CANVAS LOAD', id, cnvData);
+			//console.log('CANVAS LOAD', id, cnvData);
 			signaturePad.clear();
 			if(!cnvData[id]){
 				//alert('No data to load!');
 				console.log('No data to load!');
 				return false;
 			}
-			console.log('Loaded data', cnvData[id]);
+			//console.log('Loaded data', cnvData[id]);
 			const data = cnvData[id];
 			signaturePad.fromData(data);
 			let modal = $('loadCanvasModal');
@@ -122,7 +140,7 @@
 			const data = signaturePad.toData();
 			cnvData[currentQuestionNumber] = data;
 			alert('Saved as canvas #' + cnvData.length);
-			console.log(data);
+			//console.log(data);
 		}
 
 		//BACKS UP THE CANVAS DATA ARRAY TO LOCAL STORAGE FOR RELOADING
@@ -132,7 +150,11 @@
 
 		//REMOVES ALL BACKED UP DATA
 		const clearBackup = () => {
+			console.log('ALL SAVED DATA CLEARED!');
 			window.localStorage.setItem('cnvData', undefined);
+			//RESET CANVAS DATA AND RELOAD
+			cnvData = [];
+			location.reload();
 		}
 
 		const createPreviewBox = (data, index) => {
@@ -180,6 +202,21 @@
 				}
 			})
 		}
+
+		/*
+		* CHECK CONFIRMATION
+		* Description: Generic check, shows a confirmation box and callsback function only if confirmed
+		*
+		* @strConfirm: the string with specific text to show in the confirmation box
+		* @fnCallback: the function to callback if user confirms OK
+		*/
+		function checkConfirm(strConfirm, fnCallback){
+			var conf = confirm('Are you sure? ' + strConfirm);
+			if (conf == true){
+				fnCallback();
+			}
+		}
+
 	</script>
 	<style>
 		canvas {
@@ -215,9 +252,10 @@
 		}
 		#questionNumbers {
 			max-height: 50px;
+			display: flex;
 		}
 		.qBtn {
-			padding: 0 10px;
+			padding: 10px;
 			margin: 5px 5px;
 		}
 		.qHighlight {
@@ -227,14 +265,22 @@
 		.clearBtn {
 			background-color: red;
 			color: white;
-			padding: 5%;
-			margin: 2% 5%;
+			float: right;
+			padding: 10px;
+			order: 11;
+			align-self: flex-end;
+			/*padding: 5%;
+			margin: 2% 5%;*/
 		}
 		.saveBtn { 
 			background-color: blue;
 			color: white;
-			padding: 5%;
-			margin: 2% 5%;
+			float: right;
+			padding: 10px;
+			order: 12;
+			align-self: flex-end;
+			/*padding: 5%;
+			margin: 2% 5%;*/
 		}
 		.loadBtn {
 			background-color: green;
@@ -249,8 +295,9 @@
 	<div id="main">
 		<div id="questionWrapper">
 			<div id="questionNumbers">
-				
+				<!-- FILLED IN init() BASED ON THE questionsThisRound VALUE -->
 			</div>
+			<br>
 			<!--div id="controls">
 				<button id="clear-canvas" class="clearBtn">Clear Canvas</button>
 				<button id="save-canvas" class="saveBtn">Save Canvas</button>
