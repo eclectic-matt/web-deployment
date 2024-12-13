@@ -11,105 +11,174 @@
 	<script>
 		//THE CANVAS HTML ELEMENT
 		var cnvEl = undefined;
-		//STORED CANVAS DATA (ARRAY OF CANVASES)
-		var cnvData = [];
+		//INITIALIZE THE CURRENT ROUND'S RESPONSES
+		var currentRoundData = [];
+		//DEFAULT NUMBER OF QUESTIONS PER ROUND
+		var questionsThisRound = 10;
+		//THE CURRENT QUESTION NUMBER
+		var currentQuestionNumber = 1;
+
+		//STORED CANVAS DATA (ARRAY OF CANVASES FROM 1 - 10, ONE PER QUESTION)
+		var cnvData = Array.from(questionsThisRound).fill(undefined);
+
 		//SIGNATURE PAD OBJECT
 		var signaturePad = undefined;
+		//SCALING RATIO FOR CANVAS ELEMENTS (BASED ON window.devicePixelRatio)
+		var ratio = 1;
 
 		//LITTLE HELPER FUNCTION TO REMAP getElementById SIMILAR TO JQUERY
 		const $ = (id) => document.getElementById(id);
 
 		//TRIGGERED BY WINDOW RESIZE EVENTS
 		const resizeCanvas = () => { 
+			const data = signaturePad.toData();
 			cnvEl.width = window.innerWidth;
+			//HEIGHT REDUCED BY 50px FOR THE QUESTION BUTTONS ROW
 			cnvEl.height = window.innerHeight - 50;
+			ratio =  Math.max(window.devicePixelRatio || 1, 1);
+			cnvEl.width = cnvEl.offsetWidth * ratio;
+			cnvEl.height = cnvEl.offsetHeight * ratio;
+			cnvEl.getContext("2d").scale(ratio, ratio);
+			signaturePad.clear(); // otherwise isEmpty() might return incorrect value
+			//NOW RELOAD THE CURRENT CANVAS DATA
+			signaturePad.fromData(data);
 		}
 
 		//INITIALIZE THE CANVAS ELEMENT SETTINGS 
 		const init = () => {
+			//THE ROW OF QUESTION NUMBERS
+			let qNumsEl = $('questionNumbers');
+			qNumsEl.innerHTML = 'QUESTION: ';
+
+			//ADD A BUTTON TO THIS DIV FOR EACH QUESTION IN THIS ROUND
+			for(let i = 0; i < questionsThisRound; i++){
+				let qBtn = document.createElement('button');
+				qBtn.id = 'Q' + (i+1);
+				qBtn.className = 'qBtn';
+				qBtn.innerHTML = 'Q' + (i + 1);
+				qNumsEl.appendChild(qBtn);
+				qBtn.onclick = (ev) => {
+					//SAVE THE CURRENT CANVAS
+					const data = signaturePad.toData();
+					cnvData[currentQuestionNumber] = data;
+					//THE BUTTON IDs are "Q1" -> "Q10"
+					const qIndex = ev.target.id.substr(1,2);
+					//STORE CURRENT QUESTION NUMBER
+					currentQuestionNumber = parseInt(qIndex);
+					highlightBtn(currentQuestionNumber);
+					loadCanvasId(currentQuestionNumber);
+				}
+			}
+
+			//SHOW WE ARE ON QUESTION 1
+			highlightBtn(currentQuestionNumber);
 			//INITIALIZE THE CANVAS (THE HTML ELEMENT IS STORED AS cnvEl)
 			cnvEl = document.getElementById('canvas');
 			const canvas = document.querySelector("canvas");
-
 			signaturePad = new SignaturePad(canvas);
 
+			//CHECK FOR STORED DATA?
+			if(window.localStorage.getItem('cnvData')){
+				console.log('LOADING STORED CANVASES', window.localStorage.getItem('cnvData'));
+				cnvData = JSON.parse(window.localStorage.getItem('cnvData'));
+				//THEN LOAD Q1 CANVAS
+				loadCanvasId(1);
+			}
+
+			
 			//ADD WINDOW RESIZE EVENT LISTENER
 			window.addEventListener('resize', resizeCanvas, false);
-			
 			//TRIGGER THE RESIZE FUNCTION ONCE WINDOW LOADED
 			resizeCanvas();
 
-			//THE CLEAR BUTTON
-			var clearEl = $('clear-canvas');
-			var saveEl = $('save-canvas');
-			var loadEl = $('load-canvas');
+			window.addEventListener('unload', backupCnvData, false);
 
-			//button#clear-canvas clicked
-			clearEl.onclick = () => {
-				//canvas.clear();
-				signaturePad.clear();
-			};
-
-			//button#save-canvas clicked
-			saveEl.onclick = () => {
-				const data = signaturePad.toData();
-				cnvData.push(data);
-				console.log(data);
-			}
-
-			//button#load-canvas clicked
-			loadEl.onclick = () => {
-				if(!cnvData[0]){
-					alert('No data to load!');
-					return false;
-				}
-				//IF THERE ARE SAVED CANVASES TO LOAD - DISPLAY MODAL TO PICK ONE...
-				if(cnvData.length > 1){
-					//SHOW LOAD CANVAS MODAL
-					let modal = $('loadCanvasModal');
-					modal.style.display = 'block';
-					modal.style.zIndex = 100;
-					modal.innerHTML = null;
-					cnvData.forEach( (data, index) => {
-						//console.log('loading data', index, data);
-						let previewHead = document.createElement('h2');
-						previewHead.innerHTML = 'Saved Canvas ' + (index + 1);
-						modal.appendChild(previewHead);
-						let previewCnv = document.createElement('canvas');
-						previewCnv.id = index;
-						previewCnv.width = window.innerWidth;
-						previewCnv.height = window.innerHeight;
-						previewPad = new SignaturePad(previewCnv);
-						previewPad.fromData(data);
-						previewCnv.onclick = (ev) => {
-							//console.log('LOADING SAVED CANVAS', ev.target.id);
-							loadCanvasId(ev.target.id);
-						}
-						modal.appendChild(previewCnv);
-					});
-				}else{
-					//LOAD THE ONLY STORED DATA
-					const data = cnvData[0];
-					signaturePad.fromData(data);
-				}
-			}
+			//CANVAS ONCHANGE = SAVE TO THE cnvData ARRAY (DUPLICATING CANVASES, REMOVED)
+			//cnvEl.addEventListener('change', storeCanvas, false);
 		}
 
 		/**
-		 * Where multiple stored canvases are found - this loads by the index of the cnvData array.
+		 * Where multiple stored canvases are found - loads by index of the cnvData array.
 		 * @param int id The cnvData index to load.
 		 * @return void Applies changes in browser.
 		 */
 		const loadCanvasId = (id) => {
-			//console.log('CANVAS LOAD', id);
+			console.log('CANVAS LOAD', id, cnvData);
+			signaturePad.clear();
 			if(!cnvData[id]){
-				alert('No data to load!');
+				//alert('No data to load!');
+				console.log('No data to load!');
 				return false;
 			}
+			console.log('Loaded data', cnvData[id]);
 			const data = cnvData[id];
 			signaturePad.fromData(data);
 			let modal = $('loadCanvasModal');
 			modal.style.display = 'none';
+		}
+
+		//NOT CURRENTLY USED - WAS USING THIS IN AN onchange EVENT BUT LED TO DUPLICATED CANVASES
+		const storeCanvas = () => {
+			const data = signaturePad.toData();
+			cnvData[currentQuestionNumber] = data;
+			alert('Saved as canvas #' + cnvData.length);
+			console.log(data);
+		}
+
+		//BACKS UP THE CANVAS DATA ARRAY TO LOCAL STORAGE FOR RELOADING
+		const backupCnvData = () => {
+			window.localStorage.setItem('cnvData', JSON.stringify(cnvData));
+		}
+
+		//REMOVES ALL BACKED UP DATA
+		const clearBackup = () => {
+			window.localStorage.setItem('cnvData', undefined);
+		}
+
+		const createPreviewBox = (data, index) => {
+			//A DIV TO WRAP THIS PREVIEW IN
+			let pBox = document.createElement('div');
+			pBox.className = 'previewBox';
+			//A HEADING - WHICH WILL ALSO INCLUDE THE BUTTON TO LOAD THE CANVAS
+			let pHead = document.createElement('h4');
+			//1-INDEX FOR NORMIES
+			pHead.innerHTML = 'Canvas #' + (index + 1) + ' ';
+			//THE BUTTON TO LOAD THIS CANVAS PREVIEW
+			let loadBtn = document.createElement('button');
+			//USING 1-INDEX FOR NORMIES
+			loadBtn.innerHTML = 'Load #' + (index + 1);
+			loadBtn.className = 'loadBtn';
+			loadBtn.id = index;
+			loadBtn.onclick = (ev) => {
+				loadCanvasId(ev.target.id);
+			}
+			pHead.appendChild(loadBtn);
+			pBox.appendChild(pHead);
+			//APPEND CANVAS WITH SIGNATURE PAD (DISABLED AND SCALED DOWN)
+			let pCnv = document.createElement('canvas');
+			pCnv.style.backgroundColor = '#fff';
+			pCnv.id = index;
+			pCnv.width = Math.floor(window.innerWidth / 2);
+			pCnv.height = Math.floor(window.innerHeight / 2);
+			let pPad = new SignaturePad(pCnv);
+			pPad.off();
+			pPad.fromData(data);
+			pCnv.getContext("2d").scale(ratio / 2, ratio / 2);
+			pBox.appendChild(pCnv);
+			return pBox;
+		}
+
+		const highlightBtn = (index) => {
+			//console.log('Highlight',index);
+			let qBtns = document.querySelectorAll('.qBtn');
+			qBtns.forEach( (el) => {
+				if(el.id === ('Q' + index)){
+					//console.log('Highlight found',el.id);
+					el.classList.add('qHighlight');
+				}else{
+					el.classList.remove('qHighlight');
+				}
+			})
 		}
 	</script>
 	<style>
@@ -118,40 +187,86 @@
 			width: 100%;
 			height: 90%;
 		}
+		#controls {
+			max-height: 50px;
+		}
 		#controls button { 
 			padding: 0 10px;
-			margin: 5px 25px;
+			margin: 5px 5px;
 		}
 		#loadCanvasModal { 
 			display: none;
 			z-index: 100;
-			width: 100%;
+			width: 80%;
 			height: auto;
 			position: absolute;
 			border: 1px solid black;
-			background-color: blueviolet;
+			background-color: grey;
+			flex-direction: row;
+			align-items: stretch;
+			align-content: space-around;
+		}
+		#loadCanvasModal canvas {
+			width: 25%;
+			height: auto;
+		}
+		.previewBox {
+			align-self: stretch;
+		}
+		#questionNumbers {
+			max-height: 50px;
+		}
+		.qBtn {
+			padding: 0 10px;
+			margin: 5px 5px;
+		}
+		.qHighlight {
+			background-color: green;
+			color: white;
+		}
+		.clearBtn {
+			background-color: red;
+			color: white;
+			padding: 5%;
+			margin: 2% 5%;
+		}
+		.saveBtn { 
+			background-color: blue;
+			color: white;
+			padding: 5%;
+			margin: 2% 5%;
+		}
+		.loadBtn {
+			background-color: green;
+			color: white;
+			padding: 5%;
+			margin: 2% 5%;
 		}
 	</style>
 </head>
 
 <body onload="init()">
-<div id="main">
-	<div id="controls">
-		<!--button id="clear" onclick="clearCanvas()">Clear</button-->
-		<button id="clear-canvas">Clear</button>
-		<!--button id="save" onclick="saveCanvas()">Save</button-->
-		<button id="save-canvas">Save</button>
-		<!--button id="load" onclick="loadCanvas()">Load</button-->
-		<button id="load-canvas">Load</button>
+	<div id="main">
+		<div id="questionWrapper">
+			<div id="questionNumbers">
+				
+			</div>
+			<!--div id="controls">
+				<button id="clear-canvas" class="clearBtn">Clear Canvas</button>
+				<button id="save-canvas" class="saveBtn">Save Canvas</button>
+				<button id="load-canvas" class="loadBtn">Load Canvas</button>
+			</div-->
+			<div id="loadCanvasModal" style="display:none;">
+				<h2>Load Canvas</h2>
+				<div id="loadCanvasOptions">
+					<!-- WILL BE FILLED BY loadCanvas() -->
+				</div>
+			</div>
+			<div id="canvasWrapper">
+				<canvas id="canvas" width="100%" height="auto"></canvas>
+			</div>
+		</div>
 	</div>
-	<div id="loadCanvasModal" style="display:none;">
-		<h2>Load Canvas</h2>
-		<div id="loadCanvasOptions"></div>
-	</div>
-	<div id="canvasWrapper">
-		<canvas id="canvas" width="100%" height="auto"></canvas>
-	</div>
-</div>
 </body>
 
 </html>
