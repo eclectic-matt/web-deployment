@@ -1,0 +1,80 @@
+canvas {
+	border: 1px solid black;
+	width: 100%;
+	height: 90%;
+}
+#controls {
+	max-height: 50px;
+}
+#controls button { 
+	padding: 0 10px;
+	margin: 5px 5px;
+}
+#loadCanvasModal { 
+	display: none;
+	z-index: 100;
+	width: 80%;
+	height: auto;
+	position: absolute;
+	border: 1px solid black;
+	background-color: grey;
+	flex-direction: row;
+	align-items: stretch;
+	align-content: space-around;
+}
+#loadCanvasModal canvas {
+	width: 25%;
+	height: auto;
+}
+.previewBox {
+	align-self: stretch;
+}
+#questionNumbers {
+	max-height: 100px;
+	display: flex;
+	flex-wrap: wrap;
+}
+.qBtn {
+	padding: 10px;
+	margin: 5px 5px;
+}
+.qHighlight {
+	background-color: green;
+	color: white;
+}
+.resetBtn {
+	background-color: red;
+	color: white;
+	float: right;
+	padding: 10px;
+	order: 11;
+	align-self: flex-end;
+	/*padding: 5%;
+	margin: 2% 5%;*/
+}
+.clearBtn {
+	background-color: orange;
+	color: white;
+	float: right;
+	padding: 10px;
+	order: 11;
+	align-self: flex-end;
+	/*padding: 5%;
+	margin: 2% 5%;*/
+}
+.saveBtn { 
+	background-color: blue;
+	color: white;
+	float: right;
+	padding: 10px;
+	order: 12;
+	align-self: flex-end;
+	/*padding: 5%;
+	margin: 2% 5%;*/
+}
+.loadBtn {
+	background-color: green;
+	color: white;
+	padding: 5%;
+	margin: 2% 5%;
+}

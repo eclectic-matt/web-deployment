@@ -1,0 +1,34 @@
+{
+	"game": {
+		"id": 1,
+		"name": "Big Fat Quiz 2024"
+	},
+	"rounds": [
+		{
+			"name": "2024 So Far",
+			"questionCount": 10,
+			"questions": [
+				"Blah blah blah 1",
+				"Blah blah blah 2",
+				"Blah blah blah 3",
+				"Blah blah blah 4",
+				"Blah blah blah 5",
+				"Blah blah blah 6",
+				"Blah blah blah 7",
+				"Blah blah blah 8",
+				"Blah blah blah 9",
+				"Blah blah blah 10"
+			],
+			"canvases": [
+				{
+					"team": "Team One",
+					"data": [
+						{
+							"data": "here"
+						}
+					]
+				}
+			]
+		}
+	]
+}
