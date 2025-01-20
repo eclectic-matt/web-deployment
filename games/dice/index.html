@@ -3,43 +3,47 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Dice Balatro</title>
-		<style>
-			body { margin: 0; }
-			.die {
-				float: left;
-				max-width: 20%;
-				width: 200px;
-				height: 75px;
-				margin: auto;
-				padding-top: 5%;
-				padding-bottom: 5%;
-				text-align: center;
-				font-size: 5rem;
-				font-weight: bolder;
-				color: #000;
-			}
-		</style>
+		<link rel="stylesheet" href="style/dice.css" />
 		<script type="importmap">
-		{
-			"imports": {
-			"three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
-			"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+			{
+				"imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+				"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+				}
 			}
-		}
 		</script>
-		<!--link rel="image" href="https://game-icons.net/1x1/delapouite/perspective-dice-six-faces-five.html#download" /-->
-	</head>
-	<body onload="init()">
 		<!--script type="module" src="main.js"></script-->
 		<script src="main.js"></script>
-		<script>
-		let diceGame;
-		function init(){
-			diceGame = new Game();
-		}
-		</script>
+		<script src="class/Die.js" defer></script>
+		<script src="class/Game.js" defer></script>
+	</head>
+	<body onload="init()">
 		<div id="game">
-			<!-- Filled by game.updateUi() -->
+			<div id="menu">
+				<div id="menuHeader">SHOP</div>
+				<div id="roundScore">0</div>
+				<div id="handScore">
+					<span id="chips">0</span> x <span id="multiplier">0</span> = <span id="currentScore">0</span>
+				</div>
+				<div id="controls">
+					<button id="runInfo">Run Info</button>
+					<button id="options">Options</button>
+				</div>
+				<div id="overview">
+					<div id="currentRound">
+						<div id="currentRoundHands">3</div>
+						<div id="currentRoundRerolls">3</div>
+					</div>
+					<div id="currentCash">£0</div>
+					<div id="runSummary">
+						<div id="runAntes">1 / 8</div>
+						<div id="runRounds">0</div>
+					</div>
+				</div>
+			</div>
+			<div id="diceTray">
+				<!-- Filled by game.updateUi() -->
+			</div>
 		</div>
 		<br><br>
 		<button onclick="diceGame.rollAllDice()">Roll All Dice</button>
