@@ -1,51 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Dice Balatro</title>
-		<link rel="stylesheet" href="style/dice.css" />
-		<script type="importmap">
-			{
-				"imports": {
-				"three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
-				"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
-				}
-			}
-		</script>
-		<!--script type="module" src="main.js"></script-->
-		<script src="main.js"></script>
-		<script src="class/Die.js" defer></script>
-		<script src="class/Game.js" defer></script>
-	</head>
-	<body onload="init()">
-		<div id="game">
-			<div id="menu">
-				<div id="menuHeader">SHOP</div>
-				<div id="roundScore">0</div>
-				<div id="handScore">
-					<span id="chips">0</span> x <span id="multiplier">0</span> = <span id="currentScore">0</span>
-				</div>
-				<div id="controls">
-					<button id="runInfo">Run Info</button>
-					<button id="options">Options</button>
-				</div>
-				<div id="overview">
-					<div id="currentRound">
-						<div id="currentRoundHands">3</div>
-						<div id="currentRoundRerolls">3</div>
-					</div>
-					<div id="currentCash">£0</div>
-					<div id="runSummary">
-						<div id="runAntes">1 / 8</div>
-						<div id="runRounds">0</div>
-					</div>
-				</div>
-			</div>
-			<div id="diceTray">
-				<!-- Filled by game.updateUi() -->
-			</div>
-		</div>
-		<br><br>
-		<button onclick="diceGame.rollAllDice()">Roll All Dice</button>
-	</body>
+    <head>
+        <meta charset="utf-8" />
+    	<title>Dice Balatro</title>
+        <link rel="stylesheet" href="style/dice.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="importmap">
+        	{
+                "imports": {
+                	"three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+                    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+                }
+            }
+        </script>
+        <!--script type="module" src="main.js"></script-->
+        <script src="main.js"></script>
+    	<script src="class/Die.js" defer></script>
+        <script src="class/Game.js" defer></script>
+    </head>
+    <body onload="init()">
+        <!--div id="game" class="w3-row"-->
+            	
+            <div id="menu" class="w3-container w3-black">
+                	
+                <div id="menuHeader">SHOP</div>
+                    
+                <div class="w3-container w3-green w3-border-white w3-round-xxlarge w3-center w3-xxlarge"><span id="roundScore">0</span></div>
+                        
+                <div id="handScore" class="w3-container w3-center w3-xxlarge">
+                    <span id="chips" class="w3-blue">0</span> x <span id="multiplier" class="w3-red">0</span> = <span id="currentScore" class="w3-purple">0</span>
+                </div>
+                        
+            	<div id="controls">
+                    <button id="runInfo">Run Info</button>
+                    <button id="options">Options</button>
+                </div>
+                        
+                <div id="overview">
+                        	
+                    <div id="currentRound">
+                        Hands:  <span id="currentRoundHands">3</span>
+                        Rerolls: <span id="currentRoundRerolls">3</span>
+                    </div>
+                    Cash: £<span id="currentCash">0</span>
+                            
+                    <div id="runSummary">
+                        Antes:  <span id="runAntes">1 / 8</span>
+                        Rounds:  <span id="runRounds">0</span>
+                    </div>
+                </div>
+            </div>
+                    
+            <div id="diceTray" class="w3-gray w3-container">
+            	<h2 id="currentHand"></h2>
+                    <!-- Filled by game.updateUi() -->
+            </div>
+        <!--/div-->
+                
+        <br><br>
+                
+        <div id="buttons" class="w3-row w3-container">
+	        <!--button onclick="diceGame.rollAllDice()">Roll All Dice</button-->
+	        <button id="rerollBtn" class="w3-btn w3-col s6 w3-red" disabled onclick="diceGame.rollSelectedDice()">Re-Roll</button>
+	        <button id="scoreBtn" class="w3-btn w3-col s6 w3-green" disabled onclick="diceGame.scoreSelectedDice()">Score</button>
+        </div>
+    </body>
 </html>
