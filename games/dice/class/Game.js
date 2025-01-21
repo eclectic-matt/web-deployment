@@ -57,9 +57,9 @@ class Game
         'Level 9 - One Hand'
     ];
     anteNames = [
-    	'Small Blind',
-    	'Big Blind',
-    	'Boss Blind'
+		'Small Blind',
+		'Big Blind',
+		'Boss Blind'
     ];
     //GAME FLOW - 8 LEVELS OF SMALL / BIG / BOSS
     roundScores = [
@@ -134,6 +134,17 @@ class Game
 		this.data.state.score = 0;
 		this.data.state.history = [];
 	}
+
+	//TERMINOLOGY DUMP:
+	// The entire GAME is broken up into a series of ROUNDS (1 - 8) increasing in difficulty
+	// Each ROUND:
+	// - the game performs loadRound() which generates the stakes based on game difficulty and a random boss effect
+	// - you first "Choose Your Blind" (choose) which allows skipping (TO ADD: SKIPPING REWARDS)
+	// 		- then play your chosen stake to beat the current ANTE
+	// 		- these antes are Small Blind (small) / Big Blind (big) / Boss Blind (boss)
+	// 		- if you did not skip, you are then allowed to visit the SHOP
+	//		- the shop allows you to buy one of three types of upgrade:
+	//	- if you skipped, or you have completed the shop, and BOSS is not next, then go back to CHOOSE
 
 	loadRound(round)
 	{
@@ -432,10 +443,17 @@ class Game
 	// DIE METHODS
 	//=====================
 
-	getDice(){
+	getDice()
+	{
 		return this.data.dice.dice;
 	}
-		
+	
+	getDieElementById(die)
+	{
+		let dieElId = die.name.replace(' ', '_') + 'Value';
+		return document.getElementById(dieElId);
+	}
+
 	getSelectedDice()
 	{
 		return this.data.dice.dice.filter( (d) => { return d.selected === true; });
@@ -457,7 +475,7 @@ class Game
 	{
 		//ITERATE THROUGH DICE
 		for(let i of this.data.dice.dice){
-				i.roll();
+			i.roll();
 		}
 		//Then update the UI
 		this.updateUi();
@@ -600,21 +618,22 @@ class Game
 		const currentScoreElId = 'currentScore';
 		const currentScoreEl = document.getElementById(currentScoreElId);
 		
-		
 		//Update header
 		const menuHeaderElId = 'menuHeader';
 		const menuHeaderEl = document.getElementById(menuHeaderElId);
 		menuHeaderEl.innerHTML = null;
 		//OUTPUT AS 
-		//h2 - Small Blind
-		//Score at least: roundStake
+		//h2 - Choose your next Blind / Small Blind / Big Blind / Boss Blind / SHOP
+		//Score at least: roundStake / ""
 		let anteNameHeadEl = document.createElement('h2');
 		let anteName = this.anteNames[this.data.round.ante];
 		anteNameHeadEl.innerHTML = anteName;
 		
 		let roundScoreSpanEl = document.createElement('span');
-		let roundScore = this.data.round.stakes[this.data.round.ante];
-		roundScoreSpanEl.innerHTML = 'Score at least ' + roundScore;
+		if(this.data.state.phase === 'ante'){
+			let roundScore = this.data.round.stakes[this.data.round.ante];
+		}
+		//roundScoreSpanEl.innerHTML = 'Score at least ' + roundScore;
 		menuHeaderEl.appendChild(anteNameHeadEl);
 		menuHeaderEl.appendChild(roundScoreSpanEl);
 		
@@ -663,72 +682,31 @@ class Game
 
 	updateUIDice()
 	{
-		// - the dice tray
-		const diceTrayElId = 'diceTray';
-		const diceTrayEl = document.getElementById(diceTrayElId);
-		//OUTPUT DICE TRAY
-		//CLEAR TRAY FROM PREVIOUS ROLL
-		diceTrayEl.innerHTML = null;
-		
-		//Add current hand element 
-		let currHandEl = document.createElement('h2');
-		currHandEl.id = 'currentHandText';
-		currHandEl.className = "w3-center";
-		/*let handScore = this.scoreHand(this.getSelectedDice());
-		if(handScore){
-			if(Array.isArray(handScore.value)){
-				currHandEl.innerHTML = handScore.type + ' (' + handScore.value.join(' + ') + ')';
-			}else{
-				currHandEl.innerHTML = handScore.type + ' (' + handScore.value + ')';
-			}
-		}else{
-			currHandEl.innerHTML = 'Select some dice!';
-		}
-		*/
-		diceTrayEl.appendChild(currHandEl);
-		
-		//Add a row of dice (w3-row)
-		let diceRowEl = document.createElement('div');
-		diceRowEl.className = 'w3-row-padding w3-content';
-		
+		//ITERATE OVER THE STORED DICE
 		for(let die of this.data.dice.dice)
 		{
-			let diceEl = document.createElement('div');
-			//APPLY ALL STYLES IN CSS
-			diceEl.className = 'die w3-col s2';
+			let diceEl = document.getElementById(die.name.replace(' ', '_'));
+			//The current die's (rolled) value
+			let diceValueEl = document.getElementById(die.name.replace(' ', '_') + '_Value');
+			diceValueEl.innerHTML = die.value;
+			//SELECTED DIE?
 			if(die.selected){
 				diceEl.className = 'die w3-col s2 w3-border-red';
-			}
-
-			//https://www.w3schools.com/howto/howto_css_image_overlay_icon.asp
-			//https://www.w3schools.com/howto/howto_css_image_overlay_title.asp
-
-			//EXCEPT FOR THE BACKGROUND IMAGE WHICH IS DYNAMIC
-			let diceImageEl = document.createElement('img');
-			diceImageEl.src = 'images/plain_d' + die.sides + '.png';
-			diceEl.appendChild(diceImageEl);
-			
-			//Add a heading for the value
-			let diceValueEl = document.createElement('span');
-			diceValueEl.id = die.name.replace(' ', '_') + 'Value';
-			//diceValueEl.className = 'w3-large w3-center w3-text-white';
-			diceValueEl.className = 'w3-text-white';
-			if(die.selected){
 				diceValueEl.className = 'w3-red w3-text-white';
 			}
-			diceValueEl.innerHTML = die.value;
-			diceEl.appendChild(diceValueEl);
-			
 			let dieName = die.name;
 			diceEl.onclick = function(){
 				diceGame.selectDie(dieName);
 			}
-			//gameEl.appendChild(diceEl);
-			//diceTrayEl.appendChild(diceEl);
-			diceRowEl.appendChild(diceEl);
 		}
-		
-		diceTrayEl.appendChild(diceRowEl);
+	}
+
+	//SPECIFIC LOGIC FOR GETTING A NEW IMAGE FOR AN UPGRADED DIE
+	updateDieTypeImageUI(die)
+	{
+		//BACKGROUND IMAGE FROM IMAGES FOLDER
+		let diceImageEl = document.getElementById(die.name.replace(' ', '_') + '_Image');
+		diceImageEl.src = 'images/plain_d' + die.sides + '.png';
 	}
 
 	updateDieValues()

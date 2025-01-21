@@ -23,9 +23,14 @@
 		<!--div id="game" class="w3-row"-->
 			<div id="menu" class="w3-container w3-black">
 				
-				<div id="menuHeader">SHOP</div>
+				<div id="menuHeader">
+					<h2 id="currentRoundTitle">Choose Your Next Blind</h2>
+					<h3><span id="currentRoundRequirements"></span><span id="currentRoundStake"></span></h3>
+				</div>
 				
-				<div class="w3-container w3-green w3-border-white w3-round-xxlarge w3-center w3-xxlarge"><span id="roundScore">0</span></div>
+				<div class="w3-container w3-green w3-border-white w3-round-xxlarge w3-center w3-xxlarge roundScore">
+					<span id="roundScore">0</span>
+				</div>
 				
 				<div id="handScore" class="w3-container w3-center w3-xxlarge">
 					<span id="chips" class="w3-blue">0</span> x <span id="multiplier" class="w3-red">0</span> = <span id="currentScore" class="w3-purple">0</span>
@@ -52,8 +57,30 @@
 			</div>
 					
 			<div id="diceTray" class="w3-gray w3-container">
-				<h2 id="currentHand"></h2>
-					<!-- Filled by game.updateUi() -->
+				<h2 id="currentHandText" class="w3-center"></h2>
+				<div id="diceRow" class="w3-row-padding w3-content">
+					<!-- DEFINE THE DICE HERE-->
+					<div id="Starting_D4" class="die w3-col" style="width:20%">
+						<img id="Starting_D4_Image" src="images/plain_d4.png" />
+						<span id="Starting_D4_Value" class="w3-text-white">4</span>
+					</div>
+					<div id="Starting_D6" class="die w3-col" style="width:20%">
+						<img id="Starting_D6_Image" src="images/plain_d6.png" />
+						<span id="Starting_D6_Value" class="w3-text-white">6</span>
+					</div>
+					<div id="Starting_D8" class="die w3-col" style="width:20%">
+						<img id="Starting_D8_Image" src="images/plain_d8.png" />
+						<span id="Starting_D8_Value" class="w3-text-white">8</span>
+					</div>
+					<div id="Starting_D10" class="die w3-col" style="width:20%">
+						<img id="Starting_D10_Image" src="images/plain_d10.png" />
+						<span id="Starting_D10_Value" class="w3-text-white">10</span>
+					</div>
+					<div id="Starting_D12" class="die w3-col" style="width:20%">
+						<img id="Starting_D12_Image" src="images/plain_d12.png" />
+						<span id="Starting_D12_Value" class="w3-text-white">12</span>
+					</div>
+				</div>
 			</div>
 		<!--/div-->
 				
