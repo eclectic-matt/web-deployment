@@ -131,6 +131,7 @@ class Game
 		
 		this.data.state.hands = this.data.state.initial.hands;
 		this.data.state.rerolls = this.data.state.initial.rerolls;
+		this.data.state.phase = 'ante';//choose, ante, shop
 		this.data.state.score = 0;
 		this.data.state.history = [];
 	}
@@ -353,7 +354,7 @@ class Game
 	/**
 	 * 
 	 * @param {array} hand The array of dice.
-	 * @returns {array|false} An array of values relating if a valid full house (three of a kind and pair as [THREE_OF_A_KIND_VALUE, PAIR_VALUE]) or false if not a valid full house.
+	 * @returns {array|boolean} An array of values relating if a valid full house (three of a kind and pair as [THREE_OF_A_KIND_VALUE, PAIR_VALUE]) or false if not a valid full house.
 	 */
 	checkFullHouse(hand)
 	{
@@ -539,7 +540,7 @@ class Game
 		let handScore = this.scoreHand(this.getSelectedDice());
 		this.data.state.hands--;
 		this.data.state.score += handScore.score;
-		console.log('SCORE', this.data.state.score, this.data.round.score);
+		//console.log('SCORE', this.data.state.score, this.data.round.score);
 		//IF WE HAVE REACHED THE CURRENT ANTE SCORE
 		if(this.data.state.score >= this.data.round.score ){
 			alert('Ante complete - score: ' + this.data.state.score);
@@ -576,6 +577,7 @@ class Game
 	{
 		this.updateUIDice();
 		this.updateUIMenu();
+		this.updateDieValues();
 		return false;
 		//GET THE MAIN ELEMENT FOR THE GAME
 		//let gameEl = document.getElementById('game');
@@ -594,12 +596,6 @@ class Game
 		}
 		console.log('BEST HAND:',currentDice, bestHand + ' (' + handScore.faceTotal + ' values x ' + handScore.mult + ' hand multiplier = ' + handScore.score + ' points)');
 		*/
-	}
-
-	createUI()
-	{
-		//CREATE THE INITIAL LAYOUT AND ASSIGN IDs
-		//SUBSEQUENT UPDATES CAN THEN UPDATE VIA IDs
 	}
 
 
@@ -621,17 +617,19 @@ class Game
 		//Update header
 		const menuHeaderElId = 'menuHeader';
 		const menuHeaderEl = document.getElementById(menuHeaderElId);
-		menuHeaderEl.innerHTML = null;
+		//menuHeaderEl.innerHTML = null;
 		//OUTPUT AS 
 		//h2 - Choose your next Blind / Small Blind / Big Blind / Boss Blind / SHOP
 		//Score at least: roundStake / ""
-		let anteNameHeadEl = document.createElement('h2');
+		//let anteNameHeadEl = document.createElement('h2');
+		let anteNameHeadEl = document.getElementById('currentRoundRequirements');
 		let anteName = this.anteNames[this.data.round.ante];
 		anteNameHeadEl.innerHTML = anteName;
 		
-		let roundScoreSpanEl = document.createElement('span');
+		let roundScoreSpanEl = document.getElementById('currentRoundStake');
 		if(this.data.state.phase === 'ante'){
 			let roundScore = this.data.round.stakes[this.data.round.ante];
+			roundScoreSpanEl.innerHTML = ' - Score at least ' + roundScore;
 		}
 		//roundScoreSpanEl.innerHTML = 'Score at least ' + roundScore;
 		menuHeaderEl.appendChild(anteNameHeadEl);
@@ -712,7 +710,7 @@ class Game
 	updateDieValues()
 	{
 		for(let die of this.data.dice.dice){
-			let id = die.name.replace(' ', '_') + 'Value';
+			let id = die.name.replace(' ', '_') + '_Value';
 			let valueSpan = document.getElementById(id);
 			valueSpan.innerHTML = die.value;
 			if(die.selected){
@@ -722,13 +720,6 @@ class Game
 			}
 		}
 	}
-
-
-	createDiceUI()
-	{
-
-	}
-
 
 	mode(arr){
 		return arr.sort((a,b) =>

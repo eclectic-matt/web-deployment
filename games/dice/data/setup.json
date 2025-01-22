@@ -49,8 +49,35 @@
 		"Value +1"
 	],
 	"stakes": [
-		"Level 10 - No rerolls",
-		"Level 9 - One Hand"
+		{
+			"level": 0,
+			"name": "Standard",
+			"modifiers": []
+		},
+		{
+			"level": 1,
+			"name": "Red Stake",
+			"modifiers": [
+				{
+					"type": "rerolls",
+					"modType": "subtract",
+					"effect": -1,
+					"description": "-1 Rerolls"
+				}
+			]
+		},
+		{
+			"level": 2,
+			"name": "Orange Stake",
+			"modifiers": [
+				{
+					"type": "hands",
+					"modType": "subtract",
+					"effect": -1,
+					"description": "-1 Hands"
+				}
+			]
+		}
 	],
 	"anteNames": [
 		"Small Blind",

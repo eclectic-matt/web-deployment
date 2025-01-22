@@ -30,3 +30,6 @@ body {
 	height: auto;
 	margin: auto;
 }
+.roundScore{
+	border: 5px dotted white;
+}
