@@ -77,3 +77,61 @@ body {
 .joker h3 {
 	font-size: 0.8rem;
 }
+
+.die.selected {
+	color: yellow;
+	border: 3px outset red;
+	position: relative;
+	top: -15px;
+}
+
+.die.rolling {
+	animation: rolling 2s;
+}
+
+@keyframes rolling {
+	0%{
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
+
+.fire {
+	animation: flicker 2s infinite;
+	color: #fdd; /* Light text color */
+	text-align: center; /* Center alignment of text */
+	/* Multi-layered text-shadow for fire effect */
+	text-shadow:
+	  0px -5px 15px #FFF, /* Innermost - intense heat (white) */
+	  0px -10px 30px #FF3, /* Second - core of flame (yellow) */
+	  0px -30px 60px #F90, /* Middle - body of flame (orange) */
+	  0px -50px 100px #C33; /* Outermost - flame edges (red) */
+}
+
+/* Define the animation named "flicker" */
+@keyframes flicker {
+    /* Initial state of animation */
+    0%, 
+    /* Final state of animation */
+    100% { 
+        text-shadow: 
+            0 -5px 15px #FFF, /* Innermost - intense heat (white) */
+            0 -10px 30px #FF3, /* Second - core of flame (yellow) */
+            0 -30px 60px #F90, /* Middle - body of flame (orange) */
+            0 -50px 100px #C33; /* Outermost - flame edges (red) */
+    }
+    /* Middle state of animation */
+    50% { 
+        text-shadow: 
+            0 -10px 30px #FFF, /* Innermost - intense (white) */
+            0 -20px 60px #FF3, /* Second - core (yellow) */
+            0 -40px 80px #F90, /* Middle - body (orange) */
+            0 -60px 120px #C33; /* Outermost - flame edges (red) */
+    }
+}

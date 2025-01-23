@@ -66,8 +66,8 @@ class Game
     ];
     //GAME FLOW - 8 LEVELS OF SMALL / BIG / BOSS
     roundScores = [
-        [ 100, 125, 150 ],                 //Round 1
-        [ 200, 250, 300 ],                //Round 2
+        [ 50, 75, 100 ],                 //Round 1
+        [ 150, 225, 300 ],                //Round 2
         [ 400, 500, 600 ],                //Round 3
         [ 700, 850, 1000 ],         //Round 4
         [ 1200, 1500, 1800 ],        //Round 5
@@ -120,7 +120,7 @@ class Game
             let die = new Die(this.data.dice.types[i]);
             this.data.dice.dice.push(die);
         }
-        console.log('initDice', this.data.dice.dice);
+        //console.log('initDice', this.data.dice.dice);
     }
     initState()
     {
@@ -190,6 +190,7 @@ class Game
 	nextAnte()
 	{
 		this.deselectAllDice();
+		this.rollAllDice();
 		this.data.round.ante++;
 		//THE CURRENT ANTE REQUIREMENT IS HERE:
 		this.data.round.score = this.data.round.stakes[this.data.round.ante];
@@ -245,7 +246,7 @@ class Game
 		if(this.data.jokers.length >= this.maxJokers) return false;
 		//Otherwise add
 		this.data.jokers.push(joker);
-		this.addJokerToUi(joker);
+		ui.addJokerToUi(joker);
 	}
 	removeJoker(joker)
 	{
@@ -261,15 +262,34 @@ class Game
 		let totalScore = 0;
 		//Initialize handscore
 		let handScore = this.scoreHand(hand);
-		let totalChips = parseInt(handScore.value);
+		let totalChips = 0;//parseInt(handScore.value);
 		let totalMult = parseInt(handScore.mult);
 		//this.data.state.hands--;
 		//Alert the base score 
-		this.alertHandScore(handScore.score);
+		ui.alertHandScore(handScore.score);
+		
+		//JUST AWARE THAT I'M PLANNING TO INCLUDE A JOKER THAT IS "EVERY DIE COUNTS FOR SCORING" - INIT A FLAG HERE
+		const specialScoringDieName = 'Score Everything';
+		let specialScoringDieFlag = false;
+		if(this.data.jokers.map( (j) => { return j.name; }).includes(specialScoringDieName)){
+			specialScoringDieFlag = true;
+		}
 		
 		//First, score each die
 		for(let die of hand){
-			if(!die.selected) continue;
+			//Skip if die NOT used in scoring, AND specialScoringFlag is false
+			if(
+				(!handScore.diceUsed.includes(die.name)) &&
+				(!specialScoringDieFlag)
+			){
+				//console.log('Skipping ', die.name);
+				continue;
+			}
+			
+			//Add the die value to the total - jokers may add onto this
+			totalChips += die.value;
+			
+			//Else, iterate jokers and score the die
 			for(let joker of this.data.jokers){
 				//Die scores are just 
 				let dScore = joker.scoreDie(die);
@@ -308,7 +328,7 @@ class Game
 							}
 						break;
 					}
-					console.log('jDie', dScore);
+					//console.log('jDie', dScore);
 					//Notify die score
 					die.alertScore(dScore.type + ' ' + dScore.effect + '' + dScore.value);
 				}
@@ -356,17 +376,17 @@ class Game
 						}
 					break;
 				}
-				console.log('jHand', hScore);
+				//console.log('jHand', hScore);
 				//Notify hand score
-				this.alertHandScore(hScore.type + ' ' + hScore.effect + '' + hScore.value);
+				ui.alertHandScore(hScore.type + ' ' + hScore.effect + '' + hScore.value);
 			}
 		}
 		
 		//Calculate Score
 		totalScore = parseInt(totalChips * totalMult);
-		console.log('totalScore', totalScore, totalChips, totalMult);
+		//console.log('totalScore', totalScore, totalChips, totalMult);
 		//Nofify Total Score
-		this.alertHandScore('Score: ' + totalScore);
+		ui.alertHandScore('Score: ' + totalScore);
 		//Apply Score
 		//this.data.state.score += totalScore;
 		
@@ -377,15 +397,6 @@ class Game
 			value: handScore.value,
 			score: totalScore
 		}
-	}
-	
-	alertHandScore(scoreString)
-	{
-		let handScoreElId = 'handScoreTooltip';
-		let handScoreEl = document.getElementById(handScoreElId);
-		handScoreEl.classList.add('flash');
-		handScoreEl.classList.remove('flash');
-		handScoreEl.innerHTML = scoreString;
 	}
 
 	//=====================
@@ -572,9 +583,6 @@ class Game
 		let handMult = this.hands.length - this.hands.indexOf(handType);
 		let faceScores = hand.map( (d) => { return d.value; });
 
-		//AN ARRAY OF THE IDs OF DICE ACTUALLY USED AS PART OF THE SCORING HAND
-		let diceUsed = [];
-
 		//HOW SHOULD THE DICE VALUES BE USED?
 		let faceTotal = 0;
 		switch(handType){
@@ -610,8 +618,8 @@ class Game
 		}
 
 		//GET THE DICE USED TO MAKE THIS HAND
-		diceUsed = this.getDiceUsed(hand, handType, handValue);
-		console.log(hand, handType, diceUsed);
+		let diceUsed = this.getDiceUsed(hand, handType, handValue);
+		//console.log(hand, handType, diceUsed);
 
 		//RETURN AS AN OBJECT? 
 		let returnScore = {
@@ -636,7 +644,7 @@ class Game
 					//console.log('HIGH VALUE', d);
 					if(
 						(d.selected) && 
-						(d.value === values)
+						(d.value == values)
 					){
 						returnNames.push(d.name);
 						//ONLY ONE VALUE/DIE USED - EXIT NOW
@@ -649,8 +657,8 @@ class Game
 					//IF THIS DIE IS SELECTED, THE VALUE IS PART OF THE PAIR, AND THIS WAS NOT ALREADY ADDED TO THE RETURN NAMES ARRAY (UNECESSARY LAST CHECK?)
 					if(
 						(d.selected) && 
-						(d.value === values) && 
-						(returnNames.indexOf(d.name) === false)
+						(d.value == values) && 
+						(returnNames.includes(d.name) === false)
 					){
 						returnNames.push(d.name);
 						//KEEP ITERATING TO FIND THE SECOND PAIRED DIE
@@ -664,8 +672,8 @@ class Game
 						//IF THIS DIE IS SELECTED, THE VALUE MATCHES THE CURRENT PAIR VALUE, AND THIS DIE WAS NOT ALREADY ADDED TO THE RETURN NAMES ARRAY
 						if(
 							(d.selected) && 
-							(d.value === v) && 
-							(returnNames.indexOf(d.name) === false)
+							(d.value == v) && 
+							(returnNames.includes(d.name) === false)
 						){
 							returnNames.push(d.name);
 						}
@@ -677,8 +685,8 @@ class Game
 					//IF THIS DIE IS SELECTED, THE VALUE MATCHES THE 3OAK VALUE, AND THIS DIE WAS NOT ALREADY ADDED TO THE RETURN NAMES ARRAY
 					if(
 						(d.selected) && 
-						(d.value === values) && 
-						(returnNames.indexOf(d.name) === false)
+						(d.value == values) && 
+						(returnNames.includes(d.name) === false)
 					){
 						returnNames.push(d.name);
 					}
@@ -689,8 +697,8 @@ class Game
 					//IF THIS DIE IS SELECTED, THE VALUE MATCHES THE 3OAK VALUE, AND THIS DIE WAS NOT ALREADY ADDED TO THE RETURN NAMES ARRAY
 					if(
 						(d.selected) && 
-						(d.value === values) && 
-						(returnNames.indexOf(d.name) === false)
+						(d.value == values) && 
+						(returnNames.includes(d.name) === false)
 					){
 						returnNames.push(d.name);
 					}
@@ -703,7 +711,7 @@ class Game
 				}
 			break;
 		}
-		console.log('getDiceUsed', returnNames);
+		//console.log('getDiceUsed', returnNames, hand, type, values);
 		return returnNames;
 	}
 
@@ -736,6 +744,7 @@ class Game
 	rollDie(dieIndex)
 	{
 		this.data.dice.dice[dieIndex].roll();
+		ui.updateUi(this);
 	}
 
 	/**
@@ -748,7 +757,7 @@ class Game
 			i.roll();
 		}
 		//Then update the UI
-		this.updateUi();
+		ui.updateUi(this);
 	}
 
 	selectDie(name)
@@ -770,10 +779,7 @@ class Game
 			document.getElementById('rerollBtn').disabled = true;
 			document.getElementById('scoreBtn').disabled = true;
 		}
-		//this.updateUi();
-		//this.updateUIDice();
-		this.updateDieValues();
-		this.updateUIMenu();
+		ui.updateUi(this);
 	}
 
 	deselectAllDice()
@@ -794,14 +800,12 @@ class Game
 			if (die.selected) {
 				die.roll();
 				die.selected = false;
+				ui.updateUiRollDie(die);
 			}
 		}
 		//Prevent double clicks
 		document.getElementById('rerollBtn').disabled = true;
-		//this.updateUi();
-		//this.updateUIDice();
-		this.updateDieValues();
-		this.updateUIMenu();
+		ui.updateUi(this);
 	}
 
 	scoreSelectedDice()
@@ -809,7 +813,7 @@ class Game
 		//let handScore = this.scoreHand(this.getSelectedDice());
 		let handScore = this.scoreJokers(this.getSelectedDice());
 		this.data.state.history.push(['Scored a ' + handScore.type + ' of ' + handScore.value + ' = ' + handScore.score]);
-		console.log('history', this.data.state.history);
+		//console.log('history', this.data.state.history);
 		this.data.state.hands--;
 		this.data.state.score += handScore.score;
 		//console.log('SCORE', this.data.state.score, this.data.round.score);
@@ -834,191 +838,15 @@ class Game
 		//Prevent double clicks
 		document.getElementById('rerollBtn').disabled = true;
 		document.getElementById('scoreBtn').disabled = true;
-		this.updateUi();
+		ui.updateUi(this);
 	}
 
 
 
 	//=====================
-	// UI METHODS
+	// UTILITY METHODS
 	//=====================
 	
-	addJokerToUi(joker)
-	{
-		let jokerEl = document.createElement('div');
-		jokerEl.classList.add('w3-col');
-		jokerEl.style.width = '20%';
-		jokerEl.classList.add('joker');
-		//OUTPUT JOKER NAME HEADER
-		let jokerHead = document.createElement('h3');
-		jokerHead.innerHTML = joker.data.name;
-		jokerEl.appendChild(jokerHead);
-		//OUTPUT JOKER DESCRIPTION 
-		let jokerDescEl = document.createElement('span');
-		jokerDescEl.innerHTML = joker.data.description;
-		jokerEl.appendChild(jokerDescEl);
-		//BORDER = RARITY
-		jokerEl.classList.add(joker.data.rarity);
-		//EFFECT = MODIFIER
-		if(joker.data.modifier){
-			jokerEl.classList.add(joker.data.modifier);
-		}
-		const jokerRowElId = 'jokerRow';
-		document.getElementById(jokerRowElId).appendChild(jokerEl);
-	}
-
-	/**
-	 * Updates the UI to display the 
-	 */
-	updateUi()
-	{
-		this.updateUIDice();
-		this.updateUIMenu();
-		this.updateDieValues();
-		return false;
-		//GET THE MAIN ELEMENT FOR THE GAME
-		//let gameEl = document.getElementById('game');
-		//gameEl.innerHTML = null;
-
-		//THE KEY PARTS OF THE UI 
-		// - menu element
-		const menuElId = 'menu';
-		const menuEl = document.getElementById(menuElId);
-		
-		/*
-		//OUTPUT THE CURRENT DICE TO THE CONSOLE?
-		let currentDice = '';
-		for(let i of this.data.dice.dice){
-				currentDice += 'D' + i.sides + '=' + i.value + '.';
-		}
-		console.log('BEST HAND:',currentDice, bestHand + ' (' + handScore.faceTotal + ' values x ' + handScore.mult + ' hand multiplier = ' + handScore.score + ' points)');
-		*/
-	}
-
-
-	updateUIMenu()
-	{
-		//THE KEY PARTS OF THE UI 
-		// - menu element
-		//const menuElId = 'menu';
-		//const menuEl = document.getElementById(menuElId);
-
-		// - score elements
-		const chipsScoreElId = 'chips';
-		const chipsScoreEl = document.getElementById(chipsScoreElId);
-		const multiplierScoreElId = 'multiplier';
-		const multiplierScoreEl = document.getElementById(multiplierScoreElId);
-		const currentScoreElId = 'currentScore';
-		const currentScoreEl = document.getElementById(currentScoreElId);
-		
-		//Update header
-		const menuHeaderElId = 'menuHeader';
-		const menuHeaderEl = document.getElementById(menuHeaderElId);
-		//menuHeaderEl.innerHTML = null;
-		//OUTPUT AS 
-		//h2 - Choose your next Blind / Small Blind / Big Blind / Boss Blind / SHOP
-		//Score at least: roundStake / ""
-		//let anteNameHeadEl = document.createElement('h2');
-		let anteNameHeadEl = document.getElementById('currentRoundRequirements');
-		let anteName = this.anteNames[this.data.round.ante];
-		anteNameHeadEl.innerHTML = anteName;
-		
-		let roundScoreSpanEl = document.getElementById('currentRoundStake');
-		if(this.data.state.phase === 'ante'){
-			let roundScore = this.data.round.stakes[this.data.round.ante];
-			roundScoreSpanEl.innerHTML = ' - Score at least ' + roundScore;
-		}
-		//roundScoreSpanEl.innerHTML = 'Score at least ' + roundScore;
-		menuHeaderEl.appendChild(anteNameHeadEl);
-		menuHeaderEl.appendChild(roundScoreSpanEl);
-		
-		//Update hands/rerolls
-		//currentRoundHands
-		const currHandsElId = 'currentRoundHands';
-		const currHandsEl = document.getElementById(currHandsElId);
-		currHandsEl.innerHTML = this.data.state.hands;
-		
-		const currRerollsElId = 'currentRoundRerolls';
-		const currRerollsEl = document.getElementById(currRerollsElId);
-		currRerollsEl.innerHTML = this.data.state.rerolls;
-		
-		//currentCash
-		const currCashElId = 'currentCash';
-		const currCashEl = document.getElementById(currCashElId);
-		currCashEl.innerHTML = this.data.state.cash;
-		
-		//Round Score
-		const currScoreElId = 'roundScore';
-		const currScoreEl = document.getElementById(currScoreElId);
-		currScoreEl.innerHTML = this.data.state.score;
-		
-		//BEST HAND CALCULATION
-		//let handScore = this.scoreHand(this.getSelectedDice());
-		let handScore = this.scoreJokers(this.getSelectedDice());
-		let currHandEl = document.getElementById('currentHandText');
-
-		if(handScore){
-			//OUTPUT SEPARATELY AS faceTotal (chips) VS. mult (multiplier)
-			chipsScoreEl.innerHTML = handScore.faceTotal;
-			multiplierScoreEl.innerHTML = handScore.mult;
-			currentScoreEl.innerHTML = handScore.score;
-		
-			//IF AN ARRAY OF VALUES WAS RETURNED (FULL HOUSE / TWO PAIR ONLY)
-			if(Array.isArray(handScore.value)){
-				//OUTPUT WITH A JOIN
-				currHandEl.innerHTML = handScore.type + ' (' + handScore.value.join(' + ') + ')';
-			}else{
-				//OUTPUT THE TYPE NAME AND THE SINGLE VALUE THIS RELATES TO (STRAIGHT 7, PAIR K)
-				currHandEl.innerHTML = handScore.type + ' (' + handScore.value + ')';
-			}
-		}else{
-			currHandEl.innerHTML = 'Select some dice!';
-		}
-	}
-
-	updateUIDice()
-	{
-		//ITERATE OVER THE STORED DICE
-		for(let die of this.data.dice.dice)
-		{
-			let diceEl = document.getElementById(die.name.replace(' ', '_'));
-			//The current die's (rolled) value
-			let diceValueEl = document.getElementById(die.name.replace(' ', '_') + '_Value');
-			diceValueEl.innerHTML = die.value;
-			//SELECTED DIE?
-			if(die.selected){
-				diceEl.className = 'die w3-col s2 w3-border-red';
-				diceValueEl.className = 'w3-red w3-text-white';
-			}
-			let dieName = die.name;
-			diceEl.onclick = function(){
-				diceGame.selectDie(dieName);
-			}
-		}
-	}
-
-	//SPECIFIC LOGIC FOR GETTING A NEW IMAGE FOR AN UPGRADED DIE
-	updateDieTypeImageUI(die)
-	{
-		//BACKGROUND IMAGE FROM IMAGES FOLDER
-		let diceImageEl = document.getElementById(die.name.replace(' ', '_') + '_Image');
-		diceImageEl.src = 'images/plain_d' + die.sides + '.png';
-	}
-
-	updateDieValues()
-	{
-		for(let die of this.data.dice.dice){
-			let id = die.name.replace(' ', '_') + '_Value';
-			let valueSpan = document.getElementById(id);
-			valueSpan.innerHTML = die.value;
-			if(die.selected){
-				valueSpan.className = 'w3-red w3-text-white';
-			}else{
-				valueSpan.className = 'w3-text-white';
-			}
-		}
-	}
-
 	mode(arr){
 		return arr.sort((a,b) =>
 			arr.filter(v => v===a).length
