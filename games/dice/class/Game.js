@@ -572,6 +572,9 @@ class Game
 		let handMult = this.hands.length - this.hands.indexOf(handType);
 		let faceScores = hand.map( (d) => { return d.value; });
 
+		//AN ARRAY OF THE IDs OF DICE ACTUALLY USED AS PART OF THE SCORING HAND
+		let diceUsed = [];
+
 		//HOW SHOULD THE DICE VALUES BE USED?
 		let faceTotal = 0;
 		switch(handType){
@@ -606,16 +609,102 @@ class Game
 			break;
 		}
 
+		//GET THE DICE USED TO MAKE THIS HAND
+		diceUsed = this.getDiceUsed(hand, handType, handValue);
+		console.log(hand, handType, diceUsed);
+
 		//RETURN AS AN OBJECT? 
 		let returnScore = {
 				type: handType,
 				value: handValue,
 				mult: handMult,
 				faceTotal: faceTotal,
-				score: faceTotal * handMult
+				score: faceTotal * handMult,
+				diceUsed: diceUsed
 		};
 		return returnScore;
 		//return faceTotal * handMult;
+	}
+
+	getDiceUsed(hand, type, values)
+	{
+		//INIT AN ARRAY OF DIE NAMES TO RETURN
+		let returnNames = [];
+		switch(type){
+			case 'High Value':
+				for(let d of hand){
+					//console.log('HIGH VALUE', d);
+					if(
+						(d.selected) && 
+						(d.value === values)
+					){
+						returnNames.push(d.name);
+						//ONLY ONE VALUE/DIE USED - EXIT NOW
+						break;
+					}
+				}
+			break;
+			case 'One Pair':
+				for(let d of hand){
+					//IF THIS DIE IS SELECTED, THE VALUE IS PART OF THE PAIR, AND THIS WAS NOT ALREADY ADDED TO THE RETURN NAMES ARRAY (UNECESSARY LAST CHECK?)
+					if(
+						(d.selected) && 
+						(d.value === values) && 
+						(returnNames.indexOf(d.name) === false)
+					){
+						returnNames.push(d.name);
+						//KEEP ITERATING TO FIND THE SECOND PAIRED DIE
+					}
+				}
+			break;
+			case 'Two Pair':
+				//ITERATE OVER THE VALUES REQUIRED (TWO SEPARATE PAIR VALUES)
+				for(let v of values){
+					for(let d of hand){
+						//IF THIS DIE IS SELECTED, THE VALUE MATCHES THE CURRENT PAIR VALUE, AND THIS DIE WAS NOT ALREADY ADDED TO THE RETURN NAMES ARRAY
+						if(
+							(d.selected) && 
+							(d.value === v) && 
+							(returnNames.indexOf(d.name) === false)
+						){
+							returnNames.push(d.name);
+						}
+					}
+				}
+			break;
+			case 'Three of a Kind':
+				for(let d of hand){
+					//IF THIS DIE IS SELECTED, THE VALUE MATCHES THE 3OAK VALUE, AND THIS DIE WAS NOT ALREADY ADDED TO THE RETURN NAMES ARRAY
+					if(
+						(d.selected) && 
+						(d.value === values) && 
+						(returnNames.indexOf(d.name) === false)
+					){
+						returnNames.push(d.name);
+					}
+				}
+			break;
+			case 'Four of a Kind':
+				for(let d of hand){
+					//IF THIS DIE IS SELECTED, THE VALUE MATCHES THE 3OAK VALUE, AND THIS DIE WAS NOT ALREADY ADDED TO THE RETURN NAMES ARRAY
+					if(
+						(d.selected) && 
+						(d.value === values) && 
+						(returnNames.indexOf(d.name) === false)
+					){
+						returnNames.push(d.name);
+					}
+				}
+			break;
+			default:
+				//ALL OTHER HAND TYPES USE ALL 5 DICE - JUST RETURN ALL FIVE DICE!
+				for(let d of hand){
+					returnNames.push(d.name);
+				}
+			break;
+		}
+		console.log('getDiceUsed', returnNames);
+		return returnNames;
 	}
 
 
