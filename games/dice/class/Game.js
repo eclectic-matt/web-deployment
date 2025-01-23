@@ -1,6 +1,9 @@
 class Game 
 {
 	data = undefined;
+	antesPerRound = 3;
+	roundsPerGame = 8;
+	maxJokers = 5;
 	initTypes = [ 4, 6, 8, 10, 12 ];
 	allTypes = [ 100, 50, 20, 12, 10, 8, 6, 4 ];
 	hands = [
@@ -105,6 +108,7 @@ class Game
         this.data = {};
         this.initDice();
         this.initState();
+        this.initJokers();
     }
     initDice()
     {
@@ -161,6 +165,22 @@ class Game
 		let bossFx = this.bossEffects[round];
 		this.data.round.bossEffect = Math.floor(Math.random() * bossFx.length);
 	}
+	
+	loadPhase(phase){
+		switch(phase){
+			case 'choose':
+				//Display current round blinds and offer skip/reward
+			break;
+			case 'ante':
+			default:
+				//The main game loop
+			break;
+			case 'shop':
+				//Dice and "joker" upgrades
+				
+			break;
+		}
+	}
 
 
 	//======================
@@ -179,7 +199,7 @@ class Game
 		this.data.state.rerolls = this.data.state.initial.rerolls;
 
 		//REACHED 3 - INCREMENT LEVEL
-		if(this.data.round.ante === 3){
+		if(this.data.round.ante === this.antesPerRound){
 			this.nextRound();
 		}
 		//this.updateDieValues();
@@ -189,7 +209,7 @@ class Game
 	nextRound()
 	{
 		this.data.state.round++;
-		if(this.data.state.round === 8){
+		if(this.data.state.round === this.roundsPerGame){
 			//REACHED 8 - GAME COMPLETED! 
 			this.win();
 		}else{
@@ -206,7 +226,167 @@ class Game
 	{
 		alert('You lose - final score: ' + this.data.state.score);
 	}
-
+	
+	
+	//=====================
+	// JOKER FUNCTIONS
+	//=====================
+	initJokers(jokers = false)
+	{
+		if(!jokers){
+			this.data.jokers = [];
+		}else{
+			this.data.jokers = jokers;
+		}
+	}
+	addJoker(joker)
+	{
+		//Fail if joker limit reached
+		if(this.data.jokers.length >= this.maxJokers) return false;
+		//Otherwise add
+		this.data.jokers.push(joker);
+		this.addJokerToUi(joker);
+	}
+	removeJoker(joker)
+	{
+		if(this.data.jokers.indexOf(joker) === false) return false;
+		this.data.jokers.splice(this.data.jokers.indexOf(joker),1);
+	}
+	//Move Joker
+	
+	//Logic moved out of scoreSelectedDice()
+	scoreJokers(hand)
+	{
+		if(hand.length === 0) return false;
+		let totalScore = 0;
+		//Initialize handscore
+		let handScore = this.scoreHand(hand);
+		let totalChips = parseInt(handScore.value);
+		let totalMult = parseInt(handScore.mult);
+		//this.data.state.hands--;
+		//Alert the base score 
+		this.alertHandScore(handScore.score);
+		
+		//First, score each die
+		for(let die of hand){
+			if(!die.selected) continue;
+			for(let joker of this.data.jokers){
+				//Die scores are just 
+				let dScore = joker.scoreDie(die);
+				if(dScore){
+					switch (dScore.type) {
+						case 'chips':
+							switch (dScore.effect) {
+								case '+':
+									totalChips += parseInt(dScore.value);
+								break;
+								case '*':
+									totalChips *= parseInt(dScore.value);
+								break;
+								case '/':
+									totalChips = Math.floor(totalChips / dScore.value);
+								break;
+								case '-':
+									totalChips -= parseInt(dScore.value);
+								break;
+							}
+						break;
+						case 'mult':
+							switch (dScore.effect) {
+								case '+':
+									totalMult += parseInt(dScore.value);
+								break;
+								case '*':
+									totalMult *= parseInt(dScore.value);
+								break;
+								case '/':
+									totalMult = Math.floor(totalMult / dScore.value);
+								break;
+								case '-':
+									totalMult -= parseInt(dScore.value);
+								break;
+							}
+						break;
+					}
+					console.log('jDie', dScore);
+					//Notify die score
+					die.alertScore(dScore.type + ' ' + dScore.effect + '' + dScore.value);
+				}
+			}
+		}
+		
+		//THEN ITERATE JOKERS AND SCORE THE HAND OVERALL
+		for(let joker of this.data.jokers){
+			let hEffect = undefined;
+			let hValue = 0;
+			let hScore = joker.scoreHand(hand);
+			if(hScore){
+				//SWITCH type
+				switch(hScore.type){
+					case 'chips':
+						switch(hScore.effect){
+							case '+':
+								totalChips += hScore.value;
+							break;
+							case '*':
+								totalChips *= hScore.value;
+							break;
+							case '/':
+								totalChips = Math.floor(totalChips / hScore.value);
+							break;
+							case '-':
+								totalChips -= hScore.value;
+							break;
+						}
+					break;
+					case 'mult':
+						switch(hScore.effect){
+							case '+':
+								totalMult += hScore.value;
+							break;
+							case '*':
+								totalMult *= hScore.value;
+							break;
+							case '/':
+								totalMult = Math.floor(totalMult / hScore.value);
+							break;
+							case '-':
+								totalMult -= hScore.value;
+							break;
+						}
+					break;
+				}
+				console.log('jHand', hScore);
+				//Notify hand score
+				this.alertHandScore(hScore.type + ' ' + hScore.effect + '' + hScore.value);
+			}
+		}
+		
+		//Calculate Score
+		totalScore = parseInt(totalChips * totalMult);
+		console.log('totalScore', totalScore, totalChips, totalMult);
+		//Nofify Total Score
+		this.alertHandScore('Score: ' + totalScore);
+		//Apply Score
+		//this.data.state.score += totalScore;
+		
+		return {
+			type: handScore.type,
+			faceTotal: totalChips,
+			mult: totalMult,
+			value: handScore.value,
+			score: totalScore
+		}
+	}
+	
+	alertHandScore(scoreString)
+	{
+		let handScoreElId = 'handScoreTooltip';
+		let handScoreEl = document.getElementById(handScoreElId);
+		handScoreEl.classList.add('flash');
+		handScoreEl.classList.remove('flash');
+		handScoreEl.innerHTML = scoreString;
+	}
 
 	//=====================
 	// SCORING METHODS
@@ -327,8 +507,8 @@ class Game
 						return Math.max(...hand);
 				}
 		} else {
-				// USE TOP VALUE AS RETURN
-				return hand[hand.length - 1].value;
+			// USE TOP VALUE AS RETURN
+			return hand[hand.length - 1].value;
 		}
 		return valid;
 	}
@@ -537,12 +717,15 @@ class Game
 
 	scoreSelectedDice()
 	{
-		let handScore = this.scoreHand(this.getSelectedDice());
+		//let handScore = this.scoreHand(this.getSelectedDice());
+		let handScore = this.scoreJokers(this.getSelectedDice());
+		this.data.state.history.push(['Scored a ' + handScore.type + ' of ' + handScore.value + ' = ' + handScore.score]);
+		console.log('history', this.data.state.history);
 		this.data.state.hands--;
 		this.data.state.score += handScore.score;
 		//console.log('SCORE', this.data.state.score, this.data.round.score);
 		//IF WE HAVE REACHED THE CURRENT ANTE SCORE
-		if(this.data.state.score >= this.data.round.score ){
+		if( this.data.state.score >= this.data.round.score ){
 			alert('Ante complete - score: ' + this.data.state.score);
 			//SUCCESS - NEXT ANTE
 			this.nextAnte();
@@ -555,6 +738,7 @@ class Game
 				if(die.selected){
 					die.roll();
 					die.selected = false;
+					//die.showScore(die.value);
 				}
 			}
 		}
@@ -569,6 +753,30 @@ class Game
 	//=====================
 	// UI METHODS
 	//=====================
+	
+	addJokerToUi(joker)
+	{
+		let jokerEl = document.createElement('div');
+		jokerEl.classList.add('w3-col');
+		jokerEl.style.width = '20%';
+		jokerEl.classList.add('joker');
+		//OUTPUT JOKER NAME HEADER
+		let jokerHead = document.createElement('h3');
+		jokerHead.innerHTML = joker.data.name;
+		jokerEl.appendChild(jokerHead);
+		//OUTPUT JOKER DESCRIPTION 
+		let jokerDescEl = document.createElement('span');
+		jokerDescEl.innerHTML = joker.data.description;
+		jokerEl.appendChild(jokerDescEl);
+		//BORDER = RARITY
+		jokerEl.classList.add(joker.data.rarity);
+		//EFFECT = MODIFIER
+		if(joker.data.modifier){
+			jokerEl.classList.add(joker.data.modifier);
+		}
+		const jokerRowElId = 'jokerRow';
+		document.getElementById(jokerRowElId).appendChild(jokerEl);
+	}
 
 	/**
 	 * Updates the UI to display the 
@@ -656,7 +864,8 @@ class Game
 		currScoreEl.innerHTML = this.data.state.score;
 		
 		//BEST HAND CALCULATION
-		let handScore = this.scoreHand(this.getSelectedDice());
+		//let handScore = this.scoreHand(this.getSelectedDice());
+		let handScore = this.scoreJokers(this.getSelectedDice());
 		let currHandEl = document.getElementById('currentHandText');
 
 		if(handScore){

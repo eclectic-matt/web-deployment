@@ -2,6 +2,7 @@ body {
 	margin: 0;
 	box-sizing: border-box;
 	font-size: 12px;
+	background-color: #222;
 }
 .selected {
 	border: 5px solid outset;
@@ -32,4 +33,47 @@ body {
 }
 .roundScore{
 	border: 5px dotted white;
+}
+
+.tooltip {
+	display: none;
+}
+
+.flash {
+	animation: flashing 3s;
+	display: none;
+}
+
+@keyframes flashing {
+	0% {
+		top: 0px;
+		display: block;
+		opacity: 20%;
+	}
+	20% {
+		top: -30px;
+		opacity: 100%;
+	}
+	80% {
+		top: -30px;
+		opacity: 100%;
+	}
+	90% {
+		top: -15px;
+		opacity: 50%;
+	}
+	100% {
+		top: 0px;
+		opacity: 0%;
+		display: hidden;
+	}
+}
+
+.joker {
+	background-color: #f00;
+	color: #fff;
+	font-size: 0.6rem;
+}
+.joker h3 {
+	font-size: 0.8rem;
 }

@@ -45,4 +45,13 @@ class Die
                 const faceIndex = Math.floor(Math.random() * this.sides);
                 this.value = this.faces[faceIndex].value;
         }
+        
+        alertScore(scoreString)
+        {
+        	let dieScoreElId = this.name.replace(' ', '_') + '_Tooltip';
+			let dieScoreEl = document.getElementById(dieScoreElId);
+			dieScoreEl.classList.add('flash');
+			dieScoreEl.classList.remove('flash');
+			dieScoreEl.innerHTML = scoreString;
+        }
 }
