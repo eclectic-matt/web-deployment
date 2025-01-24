@@ -190,8 +190,8 @@ class UiManager
 		let dieEl = document.getElementById(die.name.replace(' ', '_'));
 		dieEl.classList.add('rolling');
 		dieEl.addEventListener('animationEnd', function(e){
-    		e.currentTarget.style.classList.remove('rolling');
-    		console.log(e.currentTarget,'stopped rolling');
+			e.currentTarget.style.classList.remove('rolling');
+			console.log(e.currentTarget,'stopped rolling');
 		}, false);
 	}
 	
@@ -204,5 +204,76 @@ class UiManager
 		handScoreEl.classList.add('flash');
 		handScoreEl.classList.remove('flash');
 		handScoreEl.innerHTML = scoreString;
+	}
+
+	//====================
+	// MODALS 
+	//====================
+
+	openRunInfoModal(){
+		document.getElementById('runInfoModal').style.display = 'block';
+		this.openRunInfoTab(false, 'PokerHands');
+
+		//CLEAR AND RESET THE POKER HANDS TABLE 
+		let pokerHandsTableEl = document.getElementById('pokerHandsTable');
+		pokerHandsTableEl.innerHTML = null;
+		let handsData = this.getHandsData();
+		for(let hand of hands){
+			let tr = document.createElement('tr');
+		}
+	}
+	
+	openRunInfoTab(evt, tabName) {
+		const highlightClass = "w3-green";
+		var i, x, tablinks;
+		x = document.getElementsByClassName("tab");
+		for (i = 0; i < x.length; i++) {
+			x[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablink");
+		for (i = 0; i < x.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(highlightClass, "");
+		}
+		document.getElementById(tabName).style.display = "block";
+		if(evt){
+			evt.currentTarget.className += " " + highlightClass;
+		}
+	}
+
+	getBlindsData(){
+		//GET RELEVANT DATA FROM THE GAME 
+		let data = diceGame.getBlindsAndStakesData(false);
+		console.log('ui.getBlinds', data);
+	}
+
+	getHandsData()
+	{
+		let data = diceGame.getHandsData();
+		console.log('ui.getHandsData', data);
+	}
+
+	openOptionsModal()
+	{
+		document.getElementById('optionsModal').style.display = 'block';
+		//document.createEvent('click').
+		this.openOptionsTab(false, 'Settings');
+	}
+
+	openOptionsTab(evt, tabName)
+	{
+		const highlightClass = "w3-green";
+		var i, x, tablinks;
+		x = document.getElementsByClassName("tab");
+		for (i = 0; i < x.length; i++) {
+			x[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablink");
+		for (i = 0; i < x.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(highlightClass, "");
+		}
+		document.getElementById(tabName).style.display = "block";
+		if(evt){
+			evt.currentTarget.className += " " + highlightClass;
+		}
 	}
 }

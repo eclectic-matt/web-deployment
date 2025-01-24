@@ -135,3 +135,14 @@ body {
             0 -60px 120px #C33; /* Outermost - flame edges (red) */
     }
 }
+
+.modal {
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	z-index: 50;
+	background-color: #222;
+	width: 90%;
+	height: 90%;
+	margin: auto;
+}

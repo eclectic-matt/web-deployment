@@ -16,6 +16,7 @@
 		</script-->
 		<!--script type="module" src="main.js"></script-->
 		<script src="main.js"></script>
+		<!-- LOAD IN THE MAIN CLASSES -->
 		<script src="class/Die.js" defer></script>
 		<script src="class/Game.js" defer></script>
 		<script src="class/UiManager.js" defer></script>
@@ -43,8 +44,8 @@
 				</div>
 				
 				<div id="controls">
-					<button id="runInfo">Run Info</button>
-					<button id="options">Options</button>
+					<button id="runInfo" onclick="ui.openRunInfoModal()">Run Info</button>
+					<button id="options" onclick="ui.openOptionsModal()">Options</button>
 				</div>
 				
 				<div id="overview">
@@ -60,6 +61,11 @@
 						Rounds:  <span id="runRounds">0</span>
 					</div>
 				</div>
+
+				<section id="scoreSection">
+
+				</section>
+
 			</div>
 			
 			<div id="jokerRow">
@@ -97,18 +103,97 @@
 					</div>
 				</div>
 			</div>
-		<!--/div-->
+			<!--/div-->
+					
+			<br><br>
 				
-		<br><br>
-				
-		<div id="buttons" class="w3-row-padding w3-container w3-center">
-			<!--button onclick="diceGame.rollAllDice()">Roll All Dice</button-->
-			<div class="w3-col s6">
-				<button id="rerollBtn" class="w3-button w3-round w3-red" disabled onclick="diceGame.rollSelectedDice()"> 🎲 Re-Roll</button>
+			<div id="buttons" class="w3-row-padding w3-container w3-center">
+				<!--button onclick="diceGame.rollAllDice()">Roll All Dice</button-->
+				<div class="w3-col s6">
+					<button id="rerollBtn" class="w3-button w3-round w3-red" disabled onclick="diceGame.rollSelectedDice()"> 🎲 Re-Roll</button>
+				</div>
+				<div class="w3-col s6">		
+					<button id="scoreBtn" class="w3-button w3-round w3-green" disabled onclick="diceGame.scoreSelectedDice()">🌟 Score</button>
+				</div>
 			</div>
-			<div class="w3-col s6">		
-				<button id="scoreBtn" class="w3-button w3-round w3-green" disabled onclick="diceGame.scoreSelectedDice()">🌟 Score</button>
+
+
+			<div id="runInfoModal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container">
+						<span onclick="document.getElementById('runInfoModal').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
+						<div class="w3-bar">
+							<button class="w3-bar-item w3-button tablink w3-green" onclick="ui.openRunInfoTab(event,'PokerHands')">Poker Hands</button>
+							<button class="w3-bar-item w3-button tablink" onclick="ui.openRunInfoTab(event,'Blinds')">Blinds</button>
+							<button class="w3-bar-item w3-button tablink" onclick="ui.openRunInfoTab(event,'Vouchers')">Vouchers</button>
+							<button class="w3-bar-item w3-button tablink" onclick="ui.openRunInfoTab(event,'Stakes')">Stakes</button>
+							<!--button class="w3-bar-item w3-button w3-red tablink" onclick="openRunInfo()">Close Run Info Modal</button-->
+						</div>
+						
+						<div id="PokerHands" class="w3-container w3-border tab">
+							<h2>Poker Hands</h2>
+							<table class="w3-table" id="pokerHandsTable">
+								
+							</table>
+						</div>
+					
+						<div id="Blinds" class="w3-container w3-border tab" style="display:none">
+							<h2>Blinds</h2>
+							<p>Blinds.</p> 
+						</div>
+					
+						<div id="Vouchers" class="w3-container w3-border tab" style="display:none">
+							<h2>Vouchers</h2>
+							<p>No Vouchers Redeemed</p>
+						</div>
+						
+						<div id="Stakes" class="w3-container w3-border tab" style="display:none">
+							<h2>Stakes</h2>
+							<p>No Stake.</p>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
+
+
+			<div id="optionsModal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container">
+						<span onclick="document.getElementById('optionsModal').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
+						<div class="w3-bar">
+							<button class="w3-bar-item w3-button tablink w3-green" onclick="ui.openOptionsTab(event,'Settings')">Settings</button>
+							<button class="w3-bar-item w3-button tablink" onclick="ui.openOptionsTab(event,'Audio')">Audio</button>
+							<button class="w3-bar-item w3-button tablink" onclick="ui.openOptionsTab(event,'Graphics')">Graphics</button>
+							<button class="w3-bar-item w3-button tablink" onclick="ui.openOptionsTab(event,'Stats')">Stats</button>
+							<!--button class="w3-bar-item w3-button w3-red tablink" onclick="openRunInfo()">Close Run Info Modal</button-->
+						</div>
+						
+						<div id="Settings" class="w3-container w3-border tab">
+							<h2>Settings</h2>
+							<table class="w3-table">
+							</table>
+						</div>
+					
+						<div id="Audio" class="w3-container w3-border tab" style="display:none">
+							<h2>Audio</h2>
+							<p>Audio.</p> 
+						</div>
+					
+						<div id="Graphics" class="w3-container w3-border tab" style="display:none">
+							<h2>Graphics</h2>
+							<p>No Graphics</p>
+						</div>
+						
+						<div id="Stats" class="w3-container w3-border tab" style="display:none">
+							<h2>Stats</h2>
+							<p>No Stats.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
 	</body>
 </html>

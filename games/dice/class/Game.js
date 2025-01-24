@@ -154,6 +154,7 @@ class Game
 	loadRound(round)
 	{
 		this.data.round = {};
+		this.data.round.id = round;
 		this.data.round.ante = 0;
 		//Antes
 		this.data.round.stakes = this.roundScores[round];
@@ -180,6 +181,23 @@ class Game
 				
 			break;
 		}
+	}
+
+	getBlindsAndStakesData(round=false)
+	{
+		if(!round){
+			round = this.data.round.id;
+		}
+		return {
+			stakes: this.roundScores[round],
+			score: this.data.round.stakes[this.data.round.ante],
+			bossFx: this.data.round.bossEffect
+		};
+	}
+
+	getHandsData()
+	{
+		return this.hands;
 	}
 
 
@@ -303,7 +321,7 @@ class Game
 
 	selectDie(name)
 	{
-		//Init count to enable reroll button
+		//Init count to enable/disable reroll/score buttons
 		let selectedCount = 0;
 		for(let die of this.data.dice.dice){
 			if(die.name === name){
@@ -325,6 +343,7 @@ class Game
 
 	deselectAllDice()
 	{
+		//ITERATE DICE TO DESELECT THEM
 		for(let die of this.data.dice.dice){
 			die.selected = false;
 		}
@@ -332,12 +351,15 @@ class Game
 	
 	rollSelectedDice()
 	{
+		//CHECK WE HAVE ENOUGH REROLLS
 		if(this.data.state.rerolls === 0) {
 			alert('Out of rerolls!');
 			return false;
 		}
+		//DECREMENT THE AVAILABLE REROLLS
 		this.data.state.rerolls--;
-		for (let die of this.data.dice.dice) {
+		//ITERATE OVER THE DICE
+		for(let die of this.data.dice.dice) {
 			if (die.selected) {
 				die.roll();
 				die.selected = false;
@@ -351,17 +373,16 @@ class Game
 
 	scoreSelectedDice()
 	{
-		//let handScore = this.scoreHand(this.getSelectedDice());
-		//let handScore = this.scoreJokers(this.getSelectedDice());
+		//GET THE SCORE FOR THE SELECTED DICE VIA THE ScoreManager CLASS
 		let handScore = scoreMgr.scoreJokers(this.getSelectedDice(), this.data.jokers);
-		
+		//PUSH THIS SCORE TO THE HISTORY
 		this.data.state.history.push(['Scored a ' + handScore.type + ' of ' + handScore.value + ' = ' + handScore.score]);
-		//console.log('history', this.data.state.history);
+		//DECREMENT AVAILABLE HANDS
 		this.data.state.hands--;
+		//ADD THE HAND SCORE TO THE CURRENT SCORE
 		this.data.state.score += handScore.score;
-		//console.log('SCORE', this.data.state.score, this.data.round.score);
 		//IF WE HAVE REACHED THE CURRENT ANTE SCORE
-		if( this.data.state.score >= this.data.round.score ){
+		if(this.data.state.score >= this.data.round.score){
 			alert('Ante complete - score: ' + this.data.state.score);
 			//SUCCESS - NEXT ANTE
 			this.nextAnte();
@@ -370,11 +391,10 @@ class Game
 				alert('Out of hands - scored: ' + this.data.state.score);
 			}
 			//Reroll and deselect all scored dice
-			for (let die of this.data.dice.dice) {
+			for(let die of this.data.dice.dice) {
 				if(die.selected){
 					die.roll();
 					die.selected = false;
-					//die.showScore(die.value);
 				}
 			}
 		}
