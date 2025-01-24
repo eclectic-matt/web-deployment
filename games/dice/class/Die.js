@@ -48,10 +48,13 @@ class Die
         
         alertScore(scoreString)
         {
-        	let dieScoreElId = this.name.replace(' ', '_') + '_Tooltip';
+			//NOT WORKING AND INTERFERING WITH THE D4 TOOLTIPS
+			/*let dieScoreElId = this.name.replace(' ', '_') + '_Tooltip';
 			let dieScoreEl = document.getElementById(dieScoreElId);
 			dieScoreEl.classList.add('flash');
 			dieScoreEl.classList.remove('flash');
-			dieScoreEl.innerHTML = scoreString;
+			let dieScoreSpan = document.createElement('span');
+			dieScoreSpan.innerHTML = scoreString;
+			dieScoreEl.appendChild(dieScoreSpan);*/
         }
 }

@@ -6,15 +6,212 @@
 		100, 50, 20, 12, 10, 8, 6, 4 
 	],
 	"hands": [
-		"Max Values",
-		"Five of a Kind",
-		"Full House",
-		"Four of a Kind",
-		"Straight",
-		"Three of a Kind",
-		"Two Pair",
-		"One Pair",
-		"High Value"
+		{
+			"name": "Max Values",
+			"description": "All dice have the maximum value (e.g. 6 on a D6)",
+			"current": {
+				"level": 0,
+				"scored": 0
+			},
+			"stats": {
+				"totalScored": 0
+			}
+		},
+		{
+			"name": "Five of a Kind",
+			"description": "Five dice all with the same value",
+			"current": {
+				"level": 0,
+				"scored": 0
+			},
+			"stats": {
+				"totalScored": 0
+			}
+		},
+		{
+			"name": "Full House",
+			"description": "Three dice with the same value and a pair of a different value",
+			"current": {
+				"level": 0,
+				"scored": 0
+			}
+		},
+		{
+			"name": "Four of a Kind",
+			"description": "Four dice with the same value",
+			"current": {
+				"level": 0,
+				"scored": 0
+			}
+		},
+		{
+			"name": "Straight",
+			"description": "Five dice of ascending (or descending) value",
+			"current": {
+				"level": 0,
+				"scored": 0
+			}
+		},
+		{
+			"name": "Three of a Kind",
+			"description": "Three dice with the same value",
+			"current": {
+				"level": 0,
+				"scored": 0
+			}
+		},
+		{
+			"name": "Two Pair",
+			"description": "Two dice with the same value, and another two dice of a different value",
+			"current": {
+				"level": 0,
+				"scored": 0
+			}
+		},
+		{
+			"name": "One Pair",
+			"description": "Two dice of the same value",
+			"current": {
+				"level": 0,
+				"scored": 0
+			}
+		},
+		{
+			"name": "High Value",
+			"description": "The highest single die value available",
+			"current": {
+				"level": 0,
+				"scored": 0
+			}
+		}
+	],
+	"bosses": [
+		[ 
+			{
+				"name": "Bully",
+				"minAnte": 1,
+				"maxAnte": 2,
+				"description": "Die values of '1' do not score",
+				"score": "function(die){if(die.value==1){return false;}else{return true}}"
+			}, 
+			{
+				"name": "Stingy",
+				"minAnte": 1,
+				"maxAnte": 2,
+				"description": "-1 reroll per round",
+				"score": "function(game){game.data.state.rerolls--;}"
+			}
+		],
+		[ 
+			{
+				"name": "Cumpany",
+				"minAnte": 2,
+				"maxAnte": 3,
+				"description": "Die values of '2' do not score"
+			}, 
+			{
+				"name": "Handless",
+				"minAnte": 2,
+				"maxAnte": 3,
+				"description": "-1 hands"
+			} 
+		],
+		[ 
+			{
+				"name": "Variant",
+				"minAnte": 3,
+				"maxAnte": 5,
+				"description": "No repeat hand types this round"
+			}, 
+			{
+				"name": "Slim Chance",
+				"minAnte": 3,
+				"maxAnte": 5,
+				"description": "Play only one hand"
+			} 
+		],
+		[ 
+			{
+				"name": "Splitter",
+				"minAnte": 4,
+				"maxAnte": 6,
+				"description": "Die values of '3' do not score"
+			}, 
+			{
+				"name": "Blank",
+				"minAnte": 4,
+				"maxAnte": 6,
+				"description": "Ignore one random joker per round"
+			} 
+		],
+		[ 
+			{
+				"name": "Plain",
+				"minAnte": 5,
+				"maxAnte": 7,
+				"description": "Ignore die enhancements"
+			}, 
+			{
+				"name": "Dark Skies",
+				"minAnte": 5,
+				"maxAnte": 7,
+				"description": "Lower the level of each hand played"
+			} 
+		],
+		[ 
+			{
+				"name": "Richy Rich",
+				"minAnte": 6,
+				"maxAnte": 7,
+				"description": "Ignore the lowest value dice in each hand"
+			}, 
+			{
+				"name": "Unkind",
+				"minAnte": 6,
+				"maxAnte": 7,
+				"description": "Start with no discards"
+			} 
+		],
+		[ 
+			{
+				"name": "Yuuge",
+				"minAnte": 7,
+				"maxAnte": 7,
+				"description": "Extra Large Blind"
+			}
+		],
+		[ 
+			{
+				"name": "The Beast",
+				"minAnte": 8,
+				"maxAnte": 8,
+				"description": "Disable one random die each round"
+			},
+			{
+				"name": "The Hurt",
+				"minAnte": 8,
+				"maxAnte": 8,
+				"description": "Lose £1 for each die scored"
+			},
+			{
+				"name": "The Wilds",
+				"minAnte": 8,
+				"maxAnte": 8,
+				"description": "Disable one random joker each round"
+			},
+			{
+				"name": "The Sight",
+				"minAnte": 8,
+				"maxAnte": 8,
+				"description": "Die values are rolled hidden"
+			},
+			{
+				"name": "The King",
+				"minAnte": 8,
+				"maxAnte": 8,
+				"description": "Jokers are shuffled and hidden"
+			}
+		]
 	],
 	"faceUpgrades": [
 		"Platinum",
@@ -26,18 +223,18 @@
 	"shopUpgrades": {
 		"face": {
 			"description": "Upgrade the multiplier on one face of a selected die (Max: Platinum= 5x)",
-			"cost": "Value x 2"
+			"cost": "Value x 10"
 		},
 		"upgrade": {
 			"description": "Increase the type of one dice",
-			"cost": "Type x 2"
+			"cost": "Type x 20"
 		},
-		"modifier": {
+		"joker": {
 			"description": "Modifies the game in some way",
 			"cost": 20
 		},
-		"dice": {
-			"description": "Buy an additional die",
+		"planet": {
+			"description": "Upgrade a hand's scoring level",
 			"cost": 50
 		}
 	},
@@ -93,16 +290,5 @@
 		[ 2000, 2500, 3000 ],
 		[ 3750, 4500, 5500 ],
 		[ 7000, 8500, 10000 ]
-	],
-	"bossEffects": [
-		[ "No 1s", "-1 reroll" ],
-		[ "No 2s", "-1 hand" ],
-		[ "No repeats", "One Hand" ],
-		[ "No 3s", "-2 reroll" ],
-		[ "No repeats", "One Hand" ],
-		[ "Ignore Lowest Die", "-2 reroll" ],
-		[ "Ignore Lowest Die", "No repeats" ],
-		[ "Ignore Highest Die", "No Max Values" ]
 	]
-
 }

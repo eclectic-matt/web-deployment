@@ -5,7 +5,10 @@ class UiManager
 		let jokerEl = document.createElement('div');
 		jokerEl.classList.add('w3-col');
 		jokerEl.style.width = '20%';
+		jokerEl.style.margin = 'auto';
+		jokerEl.style.border = '1px solid white';
 		jokerEl.classList.add('joker');
+		jokerEl.classList.add('w3-tooltip');
 		//OUTPUT JOKER NAME HEADER
 		let jokerHead = document.createElement('h2');
 		jokerHead.innerHTML = joker.data.name;
@@ -13,6 +16,12 @@ class UiManager
 		//OUTPUT JOKER DESCRIPTION 
 		let jokerDescEl = document.createElement('span');
 		jokerDescEl.innerHTML = joker.data.description;
+		jokerDescEl.classList.add('w3-text');
+		jokerDescEl.classList.add('w3-black');
+		jokerDescEl.classList.add('w3-text-white');
+		jokerDescEl.style.position = 'absolute';
+		jokerDescEl.style.left = '0px';
+		jokerDescEl.style.bottom = '0px';
 		jokerEl.appendChild(jokerDescEl);
 		//BORDER = RARITY
 		jokerEl.classList.add(joker.data.rarity);

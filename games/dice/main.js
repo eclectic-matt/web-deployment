@@ -15,4 +15,6 @@ function test(game){
 	//Get the evens joker and add to the game for free
 	let evensJoker = new EvensJoker();
 	game.addJoker(evensJoker);
+	let ChipButtyJoker = new ChipButty();
+	game.addJoker(ChipButtyJoker);
 }
