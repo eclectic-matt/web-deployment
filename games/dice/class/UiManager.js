@@ -217,9 +217,32 @@ class UiManager
 		//CLEAR AND RESET THE POKER HANDS TABLE 
 		let pokerHandsTableEl = document.getElementById('pokerHandsTable');
 		pokerHandsTableEl.innerHTML = null;
+		//THIS SHOULD EVENTUALLY BE MORE DYNAMIC WITH # HANDS PLAYED - USE 0 FOR NOW
 		let handsData = this.getHandsData();
-		for(let hand of hands){
+		for(let hand of handsData){
 			let tr = document.createElement('tr');
+			//THE HAND TYPE NAME
+			let td = document.createElement('td');
+			td.innerHTML = hand;
+			tr.appendChild(td);
+			pokerHandsTableEl.appendChild(tr);
+			//THE HAND MULTIPLIER
+			//let handMult = this.hands.length - this.hands.indexOf(handType);
+			let handMult = handsData.length - handsData.indexOf(hand);
+			td = document.createElement('td');
+			td.innerHTML = handMult + 'x';
+			tr.appendChild(td);
+			pokerHandsTableEl.appendChild(tr);
+			//THE HAND LEVEL (planet cards)
+			td = document.createElement('td');
+			td.innerHTML = '(L1)';
+			tr.appendChild(td);
+			pokerHandsTableEl.appendChild(tr);
+			//NUMBER OF TIMES HAND SCORED
+			td = document.createElement('td');
+			td.innerHTML = 0;
+			tr.appendChild(td);
+			pokerHandsTableEl.appendChild(tr);
 		}
 	}
 	
@@ -244,12 +267,14 @@ class UiManager
 		//GET RELEVANT DATA FROM THE GAME 
 		let data = diceGame.getBlindsAndStakesData(false);
 		console.log('ui.getBlinds', data);
+		return data;
 	}
 
 	getHandsData()
 	{
 		let data = diceGame.getHandsData();
 		console.log('ui.getHandsData', data);
+		return data;
 	}
 
 	openOptionsModal()
