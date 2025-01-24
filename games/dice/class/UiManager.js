@@ -38,7 +38,7 @@ class UiManager
 		let anteName = game.anteNames[game.data.round.ante];
 		let roundScore = game.data.round.stakes[game.data.round.ante];
 		let stake = game.data.round.stakes[game.data.round.ante];
-		let handScore = game.scoreJokers(hand);;
+		let handScore = scoreMgr.scoreJokers(hand, game.data.jokers);;
 		this.updateUIMenu(state, hand, anteName, roundScore, handScore);
 	}
 

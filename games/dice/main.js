@@ -1,8 +1,10 @@
 let diceGame;
 let ui;
+let scoreMgr;
 
 function init(){
 	ui = new UiManager();
+	scoreMgr = new ScoreManager();
 	diceGame = new Game();
 	
 	//TESTING HERE
