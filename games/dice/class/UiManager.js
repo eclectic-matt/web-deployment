@@ -7,7 +7,7 @@ class UiManager
 		jokerEl.style.width = '20%';
 		jokerEl.classList.add('joker');
 		//OUTPUT JOKER NAME HEADER
-		let jokerHead = document.createElement('h3');
+		let jokerHead = document.createElement('h2');
 		jokerHead.innerHTML = joker.data.name;
 		jokerEl.appendChild(jokerHead);
 		//OUTPUT JOKER DESCRIPTION 
@@ -188,11 +188,17 @@ class UiManager
 	updateUiRollDie(die)
 	{
 		let dieEl = document.getElementById(die.name.replace(' ', '_'));
-		dieEl.classList.add('rolling');
-		dieEl.addEventListener('animationEnd', function(e){
+		//dieEl.classList.add('rolling');
+		const rollingAnimClassName = "w3-spin";
+		const animRollTimeMs = 1000;
+		dieEl.classList.add(rollingAnimClassName);
+		setTimeout( (dieEl) => {
+			dieEl.classList.remove(rollingAnimClassName);
+		}, animRollTimeMs, dieEl);
+		/*dieEl.addEventListener('animationEnd', function(e){
 			e.currentTarget.style.classList.remove('rolling');
 			console.log(e.currentTarget,'stopped rolling');
-		}, false);
+		}, false);*/
 	}
 	
 	

@@ -314,6 +314,7 @@ class Game
 		//ITERATE THROUGH DICE
 		for(let i of this.data.dice.dice){
 			i.roll();
+			ui.updateUiRollDie(i)
 		}
 		//Then update the UI
 		ui.updateUi(this);

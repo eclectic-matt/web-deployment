@@ -26,103 +26,113 @@
 		<script src="class/jokers/EvensJoker.js" defer></script>
 	</head>
 	<body onload="init()">
-		<!--div id="game" class="w3-row"-->
-			<div id="menu" class="w3-container w3-black">
-				
+		<div id="game" class="w3-row-padding">
+			<div id="menu" class="w3-col w3-black w3-quarter">
 				<div id="menuHeader">
 					<h2 id="currentRoundTitle">Choose Your Next Blind</h2>
 					<h3><span id="currentRoundRequirements"></span><span id="currentRoundStake"></span></h3>
 				</div>
-				
 				<div class="w3-container w3-green w3-border-white w3-round-xxlarge w3-center w3-xxlarge roundScore">
 					<span id="roundScore">0</span>
 				</div>
-				
 				<div id="handScore" class="w3-container w3-center w3-xxlarge">
 					<span id="chips" class="w3-blue">0</span> x <span id="multiplier" class="w3-red">0</span> = <span id="currentScore" class="w3-purple">0</span>
 					<span id="handScoreTooltip" class="tooltip"></span>
 				</div>
-				
-				<div id="controls">
-					<button id="runInfo" onclick="ui.openRunInfoModal()">Run Info</button>
-					<button id="options" onclick="ui.openOptionsModal()">Options</button>
-				</div>
-				
-				<div id="overview">
-					
-					<div id="currentRound">
-						Hands:  <span id="currentRoundHands">3</span>
-						Rerolls: <span id="currentRoundRerolls">3</span>
+				<section id="scoreSection w3-row-padding w3-container">
+					<div id="helpBtnsDiv" class="w3-third w3-col">
+						<br>
+						<button 
+							id="runInfo" 
+							onclick="ui.openRunInfoModal()"
+							class="w3-btn w3-bar w3-red w3-text-white w3-round"
+						><br>Run<br>Info<br></button>
+						<br><br>
+						<button 
+							id="options" 
+							onclick="ui.openOptionsModal()"
+							class="w3-btn w3-bar w3-orange w3-text-white"
+						><br><br>Options<br><br></button>
 					</div>
-					Cash: £<span id="currentCash">0</span>
-					
-					<div id="runSummary">
-						Antes:  <span id="runAntes">1 / 8</span>
-						Rounds:  <span id="runRounds">0</span>
-					</div>
-				</div>
-
-				<section id="scoreSection">
-
+					<div id="scoreTotalsDiv" class="w3-twothird w3-col w3-center">
+						<div id="handsInfo" class="w3-col s6">
+							<p class="w3-black w3-text-white w3-small" style="padding:0; margin:0;">Hands</p>
+							<span id="currentRoundHands" class="w3-xxlarge w3-text-blue" style="padding:0; margin:0;">3</span>
+						</div>
+						<div id="rerollsInfo" class="w3-col s6">
+							<p class="w3-black w3-text-white w3-small" style="padding:0; margin:0;">Rerolls</p>
+							<span id="currentRoundRerolls" class="w3-xxlarge w3-text-red" style="padding:0; margin:0;">3</span>
+						</div>
+						<div style="width:100%; padding:0; margin:0;">
+							<p class="w3-xxlarge w3-text-yellow w3-center" style="padding:0; margin:0;">£<span id="currentCash">0</span></p>
+						</div>
+						<div id="anteInfo" class="w3-col s6">
+							<p class="w3-black w3-text-white" style="padding:0; margin:0;">Ante</p>
+							<p class="w3-text-white w3-large"><span id="runAntes" class="w3-xlarge w3-text-orange" style="padding:0; margin:0;">1</span> / 8</p>
+						</div>
+						<div id="roundInfo" class="w3-col s6">
+							<p class="w3-black w3-text-white" style="padding:0; margin:0;">Round</p>
+							<span id="runRounds" class="w3-xxlarge w3-text-orange" style="padding:0; margin:0;">0</span>
+						</div>
 				</section>
+			</div>
 
-			</div>
+			<div id="mainGameSection" class="w3-col w3-threequarter">
 			
-			<div id="jokerRow">
-				<!-- Filled by game. -->
-			</div>
-					
-			<div id="diceTray" class="w3-darkgray w3-container">
-				<h2 id="currentHandText" class="w3-center w3-darkgray w3-text-white"></h2>
-				<div id="diceRow" class="w3-row-padding w3-content">
-					<!-- DEFINE THE DICE HERE-->
-					<div id="Starting_D4" class="die w3-col" style="width:20%">
-						<span id="Starting_D4_Tooltip" class="tooltip"></span>
-						<img id="Starting_D4_Image" src="images/plain_d4.png" />
-						<span id="Starting_D4_Value" class="w3-text-white">4</span>
-					</div>
-					<div id="Starting_D6" class="die w3-col" style="width:20%">
-						<span id="Starting_D6_Tooltip" class="tooltip"></span>
-						<img id="Starting_D6_Image" src="images/plain_d6.png" />
-						<span id="Starting_D6_Value" class="w3-text-white">6</span>
-					</div>
-					<div id="Starting_D8" class="die w3-col" style="width:20%">
-						<span id="Starting_D8_Tooltip" class="tooltip"></span>
-						<img id="Starting_D8_Image" src="images/plain_d8.png" />
-						<span id="Starting_D8_Value" class="w3-text-white">8</span>
-					</div>
-					<div id="Starting_D10" class="die w3-col" style="width:20%">
-						<span id="Starting_D10_Tooltip" class="tooltip"></span>
-						<img id="Starting_D10_Image" src="images/plain_d10.png" />
-						<span id="Starting_D10_Value" class="w3-text-white">10</span>
-					</div>
-					<div id="Starting_D12" class="die w3-col" style="width:20%">
-						<span id="Starting_D12_Tooltip" class="tooltip"></span>
-						<img id="Starting_D12_Image" src="images/plain_d12.png" />
-						<span id="Starting_D12_Value" class="w3-text-white">12</span>
+				<div id="jokerRow" class="w3-padding-large">
+					<!-- Filled by game. -->
+				</div>
+				<br><br><br>
+
+				<div id="diceTray" class="w3-darkgray w3-threequarters">
+					<h2 id="currentHandText" class="w3-center w3-darkgray w3-text-white"></h2>
+					<div id="diceRow" class="w3-row-padding w3-content">
+						<!-- DEFINE THE DICE HERE-->
+						<div id="Starting_D4" class="die w3-col" style="width:20%">
+							<span id="Starting_D4_Tooltip" class="tooltip"></span>
+							<img id="Starting_D4_Image" src="images/plain_d4.png" />
+							<span id="Starting_D4_Value" class="w3-text-white">4</span>
+						</div>
+						<div id="Starting_D6" class="die w3-col" style="width:20%">
+							<span id="Starting_D6_Tooltip" class="tooltip"></span>
+							<img id="Starting_D6_Image" src="images/plain_d6.png" />
+							<span id="Starting_D6_Value" class="w3-text-white">6</span>
+						</div>
+						<div id="Starting_D8" class="die w3-col" style="width:20%">
+							<span id="Starting_D8_Tooltip" class="tooltip"></span>
+							<img id="Starting_D8_Image" src="images/plain_d8.png" />
+							<span id="Starting_D8_Value" class="w3-text-white">8</span>
+						</div>
+						<div id="Starting_D10" class="die w3-col" style="width:20%">
+							<span id="Starting_D10_Tooltip" class="tooltip"></span>
+							<img id="Starting_D10_Image" src="images/plain_d10.png" />
+							<span id="Starting_D10_Value" class="w3-text-white">10</span>
+						</div>
+						<div id="Starting_D12" class="die w3-col" style="width:20%">
+							<span id="Starting_D12_Tooltip" class="tooltip"></span>
+							<img id="Starting_D12_Image" src="images/plain_d12.png" />
+							<span id="Starting_D12_Value" class="w3-text-white">12</span>
+						</div>
 					</div>
 				</div>
-			</div>
-			<!--/div-->
-					
-			<br><br>
-				
-			<div id="buttons" class="w3-row-padding w3-container w3-center">
-				<!--button onclick="diceGame.rollAllDice()">Roll All Dice</button-->
-				<div class="w3-col s6">
-					<button id="rerollBtn" class="w3-button w3-round w3-red" disabled onclick="diceGame.rollSelectedDice()"> 🎲 Re-Roll</button>
-				</div>
-				<div class="w3-col s6">		
-					<button id="scoreBtn" class="w3-button w3-round w3-green" disabled onclick="diceGame.scoreSelectedDice()">🌟 Score</button>
+				<br><br>
+				<div id="buttons" class="w3-row-padding w3-container w3-center">
+					<!--button onclick="diceGame.rollAllDice()">Roll All Dice</button-->
+					<div class="w3-col s6">
+						<button id="rerollBtn" class="w3-button w3-round w3-red" disabled onclick="diceGame.rollSelectedDice()"> 🎲 Re-Roll</button>
+					</div>
+					<div class="w3-col s6">		
+						<button id="scoreBtn" class="w3-button w3-round w3-green" disabled onclick="diceGame.scoreSelectedDice()">🌟 Score</button>
+					</div>
 				</div>
 			</div>
 
 
 			<div id="runInfoModal" class="w3-modal">
-				<div class="w3-modal-content">
+				<div class="w3-modal-content w3-black">
 					<div class="w3-container">
 						<span onclick="document.getElementById('runInfoModal').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
-						<div class="w3-bar">
+						<div class="w3-bar w3-darkgray">
 							<button class="w3-bar-item w3-button tablink w3-green" onclick="ui.openRunInfoTab(event,'PokerHands')">Poker Hands</button>
 							<button class="w3-bar-item w3-button tablink" onclick="ui.openRunInfoTab(event,'Blinds')">Blinds</button>
 							<button class="w3-bar-item w3-button tablink" onclick="ui.openRunInfoTab(event,'Vouchers')">Vouchers</button>
@@ -132,14 +142,47 @@
 						
 						<div id="PokerHands" class="w3-container w3-border tab">
 							<h2>Poker Hands</h2>
-							<table class="w3-table-all" id="pokerHandsTable">
+							<table class="w3-table-all w3-text-black" id="pokerHandsTable">
 								
 							</table>
+							<br><br>
 						</div>
 					
 						<div id="Blinds" class="w3-container w3-border tab" style="display:none">
 							<h2>Blinds</h2>
-							<p>Blinds.</p> 
+							<div id="blindsDiv" class="w3-row-padding">
+								<div id="smallBlindDiv" class="w3-col w3-third w3-center">
+									<h2 id="smallBlindStatus" class="w3-red">Current</h2>
+									<h3 id="smallBlindName" style="border:6px solid cyan" class="w3-indigo w3-text-white w3-round-xxlarge">Small Blind</h3>
+									<h2 class="smallBlindIcon w3-blue w3-border w3-round">Small Blind</h2>
+									<h2 id="smallBlindScore" class="w3-black">Score at least: 300</h2>
+									<h2 class="w3-center">or</h2>
+									<div id="smallBlindSkipRewardDiv">
+										<img src="" />
+										<button id="smallBlindSkipBtn">Skip Reward</button>
+									</div>
+								</div>
+								<div id="bigBlindDiv" class="w3-col w3-third w3-center">
+									<h2 id="bigBlindStatus" class="w3-orange">Upcoming</h2>
+									<h3 id="bigBlindName" style="border:6px solid orange" class="w3-brown w3-text-white w3-round-xxlarge">Big Blind</h3>
+									<h2 class="bigBlindIcon w3-orange w3-text-brown w3-border w3-round">Big Blind</h2>
+									<h2 id="bigBlindScore" class="w3-black">Score at least: 500</h2>
+									<h2 class="w3-center">or</h2>
+									<div id="bigBlindSkipRewardDiv">
+										<img src="" />
+										<button id="bigBlindSkipBtn" disabled>Skip Reward</button>
+									</div>
+								</div>
+								<div id="bossBlindDiv" class="w3-col w3-third w3-center">
+									<h2 id="bossBlindStatus" class="w3-orange">Upcoming</h2>
+									<h3 id="bossBlindName" style="border:6px solid yellow" class="w3-amber w3-text-white w3-round-xxlarge">The Twat</h3>
+									<h2 id="bossBlindIcon" class="w3-yellow w3-text-brown w3-border w3-round">TWAT</h2>
+									<h4 id="bossBlindEffect" class="w3-text-white">Must score 5 dice</h4>
+									<h2 id="bossBlindScore" class="w3-black">Score at least: 1200</h2>
+									<!--CANNOT SKIP BOSS BLINDS -->
+								</div>
+							</div>
+							<br><br>
 						</div>
 					
 						<div id="Vouchers" class="w3-container w3-border tab" style="display:none">
