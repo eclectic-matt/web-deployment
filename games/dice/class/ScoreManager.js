@@ -86,7 +86,8 @@ class ScoreManager
 					}
 					//console.log('jDie', dScore);
 					//Notify die score
-					die.alertScore(dScore.type + ' ' + dScore.effect + '' + dScore.value);
+					//die.alertScore(dScore.type + ' ' + dScore.effect + '' + dScore.value);
+					joker.alertScore(dScore.type + ' ' + dScore.effect + '' + dScore.value);
 				}
 			}
 		}
@@ -136,6 +137,8 @@ class ScoreManager
 				//Notify hand score
 				ui.alertHandScore(hScore.type + ' ' + hScore.effect + '' + hScore.value);
 			}
+			//Remove the tooltip
+			joker.clearAlert();
 		}
 		
 		//Calculate Score

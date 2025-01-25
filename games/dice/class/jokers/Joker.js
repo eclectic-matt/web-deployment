@@ -56,4 +56,22 @@ class Joker
 	{
 		//Nothing
 	}
+	
+	//=======
+	//Alert
+	//=======
+	alertScore(scoreString)
+	{
+		//dScore.type + ' ' + dScore.effect + '' + dScore.value);
+		let tooltipEl = document.getElementById(this.data.name.replace(' ', '_') + '_Tooltip');
+		let newScoreSpan = document.createElement('span');
+		newScoreSpan.innerHTML = scoreString;
+		tooltipEl.appendChild(newScoreSpan);
+	}
+	
+	clearAlert()
+	{
+		let tooltipEl = document.getElementById(this.data.name.replace(' ', '_') + '_Tooltip');
+		tooltipEl.innerHTML = null;
+	}
 }

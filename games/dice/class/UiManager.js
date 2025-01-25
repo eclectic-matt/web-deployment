@@ -15,6 +15,7 @@ class UiManager
 		jokerEl.appendChild(jokerHead);
 		//OUTPUT JOKER DESCRIPTION 
 		let jokerDescEl = document.createElement('span');
+		jokerDescEl.id = joker.data.name.replace(' ', '_') + '_Tooltip';
 		jokerDescEl.innerHTML = joker.data.description;
 		jokerDescEl.classList.add('w3-text');
 		jokerDescEl.classList.add('w3-black');
