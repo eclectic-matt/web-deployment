@@ -18,6 +18,8 @@ class Joker
     	this.data.rarity = 'Common';
     	this.data.modifier = undefined;
     	this.data.price = 1;
+    	this.data.tooltips = [];
+    	this.data.timeouts = [];
     }
     
     //EXTENDED CLASSES MUST IMPLEMENT THE FOLLOWING:
@@ -63,14 +65,21 @@ class Joker
 	alertScore(scoreString)
 	{
 		//dScore.type + ' ' + dScore.effect + '' + dScore.value);
-		let tooltipEl = document.getElementById(this.data.name.replace(' ', '_') + '_Tooltip');
-		let newScoreSpan = document.createElement('span');
-		newScoreSpan.innerHTML = scoreString;
-		tooltipEl.appendChild(newScoreSpan);
+		//Set a delay and queue?
+		this.data.tooltips.push(scoreString);
+		this.data.timeouts.push(setTimeout((joker, scoreString) => {
+			let tooltipEl = document.getElementById(joker.data.name.replace(' ', '_') + '_Tooltip');
+			let newScoreSpan = document.createElement('span');
+			newScoreSpan.innerHTML = scoreString;
+			tooltipEl.appendChild(newScoreSpan);
+			joker.data.tooltips.pop();
+		}, 500 * this.data.tooltips.length, this, scoreString));
 	}
 	
 	clearAlert()
 	{
+		this.data.tooltips = [];
+		this.data.timeouts = [];
 		let tooltipEl = document.getElementById(this.data.name.replace(' ', '_') + '_Tooltip');
 		tooltipEl.innerHTML = null;
 	}

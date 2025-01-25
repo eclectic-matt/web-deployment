@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<link rel="manifest" href="manifest.json">
 		<title>Dice Balatro</title>
 		<link rel="stylesheet" href="style/dice.css" />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -25,6 +26,41 @@
 		<script src="class/jokers/Joker.js" defer></script>
 		<script src="class/jokers/EvensJoker.js" defer></script>
 		<script src="class/jokers/ChipButty.js" defer></script>
+		<script>
+			/* Get the documentElement (<html>) to display the page in fullscreen */
+			var elem = document.documentElement;
+			let fullScreen = false;
+			function toggleFullScreen(){
+				if(fullScreen){
+					fullScreen = false;
+					closeFullscreen();
+				}else{
+					fullScreen = true;
+					openFullscreen();
+				}
+			}
+			/* View in fullscreen */
+			function openFullscreen() {
+			  if (elem.requestFullscreen) {
+			    elem.requestFullscreen();
+			  } else if (elem.webkitRequestFullscreen) { /* Safari */
+			    elem.webkitRequestFullscreen();
+			  } else if (elem.msRequestFullscreen) { /* IE11 */
+			    elem.msRequestFullscreen();
+			  }
+			}
+			
+			/* Close fullscreen */
+			function closeFullscreen() {
+			  if (document.exitFullscreen) {
+			    document.exitFullscreen();
+			  } else if (document.webkitExitFullscreen) { /* Safari */
+			    document.webkitExitFullscreen();
+			  } else if (document.msExitFullscreen) { /* IE11 */
+			    document.msExitFullscreen();
+			  }
+			}
+		</script>
 	</head>
 	<body onload="init()">
 		<div id="game" class="w3-row-padding" style="height: 100%">
@@ -77,6 +113,7 @@
 							<span id="runRounds" class="w3-xlarge w3-text-orange" style="padding:0; margin:0;">0</span>
 						</div>
 				</section>
+				<button onclick="toggleFullScreen()">Full Screen</button>
 			</div>
 
 			<div id="mainGameSection" class="w3-col s8">

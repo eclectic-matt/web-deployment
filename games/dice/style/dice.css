@@ -69,11 +69,16 @@ body {
 	}
 }
 
+#jokerRow {
+	height: 25%;
+}
+
 .joker {
 	background-color: #f00;
 	color: #fff;
 	font-size: 0.75rem;
 	padding: 10px;
+	height: 100%;
 }
 .joker h2 {
 	font-size: 1.0rem;
@@ -146,4 +151,28 @@ body {
 	width: 90%;
 	height: 90%;
 	margin: auto;
+}
+
+/*
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}*/
+
+
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  * {
+    display: hidden;
+  }
+  html::after {
+  	content: 'Rotate to landscape mode to view!'
+  }
 }
