@@ -113,12 +113,13 @@
 							<span id="runRounds" class="w3-xlarge w3-text-orange" style="padding:0; margin:0;">0</span>
 						</div>
 				</section>
-				<button onclick="toggleFullScreen()">Full Screen</button>
+				<!--button onclick="toggleFullScreen()">Full Screen</button-->
+				<button onclick="ui.openShopModal()">Shop</button>
 			</div>
 
 			<div id="mainGameSection" class="w3-col s8">
 			
-				<div id="jokerRow" class="w3-row-padding w3-border-white w3-padding-large">
+				<div id="jokerRow" class="w3-row-padding w3-border-white w3-padding-large w3-display-container">
 					<!-- Filled by game. -->
 				</div>
 
@@ -152,7 +153,7 @@
 							<span id="Starting_D12_Value" class="w3-text-white">12</span>
 						</div>
 					</div>
-					<br><br>
+					<br>
 					<div id="buttons" class="w3-row-padding w3-container w3-center">
 						<!--button onclick="diceGame.rollAllDice()">Roll All Dice</button-->
 						<div class="w3-col s6">
@@ -273,7 +274,39 @@
 				</div>
 			</div>
 
-
+			<div id="shopModal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container">
+						<span onclick="document.getElementById('shopModal').style.display='none'" class="w3-button w3-red w3-display-topright">&times;</span>
+						<h1>Shop</h1>
+						<div id="mainShopArea">
+							<div id="shopCardRow" class="w3-row-padding">
+								<div class="w3-col s3">
+									<button onclick="document.getElementById('shopModal').style.display='none'" class="w3-button w3-orange">Next Round</button>
+									<br>
+									<button onclick="ui.rerollShop()" class="w3-button w3-green">Reroll £4</button>
+								</div>
+								<div class="w3-col s9">
+									<div id="cardOptions">
+										<h3>Cards</h3>
+									</div>
+								</div>
+							</div>
+							<div id="voucherPackRow">
+								<div class="w3-col s3">
+									<h3>Vouchers</h3>
+								</div>
+								<div class="w3-col s3">
+									<h3>Dice Upgrades</h3>
+								</div>
+								<div class="w3-col s6">
+									<h3>Booster Packs</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
 	</body>

@@ -396,6 +396,7 @@ class Game
 				if(die.selected){
 					die.roll();
 					die.selected = false;
+					ui.updateUiRollDie(die);
 				}
 			}
 		}

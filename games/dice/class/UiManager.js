@@ -3,12 +3,13 @@ class UiManager
 	addJokerToUi(joker)
 	{
 		let jokerEl = document.createElement('div');
-		jokerEl.classList.add('w3-col');
 		jokerEl.style.width = '20%';
-		jokerEl.style.margin = 'auto';
+		/*jokerEl.style.margin = '1px';*/
 		jokerEl.style.border = '1px solid white';
+		jokerEl.classList.add('w3-col');
 		jokerEl.classList.add('joker');
 		jokerEl.classList.add('w3-tooltip');
+		jokerEl.classList.add('w3-display-bottom');
 		//OUTPUT JOKER NAME HEADER
 		let jokerHead = document.createElement('h2');
 		jokerHead.innerHTML = joker.data.name;
@@ -316,5 +317,13 @@ class UiManager
 		if(evt){
 			evt.currentTarget.className += " " + highlightClass;
 		}
+	}
+	
+	openShopModal(){
+		document.getElementById('shopModal').style.display = 'block';
+	}
+	
+	updateShopOptions(shop){
+		
 	}
 }
