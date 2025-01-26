@@ -1,4 +1,7 @@
-class EvensJoker extends Joker
+//const Joker = require('./Joker.js');
+//import Joker from './Joker.js';
+
+class EvensSteven extends Joker
 {
 	constructor(data = false)
 	{
@@ -45,3 +48,5 @@ class EvensJoker extends Joker
 		//Nothing
 	}
 }
+
+//export { EvensJoker };

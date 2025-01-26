@@ -1,3 +1,6 @@
+//const Joker = require('./Joker.js');
+//import Joker from './Joker.js';
+
 class ExampleJoker extends Joker
 {
 	constructor(data = false)
@@ -44,3 +47,5 @@ class ExampleJoker extends Joker
 		super.lose(game);
 	}
 }
+
+//export { ExampleJoker };

@@ -332,16 +332,21 @@ class UiManager
 		let roundScoreCash = anteScore.cash;
 	}
 	
-	openShopModal()
+	openShopModal(game)
 	{
+		this.updateShopModal(game);
 		document.getElementById('shopModal').style.display = 'block';
 	}
 	
-	updateShopOptions(shop)
+	updateShopModal(shop)
 	{
 		//CARDS ROW - JOKER / PLANET / SPECIAL - shopCardCardsRow
 		//VOUCHER ROW - ONE PER ROUND ONLY - voucherRow
 		//DICE UPGRADE ROW - ONE PER SHOP - diceUpgradeRow
 
+	}
+	
+	openChooseModal(round){
+		
 	}
 }

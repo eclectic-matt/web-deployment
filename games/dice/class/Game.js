@@ -1,3 +1,6 @@
+//import EvensSteven from './classes/jokers/EvensSteven.js';
+//import { Joker} from './classes/jokers/Joker.js';
+
 class Game 
 {
 	data = undefined;
@@ -7,22 +10,22 @@ class Game
 	initTypes = [ 4, 6, 8, 10, 12 ];
 	allTypes = [ 100, 50, 20, 12, 10, 8, 6, 4 ];
 	hands = [
-		'Max Values',        //The max value on all 5 dice (6 on a D6)
+		'Max Values',  //The max value on all 5 dice (6 on a D6)
 		'Five of a Kind',
-		'Full House',        //Three of a Kind + One Pair
+		'Full House',  //Three of a Kind + One Pair
 		'Four of a Kind',
 		'Straight',
 		'Three of a Kind',
 		'Two Pair',
 		'One Pair',
-		'High Value', //A single die, highest value die used
+		'High Value',  //A single die, highest value die used
 	];
 	faceUpgrades = [
-		'Platinum', //5X
-		'Gold',                //4X
-		'Silver',        //3X
-		'Bronze',        //2X
-		'Standard'        //1X
+		'Platinum',   //5X
+		'Gold',       //4X
+		'Silver',     //3X
+		'Bronze',     //2X
+		'Standard'    //1X
 	];
     shopUpgrades = {
         //SHOP UPGRADES COME IN FOUR FORMS - AND EACH ROUND YOU CAN ONLY BUY ONE OF EACH UPGRADE TYPE:
@@ -41,10 +44,6 @@ class Game
         modifier: {
             description: 'Modifies the game in some way',
             cost: 20
-        },
-        dice: {
-            description: 'Buy an additional die',
-            cost: 50
         }
     };
     shopModifiers = [
@@ -86,8 +85,7 @@ class Game
         [ 'Ignore Lowest Die', 'No repeats' ],    //Round 7
         [ 'Ignore Highest Die', 'No Max Values' ] //Round 8
     ]
-
-
+    
 	//=====================
 	// INITIALIZATION METHODS
 	//=====================
@@ -98,6 +96,7 @@ class Game
             this.data = data;
         }else{
             this.initData();
+            this.loadStakes();
             this.loadRound(this.data.state.round);
             this.rollAllDice();
             //this.updateUi();
@@ -125,14 +124,17 @@ class Game
     initState()
     {
 		this.data.state = {};
+		
 		//INITIAL IS THE "DEFAULT" VALUES (RESET EACH ANTE)
 		this.data.state.initial = {};
 		this.data.state.initial.hands = 3;
 		this.data.state.initial.rerolls = 3;
-
+		this.data.state.initial.cash = 0;
+		//ROUND IS 0-INDEXED
 		this.data.state.round = 0;
-		this.data.state.cash = 0;
-		
+		this.data.state.stake = 0;
+		//INIT VALUES
+		this.data.state.cash = this.data.state.initial.cash;
 		this.data.state.hands = this.data.state.initial.hands;
 		this.data.state.rerolls = this.data.state.initial.rerolls;
 		this.data.state.phases = [
@@ -155,6 +157,27 @@ class Game
 		this.data.state.score = 0;
 		this.data.state.history = [];
 	}
+	
+	//=================
+	// LOAD FUNCTIONS
+	//=================
+	loadStakes()
+	{
+		if(this.data.state.stake == 0){
+			//NO CHANGE
+			return false;
+		}
+		//LOAD DEFAULTS
+		let modifiedStakes = this.stakes;
+		for(let r=0; r < this.roundScores.length; r++){
+			for(let a=0; a < this.roundScores[r].length; a++){
+				//Stakes are 2x - 9x higher
+				modifiedStakes[r][a] = (this.data.state.stake * modifiedStakes[r][a]);
+			}
+		}
+		//Save back over the stakes
+		this.stakes = modifiedStakes;
+	}
 
 	//TERMINOLOGY DUMP:
 	// The entire GAME is broken up into a series of ROUNDS (1 - 8) increasing in difficulty
@@ -170,68 +193,47 @@ class Game
 	//LOAD ROUND JUST SETS THE CURRENT ROUND DATA (BOSS EFFECT, STAKES ETC)
 	loadRound(round)
 	{
+		//Reset phase
+		//this.data.state.phaseIndex = 0;
+		
 		this.data.round = {};
 		this.data.round.id = round;
 		this.data.round.ante = 0;
+		this.data.round.shopFlags = {
+			voucherBought: false
+		}
 		//Antes
 		this.data.round.stakes = this.roundScores[round];
 		
 		//THE CURRENT ANTE REQUIREMENT IS HERE:
 		this.data.round.score = this.data.round.stakes[this.data.round.ante];
 
+		//Choose skip effects (store for consistency)
+		let skipBonuses = [];
+		let firstBonus = this.getSkipBonus(game, skipBonuses);
+		skipBonuses.push(firstBonus);
+		let secondBonus = this.getSkipBonus(game, skipBonuses);
+		skipBonuses.push(secondBonus);
+		this.data.round.skipBonuses = skipBonuses;
+
 		//BOSS EFFECTS (NOT YET IMPLEMENTED)
 		let bossFx = this.bossEffects[round];
 		this.data.round.bossEffect = Math.floor(Math.random() * bossFx.length);
 	}
 
-	nextPhase()
+
+	
+	getPhaseInfo()
 	{
-		this.phaseIndex++;
-		let current = this.phases[this.phaseIndex];
+		let current = this.data.state.phases[this.data.state.phaseIndex];
 		let phaseInfo = current.split('_');
 		//NAME = START/CHOOSE/ANTE/SCORE/SHOP/CHOOSE/CHECK
 		let phaseName = phaseInfo[0];
 		//TYPE = SMALL/BIG/BOSS
 		let phaseType = phaseInfo[1];
-		//SWITCH ON THE PHASE NAME
-		switch(phaseName){
-			case 'START':
-
-			break;
-			case 'CHOOSE':
-				if(phaseType === 'BOSS'){
-					//NOTHING TO CHOOSE
-
-				}
-			break;
-			case 'ANTE':
-
-			break;
-			case 'SCORE':
-
-			break;
-			case 'SHOP':
-
-			break;
-			case 'CHECK':
-
-			break;
-		}
-	}
-	
-	loadPhase(phase){
-		switch(phase){
-			case 'choose':
-				//Display current round blinds and offer skip/reward
-			break;
-			case 'ante':
-			default:
-				//The main game loop
-			break;
-			case 'shop':
-				//Dice and "joker" upgrades
-				
-			break;
+		return {
+			name: phaseName,
+			type: phaseType
 		}
 	}
 
@@ -251,11 +253,133 @@ class Game
 	{
 		return this.hands;
 	}
+	
+	getSkipBonus(round, previousBonuses)
+	{
+		//Init the default effect
+		let bonusEffect = {
+			type: 'Joker',
+			subtype: 'Card',
+			rarity: 'Common',
+			modifier: 'Foil'
+		};
+		let bonusTypes = [
+			'Planet',
+			'Joker',
+			'Booster',
+			'Cash',
+			'Foil',
+			'Mega Booster',
+			'Holographic',
+			'Negative',
+			'Polychrome',
+		];
+		let bonusRarity = [
+			'Common',
+			'Uncommon',
+			'Rare',
+			'Super Rare',
+			'Legendary'
+		];
+		
+		//GET A RANDOM REWARD BY round 
+		let typeIndex = Math.floor(Math.random() * (round+1));
+		let bonusRarityIndex = Math.floor(Math.random() * bonusRarity.length);
+		bonusEffect.type = bonusTypes[typeIndex];
+		bonusEffect.rarity = bonusRarity[bonusRarityIndex];
+		if(previousBonuses.includes(bonusEffect)){
+			bonusEffect.rarity = (bonusRarityIndex == 0 ? bonusRarity[1] : bonusRarity[bonusRarityIndex - 1]);
+		}
+		return bonusEffect;
+	}
+	
+	getShopOption(type='card')
+	{
+		//This is called multiple times to populate the shop
+		switch (type){
+			case 'card':
+				//Card row offers Jokers/Planet cards
+				
+			break;
+			case 'voucher':
+				if(this.data.round.shopFlags.voucherBought){
+					return false;
+				}
+				let currentVouchers = this.data.vouchers.map()
+			break;
+			case 'booster':
+				
+			break;
+			case 'die':
+				//Offer a single die upgrade
+			break;
+		}
+	}
 
 
 	//======================
 	// NEXT / WIN / LOSE METHODS
 	//======================
+	
+	//Trigger game phase progress using nextPhase()
+	nextPhase()
+	{
+		//Increment phase index
+		this.data.state.phaseIndex++;
+		//Reset if equal to or over phases length
+		if(this.data.state.phaseIndex >= this.data.state.phases.length){
+			this.data.state.phaseIndex = 0;
+			this.nextRound();
+		}
+		let phase = this.getPhaseInfo();
+		switch(phase.name){
+			case 'START':
+				//Apply joker round start effects
+				for(let joker of this.data.jokers){
+					let startEffect = joker.round(this);
+				}
+				//This phase does nothing else, increment phase
+				this.nextPhase();
+			break;
+			case 'CHOOSE':
+				if(phase.type === 'BOSS'){
+					//NOTHING TO CHOOSE
+				}else{
+					//Enable skip button for upcoming ante
+					//this.data.round.skipBonuses 
+				}
+				ui.showChooseModal(this);
+			break;
+			case 'ANTE':
+				//Apply ante effects
+				this.nextAnte();
+				//Get the subtype
+				switch(phase.type){
+					case 'SMALL':
+						
+					break;
+					case 'BIG':
+					
+					break;
+					case 'BOSS':
+						
+					break;
+				}
+			break;
+			case 'SCORE':
+				//Get score and display modal
+				ui.openScoreModal(this);
+			break;
+			case 'SHOP':
+				//Get shop options and display modal
+				ui.openShopModal(this);
+			break;
+			case 'CHECK':
+				//Check end of round effects?
+				
+			break;
+		}
+	}
 
 	nextAnte()
 	{
@@ -268,11 +392,10 @@ class Game
 		this.data.state.score = 0;
 		this.data.state.hands = this.data.state.initial.hands;
 		this.data.state.rerolls = this.data.state.initial.rerolls;
-
 		//REACHED 3 - INCREMENT LEVEL
-		if(this.data.round.ante === this.antesPerRound){
-			this.nextRound();
-		}
+		//if(this.data.round.ante === this.antesPerRound){
+			//this.nextRound();
+		//}
 		//this.updateDieValues();
 		//this.updateUIMenu();
 	}
@@ -406,7 +529,7 @@ class Game
 	{
 		//CHECK WE HAVE ENOUGH REROLLS
 		if(this.data.state.rerolls === 0) {
-			alert('Out of rerolls!');
+			//alert('Out of rerolls!');
 			return false;
 		}
 		//DECREMENT THE AVAILABLE REROLLS
@@ -436,9 +559,10 @@ class Game
 		this.data.state.score += handScore.score;
 		//IF WE HAVE REACHED THE CURRENT ANTE SCORE
 		if(this.data.state.score >= this.data.round.score){
-			alert('Ante complete - score: ' + this.data.state.score);
+			//alert('Ante complete - score: ' + this.data.state.score);
 			//SUCCESS - NEXT ANTE
-			this.nextAnte();
+			//this.nextAnte();
+			this.nextPhase();
 		}else{
 			if(this.data.state.hands === 0){
 				alert('Out of hands - scored: ' + this.data.state.score);
@@ -469,3 +593,5 @@ class Game
 		).pop();
 	}
 }
+
+//export { Game };

@@ -84,3 +84,5 @@ class Joker
 		tooltipEl.innerHTML = null;
 	}
 }
+
+//export { Joker };

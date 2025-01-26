@@ -1,4 +1,7 @@
-class ChipButty extends Joker
+//const Joker = require('./Joker.js');
+//import Joker from './Joker.js';
+
+class ExtraInterest extends Joker
 {
 	constructor(data = false)
 	{
@@ -47,3 +50,5 @@ class ChipButty extends Joker
 		//Nothing
 	}
 }
+
+//export { ExtraInterest };
