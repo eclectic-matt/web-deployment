@@ -325,7 +325,6 @@ class UiManager
 		this.updateAnteScoreModal(anteScore);
 		document.getElementById('anteScoreModal').style.display = 'block';
 	}
-
 	updateAnteScoreModal(anteScore)
 	{
 		let anteScoreDiv = document.getElementById('anteScoreDiv');
@@ -337,16 +336,26 @@ class UiManager
 		this.updateShopModal(game);
 		document.getElementById('shopModal').style.display = 'block';
 	}
-	
-	updateShopModal(shop)
+	updateShopModal(game)
 	{
 		//CARDS ROW - JOKER / PLANET / SPECIAL - shopCardCardsRow
 		//VOUCHER ROW - ONE PER ROUND ONLY - voucherRow
 		//DICE UPGRADE ROW - ONE PER SHOP - diceUpgradeRow
-
+		//BOOSTER PACKS ROW - TWO PER SHOP - boosterRow
+		let cards = game.getShopOption('card');
+		let voucher = game.getShopOption('voucher');
+		let diceUp = game.getShopOption('dice');
+		let boosters = game.getShopOption('booster');
 	}
 	
-	openChooseModal(round){
-		
+	openChooseModal(game)
+	{
+		this.updateChooseModal(game);
+	}
+	updateChooseModal(game)
+	{
+		//SHOW THE SKIP OPTION AND OFFER REWARD
+		//THE BUTTONS SHOULD gainSkipReward()
+		//THAT SHOULD TAKE YOU ON TO phase+=3
 	}
 }

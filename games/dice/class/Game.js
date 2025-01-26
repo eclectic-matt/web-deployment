@@ -20,6 +20,79 @@ class Game
 		'One Pair',
 		'High Value',  //A single die, highest value die used
 	];
+	handData = [
+		{
+			name: 'Max Values',
+			description: 'The max possible value on all 5 dice (e.g. 6 on a D6)',
+			level: 1,
+			mult: 30,
+			planet: 'Pluto',
+			scored: 0
+		},
+		{
+			name: 'Five of a Kind',
+			description: 'Five dice of the same value',
+			level: 1,
+			mult: 25,
+			planet: 'Neptune',
+			scored: 0
+		},{
+			name: 'Full House',
+			description: 'Three of a Kind, plus One Pair',
+			level: 1,
+			mult: 20,
+			planet: 'Uranus',
+			scored: 0
+		},
+		{
+			name: 'Four of a Kind',
+			description: 'Four dice of the same value',
+			level: 1,
+			mult: 15,
+			planet: 'Saturn',
+			scored: 0
+		},
+		{
+			name: 'Straight',
+			description: 'Five dice of ascending value',
+			level: 1,
+			mult: 10,
+			planet: 'Jupiter',
+			scored: 0
+		},
+		{
+			name: 'Three of a Kind',
+			description: 'Three dice of the same value',
+			level: 1,
+			mult: 6,
+			planet: 'Mars',
+			scored: 0
+		},
+		{
+			name: 'Two Pair',
+			description: 'Two pairs of dice of the same value',
+			level: 1,
+			mult: 4,
+			planet: 'Earth',
+			scored: 0
+		},
+		{
+			name: 'One Pair',
+			description: 'A pair of dice of the same value',
+			level: 1,
+			mult: 2,
+			planet: 'Venus',
+			scored: 0
+		},
+		{
+			name: 'High Value',
+			description: 'The highest value single die',
+			level: 1,
+			mult: 1,
+			planet: 'Mercury',
+			scored: 0
+		}
+	]
 	faceUpgrades = [
 		'Platinum',   //5X
 		'Gold',       //4X
@@ -107,7 +180,7 @@ class Game
         this.data = {};
         this.initDice();
         this.initState();
-        this.initJokers();
+        //this.initJokers();
     }
     initDice()
     {
@@ -293,22 +366,30 @@ class Game
 		return bonusEffect;
 	}
 	
+	earnSkipReward(name){
+		/*switch(true){
+			case ()
+		}*/
+	}
+	
 	getShopOption(type='card')
 	{
 		//This is called multiple times to populate the shop
 		switch (type){
 			case 'card':
 				//Card row offers Jokers/Planet cards
-				
+				//Filter out current jokers
+				//Planet/Joker balance = 30/70?
 			break;
 			case 'voucher':
 				if(this.data.round.shopFlags.voucherBought){
 					return false;
 				}
-				let currentVouchers = this.data.vouchers.map()
+				//let currentVouchers = this.data.vouchers.map()
 			break;
 			case 'booster':
-				
+				//Joker / Planet / 
+				//Sizes = Std (2), Mega (4), Bumper (6)
 			break;
 			case 'die':
 				//Offer a single die upgrade
@@ -348,7 +429,7 @@ class Game
 					//Enable skip button for upcoming ante
 					//this.data.round.skipBonuses 
 				}
-				ui.showChooseModal(this);
+				ui.openChooseModal(this);
 			break;
 			case 'ANTE':
 				//Apply ante effects
@@ -427,11 +508,12 @@ class Game
 	//=====================
 	initJokers(jokers = false)
 	{
-		if(!jokers){
-			this.data.jokers = [];
-		}else{
-			this.data.jokers = jokers;
-		}
+		this.data.jokers = [];
+		this.data.availableJokers = jokers;
+	}
+	setJokers(jokers)
+	{
+		this.data.jokers = jokers;
 	}
 	addJoker(joker)
 	{
@@ -448,7 +530,23 @@ class Game
 	}
 	//Move Joker
 	
-	//
+	//==============
+	//VOUCHERS
+	//==============
+	initVouchers(vouchers = false)
+	{
+		this.data.vouchers = [];
+		this.data.availableVouchers = vouchers;
+	}
+	setVouchers(vouchers)
+	{
+		this.data.vouchers = vouchers;
+	}
+	addVoucher(voucher)
+	{
+		this.data.vouchers.push(voucher);
+		ui.addVoucherToUi(voucher);
+	}
 
 
 	//=====================
