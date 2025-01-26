@@ -135,7 +135,23 @@ class Game
 		
 		this.data.state.hands = this.data.state.initial.hands;
 		this.data.state.rerolls = this.data.state.initial.rerolls;
-		this.data.state.phase = 'ante';//choose, ante, shop
+		this.data.state.phases = [
+			'START_ROUND',
+			'CHOOSE_SMALL',
+			'ANTE_SMALL',
+			'SCORE_SMALL',
+			'SHOP_SMALL',
+			'CHOOSE_BIG',
+			'ANTE_BIG',
+			'SCORE_BIG',
+			'SHOP_BIG',
+			'CHOOSE_BOSS',	//NO ACTUAL CHOICE HERE
+			'ANTE_BOSS',
+			'SCORE_BOSS',
+			'SHOP_BOSS',
+			'CHECK_WIN'
+		]
+		this.data.state.phaseIndex = 0;
 		this.data.state.score = 0;
 		this.data.state.history = [];
 	}
@@ -151,6 +167,7 @@ class Game
 	//		- the shop allows you to buy one of three types of upgrade:
 	//	- if you skipped, or you have completed the shop, and BOSS is not next, then go back to CHOOSE
 
+	//LOAD ROUND JUST SETS THE CURRENT ROUND DATA (BOSS EFFECT, STAKES ETC)
 	loadRound(round)
 	{
 		this.data.round = {};
@@ -165,6 +182,41 @@ class Game
 		//BOSS EFFECTS (NOT YET IMPLEMENTED)
 		let bossFx = this.bossEffects[round];
 		this.data.round.bossEffect = Math.floor(Math.random() * bossFx.length);
+	}
+
+	nextPhase()
+	{
+		this.phaseIndex++;
+		let current = this.phases[this.phaseIndex];
+		let phaseInfo = current.split('_');
+		//NAME = START/CHOOSE/ANTE/SCORE/SHOP/CHOOSE/CHECK
+		let phaseName = phaseInfo[0];
+		//TYPE = SMALL/BIG/BOSS
+		let phaseType = phaseInfo[1];
+		//SWITCH ON THE PHASE NAME
+		switch(phaseName){
+			case 'START':
+
+			break;
+			case 'CHOOSE':
+				if(phaseType === 'BOSS'){
+					//NOTHING TO CHOOSE
+
+				}
+			break;
+			case 'ANTE':
+
+			break;
+			case 'SCORE':
+
+			break;
+			case 'SHOP':
+
+			break;
+			case 'CHECK':
+
+			break;
+		}
 	}
 	
 	loadPhase(phase){

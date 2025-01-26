@@ -318,6 +318,19 @@ class UiManager
 			evt.currentTarget.className += " " + highlightClass;
 		}
 	}
+
+	openAnteScoreModal(game)
+	{
+		let anteScore = scoreMgr.getAnteCash(game);
+		this.updateAnteScoreModal(anteScore);
+		document.getElementById('anteScoreModal').style.display = 'block';
+	}
+
+	updateAnteScoreModal(anteScore)
+	{
+		let anteScoreDiv = document.getElementById('anteScoreDiv');
+		let roundScoreCash = anteScore.cash;
+	}
 	
 	openShopModal()
 	{
@@ -329,6 +342,6 @@ class UiManager
 		//CARDS ROW - JOKER / PLANET / SPECIAL - shopCardCardsRow
 		//VOUCHER ROW - ONE PER ROUND ONLY - voucherRow
 		//DICE UPGRADE ROW - ONE PER SHOP - diceUpgradeRow
-		
+
 	}
 }

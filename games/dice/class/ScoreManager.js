@@ -164,10 +164,13 @@ class ScoreManager
 	getAnteCash(game){
 		//this.data.state.hands = this.data.state.initial.hands;
 		//this.data.state.rerolls = this.data.state.initial.rerolls;
+		//EARN A CERTAIN AMOUNT FROM THE BEATEN BLIND
+		let blindEarnings = (game.data.state.phase === 'boss' ? Math.floor(game.data.state.round * 5) : Math.floor(game.data.state.round * 2) );
 		let handsRemaining = Math.max(0,game.data.state.initial.hands - game.data.state.hands);
 		let rerollsRemaining = Math.max(0, game.data.state.initial.rerolls - game.data.state.rerolls);
 		let interest = Math.floor(game.data.state.cash / 5);
 		let anteWin = {
+			blindEarnings: blindEarnings,
 			hands: handsRemaining,
 			rerolls: rerollsRemaining,
 			interest: interest,
