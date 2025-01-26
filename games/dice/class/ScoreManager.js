@@ -158,6 +158,47 @@ class ScoreManager
 		}
 	}
 
+	//====================
+	// ANTE SCORE (CASH)
+	//====================
+	getAnteCash(game){
+		//this.data.state.hands = this.data.state.initial.hands;
+		//this.data.state.rerolls = this.data.state.initial.rerolls;
+		let handsRemaining = Math.max(0,game.data.state.initial.hands - game.data.state.hands);
+		let rerollsRemaining = Math.max(0, game.data.state.initial.rerolls - game.data.state.rerolls);
+		let interest = Math.floor(game.data.state.cash / 5);
+		let anteWin = {
+			hands: handsRemaining,
+			rerolls: rerollsRemaining,
+			interest: interest,
+			jokers: []
+		};
+		//INIT THE CALCULATE WINNINGS
+		let calcCash = 0;
+		calcCash += handsRemaining;
+		calcCash += interest;
+		//JOKERS IMPLEMENTING THE win() METHOD TAKE IN THOSE PARTS OF THE STATE 
+		for(let joker of game.data.jokers){
+			let jokerEffect = joker.win(anteWin);
+			if(jokerEffect){
+				switch(jokerEffect.type){
+					case 'cash':
+						calcCash += jokerEffect.value;
+						const jokerInfo = {
+							name: joker.data.name,
+							cash: jokerEffect.value
+						};
+						anteWin.jokers.push(jokerInfo);
+					break;
+				}
+			}
+		}
+		//STORE ON THE RETURN OBJECT
+		anteWin.calcCash = calcCash;
+		//RETURN THE CASH AMOUNT
+		return anteWin;
+	}
+
 	//=====================
 	// SCORING METHODS
 	//=====================
@@ -296,7 +337,7 @@ class ScoreManager
 		let returnVal = false;
 		//Is the count of the most common value = the check value
 		if (commonCount === checkValue) {
-				returnVal = mostCommon;
+			returnVal = mostCommon;
 		}
 		return returnVal;
 	}

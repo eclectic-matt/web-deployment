@@ -3,10 +3,10 @@ class ChipButty extends Joker
 	constructor(data = false)
 	{
 		super(data);
-		this.data.name = 'Chip Butty';
-		this.data.description = 'Gain 10 chips per hand';
-		this.data.rarity = 'Common';
-		this.data.price = 5;
+		this.data.name = 'Extra Interest';
+		this.data.description = 'Gain £1 extra interest for every £5 cash';
+		this.data.rarity = 'Uncommon';
+		this.data.price = 12;
 	}
 	init(game)
 	{
@@ -33,8 +33,13 @@ class ChipButty extends Joker
 			value: 10
 		}
 	}
-	win(game)
+	win(anteWin)
 	{
+		let returnWin = {
+			type: 'cash',
+			value: anteWin.interest
+		}
+		return returnWin;
 		//Nothing
 	}
 	lose(game)

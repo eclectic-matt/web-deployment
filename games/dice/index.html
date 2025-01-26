@@ -24,8 +24,13 @@
 		<script src="class/ScoreManager.js" defer></script>
 		<!-- LOAD IN JOKERS -->
 		<script src="class/jokers/Joker.js" defer></script>
-		<script src="class/jokers/EvensJoker.js" defer></script>
 		<script src="class/jokers/ChipButty.js" defer></script>
+		<script src="class/jokers/EvensJoker.js" defer></script>
+		<script src="class/jokers/ExtraInterest.js" defer></script>
+		<!-- LOAD IN VOUCHERS -->
+		<script srd="class/vouchers/Voucher.js" defer></script>
+		<script srd="class/vouchers/FreeRoll.js" defer></script>
+		<script srd="class/vouchers/MoreHandy.js" defer></script>
 		<script>
 			/* Get the documentElement (<html>) to display the page in fullscreen */
 			var elem = document.documentElement;
@@ -282,25 +287,47 @@
 						<div id="mainShopArea">
 							<div id="shopCardRow" class="w3-row-padding">
 								<div class="w3-col s3">
-									<button onclick="document.getElementById('shopModal').style.display='none'" class="w3-button w3-orange">Next Round</button>
+									<button onclick="document.getElementById('shopModal').style.display='none'" class="w3-button w3-bar w3-padding-large w3-orange">Next Round</button>
 									<br>
-									<button onclick="ui.rerollShop()" class="w3-button w3-green">Reroll £4</button>
+									<button onclick="ui.rerollShop()" class="w3-button w3-bar w3-padding-large w3-green">Reroll £4</button>
 								</div>
 								<div class="w3-col s9">
-									<div id="cardOptions">
+									<div id="shopCardCardsRow" class="w3-row-padding">
 										<h3>Cards</h3>
 									</div>
 								</div>
 							</div>
 							<div id="voucherPackRow">
 								<div class="w3-col s3">
-									<h3>Vouchers</h3>
+									<h3 class="w3-tooltip">
+										<span 
+											class="w3-text w3-small w3-black w3-text-white" 
+											style="position:absolute; top:2rem"
+										>One Per Round</span>
+										Vouchers</h3>
+									<div id="voucherRow" class="w3-row-padding">
+
+									</div>
 								</div>
 								<div class="w3-col s3">
-									<h3>Dice Upgrades</h3>
+									<h3 class="w3-tooltip">
+										<span 
+											class="w3-text w3-small w3-black w3-text-white" 
+											style="position:absolute; top:2rem"
+										>One Per Shop</span>
+										Dice Upgrades</h3>
+									<div id="diceUpgradeRow" class="w3-row-padding">
+
+									</div>
 								</div>
 								<div class="w3-col s6">
-									<h3>Booster Packs</h3>
+									<h3 class="w3-tooltip">
+										<span 
+											class="w3-text w3-small w3-black w3-text-white" 
+											style="position:absolute; top:2rem"
+										>Two Per Shop</span>
+										Booster Packs
+									</h3>
 								</div>
 							</div>
 						</div>

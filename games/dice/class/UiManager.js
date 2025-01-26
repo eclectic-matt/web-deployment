@@ -319,11 +319,16 @@ class UiManager
 		}
 	}
 	
-	openShopModal(){
+	openShopModal()
+	{
 		document.getElementById('shopModal').style.display = 'block';
 	}
 	
-	updateShopOptions(shop){
+	updateShopOptions(shop)
+	{
+		//CARDS ROW - JOKER / PLANET / SPECIAL - shopCardCardsRow
+		//VOUCHER ROW - ONE PER ROUND ONLY - voucherRow
+		//DICE UPGRADE ROW - ONE PER SHOP - diceUpgradeRow
 		
 	}
 }
