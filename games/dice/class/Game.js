@@ -508,7 +508,7 @@ class Game
 	//=====================
 	/**
 	 * Initialise the jokers and availableJokers arrays.
- 	*/
+	*/
 	initJokers(jokers = false)
 	{
 		this.data.jokers = [];
@@ -516,10 +516,22 @@ class Game
 	}
 	/**
 	 * For loading, setting initial jokers array.
- 	*/
+	*/
 	setJokers(jokers)
 	{
 		this.data.jokers = jokers;
+	}
+	/**
+	 * Get the current jokers used in this game (getting names only with param).
+	 * @param {boolean} returnNamesOnly Return the names only (true, default) or all joker data (false).
+	 * @return {array} The array of Jokers (or just the Joker names).
+	 */
+	getJokers(returnNamesOnly=true){
+		if(returnNamesOnly){
+			return this.data.jokers.map( (j) => { return j.name; });
+		}else{
+			return this.data.jokers;
+		}
 	}
 	addJoker(joker)
 	{
@@ -549,7 +561,7 @@ class Game
 	//==============
 	/**
 	 * Initialise the vouchers and availableVouchers arrays.
- 	*/
+	*/
 	initVouchers(vouchers = false)
 	{
 		this.data.vouchers = [];

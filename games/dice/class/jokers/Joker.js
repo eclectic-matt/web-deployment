@@ -20,6 +20,8 @@ class Joker
     	this.data.price = 1;
     	this.data.tooltips = [];
     	this.data.timeouts = [];
+		//THIS IS A GENERIC OBJECT USED FOR TRACKING DATA WHICH CHANGES/RELIES ON CERTAIN STATES TO TRIGGER THE JOKER EFFECT
+		this.data.tracking = {};
     }
     
     //EXTENDED CLASSES MUST IMPLEMENT THE FOLLOWING:

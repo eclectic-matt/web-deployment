@@ -12,6 +12,7 @@
 		<script src="class/jokers/ChipButty.js" defer></script>
 		<script src="class/jokers/EvensSteven.js" defer></script>
 		<script src="class/jokers/ExtraInterest.js" defer></script>
+		<script src="class/jokers/Rerollimbursement.js" defer></script>
 		<!-- LOAD IN VOUCHERS -->
 		<script src="class/vouchers/Voucher.js" defer></script>
 		<script src="class/vouchers/FreeRoll.js" defer></script>
@@ -22,36 +23,82 @@
 		<script src="class/UiManager.js" defer></script>
 		<script src="class/ScoreManager.js" defer></script>
 		<script>
-		    var diceGame, ui, scoreMgr, jokers, vouchers;
+			var diceGame, ui, scoreMgr, jokers, vouchers;
 			
-			function init(){
+			function init()
+			{
+				//ACTUALLY INITIALIZE THE CLASSES
 				ui = new UiManager();
 				scoreMgr = new ScoreManager();
 				diceGame = new Game();
+
 				//Define the available Jokers
+				//see planning sheet at https://docs.google.com/spreadsheets/d/1pEpvaxDDvMkz3fOyRgGcG_V7CDba50mOHwvsf5yiir8/edit?gid=0#gid=0
+				/*
+					ExtraInterest				DRAFT
+					Rerollimbursement			DRAFT
+					Wackernomics				DRAFT
+					Valuable Hands
+					Burn List
+					Five Card Payout
+					Evens Steven				DRAFT
+					Chip Butty					DRAFT
+					D4 Lover
+					D6 Fighter
+					D8 Chooser
+					D10 Abuser
+					D12 User
+					D20 Praiser
+					Score All
+					Chip Reduction
+					Straight With Chips
+					Straight Booster
+					Upgraded Mult
+					Upgraded Die
+					Two Turtle Doves
+					Three Blind Mice
+					Fully Housed
+					Max Values Bonus
+					Partial Sum
+					Complex Sums
+					Token Gesture
+					Grand Finale
+					Saving Grace
+					Loaded Die
+					Copycat
+					Max-Ish Values
+					Gold Plaques
+				*/
 				jokers = new Map([
 					[ 'Joker', Joker ],
 					[ 'EvensSteven', EvensSteven ],
 					[ 'ChipButty', ChipButty ],
-					[ 'ExtraInterest', ExtraInterest ]
-			    ]);
-			    diceGame.initJokers(jokers);
-			    //Define the available vouchers
-			    vouchers = new Map([
-			    	[ 'Voucher', Voucher ],
-			    	[ 'FreeRoll', FreeRoll ],
-			    	[ 'MoreHandy', MoreHandy ]
-			    ]);
-			    diceGame.initVouchers(vouchers);
+					[ 'ExtraInterest', ExtraInterest ],
+					[ 'Rerollimbursement', Rerollimbursement ]
+					[ 'Wackernomics', Wackernomics ]
+				]);
+				diceGame.initJokers(jokers);
+				//Define the available vouchers
+				vouchers = new Map([
+					[ 'Voucher', Voucher ],
+					[ 'FreeRoll', FreeRoll ],
+					[ 'MoreHandy', MoreHandy ]
+				]);
+				diceGame.initVouchers(vouchers);
 				//TESTING HERE
 				test(diceGame);
 			}
 			//game = new(gameDict.get(name))(parseInt(diff));
 			
-			function test(game){
-				//Get the evens joker and add to the game for free
+			function test(game)
+			{
+				//Get a couple of Jokers for testing
 				game.addJokerByName('EvensSteven');
 				game.addJokerByName('ChipButty');
+
+				for(let [jokerName, jokerClass] of game.data.availableJokers){
+					console.log(jokerName);
+				}
 				
 			}
 		</script>
