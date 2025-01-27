@@ -506,11 +506,17 @@ class Game
 	//=====================
 	// JOKER FUNCTIONS
 	//=====================
+	/**
+	 * Initialise the jokers and availableJokers arrays.
+ 	*/
 	initJokers(jokers = false)
 	{
 		this.data.jokers = [];
 		this.data.availableJokers = jokers;
 	}
+	/**
+	 * For loading, setting initial jokers array.
+ 	*/
 	setJokers(jokers)
 	{
 		this.data.jokers = jokers;
@@ -528,11 +534,22 @@ class Game
 		if(this.data.jokers.indexOf(joker) === false) return false;
 		this.data.jokers.splice(this.data.jokers.indexOf(joker),1);
 	}
+	addJokerByName(name)
+	{
+		//REMOVE SPACES - names are "Chip Butty" but class is "ChipButty"
+		name = name.replace(' ', '');
+		let joker = new (this.data.availableJokers.get(name))();
+		if(!joker) return false;
+		this.addJoker(joker);
+	}
 	//Move Joker
 	
 	//==============
 	//VOUCHERS
 	//==============
+	/**
+	 * Initialise the vouchers and availableVouchers arrays.
+ 	*/
 	initVouchers(vouchers = false)
 	{
 		this.data.vouchers = [];
@@ -547,7 +564,14 @@ class Game
 		this.data.vouchers.push(voucher);
 		ui.addVoucherToUi(voucher);
 	}
-
+	addVoucherByName(name)
+	{
+		//REMOVE SPACES - names are "Chip Butty" but class is "ChipButty"
+		name = name.replace(' ', '');
+		let voucher = new (this.data.availableVouchers.get(name))();
+		if(!voucher) return false;
+		this.addVoucher(voucher);
+	}
 
 	//=====================
 	// DIE METHODS

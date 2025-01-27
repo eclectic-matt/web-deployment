@@ -22,38 +22,26 @@
 		<script src="class/UiManager.js" defer></script>
 		<script src="class/ScoreManager.js" defer></script>
 		<script>
-			function loadJoker(name)
-			{
-				return new(jokers.get(name))();
-			}
-			/*var allJokers = new Map([
-		      [ 'EvensSteven', EvensSteven ],
-		      [ 'ChipButty', ChipButty ],
-		      [ 'ExtraInterest', ExtraInterest ]
-		    ]);
-		    var vouchers = new Map([
-		    	[ 'FreeRoll', FreeRoll ],
-		    	[ 'MoreHandy', MoreHandy ]
-		    ]);*/
-		    
 		    var diceGame, ui, scoreMgr, jokers, vouchers;
 			
 			function init(){
 				ui = new UiManager();
 				scoreMgr = new ScoreManager();
 				diceGame = new Game();
+				//Define the available Jokers
 				jokers = new Map([
 					[ 'Joker', Joker ],
 					[ 'EvensSteven', EvensSteven ],
 					[ 'ChipButty', ChipButty ],
 					[ 'ExtraInterest', ExtraInterest ]
 			    ]);
+			    diceGame.initJokers(jokers);
+			    //Define the available vouchers
 			    vouchers = new Map([
 			    	[ 'Voucher', Voucher ],
 			    	[ 'FreeRoll', FreeRoll ],
 			    	[ 'MoreHandy', MoreHandy ]
 			    ]);
-			    diceGame.initJokers(jokers);
 			    diceGame.initVouchers(vouchers);
 				//TESTING HERE
 				test(diceGame);
@@ -62,14 +50,10 @@
 			
 			function test(game){
 				//Get the evens joker and add to the game for free
-				//let evensJoker = new EvensSteven();
-				let evensJoker = loadJoker('EvensSteven');
-				game.addJoker(evensJoker);
-				let chipButtyJoker = new ChipButty();
-				game.addJoker(chipButtyJoker);
+				game.addJokerByName('EvensSteven');
+				game.addJokerByName('ChipButty');
 				
 			}
-			
 		</script>
 	</head>
 <body onload="init()">
