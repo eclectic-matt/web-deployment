@@ -371,7 +371,7 @@ class UiManager
 		anteScoreTh.innerHTML = 'Blind Earnings';
 		anteScoreTableHeadRow.appendChild(anteScoreTh);
 		anteScoreTh = document.createElement('th');
-		anteScoreTh.innerHTML = '🪙'.repeat(anteScore.blindEarnings) + '£' + (anteScore.blindEarnings);
+		anteScoreTh.innerHTML = '_COIN_'.repeat(anteScore.blindEarnings) + '£' + (anteScore.blindEarnings);
 		anteScoreTableHeadRow.appendChild(anteScoreTh);
 		anteScoreTable.appendChild(anteScoreTableHeadRow);
 		
@@ -382,7 +382,7 @@ class UiManager
 			anteScoreHandsTd.innerHTML = 'Hands Remaining (' + anteScore.handsRemaining + ')';
 			anteScoreHandsRow.appendChild(anteScoreHandsTd);
 			anteScoreHandsTd = document.createElement('td');
-			//anteScoreHandsTd.innerHTML = '🪙'.repeat(anteScore.handsRemaining) + ' = £' + (anteScore.handsRemaining);
+			//anteScoreHandsTd.innerHTML = '_COIN_'.repeat(anteScore.handsRemaining) + ' = £' + (anteScore.handsRemaining);
 			anteScoreHandsTd.innerHTML = '£' + (anteScore.handsRemaining);
 			anteScoreHandsRow.appendChild(anteScoreHandsTd);
 			anteScoreTable.appendChild(anteScoreHandsRow);
@@ -395,7 +395,7 @@ class UiManager
 			anteScoreInterestTd.innerHTML = 'Interest';
 			anteScoreInterestRow.appendChild(anteScoreInterestTd);
 			anteScoreInterestTd = document.createElement('td');
-			//anteScoreInterestTd.innerHTML = '🪙'.repeat(anteScore.interest) + ' = £' + (anteScore.interest);
+			//anteScoreInterestTd.innerHTML = '_COIN_'.repeat(anteScore.interest) + ' = £' + (anteScore.interest);
 			anteScoreInterestTd.innerHTML = '£' + (anteScore.interest);
 			anteScoreInterestRow.appendChild(anteScoreInterestTd);
 			anteScoreTable.appendChild(anteScoreInterestRow);
