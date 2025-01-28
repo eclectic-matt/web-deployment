@@ -3,7 +3,7 @@ class Rerollimbursement extends Joker
 	constructor(data = false)
 	{
 		super(data);
-		this.data.name = 'Rerollimbursement';
+		this.data.name = 'Reroll imbursement';
 		this.data.description = 'Gain cash equal to the first rerolled dice value each round';
 		this.data.rarity = 'Uncommon';
 		this.data.price = 8;
