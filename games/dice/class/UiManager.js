@@ -1,10 +1,29 @@
 class UiManager 
 {
+	/**
+	 * Generates via getJokerElement and adds to the UI.
+	 * @param {object} joker The joker data.
+	 * @return void;
+ 	*/
 	addJokerToUi(joker)
 	{
-		let jokerEl = document.createElement('div');
+		let jokerEl = this.getJokerElement(joker);
+		const jokerRowElId = 'jokerRow';
+		let jokerRowEl = document.getElementById(jokerRowElId);
+		//Could check children if adding more than 5 and set all element widths appropriately
+		//let widthPercent = Math.min(20, Math.floor(jokerRowEl.getChildren().length / 5));
 		jokerEl.style.width = '20%';
-		/*jokerEl.style.margin = '1px';*/
+		jokerRowEl.appendChild(jokerEl);
+	}
+	
+	/**
+	 * Generates a new Joker HTML element ready to insert into the UI.
+	 * @param {object} joker The joker data object.
+	 * @return {HTMLElement} The joker html element.
+ 	*/
+	getJokerElement(joker)
+	{
+		let jokerEl = document.createElement('div');
 		jokerEl.style.border = '1px solid white';
 		jokerEl.classList.add('w3-col');
 		jokerEl.classList.add('joker');
@@ -22,8 +41,10 @@ class UiManager
 		jokerDescEl.classList.add('w3-black');
 		jokerDescEl.classList.add('w3-text-white');
 		jokerDescEl.style.position = 'absolute';
-		jokerDescEl.style.left = '0px';
-		jokerDescEl.style.bottom = '0px';
+		jokerDescEl.style.left = '10px';
+		jokerDescEl.style.bottom = '10px';
+		//jokerDescEl.style.width = (jokerEl.style.offsetWidth - 20) + 'px';
+		//console.log(jokerEl.style.offsetWidth, jokerDescEl.style.width);
 		jokerEl.appendChild(jokerDescEl);
 		//BORDER = RARITY
 		jokerEl.classList.add(joker.data.rarity);
@@ -31,8 +52,7 @@ class UiManager
 		if(joker.data.modifier){
 			jokerEl.classList.add(joker.data.modifier);
 		}
-		const jokerRowElId = 'jokerRow';
-		document.getElementById(jokerRowElId).appendChild(jokerEl);
+		return jokerEl;
 	}
 
 	/**
@@ -216,6 +236,8 @@ class UiManager
 	
 	alertHandScore(scoreString)
 	{
+		//CURRENTLY BROKEN, REWORKING
+		return false;
 		let handScoreElId = 'handScoreTooltip';
 		let handScoreEl = document.getElementById(handScoreElId);
 		handScoreEl.classList.add('flash');
@@ -318,7 +340,10 @@ class UiManager
 			evt.currentTarget.className += " " + highlightClass;
 		}
 	}
-
+	
+	//=====================
+	// ANTE SCORE RESULT
+	//=====================
 	openAnteScoreModal(game)
 	{
 		let anteScore = scoreMgr.getAnteCash(game);
@@ -328,9 +353,96 @@ class UiManager
 	updateAnteScoreModal(anteScore)
 	{
 		let anteScoreDiv = document.getElementById('anteScoreDiv');
-		let roundScoreCash = anteScore.cash;
+		anteScoreDiv.innerHTML = null;
+		
+		let anteScoreTableHead = document.createElement('h3');
+		anteScoreTableHead.innerHTML = 'Ante Score';
+		anteScoreDiv.appendChild(anteScoreTableHead);
+		
+		//START TABLE
+		let anteScoreTable = document.createElement('table');
+		anteScoreTable.classList.add('w3-table-all');
+		anteScoreTable.classList.add('w3-text-black');
+		anteScoreTable.classList.add('w3-center');
+		
+		//HEAD ROW - BLIND EARNINGS
+		let anteScoreTableHeadRow = document.createElement('tr');
+		let anteScoreTh = document.createElement('th');
+		anteScoreTh.innerHTML = 'Blind Earnings';
+		anteScoreTableHeadRow.appendChild(anteScoreTh);
+		anteScoreTh = document.createElement('th');
+		anteScoreTh.innerHTML = '🪙'.repeat(anteScore.blindEarnings) + '£' + (anteScore.blindEarnings);
+		anteScoreTableHeadRow.appendChild(anteScoreTh);
+		anteScoreTable.appendChild(anteScoreTableHeadRow);
+		
+		if(anteScore.handsRemaining > 0){
+			//SECOND ROW - HANDS REMAINING
+			let anteScoreHandsRow = document.createElement('tr');
+			let anteScoreHandsTd = document.createElement('td');
+			anteScoreHandsTd.innerHTML = 'Hands Remaining (' + anteScore.handsRemaining + ')';
+			anteScoreHandsRow.appendChild(anteScoreHandsTd);
+			anteScoreHandsTd = document.createElement('td');
+			//anteScoreHandsTd.innerHTML = '🪙'.repeat(anteScore.handsRemaining) + ' = £' + (anteScore.handsRemaining);
+			anteScoreHandsTd.innerHTML = '£' + (anteScore.handsRemaining);
+			anteScoreHandsRow.appendChild(anteScoreHandsTd);
+			anteScoreTable.appendChild(anteScoreHandsRow);
+		}
+		
+		if(anteScore.interest > 0){
+			//THIRD ROW - INTEREST
+			let anteScoreInterestRow = document.createElement('tr');
+			let anteScoreInterestTd = document.createElement('td');
+			anteScoreInterestTd.innerHTML = 'Interest';
+			anteScoreInterestRow.appendChild(anteScoreInterestTd);
+			anteScoreInterestTd = document.createElement('td');
+			//anteScoreInterestTd.innerHTML = '🪙'.repeat(anteScore.interest) + ' = £' + (anteScore.interest);
+			anteScoreInterestTd.innerHTML = '£' + (anteScore.interest);
+			anteScoreInterestRow.appendChild(anteScoreInterestTd);
+			anteScoreTable.appendChild(anteScoreInterestRow);
+		}
+		
+		if(anteScore.jokers.length > 0){
+			//ITERATE JOKER SCORES TO OUTPUT
+			for(let joker of anteScore.jokers){
+				let jokerScoreRow = document.createElement('tr');
+				let jokerScoreTd = document.createElement('td');
+				jokerScoreTd.innerHTML = joker.name;
+				jokerScoreRow.appendChild(jokerScoreTd);
+				jokerScoreTd = document.createElement('td');
+				jokerScoreTd.innerHTML = joker.cash;
+				jokerScoreRow.appendChild(jokerScoreTd);
+				anteScoreTable.appendChild(jokerScoreRow);
+			}
+		}
+		
+		//OUTPUT TOTAL (ALSO AS A th?)
+		let totalScoreRow = document.createElement('tr');
+		let totalScoreTh = document.createElement('th');
+		totalScoreTh.innerHTML = 'Total';
+		totalScoreRow.appendChild(totalScoreTh);
+		totalScoreTh = document.createElement('th');
+		totalScoreTh.innerHTML = '£' + anteScore.calcCash;
+		totalScoreRow.appendChild(totalScoreTh);
+		anteScoreTable.appendChild(totalScoreRow);
+		
+		anteScoreDiv.appendChild(anteScoreTable);
+		
+		/*
+		
+		/*anteWin = {
+			calcCash: 0,
+			blindEarnings: blindEarnings,
+			hands: handsRemaining,
+			rerolls: rerollsRemaining,
+			interest: interest,
+			jokers: []
+		};*/
+		
 	}
 	
+	//=====================
+	// SHOP MODAL
+	//=====================
 	openShopModal(game)
 	{
 		this.updateShopModal(game);
@@ -348,12 +460,79 @@ class UiManager
 		let boosters = game.getShopOption('booster');
 	}
 	
+	//=====================
+	// CHOOSE (SKIP) MODAL
+	//=====================
 	openChooseModal(game)
 	{
 		this.updateChooseModal(game);
+		document.getElementById('chooseModal').style.display = 'block';
 	}
 	updateChooseModal(game)
 	{
+		const chooseModalElId = 'chooseDiv';
+		let chooseModalEl = document.getElementById(chooseModalElId);
+		
+		//copy blindsDiv?0
+		let blindsDiv = document.getElementById('blindsDiv');
+		const clone = blindsDiv.cloneNode(true);
+		chooseModalEl.appendChild(clone);
+		
+		return;
+
+		chooseModalEl.classList.add('w3-row-padding');
+		chooseModalEl.innerHTML = null;
+		
+		//3 COLUMNS - SMALL / BIG / BOSS
+		const antes = [ 'SMALL', 'BIG', 'BOSS' ];
+		let anteIndex = 0;
+		for(let ante of antes){
+			//OUTPUT ANTE COLUMN
+			let anteColumn = document.createElement('div');
+			anteColumn.classList.add('w3-col s4');
+			let anteColumnHead = document.createElement('h4');
+			anteColumnHead.innerHTML = ante + ' BLIND';
+			anteColumn.appendChild(anteColumnHead);
+			//IF BOSS, SHOW NAME?
+			
+			//SHOW SCORE
+			let score = game.data.round.stakes[anteIndex];
+			let scoreEl = document.createElement('p');
+			scoreEl.innerHTML = 'Score at least: ' + score;
+			anteColumn.appendChild(scoreEl);
+			//IF BOSS, SHOW EFFECTS?
+			
+			
+			//Output skip button if not boss
+			if(ante !== 'BOSS'){
+				let skipBtnEl = document.createElement('button');
+				skipBtnEl.id = ante + 'skipBtn';
+				//skipBtnEl.onclick = 'diceGame.skipAnte("' + ante + '");';
+				skipBtnEl.innerHTML = 'Skip ' + ante;
+				anteColumn.appendChild(skipBtnEl);
+			}
+			//ADD COLUMN
+			chooseModalEl.appendChild(anteColumn);
+		}
+		
+		//GET CURRENT PHASE TO DISABLE BUTTONS
+		let phase = game.getPhaseInfo();
+		switch (phase.type) {
+			case 'SMALL':
+				//Enable small, disable big
+				document.getElementById('BIGskipBtn').disabled = true;
+			break;
+			case 'BIG':
+				document.getElementById('SMALLskipBtn').disabled = true;
+				document.getElementById('BIGskipBtn').disabled = false;
+			break;
+			case 'BOSS':
+				//NO BUTTONS ENABLED
+				document.getElementById('SMALLskipBtn').disabled = true;
+				document.getElementById('BIGskipBtn').disabled = true;
+			break;
+		}
+		
 		//SHOW THE SKIP OPTION AND OFFER REWARD
 		//THE BUTTONS SHOULD gainSkipReward()
 		//THAT SHOULD TAKE YOU ON TO phase+=3

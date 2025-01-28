@@ -13,6 +13,7 @@
 		<script src="class/jokers/EvensSteven.js" defer></script>
 		<script src="class/jokers/ExtraInterest.js" defer></script>
 		<script src="class/jokers/Rerollimbursement.js" defer></script>
+		<script src="class/jokers/Wackernomics.js" defer></script>
 		<!-- LOAD IN VOUCHERS -->
 		<script src="class/vouchers/Voucher.js" defer></script>
 		<script src="class/vouchers/FreeRoll.js" defer></script>
@@ -74,7 +75,7 @@
 					[ 'EvensSteven', EvensSteven ],
 					[ 'ChipButty', ChipButty ],
 					[ 'ExtraInterest', ExtraInterest ],
-					[ 'Rerollimbursement', Rerollimbursement ]
+					[ 'Rerollimbursement', Rerollimbursement ],
 					[ 'Wackernomics', Wackernomics ]
 				]);
 				diceGame.initJokers(jokers);
@@ -93,11 +94,13 @@
 			function test(game)
 			{
 				//Get a couple of Jokers for testing
-				game.addJokerByName('EvensSteven');
-				game.addJokerByName('ChipButty');
+				//game.addJokerByName('EvensSteven');
+				//game.addJokerByName('ChipButty');
 
 				for(let [jokerName, jokerClass] of game.data.availableJokers){
-					console.log(jokerName);
+					if(jokerName === 'Joker') continue;
+					//console.log(jokerName);
+					game.addJokerByName(jokerName);
 				}
 				
 			}
@@ -216,14 +219,28 @@
 				<div class="w3-modal-content w3-black">
 					<div class="w3-container">
 						<span 
-							onclick="document.getElementById('runInfoModal').style.display='none'; ui.showShopModal()" 
+							onclick="document.getElementById('anteScoreModal').style.display='none'; ui.openShopModal()" 
 							class="w3-button w3-red w3-display-topright"
 						>&times;</span>
-						
 						<div id="anteScoreDiv" class="w3-container w3-border">
-							
+							<!-- UiManager -->	
 						</div>
-
+					</div>
+				</div>
+			</div>
+			
+			<div id="chooseModal" class="w3-modal">
+				<div class="w3-modal-content w3-black">
+					<div class="w3-container">
+						<span style="document.getElementById('chooseModal').style.display='none';" 
+							class="w3-button w3-red w3-display-topright"
+						>&times;</span>
+						<div id="chooseDiv" class="w3-container w3-border">
+							<!-- UiManager -->	
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div id="runInfoModal" class="w3-modal">
 				<div class="w3-modal-content w3-black">

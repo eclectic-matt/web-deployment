@@ -161,15 +161,17 @@ class ScoreManager
 	//====================
 	// ANTE SCORE (CASH)
 	//====================
-	getAnteCash(game){
+	getAnteCash(game)
+	{
 		//this.data.state.hands = this.data.state.initial.hands;
 		//this.data.state.rerolls = this.data.state.initial.rerolls;
 		//EARN A CERTAIN AMOUNT FROM THE BEATEN BLIND
-		let blindEarnings = (game.data.state.phase === 'boss' ? Math.floor(game.data.state.round * 5) : Math.floor(game.data.state.round * 2) );
-		let handsRemaining = Math.max(0,game.data.state.initial.hands - game.data.state.hands);
+		let blindEarnings = (game.getPhaseInfo().type === 'BOSS' ? Math.floor(game.data.state.round * 5) : Math.floor(game.data.state.round * 2) );
+		let handsRemaining = Math.max(0, game.data.state.initial.hands - game.data.state.hands);
 		let rerollsRemaining = Math.max(0, game.data.state.initial.rerolls - game.data.state.rerolls);
 		let interest = Math.floor(game.data.state.cash / 5);
 		let anteWin = {
+			calcCash: 0,
 			blindEarnings: blindEarnings,
 			hands: handsRemaining,
 			rerolls: rerollsRemaining,
@@ -180,6 +182,7 @@ class ScoreManager
 		let calcCash = 0;
 		calcCash += handsRemaining;
 		calcCash += interest;
+		console.log('handsRemaining', handsRemaining, 'interest', interest, 'calcCash', calcCash);
 		//JOKERS IMPLEMENTING THE win() METHOD TAKE IN THOSE PARTS OF THE STATE 
 		for(let joker of game.data.jokers){
 			let jokerEffect = joker.win(anteWin);

@@ -1,9 +1,9 @@
-class Rerollimbursement extends Joker
+class Wackernomics extends Joker
 {
 	constructor(data = false)
 	{
 		super(data);
-		this.data.name = 'Wackernomics';
+		this.data.name = 'Wacker nomics';
 		this.data.description = 'Gain £1 per round. Increases by £1 for each hand played';
 		this.data.rarity = 'Uncommon';
 		this.data.price = 10;

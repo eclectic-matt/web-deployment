@@ -66,6 +66,8 @@ class Joker
 	//=======
 	alertScore(scoreString)
 	{
+		//CURRENTLY BROKEN, REWORKING
+		return false;
 		//dScore.type + ' ' + dScore.effect + '' + dScore.value);
 		//Set a delay and queue?
 		this.data.tooltips.push(scoreString);
@@ -80,6 +82,8 @@ class Joker
 	
 	clearAlert()
 	{
+		//CURRENTLY BROKEN, REWORKING
+		return false;
 		this.data.tooltips = [];
 		this.data.timeouts = [];
 		let tooltipEl = document.getElementById(this.data.name.replace(' ', '_') + '_Tooltip');

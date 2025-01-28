@@ -172,6 +172,8 @@ class Game
             this.loadStakes();
             this.loadRound(this.data.state.round);
             this.rollAllDice();
+            //init at CHOOSE_SMALL?
+            this.nextPhase();
             //this.updateUi();
         }
     }
@@ -291,25 +293,16 @@ class Game
 
 		//BOSS EFFECTS (NOT YET IMPLEMENTED)
 		let bossFx = this.bossEffects[round];
-		this.data.round.bossEffect = Math.floor(Math.random() * bossFx.length);
+		this.data.round.bossEffect = bossFx[Math.floor(Math.random() * bossFx.length)];
 	}
 
 
 	
-	getPhaseInfo()
-	{
-		let current = this.data.state.phases[this.data.state.phaseIndex];
-		let phaseInfo = current.split('_');
-		//NAME = START/CHOOSE/ANTE/SCORE/SHOP/CHOOSE/CHECK
-		let phaseName = phaseInfo[0];
-		//TYPE = SMALL/BIG/BOSS
-		let phaseType = phaseInfo[1];
-		return {
-			name: phaseName,
-			type: phaseType
-		}
-	}
-
+	//==================
+	// get data for 
+	// UI methods
+	//==================
+	
 	getBlindsAndStakesData(round=false)
 	{
 		if(!round){
@@ -402,6 +395,20 @@ class Game
 	// NEXT / WIN / LOSE METHODS
 	//======================
 	
+	getPhaseInfo()
+	{
+		let current = this.data.state.phases[this.data.state.phaseIndex];
+		let phaseInfo = current.split('_');
+		//NAME = START/CHOOSE/ANTE/SCORE/SHOP/CHOOSE/CHECK
+		let phaseName = phaseInfo[0];
+		//TYPE = SMALL/BIG/BOSS
+		let phaseType = phaseInfo[1];
+		return {
+			name: phaseName,
+			type: phaseType
+		}
+	}
+
 	//Trigger game phase progress using nextPhase()
 	nextPhase()
 	{
@@ -413,6 +420,7 @@ class Game
 			this.nextRound();
 		}
 		let phase = this.getPhaseInfo();
+		console.log('nextPhase', this.data.state.phaseIndex, phase);
 		switch(phase.name){
 			case 'START':
 				//Apply joker round start effects
@@ -437,19 +445,26 @@ class Game
 				//Get the subtype
 				switch(phase.type){
 					case 'SMALL':
-						
+						//UPDATE UI
 					break;
 					case 'BIG':
 					
 					break;
 					case 'BOSS':
-						
+						//HANDLE BOSS EFFECT?
+						switch(this.data.round.bossEffect){
+							case 'Hidden Values':
+								
+							break;
+						}
 					break;
 				}
+				//APPLY UI CHANGES
+				ui.updateUi(this);
 			break;
 			case 'SCORE':
 				//Get score and display modal
-				ui.openScoreModal(this);
+				ui.openAnteScoreModal(this);
 			break;
 			case 'SHOP':
 				//Get shop options and display modal
@@ -681,6 +696,9 @@ class Game
 		ui.updateUi(this);
 	}
 
+	/**
+	 * This is the main function that scores dice in the game. Uses ScoreManager.scoreJokers() to get the "base" score and then apply joker effects.
+ 	*/
 	scoreSelectedDice()
 	{
 		//GET THE SCORE FOR THE SELECTED DICE VIA THE ScoreManager CLASS
