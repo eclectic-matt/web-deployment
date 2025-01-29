@@ -23,7 +23,9 @@ class UiManager
  	*/
 	getJokerElement(joker)
 	{
+		const baseName = joker.data.name.replace(' ', '_');
 		let jokerEl = document.createElement('div');
+		jokerEl.id = baseName;
 		jokerEl.style.border = '1px solid white';
 		jokerEl.classList.add('w3-col');
 		jokerEl.classList.add('joker');
@@ -35,7 +37,7 @@ class UiManager
 		jokerEl.appendChild(jokerHead);
 		//OUTPUT JOKER DESCRIPTION 
 		let jokerDescEl = document.createElement('span');
-		jokerDescEl.id = joker.data.name.replace(' ', '_') + '_Tooltip';
+		jokerDescEl.id = baseName + '_Tooltip';
 		jokerDescEl.innerHTML = joker.data.description;
 		jokerDescEl.classList.add('w3-text');
 		jokerDescEl.classList.add('w3-black');

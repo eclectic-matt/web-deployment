@@ -7,6 +7,15 @@
 		<link rel="stylesheet" href="style/dice.css" />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- SCRIPT LIBRARY IMPORTS -->
+		<!-- GSAP CORE AND PLUGINS -->
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Draggable.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/TextPlugin.min.js"></script>
+		<script>
+			//replaces yourElement's text with "This is the new text" 
+			
+		</script>
 		<!-- LOAD IN JOKERS -->
 		<script src="class/jokers/Joker.js" defer></script>
 		<script src="class/jokers/ChipButty.js" defer></script>
@@ -88,6 +97,72 @@
 				diceGame.initVouchers(vouchers);
 				//TESTING HERE
 				test(diceGame);
+				
+				//TESTING GSAP + DRAGGABLE
+				//https://gsap.com/resources/get-started
+				/*
+				gsap.fromTo( ".circle",{ x: -40, fill: 'blue', }, { x: 40, fill: 'green' });
+				*/
+				/*const yourElement = document.getElementById('')
+				gsap.to(yourElement, {
+					duration: 2,
+					text: "This is the new text",
+					ease: "none",
+				});*/
+				
+				//THIS BUT HORIZONTAL - https://codepen.io/joelcoxokc/pen/mryyQP
+				
+				//https://gsap.com/docs/v3/Plugins/Draggable/
+				Draggable.create(".joker", {
+					type: "x",
+					liveSnap: {
+					    //snaps to the closest point in the array, but only when it's within 15px (new in GSAP 1.20.0 release):
+					    points: [
+					      { x: 0, y: 0 },
+					      { x: 150, y: 0 },
+					      { x: 300, y: 0 },
+					      { x: 450, y: 0 },
+					      { x: 600, y: 0 }
+					    ],
+					    radius: 74
+					},
+					bounds: document.getElementById("jokerRow"),
+					inertia: true,
+					onClick: function() {
+						//console.log("clicked");
+					},
+					onDragEnd: function(ev) {
+						
+						//console.log("drag ended", ev.currentTarget.id, );;
+						//this works - this.target.id
+						//Check collision with other jokers and reorder joker row
+						/*let jokerEls = document.getElementById('jokerRow').children;
+						jokerEls = [...jokerEls];
+						console.log(jokerEls);
+						let jokerOrder = [];
+						for(let idx of jokerEls){
+							let jokerEl = jokerEls[idx]; 
+							console.log(jokerEl.id, jokerEl.style.left);
+							let storeOrder = {
+								left: jokerEl.style.left,
+								id: jokerEl.id
+							}
+							let insertFlag = false;
+							for(let i=0; i < jokerOrder.length; i++){
+								if(jokerOrder[i].left > storeOrder.left){
+									jokerOrder.splice(i,0,storeOrder);
+									insertFlag = true;
+								}
+							}
+							if(!insertFlag){
+								jokerOrder.push(storeOrder);
+							}
+						}
+						
+						console.log('New order', jokerOrder);
+					},*/
+					}
+				});
 			}
 			//game = new(gameDict.get(name))(parseInt(diff));
 			
