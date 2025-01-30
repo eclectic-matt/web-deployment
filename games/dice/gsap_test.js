@@ -62,11 +62,34 @@ function pickupJoker(jokerId){
 	let jokerSlots = document.querySelectorAll('.jokerSlot');
 	jokerSlots.forEach( (el) => {
 		if(el.dataset.joker === jokerId){
-			const emptySlot = document.getElementById(el.id);
-			emptySlot.remove();
+			console.log('REMOVING ' + el.id);
+			//CALL TO REMOVE ELEMENT NOW
+			gsap.call(removeElement(el));
+			//const emptySlot = document.getElementById(el.id);
+			//emptySlot.remove();
 		}
 	});
+}
 
+function removeElement(element) {
+	if (typeof(element) === "string") {
+		element = document.querySelector(element);
+	}
+	return function() {
+		element.parentNode.removeChild(element);
+	};
+}
+
+
+function cleanUpSlots(){
+	//LOAD JOKER SLOTS AGAIN
+	let jokerSlots = document.querySelectorAll('.jokerSlot');
+	//NOW, RENAME SLOTS 1 - x
+	jokerSlots.forEach( (el, i) => {
+		//console.log('SLOT ' + el.id + ' RENAMED TO ' + 'jokerSlot' + (i + 1));
+		el.id = 'jokerSlot' + (i + 1);
+		el.innerHTML = 'slot' + (i + 1);
+	});
 }
 
 function setJokerInSlot(slot, joker){
