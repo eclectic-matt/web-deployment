@@ -122,10 +122,10 @@
   <div class="footer"></div-->
   
   <div id="jokerRow" class="w3-row-padding jokerRow">
-  	<div class="w3-col jokerSlot" id="jokerSlot1">
+  	<div class="w3-col jokerSlot" id="jokerSlot1" data-joker="">
   		<p>slot1</p>
   	</div>  	
-  	<div class="w3-col jokerSlot" id="jokerSlot2">
+  	<!--div class="w3-col jokerSlot" id="jokerSlot2">
   		<p>slot2</p>
   	</div>  	
   	<div class="w3-col jokerSlot" id="jokerSlot3">
@@ -136,7 +136,7 @@
   	</div>  	
   	<div class="w3-col jokerSlot" id="jokerSlot5">
   		<p>slot5</p>
-  	</div>
+  	</div-->
   </div>
   
   <div class="w3-row-padding looseJokers">
@@ -146,6 +146,11 @@
   	<div class="w3-col joker" id="jokerB">
   		<p>Joker B</p>
   	</div>
+  </div>
+
+  <div id="debug">
+	<p>SLOTS: <span id="slotsInfo"></span></p>
+	<p>JOKER ORDER: <span id="jokerOrder"></span></p>
   </div>
 </body>
 </html>
