@@ -64,6 +64,20 @@ jokers.forEach((item, i) => {
 	})
 })
 
+function addJokerSlot(){
+	/*<div class="w3-row-padding jokerRow">
+  	<div class="w3-col jokerSlot" id="jokerSlot1">
+  		<p>slot1</p>
+  	</div>  	
+  	*/
+  	let jRow = document.getElementById('jokerRow');
+  	let previousSlotCount = jRow.children.length;
+  	let newSlot = document.createElement('div');
+  	newSlot.className = 'w3-col jokerSlot';
+  	newSlot.id = 'jokerSlot' + (previousSlotCount + 1);
+  	newSlot.innerHTML = newSlot.id;
+  	jRow.appendChild(newSlot);
+}
 
 
 
