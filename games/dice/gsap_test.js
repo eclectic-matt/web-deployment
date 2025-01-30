@@ -7,8 +7,11 @@ jokers.forEach((item, i) => {
 	Draggable.create(item, {
 		
 		onPress:()=>{
+			//HIGHLIGHT SELECTED JOKER
 			gsap.to(item, {duration:0.1, scale:1.2, zIndex:100})
 			gsap.to(jokers, {duration:0.1, opacity:(i,t)=>(t==item)?1:0.3})
+			//REMOVE JOKER FROM CURRENT SLOT (AND REMOVE SLOT)
+			pickupJoker(item);
 		},
 
 		onDrag:()=>{
@@ -54,6 +57,17 @@ jokers.forEach((item, i) => {
 		}
 	})
 })
+
+function pickupJoker(jokerId){
+	let jokerSlots = document.querySelectorAll('.jokerSlot');
+	jokerSlots.forEach( (el) => {
+		if(el.dataset.joker === jokerId){
+			const emptySlot = document.getElementById(el.id);
+			emptySlot.remove();
+		}
+	});
+
+}
 
 function setJokerInSlot(slot, joker){
 	let jokerSlots = document.querySelectorAll('.jokerSlot');
