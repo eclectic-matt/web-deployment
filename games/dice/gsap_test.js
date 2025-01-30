@@ -42,7 +42,8 @@ jokers.forEach((item, i) => {
 	        //console.log('checking for hit', slot.id);
 	        if(Draggable.hitTest(item, slot, "20%")){
 	      	  
-	      	  const newY = slot.getBoundingClientRect().top + window.scrollY;
+	      	  //const newY = slot.getBoundingClientRect().top + window.scrollY - slot.style.height;
+	      	  const newY = -slot.getBoundingClientRect().height;
 	      	  const newX = slot.getBoundingClientRect().left + window.scrollX;
 	      	  console.log('Hit!', item.id, slot.id, newX, newY);
 	      	  
