@@ -33,6 +33,11 @@ jokers.forEach((item, i) => {
 	      gsap.to(item, {duration:0.1, scale:1.2, zIndex:100})
 	      gsap.to(jokers, {duration:0.1, opacity:(i,t)=>(t==item)?1:0.3})
 	    },
+	    onDrag:()=>{
+	    	if(Draggable.hitTest(item, jokerSlots, "20%")){
+	    		gsap.to(jokerSlots, {duration:0.1, scale: 1.2})
+	    	}
+	    },
 	    
 	    onRelease:()=>{ // return the item on release
 	      gsap.to(item, {duration:0.4, scale:1, ease:'elastic.out(.45)'})
