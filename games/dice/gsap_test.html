@@ -1,150 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>GSAP TESTS</title>
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- SCRIPT LIBRARY IMPORTS -->
-		<!-- GSAP CORE AND PLUGINS -->
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Draggable.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/TextPlugin.min.js"></script>
-		<!--script>
-		   function init(){
-			//https://gsap.com/docs/v3/Plugins/Draggable/static.hitTest()/
-
-			//SOURCE: https://github.com/WebDevSimplified/GSAP-Animation/blob/master/script.js
-			// gsap.from('.header', { duration: 1, y: '-100%', ease: 'bounce' })
-			// gsap.from('.link', { duration: 1, opacity: 0, delay: 1, stagger: .5 })
-			// gsap.from('.right', { duration: 1, x: '-100vw', delay: 1, ease: 'power2.in' })
-			// gsap.from('.left', { duration: 1, delay: 1.5, x: '-100%' })
-			// gsap.to('.footer', { duration: 1, y: 0, ease: 'elastic', delay: 2.5 })
-			// gsap.fromTo('.button', { opacity: 0, scale: 0, rotation: 720 }, { duration: 1, delay: 3.5, opacity: 1, scale: 1, rotation: 0 })
-			const timeline = gsap.timeline({ defaults: { duration: 1 }})
-			timeline
-				.from('.header', { y: '-100%', ease: 'bounce' })
-				.from('.link', { opacity: 0, stagger: .5 })
-				.from('.right', { x: '-100vw', ease: 'power2.in' }, 1)
-				.from('.left', { x: '-100%' }, '<.5')
-				.to('.footer', {  y: 0, ease: 'elastic' })
-				.fromTo('.button', { opacity: 0, scale: 0, rotation: 720 }, { opacity: 1, scale: 1, rotation: 0 })
-			const button = document.querySelector('.button')
-			button.addEventListener('click', () => {
-				timeline.timeScale(3)
-				timeline.reverse()
-			})
-		   }
-		</script-->
-		<script src="gsap_test.js" defer></script>
-  
-<style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .header {
-      height: 15vh;
-      background-color: red;
-    }
-
-    .links {
-      height: 100%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      color: white;
-    }
-
-    .content {
-      flex-grow: 1;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .sidebar {
-      background-color: green;
-      width: 15vw;
-    }
-
-    .button {
-      align-self: center;
-    }
-
-    .footer {
-      transform: translateY(100%);
-      height: 15vh;
-      background-color: blue;
-    }
-
-	.jokerRow, .looseJokers {
-		width: 100%;
-	}
-    .joker {
-    	width: 50px;
-    	height: 75px;
-    }
-    .jokerSlot {
-    	width: 20%;
-    	height: 75px;
-    	background-color: #333;
-    	border:1px solid white;
-    }
-    
-    #jokerA{
-    	background-color: #3ef;
-		color: white;
-    }
-    #jokerB {
-    	background-color: #2bb;
-		color: black;
-    }
-    
-  </style>
-</head>
+<head>
+	<meta charset="utf-8" />
+	<title>GSAP TESTS</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- SCRIPT LIBRARY IMPORTS -->
+	<!-- GSAP CORE AND PLUGINS -->
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Draggable.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/TextPlugin.min.js"></script>
+	<script src="gsap_test.js" defer></script>
+	<style>
+		body {
+			margin: 0;
+		    height: 100vh;
+		    display: flex;
+		    flex-direction: column;
+		    overflow: hidden;
+		}
+		
+		.header {
+			height: 15vh;
+			background-color: red;
+		}
+		.links {
+			height: 100%;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			color: white;
+		}
+		.content {
+			flex-grow: 1;
+			display: flex;
+			justify-content: space-between;
+		}
+		.sidebar {
+			background-color: green;
+			width: 15vw;
+		}
+		.button {
+			align-self: center;
+		}
+		.footer {
+			transform: translateY(100%);
+			height: 15vh;
+			background-color: blue;
+		}
+		.jokerRow, .looseJokers {
+			width: 100%;
+			height: 20vh;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			background-color: green;
+			border: 1px solid darkcyan;
+		}
+		.joker {
+			position: absolute;
+			width: 10vh;
+			height: 20vh;
+			z-index: 100;
+			flex: space-around;
+			align-self: stretch;
+		}
+		.jokerSlot {
+			width: 20%;
+			height: 75px;
+			background-color: #333;
+			border:1px solid white;
+			flex-grow: 10;
+		}
+		    
+		#jokerA{
+			background-color: #3ef;
+			color: white;
+		}
+		#jokerB {
+			background-color: #2bb;
+			color: black;
+		}
+		#jokerC {
+			background-color: #f2b;
+			color: white;
+		}
+		</style>
+	</head>
 <body>
-  <!--div class="header">
-    <div class="links">
-      <div class="link">Link 1</div>
-      <div class="link">Link 2</div>
-      <div class="link">Link 3</div>
-    </div>
-  </div>
-  <div class="content">
-    <div class="sidebar left"></div>
-    <button class="button">Reverse!</button>
-    <div class="sidebar right"></div>
-  </div>
-  <div class="footer"></div-->
-  
-  <div id="jokerRow" class="w3-row-padding jokerRow">
-  	<div class="w3-col jokerSlot" id="jokerSlot1" data-joker="">
-  		<p>slot1</p>
-  	</div>  	
-  	<!--div class="w3-col jokerSlot" id="jokerSlot2">
-  		<p>slot2</p>
-  	</div>  	
-  	<div class="w3-col jokerSlot" id="jokerSlot3">
-  		<p>slot3</p>
-  	</div>  	
-  	<div class="w3-col jokerSlot" id="jokerSlot4">
-  		<p>slot4</p>
-  	</div>  	
-  	<div class="w3-col jokerSlot" id="jokerSlot5">
-  		<p>slot5</p>
-  	</div-->
+  <div id="jokerRow" class="jokerRow">
+  	
   </div>
   
-  <div class="w3-row-padding looseJokers">
-  	  <div class="w3-col joker" id="jokerA">
+  <div class="looseJokers">
+  	<div class="joker" id="jokerA">
   		<p>Joker A</p>
   	</div>
-  	<div class="w3-col joker" id="jokerB">
+  	<div class="joker" id="jokerB">
   		<p>Joker B</p>
+  	</div>
+    <div class="joker" id="jokerC">
+  		<p>Joker C</p>
   	</div>
   </div>
 
@@ -152,5 +108,6 @@
 	<p>SLOTS: <span id="slotsInfo"></span></p>
 	<p>JOKER ORDER: <span id="jokerOrder"></span></p>
   </div>
+  
 </body>
 </html>
