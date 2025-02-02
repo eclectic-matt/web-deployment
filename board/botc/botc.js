@@ -109,7 +109,7 @@ const editions = [
 	},
 	{
 		id: 4,
-		name: "Experimental Characters",
+		name: "The Carousel (Experimental Characters)",
 		code: "exp",
 		color: "deep-orange",
 		description: "Experimental characters are characters which do not yet have a home script. At some point in the future, these may be released as part of official expansion scripts. For now, you are encouraged to experiment with them in your own scripts.",
