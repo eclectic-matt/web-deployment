@@ -2275,10 +2275,10 @@
 				"firstNight": 10,
 				"firstNightReminder": "Wake the Demon, show them the 'This character selected you' card, show the King token and point to the King player.",
 				"otherNight": 63,
-				"otherNightReminder": "If there are more dead than living, show the King a character token of a living player.",
+				"otherNightReminder": "If there are equal or more dead than living, show the King a character token of a living player.",
 				"reminders": [],
 				"setup": false,
-				"ability": "Each night, if the dead outnumber the living, you learn 1 alive character. The Demon knows who you are."
+				"ability": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King."
 				},
 				{
 				"id": "balloonist",
@@ -2286,16 +2286,15 @@
 				"edition": "",
 				"team": "townsfolk",
 				"firstNight": 45,
-				"firstNightReminder": "Choose a character type. Point to a player whose character is of that type. Place the Balloonist's Seen reminder next to that character.",
+				"firstNightReminder": "",
 				"otherNight": 62,
-				"otherNightReminder": "Choose a character type that does not yet have a Seen reminder next to a character of that type. Point to a player whose character is of that type, if there are any. Place the Balloonist's Seen reminder next to that character.",
-				"reminders": ["Seen Townsfolk",
-					"Seen Outsider",
-					"Seen Minion",
-					"Seen Demon",
-					"Seen Traveller"],
+				"otherNightReminder": "",
+				"reminders": [
+					"Seen",
+					"Seen Last"
+				],
 				"setup": true,
-				"ability": "Each night, you learn 1 player of each character type, until there are no more types to learn. [+1 Outsider]"
+				"ability": "Each night, you learn a player of a different character type than last night. [+0 or +1 Outsider]"
 				},
 				{
 				"id": "cultleader",
@@ -2321,7 +2320,7 @@
 				"otherNightReminder": "The Lycanthrope points to a living player: if good, they die and no one else can die tonight.",
 				"reminders": ["Dead"],
 				"setup": false,
-				"ability": "Each night*, choose a living player: if good, they die, but they are the only player that can die tonight."
+				"ability": "Each night*, choose an alive player. If good, they die & the Demon doesn’t kill tonight. One good player registers as evil."
 				},
 				{
 				"id": "amnesiac",
@@ -2400,7 +2399,7 @@
 				"reminders": [],
 				"remindersGlobal": ["Is the Alchemist"],
 				"setup": false,
-				"ability": "You have a Minion ability. When using this ability, the Storyteller may prompt you to make a different choice."
+				"ability": "You have a Minion ability. When using this, the Storyteller may prompt you to choose differently."
 				},
 				{
 				"id": "farmer",
