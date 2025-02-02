@@ -125,6 +125,19 @@ const editions = [
 			decoy: [],
 			traveler: []
 		}
+	},
+	{
+		id: 5,
+		name: "Traveler Characters",
+		code: "traveler",
+		color: "white",
+		description: "Travelers do have a 'home script' but are gathered here for ease.",
+		difficulty: "Varies depending on Traveler but most are suitable for beginners.",
+		evilDescription: "All Travelers can be evil and learn who the Demon is, which usually spices up games significantly!",
+		goodDescription: "Good Travelers can also be essential in solving games or supporting good victories!",
+		roles: {
+			traveler: []
+		}
 	}
 ];
 
@@ -152,6 +165,10 @@ function load(roles){
 				assign(store, role);
 			break;
 			//ETC
+		}
+		if(role.team == "traveler"){
+			store = editions[4].roles;
+			assign(store, role);
 		}
 	}
 

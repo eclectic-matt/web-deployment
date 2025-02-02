@@ -1044,34 +1044,6 @@
 			 **/
 			var roles = [
 				{
-				"id": "organgrinder",
-				"name": "Organ Grinder",
-				"edition": "",
-				"team": "minion",
-				"firstNight": 33,
-				"firstNightReminder": "All players keep their eyes closed when voting & the vote tally is secret. Votes for you only count if you vote.",
-				"otherNight": 0,
-				"otherNightReminder": "",
-				"reminders": ["Townsfolk",
-					"Wrong"],
-				"setup": false,
-				"ability": "All players keep their eyes closed when voting & the vote tally is secret. Votes for you only count if you vote."
-				},
-				{
-				"id": "vizier",
-				"name": "Vizier",
-				"edition": "",
-				"team": "minion",
-				"firstNight": 33,
-				"firstNightReminder": "All players know who you are. You can not die during the day. If good voted, you may choose to execute immediately.",
-				"otherNight": 0,
-				"otherNightReminder": "",
-				"reminders": ["Townsfolk",
-					"Wrong"],
-				"setup": false,
-				"ability": "All players know who you are. You can not die during the day. If good voted, you may choose to execute immediately."
-				},
-				{
 				"id": "washerwoman",
 				"name": "Washerwoman",
 				"edition": "tb",
@@ -2526,14 +2498,14 @@
 				"id": "acrobat",
 				"name": "Acrobat",
 				"edition": "",
-				"team": "outsider",
+				"team": "townsfolk",
 				"firstNight": 0,
 				"firstNightReminder": "",
-				"otherNight": 39,
-				"otherNightReminder": "If a good living neighbour is drunk or poisoned, the Acrobat player dies.",
-				"reminders": ["Dead"],
+				"otherNight": 0,
+				"otherNightReminder": "Wake the Acrobat to choose a player, if they are or become drunk or poisoned tonight, the Acrobat player dies.",
+				"reminders": ["Chosen", "Dead"],
 				"setup": false,
-				"ability": "Each night*, if either good living neighbour is drunk or poisoned, you die."
+				"ability": "Each night*, choose a player: if they are or become drunk or poisoned tonight, you die."
 				},
 				{
 				"id": "puzzlemaster",
@@ -2655,20 +2627,6 @@
 				"ability": "If you publicly claim to be the Goblin when nominated & are executed that day, your team wins."
 				},
 				{
-				"id": "mephit",
-				"name": "Mephit",
-				"edition": "",
-				"team": "minion",
-				"firstNight": 27,
-				"firstNightReminder": "Show the Mephit their secret word.",
-				"otherNight": 18,
-				"otherNightReminder": "Wake the 1st good player that said the Mephit's secret word and show them the 'You are' card and the thumbs down evil signal.",
-				"reminders": ["Turns evil",
-					"No ability"],
-				"setup": false,
-				"ability": "You start knowing a secret word. The 1st good player to say this word becomes evil that night."
-				},
-				{
 				"id": "mezepheles",
 				"name": "Mezepheles",
 				"edition": "",
@@ -2707,7 +2665,33 @@
 				"otherNightReminder": "",
 				"reminders": [],
 				"setup": false,
-				"ability": "If you are executed, all but 3 players die. 1 minute later, the player with the most players pointing at them dies."
+				"ability": "If you are executed, all but 3 players die. After a 10 to 1 countdown, the player with the most players pointing at them, dies."
+				},
+				{
+				"id": "boffin",
+				"name": "Boffin",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "The Demon (even if drunk or poisoned) has a not-in-play good character's ability. You both know which."
+				},
+				{
+					"id": "harpy",
+					"name": "Harpy",
+					"edition": "",
+					"team": "minion",
+					"firstNight": 0,
+					"firstNightReminder": "",
+					"otherNight": 0,
+					"otherNightReminder": "",
+					"reminders": [],
+					"setup": false,
+					"ability": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or one or both might die."
 				},
 				{
 				"id": "lilmonsta",
@@ -2736,7 +2720,7 @@
 				"reminders": ["Dead",
 					"Poisoned"],
 				"setup": false,
-				"ability": "Each night*, choose a player: they die. You start by choosing an alive player: they are poisoned - you die if & only if they die."
+				"ability": "Each night*, choose a player: they die. You start by choosing a player: they are poisoned. You die if & only if they are dead."
 				},
 				{
 				"id": "alhadikhia",
@@ -2746,12 +2730,12 @@
 				"firstNight": 0,
 				"firstNightReminder": "",
 				"otherNight": 33,
-				"otherNightReminder": "The Al-Hadikhia chooses 3 players. Announce the first player, wake them to nod yes to live or shake head no to die, kill or resurrect accordingly, then put to sleep and announce the next player. If all 3 are alive after this, all 3 die.",
+				"otherNightReminder": "The Al-Hadikhia may choose 3 players. Announce the first player, wake them to nod yes to live or shake head no to die, kill or resurrect accordingly, then put to sleep and announce the next player. If all 3 are alive after this, all 3 die.",
 				"reminders": ["1", "2", "3",
 					"Chose death",
 					"Chose life"],
 				"setup": false,
-				"ability": "Each night*, choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die."
+				"ability": "Each night*, you may choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die."
 				},
 				{
 				"id": "legion",
@@ -2761,9 +2745,12 @@
 			"firstNight": 0,
 			"firstNightReminder": "",
 			"otherNight": 23,
-			"otherNightReminder": "Choose a player, that player dies.",
-			"reminders": ["Dead",
-				"About to die"],
+			"otherNightReminder": "",
+			"reminders": [
+				"Dead",
+				"About to die",
+				"Execution Fails"
+			],
 			"setup": true,
 			"ability": "Each night*, a player might die. Executions fail if only evil voted. You register as a Minion too. [Most players are Legion]"
 			},
@@ -2796,7 +2783,7 @@
 			"otherNightReminder": "",
 			"reminders": [],
 			"setup": true,
-			"ability": "Nominees die, but may nominate again immediately (on day 3, they must). After day 3, evil wins. [All Minions are Riot]"
+			"ability": "On day 3, Minions become Riot & nominees die but nominate an alive player immediately. This must happen."
 			},
 			{
 			"id": "gangster",
@@ -2810,6 +2797,138 @@
 			"reminders": [],
 			"setup": false,
 			"ability": "Once per day, you may choose to kill an alive neighbour, if your other alive neighbour agrees."
+			},
+			{
+				"id": "gnome",
+				"name": "Gnome",
+				"edition": "",
+				"team": "traveler",
+				"firstNight": 0,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": [],
+				"setup": false,
+				"ability": "All players start knowing a player of your alignment. You may choose to kill anyone who nominates them."
+			},
+			{
+				"id": "lordoftyphon",
+				"name": "Lord of Typhon",
+				"edition": "",
+				"team": "demon",
+				"firstNight": 33,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "Choose a player: they die.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each night*, choose a player: they die. [Evil characters are in a line. You are in the middle. +1 Minion. -? to +? Outsiders]"
+			},
+			{
+				"id": "ojo",
+				"name": "Ojo",
+				"edition": "",
+				"team": "demon",
+				"firstNight": 33,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "Choose a character: they die. If this character is not in play, the Storyteller chooses who dies.",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "Each night*, choose a character: they die. If they are not in play, the Storyteller chooses who dies."
+			},
+			{
+				"id": "yaggababble",
+				"name": "Yaggababble",
+				"edition": "",
+				"team": "demon",
+				"firstNight": 33,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Dead"],
+				"setup": false,
+				"ability": "You start knowing a secret phrase. For each time you said it publicly today, a player might die."
+			},
+			{
+				"id": "kazali",
+				"name": "Kazali",
+				"edition": "",
+				"team": "demon",
+				"firstNight": 33,
+				"firstNightReminder": "Wake the Kazali, they choose which players are which minions by pointing to the script.",
+				"otherNight": 0,
+				"otherNightReminder": "Choose a player: they die.",
+				"reminders": ["Dead"],
+				"setup": true,
+				"ability": "Each night*, choose a player: they die. [You choose which players are which Minions. -? to +? Outsiders]"
+			},
+			{
+				"id": "organgrinder",
+				"name": "Organ Grinder",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 33,
+				"firstNightReminder": "All players keep their eyes closed when voting & the vote tally is secret. Votes for you only count if you vote.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Townsfolk",
+					"Wrong"],
+				"setup": false,
+				"ability": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk until dusk."
+			},
+			{
+				"id": "vizier",
+				"name": "Vizier",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 33,
+				"firstNightReminder": "All players know who you are. You can not die during the day. If good voted, you may choose to execute immediately.",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Townsfolk",
+					"Wrong"],
+				"setup": false,
+				"ability": "All players know who you are. You can not die during the day. If good voted, you may choose to execute immediately."
+			},
+			{
+				"id": "summoner",
+				"name": "Summoner",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 33,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Summoned"],
+				"setup": false,
+				"ability": "You get 3 bluffs. On the 3rd night, choose a player: they become an evil Demon of your choice. [No Demon]"
+			},
+			{
+				"id": "wizard",
+				"name": "Wizard",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 33,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Wish Granted"],
+				"setup": false,
+				"ability": "Once per game, choose to make a wish. If granted, it might have a price & leave a clue as to its nature."
+			},
+			{
+				"id": "xaan",
+				"name": "Xaan",
+				"edition": "",
+				"team": "minion",
+				"firstNight": 33,
+				"firstNightReminder": "",
+				"otherNight": 0,
+				"otherNightReminder": "",
+				"reminders": ["Night X"],
+				"setup": false,
+				"ability": "On night X, all Townsfolk are poisoned until dusk. [X Outsiders]"
 			}
 		];
 

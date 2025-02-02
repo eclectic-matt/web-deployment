@@ -14,11 +14,15 @@ jokers.forEach((item, i) => {
 
 	Draggable.create(item, {
 		
+		snap: calculateSnapPosition(jokerRow, item),
+		
 		onPress:()=>{
 			//HIGHLIGHT SELECTED JOKER
 			//gsap.to(item, {duration:0.1, scale:1.2, rotate:"10%", zIndex:100})
 			if (Draggable.hitTest(item, jokerRow, "20%")) {
-				removeJokerFromRow(jokerRow, item);
+				//removeJokerFromRow(jokerRow, item);
+				let removeIndex = jokerOrder.find( (id) => { return id == item.id;});
+				jokerOrder.splice(removeIndex,1);
 			}
 		},
 
@@ -33,21 +37,57 @@ jokers.forEach((item, i) => {
 			//gsap.to(item, {duration:0.4, scale:1, rotate: 0})
 			//gsap.to(jokers, {duration:0.2, scale:1, opacity:1})
 			
-			let previousJoker = null;
+			/*let previousJoker = null;
 			//CHECK COLLISION WITH EXISTING JOKERS
-			Array.from(jokers).filter( (j) => {j.id !== item.id}).forEach( (joker) => {
+			Array.from(jokers).filter( (j) => {return j.id !== item.id}).forEach( (joker) => {
 				//If the dropped joker overlaps another by 40%
 				if(Draggable.hitTest(item, joker, "40%")){
 					//set this joker as the "previous"
 					previousJoker = joker;
 				}
-			})
+			})*/
 			
-			if(Draggable.hitTest(item, jokerRow, "20%")){
-				console.log('bought joker', item.id, previousJoker);
-				appendJokerToRow(jokerRow, item, previousJoker);
+			
+			if(Draggable.hitTest(item, jokerRow, "50%")){
+				
+				item.snap = calculateSnapPosition(jokerRow, item);
+				
+				//CALCULATE POSITION TO INSERT - YOU WILL INSERT AT INDEX n WHERE n = leftPad 
+				//let jokerCount = jokerRow.children.length;
+				let jokerCount = jokerOrder.length;
+				let insertIndex = 0;
+				var bounds = jokerRow.getBoundingClientRect();
+				var rect = item.getBoundingClientRect();
+				//console.log(bounds, rect);
+				const leftPad = 20;
+				const topPad = 20;
+					
+				if(jokerCount > 0){
+					//let snap = appendJokerToRow(jokerRow, item, previousJoker);
+					for(let i = 0; i < jokerCount; i++){
+						let leftLimit = bounds.x + ((i+1) * (leftPad + (rect.width / 2)));
+						if(rect.x < leftLimit){
+							insertIndex = i;
+							break;
+						}
+					}
+				}
+				let newX = bounds.x + leftPad + (insertIndex * (rect.width + leftPad));
+				let newY = bounds.y + topPad;
+				jokerOrder.splice(insertIndex, 0, item.id);
+				console.log(jokerCount, insertIndex, newX, newY, item.id, jokerOrder);
+				gsap.set(item, {left: newX, top: newY});
+				
+				//gsap.set(item, { x: newX, y: newY });
+				//WE WANT TO GET "TO" [newX, newY] - transform the current [x, y] to the new values 
+				let xTransform = -(rect.x - newX);
+				let yTransform = -(rect.y - newY);
+				//console.log(item.id, newX, newY, xTransform, yTransform);
+				//gsap.set(item, { x: xTransform, y: yTransform });
 			}else{
-				removeJokerFromRow(jokerRow, item);
+				let removeIndex = jokerOrder.find( (id) => { return id == item.id;});
+				jokerOrder.splice(removeIndex,1);
+				//removeJokerFromRow(jokerRow, item);
 			}
 			
 			//gsap.to(item, {duration:1, scale:1, transform:0, translate:0, rotate:0, position:"relative", x:jokerRow.x, y:jokerRow.y});
@@ -82,6 +122,91 @@ jokers.forEach((item, i) => {
 		}
 	})
 })
+
+function calculateSnapPosition(jokerRow, joker)
+{
+	let jokerCount = jokerOrder.length;
+	let insertIndex = 0;
+	var bounds = jokerRow.getBoundingClientRect();
+	var rect = joker.getBoundingClientRect();
+	const leftPad = 20;
+	const topPad = 20;
+					
+	if(jokerCount > 0){
+		for(let i = 0; i < jokerCount; i++){
+			let leftLimit = bounds.left + ((i+1) * (leftPad + (rect.width / 2)));
+			if(rect.left < leftLimit){
+				insertIndex = i;
+				break;
+			}
+		}
+	}
+	let newX = bounds.left + leftPad + (insertIndex * (rect.width + leftPad));
+	let newY = bounds.top + topPad;
+	//jokerOrder.splice(insertIndex, 0, joker.id);
+	//console.log(jokerCount, newX, newY, joker.id, jokerOrder);
+	return { x: newX, y: newY };
+}
+
+
+
+
+function appendJokerToRow(jokerRow, item, previousJoker=null){
+	let currentJokerCount = jokerRow.children.length;
+	//let jokerRow = document.getElementById('jokerRow');
+	//console.log(jokerRow);
+	if(previousJoker){
+		jokerRow.insertBefore(item, previousJoker);
+	}else{
+		jokerRow.appendChild(item);
+	}
+	var bounds = jokerRow.getBoundingClientRect();
+	var rect = item.getBoundingClientRect();
+	
+	/*let newX = bounds.left - rect.left + (currentJokerCount * 75);
+	//let newY = -(bounds.top - rect.top);
+	let newY = bounds.top;
+	//gsap.to(item, {duration:1, x:newX, y:newY});
+	*/
+	const leftPad = 20;
+	const topPad = 20;
+	let newX = bounds.left + leftPad + (currentJokerCount * (rect.width + leftPad));
+	let newY = bounds.top + topPad;
+	
+	/*Draggable.get(item).set({
+		snap: {
+			x: newX,
+			y: newY
+		}
+	});*/
+	return {x: newX, y:newY};
+	//redrawJokerRow();
+}
+
+function removeJokerFromRow(jokerRow, item){
+	jokerRow.removeChild(item);
+	//redrawJokerRow();
+}
+
+
+function redrawJokerRow(){
+	let jokerCount = jokerRow.children.length;
+	let centreX = Math.floor((jokerRow.offsetLeft + jokerRow.offsetWidth) / 2);
+	let centreY = Math.floor((jokerRow.offsetTop + jokerRow.offsetHeight) / 2);
+	let spreadX = 50;
+	Array.from(jokerRow.children).forEach( (joker) => {
+		//gsap.to(joker, {})
+		//joker.style.zIndex =
+		let jokerXPos = centreX - (spreadX * (jokerCount - 1));
+		gsap.to(joker, {x: jokerXPos})
+	})
+}
+
+
+
+
+
+
 
 
 var pad = 20;
@@ -375,43 +500,6 @@ function createDropTile(element, index) {
 */
 
 
-function appendJokerToRow(jokerRow, item, previousJoker=null){
-	let currentJokerCount = jokerRow.children.length;
-	//let jokerRow = document.getElementById('jokerRow');
-	//console.log(jokerRow);
-	if(previousJoker){
-		jokerRow.insertBefore(item, previousJoker);
-	}else{
-		jokerRow.appendChild(item);
-	}
-	var bounds = jokerRow.getBoundingClientRect();
-	var rect = item.getBoundingClientRect();
-	
-	let newX = bounds.left - rect.left + (currentJokerCount * 75);
-	//let newY = -(bounds.top - rect.top);
-	let newY = bounds.top;
-	gsap.to(item, {duration:1, x:newX, y:newY});
-	redrawJokerRow();
-}
-
-function removeJokerFromRow(jokerRow, item){
-	jokerRow.removeChild(item);
-	redrawJokerRow();
-}
-
-
-function redrawJokerRow(){
-	let jokerCount = jokerRow.children.length;
-	let centreX = Math.floor((jokerRow.offsetLeft + jokerRow.offsetWidth) / 2);
-	let centreY = Math.floor((jokerRow.offsetTop + jokerRow.offsetHeight) / 2);
-	let spreadX = 50;
-	Array.from(jokerRow.children).forEach( (joker) => {
-		//gsap.to(joker, {})
-		//joker.style.zIndex =
-		let jokerXPos = centreX - (spreadX * (jokerCount - 1));
-		gsap.to(joker, {x: jokerXPos})
-	})
-}
 
 
 
