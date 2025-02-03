@@ -1,0 +1,161 @@
+
+{
+	"name": "Stationfall Characters",
+	"characters": [
+		"Astrochimp",
+		"Billionaire",
+		"Boarder",
+		"Botanist",
+		"Colonel",
+		"Consort",
+		"Corpsicle",
+		"Counselor",
+		"Cyborg",
+		"Daredevil",
+		"Digital Assistant",
+		"Doctor (Hyde)",
+		"Doctor (Jekyll)",
+		"Drones",
+		"Engineer",
+		"Exile",
+		"Inspector",
+		"Legal",
+		"Maintenance Clones",
+		"Medical",
+		"Microbiologist",
+		"Operative",
+		"Station Chief",
+		"Stowaway",
+		"Stranger",
+		"Telepathic Rat",
+		"Troubleshooter"
+	],
+	"projectXCharacters": [
+		"Carnivorous Bioexperiment",
+		"Combat Swarm",
+		"Death Ray",
+		"Grey Goo",
+		"Entropy Phantom",
+		"Robotic Assassin",
+		"Stable Wormhole",
+		"Tentacled Monstrosity"
+	],
+	"characterData": [
+		{
+			"id": 0,
+			"name": "Astrochimp",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "There are places where the civilized human mind breaks down. But fortunately man did not inhabit the Earth alone and there were creatures around him made of stiffer stuff. Noble savagery, savage nobility... teeth that can peel one’s face off and prodigiously strong arms made for throwing various throwable objects. Pan Troglodytes, the mighty chimpanzee helped propel mankind upward into the stars with its grit, ferocity, and almost complete lack of fear. These days the descendants of the Astrochimps are an underappreciated lot. Your lives are a lot like your forefather’s disposition: nasty, brutish, and short. But when the station is in danger, ancient instincts are triggered and this brave creature swings into action on anything resembling a vine. The Astrochimp may not grasp all of the ‘higher’ cultural aspects of his jabbering hairless cousins, but he definitely gets that timeless rule passed down through the ages… surviving and getting shinies are always good decisions.",
+			"setup": "Kitchen",
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Astrochimp is your BC and Escapes"
+			},
+			"abilities": [
+				{
+					"name": "Tunnel Rat",
+					"description": "May Step through Vents"
+				},
+				{
+					"name": "Loyal",
+					"description": "To Influence return all cubes on this card and place at least 1 more cube than was previously here"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Acrobatics",
+					"description": "Gains ZeroBorn: May Free Step or Airlock into a zero Gravity Section instead of a Free Pickup or Drop"
+				}
+			],
+			"agenda": {
+				"name": "Shiny Things",
+				"points": [
+					{
+						"trigger": "3 points if Astrochimp Escapes",
+						"points": [
+							{
+								"trigger": "+2 points if in Possession of a Briefcase"
+							},
+							{
+								"trigger": "+2 points if in Possession of Artifact"
+							},
+							{
+								"trigger": "+2 points if in Possession of a Gun"
+							}
+						]
+					}
+				]
+			},
+			"tips": [
+				"Artifact is in Physics Lab",
+				"Briefcase is in Suite",
+				"Guns can be Manufactured by a Character with Officer in Print Shop or acquired from another Character.",
+				"Astrochimp moves very quickly once he is Revealed. If he also gets his grubby little hands on a Gun and a Helmet he becomes one of the most dangerous Character in the game."
+			],
+			"quirks": [
+				"Astrochimp counts as a Human (hey, they’re 99% similar, close enough!)."
+			]
+		},
+		{
+			"id": 9999,
+			"name": "TEMPLATE",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "TEXT HERE.",
+			"setup": "LOCATION",
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Astrochimp is your BC and Escapes"
+			},
+			"abilities": [
+				{
+					"name": "Tunnel Rat",
+					"description": "May Step through Vents"
+				},
+				{
+					"name": "Loyal",
+					"description": "To Influence return all cubes on this card and place at least 1 more cube than was previously here"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Acrobatics",
+					"description": "Gains ZeroBorn: May Free Step or Airlock into a zero Gravity Section instead of a Free Pickup or Drop"
+				}
+			],
+			"agenda": {
+				"name": "Shiny Things",
+				"points": [
+					{
+						"trigger": "3 points if Astrochimp Escapes",
+						"points": [
+							{
+								"trigger": "+2 points if in Possession of a Briefcase"
+							},
+							{
+								"trigger": "+2 points if in Possession of Artifact"
+							},
+							{
+								"trigger": "+2 points if in Possession of a Gun"
+							}
+						]
+					}
+				]
+			},
+			"tips": [
+				"TIPS GO HERE",
+				"ANOTHER TIP HERE"
+			],
+			"quirks": [
+				"QUIRKS GO HERE"
+			]
+		}
+	]
+}
