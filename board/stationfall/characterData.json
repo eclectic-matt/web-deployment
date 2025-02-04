@@ -530,7 +530,7 @@
 				{
 					"type": "character",
 					"name": "Corpsicle",
-					"location": "Cryo Lab."
+					"location": "Cryo Lab"
 						},
 				{
 					"type": "token",
@@ -555,7 +555,7 @@
 			"revealPowers": [
 				{
 					"name": "Last Gasp",
-					"description": "Upon Reveal, Revive if Down or perform an Action."
+					"description": "Upon Reveal, Revive if Down or perform an Action"
 						}
 					],
 			"agenda": {
@@ -588,13 +588,154 @@
 				"After Reveal, Fang Moss can act in addition to your Activation of any Character each turn"
 			],
 			"quirks": [
-				"Fang moss is an Item. Any Character Possessing gets access to the Feed Me! Action."
+				"Fang moss is an Item. Any Character Possessing gets access to the Feed Me! Action"
 			]
 		},
 		
+		{
+			"id": 6,
+			"name": "Counselor",
+			"characterIcon": "psyche",
+			"stats": {
+				"influenceLimit": 6,
+				"pronouns": "He/Him",
+				"characterType": "Human"
+			},
+			"flavour": "Everyone on board is on edge. Counselor knows well the toll that life in space can take and has read everyone’s files several times over to calculate and leverage that toll. But the whispering has been getting louder. It has something to do with that extraordinary artifact the scientists recovered. Counselor is sure of it. It calls out somehow, beckons in the quiet stillness of downtime and sleepshifts. Fortunately Counselor has mastery over his mental state and is not vulnerable to the relic’s emanations. But some member of the crew has been compromised by that remarkable bauble’s wiles... perhaps all of them have. Counselor is sure of it. His only option now is to secure his confidential files and liberate... ahem, save, the artifact... for later study. It all makes perfect sense. Counselor is sure of it",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Counselor",
+					"location": "Therapy Garden"
+						},
+				{
+					"type": "location",
+					"name": "Shred Room",
+					"location": "Next to Therapy Garden with a lock on its Corridor"
+						}
+					],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Counselor is your BC and Escapes."
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+				},
+				{
+					"name": "Wormtongue",
+					"description": "As an Action, move a cube on a Colocated Human’s card to Betrayal"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Recorded Confessional",
+					"description": "Upon Reveal, if Live choose a Colocated Human. All other Innocent players who have that Human as a Conspirator become Suspect."
+				}
+			],
+			"agenda": {
+				"name": "Cloak and Dagger",
+				"points": [
+					{
+						"trigger": "2 points if the Counselor Escapes",
+					},
+					{
+						"trigger": "4 points if the Artifact Escapes"
+					},
+					{
+						"trigger": "2 points if you have more Kompromat than any other player at Stationfall"
+					},
+					{
+						"trigger": "1 point if you have the least Cubes in Betrayal Box at Stationfall"
+					}
+				]
+			},
+			"boardModifications": [
+				"Adding Shred Room adds another Dark Section to the station. It starts Locked",
+				"Any Character inside it may use Data Mine: Pick Up Kompromat from anywhere On Board"
+			],
+			"tips": [
+				"Artifact is in Physics Lab",
+				"A well timed use of your Reveal Power can quickly make other players go from Innocent to Guilty if you can Transmit Evidence to Authorities using Array Control.",
+				"Collect Kompromats"
+			],
+			"quirks": [
+				"None"
+			]
+		},
 		
-		
-		
+		{
+			"id": 7,
+			"name": "Cyborg",
+			"characterIcon": "split gear mask",
+			"stats": {
+				"influenceLimit": 4,
+				"pronouns": "He/Him",
+				"characterType": "Human and Robot"
+			},
+			"flavour": "It is often said that the best revenge is living well. Those who say this have usually not tried conventional forms of revenge. Living well has its merits but often means that whoever transgressed against you thinks that they got away with it. Fortunately, the study of revenge has been refined and we have weapons manufacturers that make cool metallic monsters with knives in their eyeholes and lasergun hands and secret self destruct code phrases known only by shady creeps with military clearances that don’t officially exist. And of course there are complications when Slaughtercus Omega or whatever you called the poor sap realizes that you won’t let him die even if he does kill the beautiful union organizer and brings you the prime minister’s eyeballs so your clone can get past his retinal scanners. Cyborgs are rigorously tortured and rebuilt for maximum efficiency and this might come back to haunt you if you happen to be a shady corporation with no qualms about turning low level office drones into human test subjects. But, you know what? You miss a hundred percent of the shots you don’t take",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Cyborg",
+					"location": "Cryo Lab"
+				}
+			],
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "2 points if Cyborg is your BC and not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Uncanny",
+					"description": "It takes two Activation discs for this Character to become Exhausted"
+				},
+				{
+					"name": "Fugitive",
+					"description": "No actions taken with or against this Character will make a player Suspect."
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Brutal",
+					"description": "May use a Bludgeon to Down a Helmeted Human, at which point Annihilate both the Bludgeon and the Helmet"
+				},
+				{
+					"name": "Self-Repair",
+					"description": "You may Activate Cyborg if Down and as your first action Revive Cyborg"
+				}
+			],
+			"agenda": {
+				"name": "Revenge",
+				"points": [
+					{
+						"trigger": "1 for each Character with Officer that is down at Stationfall"
+					},
+					{
+						"trigger": "2 points if no Human PCs Escape"
+					},
+					{
+						"trigger": "2 points if no Contamination Escapes"
+					},
+					{
+						"trigger": "2 points if Project X was released"
+					}
+				]
+			},
+			"boardModifications": [
+			],
+			"tips": [
+				"You can always Down Characters without penalty but others can also down you without penalty. Prioritize Downing Humans and Contaminated",
+				"Once revealed you will stop becoming Exhausted because other Players may not activate you",
+				"You can Release Project X with Officer in Bridge or Cryo Lab, alternatively by damaging Vault X or by causing Blackout",
+				"If Security is in the game, look out, as you count as a Fugitive"
+			],
+			"quirks": [
+				"Cyborg can win even if Guilty",
+				"Cyborg is both Robot and Human, and acts as a Human in the case of Hazards and Attacks"
+			]
+		},
 		
 		
 		{
