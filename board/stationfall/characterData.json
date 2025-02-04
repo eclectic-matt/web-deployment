@@ -47,10 +47,16 @@
 			"stats": {
 				"influenceLimit": 5,
 				"pronouns": "He/Him",
-				"characterType": "human"
+				"characterType": "Human"
 			},
 			"flavour": "There are places where the civilized human mind breaks down. But fortunately man did not inhabit the Earth alone and there were creatures around him made of stiffer stuff. Noble savagery, savage nobility... teeth that can peel one’s face off and prodigiously strong arms made for throwing various throwable objects. Pan Troglodytes, the mighty chimpanzee helped propel mankind upward into the stars with its grit, ferocity, and almost complete lack of fear. These days the descendants of the Astrochimps are an underappreciated lot. Your lives are a lot like your forefather’s disposition: nasty, brutish, and short. But when the station is in danger, ancient instincts are triggered and this brave creature swings into action on anything resembling a vine. The Astrochimp may not grasp all of the ‘higher’ cultural aspects of his jabbering hairless cousins, but he definitely gets that timeless rule passed down through the ages… surviving and getting shinies are always good decisions.",
-			"setup": "Kitchen",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Astrochimp",
+					"location": "Kitchen"
+				}
+			],
 			"bonusPoints": {
 				"type": "friend",
 				"reward": "2 points if Astrochimp is your BC and Escapes"
@@ -100,6 +106,95 @@
 				"Astrochimp counts as a Human (hey, they’re 99% similar, close enough!)."
 			]
 		},
+		
+		{
+			
+			"id": 1,
+			"name": "Billionaire",
+			"stats": {
+				"influenceLimit": 3,
+				"pronouns": "He/Him",
+				"characterType": "Human"
+			},
+			"flavour": "It isn’t as easy as it looks to inherit a mega-fortune and build a giga-one.  Nothing is redder in tooth and claw than a pack of ambitious millionaire influencers trying to reach the pinnacle of viral sway.  Billionaire is the tasty froth at the top of the celebrity macchiato.  A global following hangs onto his every word and whim.  His every action is captured, synthesized and broadcast to the frenzied masses as bite-sized content with unlimited reach.  But there is a top dog in the world of VIPs, but it isn’t Billionaire. In fact it isn’t a P at all.  That honor would belong to his dog Fletcher... a trendjacking holobombing cuteness sensation with his own broadcast, a billion followers, and who works for proverbial kibble (and literal caviar). But Fletcher hasn’t been well lately... a bit of light frothing at the mouth and biting the hand and all that.  A brief stay at a corporate science station seems to have fixed him right up though.  He seems as young and spry as a puppy.  It’s almost like he’s a new dog.",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Billionaire",
+					"location": "Suite"
+				},
+				{
+					"type": "character",
+					"name": "Fletcher (Dog)",
+					"location": "Security Station"
+				},
+				{
+					"type": "tokens",
+					"name": "3 Grey Bribes",
+					"location": "Character Card"
+				}
+			],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Billionaire is your BC and Fletcher Escapes. (Nobody cares about Billionaire, just the cute space pup.)"
+			},
+			"abilities": [
+				{
+					"name": "Live Streams",
+					"description": "If Jammers are OFF, Billionaire’s and Fletcher’s Sections act as if Lit and Cameras are ON."
+				},
+				{
+					"name": "Rich",
+					"description": "Cannot be Bribed. When Activated, you may use a grey Bribe instead of your own. Grey Bribes only score if Billionaire Escapes."
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Hollow Promises",
+					"description": "Hollow Promises: Upon Reveal gain and/or return all three Grey Bribe tokens."
+				}
+			],
+			"agenda": {
+				"name": "Survive",
+				"points": [
+					{
+						"trigger": "4 points if Billionaire Escapes",
+						"points": [
+							{
+								"trigger": "+1 point if not Colocated with Live Humans or Robots at Stationfall"
+							},
+							{
+								"trigger": "+2 points if Fletcher Escapes"
+							},
+							{
+								"trigger": "+1 point if Fletcher and Billionaire are Colocated when Escaping"
+							},
+							{
+								"trigger": "Billionaire doesn’t score any Possessed or unused Bribes"
+							}
+						]
+					}
+				]
+			},
+			"tips": [
+				"Protect yourself with a Helmet and try to keep Jammers OFF so your Livestream Ability stays active.",
+				"When you Reveal you can use your grey Bribes for extra Actions with other Characters."
+			],
+			"quirks": [
+				"Billionaire doesn’t score any unused Bribes",
+				"Fletcher is an Item that can be Picked Up, Dropped, Thrown etc. Fletcher cannot be Attacked or Downed (he’s got a retractable doggie space helmet). But Fletcher can be Annihilated in the same way as other Items.",
+				"Grey Bribes can only be used if they are still on the Billionaire’s card, not if it has been spent elsewhere already.",
+				"Billionare and Fletcher are Colocated for end game scoring if they are Colocated when Escaping using the same "
+			]
+		},
+		
+		
+		
+		
+		
+		
+		
+		
 		{
 			"id": 9999,
 			"name": "TEMPLATE",

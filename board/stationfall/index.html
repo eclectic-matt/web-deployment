@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8" />
+	<title>Stationfall</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
 /**
  * 
@@ -22,16 +26,114 @@ const getJSON = function(url, callback) {
 	xhr.send();
 };
 
-const charData = getJSON('./characterData.json', loadCharacters);
+const charData = getJSON('characterData.json', loadCharacters);
 
-function loadCharacters(json){
-	let data = JSON.parse(json);
-	console.log(data, data.characters.length);
+function loadCharacters(status, json){
+	
+	let listDiv = document.getElementById('charactersList');
+	listDiv.innerHTML = null;
+	
+	json.characterData.forEach( (char) => {
+		if(char.name === "TEMPLATE") return false;
+		
+		//INIT BUTTON TO SHOW/HIDE CHARACTER DIV
+		let btn = document.createElement('button');
+		btn.onclick= function() {
+			showAccordionContent(char.id);
+		}
+		btn.className = "w3-btn w3-block w3-red";
+		btn.innerHTML = char.name;
+		
+		//INIT DIV TO HOLD CHAR DATA
+		let charDiv = document.createElement('div');
+		charDiv.id = char.id;
+		charDiv.className = "w3-hide w3-center w3-padding-16";
+		//charDiv.innerHTML = char.flavour;
+		
+		//CHARACTER DATA OUTPUT
+		let charStatsTable = document.createElement('table');
+		charStatsTable.className = "w3-table-all";
+		charStatsTableHead = document.createElement('tr');
+		charStatsTableHead.innerHTML = '<th>Stat</th><th>Value</th>';
+		charStatsTable.appendChild(charStatsTableHead);
+		//char.stats.forEach( (value, index) => {
+		let statKeys = Object.keys(char.stats);
+		for(let i = 0; i < statKeys.length; i++){
+			let statName = statKeys[i];
+			let value = char.stats[statName];
+			let statRow = document.createElement('tr');
+			statRow.innerHTML = '<td>' + statName + '</td><td>' + value + '</td>';
+			charStatsTable.appendChild(statRow);
+		}
+		charDiv.appendChild(charStatsTable);
+		
+		//AGENDA
+		let agendaName = char.agenda.name;
+		let agendaHead = document.createElement('h2');
+		agendaHead.innerHTML = 'AGENDA: ' + agendaName;
+		charDiv.appendChild(agendaHead);
+		
+		
+		
+		let topPoints = char.agenda.points;
+		for(let i = 0; i < topPoints.length; i++){
+			let subTrigger = topPoints[i].trigger;
+			
+		}
+		
+		let charSetupLabel = document.createElement('h2');
+		charSetupLabel.innerHTML = "Setup";
+		charDiv.appendChild(charSetupLabel);
+		
+		let charSetup = document.createElement('ul');
+		char.setup.forEach( (setup) => {
+			let li = document.createElement('li');
+			li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' placed in " + setup.location;
+			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
+			charSetup.appendChild(li);
+		});
+		charDiv.appendChild(charSetup);
+		
+		let charAbilityLabel = document.createElement('h2');
+		charAbilityLabel.innerHTML = "Abilities";
+		charDiv.appendChild(charAbilityLabel);
+		
+		let charAbilities = document.createElement('ul');
+		char.abilities.forEach( (ability) => {
+			let li = document.createElement('li');
+			li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
+			charAbilities.appendChild(li);
+		});
+		charDiv.appendChild(charAbilities);
+		
+		let charFlavourLabel = document.createElement('h2');
+		charFlavourLabel.innerHTML = "Flavour Text";
+		charDiv.appendChild(charFlavourLabel);
+		
+		let charFlavour = document.createElement('em');
+		charFlavour.innerHTML = char.flavour;
+		charDiv.appendChild(charFlavour);
+		
+		listDiv.appendChild(btn);
+		listDiv.appendChild(charDiv);
+	})
+}
+
+function showAccordionContent(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
 }
 
 </script>
 </head>
 <body>
-
+	<h1>Characters</h1>
+	<div id="charactersList">
+		<!-- filled by loadCharacters -->
+	</div>
 </body>
 </html>

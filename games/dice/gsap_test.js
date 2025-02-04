@@ -8,21 +8,24 @@
 
 const jokers = document.querySelectorAll('.joker');
 const jokerRow = document.getElementById('jokerRow');
+const looseRow = document.getElementById('looseJokers');
 let jokerOrder = [];
+const leftPad = 20;
+const topPad = 20;
 
 jokers.forEach((item, i) => {
 
 	Draggable.create(item, {
 		
-		snap: calculateSnapPosition(jokerRow, item),
+		//snap: calculateSnapPosition(jokerRow, item),
 		
 		onPress:()=>{
 			//HIGHLIGHT SELECTED JOKER
 			//gsap.to(item, {duration:0.1, scale:1.2, rotate:"10%", zIndex:100})
 			if (Draggable.hitTest(item, jokerRow, "20%")) {
 				//removeJokerFromRow(jokerRow, item);
-				let removeIndex = jokerOrder.find( (id) => { return id == item.id;});
-				jokerOrder.splice(removeIndex,1);
+				//let removeIndex = jokerOrder.find( (id) => { return id == item.id;});
+				//jokerOrder.splice(removeIndex,1);
 			}
 		},
 
@@ -34,36 +37,18 @@ jokers.forEach((item, i) => {
 		},
 
 		onRelease:()=>{ // return the item on release
-			//gsap.to(item, {duration:0.4, scale:1, rotate: 0})
-			//gsap.to(jokers, {duration:0.2, scale:1, opacity:1})
-			
-			/*let previousJoker = null;
-			//CHECK COLLISION WITH EXISTING JOKERS
-			Array.from(jokers).filter( (j) => {return j.id !== item.id}).forEach( (joker) => {
-				//If the dropped joker overlaps another by 40%
-				if(Draggable.hitTest(item, joker, "40%")){
-					//set this joker as the "previous"
-					previousJoker = joker;
-				}
-			})*/
-			
-			
+		
 			if(Draggable.hitTest(item, jokerRow, "50%")){
 				
-				item.snap = calculateSnapPosition(jokerRow, item);
+				//item.snap = calculateSnapPosition(jokerRow, item);
 				
 				//CALCULATE POSITION TO INSERT - YOU WILL INSERT AT INDEX n WHERE n = leftPad 
-				//let jokerCount = jokerRow.children.length;
 				let jokerCount = jokerOrder.length;
 				let insertIndex = 0;
 				var bounds = jokerRow.getBoundingClientRect();
 				var rect = item.getBoundingClientRect();
-				//console.log(bounds, rect);
-				const leftPad = 20;
-				const topPad = 20;
 					
 				if(jokerCount > 0){
-					//let snap = appendJokerToRow(jokerRow, item, previousJoker);
 					for(let i = 0; i < jokerCount; i++){
 						let leftLimit = bounds.x + ((i+1) * (leftPad + (rect.width / 2)));
 						if(rect.x < leftLimit){
@@ -72,56 +57,55 @@ jokers.forEach((item, i) => {
 						}
 					}
 				}
-				let newX = bounds.x + leftPad + (insertIndex * (rect.width + leftPad));
-				let newY = bounds.y + topPad;
 				jokerOrder.splice(insertIndex, 0, item.id);
-				console.log(jokerCount, insertIndex, newX, newY, item.id, jokerOrder);
-				gsap.set(item, {left: newX, top: newY});
-				
-				//gsap.set(item, { x: newX, y: newY });
-				//WE WANT TO GET "TO" [newX, newY] - transform the current [x, y] to the new values 
-				let xTransform = -(rect.x - newX);
-				let yTransform = -(rect.y - newY);
-				//console.log(item.id, newX, newY, xTransform, yTransform);
-				//gsap.set(item, { x: xTransform, y: yTransform });
+				drawCardsFromOrder(jokerRow, jokerOrder);
 			}else{
 				let removeIndex = jokerOrder.find( (id) => { return id == item.id;});
 				jokerOrder.splice(removeIndex,1);
-				//removeJokerFromRow(jokerRow, item);
+				drawCardsFromOrder(jokerRow, jokerOrder);
 			}
-			
-			//gsap.to(item, {duration:1, scale:1, transform:0, translate:0, rotate:0, position:"relative", x:jokerRow.x, y:jokerRow.y});
-			
-			//gsap.to(item, {duration:1, scale:1, transform:0, translate:0, rotate:0, x:jokerRow.x, y:jokerRow.y});
-			
-			//Draggable.get(item).kill();
-			/*
-			//find target
-			if(Draggable.hitTest(item, jokerRow, "20%")){
-				
-				
-					const timeline = gsap.timeline({ defaults: { duration: 1 }})
-					timeline
-						.to(jokerSlots, {duration:0.1, opacity:(i,t)=>(t==slot)?1:0.3})
-						.to(slot, {duration:0.1, color: "#c33"})
-						//.to(item, {x:newX, y:newY, position: 'absolute'})
-						.to(jokerSlots, {duration:0.1, opacity:1, scale:1})
-				}
-			})
-
-			//FINISH onRelease() BY ADDING/REMOVING JOKER SLOTS IF NEEDED
-			if(slotFilled){
-				addJokerSlot();
-			}else{
-				//DROPPED OUTSIDE THE JOKER ROW - REMOVE A SLOT
-				removeJokerSlot();
-			}
-
-			updateJokerOrder();
-			*/
 		}
 	})
 })
+
+
+drawCardsFromOrder(jokerRow, jokerOrder);
+
+function drawCardsFromOrder(cardRow, jokerOrder)
+{
+	console.log('Draw cards from order to',cardRow.id,jokerOrder);
+	let jokers = jokerOrder.map( (id) => {
+		let joker = document.getElementById(id);
+		return joker;
+	});
+	drawCardsToRow(cardRow, jokers);
+}
+
+//DRAW CARDS INITIALLY 
+drawCardsToRow(looseRow, jokers);
+
+/* this works as intended */
+function drawCardsToRow(cardRow, cards)
+{
+	if(cards.length === 0) return false;
+	console.log('Draw cards to',cardRow.id,Array.from(cards).map( (card) => { return card.id;}));
+	const bounds = cardRow.getBoundingClientRect();
+	cards.forEach( (card, index) => {
+		//calculate position and animate to it
+		const rect = card.getBoundingClientRect();
+		const xPos = bounds.left + (index * (rect.width + leftPad));
+		const yPos = bounds.top;
+		console.log('Draw',card.id,'to position',xPos,yPos);
+		gsap.set(card, { x: xPos, y: yPos});
+		//
+		//const xPos = bounds.left + (index * (rect.width + leftPad));
+		//const yPos = bounds.top - rect.top;
+		//console.log('Draw',card.id,'to position',xPos,yPos);
+		//gsap.to(card, { left: xPos, top: yPos});
+	})
+}
+
+
 
 function calculateSnapPosition(jokerRow, joker)
 {
@@ -129,8 +113,7 @@ function calculateSnapPosition(jokerRow, joker)
 	let insertIndex = 0;
 	var bounds = jokerRow.getBoundingClientRect();
 	var rect = joker.getBoundingClientRect();
-	const leftPad = 20;
-	const topPad = 20;
+	
 					
 	if(jokerCount > 0){
 		for(let i = 0; i < jokerCount; i++){
@@ -145,7 +128,7 @@ function calculateSnapPosition(jokerRow, joker)
 	let newY = bounds.top + topPad;
 	//jokerOrder.splice(insertIndex, 0, joker.id);
 	//console.log(jokerCount, newX, newY, joker.id, jokerOrder);
-	return { x: newX, y: newY };
+	return { left: newX, left: newY };
 }
 
 
