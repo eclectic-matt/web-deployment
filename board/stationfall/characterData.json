@@ -593,7 +593,7 @@
 		},
 		
 		{
-			"id": 6,
+			"id": 7,
 			"name": "Counselor",
 			"characterIcon": "psyche",
 			"stats": {
@@ -638,7 +638,7 @@
 				"name": "Cloak and Dagger",
 				"points": [
 					{
-						"trigger": "2 points if the Counselor Escapes",
+						"trigger": "2 points if the Counselor Escapes"
 					},
 					{
 						"trigger": "4 points if the Artifact Escapes"
@@ -666,7 +666,7 @@
 		},
 		
 		{
-			"id": 7,
+			"id": 8,
 			"name": "Cyborg",
 			"characterIcon": "split gear mask",
 			"stats": {
@@ -734,6 +734,88 @@
 			"quirks": [
 				"Cyborg can win even if Guilty",
 				"Cyborg is both Robot and Human, and acts as a Human in the case of Hazards and Attacks"
+			]
+		},
+		
+		{
+			"id": 9,
+			"name": "Daredevil",
+			"characterIcon": "wingsuit",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "She/Her",
+				"characterType": "Human"
+			},
+			"flavour": "Your mother probably told you not to go undercover in a gang of DNA smugglers. The Station Chief probably asked you politely not to spike volleyballs out the airlock and then float out to catch them, borne on the space winds, out into the black until the moment when Death seemed imminent and then grabbing onto an incoming shuttlecraft, emerging in the hangar so close to the grave you could hear the sound of shovels. It’s a good thing the Daredevil never listened to these perpetually nagging and pedantic voices of so-called reason. If space were meant to be boring, they’d have put it on Earth! The Daredevil has abandoned the drudgery that characterizes our dumb lives in favor of sexy, zero G adventure and lucrative promotions from fringe beverage corporations system-wide! The Daredevil is about thrills, chills and defying death, to find the true meaning of the word “extreme”, all while plugging the corporate “push-the-boundaries-of-science-for-fun-and-profit” messaging. With rocket-wings on her back and rocket-fuel in her veins the Daredevil is ready for her greatest stunt: a 17,000 mph swan dive from orbit. And if she gets back to Earth with a rad scar, a unique trinket, or a strange rash, well that just makes a better story",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Daredevil",
+					"location": "Locker Room"
+				},
+				{
+					"type": "token",
+					"name": "Rocket Wings",
+					"location": "Physics Lab"
+				},
+				{
+					"type": "location",
+					"name": "Rocket Wings Launch",
+					"location": "Next to Outer Space"
+				}
+			],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Daredevil is your BC and Escapes"
+			},
+			"abilities": [
+				{
+					"name": "Pride",
+					"description": "Daredevil cannot be Robbed"
+				},
+				{
+					"name": "Adrenaline",
+					"description": "Daredevil is not Downed by Hazards, Step or Airlock into Section with Hazard is always free"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Poimt Break",
+					"description": "If you are Live, Possess a Helmet and are Colocated with Rocket Wings at Stationfall, you Escape"
+				}
+			],
+			"agenda": {
+				"name": "Thrillseeker",
+				"points": [
+					{
+						"trigger": "3 points if Daredevil Escapes",
+						"points": [
+							{
+								"trigger": "+2 points if you are the only Human that Escapes"
+							},
+							{
+								"trigger": "+2 points if you Possess Artifact or are Contaminated"
+							}
+						]
+					},
+					{
+						"trigger": "1 point if Project X was released"
+					}
+				]
+			},
+			"boardModifications": [
+				"Rocket Wings is added as a new item on board that is useful for escaping",
+				"Adding Rocket Wings Launch adds another Section Action to Outer Space",
+				"Rocket Wings Launch: If Possess Rocket Wings in Outer Space, Escape. Humans still needs to Possess a Helmet"
+			],
+			"tips": [
+				"Artifact is in Physics Lab and Contamination happens in Bio Lab",
+				"Daredevil moves faster through Hazards and survives there without a Helmet",
+				"Prevent other Humans from Escaping by Downing them, releasing Project X, Damaging Pods and preventing Abandon Ship"
+			],
+			"quirks": [
+				"With the Point Break ability, Daredevil only needs to Possess a Helmet and be Colocated with Rocket Wings to Escape, she doesn't need to Possess Rocket Wings",
+				"Even if Daredevil can be Outer Space without a Helmet, she still needs a Helmet to take the Rocket Wings Launch action"
 			]
 		},
 		
