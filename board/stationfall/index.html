@@ -47,8 +47,7 @@ function loadCharacters(status, json){
 		//INIT DIV TO HOLD CHAR DATA
 		let charDiv = document.createElement('div');
 		charDiv.id = char.id;
-		charDiv.className = "w3-hide w3-center w3-padding-16";
-		//charDiv.innerHTML = char.flavour;
+		charDiv.className = "w3-hide w3-padding-large";
 		
 		//CHARACTER DATA OUTPUT
 		let charStatsTable = document.createElement('table');
@@ -73,13 +72,38 @@ function loadCharacters(status, json){
 		agendaHead.innerHTML = 'AGENDA: ' + agendaName;
 		charDiv.appendChild(agendaHead);
 		
-		
-		
-		let topPoints = char.agenda.points;
-		for(let i = 0; i < topPoints.length; i++){
-			let subTrigger = topPoints[i].trigger;
-			
+		let agendaMainTriggerHead = document.createElement('b');
+		agendaMainTriggerHead.innerHTML = char.agenda.points[0].trigger;
+		charDiv.appendChild(agendaMainTriggerHead);
+		let subAgendaList = document.createElement('ul');
+		let topPoints = char.agenda.points[0].points;
+		if(topPoints){
+			for(let i = 0; i < topPoints.length; i++){
+				let subTrigger = topPoints[i].trigger;
+				let li = document.createElement('li');
+				li.innerHTML = subTrigger;
+				subAgendaList.appendChild(li);
+			}
+		}else{
+			//BOTANIST 
+			for(let i = 1; i < char.agenda.points.length; i++){
+				let subTrigger = char.agenda.points[i].trigger;
+				let li = document.createElement('li');
+				li.innerHTML = subTrigger;
+				subAgendaList.appendChild(li);
+				if(subTrigger.points){
+					//MAKE NEW UL / LI FOR THIS SUBTRIGGER
+					let subList = document.createElement('ul');
+					for(let j = 0; j < subTrigger.points.length; j++){
+						let subsubtrigger = document.createElement('li');
+						subsubtrigger.innerHTML = subTrigger.points[j].trigger;
+						subList.appendChild(subsubtrigger);
+					}
+					subAgendaList.appendChild(subList);
+				}
+			}
 		}
+		charDiv.appendChild(subAgendaList);
 		
 		let charSetupLabel = document.createElement('h2');
 		charSetupLabel.innerHTML = "Setup";

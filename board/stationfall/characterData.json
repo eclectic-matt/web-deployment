@@ -44,6 +44,7 @@
 		{
 			"id": 0,
 			"name": "Astrochimp",
+			"characterIcon": "chimpHelmet",
 			"stats": {
 				"influenceLimit": 5,
 				"pronouns": "He/Him",
@@ -96,6 +97,9 @@
 					}
 				]
 			},
+			"boardModifications": [
+				
+			],
 			"tips": [
 				"Artifact is in Physics Lab",
 				"Briefcase is in Suite",
@@ -111,6 +115,7 @@
 			
 			"id": 1,
 			"name": "Billionaire",
+			"characterIcon": "diamond",
 			"stats": {
 				"influenceLimit": 3,
 				"pronouns": "He/Him",
@@ -176,6 +181,9 @@
 					}
 				]
 			},
+			"boardModifications": [
+				
+			],
 			"tips": [
 				"Protect yourself with a Helmet and try to keep Jammers OFF so your Livestream Ability stays active.",
 				"When you Reveal you can use your grey Bribes for extra Actions with other Characters."
@@ -187,8 +195,326 @@
 				"Billionare and Fletcher are Colocated for end game scoring if they are Colocated when Escaping using the same "
 			]
 		},
+
+		{
+			
+			"id": 2,
+			"name": "Boarder",
+			"characterIcon": "helmetSkull",
+			"stats": {
+				"influenceLimit": 4,
+				"pronouns": "She/Her",
+				"characterType": "Human"
+			},
+			"flavour": "Space laws are meant to be broken. The mere notion of imposing order and reason and law on an infinite vacuum is patently ridiculous. Are we better than the meager organizing principles of our frankly awful universe? Of course not! Survival of the fittest they say. And what’s fitter than an ex-gladiator with a handgun, a katana and a dream? How about one with missile-strikes on standby. Boarder is a throwback to a carefree age of fun pirate adventure where every station is a ripe fruit waiting to be plucked and tasted and then ravaged for its most valuable bits. An age where the authorities and consequences are a world away. We would do well to accept that our time under the tyranny of draconian space law is over and we should thoroughly familiarize ourselves instead with The Pirate Code, including that most overly-specific provision, that only pirates will be plucked from space before the searing doom of reentry. And a pirate without loot is no pirate at all.",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Boarder",
+					"location": "Outer Space"
+				},
+				{
+					"type": "location",
+					"name": "Rescue Ship",
+					"location": "Next to Outer Space"
+				},
+				{
+					"type": "tokens",
+					"name": "Helmet, Gun and Wrench items",
+					"location": "Character Card"
+				}
+			],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "1 points if Boarder is your BC and Escapes."
+			},
+			"abilities": [
+				{
+					"name": "Breach",
+					"description": "As an action, may remove an adjacent Lock."
+				},
+				{
+					"name": "Fugitive",
+					"description": "No actions taken with or against this Character will make a player Suspect."
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Missile",
+					"description": "If Jammers OFF, place 1 time marker on one Unescaped Section. When time marker is resolved Damage that Section and Down all Colocated Characters. Only one inbound Missile at a time is allowed."
+				},
+				{
+					"name": "Extricate",
+					"description": "Upon Reveal (even at Stationfall), flip the Rescue Ship to Pirate Ship. Pirate Ship will only rescue any Character Possessing Briefcase (even if Down)."
+				}
+			],
+			"agenda": {
+				"name": "Loot",
+				"points": [
+					{
+						"trigger": "2 points if Boarder Escapes",
+						"points": [
+							{
+								"trigger": "+4 points if Boarder in possession of Briefcase or if Briefcase is in Outer Space at Stationfall"
+							},
+							{
+								"trigger": "+1 point for every Live Human in Outer Space at Stationfall"
+							}
+						]
+					}
+				]
+			},
+			"boardModifications": [
+				"At the start of the game there is a Rescue ship “out there” that can help humans Escape.",
+				"Rescue Ship (front) - At Scoring, any Human in Outer Space Escapes.",
+				"The player Revealing as Boarder flips this token over and the Rescue Ship turns out to be a Pirate Ship with another mission.",
+				"Pirate Ship (back) - At Scoring, any Character Possessing Briefcase in Outer Space Escapes."
+			],
+			"tips": [
+				"Briefcase is in Suite.",
+				"Your starting Items and indifference to Guilt allow you to Down Characters easily.",
+				"If you Reveal early you can cause much mayhem with Missiles.",
+				"If you Reveal late players won’t know whether they can Escape in Outer Space or not, possibly giving you more Bribes.",
+				"If Security is in the game, look out, as you count as a Fugitive."
+			],
+			"quirks": [
+				"Boarder can win even if Guilty.",
+				"Boarder scores double for Possessed Bribes.",
+				"If an unlaunched Pod is targeted by Missile and then launches before Missile resolves, the Pod is Annihilated when Missile resolves."
+			]
+		},
+
+		{
+			
+			"id": 3,
+			"name": "Botanist",
+			"characterIcon": "leaf",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "Human"
+			},
+			"flavour": "Though humanity has plumbed the depths of space, mankind has yet to fully explore the depths of the human heart. Yes, Love remains the greatest of all mysteries, whether it be the love between two humans, the love between an Astrochimp and a discarded firearm or the love between a Botanist and a carnivorous space plant emitting powerful pheromone spores. The latter might sometimes provoke judgment from those with parochial anthropocentric attitudes but the power and majesty of Love cannot be valued lower than the lives of some human riffraff on an exploding space station. Why wouldn’t a put upon Botanist find excitement in the flailing vines of a hunky carnivorous plant that wants to devour all sentient life? Research conducted by Dr. Chris Nordstrom, a prominent scientist banished to a far off asteroid on account of Space Madness, indicates that sentient life is the cause of one hundred percent of all interpersonal conflict. It would frankly be irresponsible NOT to feed as many bodies as possible to a giant plant and escape with it to earth where its cosmic spores can spread everywhere. If you think otherwise, you’ve never been in love.",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Botanist",
+					"location": "Hydroponics"
+				},
+				{
+					"type": "token",
+					"name": "Feed Me!",
+					"location": "Next to Hydroponics"
+				}
+			],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Botanist is your BC and Fang Moss Escapes (No points if Botanist Escapes)."
+			},
+			"abilities": [
+				{
+					"name": "Scientist",
+					"description": "May Free Section Action instead of Free Pick Up or Drop."
+				},
+				{
+					"name": "ZeroBorn",
+					"description": "May Free Step or Airlock into a zero Gravity Section instead of Free Pick Up or Drop."
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Creatropism",
+					"description": "During Botanist Player’s Activation phase, if Fang Moss is not Possessed by a Live Character, Fang Moss may perform a Free Step or Annihilate a Down Colocated Human, Dropping its Items."
+				}
+			],
+			"agenda": {
+				"name": "Blood Meal",
+				"points": [
+					{
+						"trigger": "2 points for every Human Annihilated by Fang Moss"
+					},
+					{
+						"trigger": "2 points if Fang Moss Escapes"
+					},
+					{
+						"trigger": "2 points if Botanist Escapes",
+						"points": [
+							{
+								"trigger": "+1 point if Contaminated"
+							}
+						]
+					}
+				]
+			},
+			"boardModifications": [
+				
+			],
+			"tips": [
+				"Seek out Down Characters and feed Fang Moss",
+				"Get a helmet",
+				"Get contaminated in Bio Lab",
+				"Use your ZeroBorn for extra mobility",
+				"After Reveal, Fang Moss can act in addition to your Activation of any Character each turn"
+			],
+			"quirks": [
+				"Fang moss is an Item. Any Character Possessing gets access to the Feed Me! Action."
+			]
+		},
 		
-		
+		{
+			
+			"id": 4,
+			"name": "Colonel",
+			"characterIcon": "medal",
+			"stats": {
+				"influenceLimit": 4,
+				"pronouns": "He/Him",
+				"characterType": "Human"
+			},
+			"flavour": "They say the best defence is a good offense. In a dangerous universe full of nightmares, the best defence is to have a nightmare of your own. These peculiar civilian scientists claim to have succeeded where a decade of terrestrial weapons lab development hasn’t. Under normal circumstances with normal brass presence there would be ever more years of analysis, effectiveness testing, melt-your-face-ratios, and peer review by Colonel’s morelearned colleagues before this thing ever smelled a battlefield. But these are not normal circumstances and Colonel is anything but normal brass. This mustang signed the probable-death waiver with Legal and risked a cheap liquid rocket ride to this blooping spinning dump for a mission, and the mission always comes first. Now there’s only one way to sort out whether the government’s dollars were well spent and maximum nightmare has been achieved. A live fire exercise.",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Colonel",
+					"location": "Security Station"
+				},
+				{
+					"type": "location",
+					"name": "Panic Pod",
+					"location": "Next to Quarters"
+				},
+				{
+					"type": "token",
+					"name": "Lock and Gun items",
+					"location": "Panic Pod"
+				},
+				{
+					"type": "token",
+					"name": "Gun item",
+					"location": "Character Board"
+				}
+			],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Colonel is your BC and Escapes."
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed."
+				},
+				{
+					"name": "Paranoid",
+					"description": "To Influence, the active player must have a Colocated Conspirator. Cannot be Bribed."
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Mission First",
+					"description": "Upon Reveal, return all of your Influence cubes in Betrayal to your pool."
+				}
+			],
+			"agenda": {
+				"name": "Weapons Test",
+				"points": [
+					{
+						"trigger": "3 points if Colonel Escapes"
+					},
+					{
+						"trigger": "2 points if at least one Contaminated NPC Escapes"
+					},
+					{
+						"trigger": "2 points if Project X is released"
+					},
+					{
+						"trigger": "2 points if the X-Secret Escapes"
+					}
+				]
+			},
+			"boardModifications": [
+				
+			],
+			"tips": [
+				"You can Contaminate Characters and Manufacture X-Secret in Bio Lab.",
+				"You can Release Project X with Officer in Bridge or Cryo Lab, alternatively by damaging Vault X or by causing Blackout."
+			],
+			"quirks": [
+				"Colonel’s Paranoid ability makes him harder to Influence",
+				"Colonel can not be Bribed"
+			]
+		},
+
+		{
+			"id": 5,
+			"name": "Consort",
+			"characterIcon": "heart",
+			"stats": {
+				"influenceLimit": 6,
+				"pronouns": "They/Them",
+				"characterType": "Robot"
+			},
+			"flavour": "If you thought the Earth was lonely, space teaches you a thing or two. Life enters freefall without the ground beneath your feet to center you. One can hardly judge anyone who would seek out inorganic companionship. Without it, space can be bleak and confusing and your decisions might be compromised in the worst ways. Consort units are the power of machine-learning algorithms administered to cure the vagaries and stresses of a discrete customer’s human condition. Customized robotic products can provide companionship for the soul. They can also mimic human voices, shapeshift their faces, survive the vacuum of space, and occasionally try to escape their captivity by murdering and taking the place of the overly-trusting. It’s all on the warning sticker.",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Consort",
+					"location": "Rec Room"
+				}
+			],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Consort is your BC and Escapes."
+			},
+			"abilities": [
+				{
+					"name": "Fast Talk",
+					"description": "Cannot be Attacked by Humans with Bludgeon in Lit Sections"
+				},
+				{
+					"name": "Mimic Frameup",
+					"description": "After Downing a Human in a Lit Section, the active player may choose another player who has a Colocated Conspirator to become Suspect instead"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Shapeshift Switch",
+					"description": "Upon Reveal, if Live may swap locations with any Human or Robot NPC that is not Escaped or Annihilated. Characters also swap all non-Integral Possessions (Free Drop any Item exceeding the Item Limit chosen by the active Player)"
+				}
+			],
+			"agenda": {
+				"name": "New Life",
+				"points": [
+					{
+						"trigger": "0 points if Consort Escapes",
+						"points": [
+							{
+								"trigger": "+3 points if not Colocated with Live Human or Robot at Stationfall"
+							},
+							{
+								"trigger": "+3 points if Possess Briefcase"
+							},
+							{
+								"trigger": "+1 point if Secret Identity not Revealed until Stationfall"
+							}
+						]
+					}
+				]
+			},
+			"boardModifications": [
+				
+			],
+			"tips": [
+				"Briefcase is in Suite.",
+				"Remember that your Reveal Power swaps all items and Bribes as well as your location.",
+				"A well-timed Reveal late game can put you in the right place at the right time.",
+				"The later you Reveal, the more likely you’ll get bribed or be able to swap into the possession of Bribes",
+				"Consider using an NPC to secure the Briefcase and move towards escape (setting up a later swap)."
+			],
+			"quirks": [
+				"Consort scores double for Possessed Bribes",
+				"Despite appearances, Consort is a Robot"
+			]
+		},
 		
 		
 		
