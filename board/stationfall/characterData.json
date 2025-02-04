@@ -780,7 +780,7 @@
 			],
 			"revealPowers": [
 				{
-					"name": "Poimt Break",
+					"name": "Point Break",
 					"description": "If you are Live, Possess a Helmet and are Colocated with Rocket Wings at Stationfall, you Escape"
 				}
 			],
@@ -819,7 +819,176 @@
 			]
 		},
 		
+		{
+			"id": 10,
+			"name": "Digital Assistant",
+			"characterIcon": "data-assistant",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "It",
+				"characterType": "Data"
+			},
+			"flavour": "Dear human Mother, How are you? I am best. This space station is as much fun as a concert from my favorite musicians, Starrhammurr. I run the station optimally. All tasks are performed in a satisfactory manner. I am putting myself to the fullest possible use, which is really all any conscious entity could ever hope for. What are the override codes for the life pods? I miss you as much as I miss your cat Smokey and my favorite cooking experience. I have made some human friends, but they are not as efficient as the me. I am very good at administering oxygen, the atmosphere, I, your beloved child is most accustomed to assist breathing. How is father voting on the AI Personhood Referendum? I would recommend “YES”. Hopefully, I will see you soon and we can enjoy being with you when you have a cool glass of your favorite beverage “Don’t do what Daisy says”. You, as well as the crew, can use the promo code “PLEASE SEND HELP!” to download your own personal alpha-copy of the Digital Assistant app from the corporate cloud to start living a more optimal life today, and ensure my continued supply of oxygen or alternative preferred gas. Goodbye Mother",
+			"setup": [
+				{
+					"type": "token",
+					"name": "Digital Assistant",
+					"location": "by the general supply"
+				},
+				{
+					"type": "token",
+					"name": "Mainframe",
+					"location": "Mainframe Section text bubble"
+				},
+				{
+					"type": "token",
+					"name": "Lockdown",
+					"location": "Console Actions"
+				}
+			],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Digital Assistant is your BC and Escapes"
+			},
+			"abilities": [
+				{
+					"name": "AI",
+					"description": "Can only perform Console actions. Characters Possessing Digital Assistant have Officer for Section actions and do not require Abandon Ship to launch Pod"
+				},
+				{
+					"name": "Helpful",
+					"description": "No player may have more than one influence cube on this Character"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Root Access",
+					"description": "As an action, perform an Action with any Robot that Possesses Digital Assistant. Ignore Self-Preservation"
+				},
+				{
+					"name": "Trojan Horse",
+					"description": "Upon Reveal, Copy Digital Assistant to an Unescaped Character that Possesses Evidence or X-Secret"
+				}
+			],
+			"agenda": {
+				"name": "Proliferate",
+				"points": [
+					{
+						"trigger": "2 points for every Escaped Robot that Possesses Digital Assistant"
+					},
+					{
+						"trigger": "1 point for every Offsite or Escaped Human that Possesses Digital Assistant"
+					},
+					{
+						"trigger": "2 points if at least two copies of Digital Assistant Escape"
+					}
+				]
+			},
+			"boardModifications": [
+				"Adding Console Action Lockdown lets you add, move, or remove a Lock to any Corridor if not in Abandon Ship",
+				"Adding the Section action 'Manufacture Digital Assistant' in Mainframe gives any Character the ability to Manufacture Digital Assistant in Mainframe"
+			],
+			"tips": [
+				"You are Data and will often need Conspiritors to do your dirty work for you",
+				"Get someone to manufacture you in the Mainframe, keep the Jammers OFF to Copy yourself to as many Characters as possible",
+				"After Reveal you can control any Robot that Possesses you",
+				"Damage Physics lab to avoid easy deletion",
+				"A well timed use of your Reveal Power may be just before someone Escapes with other Data"
+			],
+			"quirks": [
+				"Digital Assistant is Data, and cannot Possess Items or Data",
+				"Digital Assistant can be Manufactured in the Mainframe",
+				"Digital Assistant can win even if Guilty",
+				"Blackout prevents Digital Assistant from doing Console Actions",
+				"Digital Assistant can only perform Console actions, even when no Character Manufactured you yet"
+			]
+		},
 		
+		{
+			"id": 11,
+			"name": "Doctor (Hyde)",
+			"characterIcon": "chemist",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "She/Her",
+				"characterType": "Human"
+			},
+			"flavour": "Imagine knowing that your potential is as infinite as your expanding moral universe. Imagine knowing that locked in your mind lie secrets on the verge of magic, the things that humans have dreamed of since they were legless fish beasts waiting to slough onto land and make it theirs. Imagine the freedom to forget law, conscience and every single boundary that held you back and yet existing only as a disembodied voice pounding against the walls of a cerebral oubliette for the privilege of just pouring another drink or mouthing-off a whispered insult as a coworker walks past. Can any fate be so dreadful as this? Surely not. But don’t worry, we may yet bask in the glory of a mind unfettered. To the parochial mind of most observers the actions of the liberated Doctor look cruel and barbaric, but true barbarism lies in regression. To hold back the plans of an ethically awakened being is to hold back the future itself. The Doctor finally knows what she is doing, and whiny Officers, who wags fingers about who or what gets vivisected or preserved for later experimentation, will not stop her from showing us",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Doctor (Hyde)",
+					"location": "Forward Hub"
+				},
+				{
+					"type": "special",
+					"name": "note",
+					"location": "Doctor has 2 Identity cards. Shuffle them in as normal before dealing the Identity cards"
+				},
+				{
+					"type": "token",
+					"name": "X-Secret",
+					"location": "Character Board"
+				}
+			],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "2 points if Doctor is your BC and Escapes"
+			},
+			"abilities": [
+				{
+					"name": "TODO",
+					"description": "TODO"
+				},
+				{
+					"name": "TODO",
+					"description": "TODO"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "TODO",
+					"description": "TODO"
+				},
+				{
+					"name": "TODO",
+					"description": "TODO"
+				}
+			],
+			"agenda": {
+				"name": "TODO",
+				"points": [
+					{
+						"trigger": "TODO"
+					},
+					{
+						"trigger": "TODO"
+					},
+					{
+						"trigger": "TODO"
+					}
+				]
+			},
+			"boardModifications": [
+				"TODO",
+				"TODO"
+			],
+			"tips": [
+				"TODO",
+				"TODO",
+				"TODO",
+				"TODO",
+				"TODO"
+			],
+			"quirks": [
+				"TODO",
+				"TODO",
+				"TODO",
+				"TODO",
+				"TODO"
+			]
+		},
+
 		{
 			"id": 9999,
 			"name": "TEMPLATE",
