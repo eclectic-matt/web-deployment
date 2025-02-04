@@ -6,6 +6,8 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
+
+var data = undefined;
 /**
  * 
  * @param {The JSON file} url 
@@ -30,31 +32,103 @@ const charData = getJSON('characterData.json', loadCharacters);
 
 function loadCharacters(status, json){
 	
+	//STORE DATA FOR OTHER FUNCTIONALITY
+	data = json;
+	
 	let listDiv = document.getElementById('charactersList');
 	listDiv.innerHTML = null;
+	let index = 0;
 	
-	json.characterData.forEach( (char) => {
+	json.characterData.forEach( (char, index) => {
+		
 		if(char.name === "TEMPLATE") return false;
 		
-		//INIT BUTTON TO SHOW/HIDE CHARACTER DIV
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cBtn = createCharacterButton(char, rowOdd);
+		listDiv.appendChild(cBtn);
+		let cDiv = createCharacterDiv(char);
+		listDiv.appendChild(cDiv);
+	})
+}
+
+function getCharData(name)
+{
+	//DATA NOT LOADED - FALSE
+	if(!data) return false;
+	//CHARACTER NAME NOT FOUND - FALSE
+	if(!data.characters.includes(name)) return false;
+	//SHOULD HAVE CHARACTER, RETURN RESULT OF .find() 
+	return data.characterData.find( (char) => {
+		return char.name === name;
+	});
+}
+
+function createCharacterButton(char, odd=false){
+			//INIT BUTTON TO SHOW/HIDE CHARACTER DIV
 		let btn = document.createElement('button');
 		btn.onclick= function() {
 			showAccordionContent(char.id);
 		}
-		btn.className = "w3-btn w3-block w3-red";
+		btn.className = "w3-btn w3-block";
+		if(odd){
+			btn.className += " w3-purple";
+		}else{
+			btn.className += " w3-deep-purple";
+		}
 		btn.innerHTML = char.name;
-		
+		return btn;
+}
+function createCharacterDiv(char) {
+
 		//INIT DIV TO HOLD CHAR DATA
 		let charDiv = document.createElement('div');
 		charDiv.id = char.id;
 		charDiv.className = "w3-hide w3-padding-large";
 		
 		//CHARACTER DATA OUTPUT
+		
+		//==============
+		// SETUP
+		//==============
+		let setupDiv = document.createElement('div');
+		setupDiv.className = "w3-red w3-padding-small";
+		let charSetupLabel = document.createElement('h2');
+		charSetupLabel.innerHTML = "Setup";
+		setupDiv.appendChild(charSetupLabel);
+
+		let charSetup = document.createElement('ul');
+		char.setup.forEach((setup) => {
+			let li = document.createElement('li');
+			li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' placed in " + setup.location;
+			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
+			charSetup.appendChild(li);
+		});
+		setupDiv.appendChild(charSetup);
+		if(char.boardModifications.length > 0){
+			let boardModLabel = document.createElement('h3');
+			boardModLabel.innerHTML = "Board Modifications";
+			setupDiv.appendChild(boardModLabel);
+			let boardMod = document.createElement('ul');
+			char.boardModifications.forEach((setup) => {
+				let li = document.createElement('li');
+				li.innerHTML = setup;
+				//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
+				boardMod.appendChild(li);
+			});
+			setupDiv.appendChild(boardMod);
+		}
+		
+		charDiv.appendChild(setupDiv);
+		
+		//==============
+		// STATS
+		//==============
 		let charStatsTable = document.createElement('table');
-		charStatsTable.className = "w3-table-all";
-		charStatsTableHead = document.createElement('tr');
+		charStatsTable.className = "w3-table-all w3-text-purple";
+		/*charStatsTableHead = document.createElement('tr');
 		charStatsTableHead.innerHTML = '<th>Stat</th><th>Value</th>';
-		charStatsTable.appendChild(charStatsTableHead);
+		charStatsTable.appendChild(charStatsTableHead);*/
 		//char.stats.forEach( (value, index) => {
 		let statKeys = Object.keys(char.stats);
 		for(let i = 0; i < statKeys.length; i++){
@@ -66,15 +140,19 @@ function loadCharacters(status, json){
 		}
 		charDiv.appendChild(charStatsTable);
 		
-		//AGENDA
+		//==============
+		// AGENDA
+		//==============
+		let agendaDiv = document.createElement('div');
+		agendaDiv.className = "w3-green w3-padding-small";
 		let agendaName = char.agenda.name;
 		let agendaHead = document.createElement('h2');
 		agendaHead.innerHTML = 'AGENDA: ' + agendaName;
-		charDiv.appendChild(agendaHead);
+		agendaDiv.appendChild(agendaHead);
 		
 		let agendaMainTriggerHead = document.createElement('b');
 		agendaMainTriggerHead.innerHTML = char.agenda.points[0].trigger;
-		charDiv.appendChild(agendaMainTriggerHead);
+		agendaDiv.appendChild(agendaMainTriggerHead);
 		let subAgendaList = document.createElement('ul');
 		let topPoints = char.agenda.points[0].points;
 		if(topPoints){
@@ -103,24 +181,22 @@ function loadCharacters(status, json){
 				}
 			}
 		}
-		charDiv.appendChild(subAgendaList);
+		agendaDiv.appendChild(subAgendaList);
+		//Bonus points 
+		let bonusPoints = document.createElement('b');
+		bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type + "]</b> " + char.bonusPoints.reward;
+		agendaDiv.appendChild(bonusPoints);
+		//Add to main div
+		charDiv.appendChild(agendaDiv);
 		
-		let charSetupLabel = document.createElement('h2');
-		charSetupLabel.innerHTML = "Setup";
-		charDiv.appendChild(charSetupLabel);
-		
-		let charSetup = document.createElement('ul');
-		char.setup.forEach( (setup) => {
-			let li = document.createElement('li');
-			li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' placed in " + setup.location;
-			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
-			charSetup.appendChild(li);
-		});
-		charDiv.appendChild(charSetup);
-		
+		//==============
+		// ABILITY
+		//==============
+		let abilityDiv = document.createElement('div');
+		abilityDiv.className = "w3-blue w3-padding-small";
 		let charAbilityLabel = document.createElement('h2');
 		charAbilityLabel.innerHTML = "Abilities";
-		charDiv.appendChild(charAbilityLabel);
+		abilityDiv.appendChild(charAbilityLabel);
 		
 		let charAbilities = document.createElement('ul');
 		char.abilities.forEach( (ability) => {
@@ -128,20 +204,66 @@ function loadCharacters(status, json){
 			li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
 			charAbilities.appendChild(li);
 		});
-		charDiv.appendChild(charAbilities);
+		abilityDiv.appendChild(charAbilities);
+		let revealAbilityLabel = document.createElement('h2');
+		revealAbilityLabel.innerHTML = "Reveal Powers";
+		abilityDiv.appendChild(revealAbilityLabel);
+		let revealAbilities = document.createElement('ul');
+		char.revealPowers.forEach( (ability) => {
+			let li = document.createElement('li');
+			li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
+			revealAbilities.appendChild(li);
+		})
+		abilityDiv.appendChild(revealAbilities);
+		charDiv.appendChild(abilityDiv);
 		
+		//==============
+		// TIPS
+		//==============
+		let tipsDiv = document.createElement('div');
+		tipsDiv.className = "w3-deep-orange w3-padding-small";
+		let tipsLabel = document.createElement('h2');
+		tipsLabel.innerHTML = "Tips";
+		tipsDiv.appendChild(tipsLabel);
+		
+		let charTips = document.createElement('span');
+		charTips.innerHTML = '<ul><li>' + char.tips.join('</li><li>') + '</li></ul>';
+		tipsDiv.appendChild(charTips);
+		charDiv.appendChild(tipsDiv);
+		
+		//==============
+		// QUIRKS
+		//==============
+		let quirksDiv = document.createElement('div');
+		quirksDiv.className = "w3-deep-orange w3-padding-small";
+		let quirksLabel = document.createElement('h2');
+		quirksLabel.innerHTML = "Quirks";
+		quirksDiv.appendChild(quirksLabel);
+		
+		let charQuirks = document.createElement('span');
+		charQuirks.innerHTML = '<ul><li>' + char.quirks.join('</li><li>') + '</li></ul>';
+		quirksDiv.appendChild(charQuirks);
+		charDiv.appendChild(quirksDiv);
+		
+		//==============
+		// FLAVOUR
+		//==============
+		let flavourDiv = document.createElement('div');
+		flavourDiv.className = "w3-orange w3-padding-small";
 		let charFlavourLabel = document.createElement('h2');
 		charFlavourLabel.innerHTML = "Flavour Text";
-		charDiv.appendChild(charFlavourLabel);
+		flavourDiv.appendChild(charFlavourLabel);
 		
 		let charFlavour = document.createElement('em');
 		charFlavour.innerHTML = char.flavour;
-		charDiv.appendChild(charFlavour);
+		flavourDiv.appendChild(charFlavour);
+		charDiv.appendChild(flavourDiv);
 		
-		listDiv.appendChild(btn);
-		listDiv.appendChild(charDiv);
-	})
+		//characterWrapper.appendChild(btn);
+		//characterWrapper.appendChild(charDiv);
+		return charDiv;
 }
+
 
 function showAccordionContent(id) {
   var x = document.getElementById(id);

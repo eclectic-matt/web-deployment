@@ -285,7 +285,7 @@
 		},
 
 		{
-			
+
 			"id": 3,
 			"name": "Botanist",
 			"characterIcon": "leaf",
@@ -513,6 +513,82 @@
 			"quirks": [
 				"Consort scores double for Possessed Bribes",
 				"Despite appearances, Consort is a Robot"
+			]
+		},
+		
+		{
+			"id": 6,
+			"name": "Corpsicle",
+			"characterIcon": "snowflake",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "She/Her",
+				"characterType": "Human"
+			},
+			"flavour": "Cryogenics isn’t perfect. You might have gotten the opposite impression from the popular “Cryogenics: It’s Literally Perfect” campaign but sometimes advertisers fudge the truth and a low fat salad dressing doesn’t taste the same or a terminal patient has turned into an ice cold revenant whose body projects the cold of a grave whose comforts it will never know. The brochure clearly states that the vast percentage of the cryogenically frozen do not end up as shambling cadavers that hate the living with what little remains of their mostly dead brain. In the long run, most will end up living relatively happy and fulfilling lives and it would be downright negligent to start defaming cryogenics companies just because a few bad apples reanimate partially at the wrong time and run amok. Indeed in the grand old scheme of things it will be the meek corpsicles that have the brightest futures… or at least the longest ones. But until then they’ll just have to try to make the best of an increasingly bad deal like the rest of us. It’ll be difficult for Corpsicle to make it off the station intact along with the secret to curing her ailment, but fortunately immortality is a powerful motivator.",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Corpsicle",
+					"location": "Cryo Lab."
+						},
+				{
+					"type": "token",
+					"name": "Corpsicle starts Down and starts with a , which is Integral (cannot be removed)",
+					"location": "Character board"
+						}
+					],
+			"bonusPoints": {
+				"type": "friend",
+				"reward": "3 points if Corpsicle is your BC and Escapes."
+			},
+			"abilities": [
+				{
+					"name": "Vengeful",
+					"description": "Using Corpsicle’s Kompromat will additionally give her a Bludgeon. Her Kompromat can be used even if Down, which will instantly Revive her if Down."
+						},
+				{
+					"name": "Dying",
+					"description": "May not be activated when Exhausted and gets no Free Pick Up or Drop when activated."
+						}
+					],
+			"revealPowers": [
+				{
+					"name": "Last Gasp",
+					"description": "Upon Reveal, Revive if Down or perform an Action."
+						}
+					],
+			"agenda": {
+				"name": "Miracle Cure",
+				"points": [
+					{
+						"trigger": "3 points if Corpsicle Escapes",
+						"points": [
+							{
+								"trigger": "+2 points if Possess Nanogel"
+							}
+						]
+					},
+					{
+						"trigger": "2 points if X-Secret Escapes"
+					},
+					{
+						"trigger": "2 points if Project X is not released"
+					}
+				]
+			},
+			"boardModifications": [
+		
+			],
+			"tips": [
+				"Seek out Down Characters and feed Fang Moss",
+				"Get a helmet",
+				"Get contaminated in Bio Lab",
+				"Use your ZeroBorn for extra mobility",
+				"After Reveal, Fang Moss can act in addition to your Activation of any Character each turn"
+			],
+			"quirks": [
+				"Fang moss is an Item. Any Character Possessing gets access to the Feed Me! Action."
 			]
 		},
 		
