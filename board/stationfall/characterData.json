@@ -1686,71 +1686,77 @@
 			"id": 22,
 			"name": "Security",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"influenceLimit": 4,
+				"pronouns": "It",
+				"characterType": "Robot"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "To add later..",
 			"setup": [
 				{
 					"type": "character",
-					"name": "Engineer",
-					"location": "Array Control"
+					"name": "Security",
+					"location": "Print Shop"
 				},
 				{
 					"type": "token",
-					"name": "Reactor",
-					"location": "Reactor Control Panel"
+					"name": "Integral Gun",
+					"location": "Character Board"
 				}
 			],
 			"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
 			"bonusPoints": {
 				"type": "grudge",
-				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+				"reward": "3 points if Security is your BC and is not Live at Stationfall"
 			},
 			"abilities": [
 				{
-					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+					"name": "Peacekeeper",
+					"description": "May only attack Fugitives, Monsters, or non-innocent PCs. May not Sabotage"
 				},
 				{
-					"name": "Jury Rig",
-					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+					"name": "Armored",
+					"description": "Cannot be Attacked or Robbed by Bludgeon"
 				}
 			],
 			"revealPowers": [
 				{
-					"name": "Overload",
-					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+					"name": "Authorized Force",
+					"description": "Lose Peacekeeper"
 				}
 			],
 			"agenda": {
-				"name": "Preserve Ecosphere",
+				"name": "Peace through Superior Firepower",
 				"points": [
 					{
-						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+						"trigger": "1 point per Down Fugitive, Monster, or non-innocent Player Characters on Board at Stationfall"
 					},
 					{
-						"trigger": "3 points if no Contaminated Characters Escape"
+						"trigger": "1 point per Down Human with Bludgeon or Gun on Board at Stationfall "
 					},
 					{
-						"trigger": "2 points if Artifact does not Escape"
+						"trigger": "1 point if Briefcase does not Escape"
 					},
 					{
-						"trigger": "1 point if Innocent, but may win even if Guilty"
+						"trigger": "1 point if Artifact does not Escape",
+						"points": [
+							{
+								"trigger": "+1 point if both Briefcase and Artifact do not Escape"
+							}
+						]
 					}
 				]
 			},
 			"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+				"You are hard to Rob so Artifact and Briefcase are safest with you",
+				"Once you Reveal you can Down any Character, and then Plant a Bludgeon on them",
+				"Acquiring and using Kompromat is a good way to create Suspect Players",
+				"You can release Project-X using Officer on the Bridge or the Cryo Lab",
+				"Boarder and Cyborg are fugitives",
+				"Until you Reveal, Peacekeeper prevents you from Attacking or Sabotaging, but you can still 'Rob' items (confiscating/securing them)"
 			],
 			"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+				"None"
 			]
 		},
 		{

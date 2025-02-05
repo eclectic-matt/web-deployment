@@ -28,17 +28,12 @@ const getJSON = function(url, callback) {
 	xhr.send();
 };
 
-const charData = getJSON('characterData.json', loadCharacters);
 
 function loadCharacters(status, json){
 	
 	//STORE DATA FOR OTHER FUNCTIONALITY
 	data = json;
 
-	/*json.characterData.forEach( (char, index) => {
-		console.log(index, char.name);
-	})*/
-	
 	let listDiv = document.getElementById('charactersList');
 	listDiv.innerHTML = null;
 	let index = 0;
@@ -57,25 +52,57 @@ function loadCharacters(status, json){
 		listDiv.appendChild(cBr);
 	})
 	
-	let tutorialDiv = document.getElementById('tutorialList');
-	tutorialDiv.innerHTML = null;
+	let agendaDiv = document.getElementById('agendasList');
+	agendaDiv.innerHTML = null;
 	index = 0;
 	
-	json.tutorialCharacters.forEach( (name, index) => {
-		
-		let char = getCharData(name);
-		//console.log(name, char);
-		if(!char) return false;
+	json.characterData.forEach( (char, index) => {
 		
 		let rowOdd = (index % 2 === 0);
 		index++;
-		let cBtn = createCharacterButton(char, rowOdd);
-		tutorialDiv.appendChild(cBtn);
-		let cDiv = createCharacterDiv(char);
-		tutorialDiv.appendChild(cDiv);
+		let cHead = document.createElement('h3');
+		cHead.innerHTML = char.name;
+		agendaDiv.appendChild(cHead);
+		let cDiv = createAgendaList(char.agenda.points);
+		agendaDiv.appendChild(cDiv);
 		let cBr = document.createElement('br');
-		tutorialDiv.appendChild(cBr);
+		agendaDiv.appendChild(cBr);
 	})
+	
+	let setupDiv = document.getElementById('setupList');
+	setupDiv.innerHTML = null;
+	index = 0;
+	
+	json.characterData.forEach( (char, index) => {
+		
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cHead = document.createElement('h3');
+		cHead.innerHTML = char.name;
+		setupDiv.appendChild(cHead);
+		let cDiv = createSetupDiv(char);
+		setupDiv.appendChild(cDiv);
+		let cBr = document.createElement('br');
+		setupDiv.appendChild(cBr);
+	})
+	
+	let abilityDiv = document.getElementById('abilityList');
+	abilityDiv.innerHTML = null;
+	index = 0;
+	
+	json.characterData.forEach( (char, index) => {
+		
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cHead = document.createElement('h3');
+		cHead.innerHTML = char.name;
+		abilityDiv.appendChild(cHead);
+		let cDiv = createSetupDiv(char);
+		abilityDiv.appendChild(cDiv);
+		let cBr = document.createElement('br');
+		abilityDiv.appendChild(cBr);
+	})
+	
 }
 
 function getCharData(name)
@@ -90,7 +117,8 @@ function getCharData(name)
 	return charData;
 }
 
-function createCharacterButton(char, odd=false){
+function createCharacterButton(char, odd=false)
+{
 			//INIT BUTTON TO SHOW/HIDE CHARACTER DIV
 		let btn = document.createElement('button');
 		btn.onclick= function() {
@@ -105,191 +133,189 @@ function createCharacterButton(char, odd=false){
 		btn.innerHTML = char.name;
 		return btn;
 }
-function createCharacterDiv(char) {
 
-		//INIT DIV TO HOLD CHAR DATA
-		let charDiv = document.createElement('div');
-		charDiv.id = char.id;
-		charDiv.className = "w3-hide w3-padding-large w3-dark-grey";
-		
-		//CHARACTER DATA OUTPUT
-		
-		//==============
-		// SETUP
-		//==============
-		let setupDiv = document.createElement('div');
-		setupDiv.className = "w3-red w3-padding-small";
-		let charSetupLabel = document.createElement('h2');
-		charSetupLabel.innerHTML = "Setup";
-		setupDiv.appendChild(charSetupLabel);
+function createCharacterDiv(char) 
+{
 
-		let charSetup = document.createElement('ul');
-		char.setup.forEach((setup) => {
-			let li = document.createElement('li');
-			li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' placed in " + setup.location;
-			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
-			charSetup.appendChild(li);
-		});
-		setupDiv.appendChild(charSetup);
-		if(char.boardModifications.length > 0){
-			let boardModLabel = document.createElement('h3');
-			boardModLabel.innerHTML = "Board Modifications";
-			setupDiv.appendChild(boardModLabel);
-			let boardMod = document.createElement('ul');
-			char.boardModifications.forEach((setup) => {
-				let li = document.createElement('li');
-				li.innerHTML = setup;
-				//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
-				boardMod.appendChild(li);
-			});
-			setupDiv.appendChild(boardMod);
-		}
+	//INIT DIV TO HOLD CHAR DATA
+	let charDiv = document.createElement('div');
+	charDiv.id = char.id;
+	charDiv.className = "w3-hide w3-padding-large w3-dark-grey";
 		
-		charDiv.appendChild(setupDiv);
+	//CHARACTER DATA OUTPUT
 		
-		//==============
-		// STATS
-		//==============
-		let charStatsTable = document.createElement('table');
-		charStatsTable.className = "w3-table-all w3-text-purple";
-		/*charStatsTableHead = document.createElement('tr');
-		charStatsTableHead.innerHTML = '<th>Stat</th><th>Value</th>';
-		charStatsTable.appendChild(charStatsTableHead);*/
-		//char.stats.forEach( (value, index) => {
-		let statKeys = Object.keys(char.stats);
-		for(let i = 0; i < statKeys.length; i++){
-			let statName = statKeys[i];
-			let value = char.stats[statName];
-			let statRow = document.createElement('tr');
-			statRow.innerHTML = '<td>' + statName + '</td><td>' + value + '</td>';
-			charStatsTable.appendChild(statRow);
-		}
-		charDiv.appendChild(charStatsTable);
+	let setupDiv = createSetupDiv(char);
+	setupDiv.className = "w3-red w3-padding-small";
+	charDiv.appendChild(setupDiv);
 		
-		//==============
-		// AGENDA
-		//==============
-		let agendaDiv = document.createElement('div');
-		agendaDiv.className = "w3-green w3-padding-small";
-		let agendaName = char.agenda.name;
-		let agendaHead = document.createElement('h2');
-		agendaHead.innerHTML = 'AGENDA: ' + agendaName;
-		agendaDiv.appendChild(agendaHead);
+	//==============
+	// STATS
+	//==============
+	let charStatsTable = document.createElement('table');
+	charStatsTable.className = "w3-table-all w3-text-purple";
+	let statKeys = Object.keys(char.stats);
+	for(let i = 0; i < statKeys.length; i++){
+		let statName = statKeys[i];
+		let statFormatted = statKeys[i].charAt(0).toUpperCase() + statKeys[i].substring(1).toLowerCase();
+		let value = char.stats[statName];
+		let statRow = document.createElement('tr');
+		statRow.innerHTML = '<td>' + statFormatted + '</td><td>' + value + '</td>';
+		charStatsTable.appendChild(statRow);
+	}
+	charDiv.appendChild(charStatsTable);
 		
-		let agendaMainTriggerHead = document.createElement('b');
-		agendaMainTriggerHead.innerHTML = char.agenda.points[0].trigger;
-		agendaDiv.appendChild(agendaMainTriggerHead);
-		let subAgendaList = document.createElement('ul');
-		let topPoints = char.agenda.points[0].points;
-		if(topPoints){
-			for(let i = 0; i < topPoints.length; i++){
-				let subTrigger = topPoints[i].trigger;
-				let li = document.createElement('li');
-				li.innerHTML = subTrigger;
-				subAgendaList.appendChild(li);
-			}
-		}else{
-			//BOTANIST 
-			for(let i = 1; i < char.agenda.points.length; i++){
-				let subTrigger = char.agenda.points[i].trigger;
-				let li = document.createElement('li');
-				li.innerHTML = subTrigger;
-				subAgendaList.appendChild(li);
-				if(subTrigger.points){
-					//MAKE NEW UL / LI FOR THIS SUBTRIGGER
-					let subList = document.createElement('ul');
-					for(let j = 0; j < subTrigger.points.length; j++){
-						let subsubtrigger = document.createElement('li');
-						subsubtrigger.innerHTML = subTrigger.points[j].trigger;
-						subList.appendChild(subsubtrigger);
-					}
-					subAgendaList.appendChild(subList);
-				}
-			}
-		}
-		agendaDiv.appendChild(subAgendaList);
-		//Bonus points 
-		let bonusPoints = document.createElement('b');
-		bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type + "]</b> " + char.bonusPoints.reward;
-		agendaDiv.appendChild(bonusPoints);
-		//Add to main div
-		charDiv.appendChild(agendaDiv);
+	//==============
+	// AGENDA
+	//==============
+	let agendaDiv = document.createElement('div');
+	agendaDiv.className = "w3-green w3-padding-small";
+	let agendaName = char.agenda.name;
+	let agendaHead = document.createElement('h2');
+	agendaHead.innerHTML = 'AGENDA: ' + agendaName;
+	agendaDiv.appendChild(agendaHead);
+	let agendaNameHead = document.createElement('h3');
+	agendaNameHead.innerHTML = char.agenda.name;
+	agendaDiv.appendChild(agendaNameHead);
+	let agendaList = createAgendaList(char.agenda.points);
+	agendaDiv.appendChild(agendaList);
+	//Bonus points 
+	let bonusPoints = document.createElement('b');
+	bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type + "]</b> " + char.bonusPoints.reward;
+	agendaDiv.appendChild(bonusPoints);
+	//Add to main div
+	charDiv.appendChild(agendaDiv);
 		
-		//==============
-		// ABILITY
-		//==============
-		let abilityDiv = document.createElement('div');
-		abilityDiv.className = "w3-blue w3-padding-small";
-		let charAbilityLabel = document.createElement('h2');
-		charAbilityLabel.innerHTML = "Abilities";
-		abilityDiv.appendChild(charAbilityLabel);
+	//==============
+	// ABILITY
+	//==============
+	let abilityDiv = createAbilityDiv(char);
+	abilityDiv.className = "w3-blue w3-padding-small";
+	charDiv.appendChild(abilityDiv);
 		
-		let charAbilities = document.createElement('ul');
-		char.abilities.forEach( (ability) => {
-			let li = document.createElement('li');
-			li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
-			charAbilities.appendChild(li);
-		});
-		abilityDiv.appendChild(charAbilities);
-		let revealAbilityLabel = document.createElement('h2');
-		revealAbilityLabel.innerHTML = "Reveal Powers";
-		abilityDiv.appendChild(revealAbilityLabel);
-		let revealAbilities = document.createElement('ul');
-		char.revealPowers.forEach( (ability) => {
-			let li = document.createElement('li');
-			li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
-			revealAbilities.appendChild(li);
-		})
-		abilityDiv.appendChild(revealAbilities);
-		charDiv.appendChild(abilityDiv);
+	//==============
+	// TIPS
+	//==============
+	let tipsDiv = document.createElement('div');
+	tipsDiv.className = "w3-deep-orange w3-padding-small";
+	let tipsLabel = document.createElement('h2');
+	tipsLabel.innerHTML = "Tips";
+	tipsDiv.appendChild(tipsLabel);
 		
-		//==============
-		// TIPS
-		//==============
-		let tipsDiv = document.createElement('div');
-		tipsDiv.className = "w3-deep-orange w3-padding-small";
-		let tipsLabel = document.createElement('h2');
-		tipsLabel.innerHTML = "Tips";
-		tipsDiv.appendChild(tipsLabel);
+	let charTips = document.createElement('span');
+	charTips.innerHTML = '<ul><li>' + char.tips.join('</li><li>') + '</li></ul>';
+	tipsDiv.appendChild(charTips);
+	charDiv.appendChild(tipsDiv);
 		
-		let charTips = document.createElement('span');
-		charTips.innerHTML = '<ul><li>' + char.tips.join('</li><li>') + '</li></ul>';
-		tipsDiv.appendChild(charTips);
-		charDiv.appendChild(tipsDiv);
+	//==============
+	// QUIRKS
+	//==============
+	let quirksDiv = document.createElement('div');
+	quirksDiv.className = "w3-deep-orange w3-padding-small";
+	let quirksLabel = document.createElement('h2');
+	quirksLabel.innerHTML = "Quirks";
+	quirksDiv.appendChild(quirksLabel);
 		
-		//==============
-		// QUIRKS
-		//==============
-		let quirksDiv = document.createElement('div');
-		quirksDiv.className = "w3-deep-orange w3-padding-small";
-		let quirksLabel = document.createElement('h2');
-		quirksLabel.innerHTML = "Quirks";
-		quirksDiv.appendChild(quirksLabel);
+	let charQuirks = document.createElement('span');
+	charQuirks.innerHTML = '<ul><li>' + char.quirks.join('</li><li>') + '</li></ul>';
+	quirksDiv.appendChild(charQuirks);
+	charDiv.appendChild(quirksDiv);
 		
-		let charQuirks = document.createElement('span');
-		charQuirks.innerHTML = '<ul><li>' + char.quirks.join('</li><li>') + '</li></ul>';
-		quirksDiv.appendChild(charQuirks);
-		charDiv.appendChild(quirksDiv);
+	//==============
+	// FLAVOUR
+	//==============
+	let flavourDiv = document.createElement('div');
+	flavourDiv.className = "w3-orange w3-padding-small";
+	let charFlavourLabel = document.createElement('h2');
+	charFlavourLabel.innerHTML = "Flavour Text";
+	flavourDiv.appendChild(charFlavourLabel);
 		
-		//==============
-		// FLAVOUR
-		//==============
-		let flavourDiv = document.createElement('div');
-		flavourDiv.className = "w3-orange w3-padding-small";
-		let charFlavourLabel = document.createElement('h2');
-		charFlavourLabel.innerHTML = "Flavour Text";
-		flavourDiv.appendChild(charFlavourLabel);
+	let charFlavour = document.createElement('em');
+	charFlavour.innerHTML = char.flavour;
+	flavourDiv.appendChild(charFlavour);
+	charDiv.appendChild(flavourDiv);
 		
-		let charFlavour = document.createElement('em');
-		charFlavour.innerHTML = char.flavour;
-		flavourDiv.appendChild(charFlavour);
-		charDiv.appendChild(flavourDiv);
-		
-		//characterWrapper.appendChild(btn);
-		//characterWrapper.appendChild(charDiv);
-		return charDiv;
+	//characterWrapper.appendChild(btn);
+	//characterWrapper.appendChild(charDiv);
+	return charDiv;
 }
 
+//Recursive function to generate sublists of agendas.
+function createAgendaList(agenda)
+{
+	let returnList = document.createElement('ul');
+	for(let i=0; i < agenda.length; i++){
+		let item = document.createElement('li');
+		item.innerHTML = agenda[i].trigger;
+		returnList.appendChild(item);
+		if(agenda[i].points){
+			let subList = createAgendaList(agenda[i].points);
+			returnList.appendChild(subList);
+		}
+	}
+	return returnList;
+}
+
+function createSetupDiv(char) 
+{
+	//==============
+	// SETUP
+	//==============
+	let setupDiv = document.createElement('div');
+	let charSetupLabel = document.createElement('h3');
+	charSetupLabel.innerHTML = "Setup";
+	setupDiv.appendChild(charSetupLabel);
+
+	let charSetup = document.createElement('ul');
+	char.setup.forEach((setup) => {
+		let li = document.createElement('li');
+		li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' placed in " + setup.location;
+			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
+			charSetup.appendChild(li);
+	});
+	setupDiv.appendChild(charSetup);
+	if(char.boardModifications.length > 0){
+		let boardModLabel = document.createElement('h3');
+		boardModLabel.innerHTML = "Board Modifications";
+		setupDiv.appendChild(boardModLabel);
+		let boardMod = document.createElement('ul');
+		char.boardModifications.forEach((setup) => {
+			let li = document.createElement('li');
+			li.innerHTML = setup;
+			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
+			boardMod.appendChild(li);
+		});
+		setupDiv.appendChild(boardMod);
+	}
+	return setupDiv;
+}
+
+function createAbilityDiv(char)
+{
+	let abilityDiv = document.createElement('div');
+	abilityDiv.className = "w3-blue w3-padding-small";
+	let charAbilityLabel = document.createElement('h2');
+	charAbilityLabel.innerHTML = "Abilities";
+	abilityDiv.appendChild(charAbilityLabel);
+		
+	let charAbilities = document.createElement('ul');
+	char.abilities.forEach( (ability) => {
+		let li = document.createElement('li');
+		li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
+		charAbilities.appendChild(li);
+	});
+	abilityDiv.appendChild(charAbilities);
+	let revealAbilityLabel = document.createElement('h2');
+	revealAbilityLabel.innerHTML = "Reveal Powers";
+	abilityDiv.appendChild(revealAbilityLabel);
+	let revealAbilities = document.createElement('ul');
+	char.revealPowers.forEach( (ability) => {
+		let li = document.createElement('li');
+		li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
+		revealAbilities.appendChild(li);
+	})
+	abilityDiv.appendChild(revealAbilities);
+	return abilityDiv;
+}
 
 function showAccordionContent(id) {
   var x = document.getElementById(id);
@@ -300,17 +326,77 @@ function showAccordionContent(id) {
   }
 }
 
+const highlightTab = (name) => {
+	const btns = document.getElementsByClassName('nav');
+    for(let i = 0; i < btns.length; i++){
+        if(btns[i].value == name){
+        	btns[i].style.backgroundColor = 'green';
+        }else{
+        	btns[i].style.backgroundColor = 'purple';
+        }
+    }	
+}
+
+const showTab = (tabName) => {
+    const tabs = document.getElementsByClassName('tab');
+    for(let i = 0; i < tabs.length; i++){
+        tabs[i].style.display = 'none';
+    }
+    document.getElementById(tabName).style.display = 'block';
+    highlightTab(tabName);
+}
+
+
+const charData = getJSON('characterData.json', loadCharacters);
+
+function init() {
+	showTab("characters");
+}
+
 </script>
 </head>
-<body>
-	<h1>Characters</h1>
-	<div id="charactersList">
-		<!-- filled by loadCharacters -->
+<body onload="init()">
+	<div class="w3-bar w3-purple">
+		<button 
+			onclick="showTab('characters')"
+			class="nav w3-bar-item w3-button"
+		>Characters</button>
+		<button 
+			onclick="showTab('setup')"
+			class="nav w3-bar-item w3-button"
+		>Setup</button>
+		<button 
+			onclick="showTab('agenda')"
+			class="nav w3-bar-item w3-button"
+		>Agendas</button>
+		<button 
+			onclick="showTab('abilities')"
+			class="nav w3-bar-item w3-button"
+		>Abilities</button>
 	</div>
-	
-	<h1>Tutorial</h1>
-	<div id="tutorialList">
-		<!-- filled by loadCharacters -->
+	<div id="characters" class="tab w3-black">
+		<h1>Characters</h1>
+		<div id="charactersList">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="agenda" class="tab w3-teal" style="display:hidden;">
+		<h1>Agenda</h1>
+		<div id="agendasList">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="setup" class="tab w3-dark-gray" style="display:hidden;">
+		<h1>Setup</h1>
+		<div id="setupList">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="abilities" class="tab w3-indigo" style="display:hidden;">
+		<h1>Abilities</h1>
+		<div id="abilityList">
+			<!-- filled by loadCharacters -->
+		</div>
 	</div>
 </body>
 </html>
