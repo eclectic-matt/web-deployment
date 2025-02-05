@@ -50,6 +50,23 @@ function loadCharacters(status, json){
 		let cDiv = createCharacterDiv(char);
 		listDiv.appendChild(cDiv);
 	})
+	
+	let tutorialDiv = document.getElementById('tutorialList');
+	tutorialDiv.innerHTML = null;
+	index = 0;
+	
+	json.tutorialCharacters.forEach( (name, index) => {
+		
+		let char = getCharData(name);
+		if(!char) return false;
+		
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cBtn = createCharacterButton(char, rowOdd);
+		tutorialDiv.appendChild(cBtn);
+		let cDiv = createCharacterDiv(char);
+		tutorialDiv.appendChild(cDiv);
+	})
 }
 
 function getCharData(name)
@@ -59,9 +76,7 @@ function getCharData(name)
 	//CHARACTER NAME NOT FOUND - FALSE
 	if(!data.characters.includes(name)) return false;
 	//SHOULD HAVE CHARACTER, RETURN RESULT OF .find() 
-	return data.characterData.find( (char) => {
-		return char.name === name;
-	});
+	return data.characterData.find( (char) => char.name == name);
 }
 
 function createCharacterButton(char, odd=false){
@@ -279,6 +294,11 @@ function showAccordionContent(id) {
 <body>
 	<h1>Characters</h1>
 	<div id="charactersList">
+		<!-- filled by loadCharacters -->
+	</div>
+	
+	<h1>Tutorial</h1>
+	<div id="tutorialList">
 		<!-- filled by loadCharacters -->
 	</div>
 </body>
