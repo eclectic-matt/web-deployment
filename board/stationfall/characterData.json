@@ -1,4 +1,3 @@
-
 {
 	"name": "Stationfall Characters",
 	"characters": [
@@ -24,6 +23,7 @@
 		"Medical",
 		"Microbiologist",
 		"Operative",
+		"Security",
 		"Station Chief",
 		"Stowaway",
 		"Stranger",
@@ -41,16 +41,16 @@
 		"Tentacled Monstrosity"
 	],
 	"tutorialCharacters": [
-		"Astrochimp", 
-		"Counselor", 
-		"Cyborg", 
-		"Daredevil", 
-		"Engineer", 
-		"Exile", 
-		"Medical", 
-		"Security", 
-		"Station Chief", 
-		"Stowaway", 
+		"Astrochimp",
+		"Counselor",
+		"Cyborg",
+		"Daredevil",
+		"Engineer",
+		"Exile",
+		"Medical",
+		"Security",
+		"Station Chief",
+		"Stowaway",
 		"Stranger",
 		"Troubleshooter"
 	],
@@ -111,9 +111,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-				
-			],
+			"boardModifications": [],
 			"tips": [
 				"Artifact is in Physics Lab",
 				"Briefcase is in Suite",
@@ -124,9 +122,7 @@
 				"Astrochimp counts as a Human (hey, they’re 99% similar, close enough!)."
 			]
 		},
-		
 		{
-			
 			"id": 1,
 			"name": "Billionaire",
 			"characterIcon": "diamond",
@@ -195,9 +191,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-				
-			],
+			"boardModifications": [],
 			"tips": [
 				"Protect yourself with a Helmet and try to keep Jammers OFF so your Livestream Ability stays active.",
 				"When you Reveal you can use your grey Bribes for extra Actions with other Characters."
@@ -209,9 +203,7 @@
 				"Billionare and Fletcher are Colocated for end game scoring if they are Colocated when Escaping using the same "
 			]
 		},
-
 		{
-			
 			"id": 2,
 			"name": "Boarder",
 			"characterIcon": "helmetSkull",
@@ -297,9 +289,7 @@
 				"If an unlaunched Pod is targeted by Missile and then launches before Missile resolves, the Pod is Annihilated when Missile resolves."
 			]
 		},
-
 		{
-
 			"id": 3,
 			"name": "Botanist",
 			"characterIcon": "leaf",
@@ -360,9 +350,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-				
-			],
+			"boardModifications": [],
 			"tips": [
 				"Seek out Down Characters and feed Fang Moss",
 				"Get a helmet",
@@ -374,9 +362,7 @@
 				"Fang moss is an Item. Any Character Possessing gets access to the Feed Me! Action."
 			]
 		},
-		
 		{
-			
 			"id": 4,
 			"name": "Colonel",
 			"characterIcon": "medal",
@@ -445,9 +431,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-				
-			],
+			"boardModifications": [],
 			"tips": [
 				"You can Contaminate Characters and Manufacture X-Secret in Bio Lab.",
 				"You can Release Project X with Officer in Bridge or Cryo Lab, alternatively by damaging Vault X or by causing Blackout."
@@ -457,7 +441,6 @@
 				"Colonel can not be Bribed"
 			]
 		},
-
 		{
 			"id": 5,
 			"name": "Consort",
@@ -514,9 +497,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-				
-			],
+			"boardModifications": [],
 			"tips": [
 				"Briefcase is in Suite.",
 				"Remember that your Reveal Power swaps all items and Bribes as well as your location.",
@@ -529,7 +510,6 @@
 				"Despite appearances, Consort is a Robot"
 			]
 		},
-		
 		{
 			"id": 6,
 			"name": "Corpsicle",
@@ -545,13 +525,13 @@
 					"type": "character",
 					"name": "Corpsicle",
 					"location": "Cryo Lab"
-						},
+				},
 				{
 					"type": "token",
 					"name": "Corpsicle starts Down and starts with a , which is Integral (cannot be removed)",
 					"location": "Character board"
-						}
-					],
+				}
+			],
 			"bonusPoints": {
 				"type": "friend",
 				"reward": "3 points if Corpsicle is your BC and Escapes."
@@ -560,18 +540,18 @@
 				{
 					"name": "Vengeful",
 					"description": "Using Corpsicle’s Kompromat will additionally give her a Bludgeon. Her Kompromat can be used even if Down, which will instantly Revive her if Down."
-						},
+				},
 				{
 					"name": "Dying",
 					"description": "May not be activated when Exhausted and gets no Free Pick Up or Drop when activated."
-						}
-					],
+				}
+			],
 			"revealPowers": [
 				{
 					"name": "Last Gasp",
 					"description": "Upon Reveal, Revive if Down or perform an Action"
-						}
-					],
+				}
+			],
 			"agenda": {
 				"name": "Miracle Cure",
 				"points": [
@@ -591,9 +571,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-		
-			],
+			"boardModifications": [],
 			"tips": [
 				"Seek out Down Characters and feed Fang Moss",
 				"Get a helmet",
@@ -605,7 +583,6 @@
 				"Fang moss is an Item. Any Character Possessing gets access to the Feed Me! Action"
 			]
 		},
-		
 		{
 			"id": 7,
 			"name": "Counselor",
@@ -621,13 +598,13 @@
 					"type": "character",
 					"name": "Counselor",
 					"location": "Therapy Garden"
-						},
+				},
 				{
 					"type": "location",
 					"name": "Shred Room",
 					"location": "Next to Therapy Garden with a lock on its Corridor"
-						}
-					],
+				}
+			],
 			"bonusPoints": {
 				"type": "friend",
 				"reward": "2 points if Counselor is your BC and Escapes."
@@ -678,7 +655,6 @@
 				"None"
 			]
 		},
-		
 		{
 			"id": 8,
 			"name": "Cyborg",
@@ -737,8 +713,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-			],
+			"boardModifications": [],
 			"tips": [
 				"You can always Down Characters without penalty but others can also down you without penalty. Prioritize Downing Humans and Contaminated",
 				"Once revealed you will stop becoming Exhausted because other Players may not activate you",
@@ -750,7 +725,6 @@
 				"Cyborg is both Robot and Human, and acts as a Human in the case of Hazards and Attacks"
 			]
 		},
-		
 		{
 			"id": 9,
 			"name": "Daredevil",
@@ -832,7 +806,6 @@
 				"Even if Daredevil can be Outer Space without a Helmet, she still needs a Helmet to take the Rocket Wings Launch action"
 			]
 		},
-		
 		{
 			"id": 10,
 			"name": "Digital Assistant",
@@ -917,7 +890,6 @@
 				"Digital Assistant can only perform Console actions, even when no Character Manufactured you yet"
 			]
 		},
-		
 		{
 			"id": 11,
 			"name": "Doctor (Hyde)",
@@ -973,7 +945,7 @@
 						"points": [
 							{
 								"trigger": "+3 points if Possess Briefcase"
-							}, 
+							},
 							{
 								"trigger": "+4 points if Escaped Live in a Pod with a Down Human"
 							}
@@ -981,8 +953,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-			],
+			"boardModifications": [],
 			"tips": [
 				"Briefcase is in Suite",
 				"The later you Reveal, the more likely you’ll get Bribed",
@@ -995,7 +966,6 @@
 				"Both Players with Doctor as their PC may activate and act with Doctor"
 			]
 		},
-		
 		{
 			"id": 12,
 			"name": "Doctor (Jekyll)",
@@ -1051,7 +1021,7 @@
 						"points": [
 							{
 								"trigger": "+3 points if Contaminated"
-							}, 
+							},
 							{
 								"trigger": "+3 points if Possess Artifact"
 							}
@@ -1062,8 +1032,7 @@
 					}
 				]
 			},
-			"boardModifications": [
-			],
+			"boardModifications": [],
 			"tips": [
 				"Artifact is in Physics Lab, but you can also get it by Revealing if no PC Possesses it",
 				"Get Contaminated in Bio Lab",
@@ -1075,7 +1044,6 @@
 				"Jekyll scores normally for any Bribes Possessed by Doctor"
 			]
 		},
-		
 		{
 			"id": 13,
 			"name": "Drones",
@@ -1084,7 +1052,7 @@
 				"pronouns": "He/Him",
 				"characterType": "human"
 			},
-			"flavour": "TEXT HERE.",
+			"flavour": "TO DO",
 			"setup": [
 				{
 					"type": "character",
@@ -1102,8 +1070,7 @@
 					"location": "Character Board"
 				}
 			],
-			"boardModifications": [
-			],
+			"boardModifications": [],
 			"bonusPoints": {
 				"type": "friend",
 				"reward": "2 points if Astrochimp is your BC and Escapes"
@@ -1151,7 +1118,6 @@
 				"QUIRKS GO HERE"
 			]
 		},
-		
 		{
 			"id": 14,
 			"name": "Engineer",
@@ -1223,86 +1189,76 @@
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
 		},
-		
-		
-		
-		
-		
-		{	
+		{
 			"id": 15,
 			"name": "Exile",
 			"stats": {
-				"influenceLimit": 5,
+				"influenceLimit": 6,
 				"pronouns": "He/Him",
 				"characterType": "human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "Exile had all of the skills to be a standout in the exo-global intelligence marketplace. Patience. Spycraft. Machiavellian instincts. Whatever the opposite of scruples are. But there inevitably comes a time where you’ve been working both sides against each other for so long that they don’t need you anymore. And when the biggest players burn you there aren’t many safe places to lay low. Almost everyone has an extradition treaty with someone. Fortunately Exile had a lead on a private corporate orbital backwater with an extra bunk and a fierce need for someone to keep their mainframe running, and their mouth not. The Exile might be persona non grata in most circles because of the high treason and all but he’s just one big score away from being back in the game. Just make sure that score doesn’t involve any of your secrets, or he’ll be squeezing you until the end of days.",
 			"setup": [
 				{
 					"type": "character",
-					"name": "Engineer",
+					"name": "Exile",
 					"location": "Array Control"
-				},
-				{
-					"type": "token",
-					"name": "Reactor",
-					"location": "Reactor Control Panel"
 				}
 			],
 			"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
 			"bonusPoints": {
-				"type": "grudge",
-				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+				"type": "friend",
+				"reward": "2 points if Exile is your BC and Escapes"
 			},
 			"abilities": [
 				{
-					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+					"name": "Fast Talk",
+					"description": "Cannot be Attacked by Humans with Bludgeon in Lit Sections"
 				},
 				{
-					"name": "Jury Rig",
-					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+					"name": "Hacker",
+					"description": "May perform a Free Console Action instead of a Free Pick Up or Drop. If Jammers are OFF may perform Console Actions in any section"
 				}
 			],
 			"revealPowers": [
 				{
-					"name": "Overload",
-					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+					"name": "Blood From A Stone",
+					"description": "After using Kompromat on an NPC, return it to your hand"
+				},
+				{
+					"name": "Tradecraft",
+					"description": "As an Action with Exile, discard two Kompromat from your hand and take a previously used NPC’s Kompromat into your hand"
 				}
 			],
 			"agenda": {
-				"name": "Preserve Ecosphere",
+				"name": "Back in the Game",
 				"points": [
 					{
-						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
-					},
-					{
-						"trigger": "3 points if no Contaminated Characters Escape"
-					},
-					{
-						"trigger": "2 points if Artifact does not Escape"
-					},
-					{
-						"trigger": "1 point if Innocent, but may win even if Guilty"
+						"trigger": "2 points if Exile Escapes",
+						"points": [
+							{
+								"trigger": "+2 points for each Possessed Kompromat of Escaped Characters"
+							},
+							{
+								"trigger": "+3 points if Exile has Evidence and News does not"
+							}
+						]
 					}
 				]
 			},
 			"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+				"Pick up as much Kompromat as possible.",
+				"After Reveal, Kompromats can be used multiple times on NPCs",
+				"Help any Character that you have Kompromat for to Escape",
+				"Evidence can be Manufactured in Security Station and can be Deleted in Physics Lab",
+				"Keep the Jammers ON to prevent the Evidence from reaching the News"
 			],
 			"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+				"None"
 			]
-		
 		},
-		
 		{
-			
 			"id": 16,
 			"name": "Inspector",
 			"stats": {
@@ -1310,7 +1266,7 @@
 				"pronouns": "He/Him",
 				"characterType": "human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "TO DO",
 			"setup": [
 				{
 					"type": "character",
@@ -1372,11 +1328,8 @@
 			"quirks": [
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
-		
 		},
-		
 		{
-			
 			"id": 17,
 			"name": "Legal",
 			"stats": {
@@ -1384,7 +1337,7 @@
 				"pronouns": "He/Him",
 				"characterType": "human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "TO DO",
 			"setup": [
 				{
 					"type": "character",
@@ -1446,11 +1399,8 @@
 			"quirks": [
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
-		
 		},
-		
 		{
-
 			"id": 18,
 			"name": "Maintenance Clones",
 			"stats": {
@@ -1458,23 +1408,23 @@
 				"pronouns": "He/Him",
 				"characterType": "human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "TO DO",
 			"setup": [
 				{
 					"type": "character",
 					"name": "Engineer",
 					"location": "Array Control"
-						},
+				},
 				{
 					"type": "token",
 					"name": "Reactor",
 					"location": "Reactor Control Panel"
-						}
-					],
+				}
+			],
 			"boardModifications": [
-						"Adding Reactor changes the state of Reactor",
-						"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
-					],
+				"Adding Reactor changes the state of Reactor",
+				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
+			],
 			"bonusPoints": {
 				"type": "grudge",
 				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
@@ -1483,50 +1433,187 @@
 				{
 					"name": "Officer",
 					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
-						},
+				},
 				{
 					"name": "Jury Rig",
 					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
-						}
-					],
+				}
+			],
 			"revealPowers": [
 				{
 					"name": "Overload",
 					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
-						}
-					],
+				}
+			],
 			"agenda": {
 				"name": "Preserve Ecosphere",
 				"points": [
 					{
 						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
-							},
+					},
 					{
 						"trigger": "3 points if no Contaminated Characters Escape"
-							},
+					},
 					{
 						"trigger": "2 points if Artifact does not Escape"
-							},
+					},
 					{
 						"trigger": "1 point if Innocent, but may win even if Guilty"
-							}
-						]
+					}
+				]
 			},
 			"tips": [
-						"Anyone can arm Antimatter by removing it from Magnetic Containment",
-						"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-						"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
-					],
+				"Anyone can arm Antimatter by removing it from Magnetic Containment",
+				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
+				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+			],
 			"quirks": [
-						"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
-					]
-		
+				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+			]
 		},
-		
 		{
-
 			"id": 19,
 			"name": "Medical",
+			"stats": {
+				"influenceLimit": 4,
+				"pronouns": "It/They/Them",
+				"characterType": "Robot"
+			},
+			"flavour": "The medical profession is a double-edged sword. All medicines are poisons, it’s only a question of dosage. All surgical tools are murder weapons, it’s only a question of geography. Coincidence? Of course not. Medical bots are programmed to be as useful as they can be, to do anything to preserve our immediate life. Maybe they’re not familiar with love or empathy or with the pain that living beings experience when you poke them with thousands of needles. But what Medical lacks in context, they make up for in fanatical devotion to playing short-term God.",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Medical",
+					"location": "Aft Slot"
+				}
+			],
+			"boardModifications": [
+			],
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "1 point if Medical is your BC and is not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Emergency Response",
+					"description": " As an Action, may Revive a Human. Step or Airlock into Sections with Down Human is always Free"
+				},
+				{
+					"name": "Helpful",
+					"description": "No player may have more than one influence cube on this Character"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Haywire",
+					"description": "Gains a Bludgeon"
+				}
+			],
+			"agenda": {
+				"name": "Be Really Useful",
+				"points": [
+					{
+						"trigger": "2 points if no Down Humans on Board at Stationfall"
+					},
+					{
+						"trigger": "1 point for each star reached on the tracker on the Character Card. Move tracker one slot for every:",
+						"point": [
+							{
+								"trigger": "Human Revival performed by Medical"
+							},
+							{
+								"trigger": "Cube moved to Betrayal upon Medical's Reveal"
+							}
+						]
+					}
+				]
+			},
+			"tips": [
+				"The more Characters that are Down, the more chances you have to score points and move around quicker",
+				"The later you Reveal, the more chances you have to gain Points from other Players Influence cubes when Revealing",
+				"Free Step can be used even when you do not choose to revive anyone"
+			],
+			"quirks": [
+				"Medical marker starts off the card at a “0”",
+				"Use Medical marker to keep track of Revives and number of cubes sent to Betrayal for scoring purposes",
+				"Medical can not revive Unhelmeted Humans in Hazards",
+				"Free Steps from Emergency Response can be chained together"
+			]
+		},
+		{
+			"id": 20,
+			"name": "Microbiologist",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "TO DO",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Engineer",
+					"location": "Array Control"
+				},
+				{
+					"type": "token",
+					"name": "Reactor",
+					"location": "Reactor Control Panel"
+				}
+			],
+			"boardModifications": [
+				"Adding Reactor changes the state of Reactor",
+				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
+			],
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+				},
+				{
+					"name": "Jury Rig",
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+				}
+			],
+			"revealPowers": [
+				{
+					"name": "Overload",
+					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+				}
+			],
+			"agenda": {
+				"name": "Preserve Ecosphere",
+				"points": [
+					{
+						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+					},
+					{
+						"trigger": "3 points if no Contaminated Characters Escape"
+					},
+					{
+						"trigger": "2 points if Artifact does not Escape"
+					},
+					{
+						"trigger": "1 point if Innocent, but may win even if Guilty"
+					}
+				]
+			},
+			"tips": [
+				"Anyone can arm Antimatter by removing it from Magnetic Containment",
+				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
+				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+			],
+			"quirks": [
+				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+			]
+		},
+		{
+			"id": 21,
+			"name": "Operative",
 			"stats": {
 				"influenceLimit": 5,
 				"pronouns": "He/Him",
@@ -1538,17 +1625,17 @@
 					"type": "character",
 					"name": "Engineer",
 					"location": "Array Control"
-						},
+				},
 				{
 					"type": "token",
 					"name": "Reactor",
 					"location": "Reactor Control Panel"
-						}
-					],
+				}
+			],
 			"boardModifications": [
-						"Adding Reactor changes the state of Reactor",
-						"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
-					],
+				"Adding Reactor changes the state of Reactor",
+				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
+			],
 			"bonusPoints": {
 				"type": "grudge",
 				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
@@ -1557,639 +1644,470 @@
 				{
 					"name": "Officer",
 					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
-						},
+				},
 				{
 					"name": "Jury Rig",
 					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
-						}
-					],
+				}
+			],
 			"revealPowers": [
 				{
 					"name": "Overload",
 					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
-						}
-					],
+				}
+			],
 			"agenda": {
 				"name": "Preserve Ecosphere",
 				"points": [
 					{
 						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
-							},
+					},
 					{
 						"trigger": "3 points if no Contaminated Characters Escape"
-							},
+					},
 					{
 						"trigger": "2 points if Artifact does not Escape"
-							},
+					},
 					{
 						"trigger": "1 point if Innocent, but may win even if Guilty"
-							}
-						]
+					}
+				]
 			},
 			"tips": [
-						"Anyone can arm Antimatter by removing it from Magnetic Containment",
-						"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-						"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
-					],
+				"Anyone can arm Antimatter by removing it from Magnetic Containment",
+				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
+				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+			],
 			"quirks": [
-						"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
-					]
-		
+				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+			]
 		},
-		
 		{
-
-	"id": 20,
-	"name": "Microbiologist",
-	"stats": {
-		"influenceLimit": 5,
-		"pronouns": "He/Him",
-		"characterType": "human"
-	},
-	"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
-	"setup": [
-		{
-			"type": "character",
-			"name": "Engineer",
-			"location": "Array Control"
+			"id": 22,
+			"name": "Security",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Engineer",
+					"location": "Array Control"
 				},
-		{
-			"type": "token",
-			"name": "Reactor",
-			"location": "Reactor Control Panel"
+				{
+					"type": "token",
+					"name": "Reactor",
+					"location": "Reactor Control Panel"
 				}
 			],
-	"boardModifications": [
+			"boardModifications": [
 				"Adding Reactor changes the state of Reactor",
 				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
-	"bonusPoints": {
-		"type": "grudge",
-		"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
-	},
-	"abilities": [
-		{
-			"name": "Officer",
-			"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
 				},
-		{
-			"name": "Jury Rig",
-			"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+				{
+					"name": "Jury Rig",
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
 				}
 			],
-	"revealPowers": [
-		{
-			"name": "Overload",
-			"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+			"revealPowers": [
+				{
+					"name": "Overload",
+					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
 				}
 			],
-	"agenda": {
-		"name": "Preserve Ecosphere",
-		"points": [
-			{
-				"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+			"agenda": {
+				"name": "Preserve Ecosphere",
+				"points": [
+					{
+						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
 					},
-			{
-				"trigger": "3 points if no Contaminated Characters Escape"
+					{
+						"trigger": "3 points if no Contaminated Characters Escape"
 					},
-			{
-				"trigger": "2 points if Artifact does not Escape"
+					{
+						"trigger": "2 points if Artifact does not Escape"
 					},
-			{
-				"trigger": "1 point if Innocent, but may win even if Guilty"
+					{
+						"trigger": "1 point if Innocent, but may win even if Guilty"
 					}
 				]
-	},
-	"tips": [
+			},
+			"tips": [
 				"Anyone can arm Antimatter by removing it from Magnetic Containment",
 				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
 				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
 			],
-	"quirks": [
+			"quirks": [
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
-
-},
-
-{
-
-	"id": 21,
-	"name": "Operative",
-	"stats": {
-		"influenceLimit": 5,
-		"pronouns": "He/Him",
-		"characterType": "human"
-	},
-	"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
-	"setup": [
+		},
 		{
-			"type": "character",
-			"name": "Engineer",
-			"location": "Array Control"
+			"id": 23,
+			"name": "Station Chief",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Engineer",
+					"location": "Array Control"
 				},
-		{
-			"type": "token",
-			"name": "Reactor",
-			"location": "Reactor Control Panel"
+				{
+					"type": "token",
+					"name": "Reactor",
+					"location": "Reactor Control Panel"
 				}
 			],
-	"boardModifications": [
+			"boardModifications": [
 				"Adding Reactor changes the state of Reactor",
 				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
-	"bonusPoints": {
-		"type": "grudge",
-		"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
-	},
-	"abilities": [
-		{
-			"name": "Officer",
-			"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
 				},
-		{
-			"name": "Jury Rig",
-			"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+				{
+					"name": "Jury Rig",
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
 				}
 			],
-	"revealPowers": [
-		{
-			"name": "Overload",
-			"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+			"revealPowers": [
+				{
+					"name": "Overload",
+					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
 				}
 			],
-	"agenda": {
-		"name": "Preserve Ecosphere",
-		"points": [
-			{
-				"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+			"agenda": {
+				"name": "Preserve Ecosphere",
+				"points": [
+					{
+						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
 					},
-			{
-				"trigger": "3 points if no Contaminated Characters Escape"
+					{
+						"trigger": "3 points if no Contaminated Characters Escape"
 					},
-			{
-				"trigger": "2 points if Artifact does not Escape"
+					{
+						"trigger": "2 points if Artifact does not Escape"
 					},
-			{
-				"trigger": "1 point if Innocent, but may win even if Guilty"
+					{
+						"trigger": "1 point if Innocent, but may win even if Guilty"
 					}
 				]
-	},
-	"tips": [
+			},
+			"tips": [
 				"Anyone can arm Antimatter by removing it from Magnetic Containment",
 				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
 				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
 			],
-	"quirks": [
+			"quirks": [
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
-
-},
-
-{
-
-	"id": 22,
-	"name": "Security",
-	"stats": {
-		"influenceLimit": 5,
-		"pronouns": "He/Him",
-		"characterType": "human"
-	},
-	"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
-	"setup": [
+		},
 		{
-			"type": "character",
-			"name": "Engineer",
-			"location": "Array Control"
+			"id": 24,
+			"name": "Stowaway",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Engineer",
+					"location": "Array Control"
 				},
-		{
-			"type": "token",
-			"name": "Reactor",
-			"location": "Reactor Control Panel"
+				{
+					"type": "token",
+					"name": "Reactor",
+					"location": "Reactor Control Panel"
 				}
 			],
-	"boardModifications": [
+			"boardModifications": [
 				"Adding Reactor changes the state of Reactor",
 				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
-	"bonusPoints": {
-		"type": "grudge",
-		"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
-	},
-	"abilities": [
-		{
-			"name": "Officer",
-			"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
 				},
-		{
-			"name": "Jury Rig",
-			"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+				{
+					"name": "Jury Rig",
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
 				}
 			],
-	"revealPowers": [
-		{
-			"name": "Overload",
-			"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+			"revealPowers": [
+				{
+					"name": "Overload",
+					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
 				}
 			],
-	"agenda": {
-		"name": "Preserve Ecosphere",
-		"points": [
-			{
-				"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+			"agenda": {
+				"name": "Preserve Ecosphere",
+				"points": [
+					{
+						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
 					},
-			{
-				"trigger": "3 points if no Contaminated Characters Escape"
+					{
+						"trigger": "3 points if no Contaminated Characters Escape"
 					},
-			{
-				"trigger": "2 points if Artifact does not Escape"
+					{
+						"trigger": "2 points if Artifact does not Escape"
 					},
-			{
-				"trigger": "1 point if Innocent, but may win even if Guilty"
+					{
+						"trigger": "1 point if Innocent, but may win even if Guilty"
 					}
 				]
-	},
-	"tips": [
+			},
+			"tips": [
 				"Anyone can arm Antimatter by removing it from Magnetic Containment",
 				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
 				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
 			],
-	"quirks": [
+			"quirks": [
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
-
-},
-
-{
-
-	"id": 23,
-	"name": "Station Chief",
-	"stats": {
-		"influenceLimit": 5,
-		"pronouns": "He/Him",
-		"characterType": "human"
-	},
-	"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
-	"setup": [
+		},
 		{
-			"type": "character",
-			"name": "Engineer",
-			"location": "Array Control"
+			"id": 25,
+			"name": "Stranger",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Engineer",
+					"location": "Array Control"
 				},
-		{
-			"type": "token",
-			"name": "Reactor",
-			"location": "Reactor Control Panel"
+				{
+					"type": "token",
+					"name": "Reactor",
+					"location": "Reactor Control Panel"
 				}
 			],
-	"boardModifications": [
+			"boardModifications": [
 				"Adding Reactor changes the state of Reactor",
 				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
-	"bonusPoints": {
-		"type": "grudge",
-		"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
-	},
-	"abilities": [
-		{
-			"name": "Officer",
-			"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
 				},
-		{
-			"name": "Jury Rig",
-			"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+				{
+					"name": "Jury Rig",
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
 				}
 			],
-	"revealPowers": [
-		{
-			"name": "Overload",
-			"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+			"revealPowers": [
+				{
+					"name": "Overload",
+					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
 				}
 			],
-	"agenda": {
-		"name": "Preserve Ecosphere",
-		"points": [
-			{
-				"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+			"agenda": {
+				"name": "Preserve Ecosphere",
+				"points": [
+					{
+						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
 					},
-			{
-				"trigger": "3 points if no Contaminated Characters Escape"
+					{
+						"trigger": "3 points if no Contaminated Characters Escape"
 					},
-			{
-				"trigger": "2 points if Artifact does not Escape"
+					{
+						"trigger": "2 points if Artifact does not Escape"
 					},
-			{
-				"trigger": "1 point if Innocent, but may win even if Guilty"
+					{
+						"trigger": "1 point if Innocent, but may win even if Guilty"
 					}
 				]
-	},
-	"tips": [
+			},
+			"tips": [
 				"Anyone can arm Antimatter by removing it from Magnetic Containment",
 				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
 				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
 			],
-	"quirks": [
+			"quirks": [
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
-
-},
-
-{
-
-	"id": 24,
-	"name": "Stowaway",
-	"stats": {
-		"influenceLimit": 5,
-		"pronouns": "He/Him",
-		"characterType": "human"
-	},
-	"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
-	"setup": [
+		},
 		{
-			"type": "character",
-			"name": "Engineer",
-			"location": "Array Control"
+			"id": 26,
+			"name": "Telepathic Rat",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Engineer",
+					"location": "Array Control"
 				},
-		{
-			"type": "token",
-			"name": "Reactor",
-			"location": "Reactor Control Panel"
+				{
+					"type": "token",
+					"name": "Reactor",
+					"location": "Reactor Control Panel"
 				}
 			],
-	"boardModifications": [
+			"boardModifications": [
 				"Adding Reactor changes the state of Reactor",
 				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
-	"bonusPoints": {
-		"type": "grudge",
-		"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
-	},
-	"abilities": [
-		{
-			"name": "Officer",
-			"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
 				},
-		{
-			"name": "Jury Rig",
-			"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+				{
+					"name": "Jury Rig",
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
 				}
 			],
-	"revealPowers": [
-		{
-			"name": "Overload",
-			"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+			"revealPowers": [
+				{
+					"name": "Overload",
+					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
 				}
 			],
-	"agenda": {
-		"name": "Preserve Ecosphere",
-		"points": [
-			{
-				"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+			"agenda": {
+				"name": "Preserve Ecosphere",
+				"points": [
+					{
+						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
 					},
-			{
-				"trigger": "3 points if no Contaminated Characters Escape"
+					{
+						"trigger": "3 points if no Contaminated Characters Escape"
 					},
-			{
-				"trigger": "2 points if Artifact does not Escape"
+					{
+						"trigger": "2 points if Artifact does not Escape"
 					},
-			{
-				"trigger": "1 point if Innocent, but may win even if Guilty"
+					{
+						"trigger": "1 point if Innocent, but may win even if Guilty"
 					}
 				]
-	},
-	"tips": [
+			},
+			"tips": [
 				"Anyone can arm Antimatter by removing it from Magnetic Containment",
 				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
 				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
 			],
-	"quirks": [
+			"quirks": [
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
-
-},
-
-{
-
-	"id": 25,
-	"name": "Stranger",
-	"stats": {
-		"influenceLimit": 5,
-		"pronouns": "He/Him",
-		"characterType": "human"
-	},
-	"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
-	"setup": [
+		},
 		{
-			"type": "character",
-			"name": "Engineer",
-			"location": "Array Control"
+			"id": 27,
+			"name": "Troubleshooter",
+			"stats": {
+				"influenceLimit": 5,
+				"pronouns": "He/Him",
+				"characterType": "human"
+			},
+			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Engineer",
+					"location": "Array Control"
 				},
-		{
-			"type": "token",
-			"name": "Reactor",
-			"location": "Reactor Control Panel"
+				{
+					"type": "token",
+					"name": "Reactor",
+					"location": "Reactor Control Panel"
 				}
 			],
-	"boardModifications": [
+			"boardModifications": [
 				"Adding Reactor changes the state of Reactor",
 				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
-	"bonusPoints": {
-		"type": "grudge",
-		"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
-	},
-	"abilities": [
-		{
-			"name": "Officer",
-			"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+			"bonusPoints": {
+				"type": "grudge",
+				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+			},
+			"abilities": [
+				{
+					"name": "Officer",
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
 				},
-		{
-			"name": "Jury Rig",
-			"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+				{
+					"name": "Jury Rig",
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
 				}
 			],
-	"revealPowers": [
-		{
-			"name": "Overload",
-			"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+			"revealPowers": [
+				{
+					"name": "Overload",
+					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
 				}
 			],
-	"agenda": {
-		"name": "Preserve Ecosphere",
-		"points": [
-			{
-				"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+			"agenda": {
+				"name": "Preserve Ecosphere",
+				"points": [
+					{
+						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
 					},
-			{
-				"trigger": "3 points if no Contaminated Characters Escape"
+					{
+						"trigger": "3 points if no Contaminated Characters Escape"
 					},
-			{
-				"trigger": "2 points if Artifact does not Escape"
+					{
+						"trigger": "2 points if Artifact does not Escape"
 					},
-			{
-				"trigger": "1 point if Innocent, but may win even if Guilty"
+					{
+						"trigger": "1 point if Innocent, but may win even if Guilty"
 					}
 				]
-	},
-	"tips": [
+			},
+			"tips": [
 				"Anyone can arm Antimatter by removing it from Magnetic Containment",
 				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
 				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
 			],
-	"quirks": [
+			"quirks": [
 				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
 			]
-
-},
-
-{
-
-	"id": 26,
-	"name": "Telepathic Rat",
-	"stats": {
-		"influenceLimit": 5,
-		"pronouns": "He/Him",
-		"characterType": "human"
-	},
-	"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
-	"setup": [
-		{
-			"type": "character",
-			"name": "Engineer",
-			"location": "Array Control"
-				},
-		{
-			"type": "token",
-			"name": "Reactor",
-			"location": "Reactor Control Panel"
-				}
-			],
-	"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
-			],
-	"bonusPoints": {
-		"type": "grudge",
-		"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
-	},
-	"abilities": [
-		{
-			"name": "Officer",
-			"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
-				},
-		{
-			"name": "Jury Rig",
-			"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
-				}
-			],
-	"revealPowers": [
-		{
-			"name": "Overload",
-			"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
-				}
-			],
-	"agenda": {
-		"name": "Preserve Ecosphere",
-		"points": [
-			{
-				"trigger": "3 points if Antimatter detonates On Board before Stationfall"
-					},
-			{
-				"trigger": "3 points if no Contaminated Characters Escape"
-					},
-			{
-				"trigger": "2 points if Artifact does not Escape"
-					},
-			{
-				"trigger": "1 point if Innocent, but may win even if Guilty"
-					}
-				]
-	},
-	"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
-			],
-	"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
-			]
-
-},
-
-{
-
-	"id": 27,
-	"name": "Troubleshooter",
-	"stats": {
-		"influenceLimit": 5,
-		"pronouns": "He/Him",
-		"characterType": "human"
-	},
-	"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
-	"setup": [
-		{
-			"type": "character",
-			"name": "Engineer",
-			"location": "Array Control"
-				},
-		{
-			"type": "token",
-			"name": "Reactor",
-			"location": "Reactor Control Panel"
-				}
-			],
-	"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
-			],
-	"bonusPoints": {
-		"type": "grudge",
-		"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
-	},
-	"abilities": [
-		{
-			"name": "Officer",
-			"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
-				},
-		{
-			"name": "Jury Rig",
-			"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
-				}
-			],
-	"revealPowers": [
-		{
-			"name": "Overload",
-			"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
-				}
-			],
-	"agenda": {
-		"name": "Preserve Ecosphere",
-		"points": [
-			{
-				"trigger": "3 points if Antimatter detonates On Board before Stationfall"
-					},
-			{
-				"trigger": "3 points if no Contaminated Characters Escape"
-					},
-			{
-				"trigger": "2 points if Artifact does not Escape"
-					},
-			{
-				"trigger": "1 point if Innocent, but may win even if Guilty"
-					}
-				]
-	},
-	"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
-			],
-	"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
-			]
-
-},
-		
-
+		},
 		{
 			"id": 9999,
 			"name": "TEMPLATE",
@@ -2216,8 +2134,7 @@
 					"location": "Character Board"
 				}
 			],
-			"boardModifications": [
-			],
+			"boardModifications": [],
 			"bonusPoints": {
 				"type": "friend",
 				"reward": "2 points if Astrochimp is your BC and Escapes"

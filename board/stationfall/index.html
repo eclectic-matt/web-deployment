@@ -34,6 +34,10 @@ function loadCharacters(status, json){
 	
 	//STORE DATA FOR OTHER FUNCTIONALITY
 	data = json;
+
+	/*json.characterData.forEach( (char, index) => {
+		console.log(index, char.name);
+	})*/
 	
 	let listDiv = document.getElementById('charactersList');
 	listDiv.innerHTML = null;
@@ -49,6 +53,8 @@ function loadCharacters(status, json){
 		listDiv.appendChild(cBtn);
 		let cDiv = createCharacterDiv(char);
 		listDiv.appendChild(cDiv);
+		let cBr = document.createElement('br');
+		listDiv.appendChild(cBr);
 	})
 	
 	let tutorialDiv = document.getElementById('tutorialList');
@@ -58,6 +64,7 @@ function loadCharacters(status, json){
 	json.tutorialCharacters.forEach( (name, index) => {
 		
 		let char = getCharData(name);
+		//console.log(name, char);
 		if(!char) return false;
 		
 		let rowOdd = (index % 2 === 0);
@@ -66,6 +73,8 @@ function loadCharacters(status, json){
 		tutorialDiv.appendChild(cBtn);
 		let cDiv = createCharacterDiv(char);
 		tutorialDiv.appendChild(cDiv);
+		let cBr = document.createElement('br');
+		tutorialDiv.appendChild(cBr);
 	})
 }
 
@@ -75,8 +84,10 @@ function getCharData(name)
 	if(!data) return false;
 	//CHARACTER NAME NOT FOUND - FALSE
 	if(!data.characters.includes(name)) return false;
+	//FIND THE MATCHING CHARACTER
+	let charData = data.characterData.find( (char) => char.name == name);
 	//SHOULD HAVE CHARACTER, RETURN RESULT OF .find() 
-	return data.characterData.find( (char) => char.name == name);
+	return charData;
 }
 
 function createCharacterButton(char, odd=false){
@@ -99,7 +110,7 @@ function createCharacterDiv(char) {
 		//INIT DIV TO HOLD CHAR DATA
 		let charDiv = document.createElement('div');
 		charDiv.id = char.id;
-		charDiv.className = "w3-hide w3-padding-large";
+		charDiv.className = "w3-hide w3-padding-large w3-dark-grey";
 		
 		//CHARACTER DATA OUTPUT
 		
