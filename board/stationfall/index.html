@@ -35,11 +35,12 @@ function loadCharacters(status, json)
 {
 	//STORE DATA FOR OTHER FUNCTIONALITY
 	data = json;
+	
 	//INIT SELECTED CHARACTERS (ALL)
 	//selected = [...json.characters];
 	//INIT AS TUTORIAL CHARACTERS 
 	selected = [...json.tutorialCharacters];
-	console.log(selected);
+	
 	//OUTPUT DATA
 	outputCharacterData();
 }
@@ -324,7 +325,7 @@ function createSetupDiv(char)
 	let charSetup = document.createElement('ul');
 	char.setup.forEach((setup) => {
 		let li = document.createElement('li');
-		li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' placed in " + setup.location;
+		li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' - " + setup.location;
 			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
 			charSetup.appendChild(li);
 	});

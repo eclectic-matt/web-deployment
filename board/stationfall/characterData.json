@@ -1832,142 +1832,132 @@
 			"id": 24,
 			"name": "Stowaway",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"influenceLimit": 4,
+				"pronouns": "She/Her",
+				"characterType": "Human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "A free press is instrumental to society. Without it we would toil in the darkness, utterly unaware of the forces of corruption, mad science and rampant wrench beatings that go on just outside of society’s notice. One might therefore think that the life of a journalist would be one of spacehopping luxury and ease, punctuated by the occasional award acceptance speech. Alas, civilization is not so intuitive. Many journalists exist in states of constant danger and discomfort, forced to hide in tight spaces to better listen in on shady dealings. And there are many of those to be heard on this station. It’s a dirty job but somebody’s gotta do it. The Stowaway has vowed to stop at nothing to reveal to her media compatriots what she’s witnessed. She has found the best eavesdropping positions and network taps, and with them she can dig up and dish out the darkest dirt. But after months in hiding, our would-be hero is starting to crack. The isolation, the witnessed atrocities, the sleeping in vents, it is becoming too much. Now it’s just a question of which breaks first, her or her story",
 			"setup": [
 				{
 					"type": "character",
-					"name": "Engineer",
-					"location": "Array Control"
-				},
-				{
-					"type": "token",
-					"name": "Reactor",
-					"location": "Reactor Control Panel"
+					"name": "Stowaway Pawn",
+					"location": "On her Character Board"
 				}
 			],
 			"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
 			"bonusPoints": {
-				"type": "grudge",
-				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+				"type": "friend",
+				"reward": "2 points if Stowaway is your BC and Escapes"
 			},
 			"abilities": [
 				{
-					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+					"name": "Tunnel Rat",
+					"description": "May Step through Vents"
 				},
 				{
-					"name": "Jury Rig",
-					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+					"name": "Hacker",
+					"description": "May perform a Free Console Action instead of a Free Pick Up or Drop. If Jammers are OFF may perform Console Actions in any Section."
 				}
 			],
 			"revealPowers": [
 				{
-					"name": "Overload",
-					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+					"name": "Secret Cache",
+					"description": "Upon Reveal, you or one of your Conspirators gains a Helmet"
 				}
 			],
 			"agenda": {
-				"name": "Preserve Ecosphere",
+				"name": "Scoop of a Lifetime",
 				"points": [
 					{
-						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+						"trigger": "2 points if News ends with X-Secret"
 					},
 					{
-						"trigger": "3 points if no Contaminated Characters Escape"
+						"trigger": "2 points if News ends with Evidence"
 					},
 					{
-						"trigger": "2 points if Artifact does not Escape"
-					},
-					{
-						"trigger": "1 point if Innocent, but may win even if Guilty"
+						"trigger": "2 points if Stowaway Escapes",
+						"points": [
+							{
+								"trigger": "+3 points if Escape with Evidence and no other Character does"
+							}
+						]
 					}
 				]
 			},
 			"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+				"Evidence can be Manufactured in Security Station and X-Secret in Bio Lab",
+				"Transmit Data using Array Control or by Escaping with it at Stationfall",
+				"Turn Jammers OFF to Copy Data and to use your Hacker Ability",
+				"Stop others with Data from Escaping by Downing them or Step them into Physics Lab"
 			],
 			"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+				"Stowaway’s pawn starts on her Character card",
+				"Stowaway’s first ever Action must be to Step into any Dark Section and may not be interacted with until then"
 			]
 		},
 		{
 			"id": 25,
 			"name": "Stranger",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
+				"influenceLimit": 6,
+				"pronouns": "They/Them",
 				"characterType": "human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "Enigmas: they make people cool and interesting. You might look at someone thinking they’re a regular schlub and then suddenly, their clone shows up and tries to club you, but gets shot by a chimp and promptly eaten by a space plant. Variety is indeed the spice of life, particularly in space where everything is always aggressively interesting to the point of potential lethality. And that’s pretty fun, right? Anyway, we don’t really know when or why the freaky space-mage showed up, but everyone’s memory has been pretty iffy lately anyways. I’m sure it’s in the logs somewhere. The Stranger practices a faith that predates our own by centuries. Nobody knows what faith that is, but we should probably stop being so judgmental about stuff we know nothing about. Things that we, according to the Stranger, could not even begin to fathom in our puny mortal minds. The Stranger carries an air of mystery that reminds us why we went into space into the first place; to attempt and fail to comprehend the great unknown. Sure, maybe some of the Stranger’s behaviors are suspicious, I’m pretty sure molotovs are a safety violation of some sort, but this is probably because we lack cultural context. So, let’s all enjoy the mysteries of freaky space magic on our own shallow level",
 			"setup": [
 				{
 					"type": "character",
-					"name": "Engineer",
-					"location": "Array Control"
-				},
-				{
-					"type": "token",
-					"name": "Reactor",
-					"location": "Reactor Control Panel"
+					"name": "Stranger",
+					"location": "Nanofactory"
 				}
 			],
 			"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
 			],
 			"bonusPoints": {
-				"type": "grudge",
-				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+				"type": "friend",
+				"reward": "2 points if Stranger is your BC and Escapes"
 			},
 			"abilities": [
 				{
-					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
-				},
-				{
-					"name": "Jury Rig",
-					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+					"name": "Uncanny",
+					"description": "It takes two Activation discs for this Character to become Exhausted"
 				}
 			],
 			"revealPowers": [
 				{
-					"name": "Overload",
-					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+					"name": "Homework",
+					"description": "Upon Reveal, you may Reveal your BC and perform one Action with that Character"
+				},
+				{
+					"name": "Enigma",
+					"description": "If Schrödinger Reveal as Stranger, do not discard any card(s) (retain them as Bonus Characters). If Schrödinger Reveal as Stranger then lose Uncanny"
 				}
 			],
 			"agenda": {
-				"name": "Preserve Ecosphere",
+				"name": "It's Personal",
 				"points": [
 					{
-						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+						"trigger": "1 point if your Secret Identity is not revealed until Stationfall"
 					},
 					{
-						"trigger": "3 points if no Contaminated Characters Escape"
+						"trigger": "1 point if Possess X-Secret"
 					},
 					{
-						"trigger": "2 points if Artifact does not Escape"
+						"trigger": "2 points if you score Bonus Points"
 					},
 					{
-						"trigger": "1 point if Innocent, but may win even if Guilty"
+						"trigger": "2 points if Live and Colocated with a Bonus Character of yours at Stationfall"
 					}
 				]
 			},
 			"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+				"Focus mainly on achieving your BC’s condition and keeping the Stranger close to them",
+				"If you want your BC to survive, trigger Abandon Ship as quickly as possible either with Officer on Bridge, Damaging Power Sections, or releasing Project X",
+				"Due to your low point cap you should actively deduce and interfere with your opponent’s Agendas if possible"
 			],
 			"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+				"None"
 			]
 		},
 		{
