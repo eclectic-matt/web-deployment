@@ -8,6 +8,8 @@
 <script>
 
 var data = undefined;
+var selected = [];
+
 /**
  * 
  * @param {The JSON file} url 
@@ -29,18 +31,29 @@ const getJSON = function(url, callback) {
 };
 
 
-function loadCharacters(status, json){
-	
+function loadCharacters(status, json)
+{
 	//STORE DATA FOR OTHER FUNCTIONALITY
 	data = json;
+	//INIT SELECTED CHARACTERS (ALL)
+	//selected = [...json.characters];
+	//INIT AS TUTORIAL CHARACTERS 
+	selected = [...json.tutorialCharacters];
+	console.log(selected);
+	//OUTPUT DATA
+	outputCharacterData();
+}
 
+function outputCharacterData()
+{
 	let listDiv = document.getElementById('charactersList');
 	listDiv.innerHTML = null;
 	let index = 0;
 	
-	json.characterData.forEach( (char, index) => {
+	data.characterData.forEach( (char) => {
 		
-		if(char.name === "TEMPLATE") return false;
+		if(char.name === 'TEMPLATE') return false;
+		if(!selected.includes(char.name)) return false;
 		
 		let rowOdd = (index % 2 === 0);
 		index++;
@@ -56,16 +69,18 @@ function loadCharacters(status, json){
 	agendaDiv.innerHTML = null;
 	index = 0;
 	
-	json.characterData.forEach( (char, index) => {
+	data.characterData.forEach( (char) => {
 		
+		if(!selected.includes(char.name)) return false;
 		let rowOdd = (index % 2 === 0);
 		index++;
 		let cHead = document.createElement('h3');
 		cHead.innerHTML = char.name;
 		agendaDiv.appendChild(cHead);
 		let cDiv = createAgendaList(char.agenda.points);
+		//cDiv.className += " w3-padding-small";
 		agendaDiv.appendChild(cDiv);
-		let cBr = document.createElement('br');
+		let cBr = document.createElement('hr');
 		agendaDiv.appendChild(cBr);
 	})
 	
@@ -73,8 +88,8 @@ function loadCharacters(status, json){
 	setupDiv.innerHTML = null;
 	index = 0;
 	
-	json.characterData.forEach( (char, index) => {
-		
+	data.characterData.forEach( (char) => {
+		if(!selected.includes(char.name)) return false;
 		let rowOdd = (index % 2 === 0);
 		index++;
 		let cHead = document.createElement('h3');
@@ -82,7 +97,7 @@ function loadCharacters(status, json){
 		setupDiv.appendChild(cHead);
 		let cDiv = createSetupDiv(char);
 		setupDiv.appendChild(cDiv);
-		let cBr = document.createElement('br');
+		let cBr = document.createElement('hr');
 		setupDiv.appendChild(cBr);
 	})
 	
@@ -90,19 +105,60 @@ function loadCharacters(status, json){
 	abilityDiv.innerHTML = null;
 	index = 0;
 	
-	json.characterData.forEach( (char, index) => {
-		
+	data.characterData.forEach( (char) => {
+		if(!selected.includes(char.name)) return false;
 		let rowOdd = (index % 2 === 0);
 		index++;
 		let cHead = document.createElement('h3');
 		cHead.innerHTML = char.name;
 		abilityDiv.appendChild(cHead);
-		let cDiv = createSetupDiv(char);
+		let cDiv = createAbilityDiv(char);
 		abilityDiv.appendChild(cDiv);
-		let cBr = document.createElement('br');
+		let cBr = document.createElement('hr');
 		abilityDiv.appendChild(cBr);
 	})
 	
+	//SELECT LIST
+	let selectedDiv = document.getElementById('selectList');
+	selectedDiv.innerHTML = null;
+	data.characters.forEach( (name) => {
+		let char = getCharData(name);
+		let charLabel = document.createElement('label');
+		charLabel.innerHTML = char.name;
+		charLabel.for = char.name.replace(' ', '_');
+		selectedDiv.appendChild(charLabel);
+		let charCheck = document.createElement('input');
+		charCheck.type = 'checkbox';
+		charCheck.className = 'charSelect';
+		charCheck.id = char.name.replace(' ', '_');
+		//charCheck.checked = true;
+		charCheck.checked = selected.includes(char.name);
+		selectedDiv.appendChild(charCheck);
+		let cBr = document.createElement('br');
+		selectedDiv.appendChild(cBr);
+	});
+	//Save changes button
+	let saveBtn = document.createElement('button');
+	saveBtn.className = 'w3-btn w3-green';
+	saveBtn.onclick = function() {
+		updateCharSelection();
+	}
+	saveBtn.innerHTML = 'Save Changes';
+	selectedDiv.appendChild(saveBtn);
+}
+
+function updateCharSelection()
+{
+	//CLEAR SELECTED 
+	selected = [];
+	let checkBoxes = document.getElementsByClassName('charSelect');
+	Array.from(checkBoxes).forEach( (el) => {
+		if(el.checked){
+			selected.push(el.id.replace('_', ' '));
+		}
+	})
+	console.log('updatedSelect', selected);
+	outputCharacterData();
 }
 
 function getCharData(name)
@@ -360,7 +416,7 @@ function init() {
 		<button 
 			onclick="showTab('characters')"
 			class="nav w3-bar-item w3-button"
-		>Characters</button>
+		>Chars</button>
 		<button 
 			onclick="showTab('setup')"
 			class="nav w3-bar-item w3-button"
@@ -373,28 +429,38 @@ function init() {
 			onclick="showTab('abilities')"
 			class="nav w3-bar-item w3-button"
 		>Abilities</button>
+		<button 
+			onclick="showTab('select')"
+			class="nav w3-bar-item w3-button"
+		>Select</button>
 	</div>
 	<div id="characters" class="tab w3-black">
 		<h1>Characters</h1>
-		<div id="charactersList">
+		<div id="charactersList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
 	<div id="agenda" class="tab w3-teal" style="display:hidden;">
 		<h1>Agenda</h1>
-		<div id="agendasList">
+		<div id="agendasList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
 	<div id="setup" class="tab w3-dark-gray" style="display:hidden;">
 		<h1>Setup</h1>
-		<div id="setupList">
+		<div id="setupList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
 	<div id="abilities" class="tab w3-indigo" style="display:hidden;">
 		<h1>Abilities</h1>
-		<div id="abilityList">
+		<div id="abilityList" class="w3-padding-small">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="select" class="tab w3-indigo" style="display:hidden;">
+		<h1>Selection</h1>
+		<div id="selectList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>

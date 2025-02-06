@@ -1764,29 +1764,28 @@
 			"name": "Station Chief",
 			"stats": {
 				"influenceLimit": 5,
-				"pronouns": "He/Him",
+				"pronouns": "She/Her",
 				"characterType": "human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "Is there anyone aboard the station more loved and appreciated than the steadfast and competent Station Chief? Yes. Yes there is. The Station Chief has taken a solemn vow to eschew popularity, kinship and job satisfaction in favor of a higher calling of some kind. We may not necessarily like the Station Chief, but damned if everyone doesn’t develop a tenuous, begrudged respect that can barely conceal the deep-seated hostilities behind it. Sure, we’re thankful for our lives but do Station Chiefs really need to be such pills about it? Prancing around being all “ooh, look at me, I think you should wear a Hazmat suit” and “hey, you’d better not give that chimp a gun!” Maybe we’re all sick of it and would rather just let the place burn than take another second of sheer unrefined buzzkill but alas, the Station Chief does want everything to run smoothly and for all of us to proceed in an orderly fashion to the escape pods so whatever awesome disaster doesn’t kill us. And that’s fine, I guess. Still, it’s hard not to imagine that the survivors might envy the dead.",
 			"setup": [
 				{
 					"type": "character",
-					"name": "Engineer",
-					"location": "Array Control"
+					"name": "Section Chief",
+					"location": "Therapy Garden"
 				},
 				{
-					"type": "token",
-					"name": "Reactor",
-					"location": "Reactor Control Panel"
+					"type": "location",
+					"name": "Medivac Pods",
+					"location": "Connected to Forward Airlocks"
 				}
 			],
 			"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
+				"The Medevac Pod must be Occupied by a Down Human to launch. Abandon Ship is not required to launch"
 			],
 			"bonusPoints": {
 				"type": "grudge",
-				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+				"reward": "2 points if Section Chief is your BC and is not Live at Stationfall"
 			},
 			"abilities": [
 				{
@@ -1794,40 +1793,39 @@
 					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
 				},
 				{
-					"name": "Jury Rig",
-					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+					"name": "Pride",
+					"description": "Cannot be Robbed"
 				}
 			],
 			"revealPowers": [
 				{
-					"name": "Overload",
-					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+					"name": "Forceful Presence",
+					"description": "At the start of Station Chief’s Activation phase you may perform a Free Basic Action with a Colocated NPC or with an NPC Officer anywhere"
 				}
 			],
 			"agenda": {
-				"name": "Preserve Ecosphere",
+				"name": "Go Down with the Ship",
 				"points": [
 					{
-						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+						"trigger": "1 point for every other Human that Escapes",
+						"points": [
+							{
+								"trigger": "+1 point per NPC with the Officer ability that Escapes"
+							}
+						]
 					},
 					{
-						"trigger": "3 points if no Contaminated Characters Escape"
-					},
-					{
-						"trigger": "2 points if Artifact does not Escape"
-					},
-					{
-						"trigger": "1 point if Innocent, but may win even if Guilty"
+						"trigger": "2 points if Station Chief On Board and Live at Stationfall"
 					}
 				]
 			},
 			"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+				"Trigger Abandon Ship as quickly as possible with Officer on Bridge, Damaging Power Sections, or releasing Project X",
+				"You can launch multiple Occupied Pods from Bridge with Officer",
+				"If you can Drag a Down Human to Medevac Pod, you can launch it without Abandon ship"
 			],
 			"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+				"None"
 			]
 		},
 		{
