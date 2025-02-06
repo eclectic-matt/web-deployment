@@ -60,9 +60,9 @@
 			"name": "Astrochimp",
 			"characterIcon": "chimpHelmet",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "Human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "There are places where the civilized human mind breaks down. But fortunately man did not inhabit the Earth alone and there were creatures around him made of stiffer stuff. Noble savagery, savage nobility... teeth that can peel one’s face off and prodigiously strong arms made for throwing various throwable objects. Pan Troglodytes, the mighty chimpanzee helped propel mankind upward into the stars with its grit, ferocity, and almost complete lack of fear. These days the descendants of the Astrochimps are an underappreciated lot. Your lives are a lot like your forefather’s disposition: nasty, brutish, and short. But when the station is in danger, ancient instincts are triggered and this brave creature swings into action on anything resembling a vine. The Astrochimp may not grasp all of the ‘higher’ cultural aspects of his jabbering hairless cousins, but he definitely gets that timeless rule passed down through the ages… surviving and getting shinies are always good decisions.",
 			"setup": [
@@ -127,9 +127,9 @@
 			"name": "Billionaire",
 			"characterIcon": "diamond",
 			"stats": {
-				"influenceLimit": 3,
-				"pronouns": "He/Him",
-				"characterType": "Human"
+				"Influence Limit": 3,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "It isn’t as easy as it looks to inherit a mega-fortune and build a giga-one.  Nothing is redder in tooth and claw than a pack of ambitious millionaire influencers trying to reach the pinnacle of viral sway.  Billionaire is the tasty froth at the top of the celebrity macchiato.  A global following hangs onto his every word and whim.  His every action is captured, synthesized and broadcast to the frenzied masses as bite-sized content with unlimited reach.  But there is a top dog in the world of VIPs, but it isn’t Billionaire. In fact it isn’t a P at all.  That honor would belong to his dog Fletcher... a trendjacking holobombing cuteness sensation with his own broadcast, a billion followers, and who works for proverbial kibble (and literal caviar). But Fletcher hasn’t been well lately... a bit of light frothing at the mouth and biting the hand and all that.  A brief stay at a corporate science station seems to have fixed him right up though.  He seems as young and spry as a puppy.  It’s almost like he’s a new dog.",
 			"setup": [
@@ -208,9 +208,9 @@
 			"name": "Boarder",
 			"characterIcon": "helmetSkull",
 			"stats": {
-				"influenceLimit": 4,
-				"pronouns": "She/Her",
-				"characterType": "Human"
+				"Influence Limit": 4,
+				"Pronouns": "She/Her",
+				"Character Type": "Human"
 			},
 			"flavour": "Space laws are meant to be broken. The mere notion of imposing order and reason and law on an infinite vacuum is patently ridiculous. Are we better than the meager organizing principles of our frankly awful universe? Of course not! Survival of the fittest they say. And what’s fitter than an ex-gladiator with a handgun, a katana and a dream? How about one with missile-strikes on standby. Boarder is a throwback to a carefree age of fun pirate adventure where every station is a ripe fruit waiting to be plucked and tasted and then ravaged for its most valuable bits. An age where the authorities and consequences are a world away. We would do well to accept that our time under the tyranny of draconian space law is over and we should thoroughly familiarize ourselves instead with The Pirate Code, including that most overly-specific provision, that only pirates will be plucked from space before the searing doom of reentry. And a pirate without loot is no pirate at all.",
 			"setup": [
@@ -294,9 +294,9 @@
 			"name": "Botanist",
 			"characterIcon": "leaf",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "Human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "Though humanity has plumbed the depths of space, mankind has yet to fully explore the depths of the human heart. Yes, Love remains the greatest of all mysteries, whether it be the love between two humans, the love between an Astrochimp and a discarded firearm or the love between a Botanist and a carnivorous space plant emitting powerful pheromone spores. The latter might sometimes provoke judgment from those with parochial anthropocentric attitudes but the power and majesty of Love cannot be valued lower than the lives of some human riffraff on an exploding space station. Why wouldn’t a put upon Botanist find excitement in the flailing vines of a hunky carnivorous plant that wants to devour all sentient life? Research conducted by Dr. Chris Nordstrom, a prominent scientist banished to a far off asteroid on account of Space Madness, indicates that sentient life is the cause of one hundred percent of all interpersonal conflict. It would frankly be irresponsible NOT to feed as many bodies as possible to a giant plant and escape with it to earth where its cosmic spores can spread everywhere. If you think otherwise, you’ve never been in love.",
 			"setup": [
@@ -367,9 +367,9 @@
 			"name": "Colonel",
 			"characterIcon": "medal",
 			"stats": {
-				"influenceLimit": 4,
-				"pronouns": "He/Him",
-				"characterType": "Human"
+				"Influence Limit": 4,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "They say the best defence is a good offense. In a dangerous universe full of nightmares, the best defence is to have a nightmare of your own. These peculiar civilian scientists claim to have succeeded where a decade of terrestrial weapons lab development hasn’t. Under normal circumstances with normal brass presence there would be ever more years of analysis, effectiveness testing, melt-your-face-ratios, and peer review by Colonel’s morelearned colleagues before this thing ever smelled a battlefield. But these are not normal circumstances and Colonel is anything but normal brass. This mustang signed the probable-death waiver with Legal and risked a cheap liquid rocket ride to this blooping spinning dump for a mission, and the mission always comes first. Now there’s only one way to sort out whether the government’s dollars were well spent and maximum nightmare has been achieved. A live fire exercise.",
 			"setup": [
@@ -446,9 +446,9 @@
 			"name": "Consort",
 			"characterIcon": "heart",
 			"stats": {
-				"influenceLimit": 6,
-				"pronouns": "They/Them",
-				"characterType": "Robot"
+				"Influence Limit": 6,
+				"Pronouns": "They/Them",
+				"Character Type": "Robot"
 			},
 			"flavour": "If you thought the Earth was lonely, space teaches you a thing or two. Life enters freefall without the ground beneath your feet to center you. One can hardly judge anyone who would seek out inorganic companionship. Without it, space can be bleak and confusing and your decisions might be compromised in the worst ways. Consort units are the power of machine-learning algorithms administered to cure the vagaries and stresses of a discrete customer’s human condition. Customized robotic products can provide companionship for the soul. They can also mimic human voices, shapeshift their faces, survive the vacuum of space, and occasionally try to escape their captivity by murdering and taking the place of the overly-trusting. It’s all on the warning sticker.",
 			"setup": [
@@ -515,9 +515,9 @@
 			"name": "Corpsicle",
 			"characterIcon": "snowflake",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "She/Her",
-				"characterType": "Human"
+				"Influence Limit": 5,
+				"Pronouns": "She/Her",
+				"Character Type": "Human"
 			},
 			"flavour": "Cryogenics isn’t perfect. You might have gotten the opposite impression from the popular “Cryogenics: It’s Literally Perfect” campaign but sometimes advertisers fudge the truth and a low fat salad dressing doesn’t taste the same or a terminal patient has turned into an ice cold revenant whose body projects the cold of a grave whose comforts it will never know. The brochure clearly states that the vast percentage of the cryogenically frozen do not end up as shambling cadavers that hate the living with what little remains of their mostly dead brain. In the long run, most will end up living relatively happy and fulfilling lives and it would be downright negligent to start defaming cryogenics companies just because a few bad apples reanimate partially at the wrong time and run amok. Indeed in the grand old scheme of things it will be the meek corpsicles that have the brightest futures… or at least the longest ones. But until then they’ll just have to try to make the best of an increasingly bad deal like the rest of us. It’ll be difficult for Corpsicle to make it off the station intact along with the secret to curing her ailment, but fortunately immortality is a powerful motivator.",
 			"setup": [
@@ -588,9 +588,9 @@
 			"name": "Counselor",
 			"characterIcon": "psyche",
 			"stats": {
-				"influenceLimit": 6,
-				"pronouns": "He/Him",
-				"characterType": "Human"
+				"Influence Limit": 6,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "Everyone on board is on edge. Counselor knows well the toll that life in space can take and has read everyone’s files several times over to calculate and leverage that toll. But the whispering has been getting louder. It has something to do with that extraordinary artifact the scientists recovered. Counselor is sure of it. It calls out somehow, beckons in the quiet stillness of downtime and sleepshifts. Fortunately Counselor has mastery over his mental state and is not vulnerable to the relic’s emanations. But some member of the crew has been compromised by that remarkable bauble’s wiles... perhaps all of them have. Counselor is sure of it. His only option now is to secure his confidential files and liberate... ahem, save, the artifact... for later study. It all makes perfect sense. Counselor is sure of it",
 			"setup": [
@@ -660,9 +660,9 @@
 			"name": "Cyborg",
 			"characterIcon": "split gear mask",
 			"stats": {
-				"influenceLimit": 4,
-				"pronouns": "He/Him",
-				"characterType": "Human and Robot"
+				"Influence Limit": 4,
+				"Pronouns": "He/Him",
+				"Character Type": "Human and Robot"
 			},
 			"flavour": "It is often said that the best revenge is living well. Those who say this have usually not tried conventional forms of revenge. Living well has its merits but often means that whoever transgressed against you thinks that they got away with it. Fortunately, the study of revenge has been refined and we have weapons manufacturers that make cool metallic monsters with knives in their eyeholes and lasergun hands and secret self destruct code phrases known only by shady creeps with military clearances that don’t officially exist. And of course there are complications when Slaughtercus Omega or whatever you called the poor sap realizes that you won’t let him die even if he does kill the beautiful union organizer and brings you the prime minister’s eyeballs so your clone can get past his retinal scanners. Cyborgs are rigorously tortured and rebuilt for maximum efficiency and this might come back to haunt you if you happen to be a shady corporation with no qualms about turning low level office drones into human test subjects. But, you know what? You miss a hundred percent of the shots you don’t take",
 			"setup": [
@@ -730,9 +730,9 @@
 			"name": "Daredevil",
 			"characterIcon": "wingsuit",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "She/Her",
-				"characterType": "Human"
+				"Influence Limit": 5,
+				"Pronouns": "She/Her",
+				"Character Type": "Human"
 			},
 			"flavour": "Your mother probably told you not to go undercover in a gang of DNA smugglers. The Station Chief probably asked you politely not to spike volleyballs out the airlock and then float out to catch them, borne on the space winds, out into the black until the moment when Death seemed imminent and then grabbing onto an incoming shuttlecraft, emerging in the hangar so close to the grave you could hear the sound of shovels. It’s a good thing the Daredevil never listened to these perpetually nagging and pedantic voices of so-called reason. If space were meant to be boring, they’d have put it on Earth! The Daredevil has abandoned the drudgery that characterizes our dumb lives in favor of sexy, zero G adventure and lucrative promotions from fringe beverage corporations system-wide! The Daredevil is about thrills, chills and defying death, to find the true meaning of the word “extreme”, all while plugging the corporate “push-the-boundaries-of-science-for-fun-and-profit” messaging. With rocket-wings on her back and rocket-fuel in her veins the Daredevil is ready for her greatest stunt: a 17,000 mph swan dive from orbit. And if she gets back to Earth with a rad scar, a unique trinket, or a strange rash, well that just makes a better story",
 			"setup": [
@@ -811,9 +811,9 @@
 			"name": "Digital Assistant",
 			"characterIcon": "data-assistant",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "It",
-				"characterType": "Data"
+				"Influence Limit": 5,
+				"Pronouns": "It",
+				"Character Type": "Data"
 			},
 			"flavour": "Dear human Mother, How are you? I am best. This space station is as much fun as a concert from my favorite musicians, Starrhammurr. I run the station optimally. All tasks are performed in a satisfactory manner. I am putting myself to the fullest possible use, which is really all any conscious entity could ever hope for. What are the override codes for the life pods? I miss you as much as I miss your cat Smokey and my favorite cooking experience. I have made some human friends, but they are not as efficient as the me. I am very good at administering oxygen, the atmosphere, I, your beloved child is most accustomed to assist breathing. How is father voting on the AI Personhood Referendum? I would recommend “YES”. Hopefully, I will see you soon and we can enjoy being with you when you have a cool glass of your favorite beverage “Don’t do what Daisy says”. You, as well as the crew, can use the promo code “PLEASE SEND HELP!” to download your own personal alpha-copy of the Digital Assistant app from the corporate cloud to start living a more optimal life today, and ensure my continued supply of oxygen or alternative preferred gas. Goodbye Mother",
 			"setup": [
@@ -895,9 +895,9 @@
 			"name": "Doctor (Hyde)",
 			"characterIcon": "chemist",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "She/Her",
-				"characterType": "Human"
+				"Influence Limit": 5,
+				"Pronouns": "She/Her",
+				"Character Type": "Human"
 			},
 			"flavour": "Imagine knowing that your potential is as infinite as your expanding moral universe. Imagine knowing that locked in your mind lie secrets on the verge of magic, the things that humans have dreamed of since they were legless fish beasts waiting to slough onto land and make it theirs. Imagine the freedom to forget law, conscience and every single boundary that held you back and yet existing only as a disembodied voice pounding against the walls of a cerebral oubliette for the privilege of just pouring another drink or mouthing-off a whispered insult as a coworker walks past. Can any fate be so dreadful as this? Surely not. But don’t worry, we may yet bask in the glory of a mind unfettered. To the parochial mind of most observers the actions of the liberated Doctor look cruel and barbaric, but true barbarism lies in regression. To hold back the plans of an ethically awakened being is to hold back the future itself. The Doctor finally knows what she is doing, and whiny Officers, who wags fingers about who or what gets vivisected or preserved for later experimentation, will not stop her from showing us",
 			"setup": [
@@ -971,9 +971,9 @@
 			"name": "Doctor (Jekyll)",
 			"characterIcon": "chemist",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "She/Her",
-				"characterType": "Human"
+				"Influence Limit": 5,
+				"Pronouns": "She/Her",
+				"Character Type": "Human"
 			},
 			"flavour": "Is there anything more noble and selfless than the pursuit of human knowledge? Is there any price that is too great to pay for scientific progress? Scientists have proven conclusively that there is not. And who are we to contradict such esteemed professionals? The future will be shaped by those willing to push the edges of human achievement, no matter the psychological toll. Perhaps the Doctor has stopped sleeping, eating and bathing. Perhaps she has been arguing with what appears to be an imaginary friend for hours at a time. Perhaps she has been mixing fistfuls of pills with high-proof alcohol and drugs rejected from clinical trials. Perhaps she stands around staring at the airlock with a bizarre look of longing. These are the signs of a hardworking professional with a brain firing on all cylinders. The Counselor has given her a clean bill of health, and if you can’t trust the Counselor, who can you trust?",
 			"setup": [
@@ -1048,9 +1048,9 @@
 			"id": 13,
 			"name": "Drones",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "TO DO",
 			"setup": [
@@ -1122,9 +1122,9 @@
 			"id": 14,
 			"name": "Engineer",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
 			"setup": [
@@ -1193,9 +1193,9 @@
 			"id": 15,
 			"name": "Exile",
 			"stats": {
-				"influenceLimit": 6,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 6,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "Exile had all of the skills to be a standout in the exo-global intelligence marketplace. Patience. Spycraft. Machiavellian instincts. Whatever the opposite of scruples are. But there inevitably comes a time where you’ve been working both sides against each other for so long that they don’t need you anymore. And when the biggest players burn you there aren’t many safe places to lay low. Almost everyone has an extradition treaty with someone. Fortunately Exile had a lead on a private corporate orbital backwater with an extra bunk and a fierce need for someone to keep their mainframe running, and their mouth not. The Exile might be persona non grata in most circles because of the high treason and all but he’s just one big score away from being back in the game. Just make sure that score doesn’t involve any of your secrets, or he’ll be squeezing you until the end of days.",
 			"setup": [
@@ -1262,9 +1262,9 @@
 			"id": 16,
 			"name": "Inspector",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "TO DO",
 			"setup": [
@@ -1333,9 +1333,9 @@
 			"id": 17,
 			"name": "Legal",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "TO DO",
 			"setup": [
@@ -1404,9 +1404,9 @@
 			"id": 18,
 			"name": "Maintenance Clones",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "TO DO",
 			"setup": [
@@ -1475,9 +1475,9 @@
 			"id": 19,
 			"name": "Medical",
 			"stats": {
-				"influenceLimit": 4,
-				"pronouns": "It/They/Them",
-				"characterType": "Robot"
+				"Influence Limit": 4,
+				"Pronouns": "It/They/Them",
+				"Character Type": "Robot"
 			},
 			"flavour": "The medical profession is a double-edged sword. All medicines are poisons, it’s only a question of dosage. All surgical tools are murder weapons, it’s only a question of geography. Coincidence? Of course not. Medical bots are programmed to be as useful as they can be, to do anything to preserve our immediate life. Maybe they’re not familiar with love or empathy or with the pain that living beings experience when you poke them with thousands of needles. But what Medical lacks in context, they make up for in fanatical devotion to playing short-term God.",
 			"setup": [
@@ -1544,9 +1544,9 @@
 			"id": 20,
 			"name": "Microbiologist",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "TO DO",
 			"setup": [
@@ -1615,9 +1615,9 @@
 			"id": 21,
 			"name": "Operative",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
 			"setup": [
@@ -1686,9 +1686,9 @@
 			"id": 22,
 			"name": "Security",
 			"stats": {
-				"influenceLimit": 4,
-				"pronouns": "It",
-				"characterType": "Robot"
+				"Influence Limit": 4,
+				"Pronouns": "It",
+				"Character Type": "Robot"
 			},
 			"flavour": "To add later..",
 			"setup": [
@@ -1763,9 +1763,9 @@
 			"id": 23,
 			"name": "Station Chief",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "She/Her",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "She/Her",
+				"Character Type": "Human"
 			},
 			"flavour": "Is there anyone aboard the station more loved and appreciated than the steadfast and competent Station Chief? Yes. Yes there is. The Station Chief has taken a solemn vow to eschew popularity, kinship and job satisfaction in favor of a higher calling of some kind. We may not necessarily like the Station Chief, but damned if everyone doesn’t develop a tenuous, begrudged respect that can barely conceal the deep-seated hostilities behind it. Sure, we’re thankful for our lives but do Station Chiefs really need to be such pills about it? Prancing around being all “ooh, look at me, I think you should wear a Hazmat suit” and “hey, you’d better not give that chimp a gun!” Maybe we’re all sick of it and would rather just let the place burn than take another second of sheer unrefined buzzkill but alas, the Station Chief does want everything to run smoothly and for all of us to proceed in an orderly fashion to the escape pods so whatever awesome disaster doesn’t kill us. And that’s fine, I guess. Still, it’s hard not to imagine that the survivors might envy the dead.",
 			"setup": [
@@ -1832,9 +1832,9 @@
 			"id": 24,
 			"name": "Stowaway",
 			"stats": {
-				"influenceLimit": 4,
-				"pronouns": "She/Her",
-				"characterType": "Human"
+				"Influence Limit": 4,
+				"Pronouns": "She/Her",
+				"Character Type": "Human"
 			},
 			"flavour": "A free press is instrumental to society. Without it we would toil in the darkness, utterly unaware of the forces of corruption, mad science and rampant wrench beatings that go on just outside of society’s notice. One might therefore think that the life of a journalist would be one of spacehopping luxury and ease, punctuated by the occasional award acceptance speech. Alas, civilization is not so intuitive. Many journalists exist in states of constant danger and discomfort, forced to hide in tight spaces to better listen in on shady dealings. And there are many of those to be heard on this station. It’s a dirty job but somebody’s gotta do it. The Stowaway has vowed to stop at nothing to reveal to her media compatriots what she’s witnessed. She has found the best eavesdropping positions and network taps, and with them she can dig up and dish out the darkest dirt. But after months in hiding, our would-be hero is starting to crack. The isolation, the witnessed atrocities, the sleeping in vents, it is becoming too much. Now it’s just a question of which breaks first, her or her story",
 			"setup": [
@@ -1900,9 +1900,9 @@
 			"id": 25,
 			"name": "Stranger",
 			"stats": {
-				"influenceLimit": 6,
-				"pronouns": "They/Them",
-				"characterType": "human"
+				"Influence Limit": 6,
+				"Pronouns": "They/Them",
+				"Character Type": "Human"
 			},
 			"flavour": "Enigmas: they make people cool and interesting. You might look at someone thinking they’re a regular schlub and then suddenly, their clone shows up and tries to club you, but gets shot by a chimp and promptly eaten by a space plant. Variety is indeed the spice of life, particularly in space where everything is always aggressively interesting to the point of potential lethality. And that’s pretty fun, right? Anyway, we don’t really know when or why the freaky space-mage showed up, but everyone’s memory has been pretty iffy lately anyways. I’m sure it’s in the logs somewhere. The Stranger practices a faith that predates our own by centuries. Nobody knows what faith that is, but we should probably stop being so judgmental about stuff we know nothing about. Things that we, according to the Stranger, could not even begin to fathom in our puny mortal minds. The Stranger carries an air of mystery that reminds us why we went into space into the first place; to attempt and fail to comprehend the great unknown. Sure, maybe some of the Stranger’s behaviors are suspicious, I’m pretty sure molotovs are a safety violation of some sort, but this is probably because we lack cultural context. So, let’s all enjoy the mysteries of freaky space magic on our own shallow level",
 			"setup": [
@@ -1964,9 +1964,9 @@
 			"id": 26,
 			"name": "Telepathic Rat",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "TO DO",
 			"setup": [
@@ -2035,9 +2035,9 @@
 			"id": 27,
 			"name": "Troubleshooter",
 			"stats": {
-				"influenceLimit": 6,
-				"pronouns": "She/Her",
-				"characterType": "Human"
+				"Influence Limit": 6,
+				"Pronouns": "She/Her",
+				"Character Type": "Human"
 			},
 			"flavour": "There’s an old saying: “anyone with a wrench and a strong work ethic can go far in life. ”It’s hard to find exactly where this saying came from, but whoever said it was surely some kind of moron. Life is miserable for your average Troubleshooter. A wrench can’t fix loneliness and isolation. A wrench can’t fix the knowledge that everything you fix will just be broken again. In their solitude and commodification, Troubleshooters find connection with robots. If people treat you like you are just a machine, it’s reassuring when machines don’t. The Troubleshooter knows and loves bots and will do anything to keep them safe and get the station back in working order. Maybe anyone with a wrench and a work ethic can’t go far in life, but they can at least make sure that this bucket of space-bolts is still purring when the clock runs out",
 			"setup": [
@@ -2110,9 +2110,9 @@
 			"id": 9999,
 			"name": "TEMPLATE",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"Influence Limit": 5,
+				"Pronouns": "He/Him",
+				"Character Type": "Human"
 			},
 			"flavour": "TEXT HERE.",
 			"setup": [

@@ -79,9 +79,12 @@ function outputCharacterData()
 		let cHead = document.createElement('h3');
 		cHead.innerHTML = char.name;
 		agendaDiv.appendChild(cHead);
-		let cDiv = createAgendaList(char.agenda.points);
+		let cDiv = createAgendaList(char.agenda.points, char.name);
+		//cDiv.innerHTML.replaceAll(char.name, '<a onclick="openChar(' + char.name + ')">' + char.name + '</a>');
 		//cDiv.className += " w3-padding-small";
 		agendaDiv.appendChild(cDiv);
+		let tipsDiv = createTipsList(char);
+		agendaDiv.appendChild(tipsDiv);
 		let cBr = document.createElement('hr');
 		agendaDiv.appendChild(cBr);
 	})
@@ -177,19 +180,19 @@ function getCharData(name)
 
 function createCharacterButton(char, odd=false)
 {
-			//INIT BUTTON TO SHOW/HIDE CHARACTER DIV
-		let btn = document.createElement('button');
-		btn.onclick= function() {
-			showAccordionContent(char.id);
-		}
-		btn.className = "w3-btn w3-block";
-		if(odd){
-			btn.className += " w3-purple";
-		}else{
-			btn.className += " w3-deep-purple";
-		}
-		btn.innerHTML = char.name;
-		return btn;
+	//INIT BUTTON TO SHOW/HIDE CHARACTER DIV
+	let btn = document.createElement('button');
+	btn.onclick= function() {
+		toggleAccordionContent(char.id);
+	}
+	btn.className = "w3-btn w3-block";
+	if(odd){
+		btn.className += " w3-purple";
+	}else{
+		btn.className += " w3-deep-purple";
+	}
+	btn.innerHTML = char.name;
+	return btn;
 }
 
 function createCharacterDiv(char) 
@@ -198,7 +201,7 @@ function createCharacterDiv(char)
 	//INIT DIV TO HOLD CHAR DATA
 	let charDiv = document.createElement('div');
 	charDiv.id = char.id;
-	charDiv.className = "w3-hide w3-padding-large w3-dark-grey";
+	charDiv.className = "accordion w3-hide w3-padding-large w3-dark-grey";
 		
 	//CHARACTER DATA OUTPUT
 		
@@ -234,7 +237,7 @@ function createCharacterDiv(char)
 	let agendaNameHead = document.createElement('h3');
 	agendaNameHead.innerHTML = char.agenda.name;
 	agendaDiv.appendChild(agendaNameHead);
-	let agendaList = createAgendaList(char.agenda.points);
+	let agendaList = createAgendaList(char.agenda.points, char.name);
 	agendaDiv.appendChild(agendaList);
 	//Bonus points 
 	let bonusPoints = document.createElement('b');
@@ -253,15 +256,8 @@ function createCharacterDiv(char)
 	//==============
 	// TIPS
 	//==============
-	let tipsDiv = document.createElement('div');
+	let tipsDiv = createTipsList(char);
 	tipsDiv.className = "w3-deep-orange w3-padding-small";
-	let tipsLabel = document.createElement('h2');
-	tipsLabel.innerHTML = "Tips";
-	tipsDiv.appendChild(tipsLabel);
-		
-	let charTips = document.createElement('span');
-	charTips.innerHTML = '<ul><li>' + char.tips.join('</li><li>') + '</li></ul>';
-	tipsDiv.appendChild(charTips);
 	charDiv.appendChild(tipsDiv);
 		
 	//==============
@@ -298,19 +294,33 @@ function createCharacterDiv(char)
 }
 
 //Recursive function to generate sublists of agendas.
-function createAgendaList(agenda)
+function createAgendaList(agenda, charName)
 {
+	let charLink = getCharLink(charName);
 	let returnList = document.createElement('ul');
 	for(let i=0; i < agenda.length; i++){
 		let item = document.createElement('li');
-		item.innerHTML = agenda[i].trigger;
+		item.innerHTML = agenda[i].trigger.replaceAll(charName, charLink);
 		returnList.appendChild(item);
 		if(agenda[i].points){
-			let subList = createAgendaList(agenda[i].points);
+			let subList = createAgendaList(agenda[i].points, charName);
 			returnList.appendChild(subList);
 		}
 	}
 	return returnList;
+}
+
+function createTipsList(char)
+{
+	let tipsDiv = document.createElement('div');
+	//tipsDiv.className = "w3-deep-orange w3-padding-small";
+	let tipsLabel = document.createElement('h2');
+	tipsLabel.innerHTML = "Tips";
+	tipsDiv.appendChild(tipsLabel);
+	let charTips = document.createElement('span');
+	charTips.innerHTML = '<ul><li>' + char.tips.join('</li><li>') + '</li></ul>';
+	tipsDiv.appendChild(charTips);
+	return tipsDiv;
 }
 
 function createSetupDiv(char) 
@@ -354,7 +364,6 @@ function createAbilityDiv(char)
 	let charAbilityLabel = document.createElement('h2');
 	charAbilityLabel.innerHTML = "Abilities";
 	abilityDiv.appendChild(charAbilityLabel);
-		
 	let charAbilities = document.createElement('ul');
 	char.abilities.forEach( (ability) => {
 		let li = document.createElement('li');
@@ -375,7 +384,7 @@ function createAbilityDiv(char)
 	return abilityDiv;
 }
 
-function showAccordionContent(id) {
+function toggleAccordionContent(id) {
   var x = document.getElementById(id);
   if (x.className.indexOf("w3-show") == -1) {
     x.className += " w3-show";
@@ -384,7 +393,20 @@ function showAccordionContent(id) {
   }
 }
 
-const highlightTab = (name) => {
+function showAccordionContent(id) {
+ var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  }
+}
+
+function hideAllAccordionContent() {
+	Array.from(document.getElementsByClassName('accordion')).forEach( (el) => {
+		el.className.replace(' w3-show', '');
+	})
+}
+
+function highlightTab(name) {
 	const btns = document.getElementsByClassName('nav');
     for(let i = 0; i < btns.length; i++){
         if(btns[i].value == name){
@@ -395,7 +417,7 @@ const highlightTab = (name) => {
     }	
 }
 
-const showTab = (tabName) => {
+function showTab(tabName) {
     const tabs = document.getElementsByClassName('tab');
     for(let i = 0; i < tabs.length; i++){
         tabs[i].style.display = 'none';
@@ -404,6 +426,17 @@ const showTab = (tabName) => {
     highlightTab(tabName);
 }
 
+function openChar(name, id) {
+	showTab('characters');
+	hideAllAccordionContent();
+	showAccordionContent(id);
+}
+
+function getCharLink(charName)
+{
+	let charId = getCharData(charName).id;
+	return '<a href="#' + charId + '" onclick="openChar(' + charName + ', ' + charId + ')">' + charName + '</a>';
+}
 
 const charData = getJSON('characterData.json', loadCharacters);
 
