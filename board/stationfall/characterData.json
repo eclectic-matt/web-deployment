@@ -1517,7 +1517,7 @@
 					},
 					{
 						"trigger": "1 point for each star reached on the tracker on the Character Card. Move tracker one slot for every:",
-						"point": [
+						"points": [
 							{
 								"trigger": "Human Revival performed by Medical"
 							},
@@ -1968,7 +1968,7 @@
 				"pronouns": "He/Him",
 				"characterType": "human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "TO DO",
 			"setup": [
 				{
 					"type": "character",
@@ -2035,71 +2035,75 @@
 			"id": 27,
 			"name": "Troubleshooter",
 			"stats": {
-				"influenceLimit": 5,
-				"pronouns": "He/Him",
-				"characterType": "human"
+				"influenceLimit": 6,
+				"pronouns": "She/Her",
+				"characterType": "Human"
 			},
-			"flavour": "There are few refugees from change. Over his many decades of life, the Engineer has seen good hardworking sentient beings replaced by automata, his community fall into desperate poverty, and the Earth’s ecosystem ravaged by change. He learned from a young age that you can’t resist the march of progress but you can protect others from it. A fission reactor always needs a dedicated steward with a good work ethic and no patience for nonsense to protect everyone from the hellish neutron mosh-pit within. It’s a damn shame that outside those control room walls, it’s sheer pandemonium. Xenobiology, psychic rats, germ warfare… enough is enough. In the face of disaster, the Engineer will do what an Engineer must - he’ll fix things. And sometimes to fix things you have to break them first. The Engineer doesn’t know for sure what happens if the horrors on board make it into the atmosphere and he is not going to take any chances. Someone must take a stand against pulp science fiction and it’s probably not going to be the robots, the rich dilettante, or the unfrozen cryogenic aberration",
+			"flavour": "There’s an old saying: “anyone with a wrench and a strong work ethic can go far in life. ”It’s hard to find exactly where this saying came from, but whoever said it was surely some kind of moron. Life is miserable for your average Troubleshooter. A wrench can’t fix loneliness and isolation. A wrench can’t fix the knowledge that everything you fix will just be broken again. In their solitude and commodification, Troubleshooters find connection with robots. If people treat you like you are just a machine, it’s reassuring when machines don’t. The Troubleshooter knows and loves bots and will do anything to keep them safe and get the station back in working order. Maybe anyone with a wrench and a work ethic can’t go far in life, but they can at least make sure that this bucket of space-bolts is still purring when the clock runs out",
 			"setup": [
 				{
 					"type": "character",
-					"name": "Engineer",
-					"location": "Array Control"
+					"name": "Troubleshooter",
+					"location": "Print Shop"
+				},
+				{
+					"type": "location",
+					"name": "Cargo Claw",
+					"location": "Connect to Forward Airlocks.  Troubleshooter starts with a Bludgeon"
 				},
 				{
 					"type": "token",
-					"name": "Reactor",
-					"location": "Reactor Control Panel"
+					"name": "Bludgeon",
+					"location": "Character Board"
 				}
 			],
 			"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
+				"Cargo Claw enables any Character to do the action Grip in this Section",
+				"Grip: Pick Up an Item in Outer Space or Down a Character in Outer Space"
 			],
 			"bonusPoints": {
-				"type": "grudge",
-				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+				"type": "friend",
+				"reward": "2 points if Troubleshooter is your BC and Escapes"
 			},
 			"abilities": [
 				{
-					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+					"name": "Tunnel Rat",
+					"description": "May Step through Vents"
 				},
 				{
 					"name": "Jury Rig",
-					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+					"description": "As an Action, Repair a Colocated Damaged Section or Repair a Colocated Down Robot"
 				}
 			],
 			"revealPowers": [
 				{
-					"name": "Overload",
-					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+					"name": "Talk Them Through It",
+					"description": "During your turn, if Troubleshooter is Live, your Conspirators move and act as though they have Jury Rig and Tunnel Rat"
 				}
 			],
 			"agenda": {
-				"name": "Preserve Ecosphere",
+				"name": "Pristine 'Til The End",
 				"points": [
 					{
-						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+						"trigger": "2 points if Antimatter is not Armed at Stationfall"
 					},
 					{
-						"trigger": "3 points if no Contaminated Characters Escape"
+						"trigger": "2 points if Project X was never released"
 					},
 					{
-						"trigger": "2 points if Artifact does not Escape"
+						"trigger": "2 points if no Sections are Damaged at Stationfall"
 					},
 					{
-						"trigger": "1 point if Innocent, but may win even if Guilty"
+						"trigger": "1 point for each Live Robot at Stationfall"
 					}
 				]
 			},
 			"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+				"Your Reveal Power is very useful to allow your Conspirators to Repair Damaged Sections",
+				"Try to keep Characters out of Bridge, Cryo Lab and Magnetic Containment preventing releasing Project X and arming Antimatter"
 			],
 			"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+				"None"
 			]
 		},
 		{
