@@ -77,18 +77,26 @@ function outputCharacterData()
 		let rowOdd = (index % 2 === 0);
 		index++;
 		let cHead = document.createElement('h3');
-		cHead.innerHTML = char.name;
+		cHead.className = "w3-center";
+		cHead.innerHTML = '<b>' + char.name + '</b>';
 		agendaDiv.appendChild(cHead);
 		let cDiv = createAgendaList(char.agenda.points, char.name);
 		//cDiv.innerHTML.replaceAll(char.name, '<a onclick="openChar(' + char.name + ')">' + char.name + '</a>');
 		//cDiv.className += " w3-padding-small";
 		agendaDiv.appendChild(cDiv);
+		let bonusPoints = document.createElement('p');
+		bonusPoints.className = 'w3-center';
+		bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type.toUpperCase() + "]</b> " + char.bonusPoints.reward;
+		agendaDiv.appendChild(bonusPoints);
 		let tipsDiv = createTipsList(char);
 		agendaDiv.appendChild(tipsDiv);
 		let cBr = document.createElement('hr');
 		agendaDiv.appendChild(cBr);
 	})
 	
+	//===========
+	//SETUP
+	//===========
 	let setupDiv = document.getElementById('setupList');
 	setupDiv.innerHTML = null;
 	index = 0;
@@ -98,7 +106,8 @@ function outputCharacterData()
 		let rowOdd = (index % 2 === 0);
 		index++;
 		let cHead = document.createElement('h3');
-		cHead.innerHTML = char.name;
+		cHead.className = "w3-center";
+		cHead.innerHTML = '<b>' + char.name + '</b>';
 		setupDiv.appendChild(cHead);
 		let cDiv = createSetupDiv(char);
 		setupDiv.appendChild(cDiv);
@@ -106,6 +115,9 @@ function outputCharacterData()
 		setupDiv.appendChild(cBr);
 	})
 	
+	//===========
+	//ABILITIES 
+	//===========	
 	let abilityDiv = document.getElementById('abilityList');
 	abilityDiv.innerHTML = null;
 	index = 0;
@@ -115,7 +127,8 @@ function outputCharacterData()
 		let rowOdd = (index % 2 === 0);
 		index++;
 		let cHead = document.createElement('h3');
-		cHead.innerHTML = char.name;
+		cHead.className = "w3-center";
+		cHead.innerHTML = '<b>' + char.name + '</b>';
 		abilityDiv.appendChild(cHead);
 		let cDiv = createAbilityDiv(char);
 		abilityDiv.appendChild(cDiv);
@@ -206,7 +219,7 @@ function createCharacterDiv(char)
 	//CHARACTER DATA OUTPUT
 		
 	let setupDiv = createSetupDiv(char);
-	setupDiv.className = "w3-red w3-padding-small";
+	setupDiv.className = "w3-indigo w3-padding-small";
 	charDiv.appendChild(setupDiv);
 		
 	//==============
@@ -229,22 +242,30 @@ function createCharacterDiv(char)
 	// AGENDA
 	//==============
 	let agendaDiv = document.createElement('div');
-	agendaDiv.className = "w3-green w3-padding-small";
+	agendaDiv.className = "w3-teal w3-padding-small";
 	let agendaName = char.agenda.name;
-	let agendaHead = document.createElement('h2');
+	let agendaHead = document.createElement('h3');
 	agendaHead.innerHTML = 'AGENDA: ' + agendaName;
 	agendaDiv.appendChild(agendaHead);
-	let agendaNameHead = document.createElement('h3');
+	/*let agendaNameHead = document.createElement('h3');
 	agendaNameHead.innerHTML = char.agenda.name;
-	agendaDiv.appendChild(agendaNameHead);
+	agendaDiv.appendChild(agendaNameHead);*/
 	let agendaList = createAgendaList(char.agenda.points, char.name);
 	agendaDiv.appendChild(agendaList);
 	//Bonus points 
-	let bonusPoints = document.createElement('b');
-	bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type + "]</b> " + char.bonusPoints.reward;
+	let bonusPoints = document.createElement('p');
+	bonusPoints.className = 'w3-center';
+	bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type.toUpperCase() + "]</b> " + char.bonusPoints.reward;
 	agendaDiv.appendChild(bonusPoints);
 	//Add to main div
 	charDiv.appendChild(agendaDiv);
+	
+	//==============
+	// TIPS
+	//==============
+	let tipsDiv = createTipsList(char);
+	tipsDiv.className = "w3-teal w3-padding-small";
+	charDiv.appendChild(tipsDiv);
 		
 	//==============
 	// ABILITY
@@ -254,18 +275,11 @@ function createCharacterDiv(char)
 	charDiv.appendChild(abilityDiv);
 		
 	//==============
-	// TIPS
-	//==============
-	let tipsDiv = createTipsList(char);
-	tipsDiv.className = "w3-deep-orange w3-padding-small";
-	charDiv.appendChild(tipsDiv);
-		
-	//==============
 	// QUIRKS
 	//==============
 	let quirksDiv = document.createElement('div');
-	quirksDiv.className = "w3-deep-orange w3-padding-small";
-	let quirksLabel = document.createElement('h2');
+	quirksDiv.className = "w3-blue w3-padding-small";
+	let quirksLabel = document.createElement('h3');
 	quirksLabel.innerHTML = "Quirks";
 	quirksDiv.appendChild(quirksLabel);
 		
@@ -278,8 +292,8 @@ function createCharacterDiv(char)
 	// FLAVOUR
 	//==============
 	let flavourDiv = document.createElement('div');
-	flavourDiv.className = "w3-orange w3-padding-small";
-	let charFlavourLabel = document.createElement('h2');
+	flavourDiv.className = "w3-black w3-padding-small";
+	let charFlavourLabel = document.createElement('h3');
 	charFlavourLabel.innerHTML = "Flavour Text";
 	flavourDiv.appendChild(charFlavourLabel);
 		
@@ -314,7 +328,7 @@ function createTipsList(char)
 {
 	let tipsDiv = document.createElement('div');
 	//tipsDiv.className = "w3-deep-orange w3-padding-small";
-	let tipsLabel = document.createElement('h2');
+	let tipsLabel = document.createElement('h3');
 	tipsLabel.innerHTML = "Tips";
 	tipsDiv.appendChild(tipsLabel);
 	let charTips = document.createElement('span');
@@ -361,7 +375,7 @@ function createAbilityDiv(char)
 {
 	let abilityDiv = document.createElement('div');
 	abilityDiv.className = "w3-blue w3-padding-small";
-	let charAbilityLabel = document.createElement('h2');
+	let charAbilityLabel = document.createElement('h3');
 	charAbilityLabel.innerHTML = "Abilities";
 	abilityDiv.appendChild(charAbilityLabel);
 	let charAbilities = document.createElement('ul');
@@ -371,7 +385,7 @@ function createAbilityDiv(char)
 		charAbilities.appendChild(li);
 	});
 	abilityDiv.appendChild(charAbilities);
-	let revealAbilityLabel = document.createElement('h2');
+	let revealAbilityLabel = document.createElement('h3');
 	revealAbilityLabel.innerHTML = "Reveal Powers";
 	abilityDiv.appendChild(revealAbilityLabel);
 	let revealAbilities = document.createElement('ul');
@@ -446,7 +460,7 @@ function init() {
 
 </script>
 </head>
-<body onload="init()">
+<body onload="init()" class="w3-black">
 	<div class="w3-bar w3-purple">
 		<button 
 			onclick="showTab('characters')"
@@ -469,32 +483,33 @@ function init() {
 			class="nav w3-bar-item w3-button"
 		>Select</button>
 	</div>
+	<h1>Stationfall Reference</h1>
 	<div id="characters" class="tab w3-black">
-		<h1>Characters</h1>
+		<h2>Characters</h2>
 		<div id="charactersList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
 	<div id="agenda" class="tab w3-teal" style="display:hidden;">
-		<h1>Agenda</h1>
+		<h2>Agenda</h2>
 		<div id="agendasList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
-	<div id="setup" class="tab w3-dark-gray" style="display:hidden;">
-		<h1>Setup</h1>
+	<div id="setup" class="tab w3-indigo" style="display:hidden;">
+		<h2>Setup</h2>
 		<div id="setupList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
 	<div id="abilities" class="tab w3-indigo" style="display:hidden;">
-		<h1>Abilities</h1>
+		<h2>Abilities</h2>
 		<div id="abilityList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
 	<div id="select" class="tab w3-indigo" style="display:hidden;">
-		<h1>Selection</h1>
+		<h2>Selection</h2>
 		<div id="selectList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
