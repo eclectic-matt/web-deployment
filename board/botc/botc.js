@@ -44,7 +44,7 @@ function tab(id) {
 		tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
 	}
 	//event.target.className += " w3-red";
-	console.log(id);
+	//console.log(id);
 	document.getElementById(id).className += " w3-green";
 }
 
@@ -109,10 +109,10 @@ const editions = [
 	},
 	{
 		id: 4,
-		name: "The Carousel (Experimental Characters)",
+		name: "Experimental",
 		code: "exp",
 		color: "deep-orange",
-		description: "Experimental characters are characters which do not yet have a home script. At some point in the future, these may be released as part of official expansion scripts. For now, you are encouraged to experiment with them in your own scripts.",
+		description: "A.K.A. The Carousel - Experimental characters are characters which do not yet have a home script. At some point in the future, these may be released as part of official expansion scripts. For now, you are encouraged to experiment with them in your own scripts.",
 		difficulty: "Advanced. Recommended for players and Storytellers who have experienced many games of Blood on the Clocktower.",
 		evilDescription: "Evil players will find a new or unique minion and demon pairing to play!",
 		goodDescription: "Good players will get a few new tricks up their sleeves too!",
@@ -128,7 +128,7 @@ const editions = [
 	},
 	{
 		id: 5,
-		name: "Traveler Characters",
+		name: "Travellers",
 		code: "traveler",
 		color: "white",
 		description: "Travelers do have a 'home script' but are gathered here for ease.",
@@ -137,6 +137,19 @@ const editions = [
 		goodDescription: "Good Travelers can also be essential in solving games or supporting good victories!",
 		roles: {
 			traveler: []
+		}
+	},
+	{
+		id: 6,
+		name: "Fabled",
+		code: "fabled",
+		color: "white",
+		description: "Fabled characters are for the Storyteller. They each alter the conditions of the game somewhat and are usually included at the beginning of the game.The purpose of a Fabled character is to allow players to join in a game of Clocktower when they would otherwise not be able to, or to allow a game to run smoothly when there would otherwise be a real-world issue. Fabled characters fix problems that are outside the usual game parameters. For example, if a player has a mental disability that would normally mean that they are unable to understand the game rules or communicate with the group, a Fabled character can allow them to join in. If a player is new to the game, and fearful that they will die early, a Fabled character can protect them. If there are too many players wanting to play all at once, a Fabled character can make the game run more quickly. If one of the group is shy or softly spoken, and has trouble getting the groups attention, a Fabled character can give them the powers to do so. If the game needs to end unexpectedly early, a Fabled character can decide a winner. If you have made your own character list using the Script character list generator, a Fabled character can help it be more fun.",
+		difficulty: "N/A",
+		evilDescription: "N/A",
+		goodDescription: "N/A",
+		roles: {
+			fabled: []
 		}
 	}
 ];
@@ -169,6 +182,9 @@ function load(roles){
 		if(role.team == "traveler"){
 			store = editions[4].roles;
 			assign(store, role);
+		}else if(role.team === "fabled"){
+			store = editions[5].roles;
+			assign(store, role);
 		}
 	}
 
@@ -186,7 +202,7 @@ function load(roles){
 		let button = document.createElement('button');
 		//ADD onclick EVENT TO OPEN ACCORDION
 		button.onclick = function (event) {
-			console.log(event.target.id + ' clicked');
+			//console.log(event.target.id + ' clicked');
 			tab(event.target.id);
 		}
 		button.id = editions[edition].name.replaceAll(" ","_") + '_Edition';
@@ -202,7 +218,7 @@ function load(roles){
 	let button = document.createElement('button');
 	//ADD onclick EVENT TO OPEN ACCORDION
 	button.onclick = function (event) {
-		console.log(event.target.id + ' clicked');
+		//console.log(event.target.id + ' clicked');
 		tab(event.target.id);
 	}
 	button.id = 'All_Characters_Edition';
@@ -215,9 +231,9 @@ function load(roles){
 	//ITERATE EDITIONS
 	for(edition in editions){
 
-		console.log('-----------------------');
+		/*console.log('-----------------------');
 		console.log('PROCESSING ',editions[edition].name);
-		console.log('-----------------------');
+		console.log('-----------------------');*/
 		
 
 		//CREATE THE ACCORDION CONTENT DIV
@@ -300,7 +316,7 @@ function load(roles){
 				//CHECK IF THIS ROLE IS YET TO BE OUTPUT
 				if(teamsToFill.includes(value.team)){
 					//ADD HEADER
-					console.log('HEADER:',value.team);
+					//console.log('HEADER:',value.team);
 					let header3 = document.createElement('h3');
 					header3.innerHTML = value.team.toUpperCase();
 					div.appendChild(header3);
@@ -367,7 +383,7 @@ function load(roles){
 	for(role in sortedRoles){
 		
 		let obj = sortedRoles[role];
-		console.log('Processing',obj.name);
+		//console.log('Processing',obj.name);
 
 		//CREATE A LIST ITEM
 		let li = document.createElement('li');
