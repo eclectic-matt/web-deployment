@@ -1484,7 +1484,7 @@
 				{
 					"type": "character",
 					"name": "Medical",
-					"location": "Aft Slot"
+					"location": "Aft Hub"
 				}
 			],
 			"boardModifications": [
