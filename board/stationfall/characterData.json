@@ -64,7 +64,7 @@
 				"Pronouns": "He/Him",
 				"Character Type": "Human"
 			},
-			"flavour": "There are places where the civilized human mind breaks down. But fortunately man did not inhabit the Earth alone and there were creatures around him made of stiffer stuff. Noble savagery, savage nobility... teeth that can peel one’s face off and prodigiously strong arms made for throwing various throwable objects. Pan Troglodytes, the mighty chimpanzee helped propel mankind upward into the stars with its grit, ferocity, and almost complete lack of fear.<br><br>These days the descendants of the Astrochimps are an underappreciated lot. Your lives are a lot like your forefather’s disposition: nasty, brutish, and short. But when the station is in danger, ancient instincts are triggered and this brave creature swings into action on anything resembling a vine. The Astrochimp may not grasp all of the ‘higher’ cultural aspects of his jabbering hairless cousins, but he definitely gets that timeless rule passed down through the ages… surviving and getting shinies are always good decisions.",
+			"flavour": "There are places where the civilized human mind breaks down. But fortunately man did not inhabit the Earth alone and there were creatures around him made of stiffer stuff. Noble savagery, savage nobility... teeth that can peel one’s face off and prodigiously strong arms made for throwing various throwable objects. Pan Troglodytes, the mighty chimpanzee helped propel mankind upward into the stars with its grit, ferocity, and almost complete lack of fear.<br><br>These days the descendants of the Astrochimps are an underappreciated lot. Your lives are a lot like your forefather’s disposition: nasty, brutish, and short. But when the station is in danger, ancient instincts are triggered and this brave creature swings into action on anything resembling a vine. The Astrochimp may not grasp all of the ‘higher’ cultural aspects of his jabbering hairless cousins, but he definitely gets that timeless rule passed down through the ages… surviving and getting shinies are always good decisions",
 			"setup": [
 				{
 					"type": "character",
@@ -89,7 +89,7 @@
 			"revealPowers": [
 				{
 					"name": "Acrobatics",
-					"description": "Gains ZeroBorn: May Free Step or Airlock into a zero Gravity Section instead of a Free Pickup or Drop"
+					"description": "Gains <b><em>ZeroBorn</b></em>: May Free Step or Airlock into a zero Gravity Section instead of a Free Pickup or Drop"
 				}
 			],
 			"agenda": {

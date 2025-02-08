@@ -353,8 +353,8 @@ function load(roles){
 		div.appendChild(document.createElement('br'));
 		//ADD A BACK TO SCRIPTS LINK
 		let backToTopLink = document.createElement('a');
-		backToTopLink.href = '#scripts';
-		backToTopLink.innerHTML = '^ Back to scripts ^'
+		backToTopLink.href = '#editions';
+		backToTopLink.innerHTML = '^ Back to Editions ^'
 		div.appendChild(backToTopLink);
 
 		div.appendChild(document.createElement('br'));
