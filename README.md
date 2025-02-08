@@ -1,6 +1,6 @@
 # web-deployment
 
-The main page with new links is: https://eclectic-matt.github.io/Github-Pages-Home/
+The main page with new links is: https://eclectic-matt.github.io/
 
 Some of these files relate to the eclectic website (formerly eclecticapp.xyz but I no longer own this domain)
 The homepage is available on Github pages at: https://eclectic-matt.github.io/web-deployment/
