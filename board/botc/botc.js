@@ -130,7 +130,7 @@ const editions = [
 		id: 5,
 		name: "Travellers",
 		code: "traveler",
-		color: "white",
+		color: "grey",
 		description: "Travelers do have a 'home script' but are gathered here for ease.",
 		difficulty: "Varies depending on Traveler but most are suitable for beginners.",
 		evilDescription: "All Travelers can be evil and learn who the Demon is, which usually spices up games significantly!",
@@ -395,10 +395,16 @@ function load(roles){
 				li.style.color = 'blue';
 			break;
 			case 'minion':
-				li.style.color = 'red';
+				li.style.color = 'DarkGoldenRod';
 			break;
 			case 'demon':
-				li.style.color = 'red';
+				li.style.color = 'Maroon';
+			break;
+			case 'traveler':
+				li.style.color = 'purple';
+			break;
+			case 'fabled':
+				li.style.color = 'grey';
 			break;
 			default:
 				li.style.color = 'purple';
@@ -422,8 +428,8 @@ function load(roles){
 	div.appendChild(document.createElement('br'));
 	//ADD A BACK TO SCRIPTS LINK
 	let backToTopLink = document.createElement('a');
-	backToTopLink.href = '#scripts';
-	backToTopLink.innerHTML = '^ Back to scripts ^'
+	backToTopLink.href = '#editions';
+	backToTopLink.innerHTML = '^ Back to Editions ^'
 	div.appendChild(backToTopLink);
 
 	div.appendChild(document.createElement('br'));
