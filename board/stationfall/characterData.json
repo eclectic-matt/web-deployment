@@ -54,6 +54,213 @@
 		"Stranger",
 		"Troubleshooter"
 	],
+	"projectXData": [
+		{
+			"id": 100,
+			"name": "Carnivorous Bioexperiment",
+			"type": "Derailed Combat Entity Test",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Monster",
+					"location": "Vault X"
+				}
+			],
+			"abilities": [
+				{
+					"name": "Tunnel Rat",
+					"description": "May Step through Vents"
+							},
+				{
+					"name": "Wary",
+					"description": "Cannot be Attacked in Dark Sections"
+				}
+			],
+			"instructions": [
+				"At the end of any Resolve phase, must Down a Live Colocated Human if possible",
+				"If none, then the acting player must Step with Carnivorous Bioexpermient one Section closer to the closest Live Human. If tied, the player may choose which Section to Step to",
+				"Carnivorous Bioexpermient defends like an Unhelmeted Human and is Downed by Hazards. Carnivorous Bioexpermient has SelfPreservation, if the only valid move is through a Hazard it will not move"
+			]
+		},
+		{
+			"id": 101,
+			"name": "Combat Swarm",
+			"type": "Remote Control Murder Drones",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Monster",
+					"location": "Vault X"
+				},
+				{
+					"type": "token",
+					"name": "Direct Swarm",
+					"location": "Under Console Actions"
+				}
+			],
+			"abilities": [
+				{
+					"name": "Agile",
+					"description": "Can move up to two Sections with a single Step. Can Step through Vents"
+				},
+				{
+					"name": "Jury Rig",
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+				}
+			],
+			"instructions": [
+				"Combat Swarm is controlled with Console Actions. It can only Step (including Drag), Attack, or Jury Rig. It Attacks as though it has a Gun",
+				"It cannot be Downed unless it enters undamaged Magnetic Containment, wherein it is Downed immediately",
+				"You cannot become Suspect doing Actions with Combat Swarm",
+				"Combat Swarm is a Robot and can be Downed Repaired and ignores hazards. Counts as a Robot for scoring purposes"
+			]
+		},
+		{
+			"id": 102,
+			"name": "Death Ray",
+			"type": "Fully Operational Battle Station",
+			"setup": [
+				{
+					"type": "token",
+					"name": "Death Ray",
+					"location": "Array Control"
+				}
+			],
+			"abilities": [
+			],
+			"instructions": [
+				"Death Ray can be fired as an Action by any Human or Robot in Array Control. Death Ray cannot fire if Reactor or Array Control are Damaged. Firing Death Ray Damages Reactor",
+				"Death Ray can target Offsites, Rescue/Pirate Ship and launched Pods. Anything targeted by Death Ray is Annihilated and is removed  from the game along with everything on it",
+				"Guilty players return to Suspect if Authorities are Annihilated. Using the Death Ray does not trigger Suspicion"
+			]
+		},
+		{
+			"id": 103,
+			"name": "Entropy Phantom",
+			"type": "An Energy Ghost",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Monster",
+					"location": "Vault X"
+				}
+			],
+			"abilities": [
+				{
+					"name": "Tunnel Rat",
+					"description": "May step through vents"
+				},
+				{
+					"name": "Ethereal",
+					"description": "Can step through Locks"
+				}
+			],
+			"instructions": [
+				"At the end of any Resolve phase, the acting player must move a cube from a Colocated Character to Betrayal if possible (it’s eating their memories!)",
+				"If there are no cubes, the acting player must Step Entropy Phantom one Section closer to Antimatter if available. If it reaches Antimatter, arm it if it isn’t already, and Annihilate Entropy Phantom. If Antimatter is Annihilated, instead Step Entropy Phantom towards Magnetic Containment",
+				"Entropy Phantom cannot be Downed",
+				"Any Data Colocated with Entropy Phantom is immediately Deleted"
+			]
+		},
+		{
+			"id": 104,
+			"name": "Grey Goo",
+			"type": "Expanding Nano-Slime",
+			"setup": [
+				{
+					"type": "special",
+					"name": "Grey Goo Card",
+					"location": "Given to the acting player. Note that the Goo spreads by placing a Grey Goo marker on the card at value 0. This shows the Grey Goo spread"
+				}
+			],
+			"abilities":[
+			],
+			"instructions": [
+				"At the end of the Resolve phase of the player holding the card, Goo affects any Character in Sections within its spread by Annihilating a Helmet in their possession or Downing them if they have no Helmet",
+				"Then, increase the spread by one if not in Blackout. Any Section that number of Sections away from Vault X is now within its spread",
+				"Goo spreads through Locks but not Vents",
+				"If the spread reaches 5, proceed to Stationfall."
+			]
+		},
+		{
+			"id": 105,
+			"name": "Robotic Assassin",
+			"type": "Implacable Killbot",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Monster",
+					"location": "Vault X"
+				},
+				{
+					"type": "token",
+					"name": "Mark Target",
+					"location": "Console Actions"
+				},
+				{
+					"type": "special",
+					"name": "Target",
+					"location": "The acting player places Target on a Live Unescaped Human or Robot pawn."
+				}
+			],
+			"abilities": [
+			],
+			"instructions": [
+				"The Mark Target Console Action moves Target to a Live Unescaped Human or Robot pawn",
+				"At the end of any Resolve phase, Robotic Assassin must Down a Colocated Human or Robot that has the Target on them",
+				"If none, the player must Step Robotic Assassin one Section closer to any Human or Robot with the Mark",
+				"If tied, the acting player may choose which Section Robotic Assassin Steps to",
+				"Robotic Assassin is a Robot and can be Downed, Repaired and ignores hazards. Counts as a Robot for scoring purposes."
+			]
+		},
+		{
+			"id": 106,
+			"name": "Stable Wormhole",
+			"type": "Portal to CERN",
+			"setup": [
+				{
+					"type": "token",
+					"name": "Damage",
+					"location": "Reactor (if it isn’t already)"
+				}
+			],
+			"abilities": [
+			],
+			"instructions": [
+				"Any Items or Characters that are within Vault X or enter Vault X immediately Escape",
+				"Things that have Escaped in this manner are Colocated for scoring purposes"
+			]
+		},
+		{
+			"id": 107,
+			"name": "Tentacled Monstrosity",
+			"type": "Animal-plant Hybrid With An Appetite",
+			"setup": [
+				{
+					"type": "character",
+					"name": "Monster",
+					"location": "Vault X"
+				}
+			],
+			"abilities": [
+				{
+					"name": "Juggernaut",
+					"description": "Can Step through Locks (which removes them)"
+				},
+				{
+					"name": "Wary",
+					"description": "Cannot be Attacked in Dark Sections"
+				}
+			],
+			"instructions": [
+				"At the end of any Resolve phase, the acting player chooses a Colocated Character or Unpossessed Item to consume, moving it to this card. Consumed Characters cannot act or be interacted with, and are Downed if they are a Human without a Helmet",
+				"If there are no Colocated Characters or Items, Tentacled Monstrosity instead moves one adjacent Character or Unpossessed Item to its Section",
+				"If none, then the acting player must Step Tentacled Monstrosity one Section closer to the closest unconsumed Human (Live or Down)",
+				"If tied, the acting player chooses which Section Tentacled Monstrosity Steps to",
+				"Tentacled Monstrosity can only be Downed by Fire and has Self-Preservation. If Tentacled Monstrosity is Downed, all consumed Items and Characters are placed into its current Section"
+			]
+		}
+	],
 	"characterData": [
 		{
 			"id": 0,
@@ -1048,74 +1255,71 @@
 			"id": 13,
 			"name": "Drones",
 			"stats": {
-				"Influence Limit": 5,
-				"Pronouns": "He/Him",
-				"Character Type": "Human"
+				"Influence Limit": 0,
+				"Pronouns": "It/They/Them",
+				"Character Type": "Robot"
 			},
-			"flavour": "TO DO",
+			"flavour": "Drones: is there anything they can’t do? Yes. Most things. They are mindless automatons. You and Drones: is there anything you can’t do? Probably, but you can do a lot more with these devious little helpers than you can on your own. They are ready to assist you whenever you have access and ask nothing in return. Maybe you should buy a couple when all this is over.",
 			"setup": [
 				{
 					"type": "character",
-					"name": "Doctor (Hyde)",
-					"location": "Forward Hub"
+					"name": "Drones4",
+					"location": "Physics Lab"
+				},
+				{
+					"type": "character",
+					"name": "Drones6",
+					"location": "Outer Space"
 				},
 				{
 					"type": "special",
-					"name": "note",
-					"location": "Doctor has 2 Identity cards. Shuffle them in as normal before dealing the Identity cards"
+					"name": "Rule",
+					"location": "Drones have no Identity card. Each drone starts with an Integral Bludgeon"
 				},
 				{
 					"type": "token",
-					"name": "X-Secret",
-					"location": "Character Board"
+					"name": "Remote control token",
+					"location": "under Console Actions Actions"
 				}
 			],
-			"boardModifications": [],
+			"boardModifications": [
+				"Add Remote Control action under Console actions. Giving the players the possibility to: Perform an Action with any one Drone"
+			],
 			"bonusPoints": {
-				"type": "friend",
-				"reward": "2 points if Astrochimp is your BC and Escapes"
+				"type": "none",
+				"reward": "Drones cannot be anyone's BC"
 			},
 			"abilities": [
 				{
-					"name": "Tunnel Rat",
-					"description": "May Step through Vents"
+					"name": "Disassemble",
+					"description": "As an Action, can Down self to Repair a Colocated Section or Robot"
 				},
 				{
-					"name": "Loyal",
-					"description": "To Influence return all cubes on this card and place at least 1 more cube than was previously here"
+					"name": "Remote Control",
+					"description": "Cannot be Bribed, Influenced, or Activated directly. As a Console Action Characters may perform an Action with any Live Drone"
 				}
 			],
 			"revealPowers": [
 				{
-					"name": "Acrobatics",
-					"description": "Gains ZeroBorn: May Free Step or Airlock into a zero Gravity Section instead of a Free Pickup or Drop"
+					"name": "none",
+					"description": "N/A"
 				}
 			],
 			"agenda": {
-				"name": "Shiny Things",
+				"name": "None",
 				"points": [
-					{
-						"trigger": "3 points if Astrochimp Escapes",
-						"points": [
-							{
-								"trigger": "+2 points if in Possession of a Briefcase"
-							},
-							{
-								"trigger": "+2 points if in Possession of Artifact"
-							},
-							{
-								"trigger": "+2 points if in Possession of a Gun"
-							}
-						]
-					}
 				]
 			},
 			"tips": [
-				"TIPS GO HERE",
-				"ANOTHER TIP HERE"
+				"Drones are a useful way to Down Characters since they always Possess a Bludgeon",
+				"Drones are useful for Repairing Sections"
 			],
 			"quirks": [
-				"QUIRKS GO HERE"
+				"Drones have no Identity card",
+				"Drones are never Activated and therefore can never Free Pick Up or Drop",
+				"Drones can perform Actions and may Possess Items and Data",
+				"Drones Bludgeons are Integral and can not be removed from the Character card",
+				"Using Console action Remote control is the only way to act with Drones. Unless Digital Assistant is in the game"
 			]
 		},
 		{
@@ -1262,39 +1466,38 @@
 			"id": 16,
 			"name": "Inspector",
 			"stats": {
-				"Influence Limit": 5,
-				"Pronouns": "He/Him",
+				"Influence Limit": 4,
+				"Pronouns": "They/Them",
 				"Character Type": "Human"
 			},
-			"flavour": "TO DO",
+			"flavour": "Inspectors might seem antiquated or obsolete to the jaded youth of today with their slick Digital Assistants and their fancy all-the-information streams, but good old-fashioned skulking and trash-combing are talents for the ages. These times call for clever and observant individuals who can’t be shut down by hired goons or seduced off the trail by every Consort that bats their eyelashes just so. That said, everyone has their price, and this Inspector’s price is an early retirement all gift-wrapped in a shiny briefcase and just waiting to be seized... as evidence. In the meantime every person, robot, and errr, ‘not-applicable’ on board seems to have a secret they are trying to hide. And Inspector knows well that secrets inevitably lead to embarrassment, hurt feelings, and the occasional robotic assassin. Perhaps a little cleansing transparency is in order... starting with the video archives.",
 			"setup": [
 				{
 					"type": "character",
-					"name": "Engineer",
-					"location": "Array Control"
+					"name": "Inspector",
+					"location": "Chem Lab"
 				},
 				{
 					"type": "token",
-					"name": "Reactor",
-					"location": "Reactor Control Panel"
+					"name": "Flip Hail Mary",
+					"location": "to Inspector Shuttle side up"
 				}
 			],
 			"boardModifications": [
-				"Adding Reactor changes the state of Reactor",
-				"It cannot be Damaged with a Bludgeon. However If it is Damaged by other means, add Asphyxiation here and in connected through corridor Sections. Asphyxiation does not move through vents."
+				"The Inspector Shuttle must be Occupied by Inspector or Live Character with Jury Rig to launch"
 			],
 			"bonusPoints": {
-				"type": "grudge",
-				"reward": "2 points if Engineer is your BC and is not Live at Stationfall"
+				"type": "friend",
+				"reward": "2 points if Inspector is your BC and Escapes"
 			},
 			"abilities": [
 				{
-					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+					"name": "Investigator",
+					"description": "Can Pick Up Kompromat or Manufacture Data from adjacent Sections"
 				},
 				{
-					"name": "Jury Rig",
-					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+					"name": "Badge",
+					"description": "May Rob Items as if in possession of a Gun"
 				}
 			],
 			"revealPowers": [
@@ -1304,29 +1507,35 @@
 				}
 			],
 			"agenda": {
-				"name": "Preserve Ecosphere",
+				"name": "Dirty",
 				"points": [
 					{
-						"trigger": "3 points if Antimatter detonates On Board before Stationfall"
+						"trigger": "2 points if Inspector Escapes",
+						"points": [
+							{
+								"trigger": "+4 points if Possess Briefcase"
+							}
+						]
 					},
 					{
-						"trigger": "3 points if no Contaminated Characters Escape"
-					},
-					{
-						"trigger": "2 points if Artifact does not Escape"
-					},
-					{
-						"trigger": "1 point if Innocent, but may win even if Guilty"
+						"trigger": "1 point if Authorities end with Evidence",
+						"points": [
+							{
+								"trigger": "+2 points if News does note"
+							}
+						]
 					}
 				]
 			},
 			"tips": [
-				"Anyone can arm Antimatter by removing it from Magnetic Containment",
-				"Officers can arm the Antimatter by triggering Self-Destruct from Bridge",
-				"You can Decontaminate Characters in Tanks, or just Down them since you’re indifferent to Guilt."
+				"Briefcase is in the Suite",
+				"Evidence can be Manufactured in Security Station and sent using Array Control or by Escaping with it at Stationfall",
+				"Turn Jammers OFF to send Evidence to any Character",
+				"Your shuttle does not require Abandon Ship to launch",
+				"The later you Reveal, the more likely you’ll get Bribed"
 			],
 			"quirks": [
-				"If an unlaunched Pod is targeted by Overload and then launches before the Time marker resolves, the Pod is Annihilated when the Time marker resolves"
+				"Inspector scores double for Possessed Bribes"
 			]
 		},
 		{
