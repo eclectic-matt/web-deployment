@@ -41,7 +41,8 @@ function loadCharacters(status, json)
 	//selected = [...json.characters];
 	//INIT AS TUTORIAL CHARACTERS 
 	selected = [...json.tutorialCharacters];
-	
+	selected.push(...json.projectXCharacters);
+	console.log('selected', selected);
 	//OUTPUT DATA
 	outputCharacterData();
 }
@@ -139,22 +140,79 @@ function outputCharacterData()
 	//SELECT LIST
 	let selectedDiv = document.getElementById('selectList');
 	selectedDiv.innerHTML = null;
+	
+	let selectCharHead = document.createElement('h4');
+	selectCharHead.innerHTML = '<h4>Characters</h4>';
+	selectedDiv.appendChild(selectCharHead);
+	
+	let charactersBox = document.createElement('div');
+	charactersBox.style.display = 'flex';
+	charactersBox.style.flexDirection = 'row';
+	charactersBox.style.flexWrap = 'wrap';
+	charactersBox.style.justifyContent = 'space-between';
+	charactersBox.style.alignContent = 'space-around';
+	
 	data.characters.forEach( (name) => {
+		let charBox = document.createElement('div');
+		charBox.style.alignSelf = 'start';
+		charBox.style.border = '1px solid black';
+		charBox.style.padding = '5px';
+		
 		let char = getCharData(name);
 		let charLabel = document.createElement('label');
 		charLabel.innerHTML = char.name;
 		charLabel.for = char.name.replace(' ', '_');
-		selectedDiv.appendChild(charLabel);
+		charBox.appendChild(charLabel);
 		let charCheck = document.createElement('input');
 		charCheck.type = 'checkbox';
 		charCheck.className = 'charSelect';
 		charCheck.id = char.name.replace(' ', '_');
 		//charCheck.checked = true;
 		charCheck.checked = selected.includes(char.name);
-		selectedDiv.appendChild(charCheck);
+		charBox.appendChild(charCheck);
 		let cBr = document.createElement('br');
-		selectedDiv.appendChild(cBr);
+		charBox.appendChild(cBr);
+		charactersBox.appendChild(charBox);
 	});
+	
+	selectedDiv.appendChild(charactersBox);
+	
+	let selectXHead = document.createElement('h4');
+	selectXHead.innerHTML = '<h4>Project X</h4>';
+	selectedDiv.appendChild(selectXHead);
+	
+	let projectsBox = document.createElement('div');
+	projectsBox.style.display = 'flex';
+	projectsBox.style.flexDirection = 'row';
+	projectsBox.style.flexWrap = 'wrap';
+	projectsBox.style.justifyContent = 'space-between';
+	projectsBox.style.alignContent = 'flex-start';
+	
+	data.projectXCharacters.forEach( (name) => {
+		
+		let charBox = document.createElement('div');
+		charBox.style.alignSelf = 'start';
+		charBox.style.border = '1px solid black';
+		charBox.style.padding = '5px';
+		
+		let charLabel = document.createElement('label');
+		charLabel.innerHTML = name;
+		charLabel.for = name.replace(' ', '_');
+		charBox.appendChild(charLabel);
+		let charCheck = document.createElement('input');
+		charCheck.type = 'checkbox';
+		charCheck.className = 'charSelect';
+		charCheck.id = name.replace(' ', '_');
+		//charCheck.checked = true;
+		charCheck.checked = selected.includes(name);
+		charBox.appendChild(charCheck);
+		let cBr = document.createElement('br');
+		charBox.appendChild(cBr);
+		projectsBox.appendChild(charBox);
+	})
+	
+	selectedDiv.appendChild(projectsBox);
+	
 	//Save changes button
 	let saveBtn = document.createElement('button');
 	saveBtn.className = 'w3-btn w3-green';
@@ -163,6 +221,25 @@ function outputCharacterData()
 	}
 	saveBtn.innerHTML = 'Save Changes';
 	selectedDiv.appendChild(saveBtn);
+	
+	//PROJECT X OUTPUT
+	let projectDiv = document.getElementById('projectList');
+	projectDiv.innerHTML = null;
+	index = 0;
+	
+	data.projectXData.forEach( (project) => {
+		if(!selected.includes(project.name)) return false;
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cHead = document.createElement('h3');
+		cHead.className = "w3-center";
+		cHead.innerHTML = '<b>' + project.name + '</b>';
+		projectDiv.appendChild(cHead);
+		let cDiv = createProjectXDiv(project);
+		projectDiv.appendChild(cDiv);
+		let cBr = document.createElement('hr');
+		projectDiv.appendChild(cBr);
+	})
 }
 
 function updateCharSelection()
@@ -398,6 +475,61 @@ function createAbilityDiv(char)
 	return abilityDiv;
 }
 
+function createProjectXDiv(project)
+{
+	//INIT DIV TO HOLD PROJECT DATA
+	let projectDiv = document.createElement('div');
+	projectDiv.id = project.id;
+	projectDiv.className = "w3-padding-large w3-red";
+		
+	//PROJECT DATA OUTPUT
+	let setupDiv = document.createElement('div');
+	let charSetupLabel = document.createElement('h3');
+	charSetupLabel.innerHTML = "Setup";
+	setupDiv.appendChild(charSetupLabel);
+	let charSetup = document.createElement('ul');
+	project.setup.forEach((setup) => {
+		let li = document.createElement('li');
+		li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' - " + setup.location;
+			charSetup.appendChild(li);
+	});
+	setupDiv.appendChild(charSetup);
+	setupDiv.className = "w3-padding-small";
+	projectDiv.appendChild(setupDiv);
+	
+	if(project.abilities.length > 0){
+		let abilityDiv = document.createElement('div');
+		abilityDiv.className = "w3-padding-small";
+		let charAbilityLabel = document.createElement('h3');
+		charAbilityLabel.innerHTML = "Abilities";
+		abilityDiv.appendChild(charAbilityLabel);
+		let charAbilities = document.createElement('ul');
+		project.abilities.forEach( (ability) => {
+			let li = document.createElement('li');
+			li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
+			charAbilities.appendChild(li);
+		});
+		abilityDiv.appendChild(charAbilities);
+		projectDiv.appendChild(abilityDiv);
+	}
+	
+	let instructionsDiv = document.createElement('div');
+	instructionsDiv.className = "w3-padding-small";
+	let charInstructionsLabel = document.createElement('h3');
+	charInstructionsLabel.innerHTML = "Instructions";
+	instructionsDiv.appendChild(charInstructionsLabel);
+	let charInstructions = document.createElement('ul');
+	project.instructions.forEach( (instruct) => {
+		let li = document.createElement('li');
+		li.innerHTML = instruct;
+		charInstructions.appendChild(li);
+	});
+	instructionsDiv.appendChild(charInstructions);
+	projectDiv.appendChild(instructionsDiv);
+	
+	return projectDiv;
+}
+
 function toggleAccordionContent(id) {
   var x = document.getElementById(id);
   if (x.className.indexOf("w3-show") == -1) {
@@ -479,6 +611,10 @@ function init() {
 			class="nav w3-bar-item w3-button"
 		>Ability</button>
 		<button 
+			onclick="showTab('project')"
+			class="nav w3-bar-item w3-button"
+		>X</button>
+		<button 
 			onclick="showTab('select')"
 			class="nav w3-bar-item w3-button"
 		>Select</button>
@@ -502,15 +638,21 @@ function init() {
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
-	<div id="abilities" class="tab w3-indigo" style="display:hidden;">
+	<div id="abilities" class="tab w3-blue" style="display:hidden;">
 		<h2>Abilities</h2>
 		<div id="abilityList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
-	<div id="select" class="tab w3-indigo" style="display:hidden;">
+	<div id="select" class="tab w3-grey" style="display:hidden;">
 		<h2>Selection</h2>
 		<div id="selectList" class="w3-padding-small">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="project" class="tab w3-red" style="display:hidden;">
+		<h2>Project X</h2>
+		<div id="projectList" class="w3-padding-small">
 			<!-- filled by loadCharacters -->
 		</div>
 	</div>
