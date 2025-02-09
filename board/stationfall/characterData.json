@@ -56,6 +56,11 @@
 	],
 	"tooltips": [
 		{
+			"find": "Down",
+			"icon": "",
+			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
+		},
+		{
 			"find": "Escapes",
 			"icon": "🌍",
 			"tooltip": "Character reaches Earth, usually leaving in a Pod. The Character may be Down or Live, they still count as having Escaped if they are not Annihilated"
@@ -123,7 +128,7 @@
 		{
 			"find": "Project X",
 			"icon": "",
-			"tooltip": "The contents of Vault X, randomly determined by the card drawn face down at the start of the game"
+			"tooltip": "The contents of Vault X, randomly determined by the card drawn face down at the start of the game. It can be released by an Officer on the Bridge or Cryo Lab"
 		},
 		{
 			"find": "Antimatter",
@@ -144,11 +149,6 @@
 			"find": "Kompromat",
 			"icon": "K",
 			"tooltip": "Kompromat stands for Compromising Materials and is found around the Board. Players (not characters) pick up Kompromat, and this can be used to make the relevant character perform 1 Free action"
-		},
-		{
-			"find": "Down",
-			"icon": "",
-			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
 		},
 		{
 			"find": "Bonus Points",
