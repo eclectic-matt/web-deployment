@@ -54,6 +54,113 @@
 		"Stranger",
 		"Troubleshooter"
 	],
+	"tooltips": [
+		{
+			"find": "Escapes",
+			"icon": "🌍",
+			"tooltip": "Character reaches Earth, usually leaving in a Pod. The Character may be Down or Live, they still count as having Escaped if they are not Annihilated"
+		},
+		{
+			"find": "Briefcase",
+			"icon": "💼",
+			"tooltip": "Briefcase is an Item in Suite"
+		},
+		{
+			"find": "Artifact",
+			"icon": "🪬",
+			"tooltip": "Artifact is an Item in Physics Lab"
+		},
+		{
+			"find": "Gun",
+			"icon": "🔫",
+			"tooltip": "Guns can be Manufactured by a Character with Officer in Print Shop or acquired from another Character"
+		},
+		{
+			"find": "Contaminated",
+			"icon": "☣️",
+			"tooltip": "Characters can get contaminated in Bio Lab. This is an Item which takes up a slot on their character board"
+		},
+		{
+			"find": "Contamination",
+			"icon": "☣️",
+			"tooltip": "Characters can get contaminated in Bio Lab. This is an Item which takes up a slot on their character board"
+		},
+		{
+			"find": "Officer",
+			"icon": "",
+			"tooltip": "Officer is an ability shown on some characters, such as Station Chief, Counselor, and  Engineer. Officers can Step through Locks, unlocking them, as well as some special abilities in the Vault X and the Bridge"
+		},
+		{
+			"find": "Fugitive",
+			"icon": "",
+			"tooltip": "Fugitive is an ability shown on some characters, such as Boarder and Cyborg. Security cannot Attack players unless they are Suspect, or Fugitives"
+		},
+		{
+			"find": "X-Secret",
+			"icon": "X",
+			"tooltip": "X-Secret is data on the contents of Vault X. It can be manufactured in Bio Lab"
+		},
+		{
+			"find": "Evidence",
+			"icon": "",
+			"tooltip": "Evidence can be manufactured in the Security Station. It is only useful for causing/disproving Guilt, and some Agendas"
+		},
+		{
+			"find": "News",
+			"icon": "",
+			"tooltip": "News are the media organisations on Earth who can receive transmitted data from the Array. This is useful for some agendas"
+		},
+		{
+			"find": "Stationfall",
+			"icon": "🌪️",
+			"tooltip": "At Game End, when the Station explodes"
+		},
+		{
+			"find": "Betrayal Box",
+			"icon": "",
+			"tooltip": "When players Reveal, any cubes belonging to other players are lost to the Betrayal Box"
+		},
+		{
+			"find": "Project X",
+			"icon": "",
+			"tooltip": "The contents of Vault X, randomly determined by the card drawn face down at the start of the game"
+		},
+		{
+			"find": "Antimatter",
+			"icon": "",
+			"tooltip": "Antimatter is an item in Magnetic Containment and can be armed by moving it outside of Magnetic Containment or triggering Self-Destruct"
+		},
+		{
+			"find": "Innocent",
+			"icon": "",
+			"tooltip": "Characters start Innocent but can become Suspect by causing a Human to become Down in Lit Sections"
+		},
+		{
+			"find": "Guilty",
+			"icon": "",
+			"tooltip": "When players become suspect, they can be made Guilty if evidence is transmitted to the Authorities. Guilty players cannot win. Players can revert themselves to suspect by gathering their own evidence to transmit to the Authorities themselves if they Escape"
+		},
+		{
+			"find": "Kompromat",
+			"icon": "K",
+			"tooltip": "Kompromat stands for Compromising Materials and is found around the Board. Players (not characters) pick up Kompromat, and this can be used to make the relevant character perform 1 Free action"
+		},
+		{
+			"find": "Down",
+			"icon": "",
+			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
+		},
+		{
+			"find": "Bonus Points",
+			"icon": "",
+			"tooltip": "Points earned through your Bonus Character, depending on whether they Escape (friend) or are Not Live (grudge)"
+		},
+		{
+			"find": "BC",
+			"icon": "",
+			"tooltip": "Bonus Character - the Secret Identity card you are not using as your Player Character (the one you Reveal as). You score bonus points depending on whether they Escape (friend) or are Not Live (grudge)"
+		}
+	],
 	"projectXData": [
 		{
 			"id": 100,
