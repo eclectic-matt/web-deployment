@@ -87,7 +87,7 @@ function outputCharacterData()
 		agendaDiv.appendChild(cDiv);
 		let bonusPoints = document.createElement('p');
 		bonusPoints.className = 'w3-center';
-		bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type.toUpperCase() + "]</b> " + char.bonusPoints.reward;
+		bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type.toUpperCase() + "]</b> " + generateHelpTooltips(char.bonusPoints.reward);
 		agendaDiv.appendChild(bonusPoints);
 		let tipsDiv = createTipsList(char);
 		agendaDiv.appendChild(tipsDiv);
@@ -332,7 +332,7 @@ function createCharacterDiv(char)
 	//Bonus points 
 	let bonusPoints = document.createElement('p');
 	bonusPoints.className = 'w3-center';
-	bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type.toUpperCase() + "]</b> " + char.bonusPoints.reward;
+	bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type.toUpperCase() + "]</b> " + generateHelpTooltips(char.bonusPoints.reward);
 	agendaDiv.appendChild(bonusPoints);
 	//Add to main div
 	charDiv.appendChild(agendaDiv);
@@ -391,7 +391,8 @@ function createAgendaList(agenda, charName)
 	let returnList = document.createElement('ul');
 	for(let i=0; i < agenda.length; i++){
 		let item = document.createElement('li');
-		item.innerHTML = agenda[i].trigger.replaceAll(charName, charLink);
+		//item.innerHTML = agenda[i].trigger.replaceAll(charName, charLink);
+		item.innerHTML = generateHelpTooltips(agenda[i].trigger);
 		returnList.appendChild(item);
 		if(agenda[i].points){
 			let subList = createAgendaList(agenda[i].points, charName);
@@ -584,6 +585,18 @@ function getCharLink(charName)
 	return '<a href="#' + charId + '" onclick="openChar(' + charName + ', ' + charId + ')">' + charName + '</a>';
 }
 
+function generateHelpTooltips(inputString)
+{
+	const tooltips = data.tooltips;
+	for(const tip of tooltips){
+		if(!inputString.includes(tip.find)) continue;
+		let replacement = '<span class="w3-tooltip" style="text-decoration: underline; font-weight:bolder;">' + tip.find + '<span class="w3-text w3-black w3-padding"><em>' + tip.tooltip + '</em></span></span>';
+		//console.log('replacing ' + tip.find + ' with ' + replacement+ ' in ' + inputString);
+		inputString = inputString.replaceAll(tip.find, replacement);
+	}
+	return inputString;
+}
+
 const charData = getJSON('characterData.json', loadCharacters);
 
 function init() {
@@ -596,27 +609,27 @@ function init() {
 	<div class="w3-bar w3-purple">
 		<button 
 			onclick="showTab('characters')"
-			class="nav w3-bar-item w3-button"
+			class="nav w3-bar-item w3-button w3-small"
 		>Chars</button>
 		<button 
 			onclick="showTab('setup')"
-			class="nav w3-bar-item w3-button"
+			class="nav w3-bar-item w3-button w3-small"
 		>Setup</button>
 		<button 
 			onclick="showTab('agenda')"
-			class="nav w3-bar-item w3-button"
+			class="nav w3-bar-item w3-button w3-small"
 		>Agenda</button>
 		<button 
 			onclick="showTab('abilities')"
-			class="nav w3-bar-item w3-button"
+			class="nav w3-bar-item w3-button w3-small"
 		>Ability</button>
 		<button 
 			onclick="showTab('project')"
-			class="nav w3-bar-item w3-button"
+			class="nav w3-bar-item w3-button w3-small"
 		>X</button>
 		<button 
 			onclick="showTab('select')"
-			class="nav w3-bar-item w3-button"
+			class="nav w3-bar-item w3-button w3-small"
 		>Select</button>
 	</div>
 	<h1>Stationfall Reference</h1>
