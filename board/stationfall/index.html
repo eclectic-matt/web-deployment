@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Stationfall</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--link rel="icon" type="image/png" href="https://eclectic-matt.github.io/favicon.ico" /-->
+<script>
+
+var data = undefined;
+var selected = [];
+
+/**
+ * 
+ * @param {The JSON file} url 
+ * @param {The function to call with the response} callback 
+ */
+const getJSON = function(url, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onload = function() {
+		var status = xhr.status;
+		if (status === 200) {
+			callback(null, xhr.response);
+		} else {
+			callback(status, xhr.response);
+		}
+	};
+	xhr.send();
+};
+
+
+function loadCharacters(status, json)
+{
+	//STORE DATA FOR OTHER FUNCTIONALITY
+	data = json;
+	
+	//INIT SELECTED CHARACTERS (ALL)
+	//selected = [...json.characters];
+	//INIT AS TUTORIAL CHARACTERS 
+	selected = [...json.tutorialCharacters];
+	selected.push(...json.projectXCharacters);
+	console.log('selected', selected);
+	//OUTPUT DATA
+	outputCharacterData();
+}
+
+function outputCharacterData()
+{
+	let listDiv = document.getElementById('charactersList');
+	listDiv.innerHTML = null;
+	let index = 0;
+	
+	data.characterData.forEach( (char) => {
+		
+		if(char.name === 'TEMPLATE') return false;
+		if(!selected.includes(char.name)) return false;
+		
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cBtn = createCharacterButton(char, rowOdd);
+		listDiv.appendChild(cBtn);
+		let cDiv = createCharacterDiv(char);
+		listDiv.appendChild(cDiv);
+		let cBr = document.createElement('br');
+		listDiv.appendChild(cBr);
+	})
+	
+	let agendaDiv = document.getElementById('agendasList');
+	agendaDiv.innerHTML = null;
+	index = 0;
+	
+	data.characterData.forEach( (char) => {
+		
+		if(!selected.includes(char.name)) return false;
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cHead = document.createElement('h3');
+		cHead.className = "w3-center";
+		cHead.innerHTML = '<b>' + char.name + '</b>';
+		agendaDiv.appendChild(cHead);
+		let cDiv = createAgendaList(char.agenda.points, char.name);
+		//cDiv.innerHTML.replaceAll(char.name, '<a onclick="openChar(' + char.name + ')">' + char.name + '</a>');
+		//cDiv.className += " w3-padding-small";
+		agendaDiv.appendChild(cDiv);
+		let bonusPoints = document.createElement('p');
+		bonusPoints.className = 'w3-center';
+		bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type.toUpperCase() + "]</b> " + generateHelpTooltips(char.bonusPoints.reward);
+		agendaDiv.appendChild(bonusPoints);
+		let tipsDiv = createTipsList(char);
+		agendaDiv.appendChild(tipsDiv);
+		let cBr = document.createElement('hr');
+		agendaDiv.appendChild(cBr);
+	})
+	
+	//===========
+	//SETUP
+	//===========
+	let setupDiv = document.getElementById('setupList');
+	setupDiv.innerHTML = null;
+	index = 0;
+	
+	data.characterData.forEach( (char) => {
+		if(!selected.includes(char.name)) return false;
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cHead = document.createElement('h3');
+		cHead.className = "w3-center";
+		cHead.innerHTML = '<b>' + char.name + '</b>';
+		setupDiv.appendChild(cHead);
+		let cDiv = createSetupDiv(char);
+		setupDiv.appendChild(cDiv);
+		let cBr = document.createElement('hr');
+		setupDiv.appendChild(cBr);
+	})
+	
+	//===========
+	//ABILITIES 
+	//===========	
+	let abilityDiv = document.getElementById('abilityList');
+	abilityDiv.innerHTML = null;
+	index = 0;
+	
+	data.characterData.forEach( (char) => {
+		if(!selected.includes(char.name)) return false;
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cHead = document.createElement('h3');
+		cHead.className = "w3-center";
+		cHead.innerHTML = '<b>' + char.name + '</b>';
+		abilityDiv.appendChild(cHead);
+		let cDiv = createAbilityDiv(char);
+		abilityDiv.appendChild(cDiv);
+		let cBr = document.createElement('hr');
+		abilityDiv.appendChild(cBr);
+	})
+	
+	//SELECT LIST
+	let selectedDiv = document.getElementById('selectList');
+	selectedDiv.innerHTML = null;
+	
+	let selectCharHead = document.createElement('h4');
+	selectCharHead.innerHTML = '<h4>Characters</h4>';
+	selectedDiv.appendChild(selectCharHead);
+	
+	let charactersBox = document.createElement('div');
+	charactersBox.style.display = 'flex';
+	charactersBox.style.flexDirection = 'row';
+	charactersBox.style.flexWrap = 'wrap';
+	charactersBox.style.justifyContent = 'space-between';
+	charactersBox.style.alignContent = 'space-around';
+	
+	data.characters.forEach( (name) => {
+		let charBox = document.createElement('div');
+		charBox.style.alignSelf = 'start';
+		charBox.style.border = '1px solid black';
+		charBox.style.padding = '5px';
+		
+		let char = getCharData(name);
+		let charLabel = document.createElement('label');
+		charLabel.innerHTML = char.name;
+		charLabel.for = char.name.replace(' ', '_');
+		charBox.appendChild(charLabel);
+		let charCheck = document.createElement('input');
+		charCheck.type = 'checkbox';
+		charCheck.className = 'charSelect';
+		charCheck.id = char.name.replace(' ', '_');
+		//charCheck.checked = true;
+		charCheck.checked = selected.includes(char.name);
+		charBox.appendChild(charCheck);
+		let cBr = document.createElement('br');
+		charBox.appendChild(cBr);
+		charactersBox.appendChild(charBox);
+	});
+	
+	selectedDiv.appendChild(charactersBox);
+	
+	let selectXHead = document.createElement('h4');
+	selectXHead.innerHTML = '<h4>Project X</h4>';
+	selectedDiv.appendChild(selectXHead);
+	
+	let projectsBox = document.createElement('div');
+	projectsBox.style.display = 'flex';
+	projectsBox.style.flexDirection = 'row';
+	projectsBox.style.flexWrap = 'wrap';
+	projectsBox.style.justifyContent = 'space-between';
+	projectsBox.style.alignContent = 'flex-start';
+	
+	data.projectXCharacters.forEach( (name) => {
+		
+		let charBox = document.createElement('div');
+		charBox.style.alignSelf = 'start';
+		charBox.style.border = '1px solid black';
+		charBox.style.padding = '5px';
+		
+		let charLabel = document.createElement('label');
+		charLabel.innerHTML = name;
+		charLabel.for = name.replace(' ', '_');
+		charBox.appendChild(charLabel);
+		let charCheck = document.createElement('input');
+		charCheck.type = 'checkbox';
+		charCheck.className = 'charSelect';
+		charCheck.id = name.replace(' ', '_');
+		//charCheck.checked = true;
+		charCheck.checked = selected.includes(name);
+		charBox.appendChild(charCheck);
+		let cBr = document.createElement('br');
+		charBox.appendChild(cBr);
+		projectsBox.appendChild(charBox);
+	})
+	
+	selectedDiv.appendChild(projectsBox);
+	
+	//Save changes button
+	let saveBtn = document.createElement('button');
+	saveBtn.className = 'w3-btn w3-green';
+	saveBtn.onclick = function() {
+		updateCharSelection();
+	}
+	saveBtn.innerHTML = 'Save Changes';
+	selectedDiv.appendChild(saveBtn);
+	
+	//PROJECT X OUTPUT
+	let projectDiv = document.getElementById('projectList');
+	projectDiv.innerHTML = null;
+	index = 0;
+	
+	data.projectXData.forEach( (project) => {
+		if(!selected.includes(project.name)) return false;
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cHead = document.createElement('h3');
+		cHead.className = "w3-center";
+		cHead.innerHTML = '<b>' + project.name + '</b>';
+		projectDiv.appendChild(cHead);
+		let cDiv = createProjectXDiv(project);
+		projectDiv.appendChild(cDiv);
+		let cBr = document.createElement('hr');
+		projectDiv.appendChild(cBr);
+	})
+}
+
+function updateCharSelection()
+{
+	//CLEAR SELECTED 
+	selected = [];
+	let checkBoxes = document.getElementsByClassName('charSelect');
+	Array.from(checkBoxes).forEach( (el) => {
+		if(el.checked){
+			selected.push(el.id.replace('_', ' '));
+		}
+	})
+	console.log('updatedSelect', selected);
+	outputCharacterData();
+}
+
+function getCharData(name)
+{
+	//DATA NOT LOADED - FALSE
+	if(!data) return false;
+	//CHARACTER NAME NOT FOUND - FALSE
+	if(!data.characters.includes(name)) return false;
+	//FIND THE MATCHING CHARACTER
+	let charData = data.characterData.find( (char) => char.name == name);
+	//SHOULD HAVE CHARACTER, RETURN RESULT OF .find() 
+	return charData;
+}
+
+function createCharacterButton(char, odd=false)
+{
+	//INIT BUTTON TO SHOW/HIDE CHARACTER DIV
+	let btn = document.createElement('button');
+	btn.onclick= function() {
+		toggleAccordionContent(char.id);
+	}
+	btn.className = "w3-btn w3-block";
+	if(odd){
+		btn.className += " w3-purple";
+	}else{
+		btn.className += " w3-deep-purple";
+	}
+	btn.innerHTML = char.name;
+	return btn;
+}
+
+function createCharacterDiv(char) 
+{
+
+	//INIT DIV TO HOLD CHAR DATA
+	let charDiv = document.createElement('div');
+	charDiv.id = char.id;
+	charDiv.className = "accordion w3-hide w3-padding-large w3-dark-grey";
+		
+	//CHARACTER DATA OUTPUT
+		
+	let setupDiv = createSetupDiv(char);
+	setupDiv.className = "w3-indigo w3-padding-small";
+	charDiv.appendChild(setupDiv);
+		
+	//==============
+	// STATS
+	//==============
+	let charStatsTable = document.createElement('table');
+	charStatsTable.className = "w3-table-all w3-text-purple";
+	let statKeys = Object.keys(char.stats);
+	for(let i = 0; i < statKeys.length; i++){
+		let statName = statKeys[i];
+		let statFormatted = statKeys[i].charAt(0).toUpperCase() + statKeys[i].substring(1).toLowerCase();
+		let value = char.stats[statName];
+		let statRow = document.createElement('tr');
+		statRow.innerHTML = '<td>' + statFormatted + '</td><td>' + value + '</td>';
+		charStatsTable.appendChild(statRow);
+	}
+	charDiv.appendChild(charStatsTable);
+		
+	//==============
+	// AGENDA
+	//==============
+	let agendaDiv = document.createElement('div');
+	agendaDiv.className = "w3-teal w3-padding-small";
+	let agendaName = char.agenda.name;
+	let agendaHead = document.createElement('h3');
+	agendaHead.innerHTML = 'AGENDA: ' + agendaName;
+	agendaDiv.appendChild(agendaHead);
+	/*let agendaNameHead = document.createElement('h3');
+	agendaNameHead.innerHTML = char.agenda.name;
+	agendaDiv.appendChild(agendaNameHead);*/
+	let agendaList = createAgendaList(char.agenda.points, char.name);
+	agendaDiv.appendChild(agendaList);
+	//Bonus points 
+	let bonusPoints = document.createElement('p');
+	bonusPoints.className = 'w3-center';
+	bonusPoints.innerHTML = 'Bonus Points: <b>[' + char.bonusPoints.type.toUpperCase() + "]</b> " + generateHelpTooltips(char.bonusPoints.reward);
+	agendaDiv.appendChild(bonusPoints);
+	//Add to main div
+	charDiv.appendChild(agendaDiv);
+	
+	//==============
+	// TIPS
+	//==============
+	let tipsDiv = createTipsList(char);
+	tipsDiv.className = "w3-teal w3-padding-small";
+	charDiv.appendChild(tipsDiv);
+		
+	//==============
+	// ABILITY
+	//==============
+	let abilityDiv = createAbilityDiv(char);
+	abilityDiv.className = "w3-blue w3-padding-small";
+	charDiv.appendChild(abilityDiv);
+		
+	//==============
+	// QUIRKS
+	//==============
+	let quirksDiv = document.createElement('div');
+	quirksDiv.className = "w3-blue w3-padding-small";
+	let quirksLabel = document.createElement('h3');
+	quirksLabel.innerHTML = "Quirks";
+	quirksDiv.appendChild(quirksLabel);
+		
+	let charQuirks = document.createElement('span');
+	charQuirks.innerHTML = '<ul><li>' + char.quirks.join('</li><li>') + '</li></ul>';
+	quirksDiv.appendChild(charQuirks);
+	charDiv.appendChild(quirksDiv);
+		
+	//==============
+	// FLAVOUR
+	//==============
+	let flavourDiv = document.createElement('div');
+	flavourDiv.className = "w3-black w3-padding-small";
+	let charFlavourLabel = document.createElement('h3');
+	charFlavourLabel.innerHTML = "Flavour Text";
+	flavourDiv.appendChild(charFlavourLabel);
+		
+	let charFlavour = document.createElement('em');
+	charFlavour.innerHTML = char.flavour;
+	flavourDiv.appendChild(charFlavour);
+	charDiv.appendChild(flavourDiv);
+		
+	//characterWrapper.appendChild(btn);
+	//characterWrapper.appendChild(charDiv);
+	return charDiv;
+}
+
+//Recursive function to generate sublists of agendas.
+function createAgendaList(agenda, charName)
+{
+	let charLink = getCharLink(charName);
+	let returnList = document.createElement('ul');
+	for(let i=0; i < agenda.length; i++){
+		let item = document.createElement('li');
+		//item.innerHTML = agenda[i].trigger.replaceAll(charName, charLink);
+		item.innerHTML = generateHelpTooltips(agenda[i].trigger);
+		returnList.appendChild(item);
+		if(agenda[i].points){
+			let subList = createAgendaList(agenda[i].points, charName);
+			returnList.appendChild(subList);
+		}
+	}
+	return returnList;
+}
+
+function createTipsList(char)
+{
+	let tipsDiv = document.createElement('div');
+	//tipsDiv.className = "w3-deep-orange w3-padding-small";
+	let tipsLabel = document.createElement('h3');
+	tipsLabel.innerHTML = "Tips";
+	tipsDiv.appendChild(tipsLabel);
+	let charTips = document.createElement('span');
+	charTips.innerHTML = '<ul><li>' + char.tips.join('</li><li>') + '</li></ul>';
+	tipsDiv.appendChild(charTips);
+	return tipsDiv;
+}
+
+function createSetupDiv(char) 
+{
+	//==============
+	// SETUP
+	//==============
+	let setupDiv = document.createElement('div');
+	let charSetupLabel = document.createElement('h3');
+	charSetupLabel.innerHTML = "Setup";
+	setupDiv.appendChild(charSetupLabel);
+
+	let charSetup = document.createElement('ul');
+	char.setup.forEach((setup) => {
+		let li = document.createElement('li');
+		li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' - " + setup.location;
+			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
+			charSetup.appendChild(li);
+	});
+	setupDiv.appendChild(charSetup);
+	if(char.boardModifications.length > 0){
+		let boardModLabel = document.createElement('h3');
+		boardModLabel.innerHTML = "Board Modifications";
+		setupDiv.appendChild(boardModLabel);
+		let boardMod = document.createElement('ul');
+		char.boardModifications.forEach((setup) => {
+			let li = document.createElement('li');
+			li.innerHTML = setup;
+			//li.innerHTML = setup.type.toTitleCase() + " '" + setup.name + "' placed in " + setup.location;
+			boardMod.appendChild(li);
+		});
+		setupDiv.appendChild(boardMod);
+	}
+	return setupDiv;
+}
+
+function createAbilityDiv(char)
+{
+	let abilityDiv = document.createElement('div');
+	abilityDiv.className = "w3-blue w3-padding-small";
+	let charAbilityLabel = document.createElement('h3');
+	charAbilityLabel.innerHTML = "Abilities";
+	abilityDiv.appendChild(charAbilityLabel);
+	let charAbilities = document.createElement('ul');
+	char.abilities.forEach( (ability) => {
+		let li = document.createElement('li');
+		li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
+		charAbilities.appendChild(li);
+	});
+	abilityDiv.appendChild(charAbilities);
+	let revealAbilityLabel = document.createElement('h3');
+	revealAbilityLabel.innerHTML = "Reveal Powers";
+	abilityDiv.appendChild(revealAbilityLabel);
+	let revealAbilities = document.createElement('ul');
+	char.revealPowers.forEach( (ability) => {
+		let li = document.createElement('li');
+		li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
+		revealAbilities.appendChild(li);
+	})
+	abilityDiv.appendChild(revealAbilities);
+	return abilityDiv;
+}
+
+function createProjectXDiv(project)
+{
+	//INIT DIV TO HOLD PROJECT DATA
+	let projectDiv = document.createElement('div');
+	projectDiv.id = project.id;
+	projectDiv.className = "w3-padding-large w3-red";
+		
+	//PROJECT DATA OUTPUT
+	let setupDiv = document.createElement('div');
+	let charSetupLabel = document.createElement('h3');
+	charSetupLabel.innerHTML = "Setup";
+	setupDiv.appendChild(charSetupLabel);
+	let charSetup = document.createElement('ul');
+	project.setup.forEach((setup) => {
+		let li = document.createElement('li');
+		li.innerHTML = setup.type.charAt(0).toUpperCase() + setup.type.substring(1).toLowerCase() + " '" + setup.name + "' - " + setup.location;
+			charSetup.appendChild(li);
+	});
+	setupDiv.appendChild(charSetup);
+	setupDiv.className = "w3-padding-small";
+	projectDiv.appendChild(setupDiv);
+	
+	if(project.abilities.length > 0){
+		let abilityDiv = document.createElement('div');
+		abilityDiv.className = "w3-padding-small";
+		let charAbilityLabel = document.createElement('h3');
+		charAbilityLabel.innerHTML = "Abilities";
+		abilityDiv.appendChild(charAbilityLabel);
+		let charAbilities = document.createElement('ul');
+		project.abilities.forEach( (ability) => {
+			let li = document.createElement('li');
+			li.innerHTML = '<b>' + ability.name + "</b> => " + ability.description;
+			charAbilities.appendChild(li);
+		});
+		abilityDiv.appendChild(charAbilities);
+		projectDiv.appendChild(abilityDiv);
+	}
+	
+	let instructionsDiv = document.createElement('div');
+	instructionsDiv.className = "w3-padding-small";
+	let charInstructionsLabel = document.createElement('h3');
+	charInstructionsLabel.innerHTML = "Instructions";
+	instructionsDiv.appendChild(charInstructionsLabel);
+	let charInstructions = document.createElement('ul');
+	project.instructions.forEach( (instruct) => {
+		let li = document.createElement('li');
+		li.innerHTML = instruct;
+		charInstructions.appendChild(li);
+	});
+	instructionsDiv.appendChild(charInstructions);
+	projectDiv.appendChild(instructionsDiv);
+	
+	return projectDiv;
+}
+
+function toggleAccordionContent(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+function showAccordionContent(id) {
+ var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  }
+}
+
+function hideAllAccordionContent() {
+	Array.from(document.getElementsByClassName('accordion')).forEach( (el) => {
+		el.className.replace(' w3-show', '');
+	})
+}
+
+function highlightTab(name) {
+	const btns = document.getElementsByClassName('nav');
+    for(let i = 0; i < btns.length; i++){
+        if(btns[i].value == name){
+        	btns[i].style.backgroundColor = 'green';
+        }else{
+        	btns[i].style.backgroundColor = 'purple';
+        }
+    }	
+}
+
+function showTab(tabName) {
+    const tabs = document.getElementsByClassName('tab');
+    for(let i = 0; i < tabs.length; i++){
+        tabs[i].style.display = 'none';
+    }
+    document.getElementById(tabName).style.display = 'block';
+    highlightTab(tabName);
+}
+
+function openChar(name, id) {
+	showTab('characters');
+	hideAllAccordionContent();
+	showAccordionContent(id);
+}
+
+function getCharLink(charName)
+{
+	let charId = getCharData(charName).id;
+	return '<a href="#' + charId + '" onclick="openChar(' + charName + ', ' + charId + ')">' + charName + '</a>';
+}
+
+function generateHelpTooltips(inputString)
+{
+	const tooltips = data.tooltips;
+	for(const tip of tooltips){
+		if(!inputString.includes(tip.find)) continue;
+		let replacement = '<span class="w3-tooltip" style="text-decoration: underline; font-weight:bolder;">' + tip.find + '<span class="w3-text w3-black w3-padding"><em>' + tip.tooltip + '</em></span></span>';
+		//console.log('replacing ' + tip.find + ' with ' + replacement+ ' in ' + inputString);
+		inputString = inputString.replaceAll(tip.find, replacement);
+	}
+	return inputString;
+}
+
+const charData = getJSON('characterData.json', loadCharacters);
+
+function init() {
+	showTab("characters");
+}
+
+</script>
+</head>
+<body onload="init()" class="w3-black">
+	<div class="w3-bar w3-purple">
+		<button 
+			onclick="showTab('characters')"
+			class="nav w3-bar-item w3-button w3-small"
+		>Chars</button>
+		<button 
+			onclick="showTab('setup')"
+			class="nav w3-bar-item w3-button w3-small"
+		>Setup</button>
+		<button 
+			onclick="showTab('agenda')"
+			class="nav w3-bar-item w3-button w3-small"
+		>Agenda</button>
+		<button 
+			onclick="showTab('abilities')"
+			class="nav w3-bar-item w3-button w3-small"
+		>Ability</button>
+		<button 
+			onclick="showTab('project')"
+			class="nav w3-bar-item w3-button w3-small"
+		>X</button>
+		<button 
+			onclick="showTab('select')"
+			class="nav w3-bar-item w3-button w3-small"
+		>Select</button>
+	</div>
+	<h1>Stationfall Reference</h1>
+	<div id="characters" class="tab w3-black">
+		<h2>Characters</h2>
+		<div id="charactersList" class="w3-padding-small">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="agenda" class="tab w3-teal" style="display:hidden;">
+		<h2>Agenda</h2>
+		<div id="agendasList" class="w3-padding-small">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="setup" class="tab w3-indigo" style="display:hidden;">
+		<h2>Setup</h2>
+		<div id="setupList" class="w3-padding-small">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="abilities" class="tab w3-blue" style="display:hidden;">
+		<h2>Abilities</h2>
+		<div id="abilityList" class="w3-padding-small">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="select" class="tab w3-grey" style="display:hidden;">
+		<h2>Selection</h2>
+		<div id="selectList" class="w3-padding-small">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+	<div id="project" class="tab w3-red" style="display:hidden;">
+		<h2>Project X</h2>
+		<div id="projectList" class="w3-padding-small">
+			<!-- filled by loadCharacters -->
+		</div>
+	</div>
+</body>
+</html>

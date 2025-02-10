@@ -145,9 +145,9 @@ const editions = [
 		code: "fabled",
 		color: "white",
 		description: "Fabled characters are for the Storyteller. They each alter the conditions of the game somewhat and are usually included at the beginning of the game.The purpose of a Fabled character is to allow players to join in a game of Clocktower when they would otherwise not be able to, or to allow a game to run smoothly when there would otherwise be a real-world issue. Fabled characters fix problems that are outside the usual game parameters. For example, if a player has a mental disability that would normally mean that they are unable to understand the game rules or communicate with the group, a Fabled character can allow them to join in. If a player is new to the game, and fearful that they will die early, a Fabled character can protect them. If there are too many players wanting to play all at once, a Fabled character can make the game run more quickly. If one of the group is shy or softly spoken, and has trouble getting the groups attention, a Fabled character can give them the powers to do so. If the game needs to end unexpectedly early, a Fabled character can decide a winner. If you have made your own character list using the Script character list generator, a Fabled character can help it be more fun.",
-		difficulty: "N/A",
-		evilDescription: "N/A",
-		goodDescription: "N/A",
+		difficulty: "No Difficulty Criteria",
+		evilDescription: "No notes for Evil players",
+		goodDescription: "No notes for Good players",
 		roles: {
 			fabled: []
 		}
