@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Stationfall</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--link rel="icon" type="image/png" href="https://eclectic-matt.github.io/favicon.ico" /-->
+<script>
+
+var data = undefined;
+var selected = [];
+
+/**
+ * 
+ * @param {The JSON file} url 
+ * @param {The function to call with the response} callback 
+ */
+const getJSON = function(url, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onload = function() {
+		var status = xhr.status;
+		if (status === 200) {
+			callback(null, xhr.response);
+		} else {
+			callback(status, xhr.response);
+		}
+	};
+	xhr.send();
+};
+
+
+function loadCharacters(status, json)
+{
+	//STORE DATA FOR OTHER FUNCTIONALITY
+	data = json;
+	
+	//INIT SELECTED CHARACTERS (ALL)
+	//selected = [...json.characters];
+	//INIT AS TUTORIAL CHARACTERS 
+	selected = [...json.tutorialCharacters];
+	selected.push(...json.projectXCharacters);
+	console.log('selected', selected);
+	//OUTPUT DATA
+	outputCharacterData();
+}
+
+function outputCharacterData()
+{
+	let listDiv = document.getElementById('charactersList');
+	listDiv.style.display = 'flex';
+	listDiv.style.flexDirection = 'row';
+	listDiv.style.flexWrap = 'wrap';
+	listDiv.style.justifyContent = 'space-between';
+	listDiv.style.alignContent = 'flex-start';
+	listDiv.innerHTML = null;
+	let index = 0;
+	
+	data.characterData.forEach( (char) => {
+		
+		if(char.name === 'TEMPLATE') return false;
+		if(!selected.includes(char.name)) return false;
+		
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cDiv = createTVCharacterDiv(char);
+		listDiv.appendChild(cDiv);
+		let cBr = document.createElement('br');
+		listDiv.appendChild(cBr);
+	})
+}
+
+function createTVCharacterDiv(char)
+{
+	//INIT DIV TO HOLD CHAR DATA
+	let charDiv = document.createElement('div');
+	charDiv.id = char.id;
+	//charDiv.className = "accordion w3-hide w3-padding-large w3-dark-grey";
+	charDiv.style.alignSelf = 'start';
+	charDiv.style.border = '1px solid white';
+	charDiv.style.padding = '5px';
+
+	let charNameHead = document.createElement('h3');
+	charNameHead.innerHTML = char.name;
+	charDiv.appendChild(charNameHead);
+
+	//OUTPUT AGENDA DIV 
+	let agendaDiv = document.createElement('div');
+	let returnList = document.createElement('ul');
+	for(let i=0; i < char.agenda.length; i++){
+		let item = document.createElement('li');
+		//item.innerHTML = generateHelpTooltips(char.agenda[i].trigger);
+		item.innerHTML = char.agenda[i].trigger;
+		returnList.appendChild(item);
+		if(char.agenda[i].points){
+			let subList = createAgendaList(char.agenda[i].points, charName);
+			returnList.appendChild(subList);
+		}
+	}
+	agendaDiv.appendChild(returnList);
+	charDiv.appendChild(agendaDiv);
+
+	return charDiv;
+}
+
+//Recursive function to generate sublists of agendas.
+function createAgendaList(agenda)
+{
+	let returnList = document.createElement('ul');
+	for(let i=0; i < agenda.length; i++){
+		let item = document.createElement('li');
+		item.innerHTML = generateHelpTooltips(agenda[i].trigger);
+		returnList.appendChild(item);
+		if(agenda[i].points){
+			let subList = createAgendaList(agenda[i].points);
+			returnList.appendChild(subList);
+		}
+	}
+	return returnList;
+}
+
+
+const charData = getJSON('characterData.json', loadCharacters);
+
+</script>
+</head>
+<body class="w3-black">
+	<h1>Stationfall Reference</h1>
+	<div id="characters" class="w3-black">
+		<h2>Characters</h2>
+		<div id="charactersList" class="w3-padding-small">
+			
+		</div>
+	</div>
+</body>
+</html>
