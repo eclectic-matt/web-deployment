@@ -56,6 +56,16 @@
 	],
 	"tooltips": [
 		{
+			"find": "Officer",
+			"icon": "",
+			"tooltip": "Officer is an ability shown on some characters, such as Station Chief, Counselor, and  Engineer. Officers can Step through Locks, unlocking them, as well as some special abilities in the Vault X and the Bridge"
+		},
+		{
+			"find": "Fugitive",
+			"icon": "",
+			"tooltip": "Fugitive is an ability shown on some characters, such as Boarder and Cyborg. Security cannot Attack players unless they are Suspect, or Fugitives"
+		},
+		{
 			"find": "Down",
 			"icon": "",
 			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
@@ -89,16 +99,6 @@
 			"find": "Contamination",
 			"icon": "☣️",
 			"tooltip": "Characters can get contaminated in Bio Lab. This is an Item which takes up a slot on their character board"
-		},
-		{
-			"find": "Officer",
-			"icon": "",
-			"tooltip": "Officer is an ability shown on some characters, such as Station Chief, Counselor, and  Engineer. Officers can Step through Locks, unlocking them, as well as some special abilities in the Vault X and the Bridge"
-		},
-		{
-			"find": "Fugitive",
-			"icon": "",
-			"tooltip": "Fugitive is an ability shown on some characters, such as Boarder and Cyborg. Security cannot Attack players unless they are Suspect, or Fugitives"
 		},
 		{
 			"find": "X-Secret",
