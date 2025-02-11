@@ -8,10 +8,10 @@
 	<!--link rel="icon" type="image/png" href="https://eclectic-matt.github.io/favicon.ico" /-->
 	<style>
 		* {
-			font-size: 5px;
+			font-size: 0.9rem;
 		}
 		ul {
-			padding-left: 10px;
+			padding-left: 15px;
 		}
 	</style>
 <script>
@@ -92,6 +92,8 @@ function createTVCharacterDiv(char)
 	charDiv.style.border = '1px solid white';
 	charDiv.style.padding = '5px';
 	charDiv.style.fontSize = '5px';
+	charDiv.style.minWidth = '10%';
+	charDiv.style.maxWidth = '30%';
 
 	let charNameHead = document.createElement('h3');
 	charNameHead.innerHTML = char.name;
@@ -103,7 +105,7 @@ function createTVCharacterDiv(char)
 	for(let i=0; i < char.agenda.points.length; i++){
 		let item = document.createElement('li');
 		//item.innerHTML = generateHelpTooltips(char.agenda[i].trigger);
-		item.innerHTML = char.agenda.points[i].trigger;
+		item.innerHTML = replaceStringIcons(char.agenda.points[i].trigger);
 		//console.log(char.agenda[i].trigger);
 		returnList.appendChild(item);
 		if(char.agenda.points[i].points){
@@ -114,6 +116,9 @@ function createTVCharacterDiv(char)
 	agendaDiv.appendChild(returnList);
 	charDiv.appendChild(agendaDiv);
 
+	let abilityDiv = createAbilityDiv(char.abilities);
+	charDiv.appendChild(abilityDiv);
+
 	return charDiv;
 }
 
@@ -123,7 +128,7 @@ function createAgendaList(agenda)
 	let returnList = document.createElement('ul');
 	for(let i=0; i < agenda.length; i++){
 		let item = document.createElement('li');
-		item.innerHTML = agenda[i].trigger; //generateHelpTooltips(agenda[i].trigger);
+		item.innerHTML = replaceStringIcons(agenda[i].trigger); //generateHelpTooltips(agenda[i].trigger);
 		returnList.appendChild(item);
 		if(agenda[i].points){
 			let subList = createAgendaList(agenda[i].points);
@@ -133,6 +138,59 @@ function createAgendaList(agenda)
 	return returnList;
 }
 
+function createAbilityDiv(abilities){
+	let abilityDiv = document.createElement('div');
+	abilityDiv.style.maxWidth = '50%';
+	abilityDiv.style.display = 'flex';
+	abilityDiv.style.flexDirection = 'row';
+	abilityDiv.style.justifyContent = 'space-between';
+
+	switch(abilities.length){
+		case 0: 
+			abilityDiv.innerHTML = '';// '<div></div>';
+		break;
+		case 1:
+			let abilitySingleDiv = document.createElement('div');
+			abilitySingleDiv.style.alignSelf = 'start';
+			abilitySingleDiv.style.border = '1px solid white';
+			switch(abilities[0].name){
+				case 'Officer':
+					abilitySingleDiv.className = 'w3-orange';
+				break;
+				case 'Fugitive':
+					abilitySingleDiv.className = 'w3-red';
+				break;
+			}
+			abilitySingleDiv.innerHTML = '<b>' + abilities[0].name + '</b> => ' + abilities[0].description;
+			abilityDiv.appendChild(abilitySingleDiv);
+		break;
+		case 2:
+			//ABILITY ONE
+			let abilityOneDiv = document.createElement('div');
+			abilityOneDiv.style.alignSelf = 'start';
+			abilityOneDiv.style.border = '1px solid white';
+			abilityOneDiv.innerHTML = '<b>' + abilities[0].name + '</b> => ' + abilities[0].description;
+			abilityDiv.appendChild(abilityOneDiv);
+			let abilityTwoDiv = document.createElement('div');
+			abilityTwoDiv.style.alignSelf = 'start';
+			abilityTwoDiv.style.border = '1px solid white';
+			abilityTwoDiv.innerHTML = '<b>' + abilities[1].name + '</b> => ' + abilities[1].description;
+			abilityDiv.appendChild(abilityTwoDiv);
+		break;
+	}
+	return abilityDiv;
+}
+
+function replaceStringIcons(inputString){
+	const tooltips = data.tooltips;
+	for(const tip of tooltips){
+		if(!inputString.includes(tip.find)) continue;
+		if(tip.icon === '') continue;
+		let replacement = tip.icon;
+		inputString = inputString.replaceAll(tip.find, replacement);
+	}
+	return inputString;
+}
 
 const charData = getJSON('characterData.json', loadCharacters);
 

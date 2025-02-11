@@ -82,7 +82,7 @@
 		},
 		{
 			"find": "Artifact",
-			"icon": "🪬",
+			"icon": "🚰",
 			"tooltip": "Artifact is an Item in Physics Lab"
 		},
 		{
@@ -102,17 +102,17 @@
 		},
 		{
 			"find": "X-Secret",
-			"icon": "X",
+			"icon": "👹",
 			"tooltip": "X-Secret is data on the contents of Vault X. It can be manufactured in Bio Lab"
 		},
 		{
 			"find": "Evidence",
-			"icon": "",
+			"icon": "💠",
 			"tooltip": "Evidence can be manufactured in the Security Station. It is only useful for causing/disproving Guilt, and some Agendas"
 		},
 		{
 			"find": "News",
-			"icon": "",
+			"icon": "📡",
 			"tooltip": "News are the media organisations on Earth who can receive transmitted data from the Array. This is useful for some agendas"
 		},
 		{
@@ -127,7 +127,7 @@
 		},
 		{
 			"find": "Project X",
-			"icon": "",
+			"icon": "♦",
 			"tooltip": "The contents of Vault X, randomly determined by the card drawn face down at the start of the game. It can be released by an Officer on the Bridge or Cryo Lab"
 		},
 		{
@@ -147,7 +147,7 @@
 		},
 		{
 			"find": "Kompromat",
-			"icon": "K",
+			"icon": "[K]",
 			"tooltip": "Kompromat stands for Compromising Materials and is found around the Board. Players (not characters) pick up Kompromat, and this can be used to make the relevant character perform 1 Free action"
 		},
 		{
