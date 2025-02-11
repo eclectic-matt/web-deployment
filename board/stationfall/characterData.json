@@ -68,7 +68,7 @@
 		{
 			"find": "Down",
 			"icon": "",
-			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
+			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. A Down Character may not be Influenced, take Actions or be Activated. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
 		},
 		{
 			"find": "Escapes",
@@ -77,12 +77,12 @@
 		},
 		{
 			"find": "Briefcase",
-			"icon": "💼",
+			"icon": "<img src='icons/briefcase.jpg' width='15px' height='15px' />",
 			"tooltip": "Briefcase is an Item in Suite"
 		},
 		{
 			"find": "Artifact",
-			"icon": "🚰",
+			"icon": "<img src='icons/artifact.jpg' width='15px' height='15px' />",
 			"tooltip": "Artifact is an Item in Physics Lab"
 		},
 		{
@@ -102,12 +102,12 @@
 		},
 		{
 			"find": "X-Secret",
-			"icon": "👹",
+			"icon": "<img src='icons/x-secret.jpg' width='15px' height='15px' />",
 			"tooltip": "X-Secret is data on the contents of Vault X. It can be manufactured in Bio Lab"
 		},
 		{
 			"find": "Evidence",
-			"icon": "💠",
+			"icon": "<img src='icons/evidence.jpg' width='15px' height='15px' />",
 			"tooltip": "Evidence can be manufactured in the Security Station. It is only useful for causing/disproving Guilt, and some Agendas"
 		},
 		{
@@ -117,7 +117,7 @@
 		},
 		{
 			"find": "Stationfall",
-			"icon": "🌪️",
+			"icon": "<img src='icons/stationfall.jpg' width='15px' height='15px' />",
 			"tooltip": "At Game End, when the Station explodes"
 		},
 		{
@@ -127,12 +127,12 @@
 		},
 		{
 			"find": "Project X",
-			"icon": "♦",
+			"icon": "<img src='icons/project-x.jpg' width='15px' height='15px' />",
 			"tooltip": "The contents of Vault X, randomly determined by the card drawn face down at the start of the game. It can be released by an Officer on the Bridge or Cryo Lab"
 		},
 		{
 			"find": "Antimatter",
-			"icon": "",
+			"icon": "<img src='icons/antimatter.jpg' width='15px' height='15px' />",
 			"tooltip": "Antimatter is an item in Magnetic Containment and can be armed by moving it outside of Magnetic Containment or triggering Self-Destruct"
 		},
 		{
@@ -147,7 +147,7 @@
 		},
 		{
 			"find": "Kompromat",
-			"icon": "[K]",
+			"icon": "<img src='icons/kompromat.jpg' width='15px' height='15px' />",
 			"tooltip": "Kompromat stands for Compromising Materials and is found around the Board. Players (not characters) pick up Kompromat, and this can be used to make the relevant character perform 1 Free action"
 		},
 		{
@@ -159,8 +159,31 @@
 			"find": "BC",
 			"icon": "",
 			"tooltip": "Bonus Character - the Secret Identity card you are not using as your Player Character (the one you Reveal as). You score bonus points depending on whether they Escape (friend) or are Not Live (grudge)"
+		},
+		{
+			"find": "points",
+			"icon": "🌟",
+			"tooltip": "Points are how you win, earned through completing your PC's agenda and BC's criteria. Points can be lost through Influence limits, and points (usually) mean nothing if your PC is Guilty"
+		},
+		{
+			"find": "Human",
+			"icon": "🚹",
+			"tooltip": "Shown on the Character card, mostly obvious but a few nuances, such as Astrochimp counting as human, and Cyborg counting as both human and a robot"
+		},
+		{
+			"find": "Robot",
+			"icon": "🤖",
+			"tooltip": "A robot character, shown on the Character card - namely Medical, Security"
 		}
 	],
+	"colours": {
+		"console": "orange",
+		"conspiracy": "purple",
+		"offensive": "red",
+		"defensive": "green",
+		"mobility": "yellow",
+		"utility": "pink"
+	},
 	"projectXData": [
 		{
 			"id": 100,
@@ -393,17 +416,20 @@
 			"abilities": [
 				{
 					"name": "Tunnel Rat",
-					"description": "May Step through Vents"
+					"description": "May Step through Vents",
+					"type": "mobility"
 				},
 				{
 					"name": "Loyal",
-					"description": "To Influence return all cubes on this card and place at least 1 more cube than was previously here"
+					"description": "To Influence return all cubes on this card and place at least 1 more cube than was previously here",
+					"type": "conspiracy"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Acrobatics",
-					"description": "Gains <b><em>ZeroBorn</b></em>: May Free Step or Airlock into a zero Gravity Section instead of a Free Pickup or Drop"
+					"description": "Gains <b><em>ZeroBorn</b></em>: May Free Step or Airlock into a zero Gravity Section instead of a Free Pickup or Drop",
+					"type": "mobility"
 				}
 			],
 			"agenda": {
@@ -470,11 +496,13 @@
 			"abilities": [
 				{
 					"name": "Live Streams",
-					"description": "If Jammers are OFF, Billionaire’s and Fletcher’s Sections act as if Lit and Cameras are ON."
+					"description": "If Jammers are OFF, Billionaire’s and Fletcher’s Sections act as if Lit and Cameras are ON.",
+					"type": "utility"
 				},
 				{
 					"name": "Rich",
-					"description": "Cannot be Bribed. When Activated, you may use a grey Bribe instead of your own. Grey Bribes only score if Billionaire Escapes."
+					"description": "Cannot be Bribed. When Activated, you may use a grey Bribe instead of your own. Grey Bribes only score if Billionaire Escapes.",
+					"type": "conspiracy"
 				}
 			],
 			"revealPowers": [
@@ -926,17 +954,20 @@
 			"abilities": [
 				{
 					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed",
+					"type": "mobility"
 				},
 				{
 					"name": "Wormtongue",
-					"description": "As an Action, move a cube on a Colocated Human’s card to Betrayal"
+					"description": "As an Action, move a cube on a Colocated Human’s card to Betrayal",
+					"type": "conspiracy"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Recorded Confessional",
-					"description": "Upon Reveal, if Live choose a Colocated Human. All other Innocent players who have that Human as a Conspirator become Suspect."
+					"description": "Upon Reveal, if Live choose a Colocated Human. All other Innocent players who have that Human as a Conspirator become Suspect.",
+					"type": "offensive"
 				}
 			],
 			"agenda": {
@@ -993,21 +1024,25 @@
 			"abilities": [
 				{
 					"name": "Uncanny",
-					"description": "It takes two Activation discs for this Character to become Exhausted"
+					"description": "It takes two Activation discs for this Character to become Exhausted",
+					"type": "conspiracy"
 				},
 				{
 					"name": "Fugitive",
-					"description": "No actions taken with or against this Character will make a player Suspect."
+					"description": "No actions taken with or against this Character will make a player Suspect",
+					"type": "offensive"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Brutal",
-					"description": "May use a Bludgeon to Down a Helmeted Human, at which point Annihilate both the Bludgeon and the Helmet"
+					"description": "May use a Bludgeon to Down a Helmeted Human, at which point Annihilate both the Bludgeon and the Helmet",
+					"type": "offensive"
 				},
 				{
 					"name": "Self-Repair",
-					"description": "You may Activate Cyborg if Down and as your first action Revive Cyborg"
+					"description": "You may Activate Cyborg if Down and as your first action Revive Cyborg",
+					"type": "conspiracy"
 				}
 			],
 			"agenda": {
@@ -1073,17 +1108,20 @@
 			"abilities": [
 				{
 					"name": "Pride",
-					"description": "Daredevil cannot be Robbed"
+					"description": "Daredevil cannot be Robbed",
+					"type": "defensive"
 				},
 				{
 					"name": "Adrenaline",
-					"description": "Daredevil is not Downed by Hazards, Step or Airlock into Section with Hazard is always free"
+					"description": "Daredevil is not Downed by Hazards, Step or Airlock into Section with Hazard is always free",
+					"type": "mobility"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Point Break",
-					"description": "If you are Live, Possess a Helmet and are Colocated with Rocket Wings at Stationfall, you Escape"
+					"description": "If you are Live, Possess a Helmet and are Colocated with Rocket Wings at Stationfall, you Escape",
+					"type": "mobility"
 				}
 			],
 			"agenda": {
@@ -1461,17 +1499,20 @@
 			"abilities": [
 				{
 					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed",
+					"type": "mobility"
 				},
 				{
 					"name": "Jury Rig",
-					"description": "As an action, Repair a Colocated Damaged Section or Down Robot"
+					"description": "As an action, Repair a Colocated Damaged Section or Down Robot",
+					"type": "utility"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Overload",
-					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section"
+					"description": "Upon Reveal place a time marker in any Unescaped Section. When it resolves, Damage that Section",
+					"type": "offensive"
 				}
 			],
 			"agenda": {
@@ -1525,21 +1566,25 @@
 			"abilities": [
 				{
 					"name": "Fast Talk",
-					"description": "Cannot be Attacked by Humans with Bludgeon in Lit Sections"
+					"description": "Cannot be Attacked by Humans with Bludgeon in Lit Sections",
+					"type": "defensive"
 				},
 				{
 					"name": "Hacker",
-					"description": "May perform a Free Console Action instead of a Free Pick Up or Drop. If Jammers are OFF may perform Console Actions in any section"
+					"description": "May perform a Free Console Action instead of a Free Pick Up or Drop. If Jammers are OFF may perform Console Actions in any section",
+					"type": "console"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Blood From A Stone",
-					"description": "After using Kompromat on an NPC, return it to your hand"
+					"description": "After using Kompromat on an NPC, return it to your hand",
+					"type": "conspiracy"
 				},
 				{
 					"name": "Tradecraft",
-					"description": "As an Action with Exile, discard two Kompromat from your hand and take a previously used NPC’s Kompromat into your hand"
+					"description": "As an Action with Exile, discard two Kompromat from your hand and take a previously used NPC’s Kompromat into your hand",
+					"type": "conspiracy"
 				}
 			],
 			"agenda": {
@@ -1812,17 +1857,20 @@
 			"abilities": [
 				{
 					"name": "Emergency Response",
-					"description": " As an Action, may Revive a Human. Step or Airlock into Sections with Down Human is always Free"
+					"description": " As an Action, may Revive a Human. Step or Airlock into Sections with Down Human is always Free",
+					"type": "utility"
 				},
 				{
 					"name": "Helpful",
-					"description": "No player may have more than one influence cube on this Character"
+					"description": "No player may have more than one influence cube on this Character",
+					"type": "conspiracy"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Haywire",
-					"description": "Gains a Bludgeon"
+					"description": "Gains a Bludgeon",
+					"type": "offensive"
 				}
 			],
 			"agenda": {
@@ -2028,17 +2076,20 @@
 			"abilities": [
 				{
 					"name": "Peacekeeper",
-					"description": "May only attack Fugitives, Monsters, or non-innocent PCs. May not Sabotage"
+					"description": "May only attack Fugitives, Monsters, or non-innocent PCs. May not Sabotage",
+					"type": "defensive"
 				},
 				{
 					"name": "Armored",
-					"description": "Cannot be Attacked or Robbed by Bludgeon"
+					"description": "Cannot be Attacked or Robbed by Bludgeon",
+					"type": "defensive"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Authorized Force",
-					"description": "Lose Peacekeeper"
+					"description": "Lose Peacekeeper",
+					"type": "offensive"
 				}
 			],
 			"agenda": {
@@ -2106,17 +2157,20 @@
 			"abilities": [
 				{
 					"name": "Officer",
-					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed"
+					"description": "If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then removed",
+					"type": "mobility"
 				},
 				{
 					"name": "Pride",
-					"description": "Cannot be Robbed"
+					"description": "Cannot be Robbed",
+					"type": "defensive"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Forceful Presence",
-					"description": "At the start of Station Chief’s Activation phase you may perform a Free Basic Action with a Colocated NPC or with an NPC Officer anywhere"
+					"description": "At the start of Station Chief’s Activation phase you may perform a Free Basic Action with a Colocated NPC or with an NPC Officer anywhere",
+					"type": "utility"
 				}
 			],
 			"agenda": {
@@ -2169,17 +2223,20 @@
 			"abilities": [
 				{
 					"name": "Tunnel Rat",
-					"description": "May Step through Vents"
+					"description": "May Step through Vents",
+					"type": "mobility"
 				},
 				{
 					"name": "Hacker",
-					"description": "May perform a Free Console Action instead of a Free Pick Up or Drop. If Jammers are OFF may perform Console Actions in any Section."
+					"description": "May perform a Free Console Action instead of a Free Pick Up or Drop. If Jammers are OFF may perform Console Actions in any Section.",
+					"type": "console"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Secret Cache",
-					"description": "Upon Reveal, you or one of your Conspirators gains a Helmet"
+					"description": "Upon Reveal, you or one of your Conspirators gains a Helmet",
+					"type": "defensive"
 				}
 			],
 			"agenda": {
@@ -2237,17 +2294,20 @@
 			"abilities": [
 				{
 					"name": "Uncanny",
-					"description": "It takes two Activation discs for this Character to become Exhausted"
+					"description": "It takes two Activation discs for this Character to become Exhausted",
+					"type": "conspiracy"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Homework",
-					"description": "Upon Reveal, you may Reveal your BC and perform one Action with that Character"
+					"description": "Upon Reveal, you may Reveal your BC and perform one Action with that Character",
+					"type": "utility"
 				},
 				{
 					"name": "Enigma",
-					"description": "If Schrödinger Reveal as Stranger, do not discard any card(s) (retain them as Bonus Characters). If Schrödinger Reveal as Stranger then lose Uncanny"
+					"description": "If Schrödinger Reveal as Stranger, do not discard any card(s) (retain them as Bonus Characters). If Schrödinger Reveal as Stranger then lose Uncanny",
+					"type": "conspiracy"
 				}
 			],
 			"agenda": {
@@ -2384,17 +2444,20 @@
 			"abilities": [
 				{
 					"name": "Tunnel Rat",
-					"description": "May Step through Vents"
+					"description": "May Step through Vents",
+					"type": "mobility"
 				},
 				{
 					"name": "Jury Rig",
-					"description": "As an Action, Repair a Colocated Damaged Section or Repair a Colocated Down Robot"
+					"description": "As an Action, Repair a Colocated Damaged Section or Repair a Colocated Down Robot",
+					"type": "utility"
 				}
 			],
 			"revealPowers": [
 				{
 					"name": "Talk Them Through It",
-					"description": "During your turn, if Troubleshooter is Live, your Conspirators move and act as though they have Jury Rig and Tunnel Rat"
+					"description": "During your turn, if Troubleshooter is Live, your Conspirators move and act as though they have Jury Rig and Tunnel Rat",
+					"type": "utility"
 				}
 			],
 			"agenda": {

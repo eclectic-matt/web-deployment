@@ -13,6 +13,14 @@
 		ul {
 			padding-left: 15px;
 		}
+		h2{
+			font-size: 1.15rem;
+			font-weight: 900;
+		}
+		h3 {
+			font-size: 0.85rem;
+			font-weight: 600;
+		}
 	</style>
 <script>
 
@@ -93,9 +101,9 @@ function createTVCharacterDiv(char)
 	charDiv.style.padding = '5px';
 	charDiv.style.fontSize = '5px';
 	charDiv.style.minWidth = '10%';
-	charDiv.style.maxWidth = '30%';
+	charDiv.style.maxWidth = '33%';
 
-	let charNameHead = document.createElement('h3');
+	let charNameHead = document.createElement('h2');
 	charNameHead.innerHTML = char.name;
 	charDiv.appendChild(charNameHead);
 
@@ -140,7 +148,7 @@ function createAgendaList(agenda)
 
 function createAbilityDiv(abilities){
 	let abilityDiv = document.createElement('div');
-	abilityDiv.style.maxWidth = '50%';
+	abilityDiv.style.width = '100%';
 	abilityDiv.style.display = 'flex';
 	abilityDiv.style.flexDirection = 'row';
 	abilityDiv.style.justifyContent = 'space-between';
@@ -153,15 +161,11 @@ function createAbilityDiv(abilities){
 			let abilitySingleDiv = document.createElement('div');
 			abilitySingleDiv.style.alignSelf = 'start';
 			abilitySingleDiv.style.border = '1px solid white';
-			switch(abilities[0].name){
-				case 'Officer':
-					abilitySingleDiv.className = 'w3-orange';
-				break;
-				case 'Fugitive':
-					abilitySingleDiv.className = 'w3-red';
-				break;
+			if (abilities[0].type) {
+				let col = data.colours[abilities[0].type];
+				abilitySingleDiv.className = "w3-" + col;
 			}
-			abilitySingleDiv.innerHTML = '<b>' + abilities[0].name + '</b> => ' + abilities[0].description;
+			abilitySingleDiv.innerHTML = '<h3>' + abilities[0].name + '</h3>' + abilities[0].description;
 			abilityDiv.appendChild(abilitySingleDiv);
 		break;
 		case 2:
@@ -169,12 +173,20 @@ function createAbilityDiv(abilities){
 			let abilityOneDiv = document.createElement('div');
 			abilityOneDiv.style.alignSelf = 'start';
 			abilityOneDiv.style.border = '1px solid white';
-			abilityOneDiv.innerHTML = '<b>' + abilities[0].name + '</b> => ' + abilities[0].description;
+			if(abilities[0].type){
+				let col = data.colours[abilities[0].type];
+				abilityOneDiv.className = "w3-" + col;
+			}
+			abilityOneDiv.innerHTML = '<h3>' + abilities[0].name + '</h3>' + abilities[0].description;
 			abilityDiv.appendChild(abilityOneDiv);
 			let abilityTwoDiv = document.createElement('div');
 			abilityTwoDiv.style.alignSelf = 'start';
 			abilityTwoDiv.style.border = '1px solid white';
-			abilityTwoDiv.innerHTML = '<b>' + abilities[1].name + '</b> => ' + abilities[1].description;
+			if(abilities[1].type){
+				let col = data.colours[abilities[1].type];
+				abilityTwoDiv.className = "w3-" + col;
+			}
+			abilityTwoDiv.innerHTML = '<h3>' + abilities[1].name + '</h3>' + abilities[1].description;
 			abilityDiv.appendChild(abilityTwoDiv);
 		break;
 	}

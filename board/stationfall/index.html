@@ -595,7 +595,7 @@ function generateHelpTooltips(inputString)
 	const tooltips = data.tooltips;
 	for(const tip of tooltips){
 		if(!inputString.includes(tip.find)) continue;
-		let replacement = '<span class="w3-tooltip" style="text-decoration: underline; font-weight:bolder;">' + tip.find + '<span class="w3-text w3-black w3-padding"><em>' + tip.tooltip + '</em></span></span>';
+		let replacement = '<span class="w3-tooltip" style="text-decoration: underline; font-weight:bolder;">' + tip.find + '<span class="w3-text w3-black w3-padding"><em>' + tip.icon + ' ' + tip.tooltip + '</em></span></span>';
 		//console.log('replacing ' + tip.find + ' with ' + replacement+ ' in ' + inputString);
 		inputString = inputString.replaceAll(tip.find, replacement);
 	}
