@@ -147,11 +147,16 @@ function createAgendaList(agenda)
 }
 
 function createAbilityDiv(abilities){
+
+	const abilityFontSize = '0.7rem';
+
 	let abilityDiv = document.createElement('div');
 	abilityDiv.style.width = '100%';
 	abilityDiv.style.display = 'flex';
 	abilityDiv.style.flexDirection = 'row';
 	abilityDiv.style.justifyContent = 'space-between';
+	abilityDiv.style.fontSize = abilityFontSize;
+	
 
 	switch(abilities.length){
 		case 0: 
@@ -161,6 +166,8 @@ function createAbilityDiv(abilities){
 			let abilitySingleDiv = document.createElement('div');
 			abilitySingleDiv.style.alignSelf = 'start';
 			abilitySingleDiv.style.border = '1px solid white';
+			abilitySingleDiv.style.fontSize = abilityFontSize;
+			abilitySingleDiv.style.padding = '5px';
 			if (abilities[0].type) {
 				let col = data.colours[abilities[0].type];
 				abilitySingleDiv.className = "w3-" + col;
@@ -173,6 +180,8 @@ function createAbilityDiv(abilities){
 			let abilityOneDiv = document.createElement('div');
 			abilityOneDiv.style.alignSelf = 'start';
 			abilityOneDiv.style.border = '1px solid white';
+			abilityOneDiv.style.fontSize = abilityFontSize;
+			abilityOneDiv.style.padding = '5px';
 			if(abilities[0].type){
 				let col = data.colours[abilities[0].type];
 				abilityOneDiv.className = "w3-" + col;
@@ -182,6 +191,8 @@ function createAbilityDiv(abilities){
 			let abilityTwoDiv = document.createElement('div');
 			abilityTwoDiv.style.alignSelf = 'start';
 			abilityTwoDiv.style.border = '1px solid white';
+			abilityTwoDiv.style.fontSize = abilityFontSize;
+			abilityTwoDiv.style.padding = '5px';
 			if(abilities[1].type){
 				let col = data.colours[abilities[1].type];
 				abilityTwoDiv.className = "w3-" + col;
