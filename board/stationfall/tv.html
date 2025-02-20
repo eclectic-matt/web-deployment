@@ -156,7 +156,7 @@ function createAbilityDiv(abilities){
 	abilityDiv.style.flexDirection = 'row';
 	abilityDiv.style.justifyContent = 'space-between';
 	abilityDiv.style.fontSize = abilityFontSize;
-	
+	abilityDiv.style.gridAutoRows = '1fr';
 
 	switch(abilities.length){
 		case 0: 
@@ -168,6 +168,9 @@ function createAbilityDiv(abilities){
 			abilitySingleDiv.style.border = '1px solid white';
 			abilitySingleDiv.style.fontSize = abilityFontSize;
 			abilitySingleDiv.style.padding = '5px';
+			abilitySingleDiv.style.width = '100%';
+			abilitySingleDiv.style.height = '100%';
+			abilitySingleDiv.style.minHeight = '120px';
 			if (abilities[0].type) {
 				let col = data.colours[abilities[0].type];
 				abilitySingleDiv.className = "w3-" + col;
@@ -182,6 +185,9 @@ function createAbilityDiv(abilities){
 			abilityOneDiv.style.border = '1px solid white';
 			abilityOneDiv.style.fontSize = abilityFontSize;
 			abilityOneDiv.style.padding = '5px';
+			abilityOneDiv.style.width = '100%';
+			abilityOneDiv.style.height = '100%';
+			abilityOneDiv.style.minHeight = '120px';
 			if(abilities[0].type){
 				let col = data.colours[abilities[0].type];
 				abilityOneDiv.className = "w3-" + col;
@@ -193,6 +199,9 @@ function createAbilityDiv(abilities){
 			abilityTwoDiv.style.border = '1px solid white';
 			abilityTwoDiv.style.fontSize = abilityFontSize;
 			abilityTwoDiv.style.padding = '5px';
+			abilityTwoDiv.style.width = '100%';
+			abilityTwoDiv.style.height = '100%';
+			abilityTwoDiv.style.minHeight = '120px';
 			if(abilities[1].type){
 				let col = data.colours[abilities[1].type];
 				abilityTwoDiv.className = "w3-" + col;
@@ -221,8 +230,8 @@ const charData = getJSON('characterData.json', loadCharacters);
 </head>
 <body class="w3-black">
 	<h1>Stationfall Reference</h1>
-	<div id="characters" class="w3-black">
-		<h2>Characters</h2>
+	<div id="characters" class="w3-black" style="padding:10px;">
+		<h2 style="padding:10px;">Characters</h2>
 		<div id="charactersList" class="w3-padding-small">
 			
 		</div>
