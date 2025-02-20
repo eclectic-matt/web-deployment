@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Stationfall</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--link rel="icon" type="image/png" href="https://eclectic-matt.github.io/favicon.ico" /-->
+	<style>
+		* {
+			font-size: 0.9rem;
+		}
+		ul {
+			padding-left: 15px;
+		}
+		h2{
+			font-size: 1.15rem;
+			font-weight: 900;
+		}
+		h3 {
+			font-size: 0.85rem;
+			font-weight: 600;
+		}
+	</style>
+<script>
+
+var data = undefined;
+var selected = [];
+
+/**
+ * 
+ * @param {The JSON file} url 
+ * @param {The function to call with the response} callback 
+ */
+const getJSON = function(url, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onload = function() {
+		var status = xhr.status;
+		if (status === 200) {
+			callback(null, xhr.response);
+		} else {
+			callback(status, xhr.response);
+		}
+	};
+	xhr.send();
+};
+
+
+function loadCharacters(status, json)
+{
+	//STORE DATA FOR OTHER FUNCTIONALITY
+	data = json;
+	
+	//INIT SELECTED CHARACTERS (ALL)
+	//selected = [...json.characters];
+	//INIT AS TUTORIAL CHARACTERS 
+	selected = [...json.tutorialCharacters];
+	selected.push(...json.projectXCharacters);
+	console.log('selected', selected);
+	//OUTPUT DATA
+	outputCharacterData();
+}
+
+function outputCharacterData()
+{
+	let listDiv = document.getElementById('charactersList');
+	listDiv.style.display = 'flex';
+	listDiv.style.flexDirection = 'row';
+	listDiv.style.flexWrap = 'wrap';
+	listDiv.style.justifyContent = 'space-between';
+	listDiv.style.alignContent = 'flex-start';
+	listDiv.innerHTML = null;
+	let index = 0;
+	
+	data.characterData.forEach( (char) => {
+		
+		if(char.name === 'TEMPLATE') return false;
+		if(!selected.includes(char.name)) return false;
+		
+		let rowOdd = (index % 2 === 0);
+		index++;
+		let cDiv = createTVCharacterDiv(char);
+		listDiv.appendChild(cDiv);
+		//console.log(cDiv);
+		//console.log('aLen', char.name, char.agenda.points.length);
+		let cBr = document.createElement('br');
+		listDiv.appendChild(cBr);
+	})
+}
+
+function createTVCharacterDiv(char)
+{
+	//INIT DIV TO HOLD CHAR DATA
+	let charDiv = document.createElement('div');
+	charDiv.id = char.id;
+	//charDiv.className = "accordion w3-hide w3-padding-large w3-dark-grey";
+	charDiv.style.alignSelf = 'start';
+	charDiv.style.border = '1px solid white';
+	charDiv.style.padding = '5px';
+	charDiv.style.fontSize = '5px';
+	charDiv.style.minWidth = '10%';
+	charDiv.style.maxWidth = '33%';
+
+	let charNameHead = document.createElement('h2');
+	charNameHead.innerHTML = char.name;
+	charDiv.appendChild(charNameHead);
+
+	//OUTPUT AGENDA DIV 
+	let agendaDiv = document.createElement('div');
+	let returnList = document.createElement('ul');
+	for(let i=0; i < char.agenda.points.length; i++){
+		let item = document.createElement('li');
+		//item.innerHTML = generateHelpTooltips(char.agenda[i].trigger);
+		item.innerHTML = replaceStringIcons(char.agenda.points[i].trigger);
+		//console.log(char.agenda[i].trigger);
+		returnList.appendChild(item);
+		if(char.agenda.points[i].points){
+			let subList = createAgendaList(char.agenda.points[i].points);
+			returnList.appendChild(subList);
+		}
+	}
+	agendaDiv.appendChild(returnList);
+	charDiv.appendChild(agendaDiv);
+
+	let abilityDiv = createAbilityDiv(char.abilities);
+	charDiv.appendChild(abilityDiv);
+
+	return charDiv;
+}
+
+//Recursive function to generate sublists of agendas.
+function createAgendaList(agenda)
+{
+	let returnList = document.createElement('ul');
+	for(let i=0; i < agenda.length; i++){
+		let item = document.createElement('li');
+		item.innerHTML = replaceStringIcons(agenda[i].trigger); //generateHelpTooltips(agenda[i].trigger);
+		returnList.appendChild(item);
+		if(agenda[i].points){
+			let subList = createAgendaList(agenda[i].points);
+			returnList.appendChild(subList);
+		}
+	}
+	return returnList;
+}
+
+function createAbilityDiv(abilities){
+
+	const abilityFontSize = '0.7rem';
+
+	let abilityDiv = document.createElement('div');
+	abilityDiv.style.width = '100%';
+	abilityDiv.style.display = 'flex';
+	abilityDiv.style.flexDirection = 'row';
+	abilityDiv.style.justifyContent = 'space-between';
+	abilityDiv.style.fontSize = abilityFontSize;
+	abilityDiv.style.gridAutoRows = '1fr';
+
+	switch(abilities.length){
+		case 0: 
+			abilityDiv.innerHTML = '';// '<div></div>';
+		break;
+		case 1:
+			let abilitySingleDiv = document.createElement('div');
+			abilitySingleDiv.style.alignSelf = 'start';
+			abilitySingleDiv.style.border = '1px solid white';
+			abilitySingleDiv.style.fontSize = abilityFontSize;
+			abilitySingleDiv.style.padding = '5px';
+			abilitySingleDiv.style.width = '100%';
+			abilitySingleDiv.style.height = '100%';
+			abilitySingleDiv.style.minHeight = '120px';
+			if (abilities[0].type) {
+				let col = data.colours[abilities[0].type];
+				abilitySingleDiv.className = "w3-" + col;
+			}
+			abilitySingleDiv.innerHTML = '<h3>' + abilities[0].name + '</h3>' + abilities[0].description;
+			abilityDiv.appendChild(abilitySingleDiv);
+		break;
+		case 2:
+			//ABILITY ONE
+			let abilityOneDiv = document.createElement('div');
+			abilityOneDiv.style.alignSelf = 'start';
+			abilityOneDiv.style.border = '1px solid white';
+			abilityOneDiv.style.fontSize = abilityFontSize;
+			abilityOneDiv.style.padding = '5px';
+			abilityOneDiv.style.width = '100%';
+			abilityOneDiv.style.height = '100%';
+			abilityOneDiv.style.minHeight = '120px';
+			if(abilities[0].type){
+				let col = data.colours[abilities[0].type];
+				abilityOneDiv.className = "w3-" + col;
+			}
+			abilityOneDiv.innerHTML = '<h3>' + abilities[0].name + '</h3>' + abilities[0].description;
+			abilityDiv.appendChild(abilityOneDiv);
+			let abilityTwoDiv = document.createElement('div');
+			abilityTwoDiv.style.alignSelf = 'start';
+			abilityTwoDiv.style.border = '1px solid white';
+			abilityTwoDiv.style.fontSize = abilityFontSize;
+			abilityTwoDiv.style.padding = '5px';
+			abilityTwoDiv.style.width = '100%';
+			abilityTwoDiv.style.height = '100%';
+			abilityTwoDiv.style.minHeight = '120px';
+			if(abilities[1].type){
+				let col = data.colours[abilities[1].type];
+				abilityTwoDiv.className = "w3-" + col;
+			}
+			abilityTwoDiv.innerHTML = '<h3>' + abilities[1].name + '</h3>' + abilities[1].description;
+			abilityDiv.appendChild(abilityTwoDiv);
+		break;
+	}
+	return abilityDiv;
+}
+
+function replaceStringIcons(inputString){
+	const tooltips = data.tooltips;
+	for(const tip of tooltips){
+		if(!inputString.includes(tip.find)) continue;
+		if(tip.icon === '') continue;
+		let replacement = tip.icon;
+		inputString = inputString.replaceAll(tip.find, replacement);
+	}
+	return inputString;
+}
+
+const charData = getJSON('characterData.json', loadCharacters);
+
+</script>
+</head>
+<body class="w3-black">
+	<h1>Stationfall Reference</h1>
+	<div id="characters" class="w3-black" style="padding:10px;">
+		<h2 style="padding:10px;">Characters</h2>
+		<div id="charactersList" class="w3-padding-small">
+			
+		</div>
+	</div>
+</body>
+</html>

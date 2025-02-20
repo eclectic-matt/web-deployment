@@ -1,0 +1,53 @@
+#charactersList {
+	display: flex; 
+	flex-flow: row wrap; 
+	justify-content: space-around; 
+	align-content: space-around;
+}
+.character { 
+	border: 1px solid white; 
+	padding: 5px; 
+	font-size: 5px; 
+	width: 32%;
+}
+.character h2 { 
+	padding: 5px;
+	margin: 0;
+	font-size: 1.5rem;
+	text-align: center;
+}
+.abilitiesList {
+	display: flex;
+	justify-content: space-evenly;
+	align-content: space-around;
+	align-items: stretch;
+	border: 1px solid white;
+}
+.ability {
+	font-size: 0.8rem;
+	padding: 5px;
+	margin: 0;
+	width: 50%;
+	text-align: center;
+}
+.ability h3 {
+	padding: 2px;
+	margin: 0;
+	font-size: 1.1rem;
+	font-weight: 500;
+	text-align: center;
+}
+.dataList {
+	display: flex;
+	justify-content: space-evenly;
+}
+.agenda {
+	width: 70%;
+}
+.bonus {
+	width: 30%;
+	font-size: 0.8rem;
+}
+.bonus h3 {
+	font-size: 1.1rem;
+}

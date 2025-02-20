@@ -1,240 +1,392 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8">
 	<title>Stationfall</title>
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!--link rel="icon" type="image/png" href="https://eclectic-matt.github.io/favicon.ico" /-->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="tv.css" />
 	<style>
 		* {
 			font-size: 0.9rem;
 		}
+
 		ul {
 			padding-left: 15px;
 		}
-		h2{
+
+		h2 {
 			font-size: 1.15rem;
 			font-weight: 900;
 		}
+
 		h3 {
 			font-size: 0.85rem;
 			font-weight: 600;
 		}
 	</style>
-<script>
-
-var data = undefined;
-var selected = [];
-
-/**
- * 
- * @param {The JSON file} url 
- * @param {The function to call with the response} callback 
- */
-const getJSON = function(url, callback) {
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', url, true);
-	xhr.responseType = 'json';
-	xhr.onload = function() {
-		var status = xhr.status;
-		if (status === 200) {
-			callback(null, xhr.response);
-		} else {
-			callback(status, xhr.response);
-		}
-	};
-	xhr.send();
-};
-
-
-function loadCharacters(status, json)
-{
-	//STORE DATA FOR OTHER FUNCTIONALITY
-	data = json;
-	
-	//INIT SELECTED CHARACTERS (ALL)
-	//selected = [...json.characters];
-	//INIT AS TUTORIAL CHARACTERS 
-	selected = [...json.tutorialCharacters];
-	selected.push(...json.projectXCharacters);
-	console.log('selected', selected);
-	//OUTPUT DATA
-	outputCharacterData();
-}
-
-function outputCharacterData()
-{
-	let listDiv = document.getElementById('charactersList');
-	listDiv.style.display = 'flex';
-	listDiv.style.flexDirection = 'row';
-	listDiv.style.flexWrap = 'wrap';
-	listDiv.style.justifyContent = 'space-between';
-	listDiv.style.alignContent = 'flex-start';
-	listDiv.innerHTML = null;
-	let index = 0;
-	
-	data.characterData.forEach( (char) => {
-		
-		if(char.name === 'TEMPLATE') return false;
-		if(!selected.includes(char.name)) return false;
-		
-		let rowOdd = (index % 2 === 0);
-		index++;
-		let cDiv = createTVCharacterDiv(char);
-		listDiv.appendChild(cDiv);
-		//console.log(cDiv);
-		//console.log('aLen', char.name, char.agenda.points.length);
-		let cBr = document.createElement('br');
-		listDiv.appendChild(cBr);
-	})
-}
-
-function createTVCharacterDiv(char)
-{
-	//INIT DIV TO HOLD CHAR DATA
-	let charDiv = document.createElement('div');
-	charDiv.id = char.id;
-	//charDiv.className = "accordion w3-hide w3-padding-large w3-dark-grey";
-	charDiv.style.alignSelf = 'start';
-	charDiv.style.border = '1px solid white';
-	charDiv.style.padding = '5px';
-	charDiv.style.fontSize = '5px';
-	charDiv.style.minWidth = '10%';
-	charDiv.style.maxWidth = '33%';
-
-	let charNameHead = document.createElement('h2');
-	charNameHead.innerHTML = char.name;
-	charDiv.appendChild(charNameHead);
-
-	//OUTPUT AGENDA DIV 
-	let agendaDiv = document.createElement('div');
-	let returnList = document.createElement('ul');
-	for(let i=0; i < char.agenda.points.length; i++){
-		let item = document.createElement('li');
-		//item.innerHTML = generateHelpTooltips(char.agenda[i].trigger);
-		item.innerHTML = replaceStringIcons(char.agenda.points[i].trigger);
-		//console.log(char.agenda[i].trigger);
-		returnList.appendChild(item);
-		if(char.agenda.points[i].points){
-			let subList = createAgendaList(char.agenda.points[i].points);
-			returnList.appendChild(subList);
-		}
-	}
-	agendaDiv.appendChild(returnList);
-	charDiv.appendChild(agendaDiv);
-
-	let abilityDiv = createAbilityDiv(char.abilities);
-	charDiv.appendChild(abilityDiv);
-
-	return charDiv;
-}
-
-//Recursive function to generate sublists of agendas.
-function createAgendaList(agenda)
-{
-	let returnList = document.createElement('ul');
-	for(let i=0; i < agenda.length; i++){
-		let item = document.createElement('li');
-		item.innerHTML = replaceStringIcons(agenda[i].trigger); //generateHelpTooltips(agenda[i].trigger);
-		returnList.appendChild(item);
-		if(agenda[i].points){
-			let subList = createAgendaList(agenda[i].points);
-			returnList.appendChild(subList);
-		}
-	}
-	return returnList;
-}
-
-function createAbilityDiv(abilities){
-
-	const abilityFontSize = '0.7rem';
-
-	let abilityDiv = document.createElement('div');
-	abilityDiv.style.width = '100%';
-	abilityDiv.style.display = 'flex';
-	abilityDiv.style.flexDirection = 'row';
-	abilityDiv.style.justifyContent = 'space-between';
-	abilityDiv.style.fontSize = abilityFontSize;
-	abilityDiv.style.gridAutoRows = '1fr';
-
-	switch(abilities.length){
-		case 0: 
-			abilityDiv.innerHTML = '';// '<div></div>';
-		break;
-		case 1:
-			let abilitySingleDiv = document.createElement('div');
-			abilitySingleDiv.style.alignSelf = 'start';
-			abilitySingleDiv.style.border = '1px solid white';
-			abilitySingleDiv.style.fontSize = abilityFontSize;
-			abilitySingleDiv.style.padding = '5px';
-			abilitySingleDiv.style.width = '100%';
-			abilitySingleDiv.style.height = '100%';
-			abilitySingleDiv.style.minHeight = '120px';
-			if (abilities[0].type) {
-				let col = data.colours[abilities[0].type];
-				abilitySingleDiv.className = "w3-" + col;
-			}
-			abilitySingleDiv.innerHTML = '<h3>' + abilities[0].name + '</h3>' + abilities[0].description;
-			abilityDiv.appendChild(abilitySingleDiv);
-		break;
-		case 2:
-			//ABILITY ONE
-			let abilityOneDiv = document.createElement('div');
-			abilityOneDiv.style.alignSelf = 'start';
-			abilityOneDiv.style.border = '1px solid white';
-			abilityOneDiv.style.fontSize = abilityFontSize;
-			abilityOneDiv.style.padding = '5px';
-			abilityOneDiv.style.width = '100%';
-			abilityOneDiv.style.height = '100%';
-			abilityOneDiv.style.minHeight = '120px';
-			if(abilities[0].type){
-				let col = data.colours[abilities[0].type];
-				abilityOneDiv.className = "w3-" + col;
-			}
-			abilityOneDiv.innerHTML = '<h3>' + abilities[0].name + '</h3>' + abilities[0].description;
-			abilityDiv.appendChild(abilityOneDiv);
-			let abilityTwoDiv = document.createElement('div');
-			abilityTwoDiv.style.alignSelf = 'start';
-			abilityTwoDiv.style.border = '1px solid white';
-			abilityTwoDiv.style.fontSize = abilityFontSize;
-			abilityTwoDiv.style.padding = '5px';
-			abilityTwoDiv.style.width = '100%';
-			abilityTwoDiv.style.height = '100%';
-			abilityTwoDiv.style.minHeight = '120px';
-			if(abilities[1].type){
-				let col = data.colours[abilities[1].type];
-				abilityTwoDiv.className = "w3-" + col;
-			}
-			abilityTwoDiv.innerHTML = '<h3>' + abilities[1].name + '</h3>' + abilities[1].description;
-			abilityDiv.appendChild(abilityTwoDiv);
-		break;
-	}
-	return abilityDiv;
-}
-
-function replaceStringIcons(inputString){
-	const tooltips = data.tooltips;
-	for(const tip of tooltips){
-		if(!inputString.includes(tip.find)) continue;
-		if(tip.icon === '') continue;
-		let replacement = tip.icon;
-		inputString = inputString.replaceAll(tip.find, replacement);
-	}
-	return inputString;
-}
-
-const charData = getJSON('characterData.json', loadCharacters);
-
-</script>
 </head>
+
 <body class="w3-black">
 	<h1>Stationfall Reference</h1>
 	<div id="characters" class="w3-black" style="padding:10px;">
 		<h2 style="padding:10px;">Characters</h2>
 		<div id="charactersList" class="w3-padding-small">
-			
+			<div id="0" class="character">
+				<h2>Astrochimp</h2>
+				<div class="dataList">
+					<div class="agenda">
+					<ul>
+						<li>3🌟if Astrochimp 🌍</li>
+						<ul>
+							<li>+2🌟if in Possession of a <img src="icons/briefcase.jpg" width="15px" height="15px">
+							</li>
+							<li>+2🌟if in Possession of <img src="icons/artifact.jpg" width="15px" height="15px"></li>
+							<li>+2🌟if in Possession of a 🔫</li>
+						</ul>
+					</ul>
+					</div>
+					<div class="bonus">
+						<h3>Friend</h3>
+						2🌟if Astrochimp is your BC and 🌍
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-yellow ability">
+						<h3>Tunnel Rat</h3>May Step through Vents
+					</div>
+					<div class="w3-purple ability">
+						<h3>Loyal</h3>To Influence return all cubes on this card and place at least 1 more cube than was
+						previously here
+					</div>
+				</div>
+			</div>
+			<div id="7" class="character">
+				<h2>Counselor</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>2🌟if the Counselor 🌍</li>
+							<li>4🌟if the <img src="icons/artifact.jpg" width="15px" height="15px"> 🌍</li>
+							<li>2🌟if you have more <img src="icons/kompromat.jpg" width="15px" height="15px"> than any
+								other player at <img src="icons/stationfall.jpg" width="15px" height="15px"></li>
+							<li>1 point if you have the least Cubes in Betrayal Box at <img src="icons/stationfall.jpg"
+									width="15px" height="15px"></li>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Friend</h3>
+						2🌟if Counselor is your BC and 🌍
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-yellow ability">
+						<h3>Officer</h3>If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then
+						removed
+					</div>
+					<div class="w3-purple ability">
+						<h3>Wormtongue</h3>As an Action, move a cube on a Colocated Human’s card to Betrayal
+					</div>
+				</div>
+			</div>
+			<div id="8" class="character">
+				<h2>Cyborg</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>1 for each Character with Officer that is down at <img src="icons/stationfall.jpg"
+									width="15px" height="15px"></li>
+							<li>2🌟if no 🚹 PCs Escape</li>
+							<li>2🌟if no ☣️ 🌍</li>
+							<li>2🌟if <img src="icons/project-x.jpg" width="15px" height="15px"> was released</li>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Grudge</h3>
+						2🌟if Cyborg is your BC and is Not Live at <img src="icons/stationfall.jpg"
+						width="15px" height="15px">
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-purple ability">
+						<h3>Uncanny</h3>It takes two Activation discs for this Character to become Exhausted
+					</div>
+					<div class="w3-red ability">
+						<h3>Fugitive</h3>No actions taken with or against this Character will make a player Suspect
+					</div>
+				</div>
+			</div>
+			<div id="9" class="character">
+				<h2>Daredevil</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>3🌟if Daredevil 🌍</li>
+							<ul>
+								<li>+2🌟if you are the only 🚹 that 🌍</li>
+								<li>+2🌟if you Possess <img src="icons/artifact.jpg" width="15px" height="15px"> or are ☣️
+								</li>
+							</ul>
+							<li>1 point if <img src="icons/project-x.jpg" width="15px" height="15px"> was released</li>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Friend</h3>
+						2🌟if Daredevil is your BC and 🌍
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-green ability">
+						<h3>Pride</h3>Daredevil cannot be Robbed
+					</div>
+					<div class="w3-yellow ability">
+						<h3>Adrenaline</h3>Daredevil is not Downed by Hazards, Step or Airlock into Section with Hazard
+						is always free
+					</div>
+				</div>
+			</div>
+			<div id="14" class="character">
+				<h2>Engineer</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>3🌟if <img src="icons/antimatter.jpg" width="15px" height="15px"> detonates On Board
+									before <img src="icons/stationfall.jpg" width="15px" height="15px"></li>
+							<li>3🌟if no ☣️ Characters Escape</li>
+							<li>2🌟if <img src="icons/artifact.jpg" width="15px" height="15px"> does not Escape</li>
+							<li>1 point if Innocent, but may win even if Guilty</li>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Grudge</h3>
+						2🌟if Engineer is your BC and is Not Live at <img src="icons/stationfall.jpg"
+						width="15px" height="15px">
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-yellow ability">
+						<h3>Officer</h3>If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then
+						removed
+					</div>
+					<div class="w3-pink ability">
+						<h3>Jury Rig</h3>As an action, Repair a Colocated Damaged Section or Down Robot
+					</div>
+				</div>
+			</div>
+			<div id="15" class="character">
+				<h2>Exile</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>2🌟if Exile 🌍</li>
+							<ul>
+								<li>+2🌟for each Possessed <img src="icons/kompromat.jpg" width="15px" height="15px"> of
+									Escaped Characters</li>
+								<li>+3🌟if Exile has <img src="icons/evidence.jpg" width="15px" height="15px"> and📡does
+									not</li>
+							</ul>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Friend</h3>
+						2🌟if Exile is your BC and 🌍
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-green ability">
+						<h3>Fast Talk</h3>Cannot be Attacked by Humans with Bludgeon in Lit Sections
+					</div>
+					<div class="w3-orange ability">
+						<h3>Hacker</h3>May perform a Free Console Action instead of a Free Pick Up or Drop. If Jammers
+						are OFF may perform Console Actions in any section
+					</div>
+				</div>
+			</div>
+			<div id="19" class="character">
+				<h2>Medical</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>2🌟if no Down 🚹s on Board at <img src="icons/stationfall.jpg" width="15px" height="15px">
+							</li>
+							<li>1 point for each star reached on the tracker on the Character Card. Move tracker one slot
+								for every:</li>
+							<ul>
+								<li>🚹 Revival performed by Medical</li>
+								<li>Cube moved to Betrayal upon Medical's Reveal</li>
+							</ul>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Grudge</h3>
+						1🌟if Medical is your BC and is Not Live at 
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-pink ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Emergency Response</h3> As an Action, may Revive a Human. Step or Airlock into Sections with
+						Down Human is always Free
+					</div>
+					<div class="w3-purple ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Helpful</h3>No player may have more than one influence cube on this Character
+					</div>
+				</div>
+			</div>
+			<div id="22" class="character">
+				<h2>Security</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>1 point per Down Fugitive, Monster, or non-innocent Player Characters on Board at <img
+									src="icons/stationfall.jpg" width="15px" height="15px"></li>
+							<li>1 point per Down 🚹 with Bludgeon or 🔫 on Board at <img src="icons/stationfall.jpg"
+									width="15px" height="15px"> </li>
+							<li>1 point if <img src="icons/briefcase.jpg" width="15px" height="15px"> does not Escape</li>
+							<li>1 point if <img src="icons/artifact.jpg" width="15px" height="15px"> does not Escape</li>
+							<ul>
+								<li>+1 point if both <img src="icons/briefcase.jpg" width="15px" height="15px"> and <img
+										src="icons/artifact.jpg" width="15px" height="15px"> do not Escape</li>
+							</ul>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Grudge</h3>
+						3🌟if Security is your BC and Not Live at 
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-green ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Peacekeeper</h3>May only attack Fugitives, Monsters, or non-innocent PCs. May not Sabotage
+					</div>
+					<div class="w3-green ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Armored</h3>Cannot be Attacked or Robbed by Bludgeon
+					</div>
+				</div>
+			</div>
+			<div id="23" class="character">
+				<h2>Station Chief</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>1 point for every other 🚹 that 🌍</li>
+							<ul>
+								<li>+1 point per NPC with the Officer ability that 🌍</li>
+							</ul>
+							<li>2🌟if Station Chief On Board and Live at <img src="icons/stationfall.jpg" width="15px"
+									height="15px"></li>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Grudge</h3>
+						2🌟if Station Chief is your BC and Not Live at
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-yellow ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Officer</h3>If not Blackout, may Step (or if Down, be Dragged) through Locks, which are then
+						removed
+					</div>
+					<div class="w3-green ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Pride</h3>Cannot be Robbed
+					</div>
+				</div>
+			</div>
+			<div id="24" class="character">
+				<h2>Stowaway</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>2🌟if📡ends with <img src="icons/x-secret.jpg" width="15px" height="15px"></li>
+							<li>2🌟if📡ends with <img src="icons/evidence.jpg" width="15px" height="15px"></li>
+							<li>2🌟if Stowaway 🌍</li>
+							<ul>
+								<li>+3🌟if Escape with <img src="icons/evidence.jpg" width="15px" height="15px"> and no
+									other Character does</li>
+							</ul>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Friend</h3>
+						2🌟if Stowaway is your BC and 🌍
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-yellow ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Tunnel Rat</h3>May Step through Vents
+					</div>
+					<div class="w3-orange ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Hacker</h3>May perform a Free Console Action instead of a Free Pick Up or Drop. If Jammers
+						are OFF may perform Console Actions in any Section.
+					</div>
+				</div>
+			</div>
+			<div id="25" class="character">
+				<h2>Stranger</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>1 point if your Secret Identity is not revealed until <img src="icons/stationfall.jpg"
+									width="15px" height="15px"></li>
+							<li>1 point if Possess <img src="icons/x-secret.jpg" width="15px" height="15px"></li>
+							<li>2🌟if you score Bonus Points</li>
+							<li>2🌟if Live and Colocated with a Bonus Character of yours at <img
+									src="icons/stationfall.jpg" width="15px" height="15px"></li>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Friend</h3>
+						2🌟if Stranger is your BC and 🌍
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-purple ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Uncanny</h3>It takes two Activation discs for this Character to become Exhausted
+					</div>
+				</div>
+			</div>
+			<div id="27" class="character">
+				<h2>Troubleshooter</h2>
+				<div class="dataList">
+					<div class="agenda">
+						<ul>
+							<li>2🌟if <img src="icons/antimatter.jpg" width="15px" height="15px"> is not Armed at <img
+									src="icons/stationfall.jpg" width="15px" height="15px"></li>
+							<li>2🌟if <img src="icons/project-x.jpg" width="15px" height="15px"> was never released</li>
+							<li>2🌟if no Sections are Damaged at <img src="icons/stationfall.jpg" width="15px"
+									height="15px"></li>
+							<li>1 point for each Live 🤖 at <img src="icons/stationfall.jpg" width="15px" height="15px">
+							</li>
+						</ul>
+					</div>
+					<div class="bonus">
+						<h3>Friend</h3>
+						2🌟if Troubleshooter is your BC and 🌍
+					</div>
+				</div>
+				<div class="abilitiesList">
+					<div class="w3-yellow ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Tunnel Rat</h3>May Step through Vents
+					</div>
+					<div class="w3-pink ability"
+						style="align-self: start; border: 1px solid white; padding: 5px; width: 100%; height: 100%; min-height: 100px;">
+						<h3>Jury Rig</h3>As an Action, Repair a Colocated Damaged Section or Repair a Colocated Down
+						Robot
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+
 </body>
+
 </html>
