@@ -21,6 +21,12 @@ h3 {
 	justify-content: space-around; 
 	align-content: space-around;
 }
+#charactersList:nth-child(odd) {
+  background-color: #688;
+}
+#charactersList:nth-child(even) {
+  background-color: #668;
+}
 .character { 
 	border: 1px solid white; 
 	padding: 5px; 
