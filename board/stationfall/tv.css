@@ -21,11 +21,11 @@ h3 {
 	justify-content: space-around; 
 	align-content: space-around;
 }
-#charactersList:nth-child(odd) {
-  background-color: #688;
+.character:nth-child(odd) {
+	background-color: rgb(17, 37, 37);
 }
-#charactersList:nth-child(even) {
-  background-color: #668;
+.character:nth-child(even) {
+	background-color: rgb(49, 49, 54);
 }
 .character { 
 	border: 1px solid white; 
@@ -47,7 +47,7 @@ h3 {
 	border: 1px solid white;
 }
 .ability {
-	font-size: 0.8rem;
+	font-size: 0.85rem;
 	padding: 5px;
 	margin: 0;
 	width: 50%;
@@ -65,13 +65,13 @@ h3 {
 	justify-content: space-evenly;
 }
 .agenda {
-	width: 70%;
+	width: 75%;
 	padding: 5px;
 	border: 1px solid gray;
 }
 .bonus {
-	width: 30%;
-	font-size: 0.8rem;
+	width: 25%;
+	font-size: 0.85rem;
 	padding: 2px;
 	border: 1px solid gray;
 	text-align: center;
