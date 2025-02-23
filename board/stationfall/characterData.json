@@ -66,11 +66,6 @@
 			"tooltip": "Fugitive is an ability shown on some characters, such as Boarder and Cyborg. Security cannot Attack players unless they are Suspect, or Fugitives"
 		},
 		{
-			"find": "Down",
-			"icon": "",
-			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. A Down Character may not be Influenced, take Actions or be Activated. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
-		},
-		{
 			"find": "Escapes",
 			"icon": "🌍",
 			"tooltip": "The named object (character/item/data) reaches Earth, usually leaving in a Pod. The Character may be Down or Live, they still count as having Escaped if they are not Annihilated"
@@ -156,14 +151,19 @@
 			"tooltip": "Points earned through your Bonus Character, depending on whether they Escape (friend) or are Not Live (grudge)"
 		},
 		{
+			"find": "points",
+			"icon": "🌟",
+			"tooltip": "Points are how you win, earned through completing your PC's agenda and BC's criteria. Points can be lost through Influence limits, and points (usually) mean nothing if your PC is Guilty"
+		},
+		{
 			"find": "BC",
 			"icon": "",
 			"tooltip": "Bonus Character - the Secret Identity card you are not using as your Player Character (the one you Reveal as). You score bonus points depending on whether they Escape (friend) or are Not Live (grudge)"
 		},
 		{
-			"find": "points",
-			"icon": "🌟",
-			"tooltip": "Points are how you win, earned through completing your PC's agenda and BC's criteria. Points can be lost through Influence limits, and points (usually) mean nothing if your PC is Guilty"
+			"find": "Robot",
+			"icon": "🤖",
+			"tooltip": "A robot character, shown on the Character card - namely Medical, Security"
 		},
 		{
 			"find": "Human",
@@ -171,9 +171,9 @@
 			"tooltip": "Shown on the Character card, mostly obvious but a few nuances, such as Astrochimp counting as human, and Cyborg counting as both human and a robot"
 		},
 		{
-			"find": "Robot",
-			"icon": "🤖",
-			"tooltip": "A robot character, shown on the Character card - namely Medical, Security"
+			"find": "Down",
+			"icon": "❌",
+			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. A Down Character may not be Influenced, take Actions or be Activated. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
 		}
 	],
 	"colours": {
