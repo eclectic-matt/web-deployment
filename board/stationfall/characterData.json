@@ -153,7 +153,7 @@
 		{
 			"find": "points",
 			"icon": "🌟",
-			"tooltip": "Points are how you win, earned through completing your PC's agenda and BC's criteria. Points can be lost through Influence limits, and points (usually) mean nothing if your PC is Guilty"
+			"tooltip": "Points are how you win, earned through completing your Player Character's agenda and Bonus Character's criteria. Points can be lost through Influence limits, and points (usually) mean nothing if your PC is Guilty"
 		},
 		{
 			"find": "BC",
