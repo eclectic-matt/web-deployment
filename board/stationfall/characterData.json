@@ -66,11 +66,6 @@
 			"tooltip": "Fugitive is an ability shown on some characters, such as Boarder and Cyborg. Security cannot Attack players unless they are Suspect, or Fugitives"
 		},
 		{
-			"find": "Escapes",
-			"icon": "🌍",
-			"tooltip": "The named object (character/item/data) reaches Earth, usually leaving in a Pod. The Character may be Down or Live, they still count as having Escaped if they are not Annihilated"
-		},
-		{
 			"find": "Briefcase",
 			"icon": "<img src='icons/briefcase.jpg' width='15px' height='15px' />",
 			"tooltip": "Briefcase is an Item in Suite"
@@ -174,6 +169,11 @@
 			"find": "Down",
 			"icon": "❌",
 			"tooltip": "Down characters have been knocked unconscious by being Attacked, or coming into contact with a hazard. A Down Character may not be Influenced, take Actions or be Activated. Down Humans can be revived with Nanogel, and Down Robots can be repaired"
+		},
+		{
+			"find": "Escapes",
+			"icon": "🌍",
+			"tooltip": "The named object (character/item/data) reaches Earth, usually leaving in a Pod. The Character may be Down or Live, they still count as having Escaped if they are not Annihilated"
 		}
 	],
 	"colours": {
