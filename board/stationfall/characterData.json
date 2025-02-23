@@ -73,7 +73,7 @@
 		{
 			"find": "Escapes",
 			"icon": "🌍",
-			"tooltip": "Character reaches Earth, usually leaving in a Pod. The Character may be Down or Live, they still count as having Escaped if they are not Annihilated"
+			"tooltip": "The named object (character/item/data) reaches Earth, usually leaving in a Pod. The Character may be Down or Live, they still count as having Escaped if they are not Annihilated"
 		},
 		{
 			"find": "Briefcase",
@@ -123,7 +123,7 @@
 		{
 			"find": "Betrayal Box",
 			"icon": "",
-			"tooltip": "When players Reveal, any cubes belonging to other players are lost to the Betrayal Box"
+			"tooltip": "When players Reveal, any cubes belonging to other players on the Revealed Player Character are lost to the Betrayal Box"
 		},
 		{
 			"find": "Project X",
