@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.module.js",
+				"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/"
+			}
+		}
+	</script>
+	<!--script src="./rubik/main.js" type="module"></script-->
 	<script>
 		//CANVAS VARIABLES
 		var canvas, ctx;
@@ -35,62 +44,98 @@
 			ctx.strokeWidth = '3px';
 			//DRAW STUFF
 			ctx.fillStyle = '#f00';
-			//JUST LOOP OVER THE RUBIK ROWS AND COLS TO GENERATE A FACE
-			for(let row = 0; row < rubikSettings.rows; row++){
-				for(let col = 0; col < rubikSettings.cols; col++){
-					let randColIndex = Math.floor(Math.random() * rubikSettings.colors.length);
-					let randCol = rubikSettings.colors[randColIndex];
-					ctx.fillStyle = randCol;
-					ctx.fillRect(row * 100, col * 100, 100, 100);
-					ctx.fill();
-					ctx.strokeRect(row * 100, col * 100, 100, 100);
-					ctx.stroke();
-				}
-			}
-			
+			//CREATE THE RUBIK CUBE
+			rubikCube = new RubikCube(6);
+
 		}
 		class RubikCube {
+			//THE NUMBER OF SIDES
 			sides = 0;
+			//THE ARRAY OF FACE DATA
 			faces = [];
+			//THE CURRENT FACE INDEX
+			faceIndex = 0;
 			constructor(sides){
+				this.faceIndex = 0;
 				this.sides = sides;
 				this.init();
-				this.randomise();
+				//this.randomise();
+				this.draw();
 			}
 			init(){
 				for(let i = 0; i < this.sides; i++){
 					//GENERATE SIDE i
-					this.faces[i] = rubikSettings.colors[i];
+					//this.faces[i] = rubikSettings.colors[i];
+					this.faces[i] = [];
+					for(let row = 0; row < 3; row++){
+						this.faces[i][row] = [];
+						for(let col = 0; col < 3; col++){
+							//SET THE CURRENT "CELL" COLOUR TO THE SIDE DEFAULT
+							this.faces[i][row][col] = rubikSettings.colors[i];
+						}
+					}
 				}
 			}
 			randomise(moves=100){
 				for(let i = 0; i < moves; i++){
 					//PICK A ROW BETWEEN 1 AND this.sides
 					let sideIndex = Math.floor(Math.random() * this.sides);
-					//PICK A MOVE INDEX BETWEEN 1 AND X
+					//PICK A MOVE INDEX BETWEEN 0 AND 5
 					let moveIndex = Math.floor(Math.random() * 6);
 					switch(moveIndex){
 						case 0:
 							//TOP ROW ROTATE RIGHT
+							this.rotate(0,1);
 						break;
 						case 1:
 							//MIDDLE ROW ROTATE RIGHT
+							this.rotate(1,1);
 						break;
 						case 2:
 							//BOTTOM ROW ROTATE RIGHT
+							this.rotate(2,1);
 						break;
 						case 3:
-							//LEFT COL ROTATE UP
+							//LEFT COL FLIP UP
+							this.flip(0,1);
 						break;
-						case 4: 
-							//MIDDLE COL ROTATE UP
+						case 4:
+							//MIDDLE COL FLIP UP
+							this.flip(1,1);
 						break;
-						case 5: 
-							//RIGHT COL ROTATE UP
+						case 5:
+							//RIGHT COL FLIP UP
+							this.flip(2,1);
 						break;
 					}
 				}
 			}
+			rotate(row,repeat=1){
+				this.faceIndex += 1;
+				if(this.faceIndex >= this.sides){
+					this.faceIndex = 0;
+				}
+				this.draw();
+			}
+			flip(col, repeat=1){
+
+			}
+			draw(){
+				for(let row = 0; row < rubikSettings.rows; row++){
+					for(let col = 0; col < rubikSettings.cols; col++){
+						//GET THIS CELL'S COLOUR
+						ctx.fillStyle = this.faces[this.faceIndex][row][col];
+						ctx.fillRect(row * 100, col * 100, 100, 100);
+						ctx.fill();
+						ctx.strokeRect(row * 100, col * 100, 100, 100);
+						ctx.stroke();
+					}
+				}
+			}
+		}
+
+		const rotateRight = () => {
+			rubikCube.rotate(0,1);
 		}
 	</script>
 </head>
@@ -98,5 +143,7 @@
 <canvas id="canvas" width="600" height="800">
 	Enable javascript to view this content.
 </canvas>
+<button onclick="rotateRight()">Rotate Right</button>
+<button onclick="rotateLeft()">Rotate Right</button>
 </body>
 </html>
