@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		//CANVAS VARIABLES
+		var canvas, ctx;
+		//HOLD THE GENERATED CUBE DATA
+		var rubikCube;
+		//RUBIK CUBE SETTINGS
+		const rubikSettings = {
+			rows: 3,
+			cols: 3,
+			faces: 6,
+			colors: [
+				'#f86d32',	//ORANGE
+				'#028d49',	//GREEN
+				'#005dc4',	//BLUE
+				'#f51e1b',	//RED
+				'#ffe763',	//YELLOW
+				'#f3f6fb'	//WHITE
+			]
+		}
+		const init = () => {
+			//GET THE CANVAS
+			canvas = document.getElementById('canvas');
+			//SET THE WIDTH / HEIGHT
+			const fullWidth = window.innerWidth;
+			const fullHeight = window.innerHeight; 
+			canvas.width = fullWidth;
+			canvas.height = fullHeight;
+			//GET THE CANVAS CONTEXT
+			ctx = canvas.getContext('2d');
+			//PREP COLOURS
+			ctx.strokeStyle = '#000';
+			ctx.strokeWidth = '3px';
+			//DRAW STUFF
+			ctx.fillStyle = '#f00';
+			//JUST LOOP OVER THE RUBIK ROWS AND COLS TO GENERATE A FACE
+			for(let row = 0; row < rubikSettings.rows; row++){
+				for(let col = 0; col < rubikSettings.cols; col++){
+					let randColIndex = Math.floor(Math.random() * rubikSettings.colors.length);
+					let randCol = rubikSettings.colors[randColIndex];
+					ctx.fillStyle = randCol;
+					ctx.fillRect(row * 100, col * 100, 100, 100);
+					ctx.fill();
+					ctx.strokeRect(row * 100, col * 100, 100, 100);
+					ctx.stroke();
+				}
+			}
+			
+		}
+		class RubikCube {
+			sides = 0;
+			faces = [];
+			constructor(sides){
+				this.sides = sides;
+				this.init();
+				this.randomise();
+			}
+			init(){
+				for(let i = 0; i < this.sides; i++){
+					//GENERATE SIDE i
+					this.faces[i] = rubikSettings.colors[i];
+				}
+			}
+			randomise(moves=100){
+				for(let i = 0; i < moves; i++){
+					//PICK A ROW BETWEEN 1 AND this.sides
+					let sideIndex = Math.floor(Math.random() * this.sides);
+					//PICK A MOVE INDEX BETWEEN 1 AND X
+					let moveIndex = Math.floor(Math.random() * 6);
+					switch(moveIndex){
+						case 0:
+							//TOP ROW ROTATE RIGHT
+						break;
+						case 1:
+							//MIDDLE ROW ROTATE RIGHT
+						break;
+						case 2:
+							//BOTTOM ROW ROTATE RIGHT
+						break;
+						case 3:
+							//LEFT COL ROTATE UP
+						break;
+						case 4: 
+							//MIDDLE COL ROTATE UP
+						break;
+						case 5: 
+							//RIGHT COL ROTATE UP
+						break;
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body onload="init()">
+<canvas id="canvas" width="600" height="800">
+	Enable javascript to view this content.
+</canvas>
+</body>
+</html>
