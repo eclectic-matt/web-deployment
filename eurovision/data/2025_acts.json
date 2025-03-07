@@ -1,0 +1,618 @@
+{
+	"meta": {
+		"final": {
+			"start": "XXXXXXXX",
+			"location": "XXXXXXXXX"
+		}
+	},
+	"acts": [
+		{
+			"country": "Norway",
+			"artist": "Gåte",
+			"countryFlagCode": "no",
+			"bgColor": "indigo",
+			"song": "Ulveham",
+			"language": "unknown",
+			"youtubeVideoId": "UipzszlJwRQ",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 15
+				},
+			"final": {
+					"billingNumber": 14
+			}
+		},
+		{
+			"country": "Malta",
+			"artist": "Sarah Bonnici",
+			"bgColor": "red",
+			"countryFlagCode": "mt",
+			"song": "Loop",
+			"language": "unknown",
+			"youtubeVideoId": "l6eS60n4wg8",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 1
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Serbia",
+			"artist": "Teya Dora",
+			"bgColor": "blue",
+			"countryFlagCode": "rs",
+			"song": "Ramonda",
+			"language": "unknown",
+			"youtubeVideoId": "lWzPO6nPpwU",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 2
+				},
+			"final": {
+					"billingNumber": 16
+			}
+		},
+		{
+			"country": "Latvia",
+			"artist": "Dons",
+			"bgColor": "win8-crimson",
+			"countryFlagCode": "lv",
+			"song": "Hollow",
+			"language": "unknown",
+			"youtubeVideoId": "p8FNO0DtBng",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 9
+				},
+			"final": {
+					"billingNumber": 11
+			}
+		},
+		{
+			"country": "Portugal",
+			"artist": "Iolanda",
+			"bgColor": "red",
+			"countryFlagCode": "pt",
+			"song": "Grito",
+			"language": "unknown",
+			"youtubeVideoId": "K5wDGhcDSpQ",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 14
+				},
+			"final": {
+					"billingNumber": 18
+			}
+		},
+		{
+			"country": "Ireland",
+			"artist": "Bambie Thug",
+			"bgColor": "green",
+			"countryFlagCode": "ie",
+			"song": "Doomsday Blue",
+			"language": "unknown",
+			"youtubeVideoId": "ZGRXRrlIspY",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 4
+				},
+			"final": {
+					"billingNumber": 10
+			}
+		},
+		{
+			"country": "Croatia",
+			"artist": "Baby Lasagna",
+			"bgColor": "blue",
+			"countryFlagCode": "hr",
+			"song": "Rim Tim Tagi Dim",
+			"language": "unknown",
+			"youtubeVideoId": "xTBrVNZtnys",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 7
+				},
+			"final": {
+					"billingNumber": 23
+			}
+		},
+		{
+			"country": "Switzerland",
+			"artist": "Nemo",
+			"bgColor": "red",
+			"countryFlagCode": "ch",
+			"song": "The Code",
+			"language": "unknown",
+			"youtubeVideoId": "kiGDvM14Kwg",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 4
+				},
+			"final": {
+					"billingNumber": 21
+			}
+		},
+		{
+			"country": "Israel",
+			"artist": "Eden Golan",
+			"bgColor": "white",
+			"countryFlagCode": "il",
+			"song": "Hurricane",
+			"language": "unknown",
+			"youtubeVideoId": "lJYn09tuPw4",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 14
+				},
+			"final": {
+					"billingNumber": 6
+			}
+		},
+		{
+			"country": "Moldova",
+			"artist": "Natalia Barbu",
+			"bgColor": "yellow",
+			"countryFlagCode": "md",
+			"song": "In the Middle",
+			"language": "unknown",
+			"youtubeVideoId": "Jom9sNL5whs",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 11
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Sweden",
+			"artist": "Marcus & Martinus",
+			"bgColor": "blue",
+			"countryFlagCode": "se",
+			"song": "Unforgettable",
+			"language": "unknown",
+			"youtubeVideoId": "yekc8t0rJqA",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 1
+			}
+		},
+		{
+			"country": "Azerbaijan",
+			"artist": "Fahree feat. Ilkin Dovlatov",
+			"bgColor": "red",
+			"countryFlagCode": "az",
+			"song": "Özünlə apar",
+			"language": "unknown",
+			"youtubeVideoId": "NNhAk4rVgNc",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 12
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Czechia",
+			"artist": "Aiko",
+			"bgColor": "white",
+			"countryFlagCode": "cz",
+			"song": "Pedestal",
+			"language": "unknown",
+			"youtubeVideoId": "_iTcX6NlAqA",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 5
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Netherlands",
+			"artist": "Joost Klein",
+			"bgColor": "orange",
+			"countryFlagCode": "nl",
+			"song": "Europapa",
+			"language": "unknown",
+			"youtubeVideoId": "gT2wY0DjYGo",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 16
+				},
+			"final": {
+					"billingNumber": 5
+			}
+		},
+		{
+			"country": "Finland",
+			"artist": "Windows95man",
+			"bgColor": "white",
+			"countryFlagCode": "fi",
+			"song": "No Rules!",
+			"language": "unknown",
+			"youtubeVideoId": "8Wi7fhswoBA",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 10
+				},
+			"final": {
+					"billingNumber": 17
+			}
+		},
+		{
+			"country": "Denmark",
+			"artist": "Saba",
+			"bgColor": "red",
+			"countryFlagCode": "dk",
+			"song": "Sand",
+			"language": "unknown",
+			"youtubeVideoId": "3pCtdFnv9eQ",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 7
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Armenia",
+			"artist": "Ladaniva",
+			"bgColor": "orange",
+			"countryFlagCode": "am",
+			"song": "Jako",
+			"language": "unknown",
+			"youtubeVideoId": "_6xfmW0Fc40",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 8
+				},
+			"final": {
+					"billingNumber": 19
+			}
+		},
+		{
+			"country": "Romania",
+			"artist": "???",
+			"bgColor": "yellow",
+			"countryFlagCode": "ro",
+			"song": "???",
+			"language": "unknown",
+			"youtubeVideoId": "ugJ5n7S2GKI",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Estonia",
+			"artist": "5miinust and Puuluup",
+			"bgColor": "blue",
+			"countryFlagCode": "ee",
+			"song": "(Nendest) narkootikumidest ei tea me (küll) midagi",
+			"language": "unknown",
+			"youtubeVideoId": "zY6RbPaTNUc",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 13
+				},
+			"final": {
+					"billingNumber": 9
+			}
+		},
+		{
+			"country": "Belgium",
+			"artist": "Mustii",
+			"bgColor": "red",
+			"countryFlagCode": "be",
+			"song": "Before the Party's Over",
+			"language": "unknown",
+			"youtubeVideoId": "WCe9zrWEFNc",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 12
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Cyprus",
+			"artist": "Silia Kapsis",
+			"bgColor": "white",
+			"countryFlagCode": "cy",
+			"song": "Liar",
+			"language": "unknown",
+			"youtubeVideoId": "8q5QozrtEPA",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 1
+				},
+			"final": {
+					"billingNumber": 20
+			}
+		},
+		{
+			"country": "Iceland",
+			"artist": "Hera Björk",
+			"bgColor": "blue",
+			"countryFlagCode": "is",
+			"song": "Scared of Heights",
+			"language": "unknown",
+			"youtubeVideoId": "OouUsCZ3xkM",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 8
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Greece",
+			"artist": "Marina Satti",
+			"bgColor": "aqua",
+			"countryFlagCode": "gr",
+			"song": "Zari",
+			"language": "unknown",
+			"youtubeVideoId": "uTYalXf184A",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 3
+				},
+			"final": {
+					"billingNumber": 12
+			}
+		},
+		{
+			"country": "Poland",
+			"artist": "Luna",
+			"bgColor": "red",
+			"countryFlagCode": "pl",
+			"song": "The Tower",
+			"language": "unknown",
+			"youtubeVideoId": "IhvDkF9XZx0",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 6
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Slovenia",
+			"artist": "Raiven",
+			"bgColor": "blue",
+			"countryFlagCode": "si",
+			"song": "Veronika",
+			"language": "unknown",
+			"youtubeVideoId": "uWcSsi7SliI",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 9
+				},
+			"final": {
+					"billingNumber": 22
+			}
+		},
+		{
+			"country": "Georgia",
+			"artist": "Nutsa Buzaladze",
+			"bgColor": "white",
+			"countryFlagCode": "ge",
+			"song": "Firefighter",
+			"language": "unknown",
+			"youtubeVideoId": "blMwY8Jabyk",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 11
+				},
+			"final": {
+					"billingNumber": 24
+			}
+		},
+		{
+			"country": "San Marino",
+			"artist": "Megara",
+			"bgColor": "blue",
+			"countryFlagCode": "sm",
+			"song": "11:11",
+			"language": "unknown",
+			"youtubeVideoId": "9NcAJtfhpWA",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 10
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Austria",
+			"artist": "Kaleen",
+			"bgColor": "white",
+			"countryFlagCode": "at",
+			"song": "We Will Rave",
+			"language": "unknown",
+			"youtubeVideoId": "Kqda15G4T-4",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 6
+				},
+			"final": {
+					"billingNumber": 26
+			}
+		},
+		{
+			"country": "Albania",
+			"artist": "Besa",
+			"bgColor": "red",
+			"countryFlagCode": "al",
+			"song": "Titan",
+			"language": "unknown",
+			"youtubeVideoId": "nrjFhjpm7D8",
+			"semiFinal": {
+					"eventNumber": 2,
+					"billingNumber": 2
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "Lithuania",
+			"artist": "Silvester Belt",
+			"bgColor": "green",
+			"countryFlagCode": "lt",
+			"song": "Luktelk",
+			"language": "unknown",
+			"youtubeVideoId": "OrL668EQRu0",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 3
+				},
+			"final": {
+					"billingNumber": 7
+			}
+		},
+		{
+			"country": "Australia",
+			"artist": "Electric Fields",
+			"bgColor": "blue",
+			"countryFlagCode": "au",
+			"song": "One Milkali (One Blood)",
+			"language": "unknown",
+			"youtubeVideoId": "tJ2IaHxCvdw",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 13
+				},
+			"final": {
+					"billingNumber": 0
+			}
+		},
+		{
+			"country": "France",
+			"artist": "Slimane",
+			"bgColor": "red",
+			"countryFlagCode": "fr",
+			"song": "Mon amour",
+			"language": "unknown",
+			"youtubeVideoId": "tfoOop2HXxQ",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 25
+			}
+		},
+		{
+			"country": "Italy",
+			"artist": "Angelina Mango",
+			"bgColor": "green",
+			"countryFlagCode": "it",
+			"song": "La noia",
+			"language": "unknown",
+			"youtubeVideoId": "TO85laH-ATY",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 15
+			}
+		},
+		{
+			"country": "Spain",
+			"artist": "Nebulossa",
+			"bgColor": "yellow",
+			"countryFlagCode": "es",
+			"song": "Zorra",
+			"language": "unknown",
+			"youtubeVideoId": "LJFpexlj9Bs",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 8
+			}
+		},
+		{
+			"country": "Germany",
+			"artist": "Isaak",
+			"bgColor": "black",
+			"countryFlagCode": "de",
+			"song": "Always on the Run",
+			"language": "unknown",
+			"youtubeVideoId": "8b5gcgXcWgk",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 3
+			}
+		},
+		{
+			"country": "Ukraine",
+			"artist": "Alyona Alyona and Jerry Heil",
+			"bgColor": "blue",
+			"countryFlagCode": "ua",
+			"song": "Teresa & Maria",
+			"language": "unknown",
+			"youtubeVideoId": "k_8cNbF8FLI",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 5
+				},
+			"final": {
+					"billingNumber": 2
+			}
+		},
+		{
+			"country": "United Kingdom",
+			"artist": "Olly Alexander",
+			"bgColor": "red",
+			"countryFlagCode": "gb",
+			"song": "Dizzy",
+			"language": "unknown",
+			"youtubeVideoId": "mvs92WfR8lM",
+			"semiFinal": {
+					"eventNumber": 0,
+					"billingNumber": 0
+				},
+			"final": {
+					"billingNumber": 13
+			}
+		},
+		{
+			"country": "Luxembourg",
+			"artist": "Tali",
+			"bgColor": "blue",
+			"countryFlagCode": "lu",
+			"song": "Fighter",
+			"language": "unknown",
+			"youtubeVideoId": "6CNuXpdyYmE",
+			"semiFinal": {
+					"eventNumber": 1,
+					"billingNumber": 15
+				},
+			"final": {
+					"billingNumber": 4
+			}
+		}
+	]
+}
