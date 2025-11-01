@@ -229,7 +229,8 @@
 				<li><b>Character</b> - this is the name of a CHARACTER ROLE (i.e. not a player's name)</li>
 				<li><b>Player</b> - this is the name of a PLAYER (i.e. not a character role)</li>
 				<li><em>(rare) Traveller - this is a special character not often for the duration of the game</em></li>
-				<li><em>(rare) Fabled - this is not a character, but a special condition placed upon the game by the Storyteller</em></li>
+				<li><em>(rare) Fabled - this is not a character, but a special condition placed upon the game by the Storyteller, often to fix an issue with the rules</em></li>
+				<li><em>(rare) Loric - this is not a character, but a special condition placed upon the game by the Storyteller, usually to add spice or complication to the rules</em></li>
 			</ul>
 			<hr>
 			<h3>Conditions</h3>
@@ -3278,7 +3279,34 @@
 			  "setup": false,
 			  "ability": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is"
 			
+			},
+			{
+			  "id": "bigwig",
+			  "name": "Big Wig",
+			  "edition": "exp",
+			  "team": "loric",
+			  "firstNight": 0,
+			  "firstNightReminder": "",
+			  "otherNight": 0,
+			  "otherNightReminder": "",
+			  "reminders": [],
+			  "setup": false,
+			  "ability": "Each nominee chooses a player: until voting, only they may speak & they are mad the nominee is good or they might die."
+			},
+			{
+			  "id": "tor",
+			  "name": "Tor",
+			  "edition": "exp",
+			  "team": "loric",
+			  "firstNight": 0,
+			  "firstNightReminder": "",
+			  "otherNight": 0,
+			  "otherNightReminder": "",
+			  "reminders": [],
+			  "setup": false,
+			  "ability": "Players don't know their character or alignment. They learn them when they die."
 			}
+			
 		];
 
 		load(roles);
