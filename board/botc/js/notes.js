@@ -97,14 +97,49 @@ function setup(playerCount, scriptRoles)
 
 function createPlayerTokens(main)
 {
-    	let [w, h, r] = calcScreenDimensions();
+	let [w, h, r] = calcScreenDimensions();
+	let orientation = 1;
+	let radius = h/3;
+	let longestSide = h;
+	if(w > h)
+	{
+		//Landscape mode
+		orientation = 1;
+		radius = w / 3;
+		longestSide = w;
+	}
+	else
+	{
+		//Desktop mode
+		orientation = 2;
+		radius = h / 3;
+		longestSide = h;
+	}
+
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
 	{
 		let el = document.createElement('div');
 		el.style.position = "absolute";
-		el.style.top = (10 * i) + (0.1 * h);
-		el.style.left = 10 * i;
+		el.style.width = Math.floor(1.5*longestSide/playerCount) + 'px';
+		el.style.height = Math.floor(1.5*longestSide/playerCount) + 'px';
+		//Calculate position for each token
+		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
+		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
+		//- radius needs to adjust for the screen size (between min + max)
+		//let radius = h/3;
+		//- x position (relative to centre in top left of screen)
+		let x = Math.round(radius * (Math.cos(angle)));
+		//- left position (adjust to be in centre of screen)
+		let left = x + (w/2) + 'px';
+		// - y position (relative to centre in top left of screen)
+		let y = Math.round(radius * (Math.sin(angle)));
+		let top = y + (h/2) + 'px';
+		//el.style.top = (10 * i) + (0.1 * h);
+		//el.style.left = 10 * i;
+		el.style.top = top;
+		el.style.left = left;
+		console.log(i, angle, x, y);
 		el.className = "player";
 		el.id = "player" + (i + 1);
 		el.dataset.playerId = i;
