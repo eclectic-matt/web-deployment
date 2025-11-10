@@ -224,7 +224,12 @@ function addRole(el)
 	//let playerId = el.dataset.playerId;
 	let roleName = el.dataset.role;
 	console.log(playerId, roleName);
-	playersObj.players[playerId].roles.push(roleName);
+	if(el.checked){
+    	playersObj.players[playerId].roles.push(roleName);
+	}else{
+	   playersObj.players[playerId].roles = playersObj.players[playerId].roles.filter((r) => r !== roleName);
+
+	}
 	let roleBtn = document.getElementById("player" + playerId + "Roles");
 	roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ');
 }
@@ -247,6 +252,15 @@ function changeRole(el)
 	addRoleWindowEl2.style.display = 'block';
 	document.getElementById('playerName').innerHTML = el.parentElement.id;
 	document.getElementById('playerId').innerHTML = el.parentElement.dataset.playerId;
+	//Populate notes and checkboxes
+	let roleNames = playersObj.players[playerId].roles;
+	let checks = document.querySelectorAll("input[type=checkbox]");
+	foreach(el in checkboxes)
+	{
+	    if(roleNames.contains(el.innerHTML)){
+	        el.checked = true;
+	    }
+	}
 }
 
 function hideChangeRole()
