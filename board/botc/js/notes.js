@@ -101,19 +101,22 @@ function createPlayerTokens(main)
 	let orientation = 1;
 	let radius = h/3;
 	let longestSide = h;
+	let shortestSide = h;
 	if(w > h)
 	{
 		//Landscape mode
 		orientation = 1;
-		radius = w / 3;
+		radius = w / 4;
 		longestSide = w;
+		shortestSide = h;
 	}
 	else
 	{
 		//Desktop mode
 		orientation = 2;
-		radius = h / 3;
+		radius = h / 4;
 		longestSide = h;
+		shortestSide = w;
 	}
 
 	//Create player elements
@@ -121,8 +124,8 @@ function createPlayerTokens(main)
 	{
 		let el = document.createElement('div');
 		el.style.position = "absolute";
-		el.style.width = Math.floor(1.5*longestSide/playerCount) + 'px';
-		el.style.height = Math.floor(1.5*longestSide/playerCount) + 'px';
+		el.style.width = Math.floor(1.5*shortestSide/playerCount) + 'px';
+		el.style.height = Math.floor(1.5*shortestSide/playerCount) + 'px';
 		//Calculate position for each token
 		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
 		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
@@ -145,6 +148,7 @@ function createPlayerTokens(main)
 		el.dataset.playerId = i;
 		let addBtn = document.createElement('button');
 		addBtn.innerHTML = addRoleBtnText;
+		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
 		addBtn.className = "addBtn";
 		addBtn.onclick = () => changeRole(addBtn);
 		el.appendChild(addBtn);
@@ -170,6 +174,11 @@ function createRolesWindow()
 	//-head
 	let rolesHeader = document.createElement('h3');
 	rolesHeader.innerHTML = "Add role(s) for <span id='playerName'></span> <span id='playerId' class='hidden'></span>";
+	//-closeBtn (in header)
+	let closeAddRoleBtn = document.createElement('button');
+	closeAddRoleBtn.innerHTML = "X";
+	closeAddRoleBtn.onclick = () => hideChangeRole();
+	rolesHeader.appendChild(closeAddRoleBtn);
 	addRoleWindowEl.appendChild(rolesHeader);
 	//-list
 	let addRoleList = document.createElement('ul');
@@ -192,11 +201,16 @@ function createRolesWindow()
 		//console.log('add role ' + scriptRoles[i]);
 	}
 	addRoleWindowEl.appendChild(addRoleList);
-	//-closeBtn
-	let closeAddRoleBtn = document.createElement('button');
-	closeAddRoleBtn.innerHTML = "X";
-	closeAddRoleBtn.onclick = () => hideChangeRole();
-	addRoleWindowEl.appendChild(closeAddRoleBtn);
+	// - status (dead/vote used/evil?)
+	
+	// - notes
+	let noteElHead = document.createElement('h4');
+	noteElHead.innerHTML = "Player Notes";
+	addRoleWindowEl.appendChild(noteElHead);
+	let noteEl = document.createElement('textarea');
+	noteEl.rows = 10;
+	noteEl.cols = 100;
+	addRoleWindowEl.appendChild(noteEl);
 }
 
 function addRole(el)
