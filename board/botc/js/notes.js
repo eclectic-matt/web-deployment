@@ -197,6 +197,7 @@ function createPlayerTokens(main)
 	central.style.top = (h/2) + 'px';
 	central.style.left = (w/3) + 'px';
 	central.style.width = (w/2) + 'px';
+	central.style.fontSize = '0.5rem';
 	central.style.height = 'auto';
 	central.style.border = '1px solid black';
 	central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
