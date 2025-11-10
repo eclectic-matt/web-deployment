@@ -194,8 +194,8 @@ function createPlayerTokens(main)
 	//Add role counts element
 	let central = document.createElement('div');
 	central.style.position = 'absolute';
-	central.style.top = (w/2) + 'px';
-	central.style.left = (h/2) + 'px';
+	central.style.top = (h/2) + 'px';
+	central.style.left = (w/3) + 'px';
 	central.style.width = (w/2) + 'px';
 	central.style.height = 'auto';
 	central.style.border = '1px solid black';
