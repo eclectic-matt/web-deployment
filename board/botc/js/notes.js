@@ -171,6 +171,8 @@ function createRolesWindow()
 	//Fill addRoleWindow
 	let addRoleWindowEl = document.getElementById('addRoleWindow');
 	addRoleWindowEl.innerHTML = null;
+	//Set scroll overflow
+	addRoleWindowEl.style.overflowY = 'scroll';
 	//-head
 	let rolesHeader = document.createElement('h3');
 	rolesHeader.innerHTML = "Add role(s) for <span id='playerName'></span> <span id='playerId' class='hidden'></span>";
@@ -208,9 +210,10 @@ function createRolesWindow()
 	noteElHead.innerHTML = "Player Notes";
 	addRoleWindowEl.appendChild(noteElHead);
 	let noteEl = document.createElement('textarea');
-	noteEl.rows = 10;
-	noteEl.cols = 100;
+	noteEl.style.width = '80%';
+	noteEl.style.height = '10%';
 	addRoleWindowEl.appendChild(noteEl);
+	
 }
 
 function addRole(el)
