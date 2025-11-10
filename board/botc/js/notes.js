@@ -191,6 +191,7 @@ function createRolesWindow()
 		let roleLi = document.createElement('li');
 		//checkbox
 		let roleCheck = document.createElement('input');
+		roleCheck.className = "roleCheck";
 		roleCheck.type = "checkbox";
 		//roleCheck.setAttribute('data', "playerId: '" + i + "', role: '" + scriptRoles[i] + "'");
 		//roleCheck.dataset.playerId = i;
@@ -254,7 +255,9 @@ function changeRole(el)
 	document.getElementById('playerId').innerHTML = el.parentElement.dataset.playerId;
 	//Populate notes and checkboxes
 	let roleNames = playersObj.players[playerId].roles;
-	let checks = document.querySelectorAll("input[type=checkbox]");
+	//let checks = document.querySelectorAll("input[type=checkbox]");
+	let checks = document.getElementsByClassName('roleCheck');
+	
 	foreach(el in checkboxes)
 	{
 	    if(roleNames.includes(el.innerHTML)){
