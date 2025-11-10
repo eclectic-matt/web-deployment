@@ -227,8 +227,6 @@ function addRole(el)
 	playersObj.players[playerId].roles.push(roleName);
 	let roleBtn = document.getElementById("player" + playerId + "Roles");
 	roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ');
-
-
 }
 
 function calcScreenDimensions()
