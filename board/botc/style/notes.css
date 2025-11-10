@@ -1,0 +1,63 @@
+#menu 
+{
+    width: 100vw;
+    height: 10vh;
+    margin: 0;
+    padding: 0;
+}
+
+#main
+{
+    width: 100vw;
+    height: 90vh;
+    background-color: grey;
+    margin: 0;
+    padding: 0;
+}
+
+.player 
+{
+    border: 3px solid black;
+    border-radius: 50%;
+    background-color: yellow;
+    width: 100px;
+    height: 100px;
+}
+
+.addBtn 
+{
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    border-radius: 50%;
+    font-size: 3vw;
+}
+
+.nameInput 
+{
+    width: 60%;
+    margin-left: 20%;
+    height: 0.5rem;
+}
+
+#addRoleWindow 
+{
+    background-color: black;
+    color:white;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+ul {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+.hidden {
+    display: none;
+}

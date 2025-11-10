@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>BOTC Notes</title>
+	<link rel="stylesheet" href="./style/notes.css" />
+	<script defer src="./js/notes.js"></script>
+</head>
+
+<body>
+	<nav id="menu">
+	    <label for="playerCountInput">Set player count: <span id="playerCountSpan">5</span> </label>
+	    <input id="playerCountInput" type="range" min="5" max="20" step="1" value="5" onchange="setPlayerCount(this)"/>
+	    
+	    <label for="scriptInput">Set script: </label>
+	    <select id="scriptInput" onchange="setScript(this)">
+	    	<option value="tb">Trouble Brewing</option>
+	    	<option value="bmr">Bad Moon Rising</option>
+	    	<option value="snv">Sects and Violets</option>
+	    	<option value="all">Custom</option>
+	    </select>
+	</nav>
+	<div id="main">
+	    <!-- Default to 5 players -->
+	    <div class="player" id="player1">
+	        <div class="role blank" onclick="changeRole(this)">
+	            <i class="roleAdd">+</i>
+	        </div>
+	        <input type="text" value="Name" />
+	    </div>
+	</div>
+	<div id="addRoleWindow">
+		<!-- Fill based on script -->
+	</div>
+</body>
+
+</html>
