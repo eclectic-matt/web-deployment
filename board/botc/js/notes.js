@@ -255,10 +255,10 @@ function changeRole(el)
 	document.getElementById('playerId').innerHTML = el.parentElement.dataset.playerId;
 	//Populate notes and checkboxes
 	let roleNames = playersObj.players[playerId].roles;
-	//let checks = document.querySelectorAll("input[type=checkbox]");
-	let checks = document.getElementsByClassName('roleCheck');
+	//let checkboxes = document.querySelectorAll("input[type=checkbox]");
+	let checkboxes = document.getElementsByClassName('roleCheck');
 	
-	foreach(el in checkboxes)
+	for(let el of checkboxes)
 	{
 	    if(roleNames.includes(el.innerHTML)){
 	        el.checked = true;
