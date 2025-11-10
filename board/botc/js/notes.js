@@ -118,6 +118,7 @@ function createPlayerTokens(main)
 		longestSide = h;
 		shortestSide = w;
 	}
+	radius = shortestSide / 4;
 
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
