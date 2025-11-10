@@ -97,12 +97,13 @@ function setup(playerCount, scriptRoles)
 
 function createPlayerTokens(main)
 {
+    	let [w, h, r] = calcScreenDimensions();
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
 	{
 		let el = document.createElement('div');
 		el.style.position = "absolute";
-		el.style.top = 10 * i;
+		el.style.top = (10 * i) + (0.1 * h);
 		el.style.left = 10 * i;
 		el.className = "player";
 		el.id = "player" + (i + 1);
