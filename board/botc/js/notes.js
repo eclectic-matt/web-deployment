@@ -249,6 +249,7 @@ function createRolesWindow()
 	noteElHead.innerHTML = "Player Notes";
 	addRoleWindowEl.appendChild(noteElHead);
 	let noteEl = document.createElement('textarea');
+	noteEl.id = 'playerNotes';
 	noteEl.style.width = '80%';
 	noteEl.style.height = '10%';
 	addRoleWindowEl.appendChild(noteEl);
@@ -294,14 +295,17 @@ function changeRole(el)
 	//let checkboxes = document.querySelectorAll("input[type=checkbox]");
 	let checkboxes = document.getElementsByClassName('roleCheck');
 	
-	for(let check of checkboxes)
+	//for(let check of checkboxes)
+	checkboxes.forEach((check) => 
 	{
 	    if(roleNames.includes(check.innerHTML)){
 	        check.checked = true;
 	    }else{
 	        check.checked = false;
 	    }
-	}
+	});
+	
+	document.getElementById('playerNotes').innerHTML = playersObj.players[playerId].notes;
 }
 
 function hideChangeRole()
