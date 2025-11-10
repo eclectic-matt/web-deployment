@@ -258,12 +258,12 @@ function changeRole(el)
 	//let checkboxes = document.querySelectorAll("input[type=checkbox]");
 	let checkboxes = document.getElementsByClassName('roleCheck');
 	
-	for(let el of checkboxes)
+	for(let check of checkboxes)
 	{
-	    if(roleNames.includes(el.innerHTML)){
-	        el.checked = true;
+	    if(roleNames.includes(check.innerHTML)){
+	        check.checked = true;
 	    }else{
-	        el.checked = false;
+	        check.checked = false;
 	    }
 	}
 }
