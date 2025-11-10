@@ -101,6 +101,9 @@ function createPlayerTokens(main)
 	for (let i = 0; i < playerCount; i++)
 	{
 		let el = document.createElement('div');
+		el.style.position = "absolute";
+		el.style.top = 10 * i;
+		el.style.left = 10 * i;
 		el.className = "player";
 		el.id = "player" + (i + 1);
 		el.dataset.playerId = i;
