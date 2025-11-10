@@ -192,7 +192,8 @@ function createPlayerTokens(main)
 	central.style.top = w/3 + 'px';
 	central.style.left = h/2 + 'px';
 	central.style.border = '1px solid black';
-	central.innerHTML = roleCounts[playerCount];
+	central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
+	main.appendChild(central);
 }
 
 function createRolesWindow()
