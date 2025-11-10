@@ -259,6 +259,8 @@ function changeRole(el)
 	{
 	    if(roleNames.contains(el.innerHTML)){
 	        el.checked = true;
+	    }else{
+	        el.checked = false;
 	    }
 	}
 }
