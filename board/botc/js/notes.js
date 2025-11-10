@@ -152,6 +152,7 @@ function createPlayerTokens(main)
 		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
 		addBtn.className = "addBtn";
 		addBtn.onclick = () => changeRole(addBtn);
+		addBtn.id = "player" + i + "Roles";
 		el.appendChild(addBtn);
 		let nameInput = document.createElement('input');
 		nameInput.onchange = () => setPlayerName(nameInput);
@@ -223,6 +224,11 @@ function addRole(el)
 	//let playerId = el.dataset.playerId;
 	let roleName = el.dataset.role;
 	console.log(playerId, roleName);
+	playersObj.players[playerId].roles.push(roleName);
+	let roleBtn = document.getElementById("player" + playerId + "Roles");
+	roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ');
+
+
 }
 
 function calcScreenDimensions()
