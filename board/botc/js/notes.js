@@ -257,7 +257,7 @@ function changeRole(el)
 	let checks = document.querySelectorAll("input[type=checkbox]");
 	foreach(el in checkboxes)
 	{
-	    if(roleNames.contains(el.innerHTML)){
+	    if(roleNames.includes(el.innerHTML)){
 	        el.checked = true;
 	    }else{
 	        el.checked = false;
