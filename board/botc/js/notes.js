@@ -270,6 +270,8 @@ function addRole(el)
 	   playersObj.players[playerId].roles = playersObj.players[playerId].roles.filter((r) => r !== roleName);
 
 	}
+	debug('role added for player ' + playerId + ':' + roleName);
+	debug('player roles now: ' + playersObj.players[playerId].roles.join(', '));
 	let roleBtn = document.getElementById("player" + playerId + "Roles");
 	roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ');
 }
