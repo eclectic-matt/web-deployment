@@ -202,12 +202,13 @@ function createPlayerTokens(main)
 	
 	//Add role counts element
 	let central = document.createElement('div');
+	central.id = 'central';
 	central.style.position = 'absolute';
-	central.style.top = ((h/2) + 20) + 'px';
-	central.style.left = (w/3) + 'px';
+	central.style.top = ((h/2) + 50) + 'px';
+	central.style.left = ((w/4) + 50) + 'px';
 	central.style.width = (w/4) + 'px';
 	central.style.height = 'auto';
-	central.style.fontSize = '0.5rem';
+	central.style.fontSize = '0.75rem';
 	central.style.border = '1px solid black';
 	central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
 	main.appendChild(central);
