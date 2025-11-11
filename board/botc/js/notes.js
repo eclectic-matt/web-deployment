@@ -1,4 +1,4 @@
-//update 2025-11-11 13:45:00
+//update 2025-11-11 19:15:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -183,6 +183,15 @@ function createPlayerTokens(main)
 		el.className = "player";
 		el.id = "player" + (i + 1);
 		el.dataset.player = i;
+		//Death shroud?
+		let deathShroud = document.createElement('div');
+		deathShroud.id = "player" + i + "Shroud";
+		deathShroud.style.display = 'none';
+		deathShroud.style.width = '80%';
+		deathShroud.style.height = '5%';
+		deathShroud.style.backgroundColor = "red";
+		deathShroud.style.zIndex = 100;
+		el.appendChild(deathShroud);
 		let addBtn = document.createElement('button');
 		addBtn.innerHTML = addRoleBtnText;
 		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
@@ -245,6 +254,7 @@ function createRolesWindow()
 	let deadStatusCheck = document.createElement('input');
 	deadStatusCheck.type = 'checkbox';
 	deadStatusCheck.dataset.type = 'dead';
+	deadStatusCheck.onchange = () => updateDeathShroud(this);
 	deadStatusLi.appendChild(deadStatusCheck);
 	let deadStatusLabel = document.createElement('label');
 	deadStatusLabel.innerHTML = 'Dead?';
@@ -404,6 +414,18 @@ function hideChangeRole()
 		//Append a pencil icon to the player
 		let roleBtn = document.getElementById("player" + playerId + "Roles");
 		roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ') + pencilIconUnicode;
+	}
+}
+
+function updateDeathShroud(el)
+{
+	let playerId = document.getElementById('playerId').innerHTML;
+	let deathShroudEl = document.getElementById("player" + playerId + "Shroud");
+	if(el.checked)
+	{
+		deathShroudEl.style.display = "block";
+	}else{
+		deathShroudEl.style.display = "none";
 	}
 }
 
