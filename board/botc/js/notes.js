@@ -1,6 +1,7 @@
-//update 2025-11-11 13:43:00
+//update 2025-11-11 13:45:00
 //debug("Notes initialized");
 
+//GLOBAL VARIABLES (urgh)
 //Default to 5p, set in menu
 var playerCount = 5;
 var script = "tb";
@@ -8,10 +9,17 @@ var script = "tb";
 var playerNames = [];
 //Names of roles on the current script
 var scriptRoles = [];
+var playersObj = {
+	settings: {},
+	players: []
+}
+
 
 //Defined constants
 const addRoleBtnText = "Add Role"; //"+";
 const pencilIconUnicode = "&#9998;";
+
+
 /*
 const playersExample = [
 	{
@@ -25,10 +33,6 @@ const playersExample = [
 ];
 */
 
-var playersObj = {
-	settings: {},
-	players: []
-}
 
 var roleCounts = [
     null, //0
