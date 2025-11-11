@@ -1,4 +1,4 @@
-//update 2025-11-11 08:21:00
+//update 2025-11-11 08:22:00
 debug("Notes initialized");
 
 //Default to 5p, set in menu
@@ -177,7 +177,7 @@ function createPlayerTokens(main)
 		addBtn.innerHTML = addRoleBtnText;
 		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
 		addBtn.className = "addBtn";
-		addBtn.onclick = () => changeRole(addBtn);
+		addBtn.onclick = () => editPlayerInfo(addBtn);
 		addBtn.id = "player" + i + "Roles";
 		el.appendChild(addBtn);
 		let nameInput = document.createElement('input');
@@ -287,7 +287,7 @@ function calcScreenDimensions()
 	return [w, h, r];
 }
 
-function changeRole(el)
+function editPlayerInfo(el)
 {
 	console.log(el.parentElement.id);
 	let addRoleWindowEl2 = document.getElementById('addRoleWindow');
