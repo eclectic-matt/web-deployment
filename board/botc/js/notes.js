@@ -1,4 +1,4 @@
-//update 2025-11-11 19:15:00
+//update 2025-11-11 20:57:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -421,10 +421,15 @@ function updateDeathShroud(el)
 {
 	let playerId = document.getElementById('playerId').innerHTML;
 	let deathShroudEl = document.getElementById("player" + playerId + "Shroud");
+	//alternatively, show with border?
+	let playerEl = document.getElementById("player" + (playerId + 1));
 	if(el.checked)
 	{
+		playerEl.style.borderColour = "red";
 		deathShroudEl.style.display = "block";
-	}else{
+	}else
+	{
+		playerEl.style.borderColour = "black";
 		deathShroudEl.style.display = "none";
 	}
 }
