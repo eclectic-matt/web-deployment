@@ -1,4 +1,4 @@
-//update 2025-11-11 22:23:00
+//update 2025-11-11 22:26:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -407,7 +407,7 @@ function editPlayerInfo(el)
 	
 	//Dead / vote / alignment
 	let deadStatusEl = document.getElementById("deadStatusCheck");
-	deadStatusEl.checked = playersObj.players[playerId].dead;
+	deadStatusEl.checked = !playersObj.players[playerId].living;
 	let voteStatusEl = document.getElementById("voteStatusCheck");
 	voteStatusEl.checked = playersObj.players[playerId].deadVote;
 	let alignmentEl = document.getElementById("alignmentSelect");
