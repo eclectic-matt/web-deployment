@@ -142,7 +142,8 @@ function createPlayerTokens(main)
 		longestSide = h;
 		shortestSide = w;
 	}
-	radius = shortestSide / 3;
+	//Radius is the distance from centre
+	radius = shortestSide / 3 + (playerCount);
 
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
@@ -159,10 +160,10 @@ function createPlayerTokens(main)
 		//- x position (relative to centre in top left of screen)
 		let x = Math.round(radius * (Math.cos(angle)));
 		//- left position (adjust to be in centre of screen)
-		let left = x + (w/3) + 'px';
+		let left = (x + (w/3) + 25) + 'px';
 		// - y position (relative to centre in top left of screen)
 		let y = Math.round(radius * (Math.sin(angle)));
-		let top = y + (h/2) + 'px';
+		let top = (y + (h/2)) + 'px';
 		//el.style.top = (10 * i) + (0.1 * h);
 		//el.style.left = 10 * i;
 		el.style.top = top;
