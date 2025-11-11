@@ -295,7 +295,8 @@ function changeRole(el)
 	let roleNames = playersObj.players[playerId].roles;
 	//let checkboxes = document.querySelectorAll("input[type=checkbox]");
 	let checkboxes = document.getElementsByClassName('roleCheck');
-	debug('updating checks');
+	
+	debug('updating ' + checkboxes.length + ' checks');
 	//for(let check of checkboxes)
 	checkboxes.forEach((check) => 
 	{
