@@ -289,7 +289,7 @@ function calcScreenDimensions()
 
 function editPlayerInfo(el)
 {
-	console.log(el.parentElement.id);
+	//console.log(el.parentElement.id);
 	let addRoleWindowEl2 = document.getElementById('addRoleWindow');
 	addRoleWindowEl2.style.display = 'block';
 	document.getElementById('playerName').innerHTML = el.parentElement.id;
@@ -301,8 +301,10 @@ function editPlayerInfo(el)
 	
 	debug('updating ' + checkboxes.length + ' checks');
 	debug('selected roles: ' + roleNames.join(', '));
+	
+	Array.prototype.forEach.call(checkboxes, function(check) {
 	//for(let check of checkboxes)
-	checkboxes.forEach((check) => 
+	//checkboxes.forEach((check) => 
 	{
 	    debug(check.dataset.role);
 	    if(roleNames.includes(check.innerHTML)){
