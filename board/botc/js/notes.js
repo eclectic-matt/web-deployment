@@ -16,7 +16,7 @@ var playersObj = {
 
 
 //Defined constants
-const addRoleBtnText = "Add Role"; //"+";
+const addRoleBtnText = "Edit Player"; //"+";
 const pencilIconUnicode = "&#9998;";
 
 
@@ -28,6 +28,7 @@ const playersExample = [
 		roles: ['Virgin', 'Slayer'],
 		living: true,
 		deadVote: true,
+		alignment: 'good', //'evil'
 		notes: ''
 	}
 ];
@@ -100,6 +101,7 @@ function setupPlayersArray(pCount){
 				roles: [],
 				living: true,
 				deadVote: true,
+				alignment: 'good',
 				notes: ''
 			};
 		}
@@ -220,14 +222,67 @@ function createRolesWindow()
 	addRoleWindowEl.style.overflowY = 'scroll';
 	//-head
 	let rolesHeader = document.createElement('h3');
-	rolesHeader.innerHTML = "Add role(s) for <span id='playerName'></span> <span id='playerId' class='hidden'></span>";
+	rolesHeader.innerHTML = "Change Info for <span id='playerName'></span> <span id='playerId' class='hidden'></span>";
 	//-closeBtn (in header)
 	let closeAddRoleBtn = document.createElement('button');
 	closeAddRoleBtn.innerHTML = "X";
 	closeAddRoleBtn.onclick = () => hideChangeRole();
 	rolesHeader.appendChild(closeAddRoleBtn);
 	addRoleWindowEl.appendChild(rolesHeader);
-	//-list
+	
+	//-list status variables
+	let statusHeader = document.createElement('h4');
+	statusHeader.innerHTML = "Player Status";
+	addRoleWindowEl.appendChild(statusHeader);
+	let playerStatusList = document.createElement('ul');
+	playerStatusList.className = 'statusList';
+	// - dead?
+	let deadStatusLi = document.createElement('li');
+	let deadStatusCheck = document.createElement('input');
+	deadStatusCheck.type = 'checkbox';
+	deadStatusCheck.dataset.type = 'dead';
+	deadStatusLi.appendChild(deadStatusCheck);
+	let deadStatusLabel = document.createElement('label');
+	deadStatusLabel.innerHTML = 'Dead?';
+	deadStatusLi.appendChild(deadStatusLabel);
+	playerStatusList.appendChild(deadStatusLi);
+	// - vote used?
+	let voteStatusLi = document.createElement('li');
+	let voteStatusCheck = document.createElement('input');
+	voteStatusCheck.type = 'checkbox';
+	voteStatusCheck.dataset.type = 'vote';
+	voteStatusLi.appendChild(voteStatusCheck);
+	let voteStatusLabel = document.createElement('label');
+	voteStatusLabel.innerHTML = 'Vote Used?';
+	voteStatusLi.appendChild(voteStatusLabel);
+	playerStatusList.appendChild(voteStatusLi);
+	// - mark as good/evil
+	let alignmentLi = document.createElement('li');
+	let alignmentLabel = document.createElement('label');
+	alignmentLabel.innerHTML = 'Alignment: ';
+	alignmentLi.appendChild(alignmentLabel);
+	let alignmentSelect = document.createElement('select');
+	let alignmentSelectOptionGood = document.createElement('option');
+	alignmentSelectOptionGood.value = 'good';
+	alignmentSelectOptionGood.selected = true;
+	alignmentSelectOptionGood.innerHTML = 'Good';
+	alignmentSelect.appendChild(alignmentSelectOptionGood);
+	let alignmentSelectOptionEvil = document.createElement('option');
+	alignmentSelectOptionEvil.value = 'evil';
+	alignmentSelectOptionEvil.selected = false;
+	alignmentSelectOptionEvil.innerHTML = 'Evil';
+	alignmentSelect.appendChild(alignmentSelectOptionEvil);
+	alignmentLi.appendChild(alignmentSelect);
+	playerStatusList.appendChild(alignmentLi);
+
+	//-finish player status list
+	addRoleWindowEl.appendChild(playerStatusList);
+
+	//-list roles as checkboxes
+	let rolesListHeader = document.createElement('h4');
+	rolesListHeader.innerHTML = "Player Role(s)";
+	addRoleWindowEl.appendChild(rolesListHeader);
+
 	let addRoleList = document.createElement('ul');
 	for (let i = 0; i < scriptRoles.length; i++)
 	{
@@ -270,19 +325,12 @@ function addRole(el)
 	let roleName = el.dataset.role;
 	//console.log(playerId, roleName);
 	if(el.checked){
-    	playersObj.players[playerId].roles.push(roleName);
+		playersObj.players[playerId].roles.push(roleName);
 	}else{
-	   playersObj.players[playerId].roles = playersObj.players[playerId].roles.filter((r) => r !== roleName);
-
+		playersObj.players[playerId].roles = playersObj.players[playerId].roles.filter((r) => r !== roleName);
 	}
-	//debug('role added for player ' + playerId + ':' + roleName);
-	//debug('player roles now: ' + playersObj.players[playerId].roles.join(', '));
 	let roleBtn = document.getElementById("player" + playerId + "Roles");
 	roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ');
-	//Show icon if notes available
-	if(playersObj.players[playerId].notes.length > 0){
-	    roleBtn.innerHTML += pencilIconUnicode;
-	}
 }
 
 function calcScreenDimensions()
@@ -304,7 +352,12 @@ function editPlayerInfo(el)
 	
 	let playerId = el.parentElement.dataset.player;
 	//Set the player name on the window header
-	document.getElementById('playerName').innerHTML = playersObj.players[playerId].name;
+	if(playersObj.players[playerId].name){
+		document.getElementById('playerName').innerHTML = playersObj.players[playerId].name;
+		console.log('PlayerName updated to show: ' + playersObj.players[playerId].name);
+	}else{
+		document.getElementById('playerName').innerHTML = "player" + (playerId + 1);
+	}
 	//Set the (hidden) playerId element
 	document.getElementById('playerId').innerHTML = playerId;
 	//debug('Getting stored roles for player with ID ' + playerId);
@@ -320,13 +373,13 @@ function editPlayerInfo(el)
 	Array.prototype.forEach.call(checkboxes, function(check) 
 	{
 	    //debug(check.dataset.role);
-	    if(roleNames.includes(check.dataset.role)){
+		if(roleNames.includes(check.dataset.role)){
 	        //debug('checked=true');
-	        check.checked = true;
-	    }else{
+			check.checked = true;
+		}else{
 	        //debug('checked=false');
-	        check.checked = false;
-	    }
+			check.checked = false;
+		}
 	});
 	
 	//Load notes for this player
@@ -342,6 +395,12 @@ function hideChangeRole()
 	//Store notes
 	playersObj.players[playerId].notes = document.getElementById('playerNotes').value;
 	//debug('Current player notes: "' + document.getElementById('playerNotes').value + '"');
+	//Show icon if notes available
+	if(playersObj.players[playerId].notes.length > 0){
+		//Append a pencil icon to the player
+		let roleBtn = document.getElementById("player" + playerId + "Roles");
+		roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ') + pencilIconUnicode;
+	}
 }
 
 function setPlayerCount(input){
@@ -358,7 +417,7 @@ function setPlayerName(input)
 	let playerId = elId.replace('player', '');
 	let newName = input.value;
 	//console.log(elId + " => " + newName);
-	playerNames[playerId - 1] = newName;
+	playersObj.players[playerId - 1].name = newName;
 }
 
 async function setScript(el)
