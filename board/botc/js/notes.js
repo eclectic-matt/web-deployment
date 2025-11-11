@@ -16,7 +16,7 @@ var playersObj = {
 
 
 //Defined constants
-const addRoleBtnText = "Edit Player"; //"+";
+const addRoleBtnText = "Edit"; //"+";
 const pencilIconUnicode = "&#9998;";
 
 
