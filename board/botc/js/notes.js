@@ -1,5 +1,5 @@
-//update 2025-11-11 09:18:00
-debug("Notes initialized");
+//update 2025-11-11 10:27:00
+//debug("Notes initialized");
 
 //Default to 5p, set in menu
 var playerCount = 5;
@@ -169,10 +169,10 @@ function createPlayerTokens(main)
 		//el.style.left = 10 * i;
 		el.style.top = top;
 		el.style.left = left;
-		console.log(i, angle, x, y);
+		//console.log(i, angle, x, y);
 		el.className = "player";
 		el.id = "player" + (i + 1);
-		el.dataset.playerId = i;
+		el.dataset.player = i;
 		let addBtn = document.createElement('button');
 		addBtn.innerHTML = addRoleBtnText;
 		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
@@ -232,7 +232,7 @@ function createRolesWindow()
 		roleCheck.className = "roleCheck";
 		roleCheck.type = "checkbox";
 		//roleCheck.setAttribute('data', "playerId: '" + i + "', role: '" + scriptRoles[i] + "'");
-		//roleCheck.dataset.playerId = i;
+		//roleCheck.dataset.player = i;
 		roleCheck.dataset.role = scriptRoles[i];
 		roleCheck.onchange = () => addRole(roleCheck);
 		
@@ -261,17 +261,17 @@ function createRolesWindow()
 function addRole(el)
 {
 	let playerId = document.getElementById('playerId').innerHTML;
-	//let playerId = el.dataset.playerId;
+	//let playerId = el.dataset.player;
 	let roleName = el.dataset.role;
-	console.log(playerId, roleName);
+	//console.log(playerId, roleName);
 	if(el.checked){
     	playersObj.players[playerId].roles.push(roleName);
 	}else{
 	   playersObj.players[playerId].roles = playersObj.players[playerId].roles.filter((r) => r !== roleName);
 
 	}
-	debug('role added for player ' + playerId + ':' + roleName);
-	debug('player roles now: ' + playersObj.players[playerId].roles.join(', '));
+	//debug('role added for player ' + playerId + ':' + roleName);
+	//debug('player roles now: ' + playersObj.players[playerId].roles.join(', '));
 	let roleBtn = document.getElementById("player" + playerId + "Roles");
 	roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ');
 }
@@ -293,11 +293,12 @@ function editPlayerInfo(el)
 	let addRoleWindowEl2 = document.getElementById('addRoleWindow');
 	addRoleWindowEl2.style.display = 'block';
 	
+	let playerId = el.parentElement.dataset.player;
 	//Set the player name on the window header
 	document.getElementById('playerName').innerHTML = el.parentElement.id;
 	//Set the (hidden) playerId element
-	document.getElementById('playerId').innerHTML = el.parentElement.dataset.playerId;
-	
+	document.getElementById('playerId').innerHTML = playerId;
+	//debug('Getting stored roles for player with ID ' + playerId);
 	//Populate notes and checkboxes
 	let roleNames = playersObj.players[playerId].roles;
 	
@@ -305,29 +306,33 @@ function editPlayerInfo(el)
 	let checkboxes = document.getElementsByClassName('roleCheck');
 	
 	//debug('updating ' + checkboxes.length + ' checks');
-	debug('selected roles: ' + roleNames.join(', '));
+	//debug('selected roles: ' + roleNames.join(', '));
 	//Use array proto to foreach this collection
-	Array.prototype.forEach.call(checkboxes, function(check) {
-	//for(let check of checkboxes)
-	//checkboxes.forEach((check) => 
+	Array.prototype.forEach.call(checkboxes, function(check) 
 	{
-	    debug(check.dataset.role);
-	    if(roleNames.includes(check.innerHTML)){
-	        debug('checked=true');
+	    //debug(check.dataset.role);
+	    if(roleNames.includes(check.dataset.role)){
+	        //debug('checked=true');
 	        check.checked = true;
 	    }else{
-	        debug('checked=false');
+	        //debug('checked=false');
 	        check.checked = false;
 	    }
 	});
 	
-	document.getElementById('playerNotes').innerHTML = playersObj.players[playerId].notes;
+	//Load notes for this player
+	document.getElementById('playerNotes').value = playersObj.players[playerId].notes;
 }
 
 function hideChangeRole()
 {
 	let addRoleWindowEl = document.getElementById('addRoleWindow');
 	addRoleWindowEl.style.display = 'none';
+	//Get current player ID
+	let playerId = document.getElementById('playerId').innerHTML;
+	//Store notes
+	playersObj.players[playerId].notes = document.getElementById('playerNotes').value;
+	//debug('Current player notes: "' + document.getElementById('playerNotes').value + '"');
 }
 
 function setPlayerCount(input){
@@ -343,13 +348,13 @@ function setPlayerName(input)
 	let elId = input.parentElement.id;
 	let playerId = elId.replace('player', '');
 	let newName = input.value;
-	console.log(elId + " => " + newName);
+	//console.log(elId + " => " + newName);
 	playerNames[playerId - 1] = newName;
 }
 
 async function setScript(el)
 {
-	console.log(el.value);
+	//console.log(el.value);
 	await getScriptRoles(el.value);
 	createRolesWindow();
 }
