@@ -1,4 +1,4 @@
-//update 2025-11-11 20:57:00
+//update 2025-11-11 22:23:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -77,6 +77,7 @@ async function getScriptRoles(selectedScriptShortName)
 	if(selectedScriptShortName == "all")
 	{
 		scriptRoles = scriptRoles.map((r) => {return r.name});
+		scriptRoles.sort();
 		return scriptRoles;
 	}
 	//Filter to edition
@@ -254,6 +255,7 @@ function createRolesWindow()
 	// - dead?
 	let deadStatusLi = document.createElement('li');
 	let deadStatusCheck = document.createElement('input');
+	deadStatusCheck.id = "deadShroudCheck";
 	deadStatusCheck.type = 'checkbox';
 	deadStatusCheck.dataset.type = 'dead';
 	deadStatusCheck.onchange = () => updateDeathShroud(this);
@@ -265,6 +267,7 @@ function createRolesWindow()
 	// - vote used?
 	let voteStatusLi = document.createElement('li');
 	let voteStatusCheck = document.createElement('input');
+	voteStatusCheck.id = "voteStatusCheck";
 	voteStatusCheck.type = 'checkbox';
 	voteStatusCheck.dataset.type = 'vote';
 	voteStatusLi.appendChild(voteStatusCheck);
@@ -278,6 +281,7 @@ function createRolesWindow()
 	alignmentLabel.innerHTML = 'Alignment: ';
 	alignmentLi.appendChild(alignmentLabel);
 	let alignmentSelect = document.createElement('select');
+	alignmentSelect.id = "alignmentSelect";
 	let alignmentSelectOptionGood = document.createElement('option');
 	alignmentSelectOptionGood.value = 'good';
 	alignmentSelectOptionGood.selected = true;
@@ -400,6 +404,14 @@ function editPlayerInfo(el)
 	
 	//Load notes for this player
 	document.getElementById('playerNotes').value = playersObj.players[playerId].notes;
+	
+	//Dead / vote / alignment
+	let deadStatusEl = document.getElementById("deadStatusCheck");
+	deadStatusEl.checked = playersObj.players[playerId].dead;
+	let voteStatusEl = document.getElementById("voteStatusCheck");
+	voteStatusEl.checked = playersObj.players[playerId].deadVote;
+	let alignmentEl = document.getElementById("alignmentSelect");
+	alignmentEl.value = playersObj.players[playerId].alignment;
 }
 
 function hideChangeRole()
