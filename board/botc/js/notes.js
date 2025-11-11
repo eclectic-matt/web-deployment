@@ -75,7 +75,7 @@ async function getScriptRoles(selectedScriptShortName)
 	scriptRoles = await scriptRoles.json();
 	//Return all roles
 	if(selectedScriptShortName == "all"){
-		return scriptRoles;
+		return scriptRoles.map((r) => {return r.name});
 	}
 	//Filter to edition
 	scriptRoles = scriptRoles.filter((r) => {return r.edition == selectedScriptShortName}).map((r) => {return r.name});
