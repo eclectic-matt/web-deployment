@@ -297,6 +297,7 @@ function changeRole(el)
 	let checkboxes = document.getElementsByClassName('roleCheck');
 	
 	debug('updating ' + checkboxes.length + ' checks');
+	debug('selected roles: ' + roleNames.join(', '));
 	//for(let check of checkboxes)
 	checkboxes.forEach((check) => 
 	{
