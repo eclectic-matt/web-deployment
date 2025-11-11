@@ -1,4 +1,4 @@
-//update 2025-11-11 08:22:00
+//update 2025-11-11 09:18:00
 debug("Notes initialized");
 
 //Default to 5p, set in menu
@@ -289,19 +289,24 @@ function calcScreenDimensions()
 
 function editPlayerInfo(el)
 {
-	//console.log(el.parentElement.id);
+	//Show the info window
 	let addRoleWindowEl2 = document.getElementById('addRoleWindow');
 	addRoleWindowEl2.style.display = 'block';
+	
+	//Set the player name on the window header
 	document.getElementById('playerName').innerHTML = el.parentElement.id;
+	//Set the (hidden) playerId element
 	document.getElementById('playerId').innerHTML = el.parentElement.dataset.playerId;
+	
 	//Populate notes and checkboxes
 	let roleNames = playersObj.players[playerId].roles;
-	//let checkboxes = document.querySelectorAll("input[type=checkbox]");
+	
+	//Get the checkbox elements (HTML collection)
 	let checkboxes = document.getElementsByClassName('roleCheck');
 	
-	debug('updating ' + checkboxes.length + ' checks');
+	//debug('updating ' + checkboxes.length + ' checks');
 	debug('selected roles: ' + roleNames.join(', '));
-	
+	//Use array proto to foreach this collection
 	Array.prototype.forEach.call(checkboxes, function(check) {
 	//for(let check of checkboxes)
 	//checkboxes.forEach((check) => 
