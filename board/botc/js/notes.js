@@ -300,8 +300,10 @@ function changeRole(el)
 	{
 	    debug(check.dataset.role);
 	    if(roleNames.includes(check.innerHTML)){
+	        debug('checked=true');
 	        check.checked = true;
 	    }else{
+	        debug('checked=false');
 	        check.checked = false;
 	    }
 	});
@@ -340,5 +342,5 @@ async function setScript(el)
 }
 
 function debug(txt){
-    document.getElementById('debugWindow').innerHTML += txt;
+    document.getElementById('debugWindow').innerHTML += txt + '<br/>';
 }
