@@ -294,10 +294,11 @@ function changeRole(el)
 	let roleNames = playersObj.players[playerId].roles;
 	//let checkboxes = document.querySelectorAll("input[type=checkbox]");
 	let checkboxes = document.getElementsByClassName('roleCheck');
-	
+	debug('updating checks');
 	//for(let check of checkboxes)
 	checkboxes.forEach((check) => 
 	{
+	    debug(check.dataset.role);
 	    if(roleNames.includes(check.innerHTML)){
 	        check.checked = true;
 	    }else{
@@ -336,4 +337,8 @@ async function setScript(el)
 	console.log(el.value);
 	await getScriptRoles(el.value);
 	createRolesWindow();
+}
+
+function debug(txt){
+    document.getElementById('debugWindow').innerHTML += txt;
 }
