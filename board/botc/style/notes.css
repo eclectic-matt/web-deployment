@@ -91,6 +91,7 @@ ul.statusList {
 #central {
 	text-align: center;
 	position: absolute;
+	width: ;
 	height: auto;
 	font-size: 0.75rem;
 	border: 1px solid red;
