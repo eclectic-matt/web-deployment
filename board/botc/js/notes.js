@@ -295,7 +295,7 @@ function editPlayerInfo(el)
 	
 	let playerId = el.parentElement.dataset.player;
 	//Set the player name on the window header
-	document.getElementById('playerName').innerHTML = el.parentElement.id;
+	document.getElementById('playerName').innerHTML = playersObj.players[playerId].name;
 	//Set the (hidden) playerId element
 	document.getElementById('playerId').innerHTML = playerId;
 	//debug('Getting stored roles for player with ID ' + playerId);
