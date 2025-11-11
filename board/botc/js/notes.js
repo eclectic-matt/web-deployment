@@ -73,9 +73,12 @@ async function getScriptRoles(selectedScriptShortName)
 {
 	scriptRoles = await fetch('./roles.json');
 	scriptRoles = await scriptRoles.json();
+	//Return all roles
+	if(selectedScriptShortName == "all"){
+		return scriptRoles;
+	}
+	//Filter to edition
 	scriptRoles = scriptRoles.filter((r) => {return r.edition == selectedScriptShortName}).map((r) => {return r.name});
-	//console.log('Role count: ' + scriptRoles.length);
-	//console.log(scriptRoles);
 	return scriptRoles;
 }
 
