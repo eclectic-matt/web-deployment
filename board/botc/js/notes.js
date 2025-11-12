@@ -473,51 +473,63 @@ async function setScript(el)
 }
 
 //Obscure all player roles
-function hidePlayerRoles()
+function unhidePlayerRoles()
 {
 	let roleBtns = document.getElementsByClassName('addBtn');
 	Array.prototype.forEach.call(roleBtns, function(btn) 
 	{
 		let playerId = btn.parentElement.dataset.player;
 		let playerRoles = playersObj.players[playerId].roles;
-	    if(playersObj.players[playerId].notes.length > 0)
-	    {
-			//Append a pencil icon to the player
-			
-			btn.innerHTML = playersObj.players[playerId].roles.join(', ') + pencilIconUnicode;
+		//If no roles set for this player
+		if(playersObj.players[playerId].roles.length == 0)
+		{
+			btn.innerHTML = "Edit";
 		}
 		else
 		{
 			btn.innerHTML = playerRoles.join(', ');
 		}
+		//If there are notes
+		if(playersObj.players[playerId].notes.length > 0)
+		{
+			//Append a pencil icon to the player roles
+			btn.innerHTML += pencilIconUnicode;
+		}
+	});
+}
+
+//Hide player roles from view (prevent other players from peeking)
+function hidePlayerRoles()
+{
+	let roleBtns = document.getElementsByClassName('addBtn');
+	Array.prototype.forEach.call(roleBtns, function(btn) 
+	{
+		btn.innerHTML = "<em>HIDDEN</em>";
 	});
 }
 
 function showHidePlayerRoles()
 {
+	//Negate the showPlayerRoles variable (default: true)
 	showPlayerRoles = !showPlayerRoles;
+	console.log('Player roles are now ' + (showPlayerRoles ? 'shown' : 'hidden'));
 	let showHideBtn = document.getElementById('showHideRolesBtn');
-	//Are we currently showing player roles?
-	if(showPlayerRoles)
+	//Are we NOW showing player roles?
+	if(!showPlayerRoles)
 	{
 		//Yes - hide them
 		hidePlayerRoles();
 		showHideBtn.innerHTML = "Show Player Roles";
-	}else{
+	}
+	else
+	{
+		//No - unhide them
 		unhidePlayerRoles();
 		showHideBtn.innerHTML = "Hide Player Roles";
 	}
 }
 
-function unhidePlayerRoles()
-{
-	let roleBtns = document.getElementsByClassName('addBtn');
-	Array.prototype.forEach.call(roleBtns, function(btn) 
-	{
-		
-	    btn.innerHTML = "<em>HIDDEN</em>";
-	});
-}
+
 
 function debug(txt){
     document.getElementById('debugWindow').innerHTML += txt + '<br/>';
