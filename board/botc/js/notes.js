@@ -199,7 +199,7 @@ function createPlayerTokens(main)
 		addBtn.innerHTML = addRoleBtnText;
 		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
 		addBtn.className = "addBtn";
-		addBtn.onclick = () => editPlayerInfo(addBtn);
+		addBtn.onclick = () => openPlayerEditWindow(addBtn);
 		addBtn.id = "player" + i + "Roles";
 		el.appendChild(addBtn);
 		let nameInput = document.createElement('input');
@@ -242,7 +242,7 @@ function createRolesWindow()
 	//-closeBtn (in header)
 	let closeAddRoleBtn = document.createElement('button');
 	closeAddRoleBtn.innerHTML = "X";
-	closeAddRoleBtn.onclick = () => hidePlayerInfo();
+	closeAddRoleBtn.onclick = () => closePlayerEditWindow();
 	rolesHeader.appendChild(closeAddRoleBtn);
 	addRoleWindowEl.appendChild(rolesHeader);
 	
@@ -364,7 +364,7 @@ function calcScreenDimensions()
 	return [w, h, r];
 }
 
-function editPlayerInfo(el)
+function openPlayerEditWindow(el)
 {
 	//Show the info window
 	let addRoleWindowEl2 = document.getElementById('addRoleWindow');
@@ -414,7 +414,7 @@ function editPlayerInfo(el)
 	alignmentEl.value = playersObj.players[playerId].alignment;
 }
 
-function hidePlayerInfo()
+function closePlayerEditWindow()
 {
 	let addRoleWindowEl = document.getElementById('addRoleWindow');
 	addRoleWindowEl.style.display = 'none';
@@ -471,6 +471,8 @@ async function setScript(el)
 	await getScriptRoles(el.value);
 	createRolesWindow();
 }
+
+function 
 
 function debug(txt){
     document.getElementById('debugWindow').innerHTML += txt + '<br/>';
