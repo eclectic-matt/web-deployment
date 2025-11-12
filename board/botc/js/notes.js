@@ -1,4 +1,4 @@
-//update 2025-11-11 22:26:00
+//update 2025-11-12 07:39:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -242,7 +242,7 @@ function createRolesWindow()
 	//-closeBtn (in header)
 	let closeAddRoleBtn = document.createElement('button');
 	closeAddRoleBtn.innerHTML = "X";
-	closeAddRoleBtn.onclick = () => hideChangeRole();
+	closeAddRoleBtn.onclick = () => hidePlayerInfo();
 	rolesHeader.appendChild(closeAddRoleBtn);
 	addRoleWindowEl.appendChild(rolesHeader);
 	
@@ -414,7 +414,7 @@ function editPlayerInfo(el)
 	alignmentEl.value = playersObj.players[playerId].alignment;
 }
 
-function hideChangeRole()
+function hidePlayerInfo()
 {
 	let addRoleWindowEl = document.getElementById('addRoleWindow');
 	addRoleWindowEl.style.display = 'none';
@@ -474,4 +474,43 @@ async function setScript(el)
 
 function debug(txt){
     document.getElementById('debugWindow').innerHTML += txt + '<br/>';
+}
+
+class NoteManager
+{
+	constructor()
+	{
+		//Settings
+		this.playerCount = 5;
+		this.script = "tb";
+		this.scriptRoles = [];
+		this.playersObj = {
+			settings: {},
+			players: []
+		}
+		this.addRoleBtnText = "Edit";
+		this.pencilIconUnicode = "&#9998;";
+	}
+	//First time initialization
+	init()
+	{
+		
+	}
+	//Setup elements (by playerCount)
+	setup(pCount)
+	{
+		
+	}
+	//Save data 
+	save()
+	{
+		//Save to local storage
+		
+	}
+	//Load data
+	load()
+	{
+		//Load from local storage
+		
+	}
 }
