@@ -490,6 +490,43 @@ class NoteManager
 		}
 		this.addRoleBtnText = "Edit";
 		this.pencilIconUnicode = "&#9998;";
+		this.roleCounts = [
+		    null, //0
+		    null, //1
+		    null, //2
+		    null, //3
+		    null, //4
+		    {
+		    	t: 3,
+		    	o: 0,
+		    	m: 1,
+		    	d: 1,
+		    	tr: 0
+		    }, //5
+		    {
+		    	t: 3,
+		    	o: 1,
+		    	m: 1,
+		    	d: 1,
+		    	tr: 0
+		    }, //6
+		    '3t / 0o / 1m / 1d', //5
+		    '3t / 1o / 1m / 1d', //6
+		    '5t / 0o / 1m / 1d', //7
+		    '5t / 1o / 1m / 1d', //8
+		    '5t / 2o / 1m / 1d', //9
+		    '7t / 0o / 2m / 1d', //10
+		    '7t / 1o / 2m / 1d', //11
+		    '7t / 2o / 2m / 1d', //12
+		    '9t / 0o / 3m / 1d', //13
+		    '9t / 1o / 3m / 1d', //14
+		    '9t / 2o / 3m / 1d', //15
+		    '9t / 2o / 3m / 1d (1trv)', //16
+		    '9t / 2o / 3m / 1d (2trv)', //17
+		    '9t / 2o / 3m / 1d (3trv)', //18
+		    '9t / 2o / 3m / 1d (4trv)', //19
+		    '9t / 2o / 3m / 1d (5trv)' //20
+		];
 	}
 	//First time initialization
 	init()
