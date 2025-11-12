@@ -1,4 +1,4 @@
-//update 2025-11-12 07:39:00
+//update 2025-11-12 07:56:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -13,7 +13,7 @@ var playersObj = {
 	settings: {},
 	players: []
 }
-
+var showPlayerRoles = true;
 
 //Defined constants
 const addRoleBtnText = "Edit"; //"+";
@@ -472,7 +472,50 @@ async function setScript(el)
 	createRolesWindow();
 }
 
-function 
+//Obscure all player roles
+function hidePlayerRoles()
+{
+	let roleBtns = document.getElementsByClassName('addBtn');
+	Array.prototype.forEach.call(roleBtns, function(btn) 
+	{
+		let playerId = btn.parentElement.dataset.player;
+		let playerRoles = playersObj.players[playerId].roles;
+	    if(playersObj.players[playerId].notes.length > 0)
+	    {
+			//Append a pencil icon to the player
+			
+			btn.innerHTML = playersObj.players[playerId].roles.join(', ') + pencilIconUnicode;
+		}
+		else
+		{
+			btn.innerHTML = playerRoles.join(', ');
+		}
+	});
+}
+
+function showHidePlayerRoles()
+{
+	showPlayerRoles = !showPlayerRoles;
+	let showHideBtn = document.getElementById('showHideRolesBtn');
+	if(showPlayerRoles)
+	{
+		showPlayerRoles();
+		showHideBtn.innerHTML = "Hide Player Roles";
+	}else{
+		hidePlayerRoles();
+		showHideBtn.innerHTML = "Show Player Roles";
+	}
+}
+
+function unhidePlayerRoles()
+{
+	let roleBtns = document.getElementsByClassName('addBtn');
+	Array.prototype.forEach.call(roleBtns, function(btn) 
+	{
+		
+	    btn.innerHTML = "<em>HIDDEN</em>";
+	});
+}
 
 function debug(txt){
     document.getElementById('debugWindow').innerHTML += txt + '<br/>';
