@@ -174,7 +174,7 @@ function createPlayerTokens(main)
 		//- x position (relative to centre in top left of screen)
 		let x = Math.round(radius * (Math.cos(angle)));
 		//- left position (adjust to be in centre of screen)
-		let left = (x + (w/3) + 25) + 'px';
+		let left = (x + (w/3) + (20 - playerCount)) + 'px';
 		// - y position (relative to centre in top left of screen)
 		let y = Math.round(radius * (Math.sin(angle)));
 		let top = (y + (h/2)) + 'px';
