@@ -255,7 +255,7 @@ function createRolesWindow()
 	// - dead?
 	let deadStatusLi = document.createElement('li');
 	let deadStatusCheck = document.createElement('input');
-	deadStatusCheck.id = "deadShroudCheck";
+	deadStatusCheck.id = "deadStatusCheck";
 	deadStatusCheck.type = 'checkbox';
 	deadStatusCheck.dataset.type = 'dead';
 	deadStatusCheck.onchange = () => updateDeathShroud(this);
@@ -374,7 +374,7 @@ function openPlayerEditWindow(el)
 	//Set the player name on the window header
 	if(playersObj.players[playerId].name){
 		document.getElementById('playerName').innerHTML = playersObj.players[playerId].name;
-		console.log('PlayerName updated to show: ' + playersObj.players[playerId].name);
+		//console.log('PlayerName updated to show: ' + playersObj.players[playerId].name);
 	}else{
 		document.getElementById('playerName').innerHTML = "player" + (playerId + 1);
 	}
@@ -436,7 +436,7 @@ function updateDeathShroud(el)
 	let playerId = document.getElementById('playerId').innerHTML;
 	let deathShroudEl = document.getElementById("player" + playerId + "Shroud");
 	//alternatively, show with border?
-	let playerEl = document.getElementById("player" + (playerId + 1));
+	let playerEl = document.getElementById("player" + playerId);
 	if(el.checked)
 	{
 		playerEl.style.borderColour = "red";
@@ -497,13 +497,15 @@ function showHidePlayerRoles()
 {
 	showPlayerRoles = !showPlayerRoles;
 	let showHideBtn = document.getElementById('showHideRolesBtn');
+	//Are we currently showing player roles?
 	if(showPlayerRoles)
 	{
-		showPlayerRoles();
-		showHideBtn.innerHTML = "Hide Player Roles";
-	}else{
+		//Yes - hide them
 		hidePlayerRoles();
 		showHideBtn.innerHTML = "Show Player Roles";
+	}else{
+		unhidePlayerRoles();
+		showHideBtn.innerHTML = "Hide Player Roles";
 	}
 }
 
