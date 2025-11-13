@@ -638,6 +638,7 @@ function loadSavedData()
 	{
 		loadFromLocalStorage();
 		init();
+		document.getElementById('clearSavedBtn').disabled = false;
 	}
 }
 
