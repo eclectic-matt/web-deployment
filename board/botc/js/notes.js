@@ -623,7 +623,7 @@ function debug(txt){
 
 function clearSavedData()
 {
-	if(confirm('Really clear saved data?')){
+	if(window.confirm('Really clear saved data?')){
 		localStorage.setItem('players') = null;
 	}
 }
@@ -634,7 +634,7 @@ function loadSavedData()
 	{
 		alert('No saved data to load!');
 	}
-	if(confirm('Load stored data? This will clear your current data'))
+	if(window.confirm('Load stored data? This will clear your current data'))
 	{
 		loadFromLocalStorage();
 	}
