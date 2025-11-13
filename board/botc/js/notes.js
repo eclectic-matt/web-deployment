@@ -477,19 +477,20 @@ function updateDeathShroud(el)
 {
 	let playerId = document.getElementById('playerId').innerHTML;
 	let deathShroudEl = document.getElementById("player" + playerId + "Shroud");
-	//alternatively, show with border?
-	let playerEl = document.getElementById("player" + playerId);
-	console.log('Updating death shroud for player ' + playerId + ' to ' + (el.checked ? 'dead' : 'alive'));
-	console.log(el);
+	//alternatively, show with border? - remember confusingly set playerId+1 for the player elements themselves!
+	let playerEl = document.getElementById("player" + (parseInt(playerId) + 1));
+	//console.log('PlayerEl:' + playerEl);
+	//console.log('Updating death shroud for player ' + playerId + ' to ' + (el.checked ? 'dead' : 'alive'));
+	//console.log(el);
 	//Set on players object
 	playersObj.players[playerId].living = !el.checked;
 	if(el.checked)
 	{
-		playerEl.style.borderColour = "red";
+		playerEl.style.borderColor = "red";
 		deathShroudEl.style.display = "block";
 	}else
 	{
-		playerEl.style.borderColour = "black";
+		playerEl.style.borderColor = "black";
 		deathShroudEl.style.display = "none";
 	}
 	updateCentralInfo();
