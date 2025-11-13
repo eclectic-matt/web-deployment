@@ -272,7 +272,7 @@ function createRolesWindow()
 	voteStatusCheck.dataset.type = 'vote';
 	voteStatusLi.appendChild(voteStatusCheck);
 	let voteStatusLabel = document.createElement('label');
-	voteStatusLabel.innerHTML = 'Dead Vote?';
+	voteStatusLabel.innerHTML = 'Vote Used?';
 	voteStatusLi.appendChild(voteStatusLabel);
 	playerStatusList.appendChild(voteStatusLi);
 	// - mark as good/evil
@@ -409,7 +409,7 @@ function openPlayerEditWindow(el)
 	let deadStatusEl = document.getElementById("deadStatusCheck");
 	deadStatusEl.checked = !playersObj.players[playerId].living;
 	let voteStatusEl = document.getElementById("voteStatusCheck");
-	voteStatusEl.checked = playersObj.players[playerId].deadVote;
+	voteStatusEl.checked = !playersObj.players[playerId].deadVote;
 	let alignmentEl = document.getElementById("alignmentSelect");
 	alignmentEl.value = playersObj.players[playerId].alignment;
 }
