@@ -637,6 +637,7 @@ function loadSavedData()
 	if(window.confirm('Load stored data? This will clear your current data'))
 	{
 		loadFromLocalStorage();
+		init();
 	}
 }
 
