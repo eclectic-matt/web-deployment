@@ -74,7 +74,7 @@ async function init()
 	}else{
 		createPlayersObject();
 	}
-	setup(playerCount, scriptRoles);
+	setup();
 }
 
 async function getScriptRoles(selectedScriptShortName)
@@ -143,7 +143,7 @@ function hasSavedData()
 	return localStorage.getItem("players");
 }
 
-function setup(playerCount, scriptRoles)
+function setup()
 {
 	//Get reference to main
 	let main = document.getElementById("main");
@@ -159,6 +159,9 @@ function setup(playerCount, scriptRoles)
 
 function createPlayerTokens(main)
 {
+	//Clear main between runs
+	main.innerHTML = null;
+
 	let [w, h, r] = calcScreenDimensions();
 	let orientation = 1;
 	let radius = h/3;
@@ -516,8 +519,9 @@ function setPlayerCount(input){
 	playerCount = input.value;
 	document.getElementById("playerCountSpan").innerHTML = playerCount;
 	//init(playerCount);
-	setup(playerCount, scriptRoles);
 	setupPlayersArray(playerCount);
+	setup();
+	//createPlayerTokens(document.getElementById('main'));
 }
 
 function setPlayerName(input)
