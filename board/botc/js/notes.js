@@ -19,7 +19,6 @@ var showPlayerRoles = true;
 const addRoleBtnText = "Edit"; //"+";
 const pencilIconUnicode = "&#9998;";
 
-
 /*
 const playersExample = [
 	{
@@ -65,8 +64,17 @@ init();
 async function init()
 {
 	scriptRoles = await getScriptRoles(script)
+	
+	if(hasSavedData())
+	{
+		console.log('Loading saved data!');
+		loadFromLocalStorage();
+		playerCount = playersObj.players.length;
+		console.log('Saved data has ' + playerCount + ' players');
+	}else{
+		createPlayersObject();
+	}
 	setup(playerCount, scriptRoles);
-	createPlayersObject();
 }
 
 async function getScriptRoles(selectedScriptShortName)
@@ -205,14 +213,27 @@ function createPlayerTokens(main)
 		//Death shroud?
 		let deathShroud = document.createElement('div');
 		deathShroud.id = "player" + i + "Shroud";
-		deathShroud.style.display = 'none';
-		deathShroud.style.width = '80%';
-		deathShroud.style.height = '5%';
-		deathShroud.style.backgroundColor = "red";
+		deathShroud.style.width = '60%';
+		deathShroud.style.marginLeft = '20%';
+		deathShroud.style.marginTop = '10%';
+		deathShroud.style.marginBottom = 0;
+		deathShroud.style.height = '0.75rem';
+		deathShroud.style.backgroundColor = 'red';
+		deathShroud.style.color = 'white';
+		deathShroud.style.fontSize = '0.5rem';
+		deathShroud.style.textAlign = 'center';
+		deathShroud.innerHTML = 'DEAD';
+		if(playersObj.players[i].dead)
+		{
+			deathShroud.style.display = 'block';
+		}else{
+			deathShroud.style.display = 'none';
+		}
 		deathShroud.style.zIndex = 100;
 		el.appendChild(deathShroud);
 		let addBtn = document.createElement('button');
 		addBtn.innerHTML = addRoleBtnText;
+		addBtn.style.marginTop = '5%';
 		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
 		addBtn.className = "addBtn";
 		addBtn.onclick = () => openPlayerEditWindow(addBtn);
@@ -274,7 +295,7 @@ function createRolesWindow()
 	deadStatusCheck.id = "deadStatusCheck";
 	deadStatusCheck.type = 'checkbox';
 	deadStatusCheck.dataset.type = 'dead';
-	deadStatusCheck.onchange = () => updateDeathShroud(this);
+	deadStatusCheck.onchange = () => updateDeathShroud(deadStatusCheck);
 	deadStatusLi.appendChild(deadStatusCheck);
 	let deadStatusLabel = document.createElement('label');
 	deadStatusLabel.innerHTML = 'Dead?';
@@ -286,6 +307,7 @@ function createRolesWindow()
 	voteStatusCheck.id = "voteStatusCheck";
 	voteStatusCheck.type = 'checkbox';
 	voteStatusCheck.dataset.type = 'vote';
+	voteStatusCheck.onchange = () => updateVoteStatus(voteStatusCheck);
 	voteStatusLi.appendChild(voteStatusCheck);
 	let voteStatusLabel = document.createElement('label');
 	voteStatusLabel.innerHTML = 'Vote Used?';
@@ -445,6 +467,7 @@ function closePlayerEditWindow()
 		let roleBtn = document.getElementById("player" + playerId + "Roles");
 		roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ') + pencilIconUnicode;
 	}
+	saveToLocalStorage();
 }
 
 function updateDeathShroud(el)
@@ -453,6 +476,10 @@ function updateDeathShroud(el)
 	let deathShroudEl = document.getElementById("player" + playerId + "Shroud");
 	//alternatively, show with border?
 	let playerEl = document.getElementById("player" + playerId);
+	console.log('Updating death shroud for player ' + playerId + ' to ' + (el.checked ? 'dead' : 'alive'));
+	console.log(el);
+	//Set on players object
+	playersObj.players[playerId].living = !el.checked;
 	if(el.checked)
 	{
 		playerEl.style.borderColour = "red";
@@ -465,15 +492,23 @@ function updateDeathShroud(el)
 	updateCentralInfo();
 }
 
+function updateVoteStatus(el)
+{
+	let playerId = document.getElementById('playerId').innerHTML;
+	playersObj.players[playerId].deadVote = !el.checked;
+	updateCentralInfo();
+}
+
 function updateCentralInfo()
 {
 	//livingPlayersSpan
 	let livingEl = document.getElementById('livingPlayersSpan');
-	let livingCount = playersObj.players.map((r) => {return (r.living == true)}).length;
+	let livingCount = playersObj.players.filter((r) => {return (r.living == true)}).length;
 	livingEl.innerHTML = livingCount;
+	console.log('Living player count is now ' + livingCount);
 	//votesSpan
 	let voteEl = document.getElementById('votesSpan');
-	let voteCount = playersObj.players.map((r) => {return (r.living || r.deadVote == true)}).length;
+	let voteCount = playersObj.players.filter((r) => {return (r.living || r.deadVote == true)}).length;
 	voteEl.innerHTML = voteCount;
 }
 
