@@ -446,6 +446,19 @@ function updateDeathShroud(el)
 		playerEl.style.borderColour = "black";
 		deathShroudEl.style.display = "none";
 	}
+	updateCentralInfo();
+}
+
+function updateCentralInfo()
+{
+	//livingPlayersSpan
+	let livingEl = document.getElementById('livingPlayersSpan');
+	let livingCount = playersObj.players.map((r) => {return (r.living == true)}).length;
+	livingEl.innerHTML = livingCount;
+	//votesSpan
+	let voteEl = document.getElementById('votesSpan');
+	let voteCount = playersObj.players.map((r) => {return (r.living || r.deadVote == true)}).length;
+	voteEl.innerHTML = voteCount;
 }
 
 function setPlayerCount(input){
