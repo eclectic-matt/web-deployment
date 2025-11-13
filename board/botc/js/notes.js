@@ -119,6 +119,22 @@ function setupPlayersArray(pCount){
 	}
 }
 
+function saveToLocalStorage()
+{
+	localStorage.setItem("players", JSON.stringify(playersObj));
+}
+
+function loadFromLocalStorage()
+{
+	playersObj = JSON.parse(localStorage.getItem("players"));
+}
+
+function hasSavedData()
+{
+	//Bool test
+	return localStorage.getItem("players"));
+}
+
 function setup(playerCount, scriptRoles)
 {
 	//Get reference to main
