@@ -272,7 +272,7 @@ function createRolesWindow()
 	voteStatusCheck.dataset.type = 'vote';
 	voteStatusLi.appendChild(voteStatusCheck);
 	let voteStatusLabel = document.createElement('label');
-	voteStatusLabel.innerHTML = 'Vote Used?';
+	voteStatusLabel.innerHTML = 'Dead Vote?';
 	voteStatusLi.appendChild(voteStatusLabel);
 	playerStatusList.appendChild(voteStatusLi);
 	// - mark as good/evil
