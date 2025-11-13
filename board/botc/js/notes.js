@@ -64,8 +64,11 @@ init();
 async function init()
 {
 	scriptRoles = await getScriptRoles(script)
-	
 	if(hasSavedData())
+	{
+		document.getElementById('loadSavedBtn').disabled = false;
+	}
+/*	if(hasSavedData())
 	{
 		console.log('Loading saved data!');
 		loadFromLocalStorage();
@@ -74,6 +77,8 @@ async function init()
 	}else{
 		createPlayersObject();
 	}
+*/
+	createPlayersObject();
 	setup();
 }
 
@@ -613,6 +618,26 @@ function showHidePlayerRoles()
 
 function debug(txt){
     document.getElementById('debugWindow').innerHTML += txt + '<br/>';
+}
+
+
+function clearSavedData()
+{
+	if(confirm('Really clear saved data?')){
+		localStorage.setItem('players') = null;
+	}
+}
+
+function loadSavedData()
+{
+	if(!hasSavedData())
+	{
+		alert('No saved data to load!');
+	}
+	if(confirm('Load stored data? This will clear your current data'))
+	{
+		loadFromLocalStorage();
+	}
 }
 
 class NoteManager
