@@ -132,7 +132,7 @@ function loadFromLocalStorage()
 function hasSavedData()
 {
 	//Bool test
-	return localStorage.getItem("players"));
+	return localStorage.getItem("players");
 }
 
 function setup(playerCount, scriptRoles)
