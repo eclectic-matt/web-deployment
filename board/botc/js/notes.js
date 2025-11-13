@@ -232,10 +232,21 @@ function createPlayerTokens(main)
 		}else{
 			deathShroud.style.display = 'none';
 		}
+		if(playersObj.players[i].voteUsed)
+		{
+			deathShroud.innerHTML += ' (no vote)';
+		}
 		deathShroud.style.zIndex = 100;
 		el.appendChild(deathShroud);
 		let addBtn = document.createElement('button');
-		addBtn.innerHTML = addRoleBtnText;
+		if(playersObj.players[i].roles.length > 0){
+			addBtn.innerHTML = playersObj.players[i].roles.join(', ');
+		}else{
+			addBtn.innerHTML = addRoleBtnText;
+		}
+		if(playersObj.players[i].notes.length > 0){
+			addBtn.innerHTML += pencilIconUnicode;
+		}
 		addBtn.style.marginTop = '5%';
 		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
 		addBtn.className = "addBtn";
