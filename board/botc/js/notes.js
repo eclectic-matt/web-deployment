@@ -604,13 +604,13 @@ function showHidePlayerRoles()
 	{
 		//Yes - hide them
 		hidePlayerRoles();
-		showHideBtn.innerHTML = "Show Player Roles";
+		showHideBtn.innerHTML = "Show Roles";
 	}
 	else
 	{
 		//No - unhide them
 		unhidePlayerRoles();
-		showHideBtn.innerHTML = "Hide Player Roles";
+		showHideBtn.innerHTML = "Hide Roles";
 	}
 }
 
