@@ -558,6 +558,7 @@ async function setScript(el)
 	//console.log(el.value);
 	await getScriptRoles(el.value);
 	createRolesWindow();
+	playersObj.settings.script = el.value;
 }
 
 //Obscure all player roles
@@ -642,6 +643,10 @@ function loadSavedData()
 		loadFromLocalStorage();
 		init();
 		document.getElementById('clearSavedBtn').disabled = false;
+		document.getElementById('playerCountInput').value = playersObj.players.length;
+		document.getElementById('scriptInput').value = playersObj.settings.script;
+		await getScriptRoles(playersObj.settings.script);
+		createRolesWindow();
 	}
 }
 
