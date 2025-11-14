@@ -68,8 +68,10 @@ async function init()
 	{
 		document.getElementById('loadSavedBtn').disabled = false;
 	}
-	
-	createPlayersObject();
+	if(!playersObj.players || playersObj.players.length == 0)
+	{
+		createPlayersObject();
+	}
 	setup();
 }
 
@@ -94,7 +96,9 @@ function createPlayersObject()
 	//Only init playersObj if empty
 	if(playersObj.players.length == 0){
 		playersObj = {
-			settings: {},
+			settings: {
+				script: script
+			},
 			players: []
 		}
 	}
@@ -121,10 +125,22 @@ function setupPlayersArray(pCount){
 	}
 	else
 	{
-		//Remove players from array
+		//Remove players from array from pCount -> end
 		playersObj.players = playersObj.players.splice(pCount);
 	}
 }
+
+function setup()
+{
+	
+	//Calculate screen dimensions 
+	//let [w, h, r] = calcScreenDimensions();
+	//console.log("Window Width: " + w + ", Window Height: " + h)
+	createPlayerTokens();
+	createRolesWindow();
+}
+
+
 
 function saveToLocalStorage()
 {
@@ -142,15 +158,7 @@ function hasSavedData()
 	return localStorage.getItem("players");
 }
 
-function setup()
-{
-	
-	//Calculate screen dimensions 
-	//let [w, h, r] = calcScreenDimensions();
-	//console.log("Window Width: " + w + ", Window Height: " + h)
-	createPlayerTokens();
-	createRolesWindow();
-}
+
 
 function createPlayerTokens()
 {
@@ -223,29 +231,29 @@ function createPlayerTokens()
 		deathShroud.style.fontSize = '0.5rem';
 		deathShroud.style.textAlign = 'center';
 		deathShroud.innerHTML = 'DEAD';
-		if(playersObj.players[i].dead)
+		if(playersObj.players[i] && !playersObj.players[i].living)
 		{
 			deathShroud.style.display = 'block';
 		}else{
 			deathShroud.style.display = 'none';
 		}
-		if(playersObj.players[i].voteUsed)
+		if(playersObj.players[i] && playersObj.players[i].voteUsed)
 		{
 			deathShroud.innerHTML += ' (no vote)';
 		}
 		deathShroud.style.zIndex = 100;
 		el.appendChild(deathShroud);
 		let addBtn = document.createElement('button');
-		if(playersObj.players[i].roles.length > 0){
+		if(playersObj.players[i] && playersObj.players[i].roles.length > 0){
 			addBtn.innerHTML = playersObj.players[i].roles.join(', ');
 		}else{
 			addBtn.innerHTML = addRoleBtnText;
 		}
-		if(playersObj.players[i].notes.length > 0){
+		if(playersObj.players[i] && playersObj.players[i].notes.length > 0){
 			addBtn.innerHTML += pencilIconUnicode;
 		}
 		addBtn.style.marginTop = '5%';
-		addBtn.style.fontSize = Math.floor(longestSide / 50) + 'px';
+		addBtn.style.fontSize = Math.floor(longestSide / 100) + 'px';
 		addBtn.className = "addBtn";
 		addBtn.onclick = () => openPlayerEditWindow(addBtn);
 		addBtn.id = "player" + i + "Roles";
@@ -253,8 +261,11 @@ function createPlayerTokens()
 		let nameInput = document.createElement('input');
 		nameInput.onchange = () => setPlayerName(nameInput);
 		nameInput.type = "text";
-		if (playerNames[i]) {
-			nameInput.value = playerNames[i];
+		//NOTE: these default to player1 - player20 so this should always be true
+		if (playersObj.players[i] && playersObj.players[i].name.length > 0) {
+			console.log('setting the name of player ' + i + ' to ' + playersObj.players[i].name);
+			nameInput.value = playersObj.players[i].name;
+			nameInput.innerHTML = playersObj.players[i].name;
 		} else {
 			nameInput.value = "player" + (i + 1);
 		}
@@ -540,6 +551,7 @@ function setPlayerName(input)
 	let newName = input.value;
 	//console.log(elId + " => " + newName);
 	playersObj.players[playerId - 1].name = newName;
+	saveToLocalStorage();
 }
 
 async function setScript(el)
@@ -590,7 +602,7 @@ function showHidePlayerRoles()
 {
 	//Negate the showPlayerRoles variable (default: true)
 	showPlayerRoles = !showPlayerRoles;
-	console.log('Player roles are now ' + (showPlayerRoles ? 'shown' : 'hidden'));
+	//console.log('Player roles are now ' + (showPlayerRoles ? 'shown' : 'hidden'));
 	let showHideBtn = document.getElementById('showHideRolesBtn');
 	//Are we NOW showing player roles?
 	if(!showPlayerRoles)
@@ -616,26 +628,46 @@ function debug(txt){
 
 function clearSavedData()
 {
+	if(!hasSavedData())
+	{
+		alert('No saved data to clear!');
+		return;
+	}
 	if(window.confirm('Really clear saved data?')){
-		localStorage.setItem('players') = null;
+		localStorage.clear('players');
 	}
 }
 
-function loadSavedData()
+async function loadSavedData()
 {
 	if(!hasSavedData())
 	{
 		alert('No saved data to load!');
+		return;
 	}
 	if(window.confirm('Load stored data? This will clear your current data'))
 	{
-		loadFromLocalStorage();
-		init();
+		//Loads into playersObj
+		await loadFromLocalStorage();
+		//Set script 
+		if(playersObj.settings.script.length > 0){
+			script = playersObj.settings.script;
+		}else{
+			script = 'tb';
+		}
+		//await getScriptRoles(script);
+		//Initialize elements (await as async functions called)
+		await init();
+		//Enable clearing data (now loaded)
 		document.getElementById('clearSavedBtn').disabled = false;
+		//Set the player count input to the loaded player count
 		document.getElementById('playerCountInput').value = playersObj.players.length;
+		//Set the script to the loaded script name (shortname)
 		document.getElementById('scriptInput').value = playersObj.settings.script;
-		await getScriptRoles(playersObj.settings.script);
-		createRolesWindow();
+		//Create the player info window
+		//createRolesWindow();
+		//setup();
+		updateCentralInfo();
 	}
 }
 
