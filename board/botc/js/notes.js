@@ -68,16 +68,7 @@ async function init()
 	{
 		document.getElementById('loadSavedBtn').disabled = false;
 	}
-/*	if(hasSavedData())
-	{
-		console.log('Loading saved data!');
-		loadFromLocalStorage();
-		playerCount = playersObj.players.length;
-		console.log('Saved data has ' + playerCount + ' players');
-	}else{
-		createPlayersObject();
-	}
-*/
+	
 	createPlayersObject();
 	setup();
 }
@@ -153,20 +144,18 @@ function hasSavedData()
 
 function setup()
 {
-	//Get reference to main
-	let main = document.getElementById("main");
-	//Clear main
-	main.innerHTML = null;
 	
 	//Calculate screen dimensions 
-	let [w, h, r] = calcScreenDimensions();
+	//let [w, h, r] = calcScreenDimensions();
 	//console.log("Window Width: " + w + ", Window Height: " + h)
-	createPlayerTokens(main);
+	createPlayerTokens();
 	createRolesWindow();
 }
 
-function createPlayerTokens(main)
+function createPlayerTokens()
 {
+	//Get reference to main
+	let main = document.getElementById("main");
 	//Clear main between runs
 	main.innerHTML = null;
 
