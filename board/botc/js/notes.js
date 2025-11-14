@@ -100,9 +100,12 @@ async function getScriptRoles(selectedScriptShortName)
 
 function createPlayersObject()
 {
-	playersObj = {
-		settings: {},
-		players: []
+	//Only init playersObj if empty
+	if(playersObj.players.length == 0){
+		playersObj = {
+			settings: {},
+			players: []
+		}
 	}
 	setupPlayersArray(playerCount);
 }
@@ -115,7 +118,7 @@ function setupPlayersArray(pCount){
 		for(let i=playersObj.players.length; i<pCount; i++)
 		{
 			playersObj.players[i] = {
-				name: "player" + (i+1),
+				name: "player" + i,
 				seat: 1,
 				roles: [],
 				living: true,
