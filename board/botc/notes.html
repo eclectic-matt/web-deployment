@@ -6,26 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>TESTING BOTC Notes</title>
 	<link rel="stylesheet" href="./style/notes.css" />
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
 	<script defer src="./js/notes.js"></script>
 </head>
 
 <body>
 	<nav id="menu" class="w3-bar w3-border w3-green">
-	    <label for="playerCountInput">Set player count: <span id="playerCountSpan">5</span> </label>
+	    <label for="playerCountInput">Player count: <span id="playerCountSpan">5</span> </label>
 	    <input id="playerCountInput" type="range" min="5" max="20" step="1" value="5" onchange="setPlayerCount(this)"/>
-	    <br/>
-	    <label for="scriptInput">Set script: </label>
+	    <label for="scriptInput">Script: </label>
 	    <select id="scriptInput" onchange="setScript(this)">
 	    	<option value="tb">Trouble Brewing</option>
 	    	<option value="bmr">Bad Moon Rising</option>
 	    	<option value="snv">Sects and Violets</option>
 	    	<option value="all">Custom</option>
 	    </select>
-	    <br/>
+	    <br/><br/>
+	    <div class="w3-flex" style="justify-content:space-around">
 	    <button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
 	    <button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
 	    <button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
+	    </div>
 	</nav>
 	<div id="main">
 	    <!-- Default to 5 players -->
