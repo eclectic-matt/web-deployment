@@ -2,8 +2,8 @@
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
-//Default to 5p, set in menu
-var playerCount = 20;
+//Default to 10p, set in menu
+var playerCount = 10;
 var script = "tb";
 //Store names separately to reuse
 var playerNames = [];
