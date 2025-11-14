@@ -3,7 +3,7 @@
 
 //GLOBAL VARIABLES (urgh)
 //Default to 5p, set in menu
-var playerCount = 5;
+var playerCount = 20;
 var script = "tb";
 //Store names separately to reuse
 var playerNames = [];
