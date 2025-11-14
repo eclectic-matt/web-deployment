@@ -12,6 +12,7 @@
 
 <body>
 	<nav id="menu" class="w3-bar w3-border w3-green">
+		<div class="w3-flex" style="justify-content:space-around">
 	    <label for="playerCountInput">Player count: <span id="playerCountSpan">5</span> </label>
 	    <input id="playerCountInput" type="range" min="5" max="20" step="1" value="5" onchange="setPlayerCount(this)"/>
 	    <label for="scriptInput">Script: </label>
@@ -21,7 +22,7 @@
 	    	<option value="snv">Sects and Violets</option>
 	    	<option value="all">Custom</option>
 	    </select>
-	    <br/>
+	    </div>
 	    <div class="w3-flex" style="justify-content:space-around">
 	    <button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
 	    <button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
