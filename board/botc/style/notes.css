@@ -9,9 +9,9 @@
 #main
 {
     width: 100vw;
-    max-width: 100vw;
+    max-width: 100vw !important;
     height: 90vh;
-    max-height: 100vh;
+    max-height: 100vh !important;
     background-color: grey;
     margin: 0;
     padding: 0;
