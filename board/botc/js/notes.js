@@ -1,4 +1,4 @@
-//update 2025-11-14 08:25:00
+//update 2025-11-15 09:21:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -112,21 +112,25 @@ function setupPlayersArray(pCount){
 		//Add players to array
 		for(let i=playersObj.players.length; i<pCount; i++)
 		{
-			playersObj.players[i] = {
+			playersObj.players.push({
 				name: "player" + i,
-				seat: 1,
+				seat: i,
 				roles: [],
 				living: true,
 				deadVote: true,
 				alignment: 'good',
 				notes: ''
-			};
+			});
 		}
 	}
 	else
 	{
 		//Remove players from array from pCount -> end
-		playersObj.players = playersObj.players.splice(pCount);
+		//playersObj.players = playersObj.players.splice(pCount);
+		for(let i = playersObj.players.length; i<pCount; i++){
+			//Remove element from end of array
+			playersObj.players.pop();
+		}
 	}
 }
 
