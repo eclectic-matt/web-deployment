@@ -183,8 +183,8 @@ function createPlayerTokens()
 	//Calculate fixed values
 	let cx = 0.5 * w;
 	let cy = 0.6 * h;
-	let eclipseWidth = (w - 50) / 2;
-	let eclipseHeight = (h - 50) / 2;
+	let eclipseWidth = w / 2;
+	let eclipseHeight = h / 2;
 	
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
