@@ -1,4 +1,4 @@
-//update 2025-11-16 17:46:00
+//update 2025-11-16 19:46:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -229,8 +229,8 @@ function createPlayerTokens()
 		else
 		{
 			//Landscape
-			x = Math.round(x + shortestSide * Math.cos(angle));
-			y = Math.round(y + longestSide * Math.sin(angle));
+			x = Math.round(shortestSide * Math.cos(angle));
+			y = Math.round(longestSide * Math.sin(angle));
 			left = Math.round(x + (w/3)) + 'px';
 			top = Math.round(y + (h/2)) + 'px';
 		}
