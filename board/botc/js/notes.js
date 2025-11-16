@@ -1,4 +1,4 @@
-//update 2025-11-16 12:46:00
+//update 2025-11-16 17:46:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -208,8 +208,8 @@ function createPlayerTokens()
 	{
 		let el = document.createElement('div');
 		el.style.position = "absolute";
-		el.style.width = Math.floor((2.5*shortestSide)/playerCount) + 'px';
-		el.style.height = Math.floor((2.5*shortestSide)/playerCount) + 'px';
+		el.style.width = Math.floor((1.5*shortestSide)/playerCount) + 'px';
+		el.style.height = Math.floor((1.5*shortestSide)/playerCount) + 'px';
 		//Calculate position for each token
 		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
 		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
