@@ -202,7 +202,13 @@ function createPlayerTokens()
 	}
 	//Radius is the distance from centre
 	radius = shortestSide / 3 + (playerCount);
-
+	
+	//Calculate fixed values
+	let cx = 0.5 * w;
+	let cy = 0.6 * h;
+	let eclipseWidth = w / 2;
+	let eclipseHeight = h / 2;
+	
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
 	{
@@ -217,7 +223,7 @@ function createPlayerTokens()
 		//let radius = h/3;
 		//- x position (relative to centre in top left of screen)
 		//let x = Math.round(radius * (Math.cos(angle)));
-		let x, y, top, left;
+		/*let x, y, top, left;
 		if(longestSide == h)
 		{
 			debug('portrait');
@@ -239,7 +245,10 @@ function createPlayerTokens()
 		
 		//left = x + 'px';
 		//top = y + 'px';
-		
+		*/
+		let [x, y] = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
+		let left = x + 'px';
+		let top = y + 'px';
 		
 		debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
 		//- left position (adjust to be in centre of screen)
@@ -323,6 +332,14 @@ function createPlayerTokens()
 	central.style.border = '1px solid black';
 	central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
 	main.appendChild(central);
+}
+
+function getPointInEclipse(cx, cy, w, h, angle)
+{
+	return {
+		x: cx + (w * Math.cos(angle)),
+		y: cy + (h * Math.sin(angle))
+	};
 }
 
 function createRolesWindow()
