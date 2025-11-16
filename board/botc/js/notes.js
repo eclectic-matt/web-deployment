@@ -166,6 +166,8 @@ function hasSavedData()
 
 function createPlayerTokens()
 {
+	//Ensure playerCount set correctly
+	playerCount = playersObj.players.length;
 	//Get reference to main
 	let main = document.getElementById("main");
 	//Clear main between runs
