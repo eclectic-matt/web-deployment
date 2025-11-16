@@ -126,7 +126,11 @@ function setupPlayersArray(pCount){
 	else
 	{
 		//Remove players from array from pCount -> end
-		playersObj.players.splice(pCount);
+		let pCopy = playersObj.players;
+		debug('Before decrease: ' + pCopy.map((p) => { return p.name;}).join(', '));
+		pCopy.splice(pCount);
+		debug('After: ' + pCopy.map((p) => { return p.name;}).join(', '));
+		playersObj.players = pCopy;
 		/*for(let i = playersObj.players.length; i<pCount; i--){
 			//Remove element from end of array
 			playersObj.players.pop();
