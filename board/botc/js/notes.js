@@ -203,7 +203,7 @@ function createPlayerTokens()
 		let left = x + 'px';
 		let top = y + 'px';
 		
-		debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
+		//debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
 		el.style.top = top;
 		el.style.left = left;
 		
