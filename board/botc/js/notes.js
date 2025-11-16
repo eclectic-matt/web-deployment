@@ -246,7 +246,9 @@ function createPlayerTokens()
 		//left = x + 'px';
 		//top = y + 'px';
 		*/
-		let [x, y] = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
+		let point = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
+		let x = point.x;
+		let y = point.y;
 		let left = x + 'px';
 		let top = y + 'px';
 		
