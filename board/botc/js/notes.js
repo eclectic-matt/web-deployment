@@ -237,6 +237,10 @@ function createPlayerTokens()
 			top = Math.round(y + (h/2)) + 'px';
 		}
 		
+		left = x + 'px';
+		top = y + 'px';
+		
+		
 		debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
 		//- left position (adjust to be in centre of screen)
 		//let left = (x + (w/3) + (20 - playerCount)) + 'px';
