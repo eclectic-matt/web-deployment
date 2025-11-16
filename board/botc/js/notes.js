@@ -220,11 +220,13 @@ function createPlayerTokens()
 		let x, y, top, left;
 		if(longestSide == h)
 		{
+			debug('portrait');
 			//Portrait
 			x = Math.round(longestSide * Math.cos(angle));
 			y = Math.round(shortestSide * Math.sin(angle));
 			left = Math.round(x + (w/3)) + 'px';
 			top = Math.round(y + (h/2)) + 'px';
+			debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
 		}
 		else
 		{
