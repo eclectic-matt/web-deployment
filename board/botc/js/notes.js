@@ -194,7 +194,7 @@ function createPlayerTokens()
 	}
 	else
 	{
-		//Desktop mode
+		//Portrait mode
 		orientation = 2;
 		radius = h / 4;
 		longestSide = h;
@@ -208,20 +208,37 @@ function createPlayerTokens()
 	{
 		let el = document.createElement('div');
 		el.style.position = "absolute";
-		el.style.width = Math.floor((1.5*shortestSide)/playerCount) + 'px';
-		el.style.height = Math.floor((1.5*shortestSide)/playerCount) + 'px';
+		el.style.width = Math.floor((2.5*shortestSide)/playerCount) + 'px';
+		el.style.height = Math.floor((2.5*shortestSide)/playerCount) + 'px';
 		//Calculate position for each token
 		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
 		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
 		//- radius needs to adjust for the screen size (between min + max)
 		//let radius = h/3;
 		//- x position (relative to centre in top left of screen)
-		let x = Math.round(radius * (Math.cos(angle)));
+		//let x = Math.round(radius * (Math.cos(angle)));
+		let x, y, top, left;
+		if(longestSide == h)
+		{
+			//Portrait
+			x = Math.round(longestSide * Math.cos(angle)));
+			y = Math.round(shortestSide * Math.sin(angle));
+			left = Math.round(x + (w/3)) + 'px';
+			top = Math.round(y + (h/2)) + 'px';
+		}
+		else
+		{
+			//Landscape
+			x = Math.round(x + shortestSide * Math.cos(angle)));
+			y = Math.round(y + longestSide * Math.sin(angle));
+			left = Math.round(x + (w/3)) + 'px';
+			top = Math.round(y + (h/2)) + 'px';
+		}
 		//- left position (adjust to be in centre of screen)
-		let left = (x + (w/3) + (20 - playerCount)) + 'px';
+		//let left = (x + (w/3) + (20 - playerCount)) + 'px';
 		// - y position (relative to centre in top left of screen)
-		let y = Math.round(radius * (Math.sin(angle)));
-		let top = (y + (h/2)) + 'px';
+		//let y = Math.round(radius * (Math.sin(angle)));
+		//let top = (y + (h/2)) + 'px';
 		//el.style.top = (10 * i) + (0.1 * h);
 		//el.style.left = 10 * i;
 		el.style.top = top;
