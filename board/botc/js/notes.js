@@ -127,17 +127,17 @@ function setupPlayersArray(pCount){
 	{
 		//Remove players from array from pCount -> end
 		let pCopy = playersObj.players;
-		debug('Before decrease: ' + pCopy.map((p) => { return p.name;}).join(', '));
+		//debug('Before decrease: ' + pCopy.map((p) => { return p.name;}).join(', '));
 		pCopy.splice(pCount);
-		debug('After: ' + pCopy.map((p) => { return p.name;}).join(', '));
+		//debug('After: ' + pCopy.map((p) => { return p.name;}).join(', '));
 		playersObj.players = pCopy;
 		/*for(let i = playersObj.players.length; i<pCount; i--){
 			//Remove element from end of array
 			playersObj.players.pop();
 		}*/
 	}
-	debug('Players new length: ' + pCount);
-	debug('Names: ' + playersObj.players.map((p) => { return p.name;}).join(', '));
+	//debug('Players new length: ' + pCount);
+	//debug('Names: ' + playersObj.players.map((p) => { return p.name;}).join(', '));
 }
 
 function setup()
