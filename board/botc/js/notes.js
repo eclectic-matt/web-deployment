@@ -185,6 +185,7 @@ function createPlayerTokens()
 	let cy = 0.6 * h;
 	let eclipseWidth = w / 2;
 	let eclipseHeight = h / 2;
+	let shortestSide = Math.min(w, h);
 	
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
