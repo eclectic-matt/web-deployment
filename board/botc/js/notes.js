@@ -226,16 +226,18 @@ function createPlayerTokens()
 			y = Math.round(shortestSide * Math.sin(angle));
 			left = Math.round(x + (w/3)) + 'px';
 			top = Math.round(y + (h/2)) + 'px';
-			debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
 		}
 		else
 		{
+			debug('landscape');
 			//Landscape
 			x = Math.round(shortestSide * Math.cos(angle));
 			y = Math.round(longestSide * Math.sin(angle));
 			left = Math.round(x + (w/3)) + 'px';
 			top = Math.round(y + (h/2)) + 'px';
 		}
+		
+		debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
 		//- left position (adjust to be in centre of screen)
 		//let left = (x + (w/3) + (20 - playerCount)) + 'px';
 		// - y position (relative to centre in top left of screen)
