@@ -229,7 +229,7 @@ function createPlayerTokens()
 		else
 		{
 			//Landscape
-			x = Math.round(x + shortestSide * Math.cos(angle)));
+			x = Math.round(x + shortestSide * Math.cos(angle));
 			y = Math.round(y + longestSide * Math.sin(angle));
 			left = Math.round(x + (w/3)) + 'px';
 			top = Math.round(y + (h/2)) + 'px';
