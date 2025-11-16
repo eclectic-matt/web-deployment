@@ -180,34 +180,11 @@ function createPlayerTokens()
 	main.innerHTML = null;
 
 	let [w, h, r] = calcScreenDimensions();
-	let orientation = 1;
-	let radius = h/3;
-	let longestSide = h;
-	let shortestSide = h;
-	if(w > h)
-	{
-		//Landscape mode
-		orientation = 1;
-		radius = w / 4;
-		longestSide = w;
-		shortestSide = h;
-	}
-	else
-	{
-		//Portrait mode
-		orientation = 2;
-		radius = h / 4;
-		longestSide = h;
-		shortestSide = w;
-	}
-	//Radius is the distance from centre
-	radius = shortestSide / 3 + (playerCount);
-	
 	//Calculate fixed values
 	let cx = 0.5 * w;
 	let cy = 0.6 * h;
-	let eclipseWidth = w / 2;
-	let eclipseHeight = h / 2;
+	let eclipseWidth = (w - 50) / 2;
+	let eclipseHeight = (h - 50) / 2;
 	
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
@@ -219,33 +196,7 @@ function createPlayerTokens()
 		//Calculate position for each token
 		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
 		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
-		//- radius needs to adjust for the screen size (between min + max)
-		//let radius = h/3;
-		//- x position (relative to centre in top left of screen)
-		//let x = Math.round(radius * (Math.cos(angle)));
-		/*let x, y, top, left;
-		if(longestSide == h)
-		{
-			debug('portrait');
-			//Portrait
-			x = Math.round(shortestSide * Math.cos(angle));
-			y = Math.round(longestSide * Math.sin(angle));
-			left = Math.round(x + (w/2)) + 'px';
-			top = Math.round(y + (h/2)) + 'px';
-		}
-		else
-		{
-			debug('landscape');
-			//Landscape
-			x = Math.round(longestSide * Math.cos(angle));
-			y = Math.round(shortestSide * Math.sin(angle));
-			left = Math.round(x + (w/2)) + 'px';
-			top = Math.round(y + (h/2)) + 'px';
-		}
-		
-		//left = x + 'px';
-		//top = y + 'px';
-		*/
+
 		let point = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
 		let x = point.x;
 		let y = point.y;
@@ -253,15 +204,9 @@ function createPlayerTokens()
 		let top = y + 'px';
 		
 		debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
-		//- left position (adjust to be in centre of screen)
-		//let left = (x + (w/3) + (20 - playerCount)) + 'px';
-		// - y position (relative to centre in top left of screen)
-		//let y = Math.round(radius * (Math.sin(angle)));
-		//let top = (y + (h/2)) + 'px';
-		//el.style.top = (10 * i) + (0.1 * h);
-		//el.style.left = 10 * i;
 		el.style.top = top;
 		el.style.left = left;
+		
 		//console.log(i, angle, x, y);
 		el.className = "player";
 		el.id = "player" + (i + 1);
