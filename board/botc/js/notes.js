@@ -133,7 +133,7 @@ function setupPlayersArray(pCount){
 		}*/
 	}
 	debug('Players new length: ' + pCount);
-	debug('Names: ' + playersObj.players.map((p) => { return p.name;}).join(','));
+	debug('Names: ' + playersObj.players.map((p) => { return p.name;}).join('<br>'));
 }
 
 function setup()
