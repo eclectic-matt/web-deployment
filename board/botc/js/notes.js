@@ -224,7 +224,7 @@ function createPlayerTokens()
 			//Portrait
 			x = Math.round(shortestSide * Math.cos(angle));
 			y = Math.round(longestSide * Math.sin(angle));
-			left = Math.round(x + (w/3)) + 'px';
+			left = Math.round(x + (w/2)) + 'px';
 			top = Math.round(y + (h/2)) + 'px';
 		}
 		else
@@ -233,12 +233,12 @@ function createPlayerTokens()
 			//Landscape
 			x = Math.round(longestSide * Math.cos(angle));
 			y = Math.round(shortestSide * Math.sin(angle));
-			left = Math.round(x + (w/3)) + 'px';
+			left = Math.round(x + (w/2)) + 'px';
 			top = Math.round(y + (h/2)) + 'px';
 		}
 		
-		left = x + 'px';
-		top = y + 'px';
+		//left = x + 'px';
+		//top = y + 'px';
 		
 		
 		debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
