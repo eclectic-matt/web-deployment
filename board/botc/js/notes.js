@@ -672,6 +672,7 @@ async function loadSavedData()
 		document.getElementById('clearSavedBtn').disabled = false;
 		//Set the player count input to the loaded player count
 		document.getElementById('playerCountInput').value = playersObj.players.length;
+		document.getElementById("playerCountSpan").innerHTML = playerCount;
 		//Set the script to the loaded script name (shortname)
 		document.getElementById('scriptInput').value = playersObj.settings.script;
 		//Create the player info window
