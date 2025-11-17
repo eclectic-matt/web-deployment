@@ -181,8 +181,8 @@ function createPlayerTokens()
 
 	let [w, h, r] = calcScreenDimensions();
 	//Calculate fixed values
-	let centerAdjustX = -100;
-	let centerAdjustY = -100;
+	let centerAdjustX = -75;
+	let centerAdjustY = -75;
 	let cx = (0.5 * w) + centerAdjustX;
 	let cy = (0.6 * h) + centerAdjustY;
 	let eclipseWidth = w / 3;
