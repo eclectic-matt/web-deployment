@@ -183,8 +183,8 @@ function createPlayerTokens()
 	//Calculate fixed values
 	let cx = 0.5 * w;
 	let cy = 0.6 * h;
-	let eclipseWidth = w / 2;
-	let eclipseHeight = h / 2;
+	let eclipseWidth = w / 3;
+	let eclipseHeight = h / 3;
 	let shortestSide = Math.min(w, h);
 	
 	//Create player elements
@@ -247,7 +247,7 @@ function createPlayerTokens()
 			addBtn.innerHTML += pencilIconUnicode;
 		}
 		addBtn.style.marginTop = '5%';
-		addBtn.style.fontSize = Math.floor(longestSide / 100) + 'px';
+		addBtn.style.fontSize = Math.floor(shortestSide / 50) + 'px';
 		addBtn.className = "addBtn";
 		addBtn.onclick = () => openPlayerEditWindow(addBtn);
 		addBtn.id = "player" + i + "Roles";
