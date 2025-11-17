@@ -113,7 +113,7 @@ function setupPlayersArray(pCount){
 		for(let i=playersObj.players.length; i<pCount; i++)
 		{
 			playersObj.players.push({
-				name: "player" + i,
+				name: "p" + i,
 				seat: i,
 				roles: [],
 				living: true,
@@ -181,21 +181,22 @@ function createPlayerTokens()
 
 	let [w, h, r] = calcScreenDimensions();
 	//Calculate fixed values
-	let centerAdjustX = -50;
-	let centerAdjustY = -50;
+	let centerAdjustX = -100;
+	let centerAdjustY = -100;
 	let cx = (0.5 * w) + centerAdjustX;
 	let cy = (0.6 * h) + centerAdjustY;
 	let eclipseWidth = w / 3;
 	let eclipseHeight = h / 3;
 	let shortestSide = Math.min(w, h);
+	let elementRadius = Math.floor((1.5 * shortestSide) / (0.8 * playerCount));
 	
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
 	{
 		let el = document.createElement('div');
 		el.style.position = "absolute";
-		el.style.width = Math.floor((2 * shortestSide)/playerCount) + 'px';
-		el.style.height = Math.floor((2 * shortestSide)/playerCount) + 'px';
+		el.style.width = elementRadius + 'px';
+		el.style.height = elementRadius + 'px';
 		//Calculate position for each token
 		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
 		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
@@ -263,7 +264,7 @@ function createPlayerTokens()
 			nameInput.value = playersObj.players[i].name;
 			nameInput.innerHTML = playersObj.players[i].name;
 		} else {
-			nameInput.value = "player" + (i + 1);
+			nameInput.value = "p" + i;
 		}
 		nameInput.className = "nameInput";
 		el.appendChild(nameInput);
