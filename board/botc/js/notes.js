@@ -181,8 +181,10 @@ function createPlayerTokens()
 
 	let [w, h, r] = calcScreenDimensions();
 	//Calculate fixed values
-	let cx = 0.5 * w;
-	let cy = 0.6 * h;
+	let centerAdjustX = -50;
+	let centerAdjustY = -50;
+	let cx = (0.5 * w) + centerAdjustX;
+	let cy = (0.6 * h) + centerAdjustY;
 	let eclipseWidth = w / 3;
 	let eclipseHeight = h / 3;
 	let shortestSide = Math.min(w, h);
