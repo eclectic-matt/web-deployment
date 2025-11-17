@@ -272,6 +272,7 @@ function createPlayerTokens()
 	}
 	
 	//Add role counts element
+	/*
 	let central = document.createElement('div');
 	central.id = 'central';
 	central.style.position = 'absolute';
@@ -281,8 +282,10 @@ function createPlayerTokens()
 	central.style.height = 'auto';
 	central.style.fontSize = '0.75rem';
 	central.style.border = '1px solid black';
+	*/
+	let central = document.getElementById('central');
 	central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
-	main.appendChild(central);
+	//main.appendChild(central);
 }
 
 function getPointInEclipse(cx, cy, w, h, angle)
@@ -302,6 +305,8 @@ function createRolesWindow()
 	addRoleWindowEl.style.overflowY = 'scroll';
 	//-head
 	let rolesHeader = document.createElement('h3');
+	rolesHeader.style.textAlign = 'center';
+	rolesHeader.style.backgroundColor = 'darkgreen';
 	rolesHeader.innerHTML = "Change Info for <span id='playerName'></span> <span id='playerId' class='hidden'></span>";
 	//-closeBtn (in header)
 	let closeAddRoleBtn = document.createElement('button');
