@@ -399,6 +399,8 @@ function createRolesWindow()
 		addRoleList.appendChild(roleLi);
 		//console.log('add role ' + scriptRoles[i]);
 	}
+	addRoleList.style.maxHeight = '50%';
+	addRoleList.style.overflowY = 'scroll';
 	addRoleWindowEl.appendChild(addRoleList);
 	// - status (dead/vote used/evil?)
 	
@@ -410,6 +412,7 @@ function createRolesWindow()
 	noteEl.id = 'playerNotes';
 	noteEl.style.width = '80%';
 	noteEl.style.height = '10%';
+	
 	addRoleWindowEl.appendChild(noteEl);
 	
 }
@@ -697,6 +700,27 @@ async function loadSavedData()
 		//createRolesWindow();
 		//setup();
 		updateCentralInfo();
+	}
+}
+
+function updateUi()
+{
+	//Update central area 
+	updateCentralInfo();
+	
+	//Update player tokens 
+	createPlayerTokens();
+	
+	//Update player info window 
+	createRolesWindow();
+	
+	//Update interface
+	updateMenus();
+	
+	//Hide roles if selected
+	if(!showPlayerRoles)
+	{
+		hidePlayerRoles();
 	}
 }
 
