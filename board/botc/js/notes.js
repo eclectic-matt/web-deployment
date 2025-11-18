@@ -399,6 +399,7 @@ function createRolesWindow()
 		addRoleList.appendChild(roleLi);
 		//console.log('add role ' + scriptRoles[i]);
 	}
+	addRoleList.style.maxWidth = '100%';
 	addRoleList.style.maxHeight = '50%';
 	addRoleList.style.overflowY = 'scroll';
 	addRoleWindowEl.appendChild(addRoleList);
