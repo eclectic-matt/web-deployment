@@ -215,6 +215,12 @@ function createPlayerTokens()
 		el.className = "player";
 		el.id = "player" + (i + 1);
 		el.dataset.player = i;
+		if(playersObj.players[i].alignment == 'Evil')
+		{
+			el.style.borderColor = 'red';
+		}else{
+			el.style.borderColor = 'green';
+		}
 		//Death shroud?
 		let deathShroud = document.createElement('div');
 		deathShroud.id = "player" + i + "Shroud";
@@ -492,6 +498,12 @@ function closePlayerEditWindow()
 	let playerId = document.getElementById('playerId').innerHTML;
 	//Store notes
 	playersObj.players[playerId].notes = document.getElementById('playerNotes').value;
+	//Store alignment
+	playersObj.players[playerId].alignment = document.getElementById('alignmentSelect').value;
+	//Store living status
+	playersObj.players[playerId].living = !document.getElementById('deadStatusCheck').checked;
+	//Store vote used
+	playersObj.players[playerId].deadVote = !document.getElementById('voteStatusCheck').checked;
 	//debug('Current player notes: "' + document.getElementById('playerNotes').value + '"');
 	//Show icon if notes available
 	if(playersObj.players[playerId].notes.length > 0){
@@ -515,11 +527,11 @@ function updateDeathShroud(el)
 	playersObj.players[playerId].living = !el.checked;
 	if(el.checked)
 	{
-		playerEl.style.borderColor = "red";
+		playerEl.style.borderColor = "black";
 		deathShroudEl.style.display = "block";
 	}else
 	{
-		playerEl.style.borderColor = "black";
+		playerEl.style.borderColor = "white";
 		deathShroudEl.style.display = "none";
 	}
 	updateCentralInfo();
@@ -595,6 +607,11 @@ function unhidePlayerRoles()
 			//Append a pencil icon to the player roles
 			btn.innerHTML += pencilIconUnicode;
 		}
+		if(playersObj.players[playerId].alignment == 'evil'){
+			btn.parentElement.style.borderColor = 'red';
+		}else{
+			btn.parentElement.style.borderColor = 'green';
+		}
 	});
 }
 
@@ -605,6 +622,7 @@ function hidePlayerRoles()
 	Array.prototype.forEach.call(roleBtns, function(btn) 
 	{
 		btn.innerHTML = "<em>HIDDEN</em>";
+		btn.parentElement.style.borderColor = 'white';
 	});
 }
 

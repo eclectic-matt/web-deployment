@@ -19,7 +19,7 @@
 
 .player 
 {
-    border: 3px solid black;
+    border: 3px solid white;
     border-radius: 50%;
     /*background-color: yellow;*/
 	background-image: url("https://clocktower.online/img/life.c3464300.png");
