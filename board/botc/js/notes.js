@@ -401,6 +401,7 @@ function createRolesWindow()
 	}
 	addRoleList.style.maxWidth = '100%';
 	addRoleList.style.maxHeight = '50%';
+	addRoleList.style.height = '50%';
 	addRoleList.style.overflowY = 'scroll';
 	addRoleWindowEl.appendChild(addRoleList);
 	// - status (dead/vote used/evil?)
