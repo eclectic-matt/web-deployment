@@ -400,9 +400,10 @@ function createRolesWindow()
 		//console.log('add role ' + scriptRoles[i]);
 	}
 	addRoleList.style.maxWidth = '100%';
-	addRoleList.style.maxHeight = '50%';
-	addRoleList.style.height = '50%';
+	addRoleList.style.maxHeight = '40%';
+	addRoleList.style.height = '40%';
 	addRoleList.style.overflowY = 'scroll';
+	
 	addRoleWindowEl.appendChild(addRoleList);
 	// - status (dead/vote used/evil?)
 	
