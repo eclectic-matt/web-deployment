@@ -215,12 +215,18 @@ function createPlayerTokens()
 		el.className = "player";
 		el.id = "player" + (i + 1);
 		el.dataset.player = i;
+		//ALIGNMENT
 		if(playersObj.players[i].alignment == 'Evil')
 		{
-			el.style.borderColor = 'red';
+			//el.style.borderColor = 'red';
+			el.classList.add('evil');
+			el.classList.remove('good');
 		}else{
-			el.style.borderColor = 'green';
+			//el.style.borderColor = 'green';
+			el.classList.add('good');
+			el.classList.remove('evil');
 		}
+		
 		//Death shroud?
 		let deathShroud = document.createElement('div');
 		deathShroud.id = "player" + i + "Shroud";
