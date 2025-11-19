@@ -224,6 +224,7 @@ function createPlayerTokens()
 		//Death shroud?
 		let deathShroud = document.createElement('div');
 		deathShroud.id = "player" + i + "Shroud";
+		deathShroud.className = 'shroud';
 		deathShroud.style.width = '60%';
 		deathShroud.style.marginLeft = '20%';
 		deathShroud.style.marginTop = '10%';
@@ -237,11 +238,14 @@ function createPlayerTokens()
 		//Not "living" => show death shroud
 		if(playersObj.players[i] && !playersObj.players[i].living)
 		{
-			deathShroud.style.display = 'block';
-			el.style.filter = 'grayscale(100%)';
+			//deathShroud.style.display = 'block';
+			//el.style.filter = 'grayscale(100%)';
+			el.classList.remove('living');
+			el.classList.add('dead');
 		}else{
-			deathShroud.style.display = 'none';
-			el.style.filter = 'none';
+			//deathShroud.style.display = 'none';
+			el.classList.remove('dead');
+			el.classList.add('living');
 		}
 		if(playersObj.players[i] && playersObj.players[i].voteUsed)
 		{
