@@ -510,6 +510,18 @@ function closePlayerEditWindow()
 	playersObj.players[playerId].living = !document.getElementById('deadStatusCheck').checked;
 	//Store vote used
 	playersObj.players[playerId].deadVote = !document.getElementById('voteStatusCheck').checked;
+	let el = document.getElementById('player' + playerId);
+	//Update border (if showing roles)
+	if(showPlayerRoles)
+	{	
+		if(playersObj.players[playerId].alignment == 'Evil')
+		{
+			el.style.borderColor = 'red';
+		}else{
+			el.style.borderColor = 'green';
+		}
+	}
+
 	//debug('Current player notes: "' + document.getElementById('playerNotes').value + '"');
 	//Show icon if notes available
 	if(playersObj.players[playerId].notes.length > 0){
