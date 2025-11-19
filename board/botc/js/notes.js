@@ -702,7 +702,8 @@ async function loadSavedData()
 		//Create the player info window
 		//createRolesWindow();
 		//setup();
-		updateCentralInfo();
+		//updateCentralInfo();
+		updateUi();
 	}
 }
 
