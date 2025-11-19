@@ -234,11 +234,14 @@ function createPlayerTokens()
 		deathShroud.style.fontSize = '0.5rem';
 		deathShroud.style.textAlign = 'center';
 		deathShroud.innerHTML = 'DEAD';
+		//Not "living" => show death shroud
 		if(playersObj.players[i] && !playersObj.players[i].living)
 		{
 			deathShroud.style.display = 'block';
+			el.style.filter = 'grayscale(100%)';
 		}else{
 			deathShroud.style.display = 'none';
+			el.style.filter = 'none';
 		}
 		if(playersObj.players[i] && playersObj.players[i].voteUsed)
 		{
@@ -277,18 +280,6 @@ function createPlayerTokens()
 		main.appendChild(el);
 	}
 	
-	//Add role counts element
-	/*
-	let central = document.createElement('div');
-	central.id = 'central';
-	central.style.position = 'absolute';
-	central.style.top = ((h/2) + 30) + 'px';
-	central.style.left = ((w/4) + 30) + 'px';
-	central.style.width = ((w/4) + 50) + 'px';
-	central.style.height = 'auto';
-	central.style.fontSize = '0.75rem';
-	central.style.border = '1px solid black';
-	*/
 	let central = document.getElementById('central');
 	central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
 	//main.appendChild(central);
@@ -510,26 +501,17 @@ function closePlayerEditWindow()
 	playersObj.players[playerId].living = !document.getElementById('deadStatusCheck').checked;
 	//Store vote used
 	playersObj.players[playerId].deadVote = !document.getElementById('voteStatusCheck').checked;
-	let el = document.getElementById('player' + playerId);
-	//Update border (if showing roles)
-	if(showPlayerRoles)
-	{	
-		if(playersObj.players[playerId].alignment == 'Evil')
-		{
-			el.style.borderColor = 'red';
-		}else{
-			el.style.borderColor = 'green';
-		}
-	}
-
-	//debug('Current player notes: "' + document.getElementById('playerNotes').value + '"');
 	//Show icon if notes available
-	if(playersObj.players[playerId].notes.length > 0){
+	if(playersObj.players[playerId].notes.length > 0)
+	{
 		//Append a pencil icon to the player
 		let roleBtn = document.getElementById("player" + playerId + "Roles");
 		roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ') + pencilIconUnicode;
 	}
 	saveToLocalStorage();
+
+	//Trigger UI update
+	updateUi();
 }
 
 function updateDeathShroud(el)
