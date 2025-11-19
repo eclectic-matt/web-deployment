@@ -50,6 +50,22 @@
 	color: white;
 }
 
+.dead {
+	filter = grayscale(100%);
+}
+
+.living {
+	filter = none;
+}
+
+.evil {
+	border-color: red;
+}
+
+.good {
+	border-color: green;
+}
+
 .nameInput 
 {
     width: 70%;
