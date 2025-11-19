@@ -53,9 +53,16 @@
 .dead {
 	filter = grayscale(100%);
 }
+.dead > .shroud {
+	display: block;
+}
 
 .living {
 	filter = none;
+}
+
+.living > .shroud {
+	display: none;
 }
 
 .evil {
