@@ -250,12 +250,14 @@ function createPlayerTokens()
 		deathShroud.style.zIndex = 100;
 		el.appendChild(deathShroud);
 		let addBtn = document.createElement('button');
-		if(playersObj.players[i] && playersObj.players[i].roles.length > 0){
+		if(playersObj.players[i] && playersObj.players[i].roles.length > 0)
+		{
 			addBtn.innerHTML = playersObj.players[i].roles.join(', ');
 		}else{
 			addBtn.innerHTML = addRoleBtnText;
 		}
-		if(playersObj.players[i] && playersObj.players[i].notes.length > 0){
+		if(playersObj.players[i] && playersObj.players[i].notes.length > 0)
+		{
 			addBtn.innerHTML += pencilIconUnicode;
 		}
 		addBtn.style.marginTop = '5%';
