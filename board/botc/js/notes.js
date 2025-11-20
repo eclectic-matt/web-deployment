@@ -620,9 +620,13 @@ function unhidePlayerRoles()
 			btn.innerHTML += pencilIconUnicode;
 		}
 		if(playersObj.players[playerId].alignment == 'evil'){
-			btn.parentElement.style.borderColor = 'red';
+			btn.parentElement.classList.add('evil');
+			btn.parentElement.classList.remov3('good');
+			//btn.parentElement.style.borderColor = 'red';
 		}else{
-			btn.parentElement.style.borderColor = 'green';
+			//btn.parentElement.style.borderColor = 'green';
+			btn.parentElement.classList.add('good');
+			btn.parentElement.classList.remov3('evil');
 		}
 	});
 }
