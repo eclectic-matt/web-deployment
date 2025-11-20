@@ -73,6 +73,10 @@
 	border-color: green;
 }
 
+.hidden {
+	border-color: white;
+}
+
 .nameInput 
 {
     width: 70%;
