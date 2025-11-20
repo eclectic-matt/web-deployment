@@ -51,14 +51,14 @@
 }
 
 .dead {
-	filter = grayscale(100%);
+	filter: grayscale(100%);
 }
 .dead > .shroud {
 	display: block;
 }
 
 .living {
-	filter = none;
+	filter: none;
 }
 
 .living > .shroud {
