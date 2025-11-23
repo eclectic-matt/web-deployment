@@ -1,4 +1,4 @@
-//update 2025-11-16 21:29:00
+//update 2025-11-23 17:16:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -395,6 +395,8 @@ function createRolesWindow()
 		
 		let teamHeaderLi = document.createElement('li');
 		teamHeaderLi.innerHTML = '<b>' + toTitleCase(team) + '</b>';
+		teamHeaderLi.style.listStyleType = 'none';
+		
 		addRoleList.appendChild(teamHeaderLi);
 
 		teamRoles.forEach((r) => {
