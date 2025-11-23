@@ -82,12 +82,13 @@ async function getScriptRoles(selectedScriptShortName)
 	//Return all roles
 	if(selectedScriptShortName == "all")
 	{
-		scriptRoles = scriptRoles.map((r) => {return r.name});
-		scriptRoles.sort();
+		//scriptRoles = scriptRoles.map((r) => {return r.name});
+		//scriptRoles.sort();
 		return scriptRoles;
 	}
 	//Filter to edition
-	scriptRoles = scriptRoles.filter((r) => {return r.edition == selectedScriptShortName}).map((r) => {return r.name});
+	//scriptRoles = scriptRoles.filter((r) => {return r.edition == selectedScriptShortName}).map((r) => {return r.name});
+	scriptRoles = scriptRoles.filter((r) => { return r.edition == selectedScriptShortName});
 	return scriptRoles;
 }
 
@@ -357,7 +358,7 @@ function createRolesWindow()
 	// - mark as good/evil
 	let alignmentLi = document.createElement('li');
 	let alignmentLabel = document.createElement('label');
-	alignmentLabel.innerHTML = 'Alignment: ';
+	alignmentLabel.innerHTML = 'Align: ';
 	alignmentLi.appendChild(alignmentLabel);
 	let alignmentSelect = document.createElement('select');
 	alignmentSelect.id = "alignmentSelect";
@@ -383,6 +384,32 @@ function createRolesWindow()
 	addRoleWindowEl.appendChild(rolesListHeader);
 
 	let addRoleList = document.createElement('ul');
+	//Split into teams (tf, os, )
+	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveller", "fabled", "loric" ];
+	teams.forEach((team) => {
+		let teamHeaderLi = document.createElement('li');
+		teamHeaderLi.innerHTML = toTitleCase(team);
+		addRoleList.appendChild(teamHeaderLi);
+		//Get roles for team
+		let teamRoles = scriptRoles.filter((r) => {return r.team == team});
+		teamRoles.forEach((r) => {
+			let roleLi = document.createElement('li');
+		//checkbox
+		let roleCheck = document.createElement('input');
+		roleCheck.className = "roleCheck";
+		roleCheck.type = "checkbox";
+		roleCheck.dataset.role = r.name;
+		roleCheck.onchange = () => addRole(roleCheck);
+		
+		roleLi.appendChild(roleCheck);
+		let roleName = document.createElement('span');
+		roleName.innerHTML = r.name;
+		roleLi.appendChild(roleName);
+		addRoleList.appendChild(roleLi);
+		});
+	});
+	
+	/*
 	for (let i = 0; i < scriptRoles.length; i++)
 	{
 		let roleLi = document.createElement('li');
@@ -392,16 +419,18 @@ function createRolesWindow()
 		roleCheck.type = "checkbox";
 		//roleCheck.setAttribute('data', "playerId: '" + i + "', role: '" + scriptRoles[i] + "'");
 		//roleCheck.dataset.player = i;
-		roleCheck.dataset.role = scriptRoles[i];
+		roleCheck.dataset.role = scriptRoles[i].name;
 		roleCheck.onchange = () => addRole(roleCheck);
 		
 		roleLi.appendChild(roleCheck);
 		let roleName = document.createElement('span');
-		roleName.innerHTML = scriptRoles[i];
+		roleName.innerHTML = scriptRoles[i].name;
 		roleLi.appendChild(roleName);
 		addRoleList.appendChild(roleLi);
 		//console.log('add role ' + scriptRoles[i]);
 	}
+	*/
+	
 	addRoleList.style.maxWidth = '100%';
 	addRoleList.style.maxHeight = '40%';
 	addRoleList.style.height = '40%';
@@ -814,4 +843,14 @@ class NoteManager
 		//Load from local storage
 		
 	}
+}
+
+// Source - https://stackoverflow.com/a
+// Posted by Greg Dean, modified by community. See post 'Timeline' for change history
+// Retrieved 2025-11-23, License - CC BY-SA 4.0
+function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+  );
 }
