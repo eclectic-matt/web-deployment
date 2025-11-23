@@ -385,7 +385,7 @@ function createRolesWindow()
 
 	let addRoleList = document.createElement('ul');
 	//Split into teams (tf, os, )
-	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveller", "fabled", "loric" ];
+	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveler", "fabled", "loric" ];
 	teams.forEach((team) => {
 		
 		//Get roles for team
