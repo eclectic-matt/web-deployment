@@ -400,6 +400,7 @@ function createRolesWindow()
 		}
 		let teamHeaderLi = document.createElement('li');
 		teamHeaderLi.innerHTML = '<b>' + toTitleCase(team) + '</b>';
+		teamHeaderLi.style.fontSize = '1.5rem';
 		teamHeaderLi.style.listStyleType = 'none';
 		
 		
