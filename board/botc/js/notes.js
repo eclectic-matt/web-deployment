@@ -387,11 +387,16 @@ function createRolesWindow()
 	//Split into teams (tf, os, )
 	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveller", "fabled", "loric" ];
 	teams.forEach((team) => {
-		let teamHeaderLi = document.createElement('li');
-		teamHeaderLi.innerHTML = toTitleCase(team);
-		addRoleList.appendChild(teamHeaderLi);
-		//Get roles for team
+		
+				//Get roles for team
 		let teamRoles = scriptRoles.filter((r) => {return r.team == team});
+		
+		if(teamRoles.length == 0) return;
+		
+		let teamHeaderLi = document.createElement('li');
+		teamHeaderLi.innerHTML = '<b>' + toTitleCase(team) + '</b>';
+		addRoleList.appendChild(teamHeaderLi);
+
 		teamRoles.forEach((r) => {
 			let roleLi = document.createElement('li');
 		//checkbox
