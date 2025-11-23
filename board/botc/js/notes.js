@@ -388,14 +388,20 @@ function createRolesWindow()
 	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveller", "fabled", "loric" ];
 	teams.forEach((team) => {
 		
-				//Get roles for team
+		//Get roles for team
 		let teamRoles = scriptRoles.filter((r) => {return r.team == team});
 		
 		if(teamRoles.length == 0) return;
 		
+		//If *not* the first team
+		if(teams.indexOf(team) > 0){
+			let br = document.createElement('br');
+			addRoleList.appendChild(br);
+		}
 		let teamHeaderLi = document.createElement('li');
 		teamHeaderLi.innerHTML = '<b>' + toTitleCase(team) + '</b>';
 		teamHeaderLi.style.listStyleType = 'none';
+		
 		
 		addRoleList.appendChild(teamHeaderLi);
 
