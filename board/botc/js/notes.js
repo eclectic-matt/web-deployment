@@ -395,32 +395,40 @@ function createRolesWindow()
 		
 		//If *not* the first team
 		if(teams.indexOf(team) > 0){
-			let br = document.createElement('br');
-			addRoleList.appendChild(br);
+			//let br = document.createElement('br');
+			//addRoleList.appendChild(br);
 		}
+
+		let teamList = document.createElement('ul');
+
 		let teamHeaderLi = document.createElement('li');
 		teamHeaderLi.innerHTML = '<b>' + toTitleCase(team) + '</b>';
 		teamHeaderLi.style.fontSize = '1.35rem';
 		teamHeaderLi.style.listStyleType = 'none';
 		
 		
-		addRoleList.appendChild(teamHeaderLi);
+		//addRoleList.appendChild(teamHeaderLi);
+		teamList.appendChild(teamHeaderLi);
 
 		teamRoles.forEach((r) => {
 			let roleLi = document.createElement('li');
-		//checkbox
-		let roleCheck = document.createElement('input');
-		roleCheck.className = "roleCheck";
-		roleCheck.type = "checkbox";
-		roleCheck.dataset.role = r.name;
-		roleCheck.onchange = () => addRole(roleCheck);
-		
-		roleLi.appendChild(roleCheck);
-		let roleName = document.createElement('span');
-		roleName.innerHTML = r.name;
-		roleLi.appendChild(roleName);
-		addRoleList.appendChild(roleLi);
+			//checkbox
+			let roleCheck = document.createElement('input');
+			roleCheck.className = "roleCheck";
+			roleCheck.type = "checkbox";
+			roleCheck.dataset.role = r.name;
+			roleCheck.onchange = () => addRole(roleCheck);
+			
+			roleLi.appendChild(roleCheck);
+			let roleName = document.createElement('span');
+			roleName.innerHTML = r.name;
+			roleLi.appendChild(roleName);
+			//addRoleList.appendChild(roleLi);
+			teamList.appendChild(roleLi);
 		});
+
+		//Add the list of roles to the main list
+		addRoleList.appendChild(teamList);
 	});
 	
 	/*
