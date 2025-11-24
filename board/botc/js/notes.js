@@ -799,6 +799,15 @@ function solve()
 	
 }
 
+function showSetupWindow(){
+	document.getElementById('setupWindow').style.display = 'block';
+}
+function hideSetupWindow(){
+	document.getElementById('setupWindow').style.display = 'none';
+}
+
+
+
 class NoteManager
 {
 	constructor()
