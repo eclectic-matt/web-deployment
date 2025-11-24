@@ -791,6 +791,14 @@ function updateUi()
 	}
 }
 
+function solve()
+{
+	let worlds = [];
+	//Check role counts match
+	//Work back from the default world counts 
+	
+}
+
 class NoteManager
 {
 	constructor()
