@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>BOTC Notes</title>
+	<link rel="stylesheet" href="./style/notes.css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+	<script defer src="./js/notes.js"></script>
+</head>
+
+<body>
+	<nav id="menu" class="w3-bar w3-border w3-green">
+		<div class="w3-flex" style="justify-content:space-around">
+		<div style="max-width: 50%">
+	    <label for="playerCountInput">Player count: <span id="playerCountSpan">10</span> </label>
+	    <input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
+	    </div>
+	    <div style="max-width: 50%">
+	    <label for="scriptInput">Script: </label>
+	    <select id="scriptInput" onchange="setScript(this)">
+	    	<option value="tb">Trouble Brewing</option>
+	    	<option value="bmr">Bad Moon Rising</option>
+	    	<option value="snv">Sects and Violets</option>
+	    	<option value="all">Custom</option>
+	    </select>
+	    </div>
+	    </div>
+	    <div class="w3-flex" style="justify-content:space-around">
+	    <button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
+	    <button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
+	    <button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
+	    </div>
+	</nav>
+	<div id="central"></div>
+	<div id="solverOutput"></div>
+	<div id="main">
+		
+	    <!-- Default to 5 players -->
+	    <div class="player" id="player1">
+	        <div class="role blank" onclick="changeRole(this)">
+	            <i class="roleAdd">+</i>
+	        </div>
+	        <input type="text" value="Name" />
+	    </div>
+	</div>
+	<div id="addRoleWindow">
+		<!-- Fill based on script -->
+	</div>
+	<div id="setupWindow">
+		<h3>Script Setup</h3>
+		<label for="scriptInput">Script: </label>
+	    <select id="scriptInput" onchange="setScript(this)">
+	    	<option value="tb">Trouble Brewing</option>
+	    	<option value="bmr">Bad Moon Rising</option>
+	    	<option value="snv">Sects and Violets</option>
+	    	<option value="all">Custom</option>
+	    </select>
+	    <div id="customSetup">
+	    	<div id="availableRoles">
+	    		
+	    	</div>
+	    	<div id="selectedRolesDiv">
+	    		
+	    	</div>
+	    </div>
+	    <button>Save Script</button>
+	</div>
+	<!--div id="debugWindow">
+	    <h3>Debug</h3>
+	</div-->
+</body>
+
+</html>
