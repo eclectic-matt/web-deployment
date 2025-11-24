@@ -18,13 +18,7 @@
 	    <input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
 	    </div>
 	    <div style="max-width: 50%">
-	    <label for="scriptInput">Script: </label>
-	    <select id="scriptInput" onchange="setScript(this)">
-	    	<option value="tb">Trouble Brewing</option>
-	    	<option value="bmr">Bad Moon Rising</option>
-	    	<option value="snv">Sects and Violets</option>
-	    	<option value="all">Custom</option>
-	    </select>
+	    	<button onclick="showSetupWindow()">Setup</button>
 	    </div>
 	    </div>
 	    <div class="w3-flex" style="justify-content:space-around">
@@ -66,6 +60,9 @@
 	    	</div>
 	    </div>
 	    <button>Save Script</button>
+	</div>
+	<div id="dayNights">
+		
 	</div>
 	<!--div id="debugWindow">
 	    <h3>Debug</h3>
