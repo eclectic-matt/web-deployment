@@ -160,6 +160,10 @@ ul.statusList label {
 	padding-left: 20px;
 }
 
+ul.statusList label::before {
+	content: "\A";
+}
+
 ul.statusList input[type=checkbox] {
 	-ms-transform: scale(2); /* IE */
 	-moz-transform: scale(2); /* FF */
