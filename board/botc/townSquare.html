@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	var cnv, playerCount;
+	const init = () => {
+		//RESIZE CANVAS TO FIT SCREEN
+		resizeCanvas();
+		if(!playerCount){
+			//DEFAULT TO 7
+			playerCount = 7;
+		}
+		drawTownSquare(playerCount);
+	}
+	const resizeCanvas = () => {
+		if(!cnv){
+			cnv = document.getElementById('canvas');
+		}
+		cnv.width = window.innerWidth;
+		cnv.height = window.innerWidth;
+	}
+	const drawTownSquare = (playerCount) => {
+		if(!cnv){
+			cnv = document.getElementById('canvas');
+		}
+		//GET WIDTH / HEIGHT
+		let vw = cnv.width;
+		let vh = cnv.height;
+		//GET 2d CONTEXT
+		let ctx = cnv.getContext('2d');
+		ctx.strokeStyle = '#000';
+		ctx.fillStyle = '#b8b414';
+		//DRAWING PLAYERS IN THE LARGEST POSSIBLE CIRCLES IN A GRID, START AT 12 o'clock
+		for(let i = 0; i < playerCount; i++){
+			ctx.arc()
+		}
+	}
+</script>
+</head>
+<body onload="init()">
+	<canvas id="canvas">
+	</canvas>
+</body>
+</html>
