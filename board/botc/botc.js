@@ -151,6 +151,19 @@ const editions = [
 		roles: {
 			fabled: []
 		}
+	},
+	{
+		id: 7,
+		name: "Loric",
+		code: "loric",
+		color: "green",
+		description: "Loric characters are for the Storyteller. They each alter the conditions of the game somewhat and are usually included at the beginning of the game. The purpose of a Loric character is to add some spice or complication to the game rules for players who are experienced with the normal game rules and scripts",
+		difficulty: "No Difficulty Criteria",
+		evilDescription: "No notes for Evil players",
+		goodDescription: "No notes for Good players",
+		roles: {
+			loric: []
+		}
 	}
 ];
 
@@ -184,6 +197,9 @@ function load(roles){
 			assign(store, role);
 		}else if(role.team === "fabled"){
 			store = editions[5].roles;
+			assign(store, role);
+		}else if(role.team === "loric"){
+			store = editions[6].roles;
 			assign(store, role);
 		}
 	}
@@ -308,7 +324,7 @@ function load(roles){
 
 			let obj = editions[edition].roles[role];
 			//console.log('type', editions[edition].roles[role]);
-			teamsToFill = ['townsfolk','outsider','minion','demon','traveler','fabled','decoy'];
+			teamsToFill = ['townsfolk','outsider','minion','demon','traveler','fabled','decoy','loric'];
 			Object.entries(obj).forEach(entry => {
 
 				const [key, value] = entry;
@@ -389,7 +405,7 @@ function load(roles){
 		let li = document.createElement('li');
 		switch(obj.team){
 			case 'townsfolk':
-				li.style.color = 'green';
+				li.style.color = 'darkblue';
 			break;
 			case 'outsider':
 				li.style.color = 'blue';
@@ -405,6 +421,9 @@ function load(roles){
 			break;
 			case 'fabled':
 				li.style.color = 'grey';
+			break;
+			case 'loric':
+				li.style.color = 'green';
 			break;
 			default:
 				li.style.color = 'purple';
