@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="./style/notes.css" />
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
 	<script defer src="./js/notes.js"></script>
+	<script defer src="./js/solver.js"></script>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
 		<!-- Fill based on script -->
 	</div>
 	<div id="setupWindow">
-		<h3>Script Setup</h3>
+		<h3>Script Setup <button onclick="hideSetupWindow()">X</button></h3>
 		<label for="scriptInput">Script: </label>
 	    <select id="scriptInput" onchange="setScript(this)">
 	    	<option value="tb">Trouble Brewing</option>

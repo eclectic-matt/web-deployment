@@ -121,18 +121,50 @@
     left: 0;
 }
 
-ul {
-  columns: 2;
-  -webkit-columns: 2;
-  -moz-columns: 2;
-  max-height: 40%;
-  overflow-y: scroll;
+ul#addRoleList {
+	columns: 4;
+	-webkit-columns: 1;
+	-moz-columns: 1;
+	column-width: 1rem;
+	max-height: 80%;
+	padding: 0;
+	margin: 0;
+	overflow: auto;
+	scrollbar-color: white green;
+	scrollbar-width: thin;
+}
+
+ul#addRoleList ul {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 20%;
+	float: left;
+	overflow: auto;
+	scrollbar-color: yellow green;
+	scrollbar-width: thin;
+
 }
 
 ul.statusList {
 	columns: 3;
 	-webkit-columns: 3;
 	-moz-columns: 3;
+	list-style-type: none;
+	font-size: 1.5rem;
+}
+
+ul.statusList label {
+	padding-left: 20px;
+}
+
+ul.statusList input[type=checkbox] {
+	-ms-transform: scale(2); /* IE */
+	-moz-transform: scale(2); /* FF */
+	-webkit-transform: scale(2); /* Safari and Chrome */
+	-o-transform: scale(2); /* Opera */
+	transform: scale(2);
+	padding: 10px;
 }
 
 .hidden {

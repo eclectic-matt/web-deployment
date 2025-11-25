@@ -42,11 +42,36 @@ class Storyteller
 			minion: 2,
 			demon: 1
 		},
-		//11 - 7 1 2 1
-		//12 - 7 2 2 1
-		//13 - 9 0 3 1
-		//14 - 9 1 3 1
-		//15 - 9 2 3 1
+		{ //11
+			townsfolk: 7,
+			outsider: 1,
+			minion: 2,
+			demon: 1
+		},
+		{ //12
+			townsfolk: 7,
+			outsider: 2,
+			minion: 2,
+			demon: 1
+		},
+		{ //13
+			townsfolk: 9,
+			outsider: 0,
+			minion: 3,
+			demon: 1
+		},
+		{ //14
+			townsfolk: 9,
+			outsider: 1,
+			minion: 3,
+			demon: 1
+		},
+		{ //15
+			townsfolk: 9,
+			outsider: 2,
+			minion: 3,
+			demon: 1
+		}
 	]
 
 	constructor(script, playerCount, names = [])

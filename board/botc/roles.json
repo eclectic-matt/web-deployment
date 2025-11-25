@@ -2044,6 +2044,58 @@
 		"ability": "On night X, all Townsfolk are poisoned until dusk. [X Outsiders]"
 	},
 	{
+		"id": "wraith",
+		"name": "Wraith",
+		"edition": "",
+		"team": "minion",
+		"firstNight": 1,
+		"firstNightReminder": "",
+		"otherNight": 0,
+		"otherNightReminder": "",
+		"reminders": [],
+		"setup": false,
+		"ability": "You may choose to open your eyes at night. You wake when other evil players do."
+	},
+	{
+		"id": "hermit",
+		"name": "Hermit",
+		"edition": "",
+		"team": "outsider",
+		"firstNight": 10,
+		"firstNightReminder": "",
+		"otherNight": 0,
+		"otherNightReminder": "",
+		"reminders": ["All other outsiders!"],
+		"setup": true,
+		"ability": "You have all Outsider abilities. [-0 or -1 Outsider]"
+	},
+	{
+		"id": "princess",
+		"name": "Princess",
+		"edition": "",
+		"team": "Townsfolk",
+		"firstNight": 0,
+		"firstNightReminder": "",
+		"otherNight": 5,
+		"otherNightReminder": "",
+		"reminders": ["Princess Executed"],
+		"setup": false,
+		"ability": "On your 1st day, if you nominated & executed a player, the Demon doesn’t kill tonight."
+	},
+	{
+		"id": "deusexfiasco",
+		"name": "Deus ex Fiasco",
+		"edition": "",
+		"team": "fabled",
+		"firstNight": 0,
+		"firstNightReminder": "",
+		"otherNight": 0,
+		"otherNightReminder": "",
+		"reminders": ["Fiasco"],
+		"setup": false,
+		"ability": "At least once per game, the Storyteller will make a mistake, correct it, and publicly admit to it."
+	},
+	{
 		"id": "doomsayer",
 		"name": "Doomsayer",
 		"edition": "",
@@ -2292,4 +2344,4 @@
 		"setup": false,
 		"ability": "One or more players each have a goal. When achieved, that player learns a piece of true info"
 	}
-	]
+]
