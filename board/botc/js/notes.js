@@ -386,6 +386,12 @@ function createRolesWindow()
 	let addRoleList = document.createElement('ul');
 	//Split into teams (tf, os, )
 	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveler"];//, "fabled", "loric" ];
+	//Generate array of roles
+	let teamRoles = teams.map((t) => {return scriptRoles.filter((r) => {return r.team == team}});
+	let roleCounts = teamRoles.map((t) => {return t.length});
+	let maxRoleCount = Math.max(roleCounts);
+	
+	
 	teams.forEach((team) => {
 		
 		//Get roles for team
