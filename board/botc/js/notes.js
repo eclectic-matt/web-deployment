@@ -410,12 +410,12 @@ function createRolesWindow()
 		for(let c = 0; c < teams.length; c++)
 		{
 			let td = document.createElement('td');
+			
 			let roleCheck = document.createElement('input');
 			roleCheck.className = "roleCheck";
 			roleCheck.type = "checkbox";
 			roleCheck.dataset.role = teamRoles[c][r];
 			roleCheck.onchange = () => addRole(roleCheck);
-			
 			td.appendChild(roleCheck);
 			
 			let roleSpan = document.createElement('span');
