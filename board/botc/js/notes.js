@@ -373,7 +373,8 @@ function createRolesWindow()
 	voteStatusCheck.onchange = () => updateVoteStatus(voteStatusCheck);
 	voteStatusLi.appendChild(voteStatusCheck);
 	let voteStatusLabel = document.createElement('label');
-	voteStatusLabel.innerHTML = 'Vote Used?';
+	voteStatusLabel.innerHTML = 'Dead-voted?';
+	voteStatusLabel.style.fontSize = '0.6rem';
 	voteStatusLi.appendChild(voteStatusLabel);
 	playerStatusList.appendChild(voteStatusLi);
 	// - mark as good/evil
