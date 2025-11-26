@@ -434,8 +434,8 @@ function createRolesWindow()
 			let td = document.createElement('td');
 			
 			let roleCheck = document.createElement('input');
-			roleCheck.className = "roleCheck";
-			roleCheck.type = "checkbox";
+			roleCheck.className = 'roleCheck';
+			roleCheck.type = 'checkbox';
 			roleCheck.dataset.role = teamRoles[c][r].name;
 			roleCheck.onchange = () => addRole(roleCheck);
 			td.appendChild(roleCheck);
