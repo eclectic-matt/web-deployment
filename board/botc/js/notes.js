@@ -390,6 +390,8 @@ function createRolesWindow()
 	let teamRoles = teams.map((t) => {return scriptRoles.filter((r) => {return r.team == team}});
 	let roleCounts = teamRoles.map((t) => {return t.length});
 	let maxRoleCount = Math.max(roleCounts);
+	alert('Roles: ' + JSON.stringify(teamRoles));
+	alert('Roles Counts: ' + JSON.stringify(roleCounts));
 	
 	
 	teams.forEach((team) => {
