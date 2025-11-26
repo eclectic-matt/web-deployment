@@ -127,6 +127,7 @@ ul#addRoleList {
 	-moz-columns: 1;
 	column-width: 1rem;
 	max-height: 80%;
+	width: 100vw;
 	max-width: 200vw;
 	width: 10rem;
 	padding: 0;
@@ -140,7 +141,8 @@ ul#addRoleList ul {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	width: 20%;
+	width: 20vw;
+	max-width: 40vw;
 	float: left;
 	overflow: auto;
 	scrollbar-color: yellow green;
