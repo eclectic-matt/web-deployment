@@ -79,6 +79,7 @@ async function getScriptRoles(selectedScriptShortName)
 {
 	scriptRoles = await fetch('./roles.json');
 	scriptRoles = await scriptRoles.json();
+	
 	//Return all roles
 	if(selectedScriptShortName == "all")
 	{
