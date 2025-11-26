@@ -357,9 +357,9 @@ function createRolesWindow()
 	playerStatusList.appendChild(voteStatusLi);
 	// - mark as good/evil
 	let alignmentLi = document.createElement('li');
-	let alignmentLabel = document.createElement('label');
-	alignmentLabel.innerHTML = 'Align: ';
-	alignmentLi.appendChild(alignmentLabel);
+	//let alignmentLabel = document.createElement('label');
+	//alignmentLabel.innerHTML = 'Align: ';
+	//alignmentLi.appendChild(alignmentLabel);
 	let alignmentSelect = document.createElement('select');
 	alignmentSelect.id = "alignmentSelect";
 	let alignmentSelectOptionGood = document.createElement('option');
