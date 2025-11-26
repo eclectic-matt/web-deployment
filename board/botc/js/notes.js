@@ -395,7 +395,40 @@ function createRolesWindow()
 	alert('Roles: ' + JSON.stringify(teamRoles));
 	alert('Roles Counts: ' + JSON.stringify(roleCounts) + ', max: ' + maxRoleCount);
 	
+	let table = document.createElement('table');
+	let tr = document.createElement('tr');
+	teams.forEach((t) => {
+		let th = document.createElement('th');
+		th.innerHTML = t;
+		tr.appendChild(th);
+	});
+	table.appendChild(tr);
 	
+	for(let r = 0; r < maxRoleCount; r++)
+	{
+		tr = document.createElement('tr');
+		for(let c = 0; c < teams.length; c++)
+		{
+			let td = document.createElement('td');
+			let roleCheck = document.createElement('input');
+			roleCheck.className = "roleCheck";
+			roleCheck.type = "checkbox";
+			roleCheck.dataset.role = teamRoles[c][r];
+			roleCheck.onchange = () => addRole(roleCheck);
+			
+			td.appendChild(roleCheck);
+			
+			let roleSpan = document.createElement('span');
+			roleSpan.innerHTML = teamRoles[c][r];
+			td.appendChild(roleSpan);
+			tr.appendChild(td);
+		}
+		table.appendChild(tr);
+	}
+	
+	addRoleWindowEl.appendChild(table);
+	
+	/*
 	teams.forEach((team) => {
 		
 		//Get roles for team
@@ -440,6 +473,9 @@ function createRolesWindow()
 		//Add the list of roles to the main list
 		addRoleList.appendChild(teamList);
 	});
+	*/
+	
+	
 	
 	/*
 	for (let i = 0; i < scriptRoles.length; i++)
