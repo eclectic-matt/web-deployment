@@ -388,12 +388,12 @@ function createRolesWindow()
 	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveler"];//, "fabled", "loric" ];
 	
 	//Generate array of roles
-	let teamRoles = teams.map((t) => {return scriptRoles.filter((r) => {return r.team == team}) });
+	let teamRoles = teams.map((t) => {return scriptRoles.filter((r) => {return r.team == t}) });
 	let roleCounts = teamRoles.map((t) => {return t.length});
-	let maxRoleCount = Math.max(roleCounts);
+	let maxRoleCount = Math.max(...roleCounts);
 	
-	alert('Roles: ' + JSON.stringify(teamRoles));
-	alert('Roles Counts: ' + JSON.stringify(roleCounts) + ', max: ' + maxRoleCount);
+	//alert('Roles: ' + JSON.stringify(teamRoles));
+	//alert('Roles Counts: ' + JSON.stringify(roleCounts) + ', max: ' + maxRoleCount);
 	
 	let table = document.createElement('table');
 	let tr = document.createElement('tr');
