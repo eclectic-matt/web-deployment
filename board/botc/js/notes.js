@@ -183,8 +183,14 @@ function loadFromLocalStorage()
 
 function hasSavedData()
 {
-	//Bool test
-	return localStorage.getItem("players");
+	let boolData = false;
+	try {
+		//Bool test
+		boolData = localStorage.getItem("players");
+	}catch(ex){
+		console.log(ex);
+	}
+	return boolData;
 }
 
 
