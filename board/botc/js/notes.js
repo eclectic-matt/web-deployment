@@ -58,6 +58,14 @@ var roleCounts = [
     '9t / 2o / 3m / 1d (5trv)' //20
 ];
 
+
+
+
+
+
+
+
+
 //start
 init();
 
@@ -860,8 +868,17 @@ class NoteManager
 {
 	constructor()
 	{
+		//Check for saved state
+		if(this.hasData()){
+			this.loadState();
+		}else{
+			this.setDefaultState();
+		}
+	}
+	
+	setDefaultState()
+	{
 		//Settings
-		this.playerCount = 5;
 		this.script = "tb";
 		this.scriptRoles = [];
 		this.playersObj = {
@@ -964,6 +981,10 @@ class NoteManager
 	{
 		//Load from local storage
 		
+	}
+	hasData(){
+		//Bool test
+		return localStorage.getItem("players");
 	}
 }
 
