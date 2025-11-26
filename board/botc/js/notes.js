@@ -87,7 +87,7 @@ async function getScriptRoles(selectedScriptShortName)
 {
 	//scriptRoles = await fetch('./roles.json');
 	//scriptRoles = await scriptRoles.json();
-	scriptRoles = [{team:'townsfolk','chef'}];
+	scriptRoles = [{team:'townsfolk',name:'chef'}];
 	
 	//Return all roles
 	if(selectedScriptShortName == "all")
@@ -165,12 +165,20 @@ function setup()
 
 function saveToLocalStorage()
 {
-	localStorage.setItem("players", JSON.stringify(playersObj));
+	try{
+		localStorage.setItem("players", JSON.stringify(playersObj));
+	}catch(ex){
+		console.log(ex);
+	}
 }
 
 function loadFromLocalStorage()
 {
-	playersObj = JSON.parse(localStorage.getItem("players"));
+	try{
+		playersObj = JSON.parse(localStorage.getItem("players"));
+	}catch(ex){
+		console.log(ex);
+	}
 }
 
 function hasSavedData()
