@@ -416,12 +416,12 @@ function createRolesWindow()
 			let roleCheck = document.createElement('input');
 			roleCheck.className = "roleCheck";
 			roleCheck.type = "checkbox";
-			roleCheck.dataset.role = teamRoles[c][r];
+			roleCheck.dataset.role = teamRoles[c][r].name;
 			roleCheck.onchange = () => addRole(roleCheck);
 			td.appendChild(roleCheck);
 			
 			let roleSpan = document.createElement('span');
-			roleSpan.innerHTML = teamRoles[c][r];
+			roleSpan.innerHTML = teamRoles[c][r].name;
 			td.appendChild(roleSpan);
 			tr.appendChild(td);
 		}
