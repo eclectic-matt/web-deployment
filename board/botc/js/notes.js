@@ -85,8 +85,9 @@ async function init()
 
 async function getScriptRoles(selectedScriptShortName)
 {
-	scriptRoles = await fetch('./roles.json');
-	scriptRoles = await scriptRoles.json();
+	//scriptRoles = await fetch('./roles.json');
+	//scriptRoles = await scriptRoles.json();
+	scriptRoles = [{team:'townsfolk','chef'}];
 	
 	//Return all roles
 	if(selectedScriptShortName == "all")
@@ -960,11 +961,7 @@ class NoteManager
 			}
 		];
 	}
-	//First time initialization
-	init()
-	{
-		
-	}
+	
 	//Setup elements (by playerCount)
 	setup(pCount)
 	{
