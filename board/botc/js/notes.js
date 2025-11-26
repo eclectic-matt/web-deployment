@@ -92,13 +92,11 @@ async function getScriptRoles(selectedScriptShortName)
 	//Return all roles
 	if(selectedScriptShortName == "all")
 	{
-		//scriptRoles = scriptRoles.map((r) => {return r.name});
-		//scriptRoles.sort();
 		return scriptRoles;
-	}
-	//Filter to edition
-	//scriptRoles = scriptRoles.filter((r) => {return r.edition == selectedScriptShortName}).map((r) => {return r.name});
-	scriptRoles = scriptRoles.filter((r) => { return r.edition == selectedScriptShortName});
+	}else{
+		//Filter to edition
+		scriptRoles = scriptRoles.filter((r) => { return r.edition == selectedScriptShortName});
+		}
 	return scriptRoles;
 }
 
