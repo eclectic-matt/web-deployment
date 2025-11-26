@@ -90,13 +90,12 @@ async function getScriptRoles(selectedScriptShortName)
 	//scriptRoles = [{team:'townsfolk',name:'chef'}];
 	
 	//Return all roles
-	if(selectedScriptShortName == "all")
+	if(selectedScriptShortName != "all")
 	{
-		return scriptRoles;
-	}else{
 		//Filter to edition
 		scriptRoles = scriptRoles.filter((r) => { return r.edition == selectedScriptShortName});
-		}
+	}
+	
 	return scriptRoles;
 }
 
