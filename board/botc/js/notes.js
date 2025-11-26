@@ -385,6 +385,7 @@ function createRolesWindow()
 	addRoleWindowEl.appendChild(rolesListHeader);
 
 	let addRoleList = document.createElement('ul');
+	
 	//Split into teams (tf, os, )
 	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveler"];//, "fabled", "loric" ];
 	
