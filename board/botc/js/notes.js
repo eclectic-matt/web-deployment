@@ -672,12 +672,12 @@ function unhidePlayerRoles()
 		}
 		if(playersObj.players[playerId].alignment == 'evil'){
 			btn.parentElement.classList.add('evil');
-			btn.parentElement.classList.remov3('good');
+			btn.parentElement.classList.remove('good');
 			//btn.parentElement.style.borderColor = 'red';
 		}else{
 			//btn.parentElement.style.borderColor = 'green';
 			btn.parentElement.classList.add('good');
-			btn.parentElement.classList.remov3('evil');
+			btn.parentElement.classList.remove('evil');
 		}
 	});
 }
@@ -691,7 +691,7 @@ function hidePlayerRoles()
 		btn.innerHTML = "<em>HIDDEN</em>";
 		//btn.parentElement.style.borderColor = 'white';
 		btn.parentElement.classList.remove('evil');
-		btn.parentElement.classList.remov3('good');
+		btn.parentElement.classList.remove('good');
 	});
 }
 
