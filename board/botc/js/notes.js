@@ -85,9 +85,9 @@ async function init()
 
 async function getScriptRoles(selectedScriptShortName)
 {
-	//scriptRoles = await fetch('./roles.json');
-	//scriptRoles = await scriptRoles.json();
-	scriptRoles = [{team:'townsfolk',name:'chef'}];
+	scriptRoles = await fetch('./roles.json');
+	scriptRoles = await scriptRoles.json();
+	//scriptRoles = [{team:'townsfolk',name:'chef'}];
 	
 	//Return all roles
 	if(selectedScriptShortName == "all")
