@@ -1,4 +1,4 @@
-//update 2025-11-26 22:03:00
+//update 2025-11-27 19:40:00
 //debug("Notes initialized");
 
 //GLOBAL VARIABLES (urgh)
@@ -408,15 +408,27 @@ function createRolesWindow()
 	let addRoleList = document.createElement('ul');
 	
 	//Split into teams (tf, os, )
-	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveler"];//, "fabled", "loric" ];
+	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveler" ];//, "fabled", "loric" ];
 	
 	//Generate array of roles
-	let teamRoles = teams.map((t) => {return scriptRoles.filter((r) => {return r.team == t}) });
-	let roleCounts = teamRoles.map((t) => {return t.length});
-	let maxRoleCount = Math.max(...roleCounts);
+	let teamRoles = teams.map(
+		(t) => { 
+			return scriptRoles.filter(
+				(r) => { 
+					return r.team == t;
+				}
+			);
+		}
+	);
+	let teamCounts = teamRoles.map(
+		(t) => {
+			return t.length;
+		}
+	);
+	let maxRoleCount = Math.max(...teamCounts);
 	
-	alert('Roles: ' + JSON.stringify(teamRoles));
-	alert('Roles Counts: ' + JSON.stringify(roleCounts) + ', max: ' + maxRoleCount);
+	//alert('Roles: ' + JSON.stringify(teamRoles));
+	//alert('Roles Counts: ' + JSON.stringify(roleCounts) + ', max: ' + maxRoleCount);
 	
 	let table = document.createElement('table');
 	let tr = document.createElement('tr');
