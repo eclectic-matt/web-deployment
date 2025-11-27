@@ -415,8 +415,8 @@ function createRolesWindow()
 	let roleCounts = teamRoles.map((t) => {return t.length});
 	let maxRoleCount = Math.max(...roleCounts);
 	
-	//alert('Roles: ' + JSON.stringify(teamRoles));
-	//alert('Roles Counts: ' + JSON.stringify(roleCounts) + ', max: ' + maxRoleCount);
+	alert('Roles: ' + JSON.stringify(teamRoles));
+	alert('Roles Counts: ' + JSON.stringify(roleCounts) + ', max: ' + maxRoleCount);
 	
 	let table = document.createElement('table');
 	let tr = document.createElement('tr');
