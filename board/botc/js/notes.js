@@ -446,6 +446,7 @@ function createRolesWindow()
 		{
 			let td = document.createElement('td');
 			
+			if(teamRoles[c].length > r){
 			let roleCheck = document.createElement('input');
 			roleCheck.className = 'roleCheck';
 			roleCheck.type = 'checkbox';
@@ -456,6 +457,7 @@ function createRolesWindow()
 			let roleSpan = document.createElement('span');
 			roleSpan.innerHTML = teamRoles[c][r].name;
 			td.appendChild(roleSpan);
+			}
 			tr.appendChild(td);
 		}
 		table.appendChild(tr);
@@ -863,7 +865,7 @@ function updateUi()
 	createRolesWindow();
 	
 	//Update interface
-	updateMenus();
+	//updateMenus();
 	
 	//Hide roles if selected
 	if(!showPlayerRoles)
