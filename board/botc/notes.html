@@ -13,20 +13,15 @@
 <body>
 	<nav id="menu" class="w3-bar w3-border w3-green">
 		<div class="w3-flex" style="justify-content:space-around">
-		<div style="max-width: 50%">
-	    <label for="playerCountInput">Player count: <span id="playerCountSpan">10</span> </label>
-	    <input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
+			<div style="max-width: 50%">
+				<label for="playerCountInput">Player count: <span id="playerCountSpan">10</span> </label>
+				<input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
+			</div>
+			<div style="max-width: 50%">
+				<button onclick="showSetupWindow()">Setup</button>
+			</div>
 	    </div>
-	    <div style="max-width: 50%">
-	    <label for="scriptInput">Script: </label>
-	    <select id="scriptInput" onchange="setScript(this)">
-	    	<option value="tb">Trouble Brewing</option>
-	    	<option value="bmr">Bad Moon Rising</option>
-	    	<option value="snv">Sects and Violets</option>
-	    	<option value="all">Custom</option>
-	    </select>
-	    </div>
-	    </div>
+		<br />
 	    <div class="w3-flex" style="justify-content:space-around">
 	    <button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
 	    <button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
@@ -51,6 +46,27 @@
 	<!--div id="debugWindow">
 	    <h3>Debug</h3>
 	</div-->
+
+	<div id="setupWindow">
+		<h3>Script Setup <button onclick="hideSetupWindow()">X</button></h3>
+		<label for="scriptInput">Script: </label>
+	    <select id="scriptInput" onchange="setScript(this)">
+	    	<option value="tb">Trouble Brewing</option>
+	    	<option value="bmr">Bad Moon Rising</option>
+	    	<option value="snv">Sects and Violets</option>
+	    	<option value="all">Custom</option>
+	    </select>
+		<button onclick="addSelectedRoles()">Add Roles To Script</button>
+	    <div id="customSetup">
+	    	<div id="availableRolesDiv">
+	    		<h2>Available Roles</h2>
+	    	</div>
+	    	<div id="selectedRolesDiv">
+	    		<h2>Selected Roles</h2>
+	    	</div>
+	    </div>
+	    <button onclick="saveCustomScript()">Save Script</button>
+	</div>
 </body>
 
 </html>

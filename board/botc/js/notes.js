@@ -824,11 +824,102 @@ function solve()
 
 function showSetupWindow(){
 	document.getElementById('setupWindow').style.display = 'block';
+	//Fill in custom script roles
+	setCustomScriptSelection();
 }
 function hideSetupWindow(){
 	document.getElementById('setupWindow').style.display = 'none';
 }
 
+async function setCustomScriptSelection()
+{
+	let allRoles = await fetch('./roles.json');
+	allRoles = await allRoles.json();
+	allRoles.sort((a, b) => {return a.name > b.name;});
+
+	let availEl = document.getElementById('availableRolesDiv');
+	//Clear between runs
+	availEl.innerHTML = '<h2>Available Roles</h2>';
+
+	let selectedEl = document.getElementById('selectedRolesDiv');
+	//selectedEl.innerHTML = '<h2>SelectedRoles</h2>';
+
+	allRoles.forEach((r) => {
+		//console.log(r.name);
+		let roleOption = document.createElement('div');
+		roleOption.className = 'customRoleOption';
+		let customRoleCheck = document.createElement('input');
+		customRoleCheck.type = 'checkbox';
+		customRoleCheck.dataset.role = r.name;
+		customRoleCheck.className = 'customRoleCheck';
+		roleOption.appendChild(customRoleCheck);
+		let customRoleSpan = document.createElement('span');
+		customRoleSpan.innerHTML = r.name;
+		roleOption.appendChild(customRoleSpan);
+		availEl.appendChild(roleOption);
+	});
+}
+
+function addSelectedRoles()
+{
+	let selectedEl = document.getElementById('selectedRolesDiv');
+	let roleNames = document.getElementsByClassName('customRoleCheck');
+	//console.log(roleNames);
+	//roleNames.forEach((r) => {
+	for(let i = 0; i < roleNames.length; i++)
+	{
+		let r = roleNames[i];
+		if(r.checked)
+		{
+			//Add this role to selected
+			let roleOption = document.createElement('div');
+			roleOption.className = 'selectedRoleOption';
+			let customRoleCheck = document.createElement('input');
+			customRoleCheck.type = 'checkbox';
+			customRoleCheck.className = 'customRoleCheck';
+			roleOption.appendChild(customRoleCheck);
+			let customRoleSpan = document.createElement('span');
+			customRoleSpan.innerHTML = r.dataset.role;
+			roleOption.appendChild(customRoleSpan);
+			selectedEl.appendChild(roleOption);
+			//Remove role from available
+			let availEls = document.getElementsByClassName('customRoleOption');
+			for(let j = 0; j < availEls.length; j++)
+			{
+				let currentAvail = availEls[j];
+				//console.log('CURRENT AVAIL:',currentAvail);
+				if(currentAvail.children[0].dataset.role == r.dataset.role){
+					document.getElementById('availableRolesDiv').removeChild(currentAvail);
+					//console.log('Removed:', currentAvail.children[0].dataset.role);
+					break;
+				}
+			}
+			//Move index back by one (list has changed due to element removal!)
+			i--;			
+		}
+	}
+}
+
+async function saveCustomScript()
+{
+	//Now apply the selected roles to filter the script
+	let selectedEls = document.getElementsByClassName('selectedRoleOption');
+	let selectedRoleNames = [];
+	if(selectedEls.length > 0)
+	{
+		let allRoles = await fetch('./roles.json');
+		allRoles = await allRoles.json();
+		for(let i = 0; i < selectedEls.length; i++){
+			let selectedEl = selectedEls[i];
+			selectedRoleNames.push(selectedEl.children[1].innerHTML);
+		}
+		console.log('ROLE NAMES:',selectedRoleNames);
+		scriptRoles = allRoles.filter((r) => { return selectedRoleNames.includes(r.name)});
+		console.log('SELECTED SCRIPT ROLES:', scriptRoles);
+		//Recreate the roles window
+		createRolesWindow();
+	}//else, no selected roles - do not overwrite?
+}
 
 
 class NoteManager
