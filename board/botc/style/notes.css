@@ -121,33 +121,41 @@
     left: 0;
 }
 
-ul#addRoleList {
-	columns: 4;
-	-webkit-columns: 1;
-	-moz-columns: 1;
-	column-width: 1rem;
+#addRoleWindow table {
+	width: 90vw;
 	max-height: 80%;
-	width: 200vw;
-	max-width: 300vw;
-	padding: 0;
-	margin: 0;
-	overflow: auto;
-	scrollbar-color: white green;
-	scrollbar-width: thin;
+	border: 1px solid white;
+	border-collapse: collapse;
+	text-align: center;
+}
+#addRoleWindow table td, #addRoleWindow table tr, #addRoleWindow table th {
+	padding: 0.5rem;
+	border: 1px solid white;
+	border-collapse: collapse;
 }
 
-ul#addRoleList ul {
-	padding: 5px 5px 20px 5px;
-	margin: 0;
-	height: 100%;
-	width: 50vw;
-	max-width: 60vw;
-	float: left;
-	overflow: auto;
-	scrollbar-color: yellow green;
-	scrollbar-width: thin;
-
+#statusTable {
+	max-width: 80vw;
+	border: 1px solid white;
+	border-collapse: collapse;
+	text-align: center;
 }
+#statusTable tr {
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+#statusTable tr th {
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+#statusTable tr td {
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+
+
+
+
 
 ul.statusList {
 	columns: 3;

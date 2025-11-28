@@ -346,42 +346,45 @@ function createRolesWindow()
 	rolesHeader.appendChild(closeAddRoleBtn);
 	addRoleWindowEl.appendChild(rolesHeader);
 	
-	//-list status variables
-	let statusHeader = document.createElement('h4');
-	statusHeader.innerHTML = "Player Status";
-	addRoleWindowEl.appendChild(statusHeader);
-	let playerStatusList = document.createElement('ul');
-	playerStatusList.className = 'statusList';
-	// - dead?
-	let deadStatusLi = document.createElement('li');
+	//Dead/VoteUsed/Alignment changes
+	let statusTable = document.createElement('table');
+	statusTable.id = "statusTable";
+	let statusHeadRow = document.createElement('tr');
+	let deadTh = document.createElement('th');
+	deadTh.innerHTML = "Dead?";
+	statusHeadRow.appendChild(deadTh);
+	let voteTh = document.createElement('th');
+	voteTh.innerHTML = "Vote Used?";
+	statusHeadRow.appendChild(voteTh);
+	let alignTh = document.createElement('th');
+	alignTh.innerHTML = "Align";
+	statusHeadRow.appendChild(alignTh);
+	statusTable.appendChild(statusHeadRow);
+
+	//The actual checks row
+	let updateRow = document.createElement('tr');
+	//dead?
+	let deadStatusTd = document.createElement('td');
 	let deadStatusCheck = document.createElement('input');
 	deadStatusCheck.id = "deadStatusCheck";
 	deadStatusCheck.type = 'checkbox';
 	deadStatusCheck.dataset.type = 'dead';
 	deadStatusCheck.onchange = () => updateDeathShroud(deadStatusCheck);
-	deadStatusLi.appendChild(deadStatusCheck);
-	let deadStatusLabel = document.createElement('label');
-	deadStatusLabel.innerHTML = 'Dead?';
-	deadStatusLi.appendChild(deadStatusLabel);
-	playerStatusList.appendChild(deadStatusLi);
-	// - vote used?
-	let voteStatusLi = document.createElement('li');
+	deadStatusTd.appendChild(deadStatusCheck);
+	updateRow.appendChild(deadStatusTd);
+
+	//voteUsed?
+	let voteStatusTd = document.createElement('td');
 	let voteStatusCheck = document.createElement('input');
 	voteStatusCheck.id = "voteStatusCheck";
 	voteStatusCheck.type = 'checkbox';
 	voteStatusCheck.dataset.type = 'vote';
 	voteStatusCheck.onchange = () => updateVoteStatus(voteStatusCheck);
-	voteStatusLi.appendChild(voteStatusCheck);
-	let voteStatusLabel = document.createElement('label');
-	voteStatusLabel.innerHTML = 'Dead-voted?';
-	voteStatusLabel.style.fontSize = '0.6rem';
-	voteStatusLi.appendChild(voteStatusLabel);
-	playerStatusList.appendChild(voteStatusLi);
-	// - mark as good/evil
-	let alignmentLi = document.createElement('li');
-	//let alignmentLabel = document.createElement('label');
-	//alignmentLabel.innerHTML = 'Align: ';
-	//alignmentLi.appendChild(alignmentLabel);
+	voteStatusTd.appendChild(voteStatusCheck);
+	updateRow.appendChild(voteStatusTd);
+
+	//alignment?
+	let alignStatusTd = document.createElement('td');
 	let alignmentSelect = document.createElement('select');
 	alignmentSelect.id = "alignmentSelect";
 	let alignmentSelectOptionGood = document.createElement('option');
@@ -394,18 +397,21 @@ function createRolesWindow()
 	alignmentSelectOptionEvil.selected = false;
 	alignmentSelectOptionEvil.innerHTML = 'Evil';
 	alignmentSelect.appendChild(alignmentSelectOptionEvil);
-	alignmentLi.appendChild(alignmentSelect);
-	playerStatusList.appendChild(alignmentLi);
+	alignStatusTd.appendChild(alignmentSelect);
+	updateRow.appendChild(alignStatusTd);
 
-	//-finish player status list
-	addRoleWindowEl.appendChild(playerStatusList);
+
+
+	statusTable.appendChild(updateRow);
+
+	addRoleWindowEl.appendChild(statusTable);
 
 	//-list roles as checkboxes
 	let rolesListHeader = document.createElement('h4');
 	rolesListHeader.innerHTML = "Player Role(s)";
 	addRoleWindowEl.appendChild(rolesListHeader);
 
-	let addRoleList = document.createElement('ul');
+	//let addRoleList = document.createElement('ul');
 	
 	//Split into teams (tf, os, )
 	let teams = [ "townsfolk", "outsider", "minion", "demon", "traveler" ];//, "fabled", "loric" ];
@@ -434,7 +440,7 @@ function createRolesWindow()
 	let tr = document.createElement('tr');
 	teams.forEach((t) => {
 		let th = document.createElement('th');
-		th.innerHTML = t;
+		th.innerHTML = t.toUpperCase();
 		tr.appendChild(th);
 	});
 	table.appendChild(tr);
@@ -536,12 +542,14 @@ function createRolesWindow()
 	}
 	*/
 	
+	/*
 	addRoleList.style.maxWidth = '100%';
 	addRoleList.style.maxHeight = '40%';
 	addRoleList.style.height = '40%';
 	addRoleList.style.overflowY = 'scroll';
 	addRoleList.id = 'addRoleList';
 	addRoleWindowEl.appendChild(addRoleList);
+	*/
 	// - status (dead/vote used/evil?)
 	
 	// - notes
