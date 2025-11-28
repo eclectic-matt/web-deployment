@@ -121,19 +121,6 @@
     left: 0;
 }
 
-#addRoleWindow table {
-	width: 90vw;
-	max-height: 80%;
-	border: 1px solid white;
-	border-collapse: collapse;
-	text-align: center;
-}
-#addRoleWindow table td, #addRoleWindow table tr, #addRoleWindow table th {
-	padding: 0.5rem;
-	border: 1px solid white;
-	border-collapse: collapse;
-}
-
 #statusTable {
 	max-width: 80vw;
 	border: 1px solid white;
@@ -151,6 +138,32 @@
 #statusTable tr td {
 	border: 1px solid white;
 	border-collapse: collapse;
+}
+
+#addRoleWindow table {
+	width: 90vw;
+	max-width: 200vw;
+	max-height: 80%;
+	border: 1px solid white;
+	border-collapse: collapse;
+	text-align: center;
+}
+#addRoleWindow table td, #addRoleWindow table tr, #addRoleWindow table th {
+	padding: 0.5rem;
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+
+.roleCheck, #voteStatusCheck, #deadStatusCheck {
+	-ms-transform: scale(2); /* IE */
+	-moz-transform: scale(2); /* FF */
+	-webkit-transform: scale(2); /* Safari and Chrome */
+	-o-transform: scale(2); /* Opera */
+	transform: scale(2);
+	padding: 10px;
+}
+#alignmentSelect {
+	font-size: 1.5rem;
 }
 
 

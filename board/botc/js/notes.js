@@ -433,9 +433,6 @@ function createRolesWindow()
 	);
 	let maxRoleCount = Math.max(...teamCounts);
 	
-	//alert('Roles: ' + JSON.stringify(teamRoles));
-	//alert('Roles Counts: ' + JSON.stringify(roleCounts) + ', max: ' + maxRoleCount);
-	
 	let table = document.createElement('table');
 	let tr = document.createElement('tr');
 	teams.forEach((t) => {
@@ -459,7 +456,7 @@ function createRolesWindow()
 			roleCheck.dataset.role = teamRoles[c][r].name;
 			roleCheck.onchange = () => addRole(roleCheck);
 			td.appendChild(roleCheck);
-			
+			td.appendChild(document.createElement('br'));
 			let roleSpan = document.createElement('span');
 			roleSpan.innerHTML = teamRoles[c][r].name;
 			td.appendChild(roleSpan);
@@ -470,87 +467,6 @@ function createRolesWindow()
 	}
 	
 	addRoleWindowEl.appendChild(table);
-	
-	/*
-	teams.forEach((team) => {
-		
-		//Get roles for team
-		let teamRoles = scriptRoles.filter((r) => {return r.team == team});
-		
-		if(teamRoles.length == 0) return;
-		
-		//If *not* the first team
-		if(teams.indexOf(team) > 0){
-			//let br = document.createElement('br');
-			//addRoleList.appendChild(br);
-		}
-
-		let teamList = document.createElement('ul');
-
-		let teamHeaderLi = document.createElement('li');
-		teamHeaderLi.innerHTML = '<b>' + toTitleCase(team) + '</b>';
-		teamHeaderLi.style.fontSize = '1.35rem';
-		teamHeaderLi.style.listStyleType = 'none';
-		
-		
-		//addRoleList.appendChild(teamHeaderLi);
-		teamList.appendChild(teamHeaderLi);
-
-		teamRoles.forEach((r) => {
-			let roleLi = document.createElement('li');
-			//checkbox
-			let roleCheck = document.createElement('input');
-			roleCheck.className = "roleCheck";
-			roleCheck.type = "checkbox";
-			roleCheck.dataset.role = r.name;
-			roleCheck.onchange = () => addRole(roleCheck);
-			
-			roleLi.appendChild(roleCheck);
-			let roleName = document.createElement('span');
-			roleName.innerHTML = r.name;
-			roleLi.appendChild(roleName);
-			//addRoleList.appendChild(roleLi);
-			teamList.appendChild(roleLi);
-		});
-
-		//Add the list of roles to the main list
-		addRoleList.appendChild(teamList);
-	});
-	*/
-	
-	
-	
-	/*
-	for (let i = 0; i < scriptRoles.length; i++)
-	{
-		let roleLi = document.createElement('li');
-		//checkbox
-		let roleCheck = document.createElement('input');
-		roleCheck.className = "roleCheck";
-		roleCheck.type = "checkbox";
-		//roleCheck.setAttribute('data', "playerId: '" + i + "', role: '" + scriptRoles[i] + "'");
-		//roleCheck.dataset.player = i;
-		roleCheck.dataset.role = scriptRoles[i].name;
-		roleCheck.onchange = () => addRole(roleCheck);
-		
-		roleLi.appendChild(roleCheck);
-		let roleName = document.createElement('span');
-		roleName.innerHTML = scriptRoles[i].name;
-		roleLi.appendChild(roleName);
-		addRoleList.appendChild(roleLi);
-		//console.log('add role ' + scriptRoles[i]);
-	}
-	*/
-	
-	/*
-	addRoleList.style.maxWidth = '100%';
-	addRoleList.style.maxHeight = '40%';
-	addRoleList.style.height = '40%';
-	addRoleList.style.overflowY = 'scroll';
-	addRoleList.id = 'addRoleList';
-	addRoleWindowEl.appendChild(addRoleList);
-	*/
-	// - status (dead/vote used/evil?)
 	
 	// - notes
 	let noteElHead = document.createElement('h4');
