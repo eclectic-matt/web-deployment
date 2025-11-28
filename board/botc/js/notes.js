@@ -405,6 +405,17 @@ function createRolesWindow()
 
 	addRoleWindowEl.appendChild(statusTable);
 
+	// - notes
+	let noteElHead = document.createElement('h4');
+	noteElHead.innerHTML = "Player Notes";
+	addRoleWindowEl.appendChild(noteElHead);
+	let noteEl = document.createElement('textarea');
+	noteEl.id = 'playerNotes';
+	noteEl.style.width = '90vw';
+	noteEl.style.height = '20vh';
+	
+	addRoleWindowEl.appendChild(noteEl);
+
 	//-list roles as checkboxes
 	let rolesListHeader = document.createElement('h4');
 	rolesListHeader.innerHTML = "Player Role(s)";
@@ -466,18 +477,6 @@ function createRolesWindow()
 	}
 	
 	addRoleWindowEl.appendChild(table);
-	
-	// - notes
-	let noteElHead = document.createElement('h4');
-	noteElHead.innerHTML = "Player Notes";
-	addRoleWindowEl.appendChild(noteElHead);
-	let noteEl = document.createElement('textarea');
-	noteEl.id = 'playerNotes';
-	noteEl.style.width = '80%';
-	noteEl.style.height = '10%';
-	
-	addRoleWindowEl.appendChild(noteEl);
-	
 }
 
 function addRole(el)
