@@ -103,24 +103,6 @@
     left: 0;
 }
 
-
-#setupWindow {
-	background-color: purple;
-    color: white;
-	border: 5px outset black;
-    display: none;
-    width: 90vw;
-    height: 90vh;
-	margin-left: 5vw;
-	margin-top: 5vh;
-	padding: 5%;
-	font-size: 0.8rem;
-    z-index: 100;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
 #statusTable {
 	max-width: 80vw;
 	border: 1px solid white;
@@ -166,10 +148,30 @@
 	font-size: 1.25rem;
 }
 
+#setupWindow {
+	background-color: purple;
+    color: white;
+	border: 5px outset black;
+    display: none;
+    width: 90vw;
+    height: 90vh;
+	margin-left: 5vw;
+	margin-top: 5vh;
+	padding: 5%;
+	font-size: 0.8rem;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 #customSetup {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+#availableRolesDiv > h2, #selectedRolesDiv > h2 {
+	font-size: 0.5rem !important;
 }
 
 #availableRolesDiv, #selectedRolesDiv {
@@ -177,7 +179,6 @@
 	height: 60vh;
 	overflow: scroll;
 }
-
 
 .customRoleOption, .selectedRoleOption {
 	padding: 10px 0;
