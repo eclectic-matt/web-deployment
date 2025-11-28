@@ -397,10 +397,9 @@ function createRolesWindow()
 	alignmentSelectOptionEvil.selected = false;
 	alignmentSelectOptionEvil.innerHTML = 'Evil';
 	alignmentSelect.appendChild(alignmentSelectOptionEvil);
+	alignmentSelect.onchange = () => updateAlignment(alignmentSelect);
 	alignStatusTd.appendChild(alignmentSelect);
 	updateRow.appendChild(alignStatusTd);
-
-
 
 	statusTable.appendChild(updateRow);
 
@@ -496,6 +495,24 @@ function addRole(el)
 	roleBtn.innerHTML = playersObj.players[playerId].roles.join(', ');
 }
 
+function updateAlignment(el)
+{
+	let playerId = document.getElementById('playerId').innerHTML;
+	//alternatively, show with border? - remember confusingly set playerId+1 for the player elements themselves!
+	let playerEl = document.getElementById("player" + (parseInt(playerId) + 1));
+	console.log('Alignment updated for player ' + playerId + ' to ' + el.value);
+	//Set on players object
+	playersObj.players[playerId].alignment = el.value;
+	if(el.value == 'good'){
+		playerEl.classList.remove('evil');
+		playerEl.classList.add('good');
+	}else{
+		playerEl.classList.remove('good');
+		playerEl.classList.add('evil');
+	}
+}
+
+
 function calcScreenDimensions()
 {
 	let w = window.innerWidth;
@@ -581,7 +598,7 @@ function closePlayerEditWindow()
 	saveToLocalStorage();
 
 	//Trigger UI update
-	updateUi();
+	//updateUi();
 }
 
 function updateDeathShroud(el)
