@@ -123,7 +123,8 @@ const editions = [
 			demon: [],
 			fabled: [],
 			decoy: [],
-			traveler: []
+			traveler: [],
+			loric: []
 		}
 	},
 	{
@@ -173,33 +174,53 @@ function load(roles){
 	for(var i = 0; i < roleCount; i++){
 		var role = roles[i];
 		//console.log(role.name);
+
+		//Store role against their edition (tb/bmr/snv/exp)
 		switch(role.edition){
 			case 'tb':
 				store = editions[0].roles;
+				//console.log('Storing ', editions[0].name, role.name);
 				assign(store, role);
 			break;
 			case 'bmr':
 				store = editions[1].roles;
+				//console.log('Storing ', editions[1].name, role.name);
 				assign(store, role);
 			break;
 			case 'snv':
 				store = editions[2].roles;
+				//console.log('Storing ', editions[2].name, role.name);
 				assign(store, role);
 			break;
 			case '':
+				//Intentional fall-through
+			case 'any':
+				//Intentional fall-through
+			case 'custom':
+				//Intentional fall-through
+			case 'exp':
 				store = editions[3].roles;
+				//console.log('Storing ', editions[3].name, role.name);
 				assign(store, role);
 			break;
 			//ETC
+			default: 
+				console.log('Not matched edition for ' + role.name);
+			break;
 		}
+
+		//ALSO store against their team for traveller/fabled/loric!
 		if(role.team == "traveler"){
 			store = editions[4].roles;
+			//console.log('Storing ', editions[4].name, role.name);
 			assign(store, role);
-		}else if(role.team === "fabled"){
+		}else if(role.team == "fabled"){
 			store = editions[5].roles;
+			//console.log('Storing ', editions[5].name, role.name);
 			assign(store, role);
-		}else if(role.team === "loric"){
+		}else if(role.team == "loric"){
 			store = editions[6].roles;
+			//console.log('Storing ', editions[6].name, role.name);
 			assign(store, role);
 		}
 	}
@@ -459,7 +480,7 @@ function load(roles){
 	tab('Trouble_Brewing_Edition');
 
 	function assign(store, role){
-		//console.log(store[`${role.team}`]);
+		console.log(store.name, role.team);
 		store[`${role.team}`].push(role);
 	}
 }
