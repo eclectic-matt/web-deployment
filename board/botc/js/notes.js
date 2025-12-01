@@ -1042,6 +1042,18 @@ class NoteManager
 	}
 }
 
+function generateDropdown(name, list){
+	let select = document.createElement('select');
+	select.id = name;
+	list.forEach((item) => {
+		let opt = document.createElement('option');
+		opt.value = item;
+		opt.innerHTML = item;
+		select.appendChild(opt);
+	});
+	return select;
+}
+
 // Source - https://stackoverflow.com/a
 // Posted by Greg Dean, modified by community. See post 'Timeline' for change history
 // Retrieved 2025-11-23, License - CC BY-SA 4.0
