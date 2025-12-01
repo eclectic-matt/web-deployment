@@ -895,7 +895,7 @@ function addSelectedRoles()
 				}
 			}
 			//Move index back by one (list has changed due to element removal!)
-			i--;			
+			i--;
 		}
 	}
 }

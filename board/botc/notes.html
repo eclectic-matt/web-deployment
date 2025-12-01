@@ -55,16 +55,22 @@
 	    	<option value="snv">Sects and Violets</option>
 	    	<option value="all">Custom</option>
 	    </select>
-		<button onclick="addSelectedRoles()">Add Roles To Script</button>
+		
 	    <div id="customSetup">
-	    	<div id="availableRolesDiv">
-	    		<h2>Available Roles</h2>
-	    	</div>
-	    	<div id="selectedRolesDiv">
-	    		<h2>Selected Roles</h2>
-	    	</div>
-	    </div>
-	    <button onclick="saveCustomScript()">Save Script</button>
+			<div id="availableRolesWrapper">
+				<button class="w3-btn w3-green w3-large" onclick="addSelectedRoles()">Add Roles To Script</button>
+				<div id="availableRolesDiv">
+					<h2>Available Roles</h2>
+				</div>
+			</div>
+			<div id="selectedRolesWrapper">
+				<button class="w3-btn w3-red w3-large" onclick="removeSelectedRoles()">Remove Roles From Script</button>
+				<div id="selectedRolesDiv">
+					<h2>Selected Roles</h2>
+				</div>
+			</div>
+		</div>
+		<button class="w3-btn w3-green w3-xlarge" onclick="saveCustomScript()">Save Script</button>
 	</div>
 </body>
 
