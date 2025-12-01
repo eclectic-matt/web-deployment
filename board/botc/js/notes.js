@@ -421,6 +421,8 @@ function createRolesWindow()
 	rolesListHeader.innerHTML = "Player Role(s)";
 	addRoleWindowEl.appendChild(rolesListHeader);
 
+	let sel = generateDropdown('role', scriptRoles.map((r) => { return r.name;}));
+	addRoleWindowEl.appendChild(sel);
 	//let addRoleList = document.createElement('ul');
 	
 	//Split into teams (tf, os, )
