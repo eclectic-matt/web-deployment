@@ -231,8 +231,8 @@ function createPlayerTokens()
 	let centerAdjustY = 25;
 	let cx = (0.5 * w) + centerAdjustX;
 	let cy = (0.5 * h) + centerAdjustY;
-	let eclipseWidth = w / 2;
-	let eclipseHeight = h / 2;
+	let eclipseWidth = w / 3;
+	let eclipseHeight = h / 3;
 	let shortestSide = Math.min(w, h);
 	let elementRadius = Math.floor((1.1 * shortestSide) / (0.6 * playerCount));
 	
