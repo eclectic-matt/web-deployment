@@ -163,6 +163,23 @@ function setup()
 	createRolesWindow();
 }
 
+function getTokenCentrePoint()
+{
+	let [w, h, r] = calcScreenDimensions();
+	let cx = (0.5 * w);
+	let cy = (0.5 * h);
+	return [cx, cy];
+}
+
+function getEclipseRadius()
+{
+	let [w, h, r] = calcScreenDimensions();
+	let eclipseWidth = w / 3;
+	let eclipseHeight = h / 3;
+	let shortestSide = Math.min(w, h);
+	let elementRadius = Math.floor((1.1 * shortestSide) / (0.6 * playerCount));
+	return elementRadius;
+}
 
 
 function saveToLocalStorage()
