@@ -3,7 +3,7 @@
 
 //GLOBAL VARIABLES (urgh)
 //Default to 10p, set in menu
-var playerCount = 10;
+var playerCount = 20;
 var script = "tb";
 //Store names separately to reuse
 var playerNames = [];
@@ -18,8 +18,13 @@ var showPlayerRoles = true;
 //Defined constants
 const addRoleBtnText = "Edit"; //"+";
 const pencilIconUnicode = "&#9998;";
+const greenDotUnicode = '&#128994;';
+const handRaiseUnicode = '&#x270B;';
+
+//let notes = new NoteManager();
 
 /*
+
 const playersExample = [
 	{
 		name: 'Matt',
@@ -74,7 +79,7 @@ async function init()
 	scriptRoles = await getScriptRoles(script)
 	if(hasSavedData())
 	{
-		document.getElementById('loadSavedBtn').disabled = false;
+		//document.getElementById('loadSavedBtn').disabled = false;
 	}
 	if(!playersObj.players || playersObj.players.length == 0)
 	{
@@ -203,14 +208,16 @@ function createPlayerTokens()
 
 	let [w, h, r] = calcScreenDimensions();
 	//Calculate fixed values
+	//let centerAdjustX = -100;
+	//let centerAdjustY = -100;
 	let centerAdjustX = -50;
-	let centerAdjustY = -25;
+	let centerAdjustY = 25;
 	let cx = (0.5 * w) + centerAdjustX;
-	let cy = (0.6 * h) + centerAdjustY;
+	let cy = (0.5 * h) + centerAdjustY;
 	let eclipseWidth = w / 3;
 	let eclipseHeight = h / 3;
 	let shortestSide = Math.min(w, h);
-	let elementRadius = Math.floor((1.5 * shortestSide) / (0.8 * playerCount));
+	let elementRadius = Math.floor((1.1 * shortestSide) / (0.6 * playerCount));
 	
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
@@ -303,7 +310,7 @@ function createPlayerTokens()
 		nameInput.type = "text";
 		//NOTE: these default to player1 - player20 so this should always be true
 		if (playersObj.players[i] && playersObj.players[i].name.length > 0) {
-			console.log('setting the name of player ' + i + ' to ' + playersObj.players[i].name);
+			//console.log('setting the name of player ' + i + ' to ' + playersObj.players[i].name);
 			nameInput.value = playersObj.players[i].name;
 			nameInput.innerHTML = playersObj.players[i].name;
 		} else {
@@ -315,7 +322,27 @@ function createPlayerTokens()
 	}
 	
 	let central = document.getElementById('central');
-	central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
+	//central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
+	
+	//Clear between runs
+	central.innerHTML = null;
+
+	central.innerHTML += 'Day <span id="currentDay">1</span>';
+	central.innerHTML += '<br>';
+	//Living players
+	central.innerHTML += greenDotUnicode + ': <span id="livingPlayersSpan">' + playerCount + '</span>';
+	//Votes used
+	central.innerHTML += handRaiseUnicode + ': <span id="votesSpan">' + playerCount + '</span>';
+	//central.innerHTML += '<br>';
+	//Role counts for the current player count
+	let roleCount = noteManager.roleCounts[playerCount - 1];
+	//console.log('PlayerCount',playerCount,roleCount);
+	central.innerHTML += '<br>';
+	Object.keys(roleCount).forEach((k) => {
+		central.innerHTML += roleCount[k] + " " + k + (roleCount[k] != 1 ? 's' : '') + "<br>";
+		//console.log('Role count',k,roleCount[k]);
+	});
+
 	//main.appendChild(central);
 }
 
@@ -924,125 +951,17 @@ async function saveCustomScript()
 }
 
 
-class NoteManager
+function showHideSettings()
 {
-	constructor()
+	if(document.getElementById('setupWindow').style.display == 'block')
 	{
-		//Check for saved state
-		if(this.hasData()){
-			this.loadState();
-		}else{
-			this.setDefaultState();
-		}
-	}
-	
-	setDefaultState()
-	{
-		//Settings
-		this.script = "tb";
-		this.scriptRoles = [];
-		this.playersObj = {
-			settings: {},
-			players: []
-		}
-		this.addRoleBtnText = "Edit";
-		this.pencilIconUnicode = "&#9998;";
-		this.roleCounts = [
-			undefined, //1
-			undefined, //2
-			undefined, //3
-			undefined, //4
-			{ //5
-				townsfolk: 3,
-				outsider: 0,
-				minion: 1,
-				demon: 1
-			},
-			{ //6
-				townsfolk: 3,
-				outsider: 1,
-				minion: 1,
-				demon: 1
-			},
-			{ //7
-				townsfolk: 5,
-				outsider: 0,
-				minion: 1,
-				demon: 1
-			},
-			{ //8
-				townsfolk: 5,
-				outsider: 1,
-				minion: 1,
-				demon: 1
-			},
-			{ //9
-				townsfolk: 5,
-				outsider: 2,
-				minion: 1,
-				demon: 1
-			},
-			{ //10
-				townsfolk: 7,
-				outsider: 0,
-				minion: 2,
-				demon: 1
-			},
-			{ //11
-				townsfolk: 7,
-				outsider: 1,
-				minion: 2,
-				demon: 1
-			},
-			{ //12
-				townsfolk: 7,
-				outsider: 2,
-				minion: 2,
-				demon: 1
-			},
-			{ //13
-				townsfolk: 9,
-				outsider: 0,
-				minion: 3,
-				demon: 1
-			},
-			{ //14
-				townsfolk: 9,
-				outsider: 1,
-				minion: 3,
-				demon: 1
-			},
-			{ //15
-				townsfolk: 9,
-				outsider: 2,
-				minion: 3,
-				demon: 1
-			}
-		];
-	}
-	
-	//Setup elements (by playerCount)
-	setup(pCount)
-	{
-		
-	}
-	//Save data 
-	save()
-	{
-		//Save to local storage
-		
-	}
-	//Load data
-	load()
-	{
-		//Load from local storage
-		
-	}
-	hasData(){
-		//Bool test
-		return localStorage.getItem("players");
+		document.getElementById('setupWindow').style.display = 'none';
+	}else{
+		document.getElementById('setupWindow').style.display = 'block';
 	}
 }
+
+
 
 function generateDropdown(name, list){
 	let select = document.createElement('select');
@@ -1065,3 +984,5 @@ function toTitleCase(str) {
     text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
   );
 }
+
+let noteManager = new NoteManager();

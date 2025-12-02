@@ -7,11 +7,12 @@
 	<title>BOTC Notes</title>
 	<link rel="stylesheet" href="./style/notes.css" />
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+	<script src="./js/NoteManager.js"></script>
 	<script defer src="./js/notes.js"></script>
 </head>
 
 <body>
-	<nav id="menu" class="w3-bar w3-border w3-green">
+	<!--nav id="menu" class="w3-bar w3-border w3-green">
 		<div class="w3-flex" style="justify-content:space-around">
 			<div style="max-width: 50%">
 				<label for="playerCountInput">Player count: <span id="playerCountSpan">10</span> </label>
@@ -26,8 +27,12 @@
 	    <button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
 	    <button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
 	    </div>
-	</nav>
-	<div id="central"></div>
+	</nav-->
+	<div id="settings"><button onclick="showHideSettings()">&#9881;</button></div>
+	<div id="central">
+		<h4>Central Info</h4>
+		<p>This is the central info here and some more text here...</p>
+	</div>
 	<div id="solverOutput"></div>
 	<div id="main">
 		
@@ -47,8 +52,13 @@
 	</div-->
 
 	<div id="setupWindow">
-		<h3>Script Setup <button onclick="hideSetupWindow()">X</button></h3>
-		<label for="scriptInput">Script: </label>
+		<h3>Setup Window <button onclick="hideSetupWindow()">X</button></h3>
+
+		<h4>Players</h4>
+		<label for="playerCountInput">Player count: <span id="playerCountSpan">10</span></label>
+		<input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
+		
+		<h4 for="scriptInput">Script: </h4>
 	    <select id="scriptInput" onchange="setScript(this)">
 	    	<option value="tb">Trouble Brewing</option>
 	    	<option value="bmr">Bad Moon Rising</option>
