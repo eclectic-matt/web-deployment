@@ -273,4 +273,5 @@ ul.statusList input[type=checkbox] {
 	background-color: white;
 	text-align: center;
 	border: 5px outset black;
+	font-size: 0.7rem;
 }
