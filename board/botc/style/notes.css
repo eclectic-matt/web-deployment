@@ -270,20 +270,24 @@ ul.statusList input[type=checkbox] {
 	left: 5vw;
 }
 
-#central {
+#central 
+{
 	position: fixed;
-	top: 35vh;
-	left: 35vw;
+	top: 50%;
+	left: 50%;
 	width: 40vw;
+	margin-left: -20vw;
 	height: 40vh;
-	padding: 10px;
+	margin-top: -20vw;
+	padding: auto;
 	background-color: white;
 	text-align: center;
 	border: 5px outset black;
 	font-size: 0.7rem;
 }
 
-.w3-flex {
+.w3-flex 
+{
 	justify-content:space-around; 
 	margin-top: 5px; 
 	border: 1px solid white;
