@@ -73,6 +73,7 @@ html, body {
 
 .hidden {
 	border-color: white;
+	filter: blur(2rem);
 }
 
 .nameInput 
