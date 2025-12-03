@@ -361,12 +361,22 @@ async function solve()
 
 	let selectedRoles = [
 		"Baron",
-		"Washerwoman",
 		"Imp",
 		"Slayer",
 		"Fortune Teller",
 		"Vigormortis"
 	];
+
+	let randCharIndex = 1;
+	for(let i = 0; i < 10; i++){
+		
+		randCharIndex = 1;
+		while(selectedRoles.includes(setupModification[randCharIndex].character))
+		{
+			randCharIndex = Math.floor(Math.random() * setupModification.length);
+		}
+		selectedRoles.push(setupModification[randCharIndex].character);
+	}
 
 	scriptRoles = await fetch('./roles.json');
 	scriptRoles = await scriptRoles.json();
@@ -386,6 +396,7 @@ async function solve()
 
 function solveOutsiderCount(selectedRoles, scriptRoles)
 {
+	console.log(selectedRoles);
 	let outsiderWorlds = [];
 	let outsiderCount = playerCounts[selectedRoles.length - 1].outsider;
 	outsiderWorlds.push({title:"the default setup",effect:"made no changes",outsiderCount:outsiderCount});

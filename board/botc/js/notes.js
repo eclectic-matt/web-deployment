@@ -224,17 +224,20 @@ function createPlayerTokens()
 	main.innerHTML = null;
 
 	let [w, h, r] = calcScreenDimensions();
+	let tMin = 60;
+	let tMax = 250;
 	//Calculate fixed values
-	//let centerAdjustX = -100;
-	//let centerAdjustY = -100;
-	let centerAdjustX = -50;
-	let centerAdjustY = 25;
+	let centerAdjustX = 0;
+	let centerAdjustY = 0;
 	let cx = (0.5 * w) + centerAdjustX;
 	let cy = (0.5 * h) + centerAdjustY;
-	let eclipseWidth = w / 3;
-	let eclipseHeight = h / 3;
+	//let eclipseScalingFactor = (21 - playerCount) / 2.1;
+	let eclipseScalingFactor = 0.7;
+	let eclipseWidth = eclipseScalingFactor * (w / 2);
+	let eclipseHeight = eclipseScalingFactor * (h / 2);
 	let shortestSide = Math.min(w, h);
 	let elementRadius = Math.floor((1.1 * shortestSide) / (0.6 * playerCount));
+	elementRadius = Math.min(Math.max(elementRadius, tMin), tMax);	
 	
 	//Create player elements
 	for (let i = 0; i < playerCount; i++)
@@ -246,18 +249,27 @@ function createPlayerTokens()
 		//Calculate position for each token
 		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
 		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
-
 		let point = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
 		let x = point.x;
 		let y = point.y;
+
+		/*
+		console.log('i',i);
+		console.log('cx',cx);
+		console.log('cy',cy);
+		console.log('ew',eclipseWidth);
+		console.log('eh',eclipseHeight);
+		console.log('point.x',x);
+		console.log('point.y',y);
+		console.log('angle',angle);
+		*/
+
 		let left = x + 'px';
 		let top = y + 'px';
 		
-		//debug(i + ' => ' + x + ', ' + y + ' => ' + left + ', ' + top);
 		el.style.top = top;
 		el.style.left = left;
 		
-		//console.log(i, angle, x, y);
 		el.className = "player";
 		el.id = "player" + (i + 1);
 		el.dataset.player = i;
@@ -359,8 +371,145 @@ function createPlayerTokens()
 		central.innerHTML += roleCount[k] + " " + k + (roleCount[k] != 1 ? 's' : '') + "<br>";
 		//console.log('Role count',k,roleCount[k]);
 	});
+}
 
-	//main.appendChild(central);
+
+function testPlayerTokens(cx, cy, eclipseWidth, eclipseHeight, shortestSideRatio = 1.1, playerCountRatio = 0.6, tMin=50, tMax=300)
+{
+	//Ensure playerCount set correctly
+	playerCount = playersObj.players.length;
+	//Get reference to main
+	let main = document.getElementById("main");
+	//Clear main between runs
+	main.innerHTML = null;
+
+	let [w, h, r] = calcScreenDimensions();
+	//Calculate fixed values
+	//let centerAdjustX = -100;
+	//let centerAdjustY = -100;
+	let centerAdjustX = -50;
+	let centerAdjustY = 25;
+	//let cx = (0.5 * w) + centerAdjustX;
+	//let cy = (0.5 * h) + centerAdjustY;
+	//let eclipseWidth = w / 3;
+	//let eclipseHeight = h / 3;
+	let shortestSide = Math.min(w, h);
+	let elementRadius = Math.floor((shortestSideRatio * shortestSide) / (playerCountRatio * playerCount));
+	elementRadius = Math.min(Math.max(elementRadius, tMin), tMax);	
+	
+	//Create player elements
+	for (let i = 0; i < playerCount; i++)
+	{
+		let el = document.createElement('div');
+		el.style.position = "absolute";
+		el.style.width = elementRadius + 'px';
+		el.style.height = elementRadius + 'px';
+		//Calculate position for each token
+		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
+		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
+
+		let point = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
+		let x = point.x;
+		let y = point.y;
+
+		/*
+		console.log("===================");
+		console.log('i',i);
+		console.log('cx',cx);
+		console.log('cy',cy);
+		console.log('ew',eclipseWidth);
+		console.log('eh',eclipseHeight);
+		console.log('point.x',x);
+		console.log('point.y',y);
+		console.log('angle',angle);
+		console.log('radius',elementRadius);
+		console.log("===================");
+		console.log("");
+		*/
+
+		let left = x + 'px';
+		let top = y + 'px';
+		el.style.top = top;
+		el.style.left = left;
+		
+		//Init element
+		el.className = "player";
+		el.id = "player" + (i + 1);
+		el.dataset.player = i;
+		//ALIGNMENT
+		if(playersObj.players[i].alignment == 'Evil')
+		{
+			el.classList.add('evil');
+			el.classList.remove('good');
+		}else{
+			el.classList.add('good');
+			el.classList.remove('evil');
+		}
+		
+		//Death shroud?
+		let deathShroud = document.createElement('div');
+		deathShroud.id = "player" + i + "Shroud";
+		deathShroud.className = 'shroud';
+		deathShroud.style.width = '60%';
+		deathShroud.style.marginLeft = '20%';
+		deathShroud.style.marginTop = '10%';
+		deathShroud.style.marginBottom = 0;
+		deathShroud.style.height = '0.75rem';
+		deathShroud.style.backgroundColor = 'red';
+		deathShroud.style.color = 'white';
+		deathShroud.style.fontSize = '0.5rem';
+		deathShroud.style.textAlign = 'center';
+		deathShroud.innerHTML = 'DEAD';
+		//Not "living" => show death shroud
+		if(playersObj.players[i] && !playersObj.players[i].living)
+		{
+			//deathShroud.style.display = 'block';
+			//el.style.filter = 'grayscale(100%)';
+			el.classList.remove('living');
+			el.classList.add('dead');
+		}else{
+			//deathShroud.style.display = 'none';
+			el.classList.remove('dead');
+			el.classList.add('living');
+		}
+		if(playersObj.players[i] && playersObj.players[i].voteUsed)
+		{
+			deathShroud.innerHTML += ' (no vote)';
+		}
+		deathShroud.style.zIndex = 100;
+		el.appendChild(deathShroud);
+		let addBtn = document.createElement('button');
+		if(playersObj.players[i] && playersObj.players[i].roles.length > 0)
+		{
+			addBtn.innerHTML = playersObj.players[i].roles.join(', ');
+		}else{
+			addBtn.innerHTML = addRoleBtnText;
+		}
+		if(playersObj.players[i] && playersObj.players[i].notes.length > 0)
+		{
+			addBtn.innerHTML += pencilIconUnicode;
+		}
+		addBtn.style.marginTop = '5%';
+		addBtn.style.fontSize = Math.floor(shortestSide / 50) + 'px';
+		addBtn.className = "addBtn";
+		addBtn.onclick = () => openPlayerEditWindow(addBtn);
+		addBtn.id = "player" + i + "Roles";
+		el.appendChild(addBtn);
+		let nameInput = document.createElement('input');
+		nameInput.onchange = () => setPlayerName(nameInput);
+		nameInput.type = "text";
+		//NOTE: these default to player1 - player20 so this should always be true
+		if (playersObj.players[i] && playersObj.players[i].name.length > 0) {
+			//console.log('setting the name of player ' + i + ' to ' + playersObj.players[i].name);
+			nameInput.value = playersObj.players[i].name;
+			nameInput.innerHTML = playersObj.players[i].name;
+		} else {
+			nameInput.value = "p" + i;
+		}
+		nameInput.className = "nameInput";
+		el.appendChild(nameInput);
+		main.appendChild(el);
+	}
 }
 
 function getPointInEclipse(cx, cy, w, h, angle)
@@ -455,8 +604,8 @@ function createRolesWindow()
 	addRoleWindowEl.appendChild(noteElHead);
 	let noteEl = document.createElement('textarea');
 	noteEl.id = 'playerNotes';
-	noteEl.style.width = '90vw';
-	noteEl.style.height = '20vh';
+	noteEl.style.width = '100%';
+	noteEl.style.height = '25%';
 	
 	addRoleWindowEl.appendChild(noteEl);
 
@@ -562,7 +711,8 @@ function calcScreenDimensions()
 {
 	let w = window.innerWidth;
 	//90% to allow for nav
-	let h = 0.9 * window.innerHeight;
+	//let h = 0.9 * window.innerHeight;
+	let h = window.innerHeight;
 	//Radius of tokens
 	let r = 0.1 * h;
 	//let values = [w, h];
