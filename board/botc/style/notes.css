@@ -293,3 +293,7 @@ ul.statusList input[type=checkbox] {
 	border: 1px solid white;
 	padding: 0.5rem;
 }
+
+.closeBtn {
+	float: right;
+}
