@@ -734,33 +734,32 @@ function openPlayerEditWindow(el)
 	addRoleWindowEl2.style.display = 'block';
 	
 	let playerId = el.parentElement.dataset.player;
+	
 	//Set the player name on the window header
-	if(playersObj.players[playerId].name){
+	if(playersObj.players[playerId].name)
+	{
 		document.getElementById('playerName').innerHTML = playersObj.players[playerId].name;
-		//console.log('PlayerName updated to show: ' + playersObj.players[playerId].name);
 	}else{
 		document.getElementById('playerName').innerHTML = "player" + (playerId + 1);
 	}
 	//Set the (hidden) playerId element
 	document.getElementById('playerId').innerHTML = playerId;
-	//debug('Getting stored roles for player with ID ' + playerId);
+	
 	//Populate notes and checkboxes
 	let roleNames = playersObj.players[playerId].roles;
 	
 	//Get the checkbox elements (HTML collection)
 	let checkboxes = document.getElementsByClassName('roleCheck');
 	
-	//debug('updating ' + checkboxes.length + ' checks');
-	//debug('selected roles: ' + roleNames.join(', '));
+	//show selected roles first?
+	
 	//Use array proto to foreach this collection
 	Array.prototype.forEach.call(checkboxes, function(check) 
 	{
-	    //debug(check.dataset.role);
-		if(roleNames.includes(check.dataset.role)){
-	        //debug('checked=true');
+		if(roleNames.includes(check.dataset.role))
+		{
 			check.checked = true;
 		}else{
-	        //debug('checked=false');
 			check.checked = false;
 		}
 	});
