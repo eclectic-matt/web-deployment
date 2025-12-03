@@ -64,14 +64,14 @@
 			<button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
 	    </div-->
 
-		<div class="w3-flex">
-			<h4>Script</h4>
-			<h4>Players</h4>
-			<h4>Saved Data</h4>
-			<h4>Day</h4>
+		<div class="w3-row-padding">
+			<div class="w3-quarter">Script</h4>
+			<div class="w3-quarter">Players</div>
+			<div class="w3-quarter">Saved Data</div>
+			<div class="w3-quarter">Day</div>
 		</div>
-		<div class="w3-flex">
-			<div>
+		<div class="w3-row-padding">
+			<div class="w3-quarter">
 				<label for="scriptInput">Script: </label>
 				<select id="scriptInput" onchange="setScript(this)">
 					<option value="tb">Trouble Brewing</option>
@@ -81,16 +81,16 @@
 				</select>
 				
 			</div>
-			<div>
+			<div class="w3-quarter">
 				<label for="playerCountInput">Player count: <span id="playerCountSpan">10</span></label>
 				<input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
 			</div>
-			<div>
+			<div class="w3-quarter">
 				<button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
 				<button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
 				<button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
 			</div>
-			<div>
+			<div class="w3-quarter">
 				<span>Set Day: </span> 
 				<select>
 					<option selected value="1">Day 1</option>
