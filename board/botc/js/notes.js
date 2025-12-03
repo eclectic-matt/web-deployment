@@ -229,6 +229,14 @@ function createPlayerTokens()
 	//Calculate fixed values
 	let centerAdjustX = 0;
 	let centerAdjustY = 0;
+	if(playerCount < 10)
+	{
+		//Adjust center at low player counts
+		//centerAdjustX = -30 * (11 - playerCount);
+		//centerAdjustY = -30 * (11 - playerCount);
+		centerAdjustX = -0.1 * w;
+		centerAdjustY = -0.1 * h;
+	}
 	let cx = (0.5 * w) + centerAdjustX;
 	let cy = (0.5 * h) + centerAdjustY;
 	//let eclipseScalingFactor = (21 - playerCount) / 2.1;
@@ -848,6 +856,13 @@ function setPlayerCount(input){
 	//createPlayerTokens(document.getElementById('main'));
 }
 
+function updatePlayerCount(intPlayerCount)
+{
+	document.getElementById("playerCountSpan").innerHTML = intPlayerCount;
+	setupPlayersArray(intPlayerCount);
+	setup();
+}
+
 function setPlayerName(input)
 {
 	let elId = input.parentElement.id;
@@ -1153,3 +1168,12 @@ function toTitleCase(str) {
 }
 
 let noteManager = new NoteManager();
+
+
+// Add resize event listener with debounce for performance
+let resizeTimeout;
+window.addEventListener('resize', function() {
+	clearTimeout(resizeTimeout);
+	// update after 100ms
+	resizeTimeout = setTimeout(setup, 100); 
+});
