@@ -922,7 +922,7 @@ function hidePlayerRoles()
 	Array.prototype.forEach.call(roleBtns, function(btn) 
 	{
 		btn.innerHTML = "<em>HIDDEN</em>";
-		//btn.parentElement.style.borderColor = 'white';
+		btn.parentElement.classList.add('hidden');
 		btn.parentElement.classList.remove('evil');
 		btn.parentElement.classList.remove('good');
 	});
