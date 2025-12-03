@@ -244,19 +244,24 @@ ul.statusList input[type=checkbox] {
 }
 */
 
-
-
-#settings 
-{
-	position: fixed;
-	top: 5px;
-	right: 5px;
-}
-#settings button 
+#settings button.right
 {
 	font-size: 1.5rem;
 	width: 2.5rem;
 	height: auto;
+	position: fixed;
+	top: 5px;
+	right: 5px;
+}
+
+#settings button.left
+{
+	font-size: 1.5rem;
+	width: 2.5rem;
+	height: auto;
+	position: fixed;
+	top: 5px;
+	left: 5px;
 }
 
 #setupWindow 
