@@ -939,13 +939,15 @@ function showHidePlayerRoles()
 	{
 		//Yes - hide them
 		hidePlayerRoles();
-		showHideBtn.innerHTML = "Show Roles";
+		//showHideBtn.innerHTML = "Show Roles";
+		showHideRolesBtn.innerHTML = '&#x1F441;';
 	}
 	else
 	{
 		//No - unhide them
 		unhidePlayerRoles();
-		showHideBtn.innerHTML = "Hide Roles";
+		//showHideBtn.innerHTML = "Hide Roles";
+		showHideRolesBtn.innerHTML = '<del>&#x1F441;</del>';
 	}
 }
 
