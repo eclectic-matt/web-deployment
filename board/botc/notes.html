@@ -12,28 +12,15 @@
 </head>
 
 <body>
-	<!--nav id="menu" class="w3-bar w3-border w3-green">
-		<div class="w3-flex" style="justify-content:space-around">
-			<div style="max-width: 50%">
-				<label for="playerCountInput">Player count: <span id="playerCountSpan">10</span> </label>
-				<input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
-			</div>
-			<div style="max-width: 50%">
-				<button onclick="showSetupWindow()">Setup</button>
-			</div>
-	    </div>
-	    <div class="w3-flex" style="justify-content:space-around; margin-top: 5px;">
-	    <button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
-	    <button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
-	    <button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
-	    </div>
-	</nav-->
 	<div id="settings"><button onclick="showHideSettings()">&#9881;</button></div>
+	
 	<div id="central">
 		<h4>Central Info</h4>
 		<p>This is the central info here and some more text here...</p>
 	</div>
+	
 	<div id="solverOutput"></div>
+	
 	<div id="main">
 		
 	    <!-- Default to 5 players -->
@@ -44,26 +31,14 @@
 	        <input type="text" value="Name" />
 	    </div>
 	</div>
+	
 	<div id="addRoleWindow">
 		<!-- Fill based on script -->
 	</div>
-	<!--div id="debugWindow">
-	    <h3>Debug</h3>
-	</div-->
 
 	<div id="setupWindow">
 		<h3>Settings <button onclick="hideSetupWindow()" class="closeBtn">X</button></h3>
 
-		<!--h4>Players</h4>
-		<label for="playerCountInput">Player count: <span id="playerCountSpan">10</span></label>
-		<input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/-->
-	
-		<!--div class="w3-flex" style="justify-content:space-around; margin-top: 5px;">
-			<button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
-			<button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
-			<button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
-	    </div-->
-	    
 		<div class="w3-row-padding">
 			<div class="w3-quarter">
 				<h4>Script</h4>
@@ -74,7 +49,6 @@
 					<option value="snv">Sects and Violets</option>
 					<option value="all">Custom</option>
 				</select>
-				
 			</div>
 			<div class="w3-quarter">
 				<h4>Players</h4>
@@ -103,15 +77,9 @@
 			</div>
 		</div>
 
-		<!--div class="w3-flex" style="justify-content:space-around; margin-top: 5px;">
-			<button id="clearRoles" onclick="clearRoles()" class="w3-yellow">Clear Role Data</button>
-			<span>Set day</span>
-			<span>Something else?</span>
-	    </div-->
-
 		<br />
 
-	    <div id="customSetup">
+		<div id="customSetup">
 			<div id="availableRolesWrapper">
 				<button class="w3-btn w3-green w3-large" onclick="addSelectedRoles()">Add Roles To Script</button>
 				<div id="availableRolesDiv">
@@ -125,8 +93,9 @@
 				</div>
 			</div>
 		</div>
+		
 		<button class="w3-btn w3-green w3-xlarge" onclick="saveCustomScript()">Save Script</button>
 	</div>
+	
 </body>
-
 </html>
