@@ -903,6 +903,7 @@ function unhidePlayerRoles()
 			//Append a pencil icon to the player roles
 			btn.innerHTML += pencilIconUnicode;
 		}
+		btn.parentElement.classList.remove('hidden');
 		if(playersObj.players[playerId].alignment == 'evil'){
 			btn.parentElement.classList.add('evil');
 			btn.parentElement.classList.remove('good');
