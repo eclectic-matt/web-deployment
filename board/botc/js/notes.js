@@ -227,16 +227,8 @@ function createPlayerTokens()
 	let tMin = 60;
 	let tMax = 250;
 	//Calculate fixed values
-	let centerAdjustX = 0;
-	let centerAdjustY = 0;
-	if(playerCount < 10)
-	{
-		//Adjust center at low player counts
-		//centerAdjustX = -30 * (11 - playerCount);
-		//centerAdjustY = -30 * (11 - playerCount);
-		centerAdjustX = -0.1 * w;
-		centerAdjustY = -0.1 * h;
-	}
+	let centerAdjustX = -0.1 * ((20 - playerCount) / 8) * w;
+	let centerAdjustY = -0.1 * h;
 	let cx = (0.5 * w) + centerAdjustX;
 	let cy = (0.5 * h) + centerAdjustY;
 	//let eclipseScalingFactor = (21 - playerCount) / 2.1;
@@ -260,18 +252,6 @@ function createPlayerTokens()
 		let point = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
 		let x = point.x;
 		let y = point.y;
-
-		/*
-		console.log('i',i);
-		console.log('cx',cx);
-		console.log('cy',cy);
-		console.log('ew',eclipseWidth);
-		console.log('eh',eclipseHeight);
-		console.log('point.x',x);
-		console.log('point.y',y);
-		console.log('angle',angle);
-		*/
-
 		let left = x + 'px';
 		let top = y + 'px';
 		
@@ -381,7 +361,7 @@ function createPlayerTokens()
 	});
 }
 
-
+/*
 function testPlayerTokens(cx, cy, eclipseWidth, eclipseHeight, shortestSideRatio = 1.1, playerCountRatio = 0.6, tMin=50, tMax=300)
 {
 	//Ensure playerCount set correctly
@@ -419,22 +399,6 @@ function testPlayerTokens(cx, cy, eclipseWidth, eclipseHeight, shortestSideRatio
 		let point = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
 		let x = point.x;
 		let y = point.y;
-
-		/*
-		console.log("===================");
-		console.log('i',i);
-		console.log('cx',cx);
-		console.log('cy',cy);
-		console.log('ew',eclipseWidth);
-		console.log('eh',eclipseHeight);
-		console.log('point.x',x);
-		console.log('point.y',y);
-		console.log('angle',angle);
-		console.log('radius',elementRadius);
-		console.log("===================");
-		console.log("");
-		*/
-
 		let left = x + 'px';
 		let top = y + 'px';
 		el.style.top = top;
@@ -519,6 +483,7 @@ function testPlayerTokens(cx, cy, eclipseWidth, eclipseHeight, shortestSideRatio
 		main.appendChild(el);
 	}
 }
+*/
 
 function getPointInEclipse(cx, cy, w, h, angle)
 {
@@ -941,14 +906,14 @@ function showHidePlayerRoles()
 		//Yes - hide them
 		hidePlayerRoles();
 		//showHideBtn.innerHTML = "Show Roles";
-		showHideBtn.innerHTML = '&#x1F441;';
+		showHideBtn.innerHTML = '<del>&#x1F441;</del>';
 	}
 	else
 	{
 		//No - unhide them
 		unhidePlayerRoles();
 		//showHideBtn.innerHTML = "Hide Roles";
-		showHideBtn.innerHTML = '<del>&#x1F441;</del>';
+		showHideBtn.innerHTML = '&#x1F441;';
 	}
 }
 
