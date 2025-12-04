@@ -679,6 +679,9 @@ function updateAlignment(el)
 	}
 }
 
+function updateDay(el){
+	document.getElementById('currentDay').innerHTML = el.value;
+}
 
 function calcScreenDimensions()
 {
