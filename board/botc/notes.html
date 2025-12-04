@@ -49,7 +49,7 @@
 			<div class="w3-quarter">
 				<h4>Game Day</h4>
 				<span>Set Day: </span> 
-				<select onchange="(this) => {document.getElementById('currentDay').value = this.value; }">
+				<select onchange="(this) => {document.getElementById('currentDay').innerHTML = this.value; }">
 					<option selected value="1">Day 1</option>
 					<option value="2">Day 2</option>
 					<option value="3">Day 3</option>
