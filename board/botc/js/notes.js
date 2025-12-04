@@ -227,12 +227,12 @@ function createPlayerTokens()
 	let tMin = 60;
 	let tMax = 250;
 	//Calculate fixed values
-	let centerAdjustX = -0.1 * ((20 - playerCount) / 8) * w;
+	let centerAdjustX = -0.1 * ((21 - playerCount) / 9) * w;
 	let centerAdjustY = -0.1 * h;
 	let cx = (0.5 * w) + centerAdjustX;
 	let cy = (0.5 * h) + centerAdjustY;
 	//let eclipseScalingFactor = (21 - playerCount) / 2.1;
-	let eclipseScalingFactor = 0.7;
+	let eclipseScalingFactor = 0.75;
 	let eclipseWidth = eclipseScalingFactor * (w / 2);
 	let eclipseHeight = eclipseScalingFactor * (h / 2);
 	let shortestSide = Math.min(w, h);
