@@ -504,7 +504,7 @@ function createRolesWindow()
 	let rolesHeader = document.createElement('h3');
 	rolesHeader.style.textAlign = 'center';
 	rolesHeader.style.backgroundColor = 'darkgreen';
-	rolesHeader.innerHTML = "Change Info for <span id='playerName'></span> <span id='playerId' class='hidden'></span>";
+	rolesHeader.innerHTML = "Change Info for <span id='playerName'></span> <span id='playerId' class='invisible'></span>";
 	//-closeBtn (in header)
 	let closeAddRoleBtn = document.createElement('button');
 	closeAddRoleBtn.innerHTML = "X";
@@ -1139,6 +1139,21 @@ function toTitleCase(str) {
 
 let noteManager = new NoteManager();
 
+
+function openTab(evt, tabName) 
+{
+	var i, x, tablinks;
+	x = document.getElementsByClassName("tab");
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "none";
+	}
+	tablinks = document.getElementsByClassName("tablink");
+	for (i = 0; i < x.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+	}
+	document.getElementById(tabName).style.display = "block";
+	evt.currentTarget.className += " w3-red";
+}
 
 // Add resize event listener with debounce for performance
 let resizeTimeout;

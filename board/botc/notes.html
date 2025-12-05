@@ -23,31 +23,17 @@
 
 	<div id="setupWindow">
 		<h3>Settings <button onclick="hideSetupWindow()" class="closeBtn">X</button></h3>
+		
+		<nav class="w3-sidebar w3-bar-block w3-light-grey" style="width:130px; height: 100%;">
+			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Current')">Current</button>
+			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Setup')">Setup</button>
+			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Script')">Script</button>
+			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Data')">Data</button>
+		</nav>
 
-		<div class="w3-row-padding">
-			<div class="w3-quarter">
-				<h4>Script</h4>
-				<label for="scriptInput">Script: </label>
-				<select id="scriptInput" onchange="setScript(this)">
-					<option value="tb">Trouble Brewing</option>
-					<option value="bmr">Bad Moon Rising</option>
-					<option value="snv">Sects and Violets</option>
-					<option value="all">Custom</option>
-				</select>
-			</div>
-			<div class="w3-quarter">
-				<h4>Players</h4>
-				<label for="playerCountInput">Player count: <span id="playerCountSpan">10</span></label>
-				<input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
-			</div>
-			<div class="w3-quarter">
-				<h4>Saved Data</h4>
-				<button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
-				<button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
-				<button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
-			</div>
-			<div class="w3-quarter">
-				<h4>Game Day</h4>
+		<div style="margin-left:140px">
+			<div id="Current" class="tab w3-animate-left">
+				<h2>Current</h2>
 				<span>Set Day: </span> 
 				<select onchange="updateDay(this)">
 					<option selected value="1">Day 1</option>
@@ -60,26 +46,48 @@
 					<option value="8">Day 8</option>
 				</select>
 			</div>
-		</div>
 
-		<br />
-
-		<div id="customSetup">
-			<div id="availableRolesWrapper">
-				<button class="w3-btn w3-green w3-large" onclick="addSelectedRoles()">Add Roles To Script</button>
-				<div id="availableRolesDiv">
-					<h2>Available Roles</h2>
-				</div>
+			<div id="Setup" class="tab w3-animate-left" style="display:none">
+				<h2>Setup</h2>
+				<label for="playerCountInput">Player count: <span id="playerCountSpan">10</span></label>
+				<input id="playerCountInput" type="range" min="5" max="20" step="1" value="10" onchange="setPlayerCount(this)"/>
 			</div>
-			<div id="selectedRolesWrapper">
-				<button class="w3-btn w3-red w3-large" onclick="removeSelectedRoles()">Remove Roles From Script</button>
-				<div id="selectedRolesDiv">
-					<h2>Selected Roles</h2>
+
+			<div id="Script" class="tab w3-animate-left" style="display:none">
+				<h2>Script</h2>
+				<label for="scriptInput">Script: </label>
+				<select id="scriptInput" onchange="setScript(this)">
+					<option value="tb">Trouble Brewing</option>
+					<option value="bmr">Bad Moon Rising</option>
+					<option value="snv">Sects and Violets</option>
+					<option value="all">Custom</option>
+				</select>
+				<br />
+				<div id="customSetup">
+					<div id="availableRolesWrapper">
+						<button class="w3-btn w3-green w3-large" onclick="addSelectedRoles()">Add Roles To Script</button>
+						<div id="availableRolesDiv">
+							<h2>Available Roles</h2>
+						</div>
+					</div>
+					<div id="selectedRolesWrapper">
+						<button class="w3-btn w3-red w3-large" onclick="removeSelectedRoles()">Remove Roles From Script</button>
+						<div id="selectedRolesDiv">
+							<h2>Selected Roles</h2>
+						</div>
+					</div>
 				</div>
+				
+				<button class="w3-btn w3-green w3-xlarge" onclick="saveCustomScript()">Save Script</button>
+			</div>
+
+			<div id="Data" class="tab w3-animate-left" style="display:none">
+				<h2>Saved Data</h2>
+				<button id="showHideRolesBtn" onclick="showHidePlayerRoles()" class="w3-yellow">Hide Roles</button>
+				<button disabled id="clearSavedBtn" onclick="clearSavedData()" class="w3-red">Clear Data</button>
+				<button disabled id="loadSavedBtn" onclick="loadSavedData()" class="w3-green">Load Data</button>
 			</div>
 		</div>
-		
-		<button class="w3-btn w3-green w3-xlarge" onclick="saveCustomScript()">Save Script</button>
 	</div>
 	
 	<div id="solverOutput"></div>
