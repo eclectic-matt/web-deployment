@@ -311,6 +311,14 @@ nav#settingsNavMenu
 	font-size: 0.7rem;
 }
 
+#dayWrapper {
+	font-size: 1.5rem;
+}
+
+#livingAndVotesWrapper, #livingAndVotesWrapper span
+{
+	font-size: 1.5rem;
+}
 
 .w3-flex 
 {

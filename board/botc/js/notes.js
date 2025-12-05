@@ -338,18 +338,26 @@ function createPlayerTokens()
 		main.appendChild(el);
 	}
 	
+	
 	let central = document.getElementById('central');
 	//central.innerHTML = roleCounts[playerCount] + '<br>Alive: <span id="livingPlayersSpan">' + playerCount + '</span> - Votes: <span id="votesSpan">' + playerCount + '</span>';
 	
 	//Clear between runs
 	central.innerHTML = null;
 
-	central.innerHTML += 'Day <span id="currentDay">1</span>';
+	//Day 1 etc
+	central.innerHTML += '<span id="dayWrapper">Day <span id="currentDay">1</span></span>';
+	
 	central.innerHTML += '<br>';
+
+	//5 living / 4 votes etc
+	central.innerHTML += '<p id="livingAndVotesWrapper">';
 	//Living players
 	central.innerHTML += greenDotUnicode + ': <span id="livingPlayersSpan">' + playerCount + '</span>';
 	//Votes used
 	central.innerHTML += handRaiseUnicode + ': <span id="votesSpan">' + playerCount + '</span>';
+	central.innerHTML += '</p>';
+
 	//central.innerHTML += '<br>';
 	//Role counts for the current player count
 	let roleCount = noteManager.roleCounts[playerCount - 1];
@@ -1153,6 +1161,25 @@ function openTab(evt, tabName)
 	}
 	document.getElementById(tabName).style.display = "block";
 	evt.currentTarget.className += " w3-red";
+}
+
+function resetRoles()
+{	
+	for(let i = 0; i < playersObj.players.length; i++)
+	{
+		//RESET TO DEFAULT - BUT KEEP NAMES INTACT
+		//playersObj.players[i].name
+		//playersObj.players[i].seat
+		playersObj.players[i].roles = [];
+		playersObj.players[i].living = true;
+		playersObj.players[i].deadVote = true;
+		playersObj.players[i].alignment = 'good';
+		playersObj.players[i].notes = '';
+	}
+	//alert?
+	alert('Player roles/notes/status reset!');
+	//Update UI
+	updateUi();
 }
 
 // Add resize event listener with debounce for performance
