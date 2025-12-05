@@ -282,10 +282,17 @@ ul.statusList input[type=checkbox] {
 	margin-top: -40vh;
 }
 
-nav.w3-sidebar 
+nav#settingsNavMenu 
 {
 	position: relative;
-	max-height: 50vh;
+	min-width: 50px;
+	width: 100px;
+	height: 25vh;
+}
+
+#tabContentWrapper 
+{
+	margin-left: 110px;
 }
 
 #central 

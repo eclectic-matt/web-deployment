@@ -24,14 +24,14 @@
 	<div id="setupWindow">
 		<h3>Settings <button onclick="hideSetupWindow()" class="closeBtn">X</button></h3>
 		
-		<nav class="w3-sidebar w3-bar-block w3-light-grey" style="width:130px; height: 100%;">
+		<nav id="settingsNavMenu" class="w3-sidebar w3-bar-block w3-light-grey">
 			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Current')">Current</button>
 			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Setup')">Setup</button>
 			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Script')">Script</button>
 			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Data')">Data</button>
 		</nav>
 
-		<div style="margin-left:140px">
+		<div id="tabContentWrapper">
 			<div id="Current" class="tab w3-animate-left">
 				<h2>Current</h2>
 				<span>Set Day: </span> 
