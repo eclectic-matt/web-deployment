@@ -1184,6 +1184,7 @@ function resetRoles()
 	updateUi();
 }
 
+/*
 // Add resize event listener with debounce for performance
 let resizeTimeout;
 window.addEventListener('resize', function() {
@@ -1191,3 +1192,4 @@ window.addEventListener('resize', function() {
 	// update after 100ms
 	resizeTimeout = setTimeout(setup, 100); 
 });
+*/
