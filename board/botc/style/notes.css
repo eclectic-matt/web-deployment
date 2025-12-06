@@ -159,11 +159,11 @@ html, body
     color: white;
 	border: 5px outset black;
     display: none;
-    width: 90vw;
-    height: 90vh;
+    width: 96vw;
+    height: 96vh;
 	margin-left: 1rem;
 	margin-top: 1rem;
-	padding: 1.5rem;
+	padding: 1rem;
 	font-size: 0.8rem;
     z-index: 100;
     position: fixed;
