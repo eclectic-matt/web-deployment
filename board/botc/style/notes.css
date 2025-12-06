@@ -89,6 +89,7 @@ html, body
     margin-left: 15%;
     height: 1.5rem;
 	text-align: center;
+	font-size: 0.75rem;
 }
 
 #addRoleWindow 
@@ -107,6 +108,11 @@ html, body
     position: fixed;
     top: 0;
     left: 0;
+}
+
+.addRoleNameInput {
+	width: 50%;
+	font-size: 1.25rem;
 }
 
 #statusTable {

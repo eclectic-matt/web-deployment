@@ -512,7 +512,7 @@ function createRolesWindow()
 	let rolesHeader = document.createElement('h3');
 	rolesHeader.style.textAlign = 'center';
 	rolesHeader.style.backgroundColor = 'darkgreen';
-	rolesHeader.innerHTML = "Change Info for <span id='playerName'></span> <span id='playerId' class='invisible'></span>";
+	rolesHeader.innerHTML = "Update <input type='text' class='addRoleNameInput' id='playerName' /> <span id='playerId' class='invisible'></span>";
 	//-closeBtn (in header)
 	let closeAddRoleBtn = document.createElement('button');
 	closeAddRoleBtn.innerHTML = "X";
@@ -714,9 +714,11 @@ function openPlayerEditWindow(el)
 	//Set the player name on the window header
 	if(playersObj.players[playerId].name)
 	{
-		document.getElementById('playerName').innerHTML = playersObj.players[playerId].name;
+		//document.getElementById('playerName').innerHTML = playersObj.players[playerId].name;
+		document.getElementById('playerName').value = playersObj.players[playerId].name;
 	}else{
-		document.getElementById('playerName').innerHTML = "player" + (playerId + 1);
+		//document.getElementById('playerName').innerHTML = "player" + (playerId + 1);
+		document.getElementById('playerName').value = "player" + (playerId + 1);
 	}
 	//Set the (hidden) playerId element
 	document.getElementById('playerId').innerHTML = playerId;
