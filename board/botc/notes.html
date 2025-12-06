@@ -24,7 +24,14 @@
 	<div id="setupWindow">
 		<h3>Settings <button onclick="hideSetupWindow()" class="closeBtn">X</button></h3>
 		
-		<nav id="settingsNavMenu" class="w3-sidebar w3-bar-block w3-light-grey">
+		<nav id="verticalSettingsNavMenu" class="w3-sidebar w3-bar-block w3-light-grey w3-hide-small">
+			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Current')">Current</button>
+			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Setup')">Setup</button>
+			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Script')">Script</button>
+			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Data')">Data</button>
+		</nav>
+
+		<nav id="horizontalSettingsNavMenu" class="w3-bar w3-light-grey w3-hide-medium w3-hide-large">
 			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Current')">Current</button>
 			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Setup')">Setup</button>
 			<button class="w3-bar-item w3-button tablink" onclick="openTab(event, 'Script')">Script</button>
