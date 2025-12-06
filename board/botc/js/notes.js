@@ -512,7 +512,7 @@ function createRolesWindow()
 	let rolesHeader = document.createElement('h3');
 	rolesHeader.style.textAlign = 'center';
 	rolesHeader.style.backgroundColor = 'darkgreen';
-	rolesHeader.innerHTML = "Update <input type='text' class='addRoleNameInput' id='playerName' /> <span id='playerId' class='invisible'></span>";
+	rolesHeader.innerHTML = "Update <input type='text' onchange='setPlayerName(this)' class='addRoleNameInput' id='playerName' /> <span id='playerId' class='invisible'></span>";
 	//-closeBtn (in header)
 	let closeAddRoleBtn = document.createElement('button');
 	closeAddRoleBtn.innerHTML = "X";
