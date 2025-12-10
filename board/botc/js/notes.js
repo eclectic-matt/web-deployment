@@ -323,7 +323,9 @@ function createPlayerTokens()
 		addBtn.id = "player" + i + "Roles";
 		el.appendChild(addBtn);
 		let nameInput = document.createElement('input');
+		nameInput.id = 'player' + i + 'Name';
 		nameInput.onchange = () => setPlayerName(nameInput);
+		nameInput.onfocus = () => setCurrentPlayerId(i);
 		nameInput.type = "text";
 		//NOTE: these default to player1 - player20 so this should always be true
 		if (playersObj.players[i] && playersObj.players[i].name.length > 0) {
@@ -369,130 +371,6 @@ function createPlayerTokens()
 	});
 }
 
-/*
-function testPlayerTokens(cx, cy, eclipseWidth, eclipseHeight, shortestSideRatio = 1.1, playerCountRatio = 0.6, tMin=50, tMax=300)
-{
-	//Ensure playerCount set correctly
-	playerCount = playersObj.players.length;
-	//Get reference to main
-	let main = document.getElementById("main");
-	//Clear main between runs
-	main.innerHTML = null;
-
-	let [w, h, r] = calcScreenDimensions();
-	//Calculate fixed values
-	//let centerAdjustX = -100;
-	//let centerAdjustY = -100;
-	let centerAdjustX = -50;
-	let centerAdjustY = 25;
-	//let cx = (0.5 * w) + centerAdjustX;
-	//let cy = (0.5 * h) + centerAdjustY;
-	//let eclipseWidth = w / 3;
-	//let eclipseHeight = h / 3;
-	let shortestSide = Math.min(w, h);
-	let elementRadius = Math.floor((shortestSideRatio * shortestSide) / (playerCountRatio * playerCount));
-	elementRadius = Math.min(Math.max(elementRadius, tMin), tMax);	
-	
-	//Create player elements
-	for (let i = 0; i < playerCount; i++)
-	{
-		let el = document.createElement('div');
-		el.style.position = "absolute";
-		el.style.width = elementRadius + 'px';
-		el.style.height = elementRadius + 'px';
-		//Calculate position for each token
-		//- angle is 2PI split into playerCount sections, rotated along by PI/2 (due east is 0deg, want due south)
-		let angle = i * (2 * Math.PI / playerCount) + (Math.PI / 2);
-
-		let point = getPointInEclipse(cx, cy, eclipseWidth, eclipseHeight, angle);
-		let x = point.x;
-		let y = point.y;
-		let left = x + 'px';
-		let top = y + 'px';
-		el.style.top = top;
-		el.style.left = left;
-		
-		//Init element
-		el.className = "player";
-		el.id = "player" + (i + 1);
-		el.dataset.player = i;
-		//ALIGNMENT
-		if(playersObj.players[i].alignment == 'Evil')
-		{
-			el.classList.add('evil');
-			el.classList.remove('good');
-		}else{
-			el.classList.add('good');
-			el.classList.remove('evil');
-		}
-		
-		//Death shroud?
-		let deathShroud = document.createElement('div');
-		deathShroud.id = "player" + i + "Shroud";
-		deathShroud.className = 'shroud';
-		deathShroud.style.width = '60%';
-		deathShroud.style.marginLeft = '20%';
-		deathShroud.style.marginTop = '10%';
-		deathShroud.style.marginBottom = 0;
-		deathShroud.style.height = '0.75rem';
-		deathShroud.style.backgroundColor = 'red';
-		deathShroud.style.color = 'white';
-		deathShroud.style.fontSize = '0.5rem';
-		deathShroud.style.textAlign = 'center';
-		deathShroud.innerHTML = 'DEAD';
-		//Not "living" => show death shroud
-		if(playersObj.players[i] && !playersObj.players[i].living)
-		{
-			//deathShroud.style.display = 'block';
-			//el.style.filter = 'grayscale(100%)';
-			el.classList.remove('living');
-			el.classList.add('dead');
-		}else{
-			//deathShroud.style.display = 'none';
-			el.classList.remove('dead');
-			el.classList.add('living');
-		}
-		if(playersObj.players[i] && playersObj.players[i].voteUsed)
-		{
-			deathShroud.innerHTML += ' (no vote)';
-		}
-		deathShroud.style.zIndex = 100;
-		el.appendChild(deathShroud);
-		let addBtn = document.createElement('button');
-		if(playersObj.players[i] && playersObj.players[i].roles.length > 0)
-		{
-			addBtn.innerHTML = playersObj.players[i].roles.join(', ');
-		}else{
-			addBtn.innerHTML = addRoleBtnText;
-		}
-		if(playersObj.players[i] && playersObj.players[i].notes.length > 0)
-		{
-			addBtn.innerHTML += pencilIconUnicode;
-		}
-		addBtn.style.marginTop = '5%';
-		addBtn.style.fontSize = Math.floor(shortestSide / 50) + 'px';
-		addBtn.className = "addBtn";
-		addBtn.onclick = () => openPlayerEditWindow(addBtn);
-		addBtn.id = "player" + i + "Roles";
-		el.appendChild(addBtn);
-		let nameInput = document.createElement('input');
-		nameInput.onchange = () => setPlayerName(nameInput);
-		nameInput.type = "text";
-		//NOTE: these default to player1 - player20 so this should always be true
-		if (playersObj.players[i] && playersObj.players[i].name.length > 0) {
-			//console.log('setting the name of player ' + i + ' to ' + playersObj.players[i].name);
-			nameInput.value = playersObj.players[i].name;
-			nameInput.innerHTML = playersObj.players[i].name;
-		} else {
-			nameInput.value = "p" + i;
-		}
-		nameInput.className = "nameInput";
-		el.appendChild(nameInput);
-		main.appendChild(el);
-	}
-}
-*/
-
 function getPointInEclipse(cx, cy, w, h, angle)
 {
 	return {
@@ -512,7 +390,15 @@ function createRolesWindow()
 	let rolesHeader = document.createElement('h3');
 	rolesHeader.style.textAlign = 'center';
 	rolesHeader.style.backgroundColor = 'darkgreen';
-	rolesHeader.innerHTML = "Update <input type='text' onchange='setPlayerName(this)' class='addRoleNameInput' id='playerName' /> <span id='playerId' class='invisible'></span>";
+	//rolesHeader.innerHTML = "Update <input type='text' onchange='setPlayerName(this)' class='addRoleNameInput' id='playerName' /> <span id='playerId' class='invisible'></span>";
+	rolesHeader.innerHTML = "Update <span id='playerId' class='invisible'></span>";
+	let roleNameInput = document.createElement('input');
+	roleNameInput.type = 'text';
+	roleNameInput.onchange = () => setPlayerName(roleNameInput);
+	roleNameInput.className = 'addRoleNameInput';
+	roleNameInput.id = 'playerName';
+	rolesHeader.appendChild(roleNameInput);
+
 	//-closeBtn (in header)
 	let closeAddRoleBtn = document.createElement('button');
 	closeAddRoleBtn.innerHTML = "X";
@@ -824,38 +710,66 @@ function updateCentralInfo()
 	voteEl.innerHTML = voteCount;
 }
 
-function setPlayerCount(input){
-	playerCount = input.value;
-	document.getElementById("playerCountSpan").innerHTML = playerCount;
-	//init(playerCount);
-	setupPlayersArray(playerCount);
-	setup();
-	//createPlayerTokens(document.getElementById('main'));
+//
+
+function setPlayerCount(input)
+{
+	updatePlayerCount(input.value);
 }
 
 function updatePlayerCount(intPlayerCount)
 {
+	playerCount = intPlayerCount;
 	document.getElementById("playerCountSpan").innerHTML = intPlayerCount;
 	setupPlayersArray(intPlayerCount);
 	setup();
 }
 
+function getCurrentPlayerId()
+{
+	return (parseInt(document.getElementById('playerId').innerHTML) - 1);
+}
+
+function setCurrentPlayerId(playerId)
+{
+	document.getElementById('playerId').innerHTML = playerId;
+}
+
+function updatePlayerNameInput(playerId)
+{
+	//let playerEl = document.getElementById('player' + (playerId + 1));
+	//let nameInput = playerEl.children.filter((el) => { return el.tagName == 'input'; })[0];
+	let nameInput = document.getElementById('player' + playerId + 'Name');
+	nameInput.value = playersObj.players[playerId].name;
+}
+
 function setPlayerName(input)
 {
-	let elId = input.parentElement.id;
-	let playerId = elId.replace('player', '');
+	//let elId = input.parentElement.id;
+	//The player Id is 0-indexed, reduce by one
+	//let playerId = parseInt(elId.replace('player', '')) - 1;
+	let playerId = getCurrentPlayerId();
 	let newName = input.value;
-	//console.log(elId + " => " + newName);
-	playersObj.players[playerId - 1].name = newName;
+	setPlayerNameById(playerId, newName);
+	updatePlayerNameInput(playerId);
+}
+
+function setPlayerNameById(playerId, newName)
+{
+	playersObj.players[playerId].name = newName;
 	saveToLocalStorage();
 }
 
 async function setScript(el)
 {
-	//console.log(el.value);
-	await getScriptRoles(el.value);
+	setScriptByShortName(el.value);
+}
+
+async function setScriptByShortName(shortName)
+{
+	await getScriptRoles(shortName);
 	createRolesWindow();
-	playersObj.settings.script = el.value;
+	playersObj.settings.script = shortName;
 }
 
 //Obscure all player roles

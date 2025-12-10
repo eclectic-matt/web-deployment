@@ -199,7 +199,7 @@ html, body
 	overflow: scroll;
 }
 #availableRolesDiv > h2, #selectedRolesDiv > h2 {
-	font-size: 0.5rem !important;
+	font-size: 0.75rem !important;
 }
 
 
