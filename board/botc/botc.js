@@ -285,7 +285,7 @@ function load(roles){
 
 		//CREATE THE CONTENT HEADER
 		let header2 = document.createElement('h2');
-		header2.innerHTML = editions[edition].name + "(" + editions[edition].roles.length + " roles)";
+		header2.innerHTML = editions[edition].name;
 
 		div.appendChild(header2);
 
@@ -355,7 +355,7 @@ function load(roles){
 					//ADD HEADER
 					//console.log('HEADER:',value.team);
 					let header3 = document.createElement('h3');
-					header3.innerHTML = value.team.toUpperCase();
+					header3.innerHTML = value.team.toUpperCase() + ' (' + editions[edition].roles.length + ' roles)';
 					div.appendChild(header3);
 
 					var ul = document.createElement('ul');
@@ -414,7 +414,7 @@ function load(roles){
 	div.className = "w3-white w3-container tabContent";
 
 	let head = document.createElement('h2');
-	head.innerHTML = 'All character roles (alphabetical)';
+	head.innerHTML = 'All character roles (alphabetical - ' + sortedRoles.length + ' roles)';
 	div.appendChild(head);
 
 	for(role in sortedRoles){
