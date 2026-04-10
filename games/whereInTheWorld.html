@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			clickMap = (ev) => {
+				//console.log(ev.target);
+				let clickX = ev.clientX;
+				let clickY = ev.clientY;
+				console.log("Click Detected at ", clickX, clickY);
+				//Rework these as percentages from top and left
+				let imgWidthPx = ev.target.width;
+				let imgHeightPx = ev.target.height;
+				let percentX = (clickX / imgWidthPx) * 100;
+				let percentY = (clickY / imgHeightPx) * 100;
+				console.log("Click percentages: ", percentX, percentY);
+			}
+		</script>
+	</head>
+	<body>
+		<img 
+			src="../images/map_europe.png"
+			alt="Europe" 
+			usemap="#workmap" 
+			width="800" 
+			height="600" 
+			onclick="clickMap(event)"
+			style="border:5px solid black;"
+		>
+
+		<!--map name="workmap">
+			<area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
+			<area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
+			<area shape="circle" coords="337,300,44" alt="Cup of coffee" href="coffee.htm">
+		</map--> 
+	</body>
+</html>
