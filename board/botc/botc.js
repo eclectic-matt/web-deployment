@@ -355,7 +355,7 @@ function load(roles){
 					//ADD HEADER
 					//console.log('HEADER:',value.team);
 					let header3 = document.createElement('h3');
-					header3.innerHTML = value.team.toUpperCase() + ' (' + editions[edition].roles.length + ' roles)';
+					header3.innerHTML = value.team.toUpperCase() + ' (' + editions[edition].roles.length.toString() + ' roles)';
 					div.appendChild(header3);
 
 					var ul = document.createElement('ul');
