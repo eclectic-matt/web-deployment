@@ -285,7 +285,7 @@ function load(roles){
 
 		//CREATE THE CONTENT HEADER
 		let header2 = document.createElement('h2');
-		header2.innerHTML = editions[edition].name;
+		header2.innerHTML = editions[edition].name + "(" + editions[edition].roles.length + " roles)";
 
 		div.appendChild(header2);
 
