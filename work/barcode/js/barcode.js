@@ -41,7 +41,11 @@ const scanBarcode = () => {
 		//Detect using the barcode detector
 		barcodeDetector.detect(videoEl).then(function(result){
 			//console.log(result);
-			writeToDebugLog(result);
+			//writeToDebugLog(result);
+			result.forEach(
+				(barcode) => 
+					writeToDebugLog("BARCODE: " + barcode.rawValue + " => FORMAT " + barcode.format)
+			);
 		}).finally(function(){
 			//console.log("Completed scan!");
 			writeToDebugLog("Completed scan!");
