@@ -39,17 +39,28 @@ const scanBarcode = () => {
 		//Get video input
 		const videoEl = document.getElementById("videoOutput");
 		//Detect using the barcode detector
-		barcodeDetector.detect(videoEl).then(function(result){
-			//console.log(result);
-			//writeToDebugLog(result);
-			result.forEach(
-				(barcode) => 
-					writeToDebugLog("BARCODE: " + barcode.rawValue + " => FORMAT " + barcode.format)
-			);
-		}).finally(function(){
-			//console.log("Completed scan!");
-			writeToDebugLog("Completed scan!");
-		});
+		barcodeDetector.detect(videoEl)
+		.then(
+			function(barcodes)
+			{
+				barcodes.forEach(
+					(barcode) => 
+						writeToDebugLog("BARCODE: " + barcode.rawValue + " => FORMAT " + barcode.format)
+				);
+			}
+		).finally(
+			function()
+			{
+				//console.log("Completed scan!");
+				writeToDebugLog("Completed scan!");
+			}
+		)
+		.catch(
+			function(err)
+			{
+				writeToDebugLog("ERROR: " + err);
+			}
+		);
 	}
 	else
 	{
