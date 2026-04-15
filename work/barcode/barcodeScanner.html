@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="./js/debug.js"></script>
+	<script src="./js/barcode.js"></script>
+	<script src="./js/permission.js"></script>
+</head>
+<body onload="initBarcodeDetector()">
+	<button id="btnGetCameraPermission" onclick="getCameraPermission()">Grant Camera Permissions</button>
+	<video id="videoOutput"></video>
+	<button id="btnScanBarcode" onclick="scanBarcode()">Scan Barcode</button>
+
+	<div id="divDebug">
+		<textarea id="textareaDebugLog" style="width:500px; height:500px;">Debug Log:
+</textarea>
+	</div>
+</body>
+</html>
