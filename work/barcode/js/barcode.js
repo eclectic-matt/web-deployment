@@ -45,7 +45,7 @@ const scanBarcode = () => {
 			{
 				barcodes.forEach(
 					(barcode) => 
-						writeToDebugLog("BARCODE: " + barcode.rawValue + " => FORMAT " + barcode.format)
+						writeToDebugLog("BARCODE: " + barcode.rawValue.toString() + " => FORMAT " + barcode.format.toString())
 				);
 			}
 		).finally(
