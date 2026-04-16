@@ -1,5 +1,8 @@
+* {
+	box-sizing: border-box;
+}
 button {
-	width: 100vw;
+	width: 95vw;
 	height: auto;
 	font-size: 2rem;
 }
@@ -12,11 +15,13 @@ button#btnScanBarcode {
 	color: black;
 }
 video#videoOutput {
-	width: 100vw;
+	width: 95vw;
 	height: auto;
-	border: 3px solid black;
+	margin: 0 auto;
+	border: 2px solid black;
+	background-color: grey;
 }
-textarea#debugLogOutput {
-	width: 100vw;
+textarea#textareaDebugLog {
+	width: 95vw;
 	height: 20vh;
 }
