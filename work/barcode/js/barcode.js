@@ -33,7 +33,8 @@ function initBarcodeDetector()
 	}
 }
 
-const scanBarcode = () => {
+const scanBarcode = () => 
+{
 	if (barcodeDetector != undefined)
 	{
 		//Get video input

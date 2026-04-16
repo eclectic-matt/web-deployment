@@ -1,15 +1,18 @@
+//Setup media constraints (no audio, video facing environment - rear camera)
+const constraints = {
+	audio: false,
+	video: {
+		facingMode: { 
+			exact: "environment"
+		}
+	}
+};
+
 function getCameraPermission() 
 {
-	//add constraints object
-	var constraints = {
-		audio:false,
-		video: {
-			facingMode: { exact: "environment" }
-		}
-	};
-
 	//call getUserMedia
-	navigator.mediaDevices.getUserMedia(constraints)
+	navigator.mediaDevices
+	.getUserMedia(constraints)
 	.then(function(mediaStream)
 	{
 		var video = document.querySelector('#videoOutput');
