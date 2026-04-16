@@ -1,0 +1,22 @@
+button {
+	width: 100vw;
+	height: auto;
+	font-size: 2rem;
+}
+button#btnGetCameraPermission {
+	background-color: palevioletred;
+	color: white;
+}
+button#btnScanBarcode {
+	background-color: palegreen;
+	color: black;
+}
+video#videoOutput {
+	width: 100vw;
+	height: auto;
+	border: 3px solid black;
+}
+textarea#debugLogOutput {
+	width: 100vw;
+	height: 20vh;
+}
