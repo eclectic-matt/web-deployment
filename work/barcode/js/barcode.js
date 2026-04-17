@@ -18,6 +18,9 @@ function initBarcodeDetector()
 			formats: ["code_39", "codabar", "ean_13"],
 		});
 		*/
+
+		//These are the only formats we store in the Products table
+		//const barcodeFormats = ["ean_13"];
 		
 		// create new detector with ALL formats
 		barcodeDetector = new BarcodeDetector();
@@ -46,14 +49,14 @@ const scanBarcode = () =>
 			{
 				barcodes.forEach(
 					(barcode) => 
-						writeToDebugLog("BARCODE: " + barcode.rawValue.toString() + " => FORMAT " + barcode.format.toString())
+						writeToDebugLog(barcode.rawValue.toString() + " (" + barcode.format.toString() + ")")
 				);
 			}
 		).finally(
 			function()
 			{
 				//console.log("Completed scan!");
-				writeToDebugLog("Completed scan!");
+				//writeToDebugLog("Completed scan!");
 			}
 		)
 		.catch(
