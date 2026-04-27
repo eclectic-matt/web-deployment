@@ -56,11 +56,25 @@
 			}
 			.menu 
 			{
+				display: flex;
+				justify-content: space-between;
 				width: 96vw;
 				margin: 0;
 				padding: 10px;
 				background-color: darkslategray;
 				color: white;
+			}
+			.menuBtn button
+			{
+				background-color: lightgreen;
+				border-radius: 0.5rem;
+				color: brown;
+			}
+			.menuBtn button:hover
+			{
+				background-color: darkgreen;
+				color: yellow;
+				border-radius: 0.5rem;
 			}
 			.voteOption 
 			{
@@ -78,6 +92,7 @@
 				color: black;
 
 				text-align: left;
+				user-select: none;
 
 				left: -100vw;
 
@@ -148,7 +163,9 @@
 			<!-- Current Date + Hamburger Menu -->
 			<div class="menu">
 				<div class="dateView">Year 1, January</div>
-				<div class="menuBtn"></div>
+				<div class="menuBtn">
+					<button>&#9776;</button>
+				</div>
 			</div>
 			<!-- The current main content area -->
 			<div class="main event">
