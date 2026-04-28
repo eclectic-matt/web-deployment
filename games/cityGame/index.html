@@ -47,116 +47,10 @@
 
 			}
 		</script>
-		<style>
-			* 
-			{
-				box-sizing: border-box;
-				font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-				overflow: hidden;
-			}
-			.menu 
-			{
-				display: flex;
-				justify-content: space-between;
-				width: 96vw;
-				margin: 0;
-				padding: 10px;
-				background-color: darkslategray;
-				color: white;
-			}
-			.menuBtn button
-			{
-				background-color: lightgreen;
-				border-radius: 0.5rem;
-				color: brown;
-			}
-			.menuBtn button:hover
-			{
-				background-color: darkgreen;
-				color: yellow;
-				border-radius: 0.5rem;
-			}
-			.voteOption 
-			{
-				display: flex;
-				flex-direction: row;
-
-				padding: 10px;
-				margin: 0.5rem 0;
-				max-width: 100vw;
-
-				border: 2px outset grey;
-				border-radius: 1rem;
-				
-				background-color: darkgoldenrod;
-				color: black;
-
-				text-align: left;
-				user-select: none;
-
-				left: -100vw;
-
-				animation-name: voteOptionAppears;
-				animation-timing-function: ease-in;
-				animation-iteration-count: 1;
-			}
-			.voteOption:nth-of-type(1)
-			{
-				animation-duration: 1s;
-				animation-delay: 0s;
-			}
-			.voteOption:nth-of-type(2)
-			{
-				animation-duration: 1s;
-				animation-delay: 0.5s;
-			}
-			.voteOption:hover 
-			{
-				background-color: goldenrod;
-				color: white;
-				border: 2px outset gold;
-			}
-			.voteCosts, .voteBenefits 
-			{
-				flex-basis: grow;
-			}
-			.event 
-			{
-				text-align: center;
-			}
-			@keyframes voteOptionAppears 
-			{
-				from 
-				{
-					opacity: 0%;
-					transform: translateX(-100vw);
-				}
-				to 
-				{
-					opacity: 100%;
-					transform: translateX(0vw);
-				}
-			}
-			.tabs 
-			{
-				position: absolute;
-				bottom: 0;
-				width: 100vw;
-				overflow: hidden;
-				height: 2rem;
-				background-color: darkslategray;
-				flex-flow: row wrap;
-				justify-content: space-between;
-			}
-			.tab 
-			{
-				padding: 0;
-				margin: 0;
-				width: 20vw;
-				float: left;
-				flex-basis: grow;
-			}
-		</style>
+		<link rel="stylesheet" href="./style/main.css" />
+		<link rel="stylesheet" href="./style/elements.css" />
+		<link rel="stylesheet" href="./style/animations.css" />
+		<script src="./js/ui.js"></script>
 	</head>
 	<body>
 		<div class="gameWrapper">
@@ -168,7 +62,7 @@
 				</div>
 			</div>
 			<!-- The current main content area -->
-			<div class="main event">
+			<div class="main event tabDisplay">
 				<h2>Major Development</h2>
 				<h3>All factions vote:</h3>
 				<div class="voteWrapper">
@@ -177,15 +71,15 @@
 						<div class="voteCosts">
 							Costs:
 								<ul class="voteCostsUl">
-									<li>15 MAT</li>
-									<li>10 MON</li>
+									<li class="voteCostLi">15 MAT</li>
+									<li class="voteCostLi">10 MON</li>
 								</ul>
 						</div>
 						<div class="voteBenefits">
 							Benefits: 
 							<ul class="voteBenefitsUl">
-								<li>+15 HEA</li>
-								<li>+10 SAT</li>
+								<li class="voteBenefitLi">+15 HEA</li>
+								<li class="voteBenefitLi">+10 SAT</li>
 							</ul>
 						</div>
 					</div>
@@ -195,20 +89,25 @@
 						<div class="voteCosts">
 							Costs:
 								<ul class="voteCostsUl">
-									<li>35 MAT</li>
-									<li>25 MON</li>
+									<li class="voteCostLi">35 MAT</li>
+									<li class="voteCostLi">25 MON</li>
 								</ul>
 						</div>
 						<div class="voteBenefits">
 							Benefits: 
 							<ul class="voteBenefitsUl">
-								<li>+15 SEC</li>
-								<li>-5 SAT</li>
+								<li class="voteBenefitLi">+15 SEC</li>
+								<li class="voteBenefitLi">-5 SAT</li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<h4>4 out of 6 votes cast...</h4>
+				<div class="voteInformation">
+					<h4 class="voteStatus">
+						<span id="votesCast">4</span> out of <span id="votesExpected">6</span> votes cast...
+					</h4>
+					<h4 class="voteInformationDetail">Costs for Major Developments are shared by all players and must be paid by the end of the current year.</h4>
+				</div>
 			</div>
 			<!-- Tabs to switch between:
 				- event
@@ -218,16 +117,16 @@
 			-->
 			<div class="tabs">
 				<div class="tab showEvent">
-					<button id="showTab(event)">Event Tab</button>
+					<button class="tabButton" id="showTab('event')">Event Tab</button>
 				</div>
 				<div class="tab showDistrict">
-					<button id="showTab(district)">District</button>
+					<button class="tabButton" id="showTab('district')">District</button>
 				</div>
 				<div class="tab showCity">
-					<button id="showTab(city)">City</button>
+					<button class="tabButton" id="showTab('city')">City</button>
 				</div>
 				<div class="tab showStats">
-					<button id="showTab(stats)">Stats</button>
+					<button class="tabButton" id="showTab('stats')">Stats</button>
 				</div>
 			</div>
 		</div>

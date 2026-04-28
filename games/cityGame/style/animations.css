@@ -1,0 +1,13 @@
+@keyframes voteOptionAppears 
+{
+	from 
+	{
+		opacity: 0%;
+		transform: translateX(-100vw);
+	}
+	to 
+	{
+		opacity: 100%;
+		transform: translateX(0vw);
+	}
+}

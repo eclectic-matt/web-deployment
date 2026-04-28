@@ -1,0 +1,120 @@
+/*
+ * MAIN TOP MENU 
+ */
+.menu 
+{
+	display: flex;
+	justify-content: space-between;
+	width: 96vw;
+	margin: 0;
+	padding: 10px;
+	background-color: darkslategray;
+	color: white;
+}
+.menuBtn button
+{
+	background-color: lightgreen;
+	border-radius: 0.5rem;
+	color: brown;
+}
+.menuBtn button:hover
+{
+	background-color: darkgreen;
+	color: yellow;
+	border-radius: 0.5rem;
+}
+
+/*
+ * VOTE (EVENT) PAGE
+ */
+.voteOption 
+{
+	display: flex;
+	flex-direction: row;
+
+	padding: 10px;
+	margin: 0.5rem 0;
+	max-width: 100vw;
+
+	border: 2px outset grey;
+	border-radius: 1rem;
+	
+	background-color: darkgoldenrod;
+	color: black;
+
+	text-align: left;
+	user-select: none;
+
+	left: -200vw;
+
+	animation-name: voteOptionAppears;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;
+}
+.voteOption:nth-of-type(1)
+{
+	animation-duration: 1s;
+	animation-delay: 0s;
+}
+.voteOption:nth-of-type(2)
+{
+	animation-duration: 1s;
+	animation-delay: 0.5s;
+}
+.voteOption:hover 
+{
+	background-color: goldenrod;
+	color: white;
+	border: 2px outset gold;
+}
+.voteCosts, .voteBenefits 
+{
+	flex-basis: grow;
+}
+.voteCostsUl, .voteBenefitsUl 
+{
+	padding-left: 0;
+}
+.voteCostLi, .voteBenefitLi 
+{
+	padding: 0;
+	margin: 0;
+}
+.event 
+{
+	text-align: center;
+}
+
+/*
+ * BOTTOM TABS MENU
+ */
+.tabs 
+{
+	position: absolute;
+	bottom: 0;
+	width: 100vw;
+	overflow: hidden;
+	height: 2rem;
+	background-color: darkslategray;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	padding: 0 20px;
+}
+.tab 
+{
+	padding: 0;
+	margin: 0;
+	float: left;
+	/*width: 20vw;
+	flex-basis: grow;*/
+}
+.tabButton 
+{
+	background-color: aquamarine;
+	text-align: center;
+}
+.tabButton:hover {
+	background-color: aqua;
+	color: darkblue;
+}
