@@ -2,82 +2,38 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<script>
-			var gameData = {
-				date: {
-					year: 1,
-					month: 1
-				},
-				event: {
-					type: {
-						significance: "Major",
-						type: "Development",
-						voter: "All factions"
-					},
-					options: {
-						title: "Build Hospital",
-						costs: [
-							{
-								type: "Materials",
-								amount: 20
-							},
-							{
-								type: "Money",
-								amount: 25
-							}
-						],
-						benefits: [
-							{
-								type: "Satisfaction",
-								amount: 10
-							},
-							{
-								type: "Health",
-								amount: 15
-							}
-						]
-					}
-				}
-			};
-
-			loadCurrentEvent(gameData);
-
-			function loadCurrentEvent(data)
-			{
-
-			}
-		</script>
 		<link rel="stylesheet" href="./style/main.css" />
 		<link rel="stylesheet" href="./style/elements.css" />
 		<link rel="stylesheet" href="./style/animations.css" />
+		<script src="./js/main.js" defer></script>
 		<script src="./js/ui.js"></script>
 	</head>
 	<body>
 		<div class="gameWrapper">
 			<!-- Current Date + Hamburger Menu -->
 			<div class="menu">
-				<div class="dateView">Year 1, January</div>
+				<div id="dateHeaderMenuEl" class="dateView">Year 1, January</div>
 				<div class="menuBtn">
 					<button>&#9776;</button>
 				</div>
 			</div>
 			<!-- The current main content area -->
 			<div class="main event tabDisplay">
-				<h2>Major Development</h2>
-				<h3>All factions vote:</h3>
+				<h2 id="developmentTypeHeader">Major Development</h2>
+				<p id="voteTypeHeader">All factions vote:</p>
 				<div class="voteWrapper">
 					<div class="voteOption">
-						<h1>Build Hospital</h1>
+						<h2 id="voteOneHeader">Build Hospital</h2>
 						<div class="voteCosts">
 							Costs:
-								<ul class="voteCostsUl">
+								<ul class="voteCostsUl" id="voteOneCostsUl">
 									<li class="voteCostLi">15 MAT</li>
 									<li class="voteCostLi">10 MON</li>
 								</ul>
 						</div>
 						<div class="voteBenefits">
 							Benefits: 
-							<ul class="voteBenefitsUl">
+							<ul class="voteBenefitsUl" id="voteOneBenefitsUl">
 								<li class="voteBenefitLi">+15 HEA</li>
 								<li class="voteBenefitLi">+10 SAT</li>
 							</ul>
@@ -85,17 +41,17 @@
 					</div>
 
 					<div class="voteOption">
-						<h1>Build Barracks</h1>
+						<h2 id="voteTwoHeader">Build Barracks</h2>
 						<div class="voteCosts">
 							Costs:
-								<ul class="voteCostsUl">
+								<ul class="voteCostsUl" id="voteTwoCostsUl">
 									<li class="voteCostLi">35 MAT</li>
 									<li class="voteCostLi">25 MON</li>
 								</ul>
 						</div>
 						<div class="voteBenefits">
 							Benefits: 
-							<ul class="voteBenefitsUl">
+							<ul class="voteBenefitsUl" id="voteTwoBenefitsUl">
 								<li class="voteBenefitLi">+15 SEC</li>
 								<li class="voteBenefitLi">-5 SAT</li>
 							</ul>
