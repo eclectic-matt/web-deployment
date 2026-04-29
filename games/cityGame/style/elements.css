@@ -62,15 +62,27 @@
 	animation-duration: 1s;
 	animation-delay: 0.5s;
 }
-.voteOption:hover 
+.voteOption:hover
 {
 	background-color: goldenrod;
 	color: white;
 	border: 2px outset gold;
 }
+.voteOption:hover .voteCosts {
+	color: darkred;
+}
+.voteOption:hover .voteBenefits {
+	color: darkgreen;
+}
 .voteCosts, .voteBenefits 
 {
 	flex-basis: grow;
+}
+.voteCosts {
+	color: red;
+}
+.voteBenefits {
+	color: green;
 }
 .voteCostsUl, .voteBenefitsUl 
 {
