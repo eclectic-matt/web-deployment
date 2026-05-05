@@ -34,6 +34,11 @@
                   "effect": "- _LIFE_"
                 }
               ]
+            },
+            {
+              "title": "Comb the beach",
+              "cost": "1 _TIME_",
+              "action": "Roll the die twice. Collect Gems equal to the difference between the 2 die rolls. If you roll the same number twice, you collect nothing."
             }
           ]
         }
