@@ -41,6 +41,42 @@
               "action": "Roll the die twice. Collect Gems equal to the difference between the 2 die rolls. If you roll the same number twice, you collect nothing."
             }
           ]
+        },
+        {
+          "side": 1,
+          "description": "A storm is rolling in. The fish will be harder to catch now.",
+          "actions": [
+            {
+              "title": "Go Fishing",
+              "cost": "1 _TIME_",
+              "action": "Fish up to 3. What's your total (!)?",
+              "consequences": [
+                {
+                  "penaltyMin": 1,
+                  "penaltyMax": 1,
+                  "title": "Pirates",
+                  "effect": "Pay 2 Gems"
+                },
+                {
+                  "penaltyMin": 2,
+                  "penaltyMax": 2,
+                  "title": "Sand eagles",
+                  "effect": "Discard 2 fish cards from your supply"
+                },
+                {
+                  "penaltyMin": 3,
+                  "penaltyMax": 4,
+                  "title": "Sea seer!",
+                  "effect": "- _LIFE_ _PEP_"
+                }
+              ]
+            },
+            {
+              "title": "Comb the beach",
+              "cost": "1 _TIME_",
+              "action": "Roll the die twice. Collect Gems equal to the difference between the 2 die rolls. If you roll the same number twice, you collect nothing."
+            }
+          ]
         }
       ]
     }
