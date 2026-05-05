@@ -7,7 +7,8 @@ function initBarcodeDetector()
 function scanBarcode()
 {
 	const videoElementId = "videoOutput";
-	scanner.scanBarcode(videoElementId);
+	let msg = scanner.scanBarcode(videoElementId);
+	writeToDebugLog(msg);
 }
 
 /*var barcodeDetector;

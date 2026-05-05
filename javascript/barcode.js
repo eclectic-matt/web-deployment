@@ -25,6 +25,7 @@ class BarcodeDetection
 			console.log("Barcode detector is not setup!");
 			return;
 		}
+		let returnStr = "";
 		//Get video input
 		const videoEl = document.getElementById(videoElementId);
 		//Detect using the barcode detector
@@ -34,7 +35,8 @@ class BarcodeDetection
 			{
 				barcodes.forEach(
 					(barcode) => 
-						console.log("BARCODE", barcode.rawValue, barcode.format)
+						//console.log("BARCODE", barcode.rawValue, barcode.format)
+						returnStr += "BARCODE " + barcode.rawValue.ToString()
 				);
 			}
 		).finally(
@@ -47,8 +49,11 @@ class BarcodeDetection
 			function(err)
 			{
 				//Caught error
-				console.log("BARCODE SCAN ERROR", err);
+				//console.log("BARCODE SCAN ERROR", err);
+				returnStr += "BARCODE SCAN ERROR" + err;
 			}
 		);
+
+		return returnStr;
 	}
 }
