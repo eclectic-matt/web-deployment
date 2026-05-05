@@ -1,4 +1,16 @@
-var barcodeDetector;
+var scanner;
+function initBarcodeDetector()
+{
+	scanner = new BarcodeDetection();
+}
+
+function scanBarcode()
+{
+	const videoElementId = "videoOutput";
+	scanner.scanBarcode(videoElementId);
+}
+
+/*var barcodeDetector;
 
 function initBarcodeDetector()
 {
@@ -13,11 +25,10 @@ function initBarcodeDetector()
 		//console.log("Barcode Detector supported!");
 		writeToDebugLog("Barcode Detection supported");
 		// create new detector with formats specified (preferred for performance)
-		/*
-		const barcodeDetector = new BarcodeDetector({
-			formats: ["code_39", "codabar", "ean_13"],
-		});
-		*/
+		
+		//const barcodeDetector = new BarcodeDetector({
+		//	formats: ["code_39", "codabar", "ean_13"],
+		//});
 
 		//These are the only formats we store in the Products table
 		//const barcodeFormats = ["ean_13"];
@@ -71,4 +82,4 @@ const scanBarcode = () =>
 		//console.log("No barcode scanner setup - could not detect!");
 		writeToDebugLog("No barcode scanner setup - could not detect!");
 	}
-}
+}*/
