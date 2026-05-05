@@ -8,7 +8,7 @@
       "sides": [
         {
           "side": 0,
-          "description": "Fish or trawl the beach here...",
+          "description": "Catch fish or comb the beach in the midday sun",
           "actions": [
             {
               "title": "Go Fishing",
@@ -16,8 +16,22 @@
               "action": "Fish up to 3. What's your total (!)?",
               "consequences": [
                 {
-                  "title": "Pirates",
-                  "effect": "Pay 2 _GEMS_"
+                  "penaltyMin": 1,
+                  "penaltyMax": 1,
+                  "title": "Brave the waves",
+                  "effect": "- _PEP_"
+                },
+                {
+                  "penaltyMin": 2,
+                  "penaltyMax": 2,
+                  "title": "Greedy gulls",
+                  "effect": "Discard 1 fish card from your supply"
+                },
+                {
+                  "penaltyMin": 3,
+                  "penaltyMax": 4,
+                  "title": "Razor fish!",
+                  "effect": "- _LIFE_"
                 }
               ]
             }
