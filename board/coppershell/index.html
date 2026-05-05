@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Coppershell</title>
+	<!-- STYLES -->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+	<link rel="stylesheet" href="./style/main.css">
+	<!-- SCRIPTS -->
+	<script src="./js/game.js"></script>
+	<script>
+		function init()
+		{
+			let game = new Game();
+			game.updateAllDieFaces();
+		}
+	</script>
+</head>
+<body onload="init()">
+	<div id="main">
+		<div id="nav" class="w3-row-padding">
+			<div class="w3-col s4">Town</div>
+			<div class="w3-col s4">Player</div>
+			<div class="w3-col s4">Quest</div>
+		</div>
+		<div id="town">
+			<!-- TOP ROW = Crows, Coppersand (1), Scrapyard (2) -->
+			<div class="w3-row-padding">
+				<div class="w3-col s4">
+					<div class="location">
+						<h2>The Crow's Nest</h2>
+					</div>
+				</div>
+				<div class="w3-col s4">
+					<div class="location">
+						<h2><die face="1" ></die>Coppersand<die face="1" ></die></h2>
+					</div>
+				</div>
+				<div class="w3-col s4">
+					<div class="location">
+						<h2><die face="2" ></die>Scrapyard<die face="2" ></die></h2>
+					</div>
+				</div>
+			</div>
+			<!-- MIDDLE ROW = Miner's, Daytime, Carnival (3) -->
+			<div class="w3-row-padding">
+				<div class="w3-col s4">
+					<div class="location">
+						<h2>Miner's Guild</h2>
+					</div>
+				</div>
+				<div class="w3-col s4">
+					<div class="location">
+						<h2>Daytime Card</h2>
+					</div>
+				</div>
+				<div class="w3-col s4">
+					<div class="location">
+						<h2><die face="3" ></die>Bay Carnival<die face="3" ></die></h2>
+					</div>
+				</div>
+			</div>
+			<!-- BOTTOM ROW = Miner's, Player, Carnival -->
+			<div class="w3-row-padding">
+				<div class="w3-col s4">
+					<div class="location">
+						<h2><die face="6" ></die>The Market<die face="6" ></die></h2>
+					</div>
+				</div>
+				<div class="w3-col s4">
+					<div class="location">
+						<h2><die face="5" ></die>Chemist's Guild<die face="5" ></die></h2>
+					</div>
+				</div>
+				<div class="w3-col s4">
+					<div class="location">
+						<h2><die face="4" ></die>Burrow Glade<die face="4" ></die></h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="player">
+			<div id="playerCard">
+				<h2>Brabben Hengull</h2>
+				<p>Stuff here...</p>
+			</div>
+			<div id="rucksack">
+				<h2>Brews</h2>
+				<p>Stuff here...</p>
+			</div>
+			<div id="purse">
+				<h2>Purse</h2>
+				<p>Stuff here...</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

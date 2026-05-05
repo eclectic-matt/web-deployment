@@ -1,0 +1,30 @@
+{
+	"name": "locations",
+	"version": 1,
+	"locations": [
+		{
+			"name": "Coppersand",
+			"die": 1,
+			"sides": [
+				{
+					"side": 0,
+					"description": "Fish or trawl the beach here...",
+					"actions": [
+						{
+							"title": "Go Fishing",
+							"cost": "1 TIME",
+							"action": "Fish up to 3. What's your total (!)?",
+							"consequences": [
+								{
+									"title": "Pirates",
+									"effect": "Pay 2 Gems"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+
+}

@@ -1,0 +1,33 @@
+#nav 
+{
+	height: 2vh;
+}
+#nav div 
+{
+	border: 1px solid red;
+	text-align: center;
+	background-color: palegoldenrod;
+	color: blue;
+}
+.location 
+{
+	height: 30vh;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: lightblue;
+	text-align: center;
+	margin: 10px 0;
+}
+.location h2 
+{
+	background-color: dodgerblue;
+	color: black;
+}
+#player 
+{
+	display: none;
+}
+#quest 
+{
+	display: none;
+}
