@@ -44,6 +44,14 @@ class Game
 			progress: false
 		}
 	}
+	
+	//====================
+	// STORY CARDS
+	//====================
+	drawStoryCards(type, count = 1)
+	{
+		
+	}
 
 	getDieFace(faceNumber)
 	{
