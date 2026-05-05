@@ -43,14 +43,52 @@ class Game
 			name: undefined,
 			progress: false
 		}
+		this.story = {
+			deckRuns: 0,
+			deck: [],
+			discard: []
+		}
 	}
 	
 	//====================
 	// STORY CARDS
 	//====================
-	drawStoryCards(type, count = 1)
+	drawStoryCards(count = 1)
 	{
-		
+		let rewards = [];
+		for(let i = 0; i < count; i++)
+		{
+			let card = drawStoryCard();
+			rewards.push(card);
+		}
+		return rewards;
+	}
+	
+	drawStoryCard()
+	{
+		if(this.story.deck.length === 0)
+		{
+			this.refillStoryDeck();
+		}
+	}
+	
+	refillStoryDeck()
+	{
+		if(this.story.deckRuns == 0)
+		{
+			//Time passes - lose 1 time
+			//Tax - 1 gem for every 10
+			//Rot - lose 2 hazard cards from your supply
+		}else{
+			//Time passes - lose 1 time and 1 pep
+			//Tax - 1 gem for every 10
+			//Rot - lose ALL hazard cards from your supply
+		}
+		//Shuffle discards
+		let cards = this.story.discards;
+		cards = this.shuffle(cards);
+		this.story.deck = cards;
+		this.story.deckRuns++;
 	}
 
 	getDieFace(faceNumber)
