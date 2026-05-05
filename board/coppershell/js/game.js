@@ -5,6 +5,46 @@ class Game
 
 	}
 
+	setup()
+	{
+		this.daytime = {
+			day: 1,
+			time: 0
+		}
+		this.player = {
+			character: undefined,
+			stats: {
+				strength: 2,
+				agility: 2,
+				xp: 0,
+				purse: 2
+			},
+			rucksack: {
+				brews: {
+					life: false,
+					pep: false,
+					agility: false,
+					reroll: false,
+					attack: false,
+					xp: false
+				},
+				tools: {
+					clock: false,
+					shovel: false,
+					gloves: false,
+					lantern: false
+				},
+				fish: [],
+				materials: [],
+				forageables: []
+			}
+		}
+		this.quest = {
+			name: undefined,
+			progress: false
+		}
+	}
+
 	getDieFace(faceNumber)
 	{
 		switch(Number(faceNumber))
