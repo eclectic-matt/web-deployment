@@ -125,14 +125,21 @@ class Game
 		}
 	}
 
-	getLocation(locationName, side = 0, outputElId)
+	getLocation(locationName, outputElId)
 	{
+    if(outputElId === undefined)
+    {
+      outputElId = "location";
+    }
     console.log('Loading',locationName,'side',side,'output to',outputElId);
 		//Find the location matching this name
     let matchedLocation = this.locations.locations.find(loc => loc.name === locationName);
+    
+    if(matchedLocation === undefined) return;
 
     //Clear output 
     let outputEl = document.getElementById(outputElId);
+    outputEl.style.display = 'block';
     outputEl.innerHTML = null;
     
     //Output location details
@@ -151,9 +158,15 @@ class Game
     }
 
     let locationHead = document.createElement('h2');
-    locationHead.appendChild(dieEl);
+    if(dieEl !== null)
+    {
+      locationHead.appendChild(dieEl);
+    }
     locationHead.innerHTML = matchedLocation.name;
-    locationHead.appendChild(dieEl);
+    if(dieEl !== null)
+    {
+      locationHead.appendChild(dieEl);
+    }
 
     //Output to the output element
     outputEl.appendChild(locationHead);

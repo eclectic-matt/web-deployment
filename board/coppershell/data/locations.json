@@ -5,6 +5,7 @@
     {
       "name": "Coppersand",
       "die": 1,
+      "flipped": false,
       "sides": [
         {
           "side": 0,
@@ -83,41 +84,43 @@
     {
       "name": "Scrapyard",
       "die": 2,
-      "sides": []
-    },
-    {
-      "name": "Scrapyard",
-      "die": 2,
+      "flipped": false,
       "sides": []
     },
     {
       "name": "Bay Carnival",
       "die": 3,
+      "flipped": false,
       "sides": []
     },
     {
       "name": "Burrow Glade",
       "die": 4,
+      "flipped": false,
       "sides": []
     },
     {
       "name": "Chemist's Guild",
       "die": 5,
+      "flipped": false,
       "sides": []
     },
     {
       "name": "The Market",
       "die": 6,
+      "flipped": false,
       "sides": []
     },
     {
       "name": "Miner's Guild",
       "die": 0,
+      "flipped": false,
       "sides": []
     },
     {
       "name": "The Crow's Nest",
       "die": 0,
+      "flipped": false,
       "sides": []
     }
   ]
