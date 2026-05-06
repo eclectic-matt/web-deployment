@@ -18,7 +18,6 @@ showLocation = (locationName) =>
 	}
 	
 	//Show "back to town" button
-
 	townBtn.innerHTML = "Back to town...";
 	townBtn.onclick = () => {
 		showLocation();
@@ -27,5 +26,5 @@ showLocation = (locationName) =>
 	document.getElementById('town').style.display = 'none';
 	//Show current location large
 	let loc = document.getElementById('location');
-	loc.innerHTML = '<h2>SELECTED LOCATION</h2>';
+	loc.innerHTML = '<h2>" + locationName + "</h2>';
 }
