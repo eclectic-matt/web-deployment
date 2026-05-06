@@ -5,7 +5,7 @@ class Game
 
 	}
 
-	setup()
+	async setup()
 	{
 		this.daytime = {
 			day: 1,
@@ -49,7 +49,7 @@ class Game
 			discard: []
 		}
 
-    this.locations = fetch('./data/locations.json', { 
+    this.locations = await fetch('./data/locations.json', { 
         method: 'GET'
       })
 			.then(function(response) { 
@@ -61,7 +61,7 @@ class Game
         console.log('fetch.json', json);
         return json;
       }
-    ).value;
+    );
 	}
 	
 	//====================
