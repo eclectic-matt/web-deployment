@@ -131,7 +131,7 @@ class Game
     {
       outputElId = "location";
     }
-    console.log('Loading',locationName,'side',side,'output to',outputElId);
+    console.log('Loading',locationName,'output to',outputElId);
 		//Find the location matching this name
     let matchedLocation = this.locations.locations.find(loc => loc.name === locationName);
     
