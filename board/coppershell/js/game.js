@@ -49,7 +49,7 @@ class Game
 			discard: []
 		}
 
-    fetch('./data/locations.json', { 
+    this.locations = fetch('./data/locations.json', { 
         method: 'GET'
       })
 			.then(function(response) { 
@@ -57,9 +57,9 @@ class Game
         return response.json(); 
       })
 			.then(function(json) {
-        this.locations = json;
+        //this.locations = json;
         console.log('fetch.json', this.locations);
-        return true;
+        return json;
       }
     );
 	}
