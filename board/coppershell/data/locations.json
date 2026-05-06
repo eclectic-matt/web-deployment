@@ -79,6 +79,46 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Scrapyard",
+      "die": 2,
+      "sides": []
+    },
+    {
+      "name": "Scrapyard",
+      "die": 2,
+      "sides": []
+    },
+    {
+      "name": "Bay Carnival",
+      "die": 3,
+      "sides": []
+    },
+    {
+      "name": "Burrow Glade",
+      "die": 4,
+      "sides": []
+    },
+    {
+      "name": "Chemist's Guild",
+      "die": 5,
+      "sides": []
+    },
+    {
+      "name": "The Market",
+      "die": 6,
+      "sides": []
+    },
+    {
+      "name": "Miner's Guild",
+      "die": 0,
+      "sides": []
+    },
+    {
+      "name": "The Crow's Nest",
+      "die": 0,
+      "sides": []
     }
   ]
 }
