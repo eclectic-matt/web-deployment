@@ -58,7 +58,7 @@ class Game
       })
 			.then(function(json) {
         //this.locations = json;
-        console.log('fetch.json', this.locations);
+        console.log('fetch.json', json);
         return json;
       }
     );
