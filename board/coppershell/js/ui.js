@@ -12,8 +12,8 @@ showLocation = (locationName) =>
 			showLocation();
 		}
 		//Show all locations
-	document.getElementById('town').style.display = 'block';
-	document.getElementById('location').style.display = 'none';
+		document.getElementById('town').style.display = 'block';
+		document.getElementById('location').style.display = 'none';
 		return;
 	}
 	
@@ -25,6 +25,7 @@ showLocation = (locationName) =>
 	//Hide all locations
 	document.getElementById('town').style.display = 'none';
 	//Show current location large
-	let loc = document.getElementById('location');
-	loc.innerHTML = '<h2>' + locationName + '</h2>';
+	//let loc = document.getElementById('location');
+	//loc.innerHTML = '<h2>' + locationName + '</h2>';
+	game.getLocation(locationName, 0, 'location');
 }
