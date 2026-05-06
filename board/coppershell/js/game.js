@@ -49,19 +49,19 @@ class Game
 			discard: []
 		}
 
-    this.locations = await fetch('./data/locations.json', { 
-        method: 'GET'
-      })
+		this.locations = await fetch('./data/locations.json', { 
+				method: 'GET'
+			})
 			.then(function(response) { 
-        console.log('fetch.response', response);
-        return response.json(); 
-      })
+				console.log('fetch.response', response);
+				return response.json(); 
+			})
 			.then(function(json) {
-        //this.locations = json;
-        console.log('fetch.json', json);
-        return json;
-      }
-    );
+				//this.locations = json;
+				console.log('fetch.json', json);
+				return json;
+			}
+		);
 	}
 	
 	//====================
@@ -127,49 +127,50 @@ class Game
 
 	getLocation(locationName, outputElId)
 	{
-    if(outputElId === undefined)
-    {
-      outputElId = "location";
-    }
-    console.log('Loading',locationName,'output to',outputElId);
+		if(outputElId === undefined)
+		{
+			outputElId = "location";
+		}
+		console.log('Loading',locationName,'output to',outputElId);
+		
 		//Find the location matching this name
-    let matchedLocation = this.locations.locations.find(loc => loc.name === locationName);
-    
-    if(matchedLocation === undefined) return;
+		let matchedLocation = this.locations.locations.find(loc => loc.name === locationName);
+		
+		if(matchedLocation === undefined) return;
 
-    //Clear output 
-    let outputEl = document.getElementById(outputElId);
-    outputEl.style.display = 'block';
-    outputEl.innerHTML = null;
-    
-    //Output location details
-    /*
-    <div class="location">
-        <h2><die face="1" ></die>Coppersand<die face="1" ></die></h2>
-      </div>
-    */
-    let locationDiv = document.createElement('div');
-    locationDiv.className = 'location';
-    let dieEl = null;
-    if(matchedLocation.die > 0)
-    {
-      dieEl = document.createElement('die');
-      dieEl.setAttribute('face', matchedLocation.die);
-    }
+		//Clear output 
+		let outputEl = document.getElementById(outputElId);
+		outputEl.style.display = 'block';
+		outputEl.innerHTML = null;
+		
+		//Output location details
+		/*
+		<div class="location">
+			<h2><die face="1" ></die>Coppersand<die face="1" ></die></h2>
+		</div>
+		*/
+		let locationDiv = document.createElement('div');
+		locationDiv.className = 'location';
+		let dieEl = null;
+		if(matchedLocation.die > 0)
+		{
+			dieEl = document.createElement('die');
+			dieEl.setAttribute('face', matchedLocation.die);
+		}
 
-    let locationHead = document.createElement('h2');
-    if(dieEl !== null)
-    {
-      locationHead.appendChild(dieEl);
-    }
-    locationHead.innerHTML = matchedLocation.name;
-    if(dieEl !== null)
-    {
-      locationHead.appendChild(dieEl);
-    }
+		let locationHead = document.createElement('h2');
+		if(dieEl !== null)
+		{
+			locationHead.appendChild(dieEl);
+		}
+		locationHead.innerHTML = matchedLocation.name;
+		if(dieEl !== null)
+		{
+			locationHead.appendChild(dieEl);
+		}
 
-    //Output to the output element
-    outputEl.appendChild(locationHead);
+		//Output to the output element
+		outputEl.appendChild(locationHead);
 	}
 
 	updateAllDieFaces()
