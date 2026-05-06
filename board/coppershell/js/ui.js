@@ -1,14 +1,24 @@
 //Click location to zoom
 showLocation = (locationName) => 
 {
+	let townBtn = document.getElementById("navBtnTown");
+	
 	//No location? Show town again
 	if(locationName === undefined)
 	{
 		//Reset location 
+		townBtn.innerHTML = "Town";
+		townBtn.onclick = () => {
+			showLocation();
+		}
+		//Show all locations
+	document.getElementById('town').style.display = 'block';
+	document.getElementById('location').style.display = 'none';
+		return;
 	}
 	
 	//Show "back to town" button
-	let townBtn = document.getElementById("navBtnTown");
+
 	townBtn.innerHTML = "Back to town...";
 	townBtn.onclick = () => {
 		showLocation();
