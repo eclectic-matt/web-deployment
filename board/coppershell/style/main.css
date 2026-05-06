@@ -29,11 +29,7 @@ die
 {
 	padding: 0 5px;
 }
-#player 
-{
-	display: none;
-}
-#quest 
+#player, #quest, #location
 {
 	display: none;
 }
