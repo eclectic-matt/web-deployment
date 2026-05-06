@@ -48,10 +48,10 @@ class Game
 			deck: [],
 			discard: []
 		}
-		//this.locations = fetch('./data/locations.json');
-		fetch('../data/locations.json', { 
-			method: 'GET'
-		})
+
+    fetch('./data/locations.json', { 
+        method: 'GET'
+      })
 			.then(function(response) { 
         console.log('fetch.response', response);
         return response.json(); 
@@ -60,7 +60,8 @@ class Game
         this.locations = json;
         console.log('fetch.json', this.locations);
         return true;
-		});
+      }
+    );
 	}
 	
 	//====================
