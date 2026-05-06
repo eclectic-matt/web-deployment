@@ -48,6 +48,19 @@ class Game
 			deck: [],
 			discard: []
 		}
+		//this.locations = fetch('./data/locations.json');
+		fetch('../data/locations.json', { 
+			method: 'GET'
+		})
+			.then(function(response) { 
+        console.log('fetch.response', response);
+        return response.json(); 
+      })
+			.then(function(json) {
+        this.locations = json;
+        console.log('fetch.json', this.locations);
+        return true;
+		});
 	}
 	
 	//====================
@@ -109,6 +122,11 @@ class Game
 			default:
 				return "&#9861;";
 		}
+	}
+
+	getLocation(locationName, side = 0, outputEl)
+	{
+		
 	}
 
 	updateAllDieFaces()

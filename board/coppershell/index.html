@@ -11,9 +11,11 @@
 	<script src="./js/game.js"></script>
 	<script src="./js/ui.js"></script>
 	<script>
+		var game;
 		function init()
 		{
-			let game = new Game();
+			game = new Game();
+			game.setup();
 			game.updateAllDieFaces();
 		}
 	</script>
