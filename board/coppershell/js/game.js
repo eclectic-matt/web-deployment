@@ -61,7 +61,7 @@ class Game
         console.log('fetch.json', json);
         return json;
       }
-    );
+    ).value;
 	}
 	
 	//====================
@@ -127,6 +127,7 @@ class Game
 
 	getLocation(locationName, side = 0, outputElId)
 	{
+    console.log('Loading',locationName,'side',side,'output to',outputElId);
 		//Find the location matching this name
     let matchedLocation = this.locations.locations.find(loc => loc.name === locationName);
 
