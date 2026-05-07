@@ -138,39 +138,7 @@ class Game
 		
 		if(matchedLocation === undefined) return;
 
-		//Clear output 
-		let outputEl = document.getElementById(outputElId);
-		outputEl.style.display = 'block';
-		outputEl.innerHTML = null;
-		
-		//Output location details
-		/*
-		<div class="location">
-			<h2><die face="1" ></die>Coppersand<die face="1" ></die></h2>
-		</div>
-		*/
-		let locationDiv = document.createElement('div');
-		locationDiv.className = 'location';
-		let dieEl = null;
-		if(matchedLocation.die > 0)
-		{
-			dieEl = document.createElement('die');
-			dieEl.setAttribute('face', matchedLocation.die);
-		}
-
-		let locationHead = document.createElement('h2');
-		if(dieEl !== null)
-		{
-			locationHead.appendChild(dieEl);
-		}
-		locationHead.innerHTML = matchedLocation.name;
-		if(dieEl !== null)
-		{
-			locationHead.appendChild(dieEl);
-		}
-
-		//Output to the output element
-		outputEl.appendChild(locationHead);
+		outputLocationDataToElement(matchedLocation, outputElId);
 	}
 
 	updateAllDieFaces()
