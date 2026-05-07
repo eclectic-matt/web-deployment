@@ -46,10 +46,10 @@ outputLocationDataToElement = (location, elementId) =>
 	let locationDiv = document.createElement('div');
 	locationDiv.className = 'location';
 	let dieEl = null;
-	if(matchedLocation.die > 0)
+	if(location.die > 0)
 	{
 		dieEl = document.createElement('die');
-		dieEl.setAttribute('face', matchedLocation.die);
+		dieEl.setAttribute('face', location.die);
 	}
 
 	let locationHead = document.createElement('h2');
@@ -57,7 +57,7 @@ outputLocationDataToElement = (location, elementId) =>
 	{
 		locationHead.appendChild(dieEl);
 	}
-	locationHead.innerHTML = matchedLocation.name;
+	locationHead.innerHTML = location.name;
 	if(dieEl !== null)
 	{
 		locationHead.appendChild(dieEl);
