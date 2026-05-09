@@ -20,7 +20,13 @@
                   "penaltyMin": 1,
                   "penaltyMax": 1,
                   "title": "Brave the waves",
-                  "effect": "- _PEP_"
+                  "effect": [
+                    {
+                      "description": "- _PEP_",
+                      "resource": "PEP",
+                      "amount": -1
+                    }
+                  ]
                 },
                 {
                   "penaltyMin": 2,
