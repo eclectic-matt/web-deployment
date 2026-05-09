@@ -20,9 +20,9 @@
                   "penaltyMin": 1,
                   "penaltyMax": 1,
                   "title": "Brave the waves",
+                  "description": "- _PEP_",
                   "effect": [
                     {
-                      "description": "- _PEP_",
                       "resource": "PEP",
                       "type": "",
                       "amount": -1
@@ -33,9 +33,9 @@
                   "penaltyMin": 2,
                   "penaltyMax": 2,
                   "title": "Greedy gulls",
+                  "description": "Discard 1 fish card from your supply",
                   "effect": [
                     {
-                      "description": "Discard 1 fish card from your supply",
                       "resource": "card",
                       "type": "fish",
                       "amount": -1
