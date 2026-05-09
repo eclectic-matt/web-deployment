@@ -24,6 +24,7 @@
                     {
                       "description": "- _PEP_",
                       "resource": "PEP",
+                      "type": "",
                       "amount": -1
                     }
                   ]
@@ -32,7 +33,14 @@
                   "penaltyMin": 2,
                   "penaltyMax": 2,
                   "title": "Greedy gulls",
-                  "effect": "Discard 1 fish card from your supply"
+                  "effect": [
+                    {
+                      "description": "Discard 1 fish card from your supply",
+                      "resource": "card",
+                      "type": "fish",
+                      "amount": -1
+                    }
+                  ]
                 },
                 {
                   "penaltyMin": 3,
