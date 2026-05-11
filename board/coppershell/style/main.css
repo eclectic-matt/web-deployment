@@ -33,3 +33,43 @@ die
 {
 	display: none;
 }
+
+.daytime 
+{
+	padding: 0;
+	margin: 0;
+	max-height: 0.75rem;
+}
+
+.timeSection 
+{
+	padding:0;
+	margin: 0;
+}
+
+ul.timeValueList 
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+}
+
+li.timeValueListItem
+{
+	display: inline;
+	border: 1px solid black;
+	border-radius: 50%;
+	background-color: lightblue;
+	text-align: center;
+	min-width: 25px;
+	padding: 0px 3px;
+	margin: 20px auto;
+}
+
+li.timeValueListItem.checked
+{
+	background-color: black;
+}

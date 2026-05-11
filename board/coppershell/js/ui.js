@@ -27,13 +27,13 @@ showLocation = (locationName) =>
 	//Show current location large
 	//let loc = document.getElementById('location');
 	//loc.innerHTML = '<h2>' + locationName + '</h2>';
-	game.getLocation(locationName, 0, 'location');
+	game.getLocation(locationName, 'location');
 }
 
 outputLocationDataToElement = (location, elementId) => 
 {		
 	//Clear output 
-	let outputEl = document.getElementById(outputElId);
+	let outputEl = document.getElementById(elementId);
 	outputEl.style.display = 'block';
 	outputEl.innerHTML = null;
 	
