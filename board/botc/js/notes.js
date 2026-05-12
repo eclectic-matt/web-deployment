@@ -322,6 +322,7 @@ function createPlayerTokens()
 		addBtn.onclick = () => openPlayerEditWindow(addBtn);
 		addBtn.id = "player" + i + "Roles";
 		el.appendChild(addBtn);
+		//Name input ("player" + playerId + "Name" = 0-indexed playerId!)
 		let nameInput = document.createElement('input');
 		nameInput.id = 'player' + i + 'Name';
 		nameInput.onchange = () => setPlayerName(nameInput);
@@ -745,10 +746,10 @@ function updatePlayerNameInput(playerId)
 
 function setPlayerName(input)
 {
-	//let elId = input.parentElement.id;
+	let elId = input.parentElement.id;
 	//The player Id is 0-indexed, reduce by one
-	//let playerId = parseInt(elId.replace('player', '')) - 1;
-	let playerId = getCurrentPlayerId();
+	let playerId = parseInt(elId.replace('player', '')) - 1;
+	//let playerId = getCurrentPlayerId();
 	let newName = input.value;
 	setPlayerNameById(playerId, newName);
 	updatePlayerNameInput(playerId);
@@ -860,6 +861,7 @@ function clearSavedData()
 	}
 	if(window.confirm('Really clear saved data?')){
 		localStorage.clear('players');
+		window.location.reload();
 	}
 }
 
