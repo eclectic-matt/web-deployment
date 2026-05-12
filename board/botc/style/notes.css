@@ -12,6 +12,14 @@ html, body
 
 #main
 {
+	/*
+	position: fixed;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	*/
     width: 100vw;
     max-width: 100vw !important;
     height: 100vh;
