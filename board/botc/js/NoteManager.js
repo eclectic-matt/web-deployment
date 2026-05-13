@@ -208,7 +208,7 @@ class NoteManager
     adjustPlayerCount(newPlayerCount)
     {
         if(this.players.length < newPlayerCount)
-	    {
+		{
             //Add players to array
             for(let i=this.players.length; i<newPlayerCount; i++)
             {
@@ -235,16 +235,16 @@ class NoteManager
     async getAllRoles()
     {
         let allRoles = await fetch('./roles.json');
-	    return await allRoles.json();
+		return await allRoles.json();
     }
 
     setScript(scriptName)
     {
         if(scriptName != "all")
-	    {
+		{
 		    //Filter to edition
-		    scriptRoles = scriptRoles.filter((r) => { return r.edition == scriptName;});
-	    }else
+			scriptRoles = scriptRoles.filter((r) => { return r.edition == scriptName;});
+		}else
         {
             this.scriptRoles = this.allRoles;
         }
@@ -316,7 +316,7 @@ class NoteManager
         let eclipseHeight = h / 3;
         let shortestSide = Math.min(w, h);
         let elementRadius = Math.floor((1.1 * shortestSide) / (0.6 * this.players.length));
-       	elementRadius = Math.min(Math.max(elementRadius, tMin), tMax);	
+		elementRadius = Math.min(Math.max(elementRadius, tMin), tMax);	
 
         //Create player elements
         for (let i = 0; i < this.players.length; i++)
@@ -418,11 +418,14 @@ class NoteManager
             nameInput.onchange = () => setPlayerName(nameInput);
             nameInput.type = "text";
             //NOTE: these default to player1 - player20 so this should always be true
-            if (this.players[i] && this.players[i].name.length > 0) {
+            if (this.players[i] && this.players[i].name.length > 0) 
+			{
                 //console.log('setting the name of player ' + i + ' to ' + playersObj.players[i].name);
                 nameInput.value = this.players[i].name;
                 nameInput.innerHTML = this.players[i].name;
-            } else {
+            } 
+			else
+			{
                 nameInput.value = "p" + i;
             }
             nameInput.className = "nameInput";

@@ -474,6 +474,7 @@ function createRolesWindow()
 	noteEl.id = 'playerNotes';
 	noteEl.style.width = '100%';
 	noteEl.style.height = '25%';
+	//noteEl.innerHTML = play
 	
 	addRoleWindowEl.appendChild(noteEl);
 
@@ -574,7 +575,8 @@ function updateAlignment(el)
 	}
 }
 
-function updateDay(el){
+function updateDay(el)
+{
 	document.getElementById('currentDay').innerHTML = el.value;
 }
 
@@ -592,12 +594,16 @@ function calcScreenDimensions()
 
 function openPlayerEditWindow(el)
 {
+	//Get the current player
+	//playerId = parseInt(el.id.replace('player', '').replace('Roles', ''));
+	
 	//Show the info window
 	let addRoleWindowEl2 = document.getElementById('addRoleWindow');
 	addRoleWindowEl2.style.display = 'block';
 	
 	let playerId = el.parentElement.dataset.player;
-	
+	console.log('Opening edit window for player ' + playerId);
+
 	//Set the player name on the window header
 	if(playersObj.players[playerId].name)
 	{
@@ -630,7 +636,14 @@ function openPlayerEditWindow(el)
 	});
 	
 	//Load notes for this player
-	document.getElementById('playerNotes').value = playersObj.players[playerId].notes;
+	if(playersObj.players[playerId].notes.length > 0)
+	{
+		document.getElementById('playerNotes').innerHTML = playersObj.players[playerId].notes;
+	}
+	else
+	{
+		document.getElementById('playerNotes').innerHTML = "";
+	}
 	
 	//Dead / vote / alignment
 	let deadStatusEl = document.getElementById("deadStatusCheck");
@@ -648,6 +661,7 @@ function closePlayerEditWindow()
 	//Get current player ID
 	let playerId = document.getElementById('playerId').innerHTML;
 	//Store notes
+	console.log('Saving notes for player ' + playerId + ': ' + document.getElementById('playerNotes').value);
 	playersObj.players[playerId].notes = document.getElementById('playerNotes').value;
 	//Store alignment
 	playersObj.players[playerId].alignment = document.getElementById('alignmentSelect').value;
@@ -679,6 +693,7 @@ function updateDeathShroud(el)
 	//console.log(el);
 	//Set on players object
 	playersObj.players[playerId].living = !el.checked;
+	appendToPlayerNotes(playerId, "Marked as " + (el.checked ? 'dead' : 'alive'));
 	if(el.checked)
 	{
 		playerEl.style.borderColor = "black";
@@ -851,6 +866,23 @@ function debug(txt){
     document.getElementById('debugWindow').innerHTML += txt + '<br/>';
 }
 
+function appendToPlayerNotes(playerId, txt)
+{
+	console.log('Appending to notes for player ' + playerId + ': ' + txt);
+	let dayNumber = document.getElementById('currentDay').innerHTML;
+	let message = "DAY " + dayNumber + ": " + txt;
+	if(playersObj.players[playerId].notes.length > 0)
+	{
+		playersObj.players[playerId].notes += "\n" + message;
+	}
+	else
+	{
+		playersObj.players[playerId].notes = message;
+	}
+	console.log('Updated notes for player ' + playerId + ': ' + playersObj.players[playerId].notes);
+	//playersObj.players[playerId].notes.push("DAY " + dayNumber + ": " + txt);
+	saveToLocalStorage();
+}
 
 function clearSavedData()
 {
