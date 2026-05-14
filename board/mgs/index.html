@@ -49,7 +49,7 @@
 					if(mission.video)
 					{
 						var missionParagraph = document.createElement("p");
-						missionParagraph.innerHTML = `Start of mission: <a href="${getVideoWithTimestamp(mission.video, mission.startTime)}">start the video at ${formatTime(mission.startTime)}</a> and <a href="${getVideoWithTimestamp(mission.video, mission.endTime)}">stop at ${formatTime(mission.endTime)}</a>`;
+						missionParagraph.innerHTML = `Start of mission: <a href="${getVideoWithStartAndEndTimestamps(mission.video, mission.startTime, mission.endTime)}">start the video at ${formatTime(mission.startTime)}</a> and stop at ${formatTime(mission.endTime)}`;
 						missionContent.appendChild(missionParagraph);
 					}
 					missionList.appendChild(missionContent);
@@ -83,6 +83,17 @@
 				else
 				{
 					return videoUrl + `?t=${timestamp}`;
+				}
+			}
+			function getVideoWithStartAndEndTimestamps(videoUrl, startTimestamp, endTimestamp)
+			{
+				if(videoUrl.includes("?"))
+				{
+					return videoUrl + `&start=${startTimestamp}&end=${endTimestamp}`;
+				}
+				else
+				{
+					return videoUrl + `?start=${startTimestamp}&end=${endTimestamp}`;
 				}
 			}
 		</script>
