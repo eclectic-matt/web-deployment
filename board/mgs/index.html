@@ -9,6 +9,7 @@
 			var missions = [
 				{
 					id: 1,
+					type: "campaign",
 					name: "Cargo Dock",
 					video: "https://youtu.be/MeYbHWQrM9A",
 					startTime: 0,
@@ -16,6 +17,7 @@
 				},
 				{
 					id: 2,
+					type: "campaign",
 					name: "Helipad",
 					video: "https://youtu.be/MeYbHWQrM9A",
 					startTime: 304,
@@ -23,36 +25,144 @@
 				},
 				{
 					id: 3,
-					name: "Nuclear Silo",
-					video: "https://youtu.be/MeYbHWQrM9A",
-					startTime: 600,
-					endTime: 900
+					type: "campaign",
+					name: "Holding Cells"
+				},
+				{
+					id: 4,
+					type: "campaign",
+					name: "Revolver Ocelot"
+				},
+				{
+					id: 5,
+					type: "campaign",
+					name: "Tank Ambush"
+				},
+				{
+					id: 6,
+					type: "campaign",
+					name: "Nuclear Warhead Storage Building"
+				},
+				{
+					id: 7,
+					type: "campaign",
+					name: "Cyborg Ninja"
+				},
+				{
+					id: 8,
+					type: "campaign",
+					name: "Psycho Mantic"
+				},
+				{
+					id: 9,
+					type: "campaign",
+					name: "Prison Break"
+				},
+				{
+					id: 10,
+					type: "campaign",
+					name: "Helicopter Gunship"
+				},
+				{
+					id: 11,
+					type: "campaign",
+					name: "Sniper Wolf"
+				},
+				{
+					id: 12,
+					type: "campaign",
+					name: "Vulcan Raven"
+				},
+				{
+					id: 13,
+					type: "campaign",
+					name: "PAL Override"
+				},
+				{
+					id: 14,
+					type: "campaign",
+					name: "Metal Gear Rex"
+				},
+				{
+					id: "i",
+					type: "VR",
+					name: "Recon"
+				},
+				{
+					id: "ii",
+					type: "VR",
+					name: "Escape"
+				},
+				{
+					id: "iii",
+					type: "VR",
+					name: "Sabotage"
+				},
+				{
+					id: "iv",
+					type: "VR",
+					name: "Stealth"
+				},
+				{
+					id: "v",
+					type: "VR",
+					name: "Hostage Rescue"
+				},
+				{
+					id: "vi",
+					type: "VR",
+					name: "Coordination"
 				}
-			];
+			]
 
 			function outputMissions()
 			{
 				var missionList = document.getElementById("missionList");
 				missions.forEach(mission => {
-					//console.log(mission.name);
-					var missionButton = document.createElement("button");
-					missionButton.className = "w3-btn w3-block w3-black w3-center-align";
-					missionButton.innerText = "Mission " + mission.id;
-					missionButton.onclick = function() { showAccordion("Mission" + mission.id) };
-					missionList.appendChild(missionButton);
-					var missionContent = document.createElement("div");
-					missionContent.id = "Mission" + mission.id;
-					missionContent.className = "w3-container w3-hide";
-					var missionHeader = document.createElement("h4");
-					missionHeader.innerText = mission.name;
-					missionContent.appendChild(missionHeader);
-					if(mission.video)
+					switch(mission.type)
 					{
-						var missionParagraph = document.createElement("p");
-						missionParagraph.innerHTML = `Start of mission: <a href="${getVideoWithStartAndEndTimestamps(mission.video, mission.startTime, mission.endTime)}">start the video at ${formatTime(mission.startTime)}</a> and stop at ${formatTime(mission.endTime)}`;
-						missionContent.appendChild(missionParagraph);
+						case "campaign":
+							var missionButton = document.createElement("button");
+							missionButton.className = "w3-btn w3-block w3-red w3-center-align";
+							missionButton.innerText = "Mission " + mission.id;
+							missionButton.onclick = function() { showAccordion("Mission" + mission.id) };
+							missionList.appendChild(missionButton);
+							var missionContent = document.createElement("div");
+							missionContent.id = "Mission" + mission.id;
+							missionContent.className = "w3-container w3-hide w3-padding-16";
+							var missionHeader = document.createElement("h4");
+							missionHeader.innerText = mission.name;
+							missionContent.appendChild(missionHeader);
+							if(mission.video)
+							{
+								var missionParagraph = document.createElement("p");
+								missionParagraph.innerHTML = `Start of mission: <a href="${getVideoWithStartAndEndTimestamps(mission.video, mission.startTime, mission.endTime)}">start the video at ${formatTime(mission.startTime)}</a> and stop at ${formatTime(mission.endTime)}`;
+								missionContent.appendChild(missionParagraph);
+							}
+							missionList.appendChild(missionContent);
+							break;
+						case "VR":
+							var missionButton = document.createElement("button");
+							missionButton.className = "w3-btn w3-block w3-green w3-center-align";
+							missionButton.innerText = "VR Mission " + mission.id;
+							missionButton.onclick = function() { showAccordion("Mission" + mission.id) };
+							missionList.appendChild(missionButton);
+							var missionContent = document.createElement("div");
+							missionContent.id = "Mission" + mission.id;
+							missionContent.className = "w3-container w3-hide w3-padding-16";
+							var missionHeader = document.createElement("h4");
+							missionHeader.innerText = mission.name;
+							missionContent.appendChild(missionHeader);
+							if(mission.video)
+							{
+								var missionParagraph = document.createElement("p");
+								missionParagraph.innerHTML = `Start of mission: <a href="${getVideoWithStartAndEndTimestamps(mission.video, mission.startTime, mission.endTime)}">start the video at ${formatTime(mission.startTime)}</a> and stop at ${formatTime(mission.endTime)}`;
+								missionContent.appendChild(missionParagraph);
+							}
+							missionList.appendChild(missionContent);
+							break;
 					}
-					missionList.appendChild(missionContent);
+					
 				});
 			}
 			function formatTime(seconds)
@@ -62,7 +172,7 @@
 				return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 			}
 
-			function showAccordion(id) 
+			function showAccordion(id, hideOthers = true) 
 			{
 				var x = document.getElementById(id);
 				if (x.className.indexOf("w3-show") == -1) 
@@ -73,6 +183,12 @@
 				{ 
 					x.className = x.className.replace(" w3-show", "");
 				}
+				document.querySelectorAll(".w3-container").forEach(container => {
+					if(container.id !== id && hideOthers)
+					{
+						container.className = container.className.replace(" w3-show", "");
+					}
+				});
 			}
 			function getVideoWithTimestamp(videoUrl, timestamp)
 			{
