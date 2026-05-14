@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1"/>
+		<title>Metal Gear Solid</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+		<script>
+			var missions = [
+				{
+					id: 1,
+					name: "Cargo Dock",
+					video: "https://youtu.be/MeYbHWQrM9A",
+					startTime: 0,
+					endTime: 304
+				},
+				{
+					id: 2,
+					name: "Helipad",
+					video: "https://youtu.be/MeYbHWQrM9A",
+					startTime: 304,
+					endTime: 600
+				},
+				{
+					id: 3,
+					name: "Nuclear Silo",
+					video: "https://youtu.be/MeYbHWQrM9A",
+					startTime: 600,
+					endTime: 900
+				}
+			];
+
+			function outputMissions()
+			{
+				var missionList = document.getElementById("missionList");
+				missions.forEach(mission => {
+					//console.log(mission.name);
+					var missionButton = document.createElement("button");
+					missionButton.className = "w3-btn w3-block w3-black w3-left-align";
+					missionButton.innerText = "Mission " + mission.id;
+					missionButton.onclick = function() { showAccordion("Mission" + mission.id) };
+					missionList.appendChild(missionButton);
+					var missionContent = document.createElement("div");
+					missionContent.id = "Mission" + mission.id;
+					missionContent.className = "w3-container w3-hide";
+					var missionHeader = document.createElement("h4");
+					missionHeader.innerText = mission.name;
+					missionContent.appendChild(missionHeader);
+					if(mission.video)
+					{
+						var missionParagraph = document.createElement("p");
+						missionParagraph.innerHTML = `Start of mission: <a href="${getVideoWithTimestamp(mission.video, mission.startTime)}">start the video at ${formatTime(mission.startTime)}</a> and <a href="${getVideoWithTimestamp(mission.video, mission.endTime)}">stop at ${formatTime(mission.endTime)}</a>`;
+						missionContent.appendChild(missionParagraph);
+					}
+					missionList.appendChild(missionContent);
+				});
+			}
+			function formatTime(seconds)
+			{
+				var minutes = Math.floor(seconds / 60);
+				var remainingSeconds = seconds % 60;
+				return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+			}
+
+			function showAccordion(id) 
+			{
+				var x = document.getElementById(id);
+				if (x.className.indexOf("w3-show") == -1) 
+				{
+					x.className += " w3-show";
+				}
+				else
+				{ 
+					x.className = x.className.replace(" w3-show", "");
+				}
+			}
+			function getVideoWithTimestamp(videoUrl, timestamp)
+			{
+				if(videoUrl.includes("?"))
+				{
+					return videoUrl + `&t=${timestamp}`;
+				}
+				else
+				{
+					return videoUrl + `?t=${timestamp}`;
+				}
+			}
+		</script>
+	</head>
+	<body onload="outputMissions()">
+		<h1>Metal Gear Solid - The Board Game</h1>
+		<h2>Missions</h2>
+		<div id="missionList">
+			<!-- Mission list will be generated here -->
+		</div>
+	</body>
+</html>
