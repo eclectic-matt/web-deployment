@@ -36,7 +36,7 @@
 				missions.forEach(mission => {
 					//console.log(mission.name);
 					var missionButton = document.createElement("button");
-					missionButton.className = "w3-btn w3-block w3-black w3-left-align";
+					missionButton.className = "w3-btn w3-block w3-black w3-center-align";
 					missionButton.innerText = "Mission " + mission.id;
 					missionButton.onclick = function() { showAccordion("Mission" + mission.id) };
 					missionList.appendChild(missionButton);
@@ -97,10 +97,49 @@
 				}
 			}
 		</script>
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+				font-family: Arial, sans-serif;
+				background-color: #f4f4f4;
+				color: #333;
+				line-height: 1.6;
+				overflow-x: hidden;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				transition: all 0.3s ease-in-out;
+				border-radius: 5px;
+				text-align: center;
+			}
+			h1 {
+				font-family: "Metal Gear Solid", sans-serif;
+				font-size: 3em;
+				text-align: center;
+				color: #333;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+			}
+			h2 {
+				font-family: "Metal Gear Solid", sans-serif;
+				font-size: 2em;
+				color: #555;
+				text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+				margin-top: 20px;
+				margin-bottom: 10px;
+				border-bottom: 2px solid #333;
+				padding-bottom: 5px;
+				text-align: center;
+				background-color: #f4f4f4;
+				border-radius: 5px;
+			}
+		</style>
 	</head>
 	<body onload="outputMissions()">
-		<h1>Metal Gear Solid - The Board Game</h1>
-		<h2>Missions</h2>
+		<h1>Metal Gear Solid</h1>
+		<h2>The Board Game</h2>
+		<hr>
+		<h3>Missions</h3>
 		<div id="missionList">
 			<!-- Mission list will be generated here -->
 		</div>
