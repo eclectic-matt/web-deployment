@@ -118,7 +118,24 @@
 					}
 				}
 			];
+			
+	function init()
+	{
 		let t = document.createElement('table');
+		let thead = document.createElement('tr');
+		let nameth = document.createElement('th');
+		nameth.innerHTML = "Name";
+		thead.appendChild(nameth);
+		let editionth = document.createElement('th');
+		editionth.innerHTML = "Edition";
+		thead.appendChild(editionth);
+		let coopDiffth = document.createElement('th');
+		coopDiffth.innerHTML = "Coop Diff.";
+		thead.appendChild(coopDiffth);
+		let soloDiffth = document.createElement('th');
+		soloDiffth.innerHTML = "Solo Diff.";
+		thead.appendChild(soloDiffth);
+		t.appendChild(th);
 		chars.forEach((char) => {
 			let tr = document.createElement('tr');
 			let nametd = document.createElement('td');
@@ -136,9 +153,10 @@
 			t.appendChild(tr);
 		});
 		document.body.appendChild(t);
+	}
 		</script>
 	</head>
-	<body>
+	<body onload="init()">
 		
 		
 	</body>
