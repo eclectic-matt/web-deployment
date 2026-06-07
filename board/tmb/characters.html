@@ -118,6 +118,24 @@
 					}
 				}
 			];
+		let t = document.createElement('table');
+		chars.forEach((char) => {
+			let tr = document.createElement('tr');
+			let nametd = document.createElement('td');
+			nametd.innerHTML = char.name;
+			tr.appendChild(nametd);
+			let editiontd = document.createElement('td');
+			editiontd.innerHTML = char.edition;
+			tr.appendChild(editiontd);
+			let coopDiff = document.createElement('td');
+			coopDiff.innerHTML = char.difficulty.coop;
+			tr.appendChild(coopDiff);
+			let soloDiff = document.createElement('td');
+			soloDiff.innerHTML = char.difficulty.solo;
+			tr.appendChild(soloDiff);
+			t.appendChild(tr);
+		});
+		document.body.appendChild(t);
 		</script>
 	</head>
 	<body>
