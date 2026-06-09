@@ -347,6 +347,7 @@
 			
 	function init()
 	{
+		return;
 		let t = generateElement('table', '');
 		let thead = generateElement('tr', '');
 		let nameth = generateElement('th', 'Name');
@@ -411,7 +412,42 @@
 	</script>
 	</head>
 	<body onload="init()">
-		
-		
+		<main class="content">
+			<div class="navbar">
+				<a href="../tmb/index.html">Home</a>
+				<a href="../tmb/rules.html">Rules</a>
+				<a href="../tmb/characters.html">Characters</a>
+				<a href="../tmb/enemies.html">Enemies</a>
+				<a href="../tmb/gear.html">Gear</a>
+			</div>
+			<div class="main-content">
+				<h1>Characters</h1>
+				<button class="previous-button" onclick="showChar('Patches')">Previous</button>
+				<button class="next-button" onclick="showChar('Gale')">Next</button>
+				<div class="character">
+					<h2 class="character-name">Tantrum</h2>
+					<!--img class="character-image" src="../assets/characters/tantrum.png" alt="Tantrum"-->
+					<div class="character-info">
+						<p><strong>Edition:</strong> Base Game</p>
+						<p><strong>Difficulty:</strong> Coop: 4, Solo: 3</p>
+						<p><strong>Range:</strong> Melee</p>
+						<p><strong>Stats:</strong></p>
+						<ul>
+							<li><strong>Health:</strong> 4</li>
+							<li><strong>Dexterity:</strong> 3</li>
+							<li><strong>Attack:</strong> 3</li>
+							<li><strong>Defense:</strong> 0</li>
+						</ul>
+						<p><strong>Professions:</strong></p>
+						<ul>
+							<li>Zurker</li>
+							<li>Mimic</li>
+							<li>Skirmisher</li>
+							<li>Consumables</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</main>
 	</body>
 </html>
