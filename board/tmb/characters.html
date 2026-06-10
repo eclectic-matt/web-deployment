@@ -356,6 +356,14 @@
 			//output wrapper div
 			let charDiv = generateElement('div', '');
 			charDiv.id = char.name.replace(' ', '_');
+			if(first)
+			{
+				first = false;
+			}
+			else
+			{
+				charDiv.style.display = 'none';
+			}
 			let charHead = generateElement('h2', char.name);
 			charHead.classList.add('characterName');
 			charDiv.appendChild(charHead);
