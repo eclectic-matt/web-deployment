@@ -347,6 +347,19 @@
 			
 	function init()
 	{
+		let first = true;
+		let outputElId = 'charactersWrapperDiv';
+		let outputEl = document.getElementById(outputElId);
+		//Generate all character divs
+		chars.forEach((char) => 
+		{
+			//output wrapper div
+			let charDiv = generateElement('div', '');
+			charDiv.id = char.name.replace(' ', '_');
+			let charHead = generateElement('h2', char.name);
+			charDiv.appendChild(charHead);
+			outputEl.appendChild(charDiv);
+		});
 		return;
 		let t = generateElement('table', '');
 		let thead = generateElement('tr', '');
@@ -410,6 +423,16 @@
 	}
 
 	</script>
+	<style>
+		.previousButton {
+			float: left;
+			position: relative;
+		}
+		.nextButton {
+			position: relative;
+			float: right;
+		}
+	</style>
 	</head>
 	<body onload="init()">
 		<main class="content">
@@ -420,15 +443,14 @@
 				<a href="../tmb/enemies.html">Enemies</a>
 				<a href="../tmb/gear.html">Gear</a>
 			</div>
-			<div class="main-content">
+			<div id="charactersWrapperDiv">
 				<h1>Characters</h1>
-				<button class="previous-button" onclick="showChar('Patches')">Previous</button>
-				<button class="next-button" onclick="showChar('Gale')">Next</button>
+				<button class="previousButton" onclick="showChar('Patches')">Previous</button>
+				<button class="nextButton" onclick="showChar('Gale')">Next</button>
 				<div class="character">
-					<h2 class="character-name">Tantrum</h2>
-					<!--img class="character-image" src="../assets/characters/tantrum.png" alt="Tantrum"-->
-					<div class="character-info">
-						<p><strong>Edition:</strong> Base Game</p>
+					<h2 class="characterName">Tantrum</h2>
+					<div class="characterInfo">
+						<p><strong>Edition:</strong> <span class="charEdition">Base Game</span></p>
 						<p><strong>Difficulty:</strong> Coop: 4, Solo: 3</p>
 						<p><strong>Range:</strong> Melee</p>
 						<p><strong>Stats:</strong></p>
