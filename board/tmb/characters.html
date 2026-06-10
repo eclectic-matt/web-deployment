@@ -357,6 +357,7 @@
 			let charDiv = generateElement('div', '');
 			charDiv.id = char.name.replace(' ', '_');
 			let charHead = generateElement('h2', char.name);
+			charHead.classList.add('characterName');
 			charDiv.appendChild(charHead);
 			outputEl.appendChild(charDiv);
 		});
@@ -431,6 +432,9 @@
 		.nextButton {
 			position: relative;
 			float: right;
+		}
+		.characterName {
+			text-align: center;
 		}
 	</style>
 	</head>
