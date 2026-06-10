@@ -345,17 +345,23 @@
 				}
 			];
 			
+	var selectedChar = chars[0].name.replace(' ','_');
+	
+	var allCharNames = chars.map((c)=>{return c.name.replace(' ','_');});
+	
 	function init()
 	{
 		let first = true;
 		let outputElId = 'charactersWrapperDiv';
 		let outputEl = document.getElementById(outputElId);
+		
 		//Generate all character divs
 		chars.forEach((char) => 
 		{
 			//output wrapper div
 			let charDiv = generateElement('div', '');
 			charDiv.id = char.name.replace(' ', '_');
+			charDiv.classList.add('charDiv');
 			if(first)
 			{
 				first = false;
@@ -364,52 +370,104 @@
 			{
 				charDiv.style.display = 'none';
 			}
+			
+			//Header
 			let charHead = generateElement('h2', char.name);
 			charHead.classList.add('characterName');
 			charDiv.appendChild(charHead);
+			
+			//Difficulties
+			let coopDifficutyP =generateElement('p','Coop Difficulty: ');
+			let coopSpan = generateElement('span',char.difficulty.coop);
+			coopDifficutyP.appendChild(coopSpan);
+			charDiv.appendChild(coopDifficutyP);
+			let soloDifficultyP = generateElement('p', 'Solo Difficulty: ');
+			let soloSpan = generateElement('span',char.difficulty.solo);
+			soloDifficultyP.appendChild(soloSpan);
+			charDiv.appendChild(soloDifficultyP);
+			
+			//edition
+			let editionP = generateElement('p', 'Edition: ' + char.edition);
+			charDiv.appendChild(editionP);
+			
+			//range 
+			let rangeP = generateElement('p', 'Range: ' + char.range);
+			charDiv.appendChild(rangeP);
+			
+			//stats
+			let statsUl = generateElement('ul','');
+			let healthLi = generateElement('li', 'Health: ' + char.stats.health);
+			statsUl.appendChild(healthLi);
+			let dexLi = generateElement('li', 'Dex: ' + char.stats.dexterity);
+			statsUl.appendChild(dexLi);
+			let atkLi = generateElement('li', 'Atk: ' + char.stats.attack);
+			statsUl.appendChild(atkLi);
+			let defLi = generateElement('li', 'Def: ' + char.stats.defense);
+			statsUl.appendChild(defLi);
+			charDiv.appendChild(statsUl);
+			
+			//professions
+			let profsP = generateElement('p', 'Professions');
+			charDiv.appendChild(profsP);
+			let profsUl = generateElement('ul','');
+			char.professions.forEach((prof) => {
+				let profLi = generateElement('li', prof);
+				profsUl.appendChild(profLi);
+			});
+			charDiv.appendChild(profsUl);
+			
 			outputEl.appendChild(charDiv);
 		});
-		return;
-		let t = generateElement('table', '');
-		let thead = generateElement('tr', '');
-		let nameth = generateElement('th', 'Name');
-		thead.appendChild(nameth);
-		let editionth = generateElement('th', 'Edition');
-		thead.appendChild(editionth);
-		let coopDiffth = generateElement('th', 'Coop Diff.');
-		thead.appendChild(coopDiffth);
-		let soloDiffth = generateElement('th', 'Solo Diff.');
-		thead.appendChild(soloDiffth);
-		let statHealthTH = generateElement('th', 'Health');
-		thead.appendChild(statHealthTH);
-		let statDexTH = generateElement('th', 'Dexterity');
-		thead.appendChild(statDexTH);
-		let statAttackTH = generateElement('th', 'Attack');
-		thead.appendChild(statAttackTH);
-		let statDefenseTH = generateElement('th', 'Defense');
-		thead.appendChild(statDefenseTH);
-		let professionsTH = generateElement('th', 'Professions');
-		thead.appendChild(professionsTH);
-		t.appendChild(thead);
-		chars.forEach((char) => 
-		{
-			let data = 
-			[
-				char.name, 
-				char.edition, 
-				char.difficulty.coop, 
-				char.difficulty.solo, 
-				char.stats.health, 
-				char.stats.dexterity, 
-				char.stats.attack, 
-				char.stats.defense, 
-				char.professions.join(', ')
-			];
-			let tr = generateTableRow(data);
-			t.appendChild(tr);
-		});
-		document.body.appendChild(t);
 	}
+	
+	const getCharIndex = (name) => 
+	{
+		return allCharNames.indexOf(name);
+	}
+	
+	const nextChar = () => 
+	{
+		let curIndex = getCharIndex(selectedChar);
+		if (curIndex + 1 >= allCharNames.length)
+		{
+			//Get first char
+			let firstName = chars[0].name.replace(' ','_');
+			selectedChar = firstName;
+			showChar(firstName);
+		}else{
+			let otherName = chars[curIndex + 1].name.replace(' ','_');
+			selectedChar = otherName;
+			showChar(otherName);
+		}
+	}
+	
+	const prevChar = () => 
+	{
+		let curIndex = getCharIndex(selectedChar);
+		if (curIndex -1 < 0)
+		{
+			//Get last char
+			let lastName = chars[allCharNames.length - 1].name.replace(' ','_');
+			selectedChar = lastName;
+			showChar(lastName);
+		}else{
+			let otherName = chars[curIndex - 1].name.replace(' ','_');
+			selectedChar = otherName;
+			showChar(otherName);
+		}
+	}
+	
+	
+	const showChar = (name) => 
+	{
+		let charDivs = document.querySelectorAll('.charDiv');
+		charDivs.forEach( (div) => {
+			div.style.display = 'none';
+		});
+		let shownDiv = document.getElementById(name);
+		shownDiv.style.display = 'block';
+	}
+	
 	const generateElement = (type, content) => 
 	{
 		let el = document.createElement(type);
@@ -419,6 +477,7 @@
 		}
 		return el;
 	}
+	
 	const generateTableRow = (strArr) => 
 	{
 		let tr = document.createElement('tr');
@@ -448,17 +507,17 @@
 	</head>
 	<body onload="init()">
 		<main class="content">
-			<div class="navbar">
+			<!--div class="navbar">
 				<a href="../tmb/index.html">Home</a>
 				<a href="../tmb/rules.html">Rules</a>
 				<a href="../tmb/characters.html">Characters</a>
 				<a href="../tmb/enemies.html">Enemies</a>
 				<a href="../tmb/gear.html">Gear</a>
-			</div>
+			</div-->
 			<div id="charactersWrapperDiv">
 				<h1>Characters</h1>
-				<button class="previousButton" onclick="showChar('Patches')">Previous</button>
-				<button class="nextButton" onclick="showChar('Gale')">Next</button>
+				<button class="previousButton" onclick="prevChar()">Previous</button>
+				<button class="nextButton" onclick="nextChar()">Next</button>
 				<!--div class="character">
 					<h2 class="characterName">Tantrum</h2>
 					<div class="characterInfo">
