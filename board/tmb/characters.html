@@ -396,6 +396,8 @@
 			charDiv.appendChild(rangeP);
 			
 			//stats
+			let statsP = generateElement('p', 'Stats:');
+			charDiv.appendChild(statsP);
 			let statsUl = generateElement('ul','');
 			let healthLi = generateElement('li', 'Health: ' + char.stats.health);
 			statsUl.appendChild(healthLi);
@@ -408,14 +410,17 @@
 			charDiv.appendChild(statsUl);
 			
 			//professions
-			let profsP = generateElement('p', 'Professions');
-			charDiv.appendChild(profsP);
-			let profsUl = generateElement('ul','');
-			char.professions.forEach((prof) => {
-				let profLi = generateElement('li', prof);
-				profsUl.appendChild(profLi);
-			});
-			charDiv.appendChild(profsUl);
+			if(char.professions.length > 0)
+			{
+				let profsP = generateElement('p', 'Professions:');
+				charDiv.appendChild(profsP);
+				let profsUl = generateElement('ul','');
+				char.professions.forEach((prof) => {
+					let profLi = generateElement('li', prof);
+					profsUl.appendChild(profLi);
+				});
+				charDiv.appendChild(profsUl);
+			}
 			
 			outputEl.appendChild(charDiv);
 		});
