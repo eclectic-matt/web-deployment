@@ -7,42 +7,42 @@ https://stackoverflow.com/questions/16500656/which-color-gradient-is-used-to-col
 */
 
 const ARR_COLOURS = {
-  "Ultra Fractal": [
-    'rgb(66, 30, 15)',
-    'rgb(25, 7, 26)',
-    'rgb(9, 1, 47)',
-    'rgb(4, 4, 73)',
-    'rgb(0, 7, 100)',
-    'rgb(12, 44, 138)',
-    'rgb(24, 82, 177)',
-    'rgb(57, 125, 209)',
-    'rgb(134, 181, 229)',
-    'rgb(211, 236, 248)',
-    'rgb(241, 233, 191)',
-    'rgb(248, 201, 95)',
-    'rgb(255, 170, 0)',
-    'rgb(204, 128, 0)',
-    'rgb(153, 87, 0)',
-    'rgb(106, 52, 3)'
-  ],
-  "Pinky Green": [
-    'rgb(50, 85, 10)',
-    'rgb(75, 87, 26)',
-    'rgb(9, 151, 47)',
-    'rgb(4, 200, 73)',
-    'rgb(0, 225, 100)',
-    'rgb(12, 255, 138)',
-    'rgb(24, 160, 177)',
-    'rgb(57, 125, 209)',
-    'rgb(134, 81, 229)',
-    'rgb(211, 36, 248)',
-    'rgb(241, 93, 191)',
-    'rgb(100, 51, 95)',
-    'rgb(120, 10, 180)',
-    'rgb(135, 10, 200)',
-    'rgb(150, 10, 220)',
-    'rgb(180, 0, 255)'
-  ]
+	"Ultra Fractal": [
+		'rgb(66, 30, 15)',
+		'rgb(25, 7, 26)',
+		'rgb(9, 1, 47)',
+		'rgb(4, 4, 73)',
+		'rgb(0, 7, 100)',
+		'rgb(12, 44, 138)',
+		'rgb(24, 82, 177)',
+		'rgb(57, 125, 209)',
+		'rgb(134, 181, 229)',
+		'rgb(211, 236, 248)',
+		'rgb(241, 233, 191)',
+		'rgb(248, 201, 95)',
+		'rgb(255, 170, 0)',
+		'rgb(204, 128, 0)',
+		'rgb(153, 87, 0)',
+		'rgb(106, 52, 3)'
+	],
+	"Pinky Green": [
+		'rgb(50, 85, 10)',
+		'rgb(75, 87, 26)',
+		'rgb(9, 151, 47)',
+		'rgb(4, 200, 73)',
+		'rgb(0, 225, 100)',
+		'rgb(12, 255, 138)',
+		'rgb(24, 160, 177)',
+		'rgb(57, 125, 209)',
+		'rgb(134, 81, 229)',
+		'rgb(211, 36, 248)',
+		'rgb(241, 93, 191)',
+		'rgb(100, 51, 95)',
+		'rgb(120, 10, 180)',
+		'rgb(135, 10, 200)',
+		'rgb(150, 10, 220)',
+		'rgb(180, 0, 255)'
+	]
 };
 
 // THE WIDTH OF THE CANVAS
@@ -88,50 +88,50 @@ config.constantImag = 0;
 config.canvasWidth = 800;
 config.canvasHeight = 600;
 
-function init(){
+function init() {
 
-  // SETUP CANVAS ELEMENT
-  let cnv = document.getElementById('fractalCnv');
-  // SET THE WIDTH
-  cnv.width = config.canvasWidth;
-  // SET THE HEIGHT
-  cnv.height = config.canvasHeight;
+	// SETUP CANVAS ELEMENT
+	let cnv = document.getElementById('fractalCnv');
+	// SET THE WIDTH
+	cnv.width = config.canvasWidth;
+	// SET THE HEIGHT
+	cnv.height = config.canvasHeight;
 
-  document.getElementById('fractalCnv').onmousemove = function mouseMove(e){
-    coordInfo = document.getElementById('coordinates');
-    var rect = e.target.getBoundingClientRect();
-    var elX = e.clientX - rect.left; //x position within the element.
-    var elY = e.clientY - rect.top;  //y position within the element.
+	document.getElementById('fractalCnv').onmousemove = function mouseMove(e) {
+		coordInfo = document.getElementById('coordinates');
+		var rect = e.target.getBoundingClientRect();
+		var elX = e.clientX - rect.left; //x position within the element.
+		var elY = e.clientY - rect.top;  //y position within the element.
 
-    let xRange = RANGE / config.zoomLevel;
-    let yRange = RANGE / config.zoomLevel;
+		let xRange = RANGE / config.zoomLevel;
+		let yRange = RANGE / config.zoomLevel;
 
-    //elX will be 0 - 800, elY will be 0 - 600
-    var viewX = ( config.xMin + (xRange * (elX / config.canvasWidth) ) ).toFixed(2);
-    var viewY = ( (config.yMin + yRange) - ((yRange * (elY / config.canvasHeight) ) )).toFixed(2);
-    coordInfo.innerHTML = '(' + viewX + ',' + viewY + ')';
-  }
-  fractalStart();
+		//elX will be 0 - 800, elY will be 0 - 600
+		var viewX = (config.xMin + (xRange * (elX / config.canvasWidth))).toFixed(2);
+		var viewY = ((config.yMin + yRange) - ((yRange * (elY / config.canvasHeight)))).toFixed(2);
+		coordInfo.innerHTML = '(' + viewX + ',' + viewY + ')';
+	}
+	fractalStart();
 }
 
 // THIS IS THE FUNCTION THAT CALLS THE GENERATOR
-function fractalStart(){
+function fractalStart() {
 
-  // USUALLY A CHANGE IN ZOOM HAS BEEN MADE
-  document.getElementById('spanZoom').innerHTML = config.zoomLevel;
+	// USUALLY A CHANGE IN ZOOM HAS BEEN MADE
+	document.getElementById('spanZoom').innerHTML = config.zoomLevel;
 
-    // START TO MEASURE PERFORMANCE
-	  let tStart = performance.now();
+	// START TO MEASURE PERFORMANCE
+	let tStart = performance.now();
 
-  // CALL THE FUNCTION GENERATING THE MANDLEBROT SET
+	// CALL THE FUNCTION GENERATING THE MANDLEBROT SET
 	generateFractal(config.xCenter, config.yCenter, config.maxIterations, LIMIT, config.fractalType);
 
-    // END TO MEASURE PERFORMANCE
-	  let tEnd = performance.now();
-    let tTaken = tEnd - tStart;
-    document.getElementById('timeTaken').innerHTML = tTaken.toFixed(3);
-    // LOG PERFORMANCE
-	  console.log('Time taken: '+ (tEnd - tStart) +' milliseconds');
+	// END TO MEASURE PERFORMANCE
+	let tEnd = performance.now();
+	let tTaken = tEnd - tStart;
+	document.getElementById('timeTaken').innerHTML = tTaken.toFixed(3);
+	// LOG PERFORMANCE
+	console.log('Time taken: ' + (tEnd - tStart) + ' milliseconds');
 
 }
 
@@ -147,133 +147,133 @@ function fractalStart(){
 // Black -> never breaks out
 
 // RETURN THE NUMBER OF ITERATIONS IT TOOK TO BREAK FROM THE LIMIT
-function mandlebrot(x, y, iterations, limit, indices){
+function mandlebrot(x, y, iterations, limit, indices) {
 
-  // GET A NEW COMPLEX NUMBER FROM INPUT (x0, y0)
+	// GET A NEW COMPLEX NUMBER FROM INPUT (x0, y0)
 	let c = new Complex(x, y);
-  // GET A ZEROED COMPLEX NUMBER TO START ITERATING
-  let z = new Complex(config.constantReal, config.constantImag);
+	// GET A ZEROED COMPLEX NUMBER TO START ITERATING
+	let z = new Complex(config.constantReal, config.constantImag);
 	//let z = new Complex(0, 0);
-  // COUNT IS THE NUMBER OF ITERATIONS
+	// COUNT IS THE NUMBER OF ITERATIONS
 	let count = 0;
-  // START WITH MODULO = 0
-  let cMod = 0;
+	// START WITH MODULO = 0
+	let cMod = 0;
 
-  // DO LOOP ITERATES UNTIL LIMIT BROKEN OR MAX ITERATIONS
-  do {
+	// DO LOOP ITERATES UNTIL LIMIT BROKEN OR MAX ITERATIONS
+	do {
 
 		// CALCULATE Z^indices (z multiplied by z a number of times)
-    let zStart = z;
-    for (var i = 1; i < indices; i++){
-      z = z.multiply(zStart);
-    }
+		let zStart = z;
+		for (var i = 1; i < indices; i++) {
+			z = z.multiply(zStart);
+		}
 		let cResult = z.add(c);
-    cMod = cResult.modulo();
+		cMod = cResult.modulo();
 		// SET Z = CMOD
 		z = cResult;
-    // INCREMENT THE COUNT OF ITERATIONS COMPLETED
+		// INCREMENT THE COUNT OF ITERATIONS COMPLETED
 		count++;
 
-	} while ( (cMod <= limit) && (count < iterations) );
+	} while ((cMod <= limit) && (count < iterations));
 
-  // THEN RETURN THE COUNT (HOW LONG IT TOOK TO BREAK THE LIMIT)
+	// THEN RETURN THE COUNT (HOW LONG IT TOOK TO BREAK THE LIMIT)
 	return count;
 }
 
 
 
 // THIS WILL GENERATE A PLOT FROM x0,y0 TO x1,y1
-function generateFractal(xCenter, yCenter, iterations, limit, type){
+function generateFractal(xCenter, yCenter, iterations, limit, type) {
 
-  // CALCULATE THE RANGE OF VALUES
-  let xRange = RANGE / config.zoomLevel;
-  let yRange = RANGE / config.zoomLevel;
+	// CALCULATE THE RANGE OF VALUES
+	let xRange = RANGE / config.zoomLevel;
+	let yRange = RANGE / config.zoomLevel;
 
-  let x0 = xCenter - (xRange / 2);
-  let y0 = yCenter - (yRange / 2);
+	let x0 = xCenter - (xRange / 2);
+	let y0 = yCenter - (yRange / 2);
 
-  // THE MAXIMUM X/Y VALUES
-  let xMax = x0 + xRange;
-  let yMax = y0 + yRange;
-  // THE INCREMENT OF X/Y TO CALCULATE
-  let xInc = (xRange / config.canvasWidth);
-  let yInc = (yRange / config.canvasHeight);
-  //console.log('Range X/Y = ',xRange,yRange);
-  //console.log('x0/y0 = ',x0,y0);
-  //console.log('xMax/yMax = ',xMax,yMax);
-  //console.log('xInc/yInc = ',xInc,yInc);
+	// THE MAXIMUM X/Y VALUES
+	let xMax = x0 + xRange;
+	let yMax = y0 + yRange;
+	// THE INCREMENT OF X/Y TO CALCULATE
+	let xInc = (xRange / config.canvasWidth);
+	let yInc = (yRange / config.canvasHeight);
+	//console.log('Range X/Y = ',xRange,yRange);
+	//console.log('x0/y0 = ',x0,y0);
+	//console.log('xMax/yMax = ',xMax,yMax);
+	//console.log('xInc/yInc = ',xInc,yInc);
 
 	// SETUP CANVAS ELEMENT
 	//let screenCnv = document.getElementById('fractalCnv');
-  let cnv = document.getElementById('fractalCnv');
-  // GET 2D CONTEXT AND ENSURE NO TRANSPARENCY (FOR EFFICIENCY)
+	let cnv = document.getElementById('fractalCnv');
+	// GET 2D CONTEXT AND ENSURE NO TRANSPARENCY (FOR EFFICIENCY)
 	//let screenCtx = screenCnv.getContext('2d', { alpha: false });
-  let ctx = cnv.getContext('2d', { alpha: false });
+	let ctx = cnv.getContext('2d', { alpha: false });
 
-  /*let cnv = document.createElement('canvas');
-  cnv.width = CNV_WIDTH;
-  cnv.height = CNV_HEIGHT;
-  let ctx = cnv.getContext('2d', {alpha: false });*/
+	/*let cnv = document.createElement('canvas');
+	cnv.width = CNV_WIDTH;
+	cnv.height = CNV_HEIGHT;
+	let ctx = cnv.getContext('2d', {alpha: false });*/
 
-  // THE xCoord IS THE ACTUAL PIXEL ON THE CANVAS
+	// THE xCoord IS THE ACTUAL PIXEL ON THE CANVAS
 	let xCoord = 0;
 
-  // LOOP THROUGH ALL X VALUES IN THE RANGE
-	for (let x = x0; x < xMax; x = x + xInc){
+	// LOOP THROUGH ALL X VALUES IN THE RANGE
+	for (let x = x0; x < xMax; x = x + xInc) {
 
-    // FOR EACH ONE, RESET THE yCoord TO 0
+		// FOR EACH ONE, RESET THE yCoord TO 0
 		let yCoord = 0;
 
-    // THEN LOOP THROUGH ALL THE Y VALUES
-		for (let y = y0; y < yMax; y = y + yInc){
+		// THEN LOOP THROUGH ALL THE Y VALUES
+		for (let y = y0; y < yMax; y = y + yInc) {
 
-      // MOVE THE CANVAS PIXEL TO THE NEW COORDINATE
-      ctx.moveTo(xCoord, yCoord);
+			// MOVE THE CANVAS PIXEL TO THE NEW COORDINATE
+			ctx.moveTo(xCoord, yCoord);
 
-      // i IS THE ITERATIONS FOR THIS POINT
-      switch (type){
+			// i IS THE ITERATIONS FOR THIS POINT
+			switch (type) {
 
-        case 'mandlebrot':
-        case 'default':
-          i = mandlebrot(x, y, iterations, limit, config.exponent);
-          break;
+				case 'mandlebrot':
+				case 'default':
+					i = mandlebrot(x, y, iterations, limit, config.exponent);
+					break;
 
-        case 'cubicMandlebrot':
-          i = mandlebrot(x, y, iterations, limit, 2);
-          break;
+				case 'cubicMandlebrot':
+					i = mandlebrot(x, y, iterations, limit, 2);
+					break;
 
-        case 'quarticMandlebrot':
-          i = mandlebrot(x, y, iterations, limit, 3);
-          break;
+				case 'quarticMandlebrot':
+					i = mandlebrot(x, y, iterations, limit, 3);
+					break;
 
 
-        case 'julia':
-          i = julia(x, y, iterations, limit, 1);
-          break;
+				case 'julia':
+					i = julia(x, y, iterations, limit, 1);
+					break;
 
-      }
+			}
 
-      // USING RGB
+			// USING RGB
 			//let col = Math.floor(COL_MAX - (COL_MAX * (i / iterations)));
-      //ctx.fillStyle = 'rgb(0, ' + col + ', 0)';
+			//ctx.fillStyle = 'rgb(0, ' + col + ', 0)';
 
-      if (i >= iterations - 1){
-        col = 'rgb(0,0,0)';
-      }else{
+			if (i >= iterations - 1) {
+				col = 'rgb(0,0,0)';
+			} else {
 
-        if (config.colourScheme === 'Random'){
-          // Scale all colours to count(array_colours)
-          let colPoint = Math.floor(config.maxIterations * (i / iterations));
-          col = config.randomCols[colPoint];
-        }else{
-          // Scale all colours to count(array_colours)
-          let colPoint = Math.floor(config.maxIterations * (i / iterations));
-          col = ARR_COLOURS[config.colourScheme][colPoint];
-        }
+				if (config.colourScheme === 'Random') {
+					// Scale all colours to count(array_colours)
+					let colPoint = Math.floor(config.maxIterations * (i / iterations));
+					col = config.randomCols[colPoint];
+				} else {
+					// Scale all colours to count(array_colours)
+					let colPoint = Math.floor(config.maxIterations * (i / iterations));
+					col = ARR_COLOURS[config.colourScheme][colPoint];
+				}
 
-      }
+			}
 
-      ctx.fillStyle = col;
+			ctx.fillStyle = col;
 			ctx.fillRect(xCoord, yCoord, 1, 1);
 
 			//console.log('Point (' + x + ',' + y + ') iterations = ' + i);
@@ -286,24 +286,24 @@ function generateFractal(xCenter, yCenter, iterations, limit, type){
 
 	}
 
-  // ACTUALLY DRAW ON THE CANVAS AT THE END
-  ctx.fill();
+	// ACTUALLY DRAW ON THE CANVAS AT THE END
+	ctx.fill();
 
-  //screenCtx.drawImage(cnv, 0, 0);
+	//screenCtx.drawImage(cnv, 0, 0);
 
 }
 
-function getRandomColourScheme(){
-  let arrCols = [];
-  for (var i = 0; i < 16; i++){
-    let thisCol = random_rgb();
-    arrCols.push(thisCol);
-  }
-  return arrCols;
+function getRandomColourScheme() {
+	let arrCols = [];
+	for (var i = 0; i < 16; i++) {
+		let thisCol = random_rgb();
+		arrCols.push(thisCol);
+	}
+	return arrCols;
 }
 
 // Adapted from https://stackoverflow.com/a/23095818
 function random_rgb() {
-    let o = Math.round, r = Math.random, s = 255;
-    return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
+	let o = Math.round, r = Math.random, s = 255;
+	return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
 }

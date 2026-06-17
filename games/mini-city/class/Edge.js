@@ -8,8 +8,9 @@ class Edge
 	capacity = 10;
 	units = [];
 	
-	constructor(id, name, start, end, flow=1, capacity=10){
-	  //console.log('edgeConstr',start,end);
+	constructor(id, name, start, end, flow=1, capacity=10)
+	{
+	  	//console.log('edgeConstr',start,end);
 		this.id = id;
 		this.name = name;
 		this.start = start;
@@ -21,37 +22,46 @@ class Edge
 		end.edges.push(this);
 	}
 	
-	getNodes(){
+	getNodes()
+	{
 		return [this.start, this.end];
 	}
 	
-	getOtherNode(node){
+	getOtherNode(node)
+	{
 		let [start, end] = this.getNodes();
 		//console.log('inOtherNode',start,end);
-		if(start.id == node.id){
+		if(start.id == node.id)
+		{
 			return end;
 		}
 		return start;
 	}
 	
-	addUnit(unit){
+	addUnit(unit)
+	{
 		if(this.capacity==0) return false;
 		this.units.push(unit);
 		this.capacity -= 1;
 		this.calcWeight();
 		return true;
 	}
-	removeUnit(unit){
+
+	removeUnit(unit)
+	{
 		this.units = this.units.splice(this.units.indexOf(unit), 1);
 		this.capacity += 1;
 		this.calcWeight();
 		return true;
 	}
 	
-	getWeight(){
-	  return this.weight;
+	getWeight()
+	{
+		return this.weight;
 	}
-	calcWeight(){
+
+	calcWeight()
+	{
 		this.weight = (this.capacity * this.flow);
 	}
 }
