@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dragon Game</title>
+		<script src="..\..\javascript\draggable.js"></script>
+		<script defer>
+			let dragon = document.getElementById("dragon");
+			let draggableDragon = new Draggable(dragon, "copy");
+			let dropZone = document.getElementById("actionSet");
+			let droppableZone = new DropZone(dropZone, "copy", function(draggable) {
+				alert("Dragon dropped into Action Set!");
+			});
+		</script>
+		<style>
+			#game-container 
+			{
+				width: 100%;
+				height: 500px;
+				border: 1px solid #000;
+				position: relative;
+			}
+			.draggable 
+			{
+				width: 100px;
+				height: 100px;
+				padding: 10px;
+				text-align: center;
+				background-color: rgb(191, 228, 105);
+				position: absolute;
+				cursor: grab;
+			}
+			.droppable 
+			{
+				width: 200px;
+				height: 200px;
+				padding: 10px;
+				text-align: center;
+				background-color: rgb(105, 228, 191);
+				position: absolute;
+				top: 300px;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Dragon Game</h1>
+		<p>Welcome to the Dragon Game!</p>
+		<div id="game-container">
+			<div id="dragon" class="draggable">
+				<h2>Dragon Name here</h2>
+			</div>
+			<div id="actionSet" class="droppable">
+				<h2>Action Set</h2>
+			</div>
+		</div>
+	</body>
+</html>
