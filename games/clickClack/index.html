@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>3D Polyhedral Dice Roller</title>
+	<style>
+		body {
+			margin: 0;
+			overflow: hidden;
+			background-color: #1a1a1a;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			user-select: none;
+		}
+
+		#ui-container {
+			position: absolute;
+			top: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 15px;
+			z-index: 10;
+		}
+
+		.button-group {
+			display: flex;
+			gap: 10px;
+			background: rgba(0, 0, 0, 0.6);
+			padding: 10px;
+			border-radius: 8px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+			backdrop-filter: blur(5px);
+		}
+
+		button {
+			background-color: #2c3e50;
+			color: white;
+			border: none;
+			padding: 10px 18px;
+			font-size: 15px;
+			font-weight: bold;
+			border-radius: 4px;
+			cursor: pointer;
+			transition: all 0.15s ease-in-out;
+		}
+
+		button:hover {
+			background-color: #34495e;
+			transform: translateY(-1px);
+		}
+
+		button:active {
+			transform: translateY(1px);
+		}
+
+		button.roll-btn {
+			background-color: #27ae60;
+		}
+
+		button.roll-btn:hover {
+			background-color: #2ecc71;
+		}
+
+		#result-display {
+			color: #ffffff;
+			font-size: 28px;
+			font-weight: 800;
+			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+			background: rgba(46, 204, 113, 0.2);
+			padding: 5px 20px;
+			border-radius: 20px;
+			border: 1px solid rgba(46, 204, 113, 0.4);
+			opacity: 0;
+			transition: opacity 0.3s ease-in-out;
+		}
+
+		#result-display.show {
+			opacity: 1;
+		}
+
+		#canvas-container {
+			width: 100vw;
+			height: 100vh;
+		}
+	</style>
+	<!-- Include Three.JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.js"></script>
+	<!-- Include Cannon.es minified -->
+	<script type="module" src="https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.min.js"></script>
+</head>
+
+<body>
+
+	<div id="ui-container">
+		<div class="button-group">
+			<!-- Replaced onclick with data-type attributes -->
+			<button type="button" class="spawn-btn" data-type="D4">+ D4</button>
+			<button type="button" class="spawn-btn" data-type="D6">+ D6</button>
+			<button type="button" class="spawn-btn" data-type="D8">+ D8</button>
+			<button type="button" class="spawn-btn" data-type="D10">+ D10</button>
+			<button type="button" class="spawn-btn" data-type="D12">+ D12</button>
+			<button type="button" class="spawn-btn" data-type="D20">+ D20</button>
+
+			<!-- Replaced onclick with clear explicit IDs -->
+			<button type="button" id="btnRollAll" class="roll-btn">Roll Dice</button>
+			<button type="button" id="btnClearAll" style="background-color: #c0392b;">Clear</button>
+		</div>
+		<div id="result-display">Total: 0</div>
+	</div>
+
+	<div id="canvas-container"></div>
+
+	<script type="module">
+		// Add this import statement as the very first line of your script:
+		import * as CANNON from 'https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.min.js';
+
+		let scene, camera, renderer, world;
+		let diceArray = [];
+		const container = document.getElementById('canvas-container');
+
+		// Mathematically perfect vertex templates for polyhedral shapes
+		const POLYHEDRON_DATA = {
+			D4: {
+				vertices: [[1, 1, 1], [-1, -1, 1], [-1, 1, -1], [1, -1, -1]],
+				faces: [[0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 3, 2]],
+				values: [1, 2, 3, 4]
+			},
+			D6: {
+				vertices: [[-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1], [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]],
+				faces: [[0, 3, 2, 1], [4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]],
+				values: [1, 2, 3, 4, 5, 6]
+			},
+			D8: {
+				vertices: [[0, 1.4, 0], [1.4, 0, 0], [0, 0, -1.4], [-1.4, 0, 0], [0, 0, 1.4], [0, -1.4, 0]],
+				faces: [[0, 1, 4], [0, 4, 3], [0, 3, 2], [0, 2, 1], [5, 4, 1], [5, 3, 4], [5, 2, 3], [5, 1, 2]],
+				values: [1, 2, 3, 4, 5, 6, 7, 8]
+			},
+			D10: {
+				vertices: (function () {
+					let verts = [[0, 1.4, 0], [0, -1.4, 0]];
+					for (let i = 0; i < 10; i++) {
+						let angle = (i * Math.PI) / 5;
+						let r = 1.3;
+						let h = i % 2 === 0 ? 0.3 : -0.3;
+						verts.push([Math.cos(angle) * r, h, Math.sin(angle) * r]);
+					}
+					return verts;
+				})(),
+				faces: [, [0, 3, 4], [0, 4, 5], [0, 5, 6], [0, 6, 7], [0, 7, 8], [0, 8, 9], [0, 9, 10], [0, 10, 11], [0, 11, 2],
+					, [1, 4, 3], [1, 5, 4], [1, 6, 5], [1, 7, 6], [1, 8, 7], [1, 9, 8], [1, 10, 9], [1, 11, 10], [1, 2, 11]
+				],
+				values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+			},
+			D12: {
+				vertices: (function () {
+					let gold = (1 + Math.sqrt(5)) / 2;
+					let invGold = 1 / gold;
+					return [, [1, 1, -1], [1, -1, 1], [1, -1, -1], [-1, 1, 1], [-1, 1, -1], [-1, -1, 1], [-1, -1, -1],
+						[0, invGold, gold], [0, invGold, -gold], [0, -invGold, gold], [0, -invGold, -gold],
+						[invGold, gold, 0], [invGold, -gold, 0], [-invGold, gold, 0], [-invGold, -gold, 0],
+						[gold, 0, invGold], [gold, 0, -invGold], [-gold, 0, invGold], [-gold, 0, -invGold]
+					];
+				})(),
+				faces: [, [0, 12, 1, 17, 16], [1, 9, 11, 3, 17], [2, 13, 3, 17, 16], [0, 12, 14, 4, 8],
+					, [5, 9, 1, 12, 14], [7, 15, 6, 10, 11], [7, 11, 3, 13, 6], [6, 18, 4, 8, 10],
+					, [6, 13, 2, 16, 18]
+				],
+				values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+			},
+			D20: {
+				vertices: (function () {
+					let t = (1 + Math.sqrt(5)) / 2;
+					return [
+						[-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0], [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+						[t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]
+					];
+				})(),
+				faces: [, [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11], [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8],
+					, [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9], [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]
+				],
+				values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+			}
+		};
+
+		function initSystems() {
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color(0x1a1a1a);
+
+			camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+			camera.position.set(0, 15, 12);
+			camera.lookAt(0, 0, 0);
+
+			renderer = new THREE.WebGLRenderer({ antialias: true });
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			renderer.shadowMap.enabled = true;
+			container.appendChild(renderer.domElement);
+
+			scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+			const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+			dirLight.position.set(15, 25, 15);
+			dirLight.castShadow = true;
+			dirLight.shadow.mapSize.width = 2048;
+			dirLight.shadow.mapSize.height = 2048;
+			scene.add(dirLight);
+
+			world = new CANNON.World();
+			world.gravity.set(0, -22, 0);
+
+			// Static physics floor
+			const floorMaterial = new CANNON.Material();
+			const floorBody = new CANNON.Body({
+				mass: 0,
+				shape: new CANNON.Plane(),
+				material: floorMaterial
+			});
+			floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+			world.addBody(floorBody);
+
+			const gridHelper = new THREE.GridHelper(20, 20, 0x27ae60, 0x333333);
+			gridHelper.position.y = 0.01;
+			scene.add(gridHelper);
+
+			const floorMesh = new THREE.Mesh(
+				new THREE.PlaneGeometry(40, 40),
+				new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.8 })
+			);
+			floorMesh.rotation.x = -Math.PI / 2;
+			floorMesh.receiveShadow = true;
+			scene.add(floorMesh);
+
+			window.addEventListener('resize', onWindowResize);
+		}
+
+		function createFaceTexture(number, colorString) {
+			const canvas = document.createElement('canvas');
+			canvas.width = 128; canvas.height = 128;
+			const ctx = canvas.getContext('2d');
+
+			ctx.fillStyle = colorString;
+			ctx.fillRect(0, 0, 128, 128);
+
+			ctx.fillStyle = '#ffffff';
+			ctx.font = 'bold 50px Arial';
+			ctx.textAlign = 'center';
+			ctx.textBaseline = 'middle';
+			ctx.fillText(number, 64, 64);
+
+			const texture = new THREE.CanvasTexture(canvas);
+			return new THREE.MeshStandardMaterial({ map: texture, roughness: 0.5, metalness: 0.1, side: THREE.DoubleSide });
+		}
+
+		// Procedurally constructs pristine geometric models with distinct non-overlapping face groups
+		function buildDiceMesh(type) {
+			const data = POLYHEDRON_DATA[type];
+			const geom = new THREE.BufferGeometry();
+
+			const positions = [];
+			const normals = [];
+			const uvs = [];
+
+			const colorMap = { D4: '#9b59b6', D6: '#e74c3c', D8: '#3498db', D10: '#f1c40f', D12: '#e67e22', D20: '#1abc9c' };
+			const materials = data.values.map(num => createFaceTexture(num, colorMap[type]));
+
+			// Triangulate and isolate each face structure to guarantee unique number mapping
+			data.faces.forEach((face, faceIdx) => {
+				const groupStartVertexIdx = positions.length / 3;
+
+				// Form triangle fans for multi-vertex faces (D6, D12)
+				for (let i = 1; i < face.length - 1; i++) {
+					const v0 = data.vertices[face[0]];
+					const v1 = data.vertices[face[i]];
+					const v2 = data.vertices[face[i + 1]];
+
+					positions.push(...v0, ...v1, ...v2);
+
+					// Compute precise flat face normals
+					const p0 = new THREE.Vector3(...v0);
+					const p1 = new THREE.Vector3(...v1);
+					const p2 = new THREE.Vector3(...v2);
+					const cb = new THREE.Vector3(), ab = new THREE.Vector3();
+					cb.subVectors(p2, p1);
+					ab.subVectors(p0, p1);
+					cb.cross(ab).normalize();
+
+					normals.push(cb.x, cb.y, cb.z, cb.x, cb.y, cb.z, cb.x, cb.y, cb.z);
+
+					// Assign standard 2D mapping coordinates mapping to the canvas texture surfaces
+					uvs.push(0.5, 1, 0, 0, 1, 0);
+				}
+
+				const groupVertexCount = (positions.length / 3) - groupStartVertexIdx;
+				geom.addGroup(groupStartVertexIdx, groupVertexCount, faceIdx);
+			});
+
+			geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+			geom.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+			geom.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+
+			const mesh = new THREE.Mesh(geom, materials);
+			mesh.castShadow = true;
+			return mesh;
+		}
+
+		// Generates flat-faced bounding hulls so the shapes roll and stop realistically
+		function createCannonShape(type) {
+			const data = POLYHEDRON_DATA[type];
+
+			// Convert vertex coordinates into Cannon-compatible vectors
+			const vertices = data.vertices.map(v => new CANNON.Vec3(v[0], v[1], v[2]));
+			const faces = [];
+
+			// Triangulate sub-faces to satisfy the physics engine requirements
+			data.faces.forEach(face => {
+				for (let i = 1; i < face.length - 1; i++) {
+					faces.push([face[0], face[i], face[i + 1]]);
+				}
+			});
+
+			return new CANNON.ConvexPolyhedron({ vertices, faces });
+		}
+
+		function spawnDice(type) {
+			const mesh = buildDiceMesh(type);
+			const shape = createCannonShape(type);
+
+			const diceBody = new CANNON.Body({
+				mass: 2.0,
+				shape: shape,
+				linearDamping: 0.2, // Adds air resistance friction to help shapes settle
+				angularDamping: 0.2 // Stops perpetual rotation on flat edges
+			});
+
+			// Randomize setup transforms
+			diceBody.position.set((Math.random() - 0.5) * 5, 6 + Math.random() * 2, (Math.random() - 0.5) * 5);
+			diceBody.quaternion.setFromAxisAngle(new CANNON.Vec3(Math.random(), Math.random(), Math.random()).unit(), Math.random() * Math.PI);
+			diceBody.angularVelocity.set((Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15);
+
+			world.addBody(diceBody);
+			scene.add(mesh);
+			diceArray.push({ mesh: mesh, body: diceBody, type: type, settled: false, resultValue: 0 });
+		}
+
+		function rollAll() {
+			document.getElementById('result-display').classList.remove('show');
+			diceArray.forEach(dice => {
+				dice.settled = false;
+				dice.body.wakeUp(); // Forces physics evaluation to resume
+				dice.body.position.set((Math.random() - 0.5) * 5, 6 + Math.random() * 2, (Math.random() - 0.5) * 5);
+				dice.body.quaternion.setFromAxisAngle(new CANNON.Vec3(Math.random(), Math.random(), Math.random()).unit(), Math.random() * Math.PI);
+				dice.body.velocity.set((Math.random() - 0.5) * 6, -14, (Math.random() - 0.5) * 6);
+				dice.body.angularVelocity.set((Math.random() - 0.5) * 35, (Math.random() - 0.5) * 35, (Math.random() - 0.5) * 35);
+			});
+		}
+
+		function checkDiceResult(dice) {
+			const body = dice.body;
+			const data = POLYHEDRON_DATA[dice.type];
+			let highestY = -1;
+			let winningIndex = 0;
+
+			const normalAttribute = dice.mesh.geometry.attributes.normal;
+
+			dice.mesh.geometry.groups.forEach((group, faceIndex) => {
+				const localNormal = new THREE.Vector3();
+
+				localNormal.fromBufferAttribute(normalAttribute, group.start);
+
+				const worldNormal = localNormal.clone().applyQuaternion(new THREE.Quaternion(body.quaternion.x, body.quaternion.y, body.quaternion.z, body.quaternion.w));
+
+				if (worldNormal.y > highestY) {
+					highestY = worldNormal.y;
+					winningIndex = faceIndex;
+				}
+			});
+
+			return data.values[winningIndex] || 1;
+		}
+
+		function evaluateAllSettled() {
+			let allStopped = true;
+			let totalScore = 0;
+			diceArray.forEach(dice => {
+				const v = dice.body.velocity;
+				const av = dice.body.angularVelocity;
+				// Verifies speed has dropped low enough to indicate the dice has come to a stop
+				const isStopped = Math.abs(v.x) < 0.1 && Math.abs(v.y) < 0.1 && Math.abs(v.z) < 0.1 && Math.abs(av.x) < 0.1 && Math.abs(av.y) < 0.1 && Math.abs(av.z) < 0.1;
+
+				if (isStopped) {
+					if (!dice.settled) {
+						dice.settled = true;
+						dice.resultValue = checkDiceResult(dice);
+					}
+					totalScore += dice.resultValue;
+				}
+				else {
+					allStopped = false;
+				}
+			});
+
+			if (allStopped && diceArray.length > 0) {
+				const display = document.getElementById('result-display');
+				display.textContent = `Total Score: ${totalScore}`;
+				display.classList.add('show');
+			}
+		}
+
+		function clearAll() {
+			document.getElementById('result-display').classList.remove('show');
+			diceArray.forEach(dice => {
+				world.removeBody(dice.body);
+				scene.remove(dice.mesh);
+				dice.mesh.geometry.dispose();
+			});
+			diceArray = [];
+		}
+
+		function animate() {
+			requestAnimationFrame(animate);
+			world.step(1 / 60);
+			diceArray.forEach(dice => {
+				if (dice && dice.body && dice.mesh) {
+					dice.mesh.position.copy(dice.body.position);
+					dice.mesh.quaternion.copy(dice.body.quaternion);
+				}
+			});
+			evaluateAllSettled();
+			renderer.render(scene, camera);
+		}
+
+		function onWindowResize() {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+		}
+
+		window.onload = () => {
+			initSystems();
+			animate();
+			spawnDice('D6');
+			document.querySelectorAll('.spawn-btn').forEach(button => {
+				button.addEventListener('click', (e) => spawnDice(e.target.getAttribute('data-type')));
+			});
+			document.getElementById('btnRollAll').addEventListener('click', rollAll);
+			document.getElementById('btnClearAll').addEventListener('click', clearAll);
+		};
+	</script>
+</body>
+
+</html>
