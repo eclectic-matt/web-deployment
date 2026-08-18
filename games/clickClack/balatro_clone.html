@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Click Clack - Shiny Math Rocks</title>
+	<!-- Google Fonts for Retro Arcade Vibe -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,700&family=VT323&display=swap"
+		rel="stylesheet">
+
+	<style>
+		:root {
+			--bg-color: #0b0c16;
+			--panel-bg: #16192b;
+			--panel-border: #2a3154;
+			--accent-red: #ef3e36;
+			--accent-blue: #17b890;
+			--accent-gold: #ffb703;
+
+			--text-main: #ffffff;
+			--text-muted: #8b9bb4;
+			--chip-blue: #0077b6;
+			--mult-red: #e63946;
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		body {
+			font-family: 'Barlow Condensed', sans-serif;
+			background-color: var(--bg-color);
+			color: var(--text-main);
+			min-height: 100vh;
+
+			overflow-x: hidden;
+			background-image:
+				radial-gradient(circle at 20% 30%, rgba(239, 62, 54, 0.08) 0%, transparent 40%),
+				radial-gradient(circle at 80% 70%, rgba(23, 184, 144, 0.08) 0%, transparent 40%),
+				linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+				linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+			background-size: 100% 100%, 100% 100%, 100% 4px, 6px 100%;
+		}
+
+		/* App Layout Structure */
+		.game-wrapper {
+			display: grid;
+			grid-template-columns: 320px 1fr;
+			min-height: 100vh;
+			width: 100%;
+			gap: 16px;
+			padding: 16px;
+		}
+
+
+		/* Sidebar Panel (Round & Score) */
+		.sidebar {
+			background-color: var(--panel-bg);
+			border: 3px solid var(--panel-border);
+			border-radius: 12px;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			box-shadow: 0 8px 0px rgba(0, 0, 0, 0.4);
+			position: relative;
+		}
+
+		.sidebar::before {
+			content: '';
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			right: 2px;
+			height: 50%;
+			background: linear-gradient(rgba(255, 255, 255, 0.05), transparent);
+			border-radius: 10px 10px 0 0;
+
+			pointer-events: none;
+		}
+
+		/* Main Workspace Container */
+		.main-content {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		/* Section Styling */
+		.panel-section {
+			background-color: var(--panel-bg);
+			border: 3px solid var(--panel-border);
+			border-radius: 12px;
+			padding: 20px;
+			box-shadow: 0 8px 0px rgba(0, 0, 0, 0.4);
+		}
+
+
+		.section-title {
+			font-size: 1.4rem;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			color: var(--text-muted);
+			margin-bottom: 16px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 2px dashed var(--panel-border);
+			padding-bottom: 8px;
+		}
+
+		/* --- Score / Stats UI Elements --- */
+		.blind-banner {
+			background: linear-gradient(135deg, #3a0ca3, #7209b7);
+			border: 2px solid #f72585;
+			border-radius: 8px;
+			padding: 12px;
+
+			text-align: center;
+			margin-bottom: 20px;
+			box-shadow: inset 0 0 10px rgba(247, 37, 133, 0.5);
+		}
+
+		.blind-label {
+			font-size: 1rem;
+			color: #f72585;
+			letter-spacing: 3px;
+			text-transform: uppercase;
+			font-weight: 800;
+		}
+
+		.blind-target {
+			font-family: 'VT323', monospace;
+			font-size: 2.5rem;
+			color: #fff;
+			text-shadow: 0 0 8px #f72585;
+		}
+
+
+		.score-box {
+			background-color: #05070f;
+			border: 2px solid var(--panel-border);
+			border-radius: 8px;
+			padding: 16px;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+
+		.score-title {
+			font-size: 1.1rem;
+			color: var(--text-muted);
+			text-transform: uppercase;
+		}
+
+		.score-values {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			gap: 8px;
+			margin-top: 8px;
+		}
+
+		.chips-indicator {
+			background-color: var(--chip-blue);
+			color: white;
+			padding: 4px 12px;
+			border-radius: 4px;
+			font-size: 1.5rem;
+			font-weight: 800;
+			min-width: 80px;
+		}
+
+		.mult-sign {
+			color: var(--accent-red);
+			font-size: 1.8rem;
+			font-weight: 800;
+		}
+
+
+		.mult-indicator {
+			background-color: var(--mult-red);
+			color: white;
+			padding: 4px 12px;
+			border-radius: 4px;
+			font-size: 1.5rem;
+			font-weight: 800;
+			min-width: 80px;
+		}
+
+		.total-score {
+			font-family: 'VT323', monospace;
+			font-size: 3rem;
+			color: var(--accent-gold);
+			margin-top: 12px;
+			text-shadow: 0 0 10px rgba(255, 183, 3, 0.4);
+		}
+
+		.stat-row {
+
+			display: flex;
+			justify-content: space-between;
+			background: rgba(0, 0, 0, 0.2);
+			padding: 8px 12px;
+			border-radius: 6px;
+			margin-bottom: 8px;
+			font-size: 1.2rem;
+		}
+
+		.stat-label {
+			color: var(--text-muted);
+			text-transform: uppercase;
+		}
+
+		.stat-val {
+			font-weight: 800;
+			color: #fff;
+		}
+
+		/* Menu / Action Buttons */
+		.menu-buttons {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			margin-top: auto;
+		}
+
+
+		.btn {
+			background: linear-gradient(to bottom, #2c3561, #1c2342);
+			border: 2px solid #3d4984;
+			border-bottom-width: 6px;
+			color: white;
+			padding: 12px 16px;
+			border-radius: 8px;
+			font-family: 'Barlow Condensed', sans-serif;
+			font-size: 1.3rem;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			cursor: pointer;
+			transition: all 0.1s ease;
+		}
+
+		.btn:active {
+			border-bottom-width: 2px;
+			transform: translateY(4px);
+
+		}
+
+		.btn-primary {
+			background: linear-gradient(to bottom, #ff3838, #c30000);
+			border-color: #ff5252;
+		}
+
+		.btn-accent {
+			background: linear-gradient(to bottom, #00b4d8, #0077b6);
+			border-color: #90e0ef;
+		}
+
+		/* --- Jokers Section --- */
+		.jokers-container {
+			display: flex;
+			gap: 4px;
+			flex-wrap: wrap;
+			min-height: 150px;
+			padding: 10px 5px;
+			position: relative;
+		}
+
+		.joker-card {
+			max-width: 24%;
+			height: 160px;
+			background: linear-gradient(135deg, #e0e0e0, #ffffff);
+			border: 3px solid #111;
+			border-radius: 8px;
+			color: #111;
+			padding: 8px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			box-shadow: 0 6px 0px rgba(0, 0, 0, 0.5);
+			cursor: grab;
+			position: relative;
+			touch-action: none;
+			transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+		}
+
+		.joker-card:active {
+			cursor: grabbing;
+		}
+
+		.joker-card.dragging {
+			opacity: 0.5;
+			transform: scale(1.05) rotate(3deg);
+			box-shadow: 0 15px 15px rgba(0, 0, 0, 0.6);
+			z-index: 100;
+		}
+
+		/* Balatro Specific Joker Rarity Themes */
+		.joker-card[data-rarity="common"] {
+			border-color: #555;
+		}
+
+		.joker-card[data-rarity="uncommon"] {
+			border-color: var(--chip-blue);
+		}
+
+		.joker-card[data-rarity="rare"] {
+			border-color: var(--accent-red);
+			background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+		}
+
+		.joker-card[data-rarity="legendary"] {
+			border-color: var(--accent-gold);
+			background: linear-gradient(135deg, #ffe259, #ffa751);
+		}
+
+
+		.joker-badge {
+			font-size: 0.65rem;
+			text-transform: uppercase;
+			background: #111;
+			color: #fff;
+			padding: 2px 4px;
+			border-radius: 3px;
+			align-self: flex-start;
+			font-weight: 800;
+		}
+
+		.joker-name {
+			font-size: 1.1rem;
+			font-weight: 800;
+			line-height: 1.1;
+			text-transform: uppercase;
+			margin-top: 4px;
+		}
+
+
+		.joker-ability {
+			font-size: 0.75rem;
+			font-family: sans-serif;
+			font-weight: bold;
+			color: #333;
+			background: rgba(255, 255, 255, 0.7);
+			padding: 4px;
+			border-radius: 4px;
+			border: 1px dashed #777;
+			margin-top: auto;
+		}
+
+		/* --- Main Arena: Dice Equation --- */
+		.arena-grid {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+
+
+		/* Equation Slots Setup */
+		.equation-bar {
+			background-color: #05070f;
+			border: 2px solid var(--panel-border);
+			border-radius: 12px;
+			padding: 30px 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.eq-text {
+			font-size: 2.5rem;
+			font-weight: 800;
+			color: var(--text-main);
+		}
+
+
+		.eq-text.result-y {
+			color: var(--accent-gold);
+			font-family: 'VT323', monospace;
+			font-size: 1.5rem;
+			text-shadow: 0 0 10px rgba(255, 183, 3, 0.3);
+		}
+
+		.eq-slot {
+			min-width: 15%;
+			max-width: 20%;
+			height: 70px;
+			border: 3px dashed #3d4984;
+			border-radius: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			background-color: rgba(22, 25, 43, 0.6);
+			transition: all 0.2s ease;
+		}
+
+
+		.eq-slot::after {
+			content: attr(data-placeholder);
+			position: absolute;
+			font-size: 1.2rem;
+			color: rgba(255, 255, 255, 0.15);
+			font-weight: 800;
+			text-transform: uppercase;
+		}
+
+		.eq-slot.drag-over {
+			border-color: var(--accent-gold);
+			background-color: rgba(255, 183, 3, 0.1);
+			transform: scale(1.05);
+		}
+
+		/* Dice Pool Styling */
+		.dice-pool-container {
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 8px;
+
+			padding: 16px;
+			min-height: 110px;
+			display: flex;
+			gap: 16px;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+			border: 2px solid var(--panel-border);
+		}
+
+		/* Realized CSS Interactive Dice */
+		.dice {
+			width: 40px;
+			height: 40px;
+			background-color: #fff;
+			color: #111;
+			border-radius: 8px;
+			box-shadow: 0 5px 0px #b5b5b5, 0 8px 10px rgba(0, 0, 0, 0.5);
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-rows: repeat(3, 1fr);
+			padding: 6px;
+			gap: 2px;
+			cursor: grab;
+			touch-action: none;
+			transition: transform 0.1s ease;
+		}
+
+		.dice:active {
+			cursor: grabbing;
+		}
+
+		.dice.rolling {
+			animation: diceRoll 0.4s ease-out infinite;
+		}
+
+		.dot {
+			background-color: #111;
+			border-radius: 50%;
+			width: 8px;
+			height: 8px;
+			margin: auto;
+			opacity: 0;
+		}
+
+		/* Dice Dot Absolute Placement Logic via standard layouts mapped inside 3x3 grids */
+
+		/* DIE VALUE 1 */
+		.dice[data-value="1"] .dot:nth-child(5) {
+			opacity: 1;
+		}
+
+		/* DIE VALUE 2 */
+		.dice[data-value="2"] .dot:nth-child(1),
+		.dice[data-value="2"] .dot:nth-child(9) {
+			opacity: 1;
+		}
+
+		/* DIE VALUE 3 */
+		.dice[data-value="3"] .dot:nth-child(1),
+		.dice[data-value="3"] .dot:nth-child(5),
+		.dice[data-value="3"] .dot:nth-child(9) {
+			opacity: 1;
+		}
+
+		/* DIE VALUE 4 */
+		.dice[data-value="4"] .dot:nth-child(1),
+		.dice[data-value="4"] .dot:nth-child(3),
+		.dice[data-value="4"] .dot:nth-child(7),
+		.dice[data-value="4"] .dot:nth-child(9) {
+			opacity: 1;
+		}
+
+		/* DIE VALUE 5 */
+		.dice[data-value="5"] .dot:nth-child(1),
+		.dice[data-value="5"] .dot:nth-child(3),
+		.dice[data-value="5"] .dot:nth-child(5),
+		.dice[data-value="5"] .dot:nth-child(7),
+		.dice[data-value="5"] .dot:nth-child(9) {
+			opacity: 1;
+		}
+
+		/* DIE VALUE 6 */
+		.dice[data-value="6"] .dot:nth-child(1),
+		.dice[data-value="6"] .dot:nth-child(3),
+		.dice[data-value="6"] .dot:nth-child(4),
+		.dice[data-value="6"] .dot:nth-child(6),
+		.dice[data-value="6"] .dot:nth-child(7),
+		.dice[data-value="6"] .dot:nth-child(9) {
+			opacity: 1;
+		}
+
+		/* Color variations for dice types */
+		.dice-modifier {
+			background-color: #ffccd5;
+		}
+
+		.dice-modifier .dot {
+			background-color: #c30000;
+		}
+
+
+		/* Animation for rolling action */
+
+		@keyframes diceRoll {
+			0% {
+				transform: scale(0.9) rotate(0deg);
+				filter: blur(0.5px);
+			}
+
+			50% {
+				transform: scale(1.1) rotate(180deg);
+				filter: blur(1px);
+			}
+
+			100% {
+				transform: scale(0.9) rotate(360deg);
+				filter: blur(0.5px);
+			}
+		}
+
+		/* Custom System Message Alert Box Component (Avoids native Alerts) */
+		.alert-box {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			background: #f72585;
+			color: white;
+			padding: 14px 24px;
+			border-radius: 8px;
+			font-weight: 800;
+			font-size: 1.2rem;
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+			transform: translateY(150%);
+
+			transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			z-index: 1000;
+		}
+
+		.alert-box.show {
+			transform: translateY(0);
+		}
+
+		/* --- RESPONSIVE BREAKPOINTS (Mobile & Desktop Panels Switch) --- */
+		@media (max-width: 900px) {
+			.game-wrapper {
+				grid-template-columns: 1fr;
+				/* Stack vertically on tablet/mobile */
+				padding: 10px;
+				gap: 12px;
+			}
+
+			.sidebar {
+				min-height: auto;
+				gap: 20px;
+			}
+
+			.menu-buttons {
+
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+
+			.menu-buttons .btn {
+				flex: 1 1 140px;
+			}
+
+			.equation-bar {
+				padding: 20px 10px;
+				gap: 8px;
+			}
+
+			.eq-text {
+				font-size: 1.8rem;
+			}
+
+			.eq-text.result-y {
+				font-size: 2.5rem;
+
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="game-wrapper">
+
+		<!-- SIDEBAR: ROUND, BLIND, SCORE & ACTIONS -->
+		<aside class="sidebar">
+			<div>
+				<div class="blind-banner">
+					<div class="blind-label" id="blind-type">Small Blind</div>
+					<div class="blind-target" id="target-val">300</div>
+				</div>
+
+				<div class="score-box">
+					<div class="score-title">Current Score</div>
+					<div class="score-values">
+
+						<div class="chips-indicator" id="ui-chips">10</div>
+						<div class="mult-sign">+</div>
+						<div class="mult-indicator" id="ui-mult">1</div>
+					</div>
+					<div class="total-score" id="ui-total">0</div>
+				</div>
+
+				<div class="stat-row">
+					<span class="stat-label">Round</span>
+					<span class="stat-val" id="stat-round">1 / 8</span>
+				</div>
+				<div class="stat-row">
+					<span class="stat-label">Rerolls Left</span>
+					<span class="stat-val" id="stat-rerolls">3</span>
+				</div>
+				<div class="stat-row">
+					<span class="stat-label">Bank Cash</span>
+					<span class="stat-val" id="stat-cash">$4</span>
+				</div>
+
+			</div>
+
+			<div class="menu-buttons">
+				<button class="btn btn-primary" id="btn-submit" onclick="submitEquation()">Submit Equation</button>
+				<button class="btn btn-accent" id="btn-roll" onclick="rollPoolDice()">Roll Unused Dice</button>
+			</div>
+		</aside>
+
+		<!-- MAIN LAYOUT AREA -->
+		<main class="main-content">
+
+			<!-- TOP PANEL: JOKERS (REORDERABLE CARDS) -->
+			<section class="panel-section">
+				<div class="section-title">
+					<span>Joker Mechanics Slots</span>
+					<span style="font-size: 0.9rem; color: var(--accent-gold);">← Drag cards to reorder multiplier
+						priorities →</span>
+
+				</div>
+				<div class="jokers-container" id="jokers-zone">
+					<!-- Joker 1 -->
+					<div class="joker-card" data-rarity="common" draggable="true">
+						<div class="joker-badge">Common</div>
+						<div class="joker-name">Abstract Die</div>
+						<div class="joker-ability">+4 Chips per unique die face value</div>
+					</div>
+					<!-- Joker 2 -->
+					<div class="joker-card" data-rarity="uncommon" draggable="true">
+						<div class="joker-badge">Uncommon</div>
+						<div class="joker-name">Fibonacci</div>
+						<div class="joker-ability">If x is 1, 2, 3 or 5, gain +8 Mult</div>
+					</div>
+					<!-- Joker 3 -->
+					<div class="joker-card" data-rarity="rare" draggable="true">
+						<div class="joker-badge">Rare</div>
+						<div class="joker-name">Greedy Algebra</div>
+						<div class="joker-ability">Multiply final Equation output by 1.5x</div>
+
+					</div>
+					<!-- Joker 4 -->
+					<div class="joker-card" data-rarity="legendary" draggable="true">
+						<div class="joker-badge">Legendary</div>
+						<div class="joker-name">The Matrix</div>
+						<div class="joker-ability">m values are auto-squared instantly</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- BOTTOM PANEL: DICE EQUATION ENGINE -->
+			<section class="panel-section">
+				<div class="section-title">
+					<span>Equation Calculation Workspace</span>
+				</div>
+				<div class="arena-grid">
+
+					<!-- Equation Snap Targets Slot Matrix -->
+					<div class="equation-bar">
+
+						<span class="eq-text result-y" id="eq-y-output">0</span>
+						<span class="eq-text">=</span>
+
+						<!-- M Slot -->
+						<div class="eq-slot" data-slot="m" data-placeholder="m"></div>
+
+						<span class="eq-text">(•)</span>
+
+						<!-- X Slot -->
+						<div class="eq-slot" data-slot="x" data-placeholder="x"></div>
+
+						<span class="eq-text">+</span>
+
+						<!-- C Slot -->
+						<div class="eq-slot" data-slot="c" data-placeholder="c"></div>
+					</div>
+
+					<!-- Available Active Rollable Dice Pool -->
+					<div class="section-title" style="margin-bottom:0; font-size:1.1rem; border:none;">
+
+						<span>Your Rolled Dice Sandbox (Drag into slots above)</span>
+					</div>
+					<div class="dice-pool-container" id="dice-pool">
+						<!-- Dice Assets built via standard 9-dot grid for flexible representation -->
+						<div class="dice dice-modifier" data-value="1" id="die-1">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+						</div>
+						<div class="dice dice-modifier" data-value="3" id="die-2">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+						</div>
+						<div class="dice dice-modifier" data-value="4" id="die-3">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+						</div>
+
+
+
+						<div class="dice dice-modifier" data-value="5" id="die-4">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+						</div>
+						<div class="dice dice-modifier" data-value="6" id="die-5">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+
+		</main>
+	</div>
+
+	<!-- Feedback Banner Object -->
+	<div class="alert-box" id="toast-banner">Equation Submitted!</div>
+
+	<!-- ENGINE SCRIPTS CONTROLLER -->
+	<script>
+		// Game Logic State Variables
+		let rerollsLeft = 3;
+		let currentRoundScore = 0;
+		let blindTargetScore = 300;
+		let currentRound = 1;
+
+		window.onload = function () {
+			initJokerDragging();
+			initDiceDragging();
+			calculateEquation();
+		};
+
+		/* --- 1. JOKER REORDERING FUNCTIONALITY (HTML5 Drag & Drop) --- */
+		function initJokerDragging() {
+			const container = document.getElementById('jokers-zone');
+			const cards = container.querySelectorAll('.joker-card');
+
+			cards.forEach(card => {
+				card.addEventListener('dragstart', () => {
+					card.classList.add('dragging');
+				});
+
+				card.addEventListener('dragend', () => {
+					card.classList.remove('dragging');
+					triggerNotification("Joker mult priority rearranged!");
+				});
+			});
+
+			container.addEventListener('dragover', e => {
+				e.preventDefault();
+				const afterElement = getDragAfterElement(container, e.clientX);
+				const draggingCard = document.querySelector('.joker-card.dragging');
+				if (draggingCard) {
+					if (afterElement == null) {
+						container.appendChild(draggingCard);
+					} else {
+
+
+
+						container.insertBefore(draggingCard, afterElement);
+					}
+				}
+			});
+		}
+
+		function getDragAfterElement(container, x) {
+			const draggableElements = [...container.querySelectorAll('.joker-card:not(.dragging)')];
+
+			return draggableElements.reduce((closest, child) => {
+				const box = child.getBoundingClientRect();
+				const offset = x - box.left - box.width / 2;
+				if (offset < 0 && offset > closest.offset) {
+					return { offset: offset, element: child };
+				} else {
+					return closest;
+				}
+			}, { offset: Number.NEGATIVE_INFINITY }).element;
+		}
+
+		/* --- 2. DICE ENGINE DRAG & SNAP FUNCTIONALITY --- */
+		let draggedDie = null;
+
+		function initDiceDragging() {
+			const dice = document.querySelectorAll('.dice');
+			const slots = document.querySelectorAll('.eq-slot');
+			const pool = document.getElementById('dice-pool');
+
+			// Apply modern unified pointers handling dragging setup to items
+			dice.forEach(die => {
+				die.setAttribute('draggable', 'true');
+
+				die.addEventListener('dragstart', (e) => {
+					draggedDie = die;
+					setTimeout(() => die.style.opacity = '0.4', 0);
+				});
+
+				die.addEventListener('dragend', () => {
+					setTimeout(() => {
+
+
+
+						if (draggedDie) {
+							draggedDie.style.opacity = '1';
+							draggedDie = null;
+						}
+					}, 0);
+					calculateEquation();
+				});
+			});
+
+			slots.forEach(slot => {
+				slot.addEventListener('dragover', e => {
+					e.preventDefault();
+					slot.classList.add('drag-over');
+				});
+
+				slot.addEventListener('dragleave', () => {
+					slot.classList.remove('drag-over');
+				});
+
+
+
+
+				slot.addEventListener('drop', e => {
+					e.preventDefault();
+					slot.classList.remove('drag-over');
+
+					// If target slot already holds a die, move old die back to pool tray
+					if (slot.children.length > 0) {
+						pool.appendChild(slot.children[0]);
+					}
+
+					if (draggedDie) {
+						slot.appendChild(draggedDie);
+					}
+				});
+			});
+
+			// Allow clicking/dropping back directly onto pool area container
+			pool.addEventListener('dragover', e => e.preventDefault());
+			pool.addEventListener('drop', e => {
+				e.preventDefault();
+
+
+
+				if (draggedDie) {
+					pool.appendChild(draggedDie);
+				}
+			});
+		}
+
+		/* --- 3. DYNAMIC EQUATION RESOLVER ENGINE --- */
+		function calculateEquation() {
+			const mSlot = document.querySelector('.eq-slot[data-slot="m"]');
+			const xSlot = document.querySelector('.eq-slot[data-slot="x"]');
+			const cSlot = document.querySelector('.eq-slot[data-slot="c"]');
+
+			let m = mSlot.children.length > 0 ? parseInt(mSlot.children[0].getAttribute('data-value')) : 0;
+			let x = xSlot.children.length > 0 ? parseInt(xSlot.children[0].getAttribute('data-value')) : 0;
+			let c = cSlot.children.length > 0 ? parseInt(cSlot.children[0].getAttribute('data-value')) : 0;
+
+			// Compute y = mx + c
+			let yOutput = (m * x) + c;
+
+
+
+
+			// Inject updates to interactive UI components immediately
+			document.getElementById('eq-y-output').innerText = `${ yOutput }`;
+
+			// Mirror chips/mult feedback trackers live
+			document.getElementById('ui-chips').innerText = Math.max(10, (m * x) * 5);
+			document.getElementById('ui-mult').innerText = Math.max(1, c * 2);
+
+			return yOutput;
+		}
+
+		/* --- 4. DICE ROLL MECHANICS --- */
+		function rollPoolDice() {
+			if (rerollsLeft <= 0) {
+				triggerNotification("No rerolls remaining this round!");
+				return;
+			}
+
+			rerollsLeft--;
+			document.getElementById('stat-rerolls').innerText = rerollsLeft;
+
+
+
+
+			const pool = document.getElementById('dice-pool');
+			const targetDice = pool.querySelectorAll('.dice');
+
+			if (targetDice.length === 0) {
+				triggerNotification("No unplaced dice left to roll!");
+				return;
+			}
+
+			targetDice.forEach(die => {
+				die.classList.add('rolling');
+
+				// Randomize face values after animation sequence resolves
+				setTimeout(() => {
+					const newFaceValue = Math.floor(Math.random() * 6) + 1;
+					die.setAttribute('data-value', newFaceValue);
+					die.classList.remove('rolling');
+					calculateEquation();
+				}, 400);
+			});
+
+
+
+		}
+
+		/* --- 5. SYSTEM ACTIONS / SUBMISSION RULES --- */
+		function submitEquation() 
+		{
+			const frameOutput = calculateEquation();
+
+			if (frameOutput === 0) 
+			{
+				triggerNotification("Place dice to build a valid equation first!");
+				return;
+			}
+
+			const calculatedChips = parseInt(document.getElementById('ui-chips').innerText);
+			const calculatedMult = parseInt(document.getElementById('ui-mult').innerText);
+			const gainedScore = calculatedChips * calculatedMult;
+
+			currentRoundScore += gainedScore;
+			document.getElementById('ui-total').innerText = currentRoundScore;
+
+			triggerNotification(`Scored + ${ gainedScore } Chips!`);
+
+
+
+
+			// Evaluation win checking criteria
+			if (currentRoundScore >= blindTargetScore) {
+				setTimeout(() => {
+					triggerNotification("Blind Defeated! Advancing to Next Round...");
+					nextRoundProgression();
+				}, 1200);
+			}
+		}
+
+		function nextRoundProgression() {
+			currentRound++;
+			if (currentRound > 8) {
+				triggerNotification("Victory! You completed all equation matches!");
+				currentRound = 1;
+			}
+
+			document.getElementById('stat-round').innerText = `${ currentRound } / 8`;
+			blindTargetScore = currentRound * 320;
+			document.getElementById('target-val').innerText = blindTargetScore;
+
+
+
+
+			// Switch blind naming aesthetic flags
+			const blinds = ["Small Blind", "Big Blind", "The Hook Boss", "Amber Wedge", "The Wall", "Cerulean Bell", "Omega Blind"];
+			document.getElementById('blind-type').innerText = blinds[currentRound % blinds.length];
+
+			resetRoundState();
+		}
+
+		function resetRoundState() {
+			const pool = document.getElementById('dice-pool');
+			const slots = document.querySelectorAll('.eq-slot');
+
+			slots.forEach(slot => {
+				if (slot.children.length > 0) {
+					pool.appendChild(slot.children[0]);
+				}
+			});
+
+			rerollsLeft = 3;
+
+
+
+			currentRoundScore = 0;
+			document.getElementById('stat-rerolls').innerText = rerollsLeft;
+			document.getElementById('ui-total').innerText = "0";
+
+			// Re-roll all automatically on full structural wipe
+			const allDice = document.querySelectorAll('.dice');
+			allDice.forEach(die => {
+				die.setAttribute('data-value', Math.floor(Math.random() * 6) + 1);
+			});
+
+			calculateEquation();
+			triggerNotification("Board cleared & reset!");
+		}
+
+		// Custom Notification Utility Method
+		function triggerNotification(msg) {
+			const toast = document.getElementById('toast-banner');
+			toast.innerText = msg;
+			toast.classList.add('show');
+
+
+
+			setTimeout(() => {
+				toast.classList.remove('show');
+			}, 2500);
+		}
+	</script>
+</body>
+
+</html>
