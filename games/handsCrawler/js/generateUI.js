@@ -1,4 +1,6 @@
-const handsEl = document.getElementById('hands');
+const handsEl = document.getElementById("hands");
+const draggablePoolEl = document.getElementById("draggable-pool");
+
 /*
 <div id="leftHand">
 	<div class="drop-zone" id="left-pinky" title="Left Pinky"></div>
@@ -17,18 +19,20 @@ const handsEl = document.getElementById('hands');
 */
 
 const initUI = () => {
+	generateEquipment();
 	generateHands();
+	setupDraggables();
 }
 
 const generateHands = () => {
 	let handNames = ["left", "right"];
 	let fingerNames = ["pinky", "ring", "middle", "index", "thumb"];
-	for(hand = 1; hand <= 2; hand++)
+	for(let hand = 1; hand <= 2; hand++)
 	{
 		let hand = document.createElement("div");
 		let handName = handNames.shift();
 		hand.id = handName + "Hand";
-		for(digit = 1; digit <= 5; digit++)
+		for(let digit = 1; digit <= 5; digit++)
 		{
 			let finger = document.createElement("div");
 			finger.id = handName + "-" + fingerNames[digit - 1];
@@ -39,6 +43,32 @@ const generateHands = () => {
 		handsEl.appendChild(hand);
 		fingerNames.reverse();
 	}
-	//Now add event listeners to the generated elements
-	setupDraggables();
+}
+
+/*
+<div class="draggable ring" id="basic-ring" title="Basic Ring">O</div>
+<div class="draggable ring" id="wide-ring" title="Wide Ring">( )</div>
+<div class="draggable ring" id="super-ring" title="Super Ring">[ ]</div>
+*/
+const generateEquipment = () => {
+	let ringRarities = ["common", "uncommon", "rare", "mythic", "legendary"];
+	let ringMaterials = ["wood", "copper", "iron", "steel", "crystal"];
+	let ringTypes = ["mana", "strength", "vision", "knowledge", "boost"];
+	let ringIcons = ["O", "0", "( )", "{ }", "[ ]"];
+	for(let i = 0; i < ringRarities.length; i++)
+	{
+		let ring = document.createElement("div");
+		ring.classList.add("draggable");
+		ring.classList.add("ring");
+		//Generate a random ring
+		let ringRarity = ringRarities[i];
+		let ringMaterial = ringMaterials[Math.floor(Math.random() * ringMaterials.length)];
+		let ringType = ringTypes[Math.floor(Math.random() * ringTypes.length)];
+		let ringIcon = ringIcons[Math.floor(Math.random() * ringIcons.length)];
+		//Generate the name/title
+		ring.id = ringRarity + "-" + ringMaterial + "-" + ringType + "-ring";
+		ring.title = ringRarity + " " + ringMaterial + " ring of " + ringType;
+		ring.innerHTML = ringIcon;
+		draggablePoolEl.appendChild(ring);
+	}
 }
