@@ -1,4 +1,4 @@
-class ScoreEffect
+class ScoreEffect extends Effect
 {
 	//This score effect applies to "any" attack type
 	attackType = "any";
@@ -19,6 +19,7 @@ class ScoreEffect
 	
 	constructor(attackType = "any", damageType = "any", additor = 0, subtractor = 0, multiplier = 1, divisor = 1, chancePercentage = 100)
 	{
+		super("score");
 		this.attackType = attackType;
 		this.damageType = damageType;
 		this.additor = additor;
