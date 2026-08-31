@@ -114,6 +114,10 @@ const initTestButtons = () =>
   	outputToTxt("Total Damage = " + damage.total);
   });
   let magicBtn = document.getElementById("btnTestMagicalAttack");
+  let clearBtn = document.getElementById("btnClearTxt");
+  clearBtn.addEventListener("click", () => {
+  	clearTxt();
+  });
 }
 
 const scoreDamage = (damage, ring) => {
@@ -122,4 +126,8 @@ const scoreDamage = (damage, ring) => {
 
 const outputToTxt = (msg) => {
 	document.getElementById("txtTestOutput").value += msg + "\n";
+}
+
+const clearTxt = () => {
+	document.getElementById("txtTestOutput").value = "";
 }
