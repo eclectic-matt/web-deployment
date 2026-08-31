@@ -22,6 +22,7 @@ const initUI = () => {
 	generateEquipment();
 	generateHands();
 	setupDraggables();
+	initTestButtons();
 }
 
 const generateHands = () => {
@@ -60,6 +61,8 @@ const generateEquipment = () => {
 		let ring = document.createElement("div");
 		ring.classList.add("draggable");
 		ring.classList.add("ring");
+		//Generate using the item generator
+		
 		//Generate a random ring
 		let ringRarity = ringRarities[i];
 		let ringMaterial = ringMaterials[Math.floor(Math.random() * ringMaterials.length)];
@@ -71,4 +74,18 @@ const generateEquipment = () => {
 		ring.innerHTML = ringIcon;
 		draggablePoolEl.appendChild(ring);
 	}
+}
+
+const initTestButtons = () => 
+{
+  let physBtn = document.getElementById("btnTestPhysicalAttack");
+  physBtn.addEventListener("click", (ev) => {
+  	outputToTxt("physical attack");
+  	//Get ring data
+  });
+  let magicBtn = document.getElementById("btnTestMagicalAttack");
+}
+
+const outputToTxt = (msg) => {
+	document.getElementById("txtTestOutput").value += msg + "\n";
 }

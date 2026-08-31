@@ -1,22 +1,32 @@
-* {
+* 
+{
 	box-sizing: border-box;
 }
 
-body {
+body 
+{
 	background-color: black;
 	color: white;
 }
 
 .ring 
 {
+  display: block;
+	flex: 0 1 calc(20% - 1px);
+	
 	min-width: 30px;
 	min-height: 30px;
+	height: 0;
+  padding-bottom: calc(20% - 1px);
+	margin: 0;
+	padding: 2px;
 	border: 1px solid white;
 	border-radius: 50%;
-	flex: 0 1 calc(20% - 8px);
+	
 	text-align: center;
 	vertical-align: center;
-	font-size: 4rem;
+	
+	font-size: 1rem;
 }
 
 #draggable-pool 
@@ -31,32 +41,43 @@ body {
 
 .drop-zone 
 {
-	min-width: 50px;
-	min-height: 50px;
+	min-width: 20px;
+	max-width: calc(20% - 8px);
+	min-height: 20px;
+	margin: 0;
+	height: auto;
 	border: 1px solid red;
-	/*width: 20%;*/
-	flex: 0 1 calc(20% - 8px);
+	flex: 0 1 calc(20% - 2px);
 }
 
-#hands {
+#hands 
+{
 	width: 100%;
-	height: 100px;
+	min-height: 50px;
+	height: auto;
 	border: 5px outset grey;
 }
+
 #leftHand 
 {
 	width: 50%;
+	padding: 0;
 	float: left;
 	display: flex;
 	flex-flow: row wrap;
+	flex-direction: row;
+	gap: 5px;
 	position: relative;
-
 }
+
 #rightHand 
 {
 	width: 50%;
+	padding: 0;
 	float: left;
 	display: flex;
 	flex-flow: row wrap;
+	flex-direction: row;
+  gap: 10px;
 	position: relative;
 }
