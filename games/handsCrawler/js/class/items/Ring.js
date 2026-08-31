@@ -12,6 +12,7 @@ class Ring extends Item
 	}
 	score(attack)
 	{
-		this.effect.score(attack);
+		//this.effect.score(attack);
+		
 	}
 }

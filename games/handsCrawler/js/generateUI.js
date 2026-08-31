@@ -47,6 +47,13 @@ const generateEquipment = () => {
 		//Generate using the item generator
 		let ringData = generator.generateRing(i, i);
 		outputToTxt(ringData.effect.name + " " + ringData.effect.operation);
+		//Set data on element
+		ring.dataset.rarityName = ringData.rarity.name;
+		ring.dataset.rarityMultiplier = ringData.rarity.multiplier;
+		ring.dataset.effectName = ringData.effect.name;
+		ring.dataset.effectOperation = ringData.effect.operation;
+		ring.dataset.effectValue = ringData.effect.value;
+		
 		ring.title = ringData.rarity.name + " Ring of " + ringData.effect.operation + " " + ringData.effect.name;
 		ring.id = ringData.rarity.name + "-" + ringData.effect.operation + "-" + ringData.effect.name + "-ring";
 		ring.innerHTML = "O";
@@ -72,8 +79,45 @@ const initTestButtons = () =>
   physBtn.addEventListener("click", (ev) => {
   	outputToTxt("physical attack");
   	//Get ring data
+  	let rings = document.querySelectorAll(".ring");
+  	let damage = new Damage();
+  	damage.base = 10;
+  	damage.power = 1;
+  	for(let i = 0; i < rings.length; i++)
+  	{
+  	  let ring = rings[i];
+  	  //Extract ring data
+  	  let rarityName = ring.dataset.rarityName;
+  	  let rarityMultiplier = ring.dataset.rarityMultiplier;
+  	  let effectValue = ring.dataset.effectValue;
+  	  let effectName = ring.dataset.effectName;
+  	  let effectOp = ring.dataset.effectOperation;
+  	  outputToTxt("Scoring " + ring.id + " from base=" + damage.base + ", power=" + damage.power);
+  	  let scoringTypes = ["base", "power"];
+  	  if(scoringTypes.includes(effectName))
+  	  {
+  	  	outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
+	  	  switch(effectOp)
+	  	  {
+	  	  	case "add":
+	  	  		damage[effectName] += (effectValue * rarityMultiplier);
+	  	  		break;
+	  	  	case "multiply":
+	  	  		damage[effectName] *= (effectValue * rarityMultiplier);
+	  	  		break;
+	  	  }
+  	  }
+  	}
+  	damage.total = damage.base * damage.power;
+  	outputToTxt("Final Base = " + damage.base);
+  	outputToTxt("Final Power = " + damage.power);
+  	outputToTxt("Total Damage = " + damage.total);
   });
   let magicBtn = document.getElementById("btnTestMagicalAttack");
+}
+
+const scoreDamage = (damage, ring) => {
+	
 }
 
 const outputToTxt = (msg) => {
