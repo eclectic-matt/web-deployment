@@ -105,7 +105,7 @@ class ItemGenerator
 	
 	generateEffect(type = "score")
 	{
-	  
+		
 	}
 	
 	generateRarity(min = 1, max = 5)
@@ -115,11 +115,11 @@ class ItemGenerator
 	
 	generateMaterial(min = 1, max = 10)
 	{
-	  
+		
 	}
 	
 	generateCategory(min = 1, max = 5)
 	{
-	  
+		
 	}
 }

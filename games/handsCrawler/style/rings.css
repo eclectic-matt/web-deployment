@@ -11,13 +11,13 @@ body
 
 .ring 
 {
-  display: block;
+	display: block;
 	flex: 0 1 calc(20% - 1px);
 	position: relative;
 	min-width: 30px;
 	min-height: 30px;
 	height: 0;
-  padding-bottom: calc(20% - 1px);
+	padding-bottom: calc(20% - 1px);
 	margin: 0;
 	padding: 2px;
 	border: 1px solid white;
@@ -28,57 +28,57 @@ body
 }
 
 .ring .popup-score {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: bold;
-  padding: 10px 5px;
-  border-radius: 5px;
-  background-color: #2ecc71;
-  color: #fff;
-  opacity: 0; 
-  pointer-events: none;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	font-weight: bold;
+	padding: 10px 5px;
+	border-radius: 5px;
+	background-color: #2ecc71;
+	color: #fff;
+	opacity: 0; 
+	pointer-events: none;
 }
 
 .popup-score.show {
-  animation: slideUpAndFade 1s ease-in-out forwards;
+	animation: slideUpAndFade 1s ease-in-out forwards;
 }
 
 @keyframes slideUpAndFade {
-  0% {
-    top: 100%;
-    opacity: 0;
-  }
-  15% {
-    top: -30px;
-    opacity: 1;
-  }
-  85% {
-    top: -40px;
-    opacity: 1;
-  }
-  100% {
-    top: -50px;
-    opacity: 0;
-  }
+	0% {
+		top: 100%;
+		opacity: 0;
+	}
+	15% {
+		top: -30px;
+		opacity: 1;
+	}
+	85% {
+		top: -40px;
+		opacity: 1;
+	}
+	100% {
+		top: -50px;
+		opacity: 0;
+	}
 }
 
 .ring .ring-info {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: bold;
-  padding: 10px 5px;
-  font-size: 0.5rem;
-  border-radius: 5px;
-  background-color: #2ecc71;
-  color: #fff;
-  opacity: 0;
-  pointer-events: none;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	font-weight: bold;
+	padding: 10px 5px;
+	font-size: 0.5rem;
+	border-radius: 5px;
+	background-color: #2ecc71;
+	color: #fff;
+	opacity: 0;
+	pointer-events: none;
 }
 
 .ring:hover .ring-info {
-  animation: slideUpAndFade 1s ease-in-out forwards;
+	animation: slideUpAndFade 1s ease-in-out forwards;
 }
 
 #draggable-pool 
@@ -130,6 +130,6 @@ body
 	display: flex;
 	flex-flow: row wrap;
 	flex-direction: row;
-  gap: 10px;
+	gap: 10px;
 	position: relative;
 }

@@ -1,0 +1,27 @@
+{
+	"version": "0.1",
+	"items": {
+		"rings": [
+			{
+				"name": "Ring of Power",
+				"description": "A ring which increases your base damage",
+				"icon": "power_ring_common.png",
+				"type": "ring",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "common",
+					"multiplier": 1
+				},
+				"effect": {
+					"name": "base",
+					"operation": "add",
+					"value": 5,
+					"description": "+5 Base"
+				}
+			}
+		]
+	}
+}
