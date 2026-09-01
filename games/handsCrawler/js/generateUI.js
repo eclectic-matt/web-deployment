@@ -99,6 +99,8 @@ const initTestButtons = () =>
 
 const triggerPhysicalAttack = () => {
 	outputToTxt("physical attack");
+	//Reset scores
+	resetScores();
 	//Get ring data
 	//let rings = document.querySelectorAll(".ring");
 	let rings = [];
@@ -157,7 +159,7 @@ const triggerPhysicalAttack = () => {
 	//Calculate total damage
 	damage.total = damage.base * damage.power;
 	//Update total score
-	updateTotalScore(damage.total);
+	setTimeout(updateTotalScore, delay, damage.total);
 
 	outputToTxt("Final Base = " + damage.base);
 	outputToTxt("Final Power = " + damage.power);
@@ -188,21 +190,28 @@ const scoreRing = (ring) =>
 			case "add":
 				scoreContribution = (effectValue * rarityMultiplier);
 				popupString = "+" + scoreContribution;
+				switch(effectName)
+				{
+					case "base":
+						addBaseScore(scoreContribution);
+						break;
+					case "power":
+						addPowerScore(scoreContribution);
+						break;
+				}
 				break;
 			case "multiply":
 				scoreContribution = (effectValue * rarityMultiplier);
 				popupString = "x" + scoreContribution;
-				break;
-		}
-
-		//Update score based on effectName
-		switch(effectName)
-		{
-			case "base":
-				updateBaseScore(scoreContribution);
-				break;
-			case "power":
-				updatePowerScore(scoreContribution);
+				switch(effectName)
+				{
+					case "base":
+						multiplyBaseScore(scoreContribution);
+						break;
+					case "power":
+						multiplyPowerScore(scoreContribution);
+						break;
+				}
 				break;
 		}
 	}
@@ -223,18 +232,37 @@ const scoreRing = (ring) =>
 	}
 }
 
-const updateBaseScore = (base) =>
+const resetScores = () => 
+{
+	document.getElementById("baseScore").innerHTML = 10;
+	document.getElementById("powerScore").innerHTML = 1;
+	document.getElementById("totalScore").innerHTML = 0;
+}
+
+const addBaseScore = (base) =>
 {
 	let previous = parseInt(document.getElementById("baseScore").innerHTML);
 	base = previous + base;
 	document.getElementById("baseScore").innerHTML = base;
 }
+const multiplyBaseScore = (multiplier) =>
+{
+	let previous = parseInt(document.getElementById("baseScore").innerHTML);
+	let newBase = previous * multiplier;
+	document.getElementById("baseScore").innerHTML = newBase;
+}
 
-const updatePowerScore = (power) => 
+const addPowerScore = (power) => 
 {
 	let previous = parseInt(document.getElementById("powerScore").innerHTML);
 	power = previous + power;
 	document.getElementById("powerScore").innerHTML = power;
+}
+const multiplyPowerScore = (multiplier) =>
+{
+	let previous = parseInt(document.getElementById("powerScore").innerHTML);
+	let newPower = previous * multiplier;
+	document.getElementById("powerScore").innerHTML = newPower;
 }
 
 const updateTotalScore = (total) => 
