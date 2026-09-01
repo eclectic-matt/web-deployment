@@ -64,6 +64,19 @@ const generateEquipment = () => {
 		//Create an element to display the ring info
 		let infoEl = document.createElement("div");
 		infoEl.classList.add("ring-info");
+		//Colour the info popup based on the effect
+		if(ringData.effect.name === "base")
+		{
+			infoEl.style.backgroundColor = "var(--base-score-color)";
+		}
+		else if(ringData.effect.name === "power")
+		{
+			infoEl.style.backgroundColor = "var(--power-score-color)";
+		}
+		else
+		{
+			infoEl.style.backgroundColor = "var(--total-score-color)";
+		}
 		infoEl.innerHTML = ring.title;
 		ring.appendChild(infoEl);
 		
@@ -131,16 +144,6 @@ const triggerPhysicalAttack = () => {
 					damage[effectName] *= scoreContribution;
 					break;
 			}
-			//Update score based on effectName
-			switch(effectName)
-			{
-				case "base":
-					updateBaseScore(scoreContribution);
-					break;
-				case "power":
-					updatePowerScore(scoreContribution);
-					break;
-			}
 		}
 		if(ringScores === true)
 		{
@@ -179,6 +182,7 @@ const scoreRing = (ring) =>
 	let popupString = "";
 	if (scoringTypes.includes(effectName))
 	{
+		//Calculate score contribution based on operation
 		switch (effectOp)
 		{
 			case "add":
@@ -188,6 +192,17 @@ const scoreRing = (ring) =>
 			case "multiply":
 				scoreContribution = (effectValue * rarityMultiplier);
 				popupString = "x" + scoreContribution;
+				break;
+		}
+
+		//Update score based on effectName
+		switch(effectName)
+		{
+			case "base":
+				updateBaseScore(scoreContribution);
+				break;
+			case "power":
+				updatePowerScore(scoreContribution);
 				break;
 		}
 	}
