@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ring Fitting - Interactive Hand Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+      align-items: flex-start;
+    }
+
+    /* Hand Canvas Area */
+    .hand-wrapper {
+      position: relative;
+      width: 256px;
+      height: 256px;
+      border: 2px dashed #ccc;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .hand-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      user-select: none;
+    }
+
+    /* Ring Selector Palette */
+    .ring-palette {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .ring-palette h3 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+    }
+
+    .ring-options {
+      display: flex;
+      gap: 15px;
+    }
+
+    .ring-item {
+      width: 40px;
+      height: 40px;
+      cursor: grab;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .ring-item:active {
+      cursor: grabbing;
+    }
+
+    .ring-item:hover {
+      transform: scale(1.1);
+    }
+
+    /* Wrapper that clips the bottom half of the ring */
+    .ring-wrapper {
+      position: absolute;
+      width: 40px;
+      height: 20px; /* Only shows top half */
+      overflow: hidden;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* The actual ring image inside the wrapper, shifted up */
+    .clipped-ring {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Drag & Drop Rings onto Fingers</h1>
+  <p>Drag a ring from the palette and drop it onto a finger to see the wrapped effect!</p>
+
+  <div class="container">
+    <!-- Hand Container -->
+    <div class="hand-wrapper" id="handContainer">
+      <img 
+        src="assets/img/left_hand.png" 
+        alt="Hand" 
+        usemap="#hand-map" 
+        class="hand-image" 
+        id="handImg"
+      />
+
+      <!-- HTML Image Map defining drop targets -->
+      <map name="hand-map">
+        <area shape="rect" coords="48,25,80,118" alt="Pinky Finger" data-finger="pinky" href="#" />
+        <area shape="rect" coords="85,16,117,115" alt="Ring Finger" data-finger="ring" href="#" />
+        <area shape="rect" coords="120,5,152,112" alt="Middle Finger" data-finger="middle" href="#" />
+        <area shape="rect" coords="155,16,187,135" alt="Index Finger" data-finger="index" href="#" />
+        <area shape="rect" coords="190,96,240,150" alt="Thumb Finger" data-finger="thumb" href="#" />
+      </map>
+    </div>
+
+    <!-- Ring Palette -->
+    <div class="ring-palette">
+      <h3>Select a Ring:</h3>
+      <div class="ring-options">
+        <img 
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='12' fill='none'/><circle cx='50' cy='15' r='10' fill='%2300ffff'/></svg>" 
+          class="ring-item" 
+          draggable="true" 
+          id="ring1" 
+          alt="Diamond Gold Ring"
+        />
+        <img 
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23c0c0c0' stroke-width='12' fill='none'/><polygon points='50,5 60,20 40,20' fill='%23ff0055'/></svg>" 
+          class="ring-item" 
+          draggable="true" 
+          id="ring2" 
+          alt="Ruby Silver Ring"
+        />
+        <img 
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23b87333' stroke-width='10' fill='none'/></svg>" 
+          class="ring-item" 
+          draggable="true" 
+          id="ring3" 
+          alt="Band Ring"
+        />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let draggedRingSrc = null;
+
+    document.querySelectorAll('.ring-item').forEach(ring => {
+      ring.addEventListener('dragstart', (e) => {
+        draggedRingSrc = e.target.src;
+        e.dataTransfer.setData('text/plain', e.target.src);
+      });
+    });
+
+    const areas = document.querySelectorAll('map[name="hand-map"] area');
+    const handContainer = document.getElementById('handContainer');
+
+    areas.forEach(area => {
+      area.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+
+      area.addEventListener('drop', (e) => {
+        e.preventDefault();
+        
+        const coords = area.coords.split(',').map(Number);
+        const centerX = (coords[0] + coords[2]) / 2;
+        const centerY = (coords[1] + coords[3]) / 2;
+
+        const fingerId = area.getAttribute('data-finger');
+        const existingRing = document.getElementById(`placed-${fingerId}`);
+        if (existingRing) {
+          existingRing.remove();
+        }
+
+        // Create wrapper container that acts as a viewport mask
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('ring-wrapper');
+        wrapper.id = `placed-${fingerId}`;
+        wrapper.style.left = `${centerX}px`;
+        wrapper.style.top = `${centerY}px`;
+
+        // Create the inner ring image
+        const ringImg = document.createElement('img');
+        ringImg.src = draggedRingSrc;
+        ringImg.classList.add('clipped-ring');
+
+        // Append image to wrapper, then wrapper to the hand board
+        wrapper.appendChild(ringImg);
+        handContainer.appendChild(wrapper);
+      });
+    });
+  </script>
+</body>
+</html>

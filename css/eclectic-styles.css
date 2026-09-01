@@ -1,0 +1,152 @@
+/* Eclectic Styles - layout & grid utilities */
+:root 
+{
+	--primary-bg-color: black;
+	--primary-text-color: white;
+	--primary-border-color: white;
+	--secondary-bg-color: darkslategrey;
+	--secondary-text-color: yellow;
+	--secondary-border-color: grey;
+	--highlight-bg-color: grey;
+	--highlight-text-color: yellow;
+	--highlight-border-color: yellow;
+}
+
+body 
+{
+	background-color: var(--primary-bg-color);
+	color: var(--primary-text-color);
+	box-sizing: border-box;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Basic container utilities */
+.container 
+{
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+.container-fluid 
+{
+	width: 100%; 
+	padding-left: 16px; 
+	padding-right: 16px; 
+	box-sizing: border-box;
+}
+
+/* Horizontal alignment helpers */
+.align-left   {text-align: left}
+.align-center {text-align: center}
+.align-right  {text-align: right}
+
+/* Vertical alignment helpers for flex contexts */
+.val-top    {align-items: flex-start}
+.val-center {align-items: center}
+.val-bottom {align-items: flex-end}
+
+/* Utility to place elements inline and align within container */
+.hstack {display: flex; flex-direction: row; gap: 8px}
+.vstack {display: flex; flex-direction: column; gap: 8px}
+
+/* Spacing utilities (small set) */
+.mt-0{margin-top:0} 
+.mt-1{margin-top:4px} 
+.mt-2{margin-top:8px} 
+.mt-3{margin-top:16px}
+.mb-0{margin-bottom:0} 
+.mb-1{margin-bottom:4px} 
+.mb-2{margin-bottom:8px} 
+.mb-3{margin-bottom:16px}
+.ml-0{margin-left:0} 
+.ml-1{margin-left:4px} 
+.ml-2{margin-left:8px} 
+.ml-3{margin-left:16px}
+.mr-0{margin-right:0} 
+.mr-1{margin-right:4px} 
+.mr-2{margin-right:8px} 
+.mr-3{margin-right:16px}
+
+/* Simple Grid: row/column with 12-column system */
+.row 
+{
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: -8px;
+	margin-right: -8px;
+}
+.row > [class*="col-"] 
+{
+	padding-left: 8px;
+	padding-right: 8px;
+	box-sizing: border-box;
+}
+
+/* Column widths (percentages for 12-grid) */
+.col {flex: 1 1 0%; min-width: 0}
+.col-1  {flex: 0 0 8.333333%}
+.col-2  {flex: 0 0 16.666667%}
+.col-3  {flex: 0 0 25%}
+.col-4  {flex: 0 0 33.333333%}
+.col-5  {flex: 0 0 41.666667%}
+.col-6  {flex: 0 0 50%}
+.col-7  {flex: 0 0 58.333333%}
+.col-8  {flex: 0 0 66.666667%}
+.col-9  {flex: 0 0 75%}
+.col-10 {flex: 0 0 83.333333%}
+.col-11 {flex: 0 0 91.666667%}
+.col-12 {flex: 0 0 100%}
+
+/* Helpers for ordering and alignment inside grid items */
+.justify-start {justify-content: flex-start}
+.justify-center{justify-content: center}
+.justify-end   {justify-content: flex-end}
+
+/* Responsive tweaks */
+@media (max-width: 768px) 
+{
+	.col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11 
+	{
+		flex: 0 0 100%;
+	}
+}
+
+/* Small utility for clearfix when needed */
+.clearfix::after 
+{
+	content: ""; 
+	display: table; 
+	clear: both;
+}
+
+/* Basic demo-friendly element styling (non-opinionated) */
+.box 
+{
+	padding: 12px; 
+	background: transparent; 
+	border: 1px solid transparent;
+}
+
+.jazzy 
+{
+	border-radius: 1rem;
+	border-left: 1px solid var(--primary-border-color);
+	border-top: 1px solid var(--primary-border-color);
+	border-right: 1px solid var(--secondary-border-color);
+	border-bottom: 1px solid var(--secondary-border-color);
+	padding: 0.5rem 1.5rem;
+}
+.jazzy:hover 
+{
+	border-left: 2px solid var(--highlight-border-color);
+	border-top: 2px solid var(--highlight-border-color);
+	border-right: 2px solid var(--primary-border-color);
+	border-bottom: 2px solid var(--primary-border-color);
+	background-color: var(--secondary-bg-color);
+	color: var(--highlight-text-color);
+	transition: background-color 400ms linear, color 800ms linear;
+}

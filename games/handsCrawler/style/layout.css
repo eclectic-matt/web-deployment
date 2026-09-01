@@ -93,3 +93,62 @@ section#gameArea
 	flex-grow: 1; /* Automatically stretches to fill the remaining 80% */
 	background-color: #000; /* Visual placeholder color */
 }
+
+div#buttonRow 
+{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+div#buttonRow button 
+{
+	flex: 1; /* Each button takes equal space */
+	margin: 0 5px; /* Adds spacing between buttons */
+	padding: 10px;
+	font-size: 1rem;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+@media screen and (max-width: 768px) 
+{
+	/* For smaller screens, stack the side panel on top of the game area */
+	section#mainContent 
+	{
+		flex-direction: column;
+	}
+	
+	section#sidePanel 
+	{
+		width: 100%;
+	}
+	
+	section#gameArea 
+	{
+		flex-grow: 1; /* Still takes up remaining space */
+	}
+}
+
+@media screen and (min-width: 769px) 
+{
+	/* For larger screens, keep the side panel and game area side by side */
+	section#mainContent 
+	{
+		flex-direction: row;
+	}
+	
+	section#sidePanel 
+	{
+		width: 20%;
+	}
+	
+	section#gameArea 
+	{
+		flex-grow: 1; /* Still takes up remaining space */
+	}
+}

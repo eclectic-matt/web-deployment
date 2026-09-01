@@ -3,9 +3,9 @@
 	"items": {
 		"rings": [
 			{
-				"name": "Ring of Power",
+				"name": "Ring of Base",
 				"description": "A ring which increases your base damage",
-				"icon": "power_ring_common.png",
+				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='12' fill='none'/><circle cx='50' cy='15' r='10' fill='%2300ffff'/></svg>",
 				"type": "ring",
 				"action": {
 					"type": "score",
@@ -20,6 +20,26 @@
 					"operation": "add",
 					"value": 5,
 					"description": "+5 Base"
+				}
+			},
+			{
+				"name": "Ring of Power",
+				"description": "A ring which increases your power damage",
+				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23c0c0c0' stroke-width='12' fill='none'/><polygon points='50,5 60,20 40,20' fill='%23ff0055'/></svg>",
+				"type": "ring",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "common",
+					"multiplier": 1
+				},
+				"effect": {
+					"name": "power",
+					"operation": "add",
+					"value": 3,
+					"description": "+3 Power"
 				}
 			}
 		]

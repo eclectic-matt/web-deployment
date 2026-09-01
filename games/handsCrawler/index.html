@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- Import Libraries -->
+		<script src="../../libraries/javascript/saveLoad.js"></script>
 		<!-- Import classes -->
 		<script src="./js/class/Damage.js" defer></script>
 		<script src="./js/class/generators/ItemGenerator.js" defer></script>
 		<script src="./js/generateUI.js" defer></script>
 		<script src="./js/draggable.js" defer></script>
+		<script src="./js/class/Game.js" defer></script>
+		<!-- Import Styles -->
 		<link href="./style/rings.css" rel="stylesheet"/>
 		<link href="./style/layout.css" rel="stylesheet"/>
 	</head>
@@ -23,6 +27,14 @@
 				</section>
 				<section id="gameArea">
 					<h2>Hands:</h2>
+					<map name="leftHandMap" id="leftHandMap">
+						<area shape="poly" coords="29,99,18,30,109,110,132,33" href="#leftPinkyArea" id="leftPinkyArea" class="drop-zone mapDrop"/>
+					</map>
+					<img src="assets/img/left_hand.png" usemap="#leftHandMap" width="200" height="200"/>
+					<map name="rightHandMap" id="rightHandMap">
+						<area shape="poly" coords="29,99,18,30,109,110,132,33" href="#rightPinkyArea" id="rightPinkyArea" class="drop-zone mapDrop"/>
+					</map>
+					<img src="assets/img/right_hand.png" usemap="#rightHandMap" width="200" height="200"/>
 					<div id="hands">
 						<!-- Filled by JS -->
 					</div>
@@ -35,9 +47,11 @@
 					<h2>Test:</h2>
 					<div id="test">
 						<textarea name="" id="txtTestOutput" cols="50" rows="10"></textarea>
-						<button id="btnTestPhysicalAttack">Physical</button>
-						<button id="btnTestMagicalAttack">Magical</button>
-						<button id="btnClearTxt">Clear</button>
+						<div id="buttonRow">
+							<button id="btnTestPhysicalAttack">Physical</button>
+							<button id="btnTestMagicalAttack">Magical</button>
+							<button id="btnClearTxt">Clear</button>
+						</div>
 					</div>
 				</section>
 			</section>
