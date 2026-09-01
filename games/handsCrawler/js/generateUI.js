@@ -116,31 +116,46 @@ const triggerPhysicalAttack = () => {
 		let ringScores = false;
 		if(scoringTypes.includes(effectName))
 		{
-		outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
+			outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
+			//Calculate score contribution based on operation
 			switch(effectOp)
 			{
-			case "add":
-				ringScores = true;
-				scoreContribution = (effectValue * rarityMultiplier); 
-				damage[effectName] += scoreContribution;
-				break;
-			case "multiply":
-				ringScores = true;
-				scoreContribution = (effectValue * rarityMultiplier);
-				damage[effectName] *= scoreContribution;
-				break;
+				case "add":
+					ringScores = true;
+					scoreContribution = (effectValue * rarityMultiplier); 
+					damage[effectName] += scoreContribution;
+					break;
+				case "multiply":
+					ringScores = true;
+					scoreContribution = (effectValue * rarityMultiplier);
+					damage[effectName] *= scoreContribution;
+					break;
+			}
+			//Update score based on effectName
+			switch(effectName)
+			{
+				case "base":
+					updateBaseScore(scoreContribution);
+					break;
+				case "power":
+					updatePowerScore(scoreContribution);
+					break;
 			}
 		}
 		if(ringScores === true)
 		{
 			//Display popups with 0.5s delay
-		setTimeout(scoreRing, delay, ring);
-		//Add 500ms to delay
-		delay += 500;
+			setTimeout(scoreRing, delay, ring);
+			//Add 500ms to delay
+			delay += 500;
 		}
 	}
 	
+	//Calculate total damage
 	damage.total = damage.base * damage.power;
+	//Update total score
+	updateTotalScore(damage.total);
+
 	outputToTxt("Final Base = " + damage.base);
 	outputToTxt("Final Power = " + damage.power);
 	outputToTxt("Total Damage = " + damage.total);
@@ -176,12 +191,42 @@ const scoreRing = (ring) =>
 				break;
 		}
 	}
+
 	if (popupString !== "")
 	{
 		//Show the popup element
 		popupEl.innerHTML = popupString;
+		switch(effectName){
+			case "base":
+				popupEl.style.backgroundColor = "var(--base-score-color)";
+				break;
+			case "power":
+				popupEl.style.backgroundColor = "var(--power-score-color)";
+				break;
+		}
 		popupEl.classList.add("show");
 	}
+}
+
+const updateBaseScore = (base) =>
+{
+	let previous = parseInt(document.getElementById("baseScore").innerHTML);
+	base = previous + base;
+	document.getElementById("baseScore").innerHTML = base;
+}
+
+const updatePowerScore = (power) => 
+{
+	let previous = parseInt(document.getElementById("powerScore").innerHTML);
+	power = previous + power;
+	document.getElementById("powerScore").innerHTML = power;
+}
+
+const updateTotalScore = (total) => 
+{
+	let previous = parseInt(document.getElementById("totalScore").innerHTML);
+	total = previous + total;
+	document.getElementById("totalScore").innerHTML = total;
 }
 
 const clearPopups = () => {
