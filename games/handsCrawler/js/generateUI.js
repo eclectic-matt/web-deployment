@@ -61,10 +61,16 @@ const generateEquipment = () => {
 		ring.title = ringData.rarity.name + " Ring of " + ringData.effect.operation + " " + ringData.effect.name;
 		ring.id = ringData.rarity.name + "-" + ringData.effect.operation + "-" + ringData.effect.name + "-ring";
 		ring.innerHTML = "O";
-		//Create a score element which is shown when the ring scores
+		//Create a score element which is shown when the ring scores (firstChildElement)
 		let scoreEl = document.createElement("div");
 		scoreEl.classList.add("popup-score");
 		ring.appendChild(scoreEl);
+		//Create an element to display the ring info
+		let infoEl = document.createElement("div");
+		infoEl.classList.add("ring-info");
+		infoEl.innerHTML = ring.title;
+		ring.appendChild(infoEl);
+		
 		draggablePoolEl.appendChild(ring);
 	}
 }
@@ -85,7 +91,14 @@ const initTestButtons = () =>
 const triggerPhysicalAttack = () => {
 	outputToTxt("physical attack");
 	  	//Get ring data
-	  	let rings = document.querySelectorAll(".ring");
+	  	//let rings = document.querySelectorAll(".ring");
+	  	let rings = [];
+	  	//Correct approach - get left hand, then each ring on that hand in order
+	  	let lhRings = document.querySelectorAll("#leftHand > .finger > .ring");
+	  	rings.push(...lhRings);
+	  	let rhRings = document.querySelectorAll("#rightHand > .finger > .ring");
+	  	rings.push(...rhRings);
+	  	console.log(rings);
 	  	let damage = new Damage();
 	  	damage.base = 10;
 	  	damage.power = 1;
@@ -155,7 +168,6 @@ const scoreRing = (ring) =>
 	let popupString = "";
 	if (scoringTypes.includes(effectName))
 	{
-		outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
 		switch (effectOp)
 		{
 			case "add":

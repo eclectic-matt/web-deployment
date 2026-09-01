@@ -32,7 +32,8 @@ body
   left: 50%;
   transform: translateX(-50%);
   font-weight: bold;
-  padding: 10px;
+  padding: 10px 5px;
+  border-radius: 5px;
   background-color: #2ecc71;
   color: #fff;
   opacity: 0; 
@@ -62,6 +63,24 @@ body
   }
 }
 
+.ring .ring-info {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  padding: 10px 5px;
+  font-size: 0.5rem;
+  border-radius: 5px;
+  background-color: #2ecc71;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ring:hover .ring-info {
+  animation: slideUpAndFade 1s ease-in-out forwards;
+}
+
 #draggable-pool 
 {
 	width: 100%;
@@ -79,7 +98,7 @@ body
 	min-height: 20px;
 	margin: 0;
 	height: auto;
-	border: 1px solid red;
+	border: 1px dashed red;
 	flex: 0 1 calc(20% - 2px);
 }
 
