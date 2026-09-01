@@ -13,7 +13,7 @@ body
 {
   display: block;
 	flex: 0 1 calc(20% - 1px);
-	
+	position: relative;
 	min-width: 30px;
 	min-height: 30px;
 	height: 0;
@@ -22,11 +22,44 @@ body
 	padding: 2px;
 	border: 1px solid white;
 	border-radius: 50%;
-	
 	text-align: center;
 	vertical-align: center;
-	
 	font-size: 1rem;
+}
+
+.ring .popup-score {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  padding: 10px;
+  background-color: #2ecc71;
+  color: #fff;
+  opacity: 0; 
+  pointer-events: none;
+}
+
+.popup-score.show {
+  animation: slideUpAndFade 1s ease-in-out forwards;
+}
+
+@keyframes slideUpAndFade {
+  0% {
+    top: 100%;
+    opacity: 0;
+  }
+  15% {
+    top: -30px;
+    opacity: 1;
+  }
+  85% {
+    top: -40px;
+    opacity: 1;
+  }
+  100% {
+    top: -50px;
+    opacity: 0;
+  }
 }
 
 #draggable-pool 

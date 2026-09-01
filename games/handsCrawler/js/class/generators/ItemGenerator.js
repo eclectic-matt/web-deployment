@@ -95,7 +95,7 @@ class ItemGenerator
 	
 	generateInt(min = 1, max = 5)
 	{
-		return min + Math.floor(Math.random() * (max - min));
+		return (min + Math.floor(Math.random() * (max - min)));
 	}
 	
 	constrain(value, min = 1, max = 5)

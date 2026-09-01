@@ -33,9 +33,9 @@ const generateHands = () => {
 
 const generateEquipment = () => {
 	let ringRarities = ["common", "uncommon", "rare", "mythic", "legendary"];
-	let ringMaterials = ["wood", "copper", "iron", "steel", "crystal"];
-	let ringTypes = ["mana", "strength", "vision", "knowledge", "boost"];
-	let ringIcons = ["O", "0", "( )", "{ }", "[ ]"];
+	//let ringMaterials = ["wood", "copper", "iron", "steel", "crystal"];
+	//let ringTypes = ["mana", "strength", "vision", "knowledge", "boost"];
+	//let ringIcons = ["O", "0", "( )", "{ }", "[ ]"];
 	
 	let generator = new ItemGenerator();
 	
@@ -45,7 +45,11 @@ const generateEquipment = () => {
 		ring.classList.add("draggable");
 		ring.classList.add("ring");
 		//Generate using the item generator
-		let ringData = generator.generateRing(i, i);
+		//let level = Math.floor(i / 3);
+		//let ringData = generator.generateRing(i, i);
+		let rarity = 1;
+		let effect = generator.generateInt(1,4);
+		let ringData = generator.generateRing(rarity, effect);
 		outputToTxt(ringData.effect.name + " " + ringData.effect.operation);
 		//Set data on element
 		ring.dataset.rarityName = ringData.rarity.name;
@@ -57,18 +61,10 @@ const generateEquipment = () => {
 		ring.title = ringData.rarity.name + " Ring of " + ringData.effect.operation + " " + ringData.effect.name;
 		ring.id = ringData.rarity.name + "-" + ringData.effect.operation + "-" + ringData.effect.name + "-ring";
 		ring.innerHTML = "O";
-		
-		/*
-		//Generate a random ring
-		let ringRarity = ringRarities[i];
-		let ringMaterial = ringMaterials[Math.floor(Math.random() * ringMaterials.length)];
-		let ringType = ringTypes[Math.floor(Math.random() * ringTypes.length)];
-		let ringIcon = ringIcons[Math.floor(Math.random() * ringIcons.length)];
-		//Generate the name/title
-		ring.id = ringRarity + "-" + ringMaterial + "-" + ringType + "-ring";
-		ring.title = ringRarity + " " + ringMaterial + " ring of " + ringType;
-		ring.innerHTML = ringIcon;
-		*/
+		//Create a score element which is shown when the ring scores
+		let scoreEl = document.createElement("div");
+		scoreEl.classList.add("popup-score");
+		ring.appendChild(scoreEl);
 		draggablePoolEl.appendChild(ring);
 	}
 }
@@ -77,47 +73,120 @@ const initTestButtons = () =>
 {
   let physBtn = document.getElementById("btnTestPhysicalAttack");
   physBtn.addEventListener("click", (ev) => {
-  	outputToTxt("physical attack");
-  	//Get ring data
-  	let rings = document.querySelectorAll(".ring");
-  	let damage = new Damage();
-  	damage.base = 10;
-  	damage.power = 1;
-  	for(let i = 0; i < rings.length; i++)
-  	{
-  	  let ring = rings[i];
-  	  //Extract ring data
-  	  let rarityName = ring.dataset.rarityName;
-  	  let rarityMultiplier = ring.dataset.rarityMultiplier;
-  	  let effectValue = ring.dataset.effectValue;
-  	  let effectName = ring.dataset.effectName;
-  	  let effectOp = ring.dataset.effectOperation;
-  	  outputToTxt("Scoring " + ring.id + " from base=" + damage.base + ", power=" + damage.power);
-  	  let scoringTypes = ["base", "power"];
-  	  if(scoringTypes.includes(effectName))
-  	  {
-  	  	outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
-	  	  switch(effectOp)
-	  	  {
-	  	  	case "add":
-	  	  		damage[effectName] += (effectValue * rarityMultiplier);
-	  	  		break;
-	  	  	case "multiply":
-	  	  		damage[effectName] *= (effectValue * rarityMultiplier);
-	  	  		break;
-	  	  }
-  	  }
-  	}
-  	damage.total = damage.base * damage.power;
-  	outputToTxt("Final Base = " + damage.base);
-  	outputToTxt("Final Power = " + damage.power);
-  	outputToTxt("Total Damage = " + damage.total);
+  	triggerPhysicalAttack();
   });
   let magicBtn = document.getElementById("btnTestMagicalAttack");
   let clearBtn = document.getElementById("btnClearTxt");
   clearBtn.addEventListener("click", () => {
   	clearTxt();
   });
+}
+
+const triggerPhysicalAttack = () => {
+	outputToTxt("physical attack");
+	  	//Get ring data
+	  	let rings = document.querySelectorAll(".ring");
+	  	let damage = new Damage();
+	  	damage.base = 10;
+	  	damage.power = 1;
+	  	let delay = 0;
+	  	for(let i = 0; i < rings.length; i++)
+	  	{
+	  	  let ring = rings[i];
+	  	  //Get score popup for this ring
+	  	  let popupEl = ring.firstElementChild;
+	  	  //Extract ring data
+	  	  let rarityName = ring.dataset.rarityName;
+	  	  let rarityMultiplier = ring.dataset.rarityMultiplier;
+	  	  let effectValue = ring.dataset.effectValue;
+	  	  let effectName = ring.dataset.effectName;
+	  	  let effectOp = ring.dataset.effectOperation;
+	  	  outputToTxt("Scoring " + ring.id + " from base=" + damage.base + ", power=" + damage.power);
+	  	  let scoringTypes = ["base", "power"];
+	  	  let scoreContribution = 0;
+	  	  let ringScores = false;
+	  	  if(scoringTypes.includes(effectName))
+	  	  {
+	  	  	outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
+		  	  switch(effectOp)
+		  	  {
+		  	  	case "add":
+		  	  		ringScores = true;
+		  	  		scoreContribution = (effectValue * rarityMultiplier); 
+		  	  		damage[effectName] += scoreContribution;
+		  	  		break;
+		  	  	case "multiply":
+		  	  		ringScores = true;
+		  	  		scoreContribution = (effectValue * rarityMultiplier);
+		  	  		damage[effectName] *= scoreContribution;
+		  	  		break;
+		  	  }
+	  	  }
+	  	  if(ringScores === true)
+	  	  {
+	  			//Display popups with 0.5s delay
+	  	  	setTimeout(scoreRing, delay, ring);
+	  	  	//Add 500ms to delay
+	  	  	delay += 500;
+	  	  }
+	  	}
+	  	
+	  	damage.total = damage.base * damage.power;
+	  	outputToTxt("Final Base = " + damage.base);
+	  	outputToTxt("Final Power = " + damage.power);
+	  	outputToTxt("Total Damage = " + damage.total);
+	  	//Add 1s to delay to allow popups to finish animating
+	  	delay += 1000;
+	  	//Clear popups classes for next scoring
+	  	setTimeout(clearPopups, delay);
+}
+
+const scoreRing = (ring) => 
+{
+	let popupEl = ring.firstElementChild;
+	//Extract ring data
+	let rarityName = ring.dataset.rarityName;
+	let rarityMultiplier = ring.dataset.rarityMultiplier;
+	let effectValue = ring.dataset.effectValue;
+	let effectName = ring.dataset.effectName;
+	let effectOp = ring.dataset.effectOperation;
+	let scoringTypes = ["base", "power"];
+	let scoreContribution = 0;
+	let popupString = "";
+	if (scoringTypes.includes(effectName))
+	{
+		outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
+		switch (effectOp)
+		{
+			case "add":
+				scoreContribution = (effectValue * rarityMultiplier);
+				popupString = "+" + scoreContribution;
+				break;
+			case "multiply":
+				scoreContribution = (effectValue * rarityMultiplier);
+				popupString = "x" + scoreContribution;
+				break;
+		}
+	}
+	if (popupString !== "")
+	{
+		//Show the popup element
+		popupEl.innerHTML = popupString;
+		popupEl.classList.add("show");
+	}
+}
+
+const clearPopups = () => {
+	let rings = document.querySelectorAll(".ring");
+	for(let i = 0; i < rings.length; i++)
+	{
+		let ring = rings[i];
+	  //Get score popup for this ring
+	  let popupEl = ring.firstElementChild;
+	  //Clear data and show class
+	  popupEl.innerHTML = "";
+	  popupEl.classList.remove("show");
+	}
 }
 
 const scoreDamage = (damage, ring) => {
