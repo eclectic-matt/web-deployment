@@ -21,9 +21,16 @@
 
     .container {
       display: flex;
-      gap: 40px;
+      gap: 30px;
       margin-top: 20px;
       align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hands-section {
+      display: flex;
+      gap: 20px;
     }
 
     /* Hand Canvas Area */
@@ -53,6 +60,7 @@
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      min-width: 150px;
     }
 
     .ring-palette h3 {
@@ -104,27 +112,47 @@
 <body>
 
   <h1>Drag & Drop Rings onto Fingers</h1>
-  <p>Drag a ring from the palette and drop it onto a finger to see the wrapped effect!</p>
+  <p>Drag a ring from the palette and drop it onto any finger on either hand!</p>
 
   <div class="container">
-    <!-- Hand Container -->
-    <div class="hand-wrapper" id="handContainer">
-      <img 
-        src="assets/img/left_hand.png" 
-        alt="Hand" 
-        usemap="#hand-map" 
-        class="hand-image" 
-        id="handImg"
-      />
+    <div class="hands-section">
+      <!-- Left Hand Container -->
+      <div class="hand-wrapper" id="leftHandContainer">
+        <img 
+          src="assets/img/left_hand.png" 
+          alt="Left Hand" 
+          usemap="#left-hand-map" 
+          class="hand-image" 
+        />
 
-      <!-- HTML Image Map defining drop targets -->
-      <map name="hand-map">
-        <area shape="rect" coords="48,25,80,118" alt="Pinky Finger" data-finger="pinky" href="#" />
-        <area shape="rect" coords="85,16,117,115" alt="Ring Finger" data-finger="ring" href="#" />
-        <area shape="rect" coords="120,5,152,112" alt="Middle Finger" data-finger="middle" href="#" />
-        <area shape="rect" coords="155,16,187,135" alt="Index Finger" data-finger="index" href="#" />
-        <area shape="rect" coords="190,96,240,150" alt="Thumb Finger" data-finger="thumb" href="#" />
-      </map>
+        <!-- HTML Image Map defining drop targets for Left Hand -->
+        <map name="left-hand-map">
+          <area shape="rect" coords="48,25,80,118" alt="Pinky Finger" data-finger="left-pinky" href="#" />
+          <area shape="rect" coords="85,16,117,115" alt="Ring Finger" data-finger="left-ring" href="#" />
+          <area shape="rect" coords="120,5,152,112" alt="Middle Finger" data-finger="left-middle" href="#" />
+          <area shape="rect" coords="155,16,187,135" alt="Index Finger" data-finger="left-index" href="#" />
+          <area shape="rect" coords="190,96,240,150" alt="Thumb Finger" data-finger="left-thumb" href="#" />
+        </map>
+      </div>
+
+      <!-- Right Hand Container -->
+      <div class="hand-wrapper" id="rightHandContainer">
+        <img 
+          src="assets/img/right_hand.png" 
+          alt="Right Hand" 
+          usemap="#right-hand-map" 
+          class="hand-image" 
+        />
+
+        <!-- HTML Image Map defining drop targets for Right Hand (Mirrored Coords) -->
+        <map name="right-hand-map">
+          <area shape="rect" coords="16,96,66,150" alt="Thumb Finger" data-finger="right-thumb" href="#" />
+          <area shape="rect" coords="69,16,101,135" alt="Index Finger" data-finger="right-index" href="#" />
+          <area shape="rect" coords="104,5,136,112" alt="Middle Finger" data-finger="right-middle" href="#" />
+          <area shape="rect" coords="139,16,171,115" alt="Ring Finger" data-finger="right-ring" href="#" />
+          <area shape="rect" coords="176,25,208,118" alt="Pinky Finger" data-finger="right-pinky" href="#" />
+        </map>
+      </div>
     </div>
 
     <!-- Ring Palette -->
@@ -166,8 +194,7 @@
       });
     });
 
-    const areas = document.querySelectorAll('map[name="hand-map"] area');
-    const handContainer = document.getElementById('handContainer');
+    const areas = document.querySelectorAll('area');
 
     areas.forEach(area => {
       area.addEventListener('dragover', (e) => {
@@ -178,19 +205,41 @@
         e.preventDefault();
         
         const coords = area.coords.split(',').map(Number);
-        const centerX = (coords[0] + coords[2]) / 2;
-        const centerY = (coords[1] + coords[3]) / 2;
+        let centerX = (coords[0] + coords[2]) / 2;
+        let centerY = (coords[1] + coords[3]) / 2;
 
         const fingerId = area.getAttribute('data-finger');
+
         const existingRing = document.getElementById(`placed-${fingerId}`);
         if (existingRing) {
           existingRing.remove();
         }
 
+        // Determine which container to drop into based on the map name
+        const mapName = area.parentElement.getAttribute('name');
+        const targetContainerId = mapName === 'left-hand-map' ? 'leftHandContainer' : 'rightHandContainer';
+        const activeContainer = document.getElementById(targetContainerId);
+
         // Create wrapper container that acts as a viewport mask
         const wrapper = document.createElement('div');
         wrapper.classList.add('ring-wrapper');
         wrapper.id = `placed-${fingerId}`;
+        let ringRotateAngle = '0deg'; // Default rotation
+        if(fingerId === "right-thumb")
+        {
+          //Right thumb rotate clockwise and shift left
+          ringRotateAngle = '-30deg'; // Rotate for thumbs
+          centerX += 6;
+          centerY -= 10; // Shift up for better alignment
+        }
+        else if(fingerId === "left-thumb")
+        {
+          //Left thumb rotate counter-clockwise and shift right
+          ringRotateAngle = '30deg'; // Rotate for thumbs
+          centerX -= 10;
+          centerY += 6; // Shift up for better alignment
+        }
+        wrapper.style.rotate = ringRotateAngle;
         wrapper.style.left = `${centerX}px`;
         wrapper.style.top = `${centerY}px`;
 
@@ -199,9 +248,9 @@
         ringImg.src = draggedRingSrc;
         ringImg.classList.add('clipped-ring');
 
-        // Append image to wrapper, then wrapper to the hand board
+        // Append image to wrapper, then wrapper to the correct hand board
         wrapper.appendChild(ringImg);
-        handContainer.appendChild(wrapper);
+        activeContainer.appendChild(wrapper);
       });
     });
   </script>
