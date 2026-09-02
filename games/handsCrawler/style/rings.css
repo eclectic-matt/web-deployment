@@ -72,7 +72,7 @@
 #draggable-pool 
 {
 	width: 100%;
-	min-height: 100px;
+	min-height: 50px;
 	border: 5px outset grey;
 	display: flex;
 	flex-flow: row wrap;
