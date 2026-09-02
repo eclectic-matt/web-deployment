@@ -36,8 +36,8 @@
     /* Hand Canvas Area */
     .hand-wrapper {
       position: relative;
-      width: 256px;
-      height: 256px;
+      width: 160px;
+      height: 160px;
       border: 2px dashed #ccc;
       background-color: #fff;
       border-radius: 8px;
@@ -78,7 +78,9 @@
       height: 40px;
       cursor: grab;
       border-radius: 50%;
+      background-color: #fff;
       transition: transform 0.2s;
+      transition: background 0.5s;
     }
 
     .ring-item:active {
@@ -87,6 +89,7 @@
 
     .ring-item:hover {
       transform: scale(1.1);
+      background-color: #ddd;
     }
 
     /* Wrapper that clips the bottom half of the ring */
@@ -100,12 +103,18 @@
     }
 
     /* The actual ring image inside the wrapper, shifted up */
-    .clipped-ring {
+    .clipped-ring 
+    {
       position: absolute;
       width: 40px;
       height: 40px;
       top: 0;
       left: 0;
+    }
+    
+    img 
+    {
+      user-select: none;
     }
   </style>
 </head>
@@ -188,9 +197,32 @@
     let draggedRingSrc = null;
 
     document.querySelectorAll('.ring-item').forEach(ring => {
+      //Add drag start event
       ring.addEventListener('dragstart', (e) => {
         draggedRingSrc = e.target.src;
         e.dataTransfer.setData('text/plain', e.target.src);
+      });
+      //Add mobile-friendly drag event
+      ring.addEventListener('pointerdown', (e) => {
+          draggedRingSrc = e.target.src;
+          e.dataTransfer.setData('text/plain', e.target.src);
+        });
+      //Prevent context menu event
+      ring.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+      });
+      ring.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        
+        // Update image position based on touch coordinates
+        ring.style.position = 'absolute';
+        ring.style.left = `${e.clientX - img.width / 2}px`;
+        ring.style.top = `${e.clientY - img.height / 2}px`;
+      });
+      
+      ring.addEventListener('pointerup', (e) => {
+        isDragging = false;
+        ring.releasePointerCapture(e.pointerId);
       });
     });
 

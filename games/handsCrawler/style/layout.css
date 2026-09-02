@@ -10,6 +10,62 @@
 	--total-score-color: #2ecc71;
 }
 
+body 
+{
+	background-color: black;
+	color: white;
+}
+
+/* Reset margins and set full screen boundaries */
+html, body 
+{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden; /* Prevents unwanted page scrolling */
+}
+
+main#main 
+{
+	display: flex;
+	flex-direction: column;
+	height: 100vh; /* Uses 100% of the screen height */
+}
+
+section#menuBar 
+{
+	height: 50px;
+	width: 100%;
+	background-color: #2c3e50; /* Visual placeholder color */
+	color: white;
+	flex-shrink: 0; /* Prevents the menu bar from squishing */
+}
+
+section#mainContent 
+{
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1; /* Automatically takes up all height left under the menu */
+}
+
+section#sidePanel
+{
+	width: 20%;
+	padding: 10px;
+	background-color: #177d85;
+	color: white;
+	flex-shrink: 0; /* Keeps it strictly at 20% */
+	text-align: center;
+}
+section#scoringArea 
+{
+  background: #222;
+  padding: 10px 15px 20px 20px;
+  width: 50%;
+  margin: 0 auto;
+  font-size: 2rem;
+}
+
 #baseScore, #powerScore, #totalScore 
 {
 	font-size: 1.25rem;
@@ -36,62 +92,10 @@
 	background-color: var(--total-score-color);
 }
 
-body 
-{
-	background-color: black;
-	color: white;
-}
-
-/* Reset margins and set full screen boundaries */
-html, body 
-{
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	overflow: hidden; /* Prevents unwanted page scrolling */
-}
-
-/* 1. Main container stacks the menu bar vertically on top of the content row */
-main#main 
-{
-	display: flex;
-	flex-direction: column;
-	height: 100vh; /* Uses 100% of the screen height */
-}
-
-/* 2. Menu Bar takes exactly 50px */
-section#menuBar 
-{
-	height: 50px;
-	width: 100%;
-	background-color: #2c3e50; /* Visual placeholder color */
-	color: white;
-	flex-shrink: 0; /* Prevents the menu bar from squishing */
-}
-
-/* 3. The content row expands to claim all remaining vertical height */
-section#mainContent 
-{
-	display: flex;
-	flex-direction: row;
-	flex-grow: 1; /* Automatically takes up all height left under the menu */
-}
-
-/* 4. Side Panel takes exactly 20% width */
-section#sidePanel
-{
-	width: 20%;
-	padding: 10px;
-	background-color: #177d85; /* Visual placeholder color */
-	color: white;
-	flex-shrink: 0; /* Keeps it strictly at 20% */
-}
-
-/* 5. Game Area takes all remaining horizontal space in the row */
 section#gameArea 
 {
 	flex-grow: 1; /* Automatically stretches to fill the remaining 80% */
-	background-color: #000; /* Visual placeholder color */
+	background-color: #000;
 }
 
 div#buttonRow 
