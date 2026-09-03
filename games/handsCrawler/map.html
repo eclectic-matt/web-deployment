@@ -133,12 +133,27 @@
 		{
 			user-select: none;
 		}
+
+		/* Default highlight layer */
+		.area-highlight-overlay 
+		{
+			border: 2px dashed #ff0000 !important;
+			background-color: rgba(255, 0, 0, 0.15) !important;
+			transition: background-color 0.05s ease, border-color 0.05s ease;
+		}
+
+		/* Active calculated hovering layer state */
+		.area-highlight-overlay.is-hovered 
+		{
+			border-color: #00ff00 !important;
+			background-color: rgba(0, 255, 0, 0.3) !important;
+		}
 	</style>
 </head>
 <body>
 
-<h1>Drag & Drop Rings onto Fingers</h1>
-<p>Drag a ring from the palette and drop it onto any finger on either hand!</p>
+<h1>Drag & Drop Tests</h1>
+<p>Drag a ring and drop it onto any finger</p>
 
 <div class="container">
 	<div class="hands-section">
@@ -216,8 +231,12 @@
 	let dragVisualElement = null; // Track our visual feedback element globally
 
 	document.querySelectorAll('.ring-item').forEach(ring => {
-		
-		// --- DESKTOP NATIVE API ---
+
+		//==================
+		// DRAG START 
+		//==================
+
+		// --- DESKTOP LOGIC ---
 		ring.addEventListener('dragstart', (e) => {
 			const imgElement = e.currentTarget.tagName === 'IMG' 
 				? e.currentTarget 
@@ -227,6 +246,7 @@
 				isDragging = true;
 				draggedRingSrc = imgElement.src;
 				e.dataTransfer.setData('text/plain', imgElement.src);
+				highlightDropAreas(true);
 			}
 		});
 
@@ -239,7 +259,8 @@
 			if (imgElement) {
 				isDragging = true;
 				draggedRingSrc = imgElement.src;
-				
+				highlightDropAreas(true);
+
 				// Capture pointer focus to ensure movement tracking continues if finger slips
 				ring.setPointerCapture(e.pointerId);
 
@@ -256,19 +277,26 @@
 			}
 		});
 
-		// Prevent context menu interactions blocking dragging
-		ring.addEventListener('contextmenu', (e) => e.preventDefault());
+		//==================
+		// DRAG END (DROP) 
+		//==================
 
-		// --- MOVEMENT TRACKING ---
-		ring.addEventListener('pointermove', (e) => {
-			if (!isDragging || !dragVisualElement) return;
-			updateVisualPosition(e.clientX, e.clientY);
+		// --- DESKTOP NATIVE CLEANUP ---
+		ring.addEventListener('dragend', () => {
+			isDragging = false;
+			highlightDropAreas(false);
+			
+			// Clean up any proxy images abandoned by pointerdown
+			if (dragVisualElement) {
+				dragVisualElement.remove();
+				dragVisualElement = null;
+			}
 		});
 
 		// --- MOBILE RELEASE LOGIC ---
 		ring.addEventListener('pointerup', (e) => {
 			if (!isDragging) return;
-			
+			highlightDropAreas(false);
 			isDragging = false;
 			if(e.pointerId === undefined) 
 			{
@@ -337,6 +365,31 @@
 				console.log("Dropped outside a valid finger area slot");
 			}
 		});
+
+		//==================
+		// DRAG MOVE 
+		//==================
+
+		// --- DESKTOP EVENT ---
+		ring.addEventListener('dragmove', (e) => {
+			if (!isDragging || !dragVisualElement) return;
+			updateVisualPosition(e.clientX, e.clientY);
+			
+			// Tracks hover positions on mobile layout views in real-time
+			updateActiveHoverState(e.clientX, e.clientY);
+		});
+
+		// --- MOBILE EVENT TRACKING ---
+		ring.addEventListener('pointermove', (e) => {
+			if (!isDragging || !dragVisualElement) return;
+			updateVisualPosition(e.clientX, e.clientY);
+			
+			// Tracks hover positions on mobile layout views in real-time
+			updateActiveHoverState(e.clientX, e.clientY);
+		});
+
+		// Prevent context menu interactions blocking dragging
+		ring.addEventListener('contextmenu', (e) => e.preventDefault());
 	});
 
 	// Helper function to lock visual proxy positioning onto cursor/finger coordinates
@@ -349,16 +402,23 @@
 	// --- DESKTOP STANDARD LISTENERS ---
 	const areas = document.querySelectorAll('area');
 	areas.forEach(area => {
-		area.addEventListener('dragover', (e) => e.preventDefault());
+		area.addEventListener('dragover', (e) => {
+			e.preventDefault();
+			// Tracks desktop native mouse hover positions across layers
+			updateActiveHoverState(e.clientX, e.clientY);
+		});
 		area.addEventListener('drop', (e) => {
 			e.preventDefault();
+			if(!isDragging) return;
 			isDragging = false;
 			executeDropLogic(area);
 		});
 	});
 
 	// --- CENTRALIZED ISOLATED PRODUCTION DROP LOGIC ---
-	function executeDropLogic(area) {
+	function executeDropLogic(area) 
+	{
+		highlightDropAreas(false);
 		const coords = area.coords.split(',').map(Number);
 		let centerX = (coords[0] + coords[2]) / 2;
 		let centerY = (coords[1] + coords[3]) / 2;
@@ -399,6 +459,95 @@
 
 		wrapper.appendChild(ringImg);
 		activeContainer.appendChild(wrapper);
+	}
+
+	function updateActiveHoverState(clientX, clientY) {
+		// 1. Remove the hover state class from all active overlays first
+		document.querySelectorAll('.area-highlight-overlay').forEach(box => box.classList.remove('is-hovered'));
+
+		// 2. Scan boundaries to see if coords sit inside any finger zone
+		for (let area of document.querySelectorAll('area')) {
+			const map = area.parentElement;
+			const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
+			if (!linkedImg) continue;
+
+			const rect = linkedImg.getBoundingClientRect();
+			const coords = area.coords.split(',').map(Number);
+			let isInside = false;
+
+			if (area.shape === 'circle') {
+				const centerX = rect.left + coords[0];
+				const centerY = rect.top + coords[1];
+				const radius = coords[2];
+				const distance = Math.sqrt(Math.pow(clientX - centerX, 2) + Math.pow(clientY - centerY, 2));
+				if (distance <= radius) isInside = true;
+			} 
+			else if (area.shape === 'rect' || !area.shape) {
+				const left = rect.left + coords[0];
+				const top = rect.top + coords[1];
+				const right = rect.left + coords[2];
+				const bottom = rect.top + coords[3];
+				if (clientX >= left && clientX <= right && clientY >= top && clientY <= bottom) isInside = true;
+			}
+
+			if (isInside) {
+				// Find the matching visual overlay using the data index tracker attribute
+				const index = area.getAttribute('data-area-index');
+				const matchingOverlay = document.querySelector(`.area-highlight-overlay[data-area-index="${index}"]`);
+				if (matchingOverlay) {
+					matchingOverlay.classList.add('is-hovered');
+				}
+				break; // Stop evaluating once a match is found
+			}
+		}
+	}
+
+	function highlightDropAreas(showHighlight = false)
+	{
+		document.querySelectorAll('.area-highlight-overlay').forEach(box => box.remove());
+		if (!showHighlight) return;
+
+		document.querySelectorAll('area').forEach((area, index) => {
+			const map = area.parentElement;
+			const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
+			if (!linkedImg) return;
+
+			const imgRect = linkedImg.getBoundingClientRect();
+			const coords = area.coords.split(',').map(Number);
+
+			const overlay = document.createElement('div');
+			overlay.classList.add('area-highlight-overlay');
+			
+			// Link the overlay to this specific area slot
+			overlay.setAttribute('data-area-index', index);
+			area.setAttribute('data-area-index', index);
+
+			overlay.style.position = 'fixed';
+			overlay.style.pointerEvents = 'none'; 
+			overlay.style.border = '2px dashed #ff0000';
+			overlay.style.backgroundColor = 'rgba(255, 0, 0, 0.15)'; 
+			overlay.style.borderRadius = '50%'; 
+			overlay.style.zIndex = '999';
+
+			if (area.shape === 'circle') {
+				const radius = coords[2];
+				const centerX = imgRect.left + coords[0];
+				const centerY = imgRect.top + coords[1];
+				overlay.style.width = `${radius * 2}px`;
+				overlay.style.height = `${radius * 2}px`;
+				overlay.style.left = `${centerX - radius}px`;
+				overlay.style.top = `${centerY - radius}px`;
+			}
+			else if (area.shape === 'rect' || !area.shape) {
+				overlay.style.borderRadius = '4px'; // Square style edges
+				overlay.style.left = `${imgRect.left + coords[0]}px`;
+				overlay.style.top = `${imgRect.top + coords[1]}px`;
+				overlay.style.width = `${coords[2] - coords[0]}px`;
+				overlay.style.height = `${coords[3] - coords[1]}px`;
+			}
+
+			document.body.appendChild(overlay);
+		});
 	}
 </script>
 </body>
