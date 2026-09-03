@@ -504,49 +504,61 @@
 
 	function highlightDropAreas(showHighlight = false)
 	{
+		// 1. Clear out previous highlight elements safely using your variable name
 		document.querySelectorAll('.' + highlightClassName).forEach(box => box.remove());
 		if (!showHighlight) return;
+
+		// Grab your scaling container element
+		const gameScaler = document.getElementById('gameScaler');
+		if (!gameScaler) return;
 
 		document.querySelectorAll(dropAreaTagName).forEach((area, index) => {
 			const map = area.parentElement;
 			const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
 			if (!linkedImg) return;
 
-			const imgRect = linkedImg.getBoundingClientRect();
+			// Find the parent hand-wrapper element
+			const handWrapper = linkedImg.closest('.hand-wrapper');
+			if (!handWrapper) return;
+
 			const coords = area.coords.split(',').map(Number);
 
 			const overlay = document.createElement('div');
-			overlay.classList.add('area-highlight-overlay');
+			// Use your variable name here to ensure matches work during cleanups
+			overlay.classList.add(highlightClassName); 
 			
-			// Link the overlay to this specific area slot
 			overlay.setAttribute('data-area-index', index);
 			area.setAttribute('data-area-index', index);
 
-			overlay.style.position = 'fixed';
+			// CHANGE: Use absolute layout positions relative to the container frame
+			overlay.style.position = 'absolute';
 			overlay.style.pointerEvents = 'none'; 
 			overlay.style.border = '2px dashed #ff0000';
 			overlay.style.backgroundColor = 'rgba(255, 0, 0, 0.15)'; 
-			overlay.style.borderRadius = '50%'; 
 			overlay.style.zIndex = '999';
 
 			if (area.shape === 'circle') {
+				const centerX = coords[0];
+				const centerY = coords[1];
 				const radius = coords[2];
-				const centerX = imgRect.left + coords[0];
-				const centerY = imgRect.top + coords[1];
+
+				overlay.style.borderRadius = '50%'; 
 				overlay.style.width = `${radius * 2}px`;
 				overlay.style.height = `${radius * 2}px`;
+				// Math uses coordinates directly relative to the wrapper boundaries
 				overlay.style.left = `${centerX - radius}px`;
 				overlay.style.top = `${centerY - radius}px`;
 			}
 			else if (area.shape === 'rect' || !area.shape) {
-				overlay.style.borderRadius = '4px'; // Square style edges
-				overlay.style.left = `${imgRect.left + coords[0]}px`;
-				overlay.style.top = `${imgRect.top + coords[1]}px`;
+				overlay.style.borderRadius = '4px'; 
+				overlay.style.left = `${coords[0]}px`;
+				overlay.style.top = `${coords[1]}px`;
 				overlay.style.width = `${coords[2] - coords[0]}px`;
 				overlay.style.height = `${coords[3] - coords[1]}px`;
 			}
 
-			document.body.appendChild(overlay);
+			// CRITICAL FIX: Append directly to the unscaled parent container block
+			handWrapper.appendChild(overlay);
 		});
 	}
 
