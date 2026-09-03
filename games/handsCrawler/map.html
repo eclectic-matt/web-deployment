@@ -1,290 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ring Fitting - Interactive Hand Map</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 20px;
-    }
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+	<title>Ring Fitting - Interactive Hand Map</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background-color: #f4f4f9;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			
+			/* Force everything to lock inside the active screen boundaries */
+			overflow: hidden; 
+			position: fixed; 
+			
+			/* Disable mobile-specific browser gestures */
+			touch-action: none; 
+			-webkit-overflow-scrolling: auto; 
+		}
 
-    h1 {
-      color: #333;
-    }
+		h1 {
+			color: #333;
+		}
 
-    .container {
-      display: flex;
-      gap: 30px;
-      margin-top: 20px;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+		.container {
+			display: flex;
+			gap: 30px;
+			margin-top: 20px;
+			align-items: flex-start;
+			flex-wrap: wrap;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			position: relative;
+			
+			/* Standard safety measure to prevent native scrolling mechanics */
+			touch-action: none; 
+		}
 
-    .hands-section {
-      display: flex;
-      gap: 20px;
-    }
+		.hands-section {
+			display: flex;
+			gap: 20px;
+		}
 
-    /* Hand Canvas Area */
-    .hand-wrapper {
-      position: relative;
-      width: 160px;
-      height: 160px;
-      border: 2px dashed #ccc;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
+		/* Hand Canvas Area */
+		.hand-wrapper {
+			position: relative;
+			width: 256px;		/*IMPORTANT: Keep this size consistent with the hand image dimensions for proper alignment*/
+			height: 256px;	/*IMPORTANT: Keep this size consistent with the hand image dimensions for proper alignment*/
+			border: 2px dashed #ccc;
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+		}
 
-    .hand-image {
-      width: 100%;
-      height: 100%;
-      display: block;
-      user-select: none;
-    }
+		.hand-image {
+			width: 100%;
+			height: 100%;
+			display: block;
+			user-select: none;
+		}
 
-    /* Ring Selector Palette */
-    .ring-palette {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      min-width: 150px;
-    }
+		/* Ring Selector Palette */
+		.ring-palette {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+			padding: 20px;
+			background: #fff;
+			border-radius: 8px;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+			min-width: 150px;
+		}
 
-    .ring-palette h3 {
-      margin: 0 0 10px 0;
-      font-size: 16px;
-    }
+		.ring-palette h3 {
+			margin: 0 0 10px 0;
+			font-size: 16px;
+		}
 
-    .ring-options {
-      display: flex;
-      gap: 15px;
-    }
+		.ring-options {
+			display: flex;
+			gap: 15px;
+		}
 
-    .ring-item {
-      width: 40px;
-      height: 40px;
-      cursor: grab;
-      border-radius: 50%;
-      background-color: #fff;
-      transition: transform 0.2s;
-      transition: background 0.5s;
-    }
+		.ring-item {
+			width: 40px;
+			height: 40px;
+			cursor: grab;
+			border-radius: 50%;
+			background-color: #fff;
+			transition: transform 0.2s;
+			transition: background 0.5s;
+		}
 
-    .ring-item:active {
-      cursor: grabbing;
-    }
+		.ring-item:active {
+			cursor: grabbing;
+		}
 
-    .ring-item:hover {
-      transform: scale(1.1);
-      background-color: #ddd;
-    }
+		.ring-item:hover {
+			transform: scale(1.1);
+			background-color: #ddd;
+		}
 
-    /* Wrapper that clips the bottom half of the ring */
-    .ring-wrapper {
-      position: absolute;
-      width: 40px;
-      height: 20px; /* Only shows top half */
-      overflow: hidden;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
+		/* Wrapper that clips the bottom half of the ring */
+		.ring-wrapper {
+			position: absolute;
+			width: 40px;
+			height: 20px; /* Only shows top half */
+			overflow: hidden;
+			transform: translate(-50%, -50%);
+			pointer-events: none;
+		}
 
-    /* The actual ring image inside the wrapper, shifted up */
-    .clipped-ring 
-    {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      top: 0;
-      left: 0;
-    }
-    
-    img 
-    {
-      user-select: none;
-    }
-  </style>
+		/* The actual ring image inside the wrapper, shifted up */
+		.clipped-ring 
+		{
+			position: absolute;
+			width: 40px;
+			height: 40px;
+			top: 0;
+			left: 0;
+		}
+		
+		img 
+		{
+			user-select: none;
+		}
+	</style>
 </head>
 <body>
 
-  <h1>Drag & Drop Rings onto Fingers</h1>
-  <p>Drag a ring from the palette and drop it onto any finger on either hand!</p>
+<h1>Drag & Drop Rings onto Fingers</h1>
+<p>Drag a ring from the palette and drop it onto any finger on either hand!</p>
 
-  <div class="container">
-    <div class="hands-section">
-      <!-- Left Hand Container -->
-      <div class="hand-wrapper" id="leftHandContainer">
-        <img 
-          src="assets/img/left_hand.png" 
-          alt="Left Hand" 
-          usemap="#left-hand-map" 
-          class="hand-image" 
-        />
+<div class="container">
+	<div class="hands-section">
+		<!-- Left Hand Container -->
+		<div class="hand-wrapper" id="leftHandContainer">
+			<img 
+				src="assets/img/left_hand.png" 
+				alt="Left Hand" 
+				usemap="#left-hand-map" 
+				class="hand-image" 
+			/>
 
-        <!-- HTML Image Map defining drop targets for Left Hand -->
-        <map name="left-hand-map">
-          <area shape="rect" coords="48,25,80,118" alt="Pinky Finger" data-finger="left-pinky" href="#" />
-          <area shape="rect" coords="85,16,117,115" alt="Ring Finger" data-finger="left-ring" href="#" />
-          <area shape="rect" coords="120,5,152,112" alt="Middle Finger" data-finger="left-middle" href="#" />
-          <area shape="rect" coords="155,16,187,135" alt="Index Finger" data-finger="left-index" href="#" />
-          <area shape="rect" coords="190,96,240,150" alt="Thumb Finger" data-finger="left-thumb" href="#" />
-        </map>
-      </div>
+			<!-- HTML Image Map defining drop targets for Left Hand -->
+			<map name="left-hand-map">
+				<area shape="rect" coords="48,25,80,118" alt="Pinky Finger" data-finger="left-pinky" href="#" />
+				<area shape="rect" coords="85,16,117,115" alt="Ring Finger" data-finger="left-ring" href="#" />
+				<area shape="rect" coords="120,5,152,112" alt="Middle Finger" data-finger="left-middle" href="#" />
+				<area shape="rect" coords="155,16,187,135" alt="Index Finger" data-finger="left-index" href="#" />
+				<area shape="rect" coords="190,96,240,150" alt="Thumb Finger" data-finger="left-thumb" href="#" />
+			</map>
+		</div>
 
-      <!-- Right Hand Container -->
-      <div class="hand-wrapper" id="rightHandContainer">
-        <img 
-          src="assets/img/right_hand.png" 
-          alt="Right Hand" 
-          usemap="#right-hand-map" 
-          class="hand-image" 
-        />
+		<!-- Right Hand Container -->
+		<div class="hand-wrapper" id="rightHandContainer">
+			<img 
+				src="assets/img/right_hand.png" 
+				alt="Right Hand" 
+				usemap="#right-hand-map" 
+				class="hand-image" 
+			/>
 
-        <!-- HTML Image Map defining drop targets for Right Hand (Mirrored Coords) -->
-        <map name="right-hand-map">
-          <area shape="rect" coords="16,96,66,150" alt="Thumb Finger" data-finger="right-thumb" href="#" />
-          <area shape="rect" coords="69,16,101,135" alt="Index Finger" data-finger="right-index" href="#" />
-          <area shape="rect" coords="104,5,136,112" alt="Middle Finger" data-finger="right-middle" href="#" />
-          <area shape="rect" coords="139,16,171,115" alt="Ring Finger" data-finger="right-ring" href="#" />
-          <area shape="rect" coords="176,25,208,118" alt="Pinky Finger" data-finger="right-pinky" href="#" />
-        </map>
-      </div>
-    </div>
+			<!-- HTML Image Map defining drop targets for Right Hand (Mirrored Coords) -->
+			<map name="right-hand-map">
+				<area shape="rect" coords="16,96,66,150" alt="Thumb Finger" data-finger="right-thumb" href="#" />
+				<area shape="rect" coords="69,16,101,135" alt="Index Finger" data-finger="right-index" href="#" />
+				<area shape="rect" coords="104,5,136,112" alt="Middle Finger" data-finger="right-middle" href="#" />
+				<area shape="rect" coords="139,16,171,115" alt="Ring Finger" data-finger="right-ring" href="#" />
+				<area shape="rect" coords="176,25,208,118" alt="Pinky Finger" data-finger="right-pinky" href="#" />
+			</map>
+		</div>
+	</div>
 
-    <!-- Ring Palette -->
-    <div class="ring-palette">
-      <h3>Select a Ring:</h3>
-      <div class="ring-options">
-        <img 
-          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='12' fill='none'/><circle cx='50' cy='15' r='10' fill='%2300ffff'/></svg>" 
-          class="ring-item" 
-          draggable="true" 
-          id="ring1" 
-          alt="Diamond Gold Ring"
-        />
-        <img 
-          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23c0c0c0' stroke-width='12' fill='none'/><polygon points='50,5 60,20 40,20' fill='%23ff0055'/></svg>" 
-          class="ring-item" 
-          draggable="true" 
-          id="ring2" 
-          alt="Ruby Silver Ring"
-        />
-        <img 
-          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23b87333' stroke-width='10' fill='none'/></svg>" 
-          class="ring-item" 
-          draggable="true" 
-          id="ring3" 
-          alt="Band Ring"
-        />
-      </div>
-    </div>
-  </div>
+	<!-- Ring Palette -->
+	<div class="ring-palette">
+		<h3>Select a Ring:</h3>
+		<div class="ring-options">
+			<img 
+				src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='12' fill='none'/><circle cx='50' cy='15' r='10' fill='%2300ffff'/></svg>" 
+				class="ring-item" 
+				draggable="true" 
+				id="ring1" 
+				alt="Diamond Gold Ring"
+			/>
+			<img 
+				src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23c0c0c0' stroke-width='12' fill='none'/><polygon points='50,5 60,20 40,20' fill='%23ff0055'/></svg>" 
+				class="ring-item" 
+				draggable="true" 
+				id="ring2" 
+				alt="Ruby Silver Ring"
+			/>
+			<img 
+				src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23b87333' stroke-width='10' fill='none'/></svg>" 
+				class="ring-item" 
+				draggable="true" 
+				id="ring3" 
+				alt="Band Ring"
+			/>
+		</div>
+	</div>
+</div>
 
-  <script>
-    let draggedRingSrc = null;
+<script>
+	let draggedRingSrc = null;
+	let isDragging = false;
+	let dragVisualElement = null; // Track our visual feedback element globally
 
-    document.querySelectorAll('.ring-item').forEach(ring => {
-      //Add drag start event
-      ring.addEventListener('dragstart', (e) => {
-        draggedRingSrc = e.target.src;
-        e.dataTransfer.setData('text/plain', e.target.src);
-      });
-      //Add mobile-friendly drag event
-      ring.addEventListener('pointerdown', (e) => {
-          draggedRingSrc = e.target.src;
-          e.dataTransfer.setData('text/plain', e.target.src);
-        });
-      //Prevent context menu event
-      ring.addEventListener('contextmenu', function(event) {
-        event.preventDefault();
-      });
-      ring.addEventListener('pointermove', (e) => {
-        if (!isDragging) return;
-        
-        // Update image position based on touch coordinates
-        ring.style.position = 'absolute';
-        ring.style.left = `${e.clientX - img.width / 2}px`;
-        ring.style.top = `${e.clientY - img.height / 2}px`;
-      });
-      
-      ring.addEventListener('pointerup', (e) => {
-        isDragging = false;
-        ring.releasePointerCapture(e.pointerId);
-      });
-    });
+	document.querySelectorAll('.ring-item').forEach(ring => {
+		
+		// --- DESKTOP NATIVE API ---
+		ring.addEventListener('dragstart', (e) => {
+			const imgElement = e.currentTarget.tagName === 'IMG' 
+				? e.currentTarget 
+				: e.currentTarget.querySelector('img');
 
-    const areas = document.querySelectorAll('area');
+			if (imgElement) {
+				isDragging = true;
+				draggedRingSrc = imgElement.src;
+				e.dataTransfer.setData('text/plain', imgElement.src);
+			}
+		});
 
-    areas.forEach(area => {
-      area.addEventListener('dragover', (e) => {
-        e.preventDefault();
-      });
+		// --- MOBILE FALLBACK INITIALIZATION ---
+		ring.addEventListener('pointerdown', (e) => {
+			const imgElement = e.currentTarget.tagName === 'IMG' 
+				? e.currentTarget 
+				: e.currentTarget.querySelector('img');
 
-      area.addEventListener('drop', (e) => {
-        e.preventDefault();
-        
-        const coords = area.coords.split(',').map(Number);
-        let centerX = (coords[0] + coords[2]) / 2;
-        let centerY = (coords[1] + coords[3]) / 2;
+			if (imgElement) {
+				isDragging = true;
+				draggedRingSrc = imgElement.src;
+				
+				// Capture pointer focus to ensure movement tracking continues if finger slips
+				ring.setPointerCapture(e.pointerId);
 
-        const fingerId = area.getAttribute('data-finger');
+				// Create the visual proxy element immediately on down action
+				dragVisualElement = document.createElement('img');
+				dragVisualElement.src = draggedRingSrc;
+				dragVisualElement.style.position = 'fixed'; // Fixed positioning scales better across layouts
+				dragVisualElement.style.width = `${imgElement.offsetWidth}px`;
+				dragVisualElement.style.height = `${imgElement.offsetHeight}px`;
+				dragVisualElement.style.pointerEvents = 'none'; // Critical: allows dropping beneath itself
+				dragVisualElement.style.zIndex = '9999';
+				updateVisualPosition(e.clientX, e.clientY);
+				document.body.appendChild(dragVisualElement);
+			}
+		});
 
-        const existingRing = document.getElementById(`placed-${fingerId}`);
-        if (existingRing) {
-          existingRing.remove();
-        }
+		// Prevent context menu interactions blocking dragging
+		ring.addEventListener('contextmenu', (e) => e.preventDefault());
 
-        // Determine which container to drop into based on the map name
-        const mapName = area.parentElement.getAttribute('name');
-        const targetContainerId = mapName === 'left-hand-map' ? 'leftHandContainer' : 'rightHandContainer';
-        const activeContainer = document.getElementById(targetContainerId);
+		// --- MOVEMENT TRACKING ---
+		ring.addEventListener('pointermove', (e) => {
+			if (!isDragging || !dragVisualElement) return;
+			updateVisualPosition(e.clientX, e.clientY);
+		});
 
-        // Create wrapper container that acts as a viewport mask
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('ring-wrapper');
-        wrapper.id = `placed-${fingerId}`;
-        let ringRotateAngle = '0deg'; // Default rotation
-        if(fingerId === "right-thumb")
-        {
-          //Right thumb rotate clockwise and shift left
-          ringRotateAngle = '-30deg'; // Rotate for thumbs
-          centerX += 6;
-          centerY -= 10; // Shift up for better alignment
-        }
-        else if(fingerId === "left-thumb")
-        {
-          //Left thumb rotate counter-clockwise and shift right
-          ringRotateAngle = '30deg'; // Rotate for thumbs
-          centerX -= 10;
-          centerY += 6; // Shift up for better alignment
-        }
-        wrapper.style.rotate = ringRotateAngle;
-        wrapper.style.left = `${centerX}px`;
-        wrapper.style.top = `${centerY}px`;
+		// --- MOBILE RELEASE LOGIC ---
+		ring.addEventListener('pointerup', (e) => {
+			if (!isDragging) return;
+			
+			isDragging = false;
+			if(e.pointerId === undefined) 
+			{
+				dragVisualElement.remove();
+				dragVisualElement = null;
+				return;
+			}
+			ring.releasePointerCapture(e.pointerId);
 
-        // Create the inner ring image
-        const ringImg = document.createElement('img');
-        ringImg.src = draggedRingSrc;
-        ringImg.classList.add('clipped-ring');
+			if (dragVisualElement) {
+				dragVisualElement.remove();
+				dragVisualElement = null;
+			}
 
-        // Append image to wrapper, then wrapper to the correct hand board
-        wrapper.appendChild(ringImg);
-        activeContainer.appendChild(wrapper);
-      });
-    });
-  </script>
+			// 1. Get the actual finger position relative to the screen viewport
+			const fingerX = e.clientX;
+			const fingerY = e.clientY;
+
+			let targetArea = null;
+
+			// 2. Loop through all your area nodes directly
+			for (let area of document.querySelectorAll('area')) {
+				// Find the interactive hand background map image linked to this area configuration
+				const map = area.parentElement;
+				const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
+				
+				if (!linkedImg) continue;
+
+				// Calculate the physical layout positioning dimensions of the image on the mobile screen
+				const rect = linkedImg.getBoundingClientRect();
+				
+				// Convert the string array coordinates from your HTML into numbers
+				const coords = area.coords.split(',').map(Number);
+
+				// Check bounding overlap rules based on the shape profile type
+				if (area.shape === 'rect' || !area.shape) {
+					// Adjust calculations to map layout boundaries accurately
+					const left = rect.left + coords[0];
+					const top = rect.top + coords[1];
+					const right = rect.left + coords[2];
+					const bottom = rect.top + coords[3];
+
+					if (fingerX >= left && fingerX <= right && fingerY >= top && fingerY <= bottom) {
+						targetArea = area;
+						break;
+					}
+				} 
+				else if (area.shape === 'circle') {
+					const centerX = rect.left + coords[0];
+					const centerY = rect.top + coords[1];
+					const radius = coords[2];
+
+					// Use the Pythagorean theorem to calculate distance from the center point
+					const distance = Math.sqrt(Math.pow(fingerX - centerX, 2) + Math.pow(fingerY - centerY, 2));
+					if (distance <= radius) {
+						targetArea = area;
+						break;
+					}
+				}
+			}
+			
+			// 3. Fire your drop engine directly if boundary intersections match
+			if (targetArea) {
+				executeDropLogic(targetArea);
+			} else {
+				console.log("Dropped outside a valid finger area slot");
+			}
+		});
+	});
+
+	// Helper function to lock visual proxy positioning onto cursor/finger coordinates
+	function updateVisualPosition(clientX, clientY) {
+		if (!dragVisualElement) return;
+		dragVisualElement.style.left = `${clientX - dragVisualElement.offsetWidth / 2}px`;
+		dragVisualElement.style.top = `${clientY - dragVisualElement.offsetHeight / 2}px`;
+	}
+
+	// --- DESKTOP STANDARD LISTENERS ---
+	const areas = document.querySelectorAll('area');
+	areas.forEach(area => {
+		area.addEventListener('dragover', (e) => e.preventDefault());
+		area.addEventListener('drop', (e) => {
+			e.preventDefault();
+			isDragging = false;
+			executeDropLogic(area);
+		});
+	});
+
+	// --- CENTRALIZED ISOLATED PRODUCTION DROP LOGIC ---
+	function executeDropLogic(area) {
+		const coords = area.coords.split(',').map(Number);
+		let centerX = (coords[0] + coords[2]) / 2;
+		let centerY = (coords[1] + coords[3]) / 2;
+
+		const fingerId = area.getAttribute('data-finger');
+
+		const existingRing = document.getElementById(`placed-${fingerId}`);
+		if (existingRing) {
+			existingRing.remove();
+		}
+
+		const mapName = area.parentElement.getAttribute('name');
+		const targetContainerId = mapName === 'left-hand-map' ? 'leftHandContainer' : 'rightHandContainer';
+		const activeContainer = document.getElementById(targetContainerId);
+
+		const wrapper = document.createElement('div');
+		wrapper.classList.add('ring-wrapper');
+		wrapper.id = `placed-${fingerId}`;
+		
+		let ringRotateAngle = '0deg';
+		if (fingerId === "right-thumb") {
+			ringRotateAngle = '-30deg';
+			centerX += 6;
+			centerY -= 10;
+		} else if (fingerId === "left-thumb") {
+			ringRotateAngle = '30deg';
+			centerX -= 10;
+			centerY += 6;
+		}
+		
+		wrapper.style.rotate = ringRotateAngle;
+		wrapper.style.left = `${centerX}px`;
+		wrapper.style.top = `${centerY}px`;
+
+		const ringImg = document.createElement('img');
+		ringImg.src = draggedRingSrc;
+		ringImg.classList.add('clipped-ring');
+
+		wrapper.appendChild(ringImg);
+		activeContainer.appendChild(wrapper);
+	}
+</script>
 </body>
 </html>
