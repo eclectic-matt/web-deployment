@@ -221,7 +221,12 @@
 	let isDragging = false;
 	let dragVisualElement = null; // Track our visual feedback element globally
 
-	document.querySelectorAll('.ring-item').forEach(ring => {
+	const ringItemsClassName = 'ring-item';
+	const dropAreaTagName = 'area';
+	const highlightClassName = 'area-highlight-overlay';
+	const gameScalerId = 'gameScaler';
+
+	document.querySelectorAll('.' + ringItemsClassName).forEach(ring => {
 
 		//==================
 		// DRAG START 
@@ -247,7 +252,8 @@
 				? e.currentTarget 
 				: e.currentTarget.querySelector('img');
 
-			if (imgElement) {
+			if (imgElement)
+			{
 				isDragging = true;
 				draggedRingSrc = imgElement.src;
 				highlightDropAreas(true);
@@ -297,7 +303,8 @@
 			}
 			ring.releasePointerCapture(e.pointerId);
 
-			if (dragVisualElement) {
+			if (dragVisualElement)
+			{
 				dragVisualElement.remove();
 				dragVisualElement = null;
 			}
@@ -309,7 +316,7 @@
 			let targetArea = null;
 
 			// 2. Loop through all your area nodes directly
-			for (let area of document.querySelectorAll('area')) {
+			for (let area of document.querySelectorAll(dropAreaTagName)) {
 				// Find the interactive hand background map image linked to this area configuration
 				const map = area.parentElement;
 				const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
@@ -384,14 +391,15 @@
 	});
 
 	// Helper function to lock visual proxy positioning onto cursor/finger coordinates
-	function updateVisualPosition(clientX, clientY) {
+	function updateVisualPosition(clientX, clientY)
+	{
 		if (!dragVisualElement) return;
 		dragVisualElement.style.left = `${clientX - dragVisualElement.offsetWidth / 2}px`;
 		dragVisualElement.style.top = `${clientY - dragVisualElement.offsetHeight / 2}px`;
 	}
 
 	// --- DESKTOP STANDARD LISTENERS ---
-	const areas = document.querySelectorAll('area');
+	const areas = document.querySelectorAll(dropAreaTagName);
 	areas.forEach(area => {
 		area.addEventListener('dragover', (e) => {
 			e.preventDefault();
@@ -452,12 +460,13 @@
 		activeContainer.appendChild(wrapper);
 	}
 
-	function updateActiveHoverState(clientX, clientY) {
+	function updateActiveHoverState(clientX, clientY)
+	{
 		// 1. Remove the hover state class from all active overlays first
-		document.querySelectorAll('.area-highlight-overlay').forEach(box => box.classList.remove('is-hovered'));
+		document.querySelectorAll('.' + highlightClassName).forEach(box => box.classList.remove('is-hovered'));
 
 		// 2. Scan boundaries to see if coords sit inside any finger zone
-		for (let area of document.querySelectorAll('area')) {
+		for (let area of document.querySelectorAll(dropAreaTagName)) {
 			const map = area.parentElement;
 			const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
 			if (!linkedImg) continue;
@@ -484,7 +493,7 @@
 			if (isInside) {
 				// Find the matching visual overlay using the data index tracker attribute
 				const index = area.getAttribute('data-area-index');
-				const matchingOverlay = document.querySelector(`.area-highlight-overlay[data-area-index="${index}"]`);
+				const matchingOverlay = document.querySelector(`.` + highlightClassName + `[data-area-index="${index}"]`);
 				if (matchingOverlay) {
 					matchingOverlay.classList.add('is-hovered');
 				}
@@ -495,10 +504,10 @@
 
 	function highlightDropAreas(showHighlight = false)
 	{
-		document.querySelectorAll('.area-highlight-overlay').forEach(box => box.remove());
+		document.querySelectorAll('.' + highlightClassName).forEach(box => box.remove());
 		if (!showHighlight) return;
 
-		document.querySelectorAll('area').forEach((area, index) => {
+		document.querySelectorAll(dropAreaTagName).forEach((area, index) => {
 			const map = area.parentElement;
 			const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
 			if (!linkedImg) return;
@@ -544,7 +553,7 @@
 	// 2. FIXED: Automate auto-scaling behavior matching layout container limits
 	function resizeGameViewport()
 	{
-		const scaler = document.getElementById('gameScaler');
+		const scaler = document.getElementById(gameScalerId);
 		if (!scaler) return;
 
 		// Define absolute bounding area needed for full display unscaled
