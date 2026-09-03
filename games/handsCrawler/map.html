@@ -465,7 +465,18 @@
 		// 1. Remove the hover state class from all active overlays first
 		document.querySelectorAll('.' + highlightClassName).forEach(box => box.classList.remove('is-hovered'));
 
-		// 2. Scan boundaries to see if coords sit inside any finger zone
+		// 2. Fetch the active scaling multiplier factor from your game scaler container
+		const gameScaler = document.getElementById('gameScaler');
+		let currentScale = 1;
+		if (gameScaler && gameScaler.style.transform) {
+			// Extracts the numerical value out of "scale(0.75)"
+			const match = gameScaler.style.transform.match(/scale\(([^)]+)\)/);
+			if (match && match[1]) {
+				currentScale = parseFloat(match[1]);
+			}
+		}
+
+		// 3. Scan boundaries to see if coords sit inside any finger zone
 		for (let area of document.querySelectorAll(dropAreaTagName)) {
 			const map = area.parentElement;
 			const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
@@ -476,28 +487,31 @@
 			let isInside = false;
 
 			if (area.shape === 'circle') {
-				const centerX = rect.left + coords[0];
-				const centerY = rect.top + coords[1];
-				const radius = coords[2];
+				// Apply scale multiplier directly to your area map coordinates parameters
+				const centerX = rect.left + (coords[0] * currentScale);
+				const centerY = rect.top + (coords[1] * currentScale);
+				const radius = coords[2] * currentScale;
+				
 				const distance = Math.sqrt(Math.pow(clientX - centerX, 2) + Math.pow(clientY - centerY, 2));
 				if (distance <= radius) isInside = true;
 			} 
 			else if (area.shape === 'rect' || !area.shape) {
-				const left = rect.left + coords[0];
-				const top = rect.top + coords[1];
-				const right = rect.left + coords[2];
-				const bottom = rect.top + coords[3];
+				// Apply scale multiplier directly to your area map coordinates parameters
+				const left = rect.left + (coords[0] * currentScale);
+				const top = rect.top + (coords[1] * currentScale);
+				const right = rect.left + (coords[2] * currentScale);
+				const bottom = rect.top + (coords[3] * currentScale);
+				
 				if (clientX >= left && clientX <= right && clientY >= top && clientY <= bottom) isInside = true;
 			}
 
 			if (isInside) {
-				// Find the matching visual overlay using the data index tracker attribute
 				const index = area.getAttribute('data-area-index');
 				const matchingOverlay = document.querySelector(`.` + highlightClassName + `[data-area-index="${index}"]`);
 				if (matchingOverlay) {
 					matchingOverlay.classList.add('is-hovered');
 				}
-				break; // Stop evaluating once a match is found
+				break; 
 			}
 		}
 	}
