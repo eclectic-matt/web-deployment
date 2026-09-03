@@ -2,45 +2,50 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=0.75, maximum-scale=0.75, user-scalable=no, viewport-fit=cover" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 	<title>Ring Tests</title>
-	<style>
+		<style>
 		body {
 			font-family: Arial, sans-serif;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			justify-content: flex-start;
+			justify-content: center; /* FIXED: Centers content vertically if scaled down */
 			background-color: #f4f4f9;
 			margin: 0;
 			padding: 0;
 			width: 100%;
 			height: 100%;
-			/* Force everything to lock inside the active screen boundaries */
 			overflow: hidden; 
 			position: fixed; 
-			/* Disable mobile-specific browser gestures */
 			touch-action: none; 
 			-webkit-overflow-scrolling: auto; 
 		}
 
 		h1 {
 			color: #333;
+			margin: 10px 0;
+			text-align: center;
+		}
+
+		/* FIXED: Create an isolated scaling wrapper wrapper around game interface objects */
+		.game-scaler {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			transform-origin: center center; /* Shrinks cleanly from the center point */
+			width: auto;
+			height: auto;
 		}
 
 		.container {
 			display: flex;
-			gap: 30px;
-			margin-top: 20px;
+			gap: 20px; /* Reduced from 30px to conserve small layout parameters */
 			align-items: center;
-			justify-content: flex-start;
+			justify-content: center;
 			flex-direction: column;
-			flex-wrap: wrap;
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
 			position: relative;
-			/* Standard safety measure to prevent native scrolling mechanics */
 			touch-action: none; 
 		}
 
@@ -49,11 +54,11 @@
 			gap: 10px;
 		}
 
-		/* Hand Canvas Area */
+		/* Hand Canvas Area (Keeps your exact fixed dimensions intact) */
 		.hand-wrapper {
 			position: relative;
-			width: 256px;	/*IMPORTANT: Keep this size consistent with the hand image dimensions for proper alignment*/
-			height: 256px;	/*IMPORTANT: Keep this size consistent with the hand image dimensions for proper alignment*/
+			width: 256px;	
+			height: 256px;	
 			border: 2px dashed #ccc;
 			background-color: #fff;
 			border-radius: 8px;
@@ -71,8 +76,9 @@
 		.ring-palette {
 			display: flex;
 			flex-direction: column;
-			gap: 15px;
-			padding: 20px;
+			align-items: center; /* Center items within palette */
+			gap: 10px;
+			padding: 15px;
 			background: #fff;
 			border-radius: 8px;
 			box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -80,7 +86,7 @@
 		}
 
 		.ring-palette h3 {
-			margin: 0 0 10px 0;
+			margin: 0 0 5px 0;
 			font-size: 16px;
 		}
 
@@ -99,28 +105,19 @@
 			transition: background 0.5s;
 		}
 
-		.ring-item:active {
-			cursor: grabbing;
-		}
+		.ring-item:active { cursor: grabbing; }
+		.ring-item:hover { transform: scale(1.1); background-color: #ddd; }
 
-		.ring-item:hover {
-			transform: scale(1.1);
-			background-color: #ddd;
-		}
-
-		/* Wrapper that clips the bottom half of the ring */
 		.ring-wrapper {
 			position: absolute;
 			width: 40px;
-			height: 20px; /* Only shows top half */
+			height: 20px; 
 			overflow: hidden;
 			transform: translate(-50%, -50%);
 			pointer-events: none;
 		}
 
-		/* The actual ring image inside the wrapper, shifted up */
-		.clipped-ring 
-		{
+		.clipped-ring {
 			position: absolute;
 			width: 40px;
 			height: 40px;
@@ -128,22 +125,15 @@
 			left: 0;
 		}
 		
-		img 
-		{
-			user-select: none;
-		}
+		img { user-select: none; }
 
-		/* Default highlight layer */
-		.area-highlight-overlay 
-		{
+		.area-highlight-overlay {
 			border: 2px dashed #ff0000 !important;
 			background-color: rgba(255, 0, 0, 0.15) !important;
 			transition: background-color 0.05s ease, border-color 0.05s ease;
 		}
 
-		/* Active calculated hovering layer state */
-		.area-highlight-overlay.is-hovered 
-		{
+		.area-highlight-overlay.is-hovered {
 			border-color: #00ff00 !important;
 			background-color: rgba(0, 255, 0, 0.3) !important;
 		}
@@ -154,72 +144,74 @@
 <h1>Drag & Drop Tests</h1>
 <p>Drag a ring and drop it onto any finger</p>
 
-<div class="container">
-	<div class="hands-section">
-		<!-- Left Hand Container -->
-		<div class="hand-wrapper" id="leftHandContainer">
-			<img 
-				src="assets/img/left_hand.png" 
-				alt="Left Hand" 
-				usemap="#left-hand-map" 
-				class="hand-image" 
-			/>
+<div class="game-scaler" id="gameScaler">
+	<div class="container">
+		<div class="hands-section">
+			<!-- Left Hand Container -->
+			<div class="hand-wrapper" id="leftHandContainer">
+				<img 
+					src="assets/img/left_hand.png" 
+					alt="Left Hand" 
+					usemap="#left-hand-map" 
+					class="hand-image" 
+				/>
 
-			<!-- HTML Image Map defining drop targets for Left Hand -->
-			<map name="left-hand-map">
-				<area shape="rect" coords="48,25,80,118" alt="Pinky Finger" data-finger="left-pinky" href="#" />
-				<area shape="rect" coords="85,16,117,115" alt="Ring Finger" data-finger="left-ring" href="#" />
-				<area shape="rect" coords="120,5,152,112" alt="Middle Finger" data-finger="left-middle" href="#" />
-				<area shape="rect" coords="155,16,187,135" alt="Index Finger" data-finger="left-index" href="#" />
-				<area shape="rect" coords="190,96,240,150" alt="Thumb Finger" data-finger="left-thumb" href="#" />
-			</map>
+				<!-- HTML Image Map defining drop targets for Left Hand -->
+				<map name="left-hand-map">
+					<area shape="rect" coords="48,25,80,118" alt="Pinky Finger" data-finger="left-pinky" href="#" />
+					<area shape="rect" coords="85,16,117,115" alt="Ring Finger" data-finger="left-ring" href="#" />
+					<area shape="rect" coords="120,5,152,112" alt="Middle Finger" data-finger="left-middle" href="#" />
+					<area shape="rect" coords="155,16,187,135" alt="Index Finger" data-finger="left-index" href="#" />
+					<area shape="rect" coords="190,96,240,150" alt="Thumb Finger" data-finger="left-thumb" href="#" />
+				</map>
+			</div>
+
+			<!-- Right Hand Container -->
+			<div class="hand-wrapper" id="rightHandContainer">
+				<img 
+					src="assets/img/right_hand.png" 
+					alt="Right Hand" 
+					usemap="#right-hand-map" 
+					class="hand-image" 
+				/>
+
+				<!-- HTML Image Map defining drop targets for Right Hand (Mirrored Coords) -->
+				<map name="right-hand-map">
+					<area shape="rect" coords="16,96,66,150" alt="Thumb Finger" data-finger="right-thumb" href="#" />
+					<area shape="rect" coords="69,16,101,135" alt="Index Finger" data-finger="right-index" href="#" />
+					<area shape="rect" coords="104,5,136,112" alt="Middle Finger" data-finger="right-middle" href="#" />
+					<area shape="rect" coords="139,16,171,115" alt="Ring Finger" data-finger="right-ring" href="#" />
+					<area shape="rect" coords="176,25,208,118" alt="Pinky Finger" data-finger="right-pinky" href="#" />
+				</map>
+			</div>
 		</div>
-
-		<!-- Right Hand Container -->
-		<div class="hand-wrapper" id="rightHandContainer">
-			<img 
-				src="assets/img/right_hand.png" 
-				alt="Right Hand" 
-				usemap="#right-hand-map" 
-				class="hand-image" 
-			/>
-
-			<!-- HTML Image Map defining drop targets for Right Hand (Mirrored Coords) -->
-			<map name="right-hand-map">
-				<area shape="rect" coords="16,96,66,150" alt="Thumb Finger" data-finger="right-thumb" href="#" />
-				<area shape="rect" coords="69,16,101,135" alt="Index Finger" data-finger="right-index" href="#" />
-				<area shape="rect" coords="104,5,136,112" alt="Middle Finger" data-finger="right-middle" href="#" />
-				<area shape="rect" coords="139,16,171,115" alt="Ring Finger" data-finger="right-ring" href="#" />
-				<area shape="rect" coords="176,25,208,118" alt="Pinky Finger" data-finger="right-pinky" href="#" />
-			</map>
-		</div>
-	</div>
-	<br />
-	<!-- Ring Palette -->
-	<div class="ring-palette">
-		<h3>Select a Ring:</h3>
-		<div class="ring-options">
-			<img 
-				src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='12' fill='none'/><circle cx='50' cy='15' r='10' fill='%2300ffff'/></svg>" 
-				class="ring-item" 
-				draggable="true" 
-				id="ring1" 
-				alt="Diamond Gold Ring"
-			/>
-			<img 
-				src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23c0c0c0' stroke-width='12' fill='none'/><polygon points='50,5 60,20 40,20' fill='%23ff0055'/></svg>" 
-				class="ring-item" 
-				draggable="true" 
-				id="ring2" 
-				alt="Ruby Silver Ring"
-			/>
-			<img 
-				src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23b87333' stroke-width='10' fill='none'/></svg>" 
-				class="ring-item" 
-				draggable="true" 
-				id="ring3" 
-				alt="Band Ring"
-			/>
+		<br />
+		<!-- Ring Palette -->
+		<div class="ring-palette">
+			<h3>Select a Ring:</h3>
+			<div class="ring-options">
+				<img 
+					src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='12' fill='none'/><circle cx='50' cy='15' r='10' fill='%2300ffff'/></svg>" 
+					class="ring-item" 
+					draggable="true" 
+					id="ring1" 
+					alt="Diamond Gold Ring"
+				/>
+				<img 
+					src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23c0c0c0' stroke-width='12' fill='none'/><polygon points='50,5 60,20 40,20' fill='%23ff0055'/></svg>" 
+					class="ring-item" 
+					draggable="true" 
+					id="ring2" 
+					alt="Ruby Silver Ring"
+				/>
+				<img 
+					src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23b87333' stroke-width='10' fill='none'/></svg>" 
+					class="ring-item" 
+					draggable="true" 
+					id="ring3" 
+					alt="Band Ring"
+				/>
+			</div>
 		</div>
 	</div>
 </div>
@@ -548,6 +540,34 @@
 			document.body.appendChild(overlay);
 		});
 	}
+
+	// 2. FIXED: Automate auto-scaling behavior matching layout container limits
+	function resizeGameViewport()
+	{
+		const scaler = document.getElementById('gameScaler');
+		if (!scaler) return;
+
+		// Define absolute bounding area needed for full display unscaled
+		const targetWidth = 540;  // 256px left hand + 256px right hand + gap spacing offsets
+		const targetHeight = 420; // Structural grid sizing containing elements vertically
+
+		// Calculate view multipliers relative to screen dimensions
+		const scaleX = window.innerWidth / targetWidth;
+		const scaleY = window.innerHeight / targetHeight;
+
+		// Choose whichever scaling restriction factor is lowest to prevent off-screen cropping
+		let optimalScale = Math.min(scaleX, scaleY);
+
+		// Do not scale up layout if screen is wide (e.g. standard laptops/monitors)
+		if (optimalScale > 1) optimalScale = 1;
+
+		// Apply the transformer rule instantly
+		scaler.style.transform = `scale(${optimalScale})`;
+	}
+
+	// Bind events to listen for scaling view recalculations
+	window.addEventListener('resize', resizeGameViewport);
+	window.addEventListener('DOMContentLoaded', resizeGameViewport);
 </script>
 </body>
 </html>
