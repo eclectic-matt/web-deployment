@@ -84,7 +84,7 @@ function initDragEvents()
 	
 					// Capture pointer focus to ensure movement tracking continues if finger slips
 					ring.setPointerCapture(e.pointerId);
-					
+					clearDragVisualElements();
 					// Create the visual proxy element immediately on down action
 					dragVisualElement = document.createElement('img');
 					dragVisualElement.id = 'dragVisual';
