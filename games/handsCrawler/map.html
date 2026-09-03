@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.75, maximum-scale=0.75, user-scalable=no, viewport-fit=cover" />
 	<title>Ring Tests</title>
 	<style>
 		body {
@@ -10,16 +10,15 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			justify-content: flex-start;
 			background-color: #f4f4f9;
 			margin: 0;
 			padding: 0;
 			width: 100%;
 			height: 100%;
-			
 			/* Force everything to lock inside the active screen boundaries */
 			overflow: hidden; 
 			position: fixed; 
-			
 			/* Disable mobile-specific browser gestures */
 			touch-action: none; 
 			-webkit-overflow-scrolling: auto; 
@@ -33,27 +32,27 @@
 			display: flex;
 			gap: 30px;
 			margin-top: 20px;
-			align-items: flex-start;
+			align-items: center;
+			justify-content: flex-start;
+			flex-direction: column;
 			flex-wrap: wrap;
-			justify-content: center;
 			width: 100%;
 			height: 100%;
 			overflow: hidden;
 			position: relative;
-			
 			/* Standard safety measure to prevent native scrolling mechanics */
 			touch-action: none; 
 		}
 
 		.hands-section {
 			display: flex;
-			gap: 20px;
+			gap: 10px;
 		}
 
 		/* Hand Canvas Area */
 		.hand-wrapper {
 			position: relative;
-			width: 256px;		/*IMPORTANT: Keep this size consistent with the hand image dimensions for proper alignment*/
+			width: 256px;	/*IMPORTANT: Keep this size consistent with the hand image dimensions for proper alignment*/
 			height: 256px;	/*IMPORTANT: Keep this size consistent with the hand image dimensions for proper alignment*/
 			border: 2px dashed #ccc;
 			background-color: #fff;
@@ -195,7 +194,7 @@
 			</map>
 		</div>
 	</div>
-
+	<br />
 	<!-- Ring Palette -->
 	<div class="ring-palette">
 		<h3>Select a Ring:</h3>
