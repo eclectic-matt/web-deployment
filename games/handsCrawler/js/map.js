@@ -17,7 +17,7 @@ class RingMapUi
   #ringOptionsElementId = 'ring-options';
   //THE JSON DATA PATH
   //#itemDataJsonPath = '../data/itemData.json';
-  #itemDataJsonPath = '/games/handsCrawler/data/itemData.json';
+  #itemDataJsonPath = './data/itemData.json';
   //ELEMENT REFERENCES
   #ringOptionsAreaEl = null;
   #scalerEl = null;
