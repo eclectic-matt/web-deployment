@@ -1,35 +1,36 @@
 //INIT THE RING DATA AND CREATE RINGS
 async function loadItemData() 
 {
-  try
-  {
-    const response = await fetch(itemDataJsonPath); 
-        
-    if (!response.ok)
-    {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-        
-    const data = await response.json();
-    let ringsInfo = data.items.rings;
-    ringsInfo.forEach(r => {
-      let ringImg = document.createElement('img');
-      ringImg.src = r.icon;
-      ringImg.className = 'ring-item';
-			ringImg.draggable = true; 
-			ringImg.id = r.id;
-			ringImg.alt = r.name;
-			ringImg.tooltip = r.name;
-			ringOptionsArea.appendChild(ringImg);
-			initDragEvents();
-    });
-  }
-  catch (error)
-  {
-    console.error("Failed to load JSON file:", error);
-  }
+	try
+	{
+		const response = await fetch(itemDataJsonPath); 
+		
+		if (!response.ok)
+		{
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		
+		const data = await response.json();
+		let ringsInfo = data.items.rings;
+		ringsInfo.forEach(r => 
+		{
+			let ringImg = document.createElement('img');
+			ringImg.src = r.icon;
+			ringImg.className = 'ring-item';
+				ringImg.draggable = true; 
+				ringImg.id = r.id;
+				ringImg.alt = r.name;
+				ringImg.tooltip = r.name;
+				ringOptionsArea.appendChild(ringImg);
+		});
+		initDragEvents();
+	}
+	catch (error)
+	{
+		console.error("Failed to load JSON file:", error);
+	}
 }
-	
+
 //INIT GLOBAL VARS
 let draggedRingSrc = null;
 let isDragging = false;
