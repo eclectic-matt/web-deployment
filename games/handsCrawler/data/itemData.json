@@ -3,7 +3,7 @@
 	"items": {
 		"rings": [
 			{
-			  "id": "common-base-ring",
+				"id": "common-base-ring",
 				"name": "Ring of Base",
 				"description": "A ring which increases your base damage",
 				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='12' fill='none'/><circle cx='50' cy='15' r='10' fill='%2300ffff'/></svg>",
@@ -24,7 +24,7 @@
 				}
 			},
 			{
-			  "id": "common-power-ring",
+				"id": "common-power-ring",
 				"name": "Ring of Power",
 				"description": "A ring which increases your power damage",
 				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23c0c0c0' stroke-width='12' fill='none'/><polygon points='50,5 60,20 40,20' fill='%23ff0055'/></svg>",
@@ -45,7 +45,7 @@
 				}
 			},
 			{
-			  "id": "common-damage-ring",
+				"id": "common-damage-ring",
 				"name": "Ring of Damage",
 				"description": "A ring which increases your total damage",
 				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23b87333' stroke-width='10' fill='none'/></svg>",
@@ -66,7 +66,7 @@
 				}
 			},
 			{
-			  "id": "common-boost-ring",
+				"id": "common-boost-ring",
 				"name": "Ring of Boost",
 				"description": "A ring which deals damage twice",
 				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23aa00bb' stroke-width='10' fill='none'/></svg>",
