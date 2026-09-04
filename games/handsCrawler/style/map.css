@@ -113,7 +113,7 @@ h1
 .ring-item:hover
 { 
 	transform: scale(1.1); 
-	background-color: #60f; 
+	background-color: rgba(0, 255, 0, 0.3);
 }
 
 .ring-wrapper
