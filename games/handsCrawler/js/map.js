@@ -10,13 +10,12 @@ class RingMapUi
   #targetHeight = 420;
   //SET CLASS NAMES / TAGS / IDs
   #ringItemsClassName = 'ring-item';
-  #dragVisualElementId = 'dragVisual';
+  #dragVisualElementId = 'drag-visual';
   #dropAreaTagName = 'area';
   #highlightClassName = 'area-highlight-overlay';
-  #gameScalerId = 'gameScaler';
+  #gameScalerId = 'game-scaler';
   #ringOptionsElementId = 'ring-options';
   //THE JSON DATA PATH
-  //#itemDataJsonPath = '../data/itemData.json';
   #itemDataJsonPath = './data/itemData.json';
   //ELEMENT REFERENCES
   #ringOptionsAreaEl = null;
@@ -445,7 +444,7 @@ class RingMapUi
     }
 
     const mapName = area.parentElement.getAttribute('name');
-    const targetContainerId = mapName === 'left-hand-map' ? 'leftHandContainer' : 'rightHandContainer';
+    const targetContainerId = mapName === 'left-hand-map' ? 'left-hand-container' : 'right-hand-container';
     const activeContainer = document.getElementById(targetContainerId);
     
     if (!activeContainer) return;
@@ -458,7 +457,22 @@ class RingMapUi
     wrapper.style.top = `${centerY}px`;
     wrapper.style.transform = 'translate(-50%, -50%)';
     wrapper.style.pointerEvents = 'none';
-
+    
+    let ringRotateAngle = '0deg';
+		if (fingerId === "right-thumb") {
+			ringRotateAngle = '-30deg';
+			centerX += 6;
+			centerY -= 10;
+		} else if (fingerId === "left-thumb") {
+			ringRotateAngle = '30deg';
+			centerX -= 10;
+			centerY += 6;
+		}
+		
+		wrapper.style.rotate = ringRotateAngle;
+		wrapper.style.left = `${centerX}px`;
+		wrapper.style.top = `${centerY}px`;
+    
     const ringImg = document.createElement('img');
     ringImg.src = this.#draggedRingSrc;
     ringImg.className = 'placed-ring-graphic';
