@@ -1,5 +1,28 @@
 {
 	"version": "0.1",
+	"ideas": [
+	  "Potion of Healing + 10HP",
+	  "Potion of Mana +10MP",
+	  "Potion of Shield +5SH",
+	  "Potion of Vision",
+	  "Potion of Insight",
+	  "Potion of Luck",
+	  "Spell of Fireball (10% chance burn)",
+	  "Spell of Ice Shard (10% chance freeze)",
+	  "Spell of Lightning (10% chance vulnerable)",
+	  "Spell of Earthquake (10% chance weak)",
+	  "Ring of Base Boost (+5 base)",
+	  "Ring of Power Boost (+2 power)",
+	  "Ring of Damage Boost (+10 damage)",
+	  "Ring of Chance (x2 chance)",
+	  "Ring of Vision (see upcoming rooms)",
+	  "Ring of Insight (see enemy info)",
+	  "Ring of Shield (+5 shield)",
+	  "Rusty Spoon (2 base)",
+	  "Dagger (5 base)",
+	  "Sword (10 base)",
+	  "Shield (1/2 damage taken)"
+	],
 	"items": {
 		"rings": [
 			{

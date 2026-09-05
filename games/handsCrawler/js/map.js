@@ -12,7 +12,7 @@ class RingMapUi
   #ringItemsClassName = 'ring-item';
   #dragVisualElementId = 'drag-visual';
   #dropAreaTagName = 'area';
-  #highlightClassName = 'area-highlight-overlay';
+  #ringHighlightClassName = 'ring-highlight-overlay';
   #gameScalerId = 'game-scaler';
   #ringOptionsElementId = 'ring-options';
   //THE JSON DATA PATH
@@ -301,7 +301,7 @@ class RingMapUi
   highlightDropAreas(showHighlight = false)
   {
     //Clear out previous highlight elements
-    document.querySelectorAll('.' + this.#highlightClassName).forEach(box => box.remove());
+    document.querySelectorAll('.' + this.#ringHighlightClassName).forEach(box => box.remove());
     if (!showHighlight) return;
 
     // Grab your scaling container element
@@ -319,7 +319,7 @@ class RingMapUi
       const coords = area.coords.split(',').map(Number);
 
       const overlay = document.createElement('div');
-      overlay.classList.add(this.#highlightClassName); 
+      overlay.classList.add(this.#ringHighlightClassName); 
       
       overlay.setAttribute('data-area-index', index);
       area.setAttribute('data-area-index', index);
@@ -360,7 +360,7 @@ class RingMapUi
   updateActiveHoverState(clientX, clientY)
   {
     //Remove hover class from active overlays
-    document.querySelectorAll('.' + this.#highlightClassName).forEach(box => box.classList.remove('is-hovered'));
+    document.querySelectorAll('.' + this.#ringHighlightClassName).forEach(box => box.classList.remove('is-hovered'));
     
     //Get scaling factor from game scaler
     let currentScale = 1;
@@ -408,7 +408,7 @@ class RingMapUi
       if (isInside)
       {
         const index = area.getAttribute('data-area-index');
-        const matchingOverlay = document.querySelector(`.` + this.#highlightClassName + `[data-area-index="${index}"]`);
+        const matchingOverlay = document.querySelector(`.` + this.#ringHighlightClassName + `[data-area-index="${index}"]`);
         if (matchingOverlay)
         {
           matchingOverlay.classList.add('is-hovered');

@@ -140,14 +140,14 @@ img
 	user-select: none;
 }
 
-.area-highlight-overlay
+.ring-highlight-overlay
 {
 	border: 2px dashed #ff0000 !important;
 	background-color: rgba(255, 0, 0, 0.15) !important;
 	transition: background-color 0.05s ease, border-color 0.05s ease;
 }
 
-.area-highlight-overlay.is-hovered
+.ring-highlight-overlay.is-hovered
 {
 	border-color: #00ff00 !important;
 	background-color: rgba(0, 255, 0, 0.3) !important;
