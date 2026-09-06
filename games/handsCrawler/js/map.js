@@ -481,6 +481,9 @@ class RingMapUi
     if (!activeContainer) return;
     
     let ringRotateAngle = '0deg';
+    const isBracelet = fingerId.includes('bracelet');
+    const isRing = area.getAttribute('data-item-type') == 'ring';
+    const isThumb = fingerId.includes('thumb');
     
     // Custom positional/spatial offsets for different gear types
     if (fingerId === "right-thumb")
@@ -502,12 +505,11 @@ class RingMapUi
     wrapper.style.position = 'absolute';
     wrapper.style.left = `${centerX}px`;
     wrapper.style.top = `${centerY}px`;
-    wrapper.style.transform = 'translate(-50%, -50%)';
+      wrapper.style.transform = 'translate(-50%, -50%)';
     wrapper.style.pointerEvents = 'none';
     wrapper.style.rotate = ringRotateAngle;
     
-    const isBracelet = fingerId.includes('bracelet');
-    const isThumb = fingerId.includes('thumb');
+    
     
     // --- DYNAMIC BOUNDING BOX SIZING FROM MAP COORDS ---
     let targetWidth = 44;  // Safe defaults
@@ -549,7 +551,9 @@ class RingMapUi
     {
       ringImg.style.clipPath = 'inset(47% 0% 0% 0%)'; 
       ringImg.style.transform = 'translateY(-40%) scale(3)'; 
-    } else {
+    }
+    else if (isRing)
+    {
       ringImg.style.clipPath = 'inset(0% 0% 45% 0%)'; 
       ringImg.style.transform = 'translateY(22%)'; 
     }
