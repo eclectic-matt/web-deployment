@@ -77,7 +77,7 @@ class RingMapUi
         ringImg.dataset.rarityMultiplier = r.rarity.multiplier;
         ringImg.dataset.effectValue = r.effect.value;
         ringImg.dataset.effectName = r.effect.name;
-        ringImg.dataset.effectOp = r.effect.operation;
+        ringImg.dataset.effectOperation = r.effect.operation;
 
         if (this.#ringOptionsAreaEl)
         {
@@ -602,6 +602,9 @@ class RingMapUi
 }
 
 
+// Clean utility helper to delay execution in loop frames
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 class RingScoring 
 {
   constructor()
@@ -611,98 +614,136 @@ class RingScoring
   
   initTestButtons = () => 
   {
-  	let physBtn = document.getElementById("btnTestPhysicalAttack");
-  	physBtn.addEventListener("click", (ev) =>
-  	{
-  		this.triggerPhysicalAttack();
-  	});
-  	let magicBtn = document.getElementById("btnTestMagicalAttack");
-  	let clearBtn = document.getElementById("btnClearTxt");
-  	clearBtn.addEventListener("click", () => 
-  	{
-  		this.clearTxt().bind(this);
-  	});
+    let physBtn = document.getElementById("btnTestPhysicalAttack");
+    if (physBtn) {
+      physBtn.addEventListener("click", (ev) => {
+        this.triggerPhysicalAttack();
+      });
+    }
+    
+    let magicBtn = document.getElementById("btnTestMagicalAttack");
+    
+    let clearBtn = document.getElementById("btnClearTxt");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        this.clearTxt();
+      });
+    }
   }
   
-  triggerPhysicalAttack = () => 
+  triggerPhysicalAttack = async () => 
   {
-  	outputToTxt("physical attack");
-  	//Reset scores
-  	this.resetScores();
-  	//Get ring data
-  	//let rings = document.querySelectorAll(".ring");
-  	let rings = [];
-  	//Correct approach - get left hand, then each ring on that hand in order
-  	let lhRings = document.querySelectorAll("#left-hand-container > .ring-wrapper");
-  	//console.log('lhRings', lhRings);
-  	rings.push(...lhRings);
-  	let rhRings = document.querySelectorAll("#right-hand-container > .ring-wrapper");
-  	rings.push(...rhRings);
-  	//console.log('rhRings', rhRings);
-  	//console.log('rings', rings);
-  	let damage = new Damage();
-  	damage.base = 10;
-  	damage.power = 1;
-  	let delay = 0;
-  	for(let i = 0; i < rings.length; i++)
-  	{
-  		let ring = rings[i];
-  		//console.log(ring.dataset);
-  		//Get score popup for this ring
-  		let popupEl = ring.firstElementChild;
-  		//Extract ring data
-  		let rarityName = ring.dataset.rarityName;
-  		let rarityMultiplier = ring.dataset.rarityMultiplier;
-  		let effectValue = ring.dataset.effectValue;
-  		let effectName = ring.dataset.effectName;
-  		let effectOp = ring.dataset.effectOperation;
-  		outputToTxt("Scoring " + ring.id + " from base=" + damage.base + ", power=" + damage.power);
-  		let scoringTypes = ["base", "power"];
-  		let scoreContribution = 0;
-  		let ringScores = false;
-  		if(scoringTypes.includes(effectName))
-  		{
-  			outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
-  			//Calculate score contribution based on operation
-  			switch(effectOp)
-  			{
-  				case "add":
-  					ringScores = true;
-  					scoreContribution = (effectValue * rarityMultiplier); 
-  					damage[effectName] += scoreContribution;
-  					break;
-  				case "multiply":
-  					ringScores = true;
-  					scoreContribution = (effectValue * rarityMultiplier);
-  					damage[effectName] *= scoreContribution;
-  					break;
-  			}
-  		}
-  		if(ringScores)
-  		{
-  			//Display popups with 0.5s delay
-  			setTimeout(this.scoreRing, delay, ring);
-  			//Add 500ms to delay
-  			delay += 500;
-  		}
-  	}
-  	
-  	//Calculate total damage
-  	damage.total = damage.base * damage.power;
-  	//Update total score
-  	setTimeout(updateTotalScore, delay, damage.total);
+    // Clear old text first so you can clearly see the new calculations run step-by-step
+    this.clearTxt();
+    console.log('--- Starting Physical Attack Scoring Cycle ---');
+    this.outputToTxt("physical attack");
+    this.resetScores();
+    
+    // --- EXACT ANATOMICAL SCORING ORDER MATRIX ---
+    const targetOrderIDs = [
+      "placed-left-pinky",
+      "placed-left-ring",
+      "placed-left-middle",
+      "placed-left-index",
+      "placed-left-thumb",
+      "placed-right-thumb",
+      "placed-right-index",
+      "placed-right-middle",
+      "placed-right-ring",
+      "placed-right-pinky"
+    ];
+    
+    let rings = [];
+    
+    // Scan through the exact order tracking index matrix
+    targetOrderIDs.forEach(id => {
+      const foundRingElement = document.getElementById(id);
+      if (foundRingElement) {
+        rings.push(foundRingElement);
+      }
+    });
+    
+    console.log('Aggregated active items sorted in exact order:', rings.map(r => r.id));
+
+    let damage = new Damage();
+    damage.base = 10;
+    damage.power = 1;
+    
+    for(let i = 0; i < rings.length; i++)
+    {
+      let ring = rings[i];
+      
+      // Target Debugging Lookups
+      console.log(`Inspecting element [Index: ${i}, ID: ${ring.id}]:`, ring.dataset);
+      
+      let rarityMultiplier = Number(ring.dataset.rarityMultiplier || 1);
+      let effectValue = Number(ring.dataset.effectValue || 0);
+      let effectName = ring.dataset.effectName;
+      let effectOp = ring.dataset.effectOperation;
+      
+      let scoringTypes = ["base", "power"];
+      let scoreContribution = 0;
+      let ringScores = false;
+      
+      if(scoringTypes.includes(effectName))
+      {
+        console.log(`Matched valid scoring type "${effectName}" for item ${ring.id}. Value: ${effectValue}, Multiplier: ${rarityMultiplier}`);
+        this.outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
+        
+        switch(effectOp)
+        {
+          case "add":
+            ringScores = true;
+            scoreContribution = (effectValue * rarityMultiplier); 
+            damage[effectName] += scoreContribution;
+            console.log(`Operation [ADD]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
+            break;
+          case "multiply":
+            ringScores = true;
+            scoreContribution = (effectValue * rarityMultiplier);
+            damage[effectName] *= scoreContribution;
+            console.log(`Operation [MULTIPLY]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
+            break;
+          default:
+            console.warn(`Unrecognised effect operation type "${effectOp}" on element ${ring.id}`);
+            break;
+        }
+      } else {
+        console.log(`Skipping item ${ring.id}: effect classification "${effectName}" does not match targeted scoring groups [base, power]`);
+      }
+      
+      if(ringScores)
+      {
+        this.outputToTxt("Scoring " + ring.id + " from base=" + damage.base + ", power=" + damage.power);
+        console.log(`Triggering visual score animation for ${ring.id}`);
+        this.scoreRing(ring);
+        
+        // This holds the loop frame open for 500ms so you can view the changes update incrementally
+        await sleep(500);
+      }
+    }
+    
+    // Calculate final total damage numbers
+    damage.total = damage.base * damage.power;
+    console.log('Calculation Step Complete. Final Stats Computed:', damage);
+    
+    // Update visual layouts to display total sum metrics
+    this.updateTotalScore(damage.total);
   
-  	outputToTxt("Final Base = " + damage.base);
-  	outputToTxt("Final Power = " + damage.power);
-  	outputToTxt("Total Damage = " + damage.total);
-  	//Add 1s to delay to allow popups to finish animating
-  	delay += 1000;
-  	//Clear popups classes for next scoring
-  	setTimeout(clearPopups, delay);
+    this.outputToTxt("Final Base = " + damage.base);
+    this.outputToTxt("Final Power = " + damage.power);
+    this.outputToTxt("Total Damage = " + damage.total);
+    
+    // Allow 1s for final total text to be read/animated before cleaning up components
+    console.log('All updates pushed to DOM view layers. Pausing execution before clearing temporary overlay popups...');
+    await sleep(1000);
+    this.clearPopups();
+    console.log('--- Scoring Cycle Execution Loop Completed Cleanly ---');
   }
   
   resetScores = () =>
   {
+    console.log('Resetting scoreboard elements to baseline specifications.');
     document.getElementById("baseScore").innerHTML = 10;
     document.getElementById("powerScore").innerHTML = 1;
     document.getElementById("totalScore").innerHTML = 0;
@@ -711,129 +752,116 @@ class RingScoring
   scoreRing = (ring) =>
   {
     let popupEl = ring.firstElementChild;
-    console.log('scoring', ring, popupEl);
-    //Extract ring data
-    let rarityName = ring.dataset.rarityName;
-    let rarityMultiplier = ring.dataset.rarityMultiplier;
-    let effectValue = ring.dataset.effectValue;
+    if (!popupEl) {
+      console.error(`Popup structural layout anomaly: First child node missing inside wrapper element ${ring.id}`);
+      return;
+    }
+    
+    let rarityMultiplier = Number(ring.dataset.rarityMultiplier || 1);
+    let effectValue = Number(ring.dataset.effectValue || 0);
     let effectName = ring.dataset.effectName;
     let effectOp = ring.dataset.effectOperation;
     let scoringTypes = ["base", "power"];
     let scoreContribution = 0;
     let popupString = "";
+    
     if (scoringTypes.includes(effectName))
     {
-      //Calculate score contribution based on operation
       switch (effectOp)
       {
         case "add":
           scoreContribution = (effectValue * rarityMultiplier);
           popupString = "+" + scoreContribution;
-          switch (effectName)
-          {
-            case "base":
-              addBaseScore(scoreContribution);
-              break;
-            case "power":
-              addPowerScore(scoreContribution);
-              break;
-          }
+          if (effectName === "base") this.addBaseScore(scoreContribution);
+          if (effectName === "power") this.addPowerScore(scoreContribution);
           break;
         case "multiply":
           scoreContribution = (effectValue * rarityMultiplier);
           popupString = "x" + scoreContribution;
-          switch (effectName)
-          {
-            case "base":
-              multiplyBaseScore(scoreContribution);
-              break;
-            case "power":
-              multiplyPowerScore(scoreContribution);
-              break;
-          }
+          if (effectName === "base") this.multiplyBaseScore(scoreContribution);
+          if (effectName === "power") this.multiplyPowerScore(scoreContribution);
           break;
       }
     }
     
-    if (popupString !== "")
-    {
-      //Show the popup element
+    if (popupString !== "") {
+      console.log(`Setting Popup markup contents for ${ring.id} to "${popupString}"`);
       popupEl.innerHTML = popupString;
-      switch (effectName) {
-        case "base":
-          popupEl.style.backgroundColor = "var(--base-score-color)";
-          break;
-        case "power":
-          popupEl.style.backgroundColor = "var(--power-score-color)";
-          break;
-      }
+      popupEl.style.backgroundColor = effectName === "base" ? "var(--base-score-color)" : "var(--power-score-color)";
       popupEl.classList.add("show");
     }
   }
-  
-}
 
+  addBaseScore = (base) =>
+  {
+    let previous = parseInt(document.getElementById("baseScore").innerHTML) || 0;
+    base = previous + base;
+    document.getElementById("baseScore").innerHTML = base;
+  }
 
-const addBaseScore = (base) =>
-{
-	let previous = parseInt(document.getElementById("baseScore").innerHTML);
-	base = previous + base;
-	document.getElementById("baseScore").innerHTML = base;
-}
-const multiplyBaseScore = (multiplier) =>
-{
-	let previous = parseInt(document.getElementById("baseScore").innerHTML);
-	let newBase = previous * multiplier;
-	document.getElementById("baseScore").innerHTML = newBase;
-}
+  multiplyBaseScore = (multiplier) =>
+  {
+    let previous = parseInt(document.getElementById("baseScore").innerHTML) || 0;
+    let newBase = previous * multiplier;
+    document.getElementById("baseScore").innerHTML = newBase;
+  }
 
-const addPowerScore = (power) => 
-{
-	let previous = parseInt(document.getElementById("powerScore").innerHTML);
-	power = previous + power;
-	document.getElementById("powerScore").innerHTML = power;
-}
-const multiplyPowerScore = (multiplier) =>
-{
-	let previous = parseInt(document.getElementById("powerScore").innerHTML);
-	let newPower = previous * multiplier;
-	document.getElementById("powerScore").innerHTML = newPower;
-}
+  addPowerScore = (power) => 
+  {
+    let previous = parseInt(document.getElementById("powerScore").innerHTML) || 0;
+    power = previous + power;
+    document.getElementById("powerScore").innerHTML = power;
+  }
 
-const updateTotalScore = (total) => 
-{
-	let previous = parseInt(document.getElementById("totalScore").innerHTML);
-	total = previous + total;
-	document.getElementById("totalScore").innerHTML = total;
-}
+  multiplyPowerScore = (multiplier) =>
+  {
+    let previous = parseInt(document.getElementById("powerScore").innerHTML) || 0;
+    let newPower = previous * multiplier;
+    document.getElementById("powerScore").innerHTML = newPower;
+  }
 
-const clearPopups = () => 
-{
-	let rings = document.querySelectorAll(".ring-wrapper");
-	for(let i = 0; i < rings.length; i++)
-	{
-		let ring = rings[i];
-		//Get score popup for this ring
-		let popupEl = ring.firstElementChild;
-		//Clear data and show class
-		popupEl.innerHTML = "";
-		popupEl.classList.remove("show");
-	}
-}
+  updateTotalScore = (total) => 
+  {
+    let previous = parseInt(document.getElementById("totalScore").innerHTML) || 0;
+    total = previous + total;
+    document.getElementById("totalScore").innerHTML = total;
+  }
 
-const scoreDamage = (damage, ring) => 
-{
-	
-}
+  clearPopups = () => 
+  {
+    console.log('Clearing visibility states and content values from animation overlay tracking node references.');
+    let rings = document.querySelectorAll(".ring-wrapper");
+    for(let i = 0; i < rings.length; i++)
+    {
+      let ring = rings[i];
+      let popupEl = ring.firstElementChild;
+      if (popupEl) {
+        popupEl.innerHTML = "";
+        popupEl.classList.remove("show");
+      }
+    }
+  }
 
-const outputToTxt = (msg) => 
-{
-	document.getElementById("txtTestOutput").value += msg + "\n";
-}
+  scoreDamage = (damage, ring) => 
+  {
+    // Placeholder method preserved from original code hook
+  }
 
-const clearTxt = () => 
-{
-	document.getElementById("txtTestOutput").value = "";
+  outputToTxt = (msg) => 
+  {
+    let txtOutput = document.getElementById("txtTestOutput");
+    if (txtOutput) {
+      txtOutput.value += msg + "\n";
+    }
+  }
+
+  clearTxt = () => 
+  {
+    let txtOutput = document.getElementById("txtTestOutput");
+    if (txtOutput) {
+      txtOutput.value = "";
+    }
+  }
 }
 
 // Automatically instantiate the application scope
