@@ -24,6 +24,11 @@ body
 	-webkit-overflow-scrolling: auto; 
 }
 
+div {
+	margin: 0;
+	padding: 0;
+}
+
 h1
 {
 	color: #fff;
@@ -256,4 +261,21 @@ section#scoringArea
 		top: -50px;
 		opacity: 0;
 	}
+}
+
+#buttonRow
+{
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	gap: 10px;
+}
+
+button 
+{
+	padding: 10px;
+	background: var(--base-score-color);
+	color: white;
+	border-radius: 10px;
+	flex: 1 1 auto;
 }
