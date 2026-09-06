@@ -5,12 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 	<title>Ring Tests</title>
 	<link rel="stylesheet" href="./style/map.css" />
+	<script src="./js/class/Damage.js" defer></script>
 	<script src="./js/map.js" defer></script>
 </head>
 <body>
 
-<h1>Drag & Drop Tests</h1>
-<p>Drag a ring and drop it onto any finger</p>
+<section id="sidePanel">
+	<section id="scoringArea" class="scoring-area">
+		<span id="baseScore">10</span> x <span id="powerScore">1</span> = <span id="totalScore">0</span>
+	</section>
+</section>
 
 <div class="game-scaler" id="game-scaler">
 	<div class="container">
@@ -67,6 +71,15 @@
 				<!-- filled by itemData.json -->
 			</div>
 		</div>
+	</div>
+</div>
+
+<div id="test">
+	<textarea name="" id="txtTestOutput" cols="50" rows="10"></textarea>
+	<div id="buttonRow">
+		<button id="btnTestPhysicalAttack">Physical</button>
+		<button id="btnTestMagicalAttack">Magical</button>
+		<button id="btnClearTxt">Clear</button>
 	</div>
 </div>
 </body>

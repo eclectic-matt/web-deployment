@@ -2,6 +2,7 @@ class RingMapUi
 {
   //INIT MAIN VARS
   #draggedRingSrc = null;
+  #draggedRingDataset = null;
   #dragVisualElement = null;
   #itemData = null;
   #isDragging = false;
@@ -72,7 +73,12 @@ class RingMapUi
         ringImg.id = r.id;
         ringImg.alt = r.name;
         ringImg.title = r.name;
-        
+        ringImg.dataset.rarityName = r.rarity.name;
+        ringImg.dataset.rarityMultiplier = r.rarity.multiplier;
+        ringImg.dataset.effectValue = r.effect.value;
+        ringImg.dataset.effectName = r.effect.name;
+        ringImg.dataset.effectOp = r.effect.operation;
+
         if (this.#ringOptionsAreaEl)
         {
           this.#ringOptionsAreaEl.appendChild(ringImg);
@@ -120,6 +126,7 @@ class RingMapUi
           this.#isDragging = true;
           this.#draggedRingSrc = imgElement.src;
           e.dataTransfer.setData('text/plain', imgElement.src);
+          this.#draggedRingDataset = imgElement.dataset;
           this.highlightDropAreas(true);
         }
       });
@@ -135,6 +142,7 @@ class RingMapUi
         {
           this.#isDragging = true;
           this.#draggedRingSrc = imgElement.src;
+          this.#draggedRingDataset = imgElement.dataset;
           this.highlightDropAreas(true);
   
           // Capture pointer focus to ensure movement tracking continues if finger slips
@@ -248,20 +256,20 @@ class RingMapUi
         if (targetArea) 
         {
           let dropAreaType = targetArea.dataset.itemType;
-          console.log('dropAreaType', dropAreaType);
-          console.log('droppedItemType', droppedItemType);
+          //console.log('dropAreaType', dropAreaType);
+          //console.log('droppedItemType', droppedItemType);
           if(dropAreaType === droppedItemType)
           {
             this.executeDropLogic(targetArea);
           }
           else
           {
-            console.log('Tried to drop a', droppedItemType,'onto a',dropAreaType,'slot!');
+            //console.log('Tried to drop a', droppedItemType,'onto a',dropAreaType,'slot!');
           }
         }
         else
         {
-          console.log("Dropped outside a valid area slot");
+          //console.log("Dropped outside a valid area slot");
         }
         this.clearDragVisualElements();
       });
@@ -465,7 +473,7 @@ class RingMapUi
   
     // Use data-finger or fallback to item-type so bracelets target properly
     const fingerId = area.getAttribute('data-finger') || area.getAttribute('data-item-type');
-    console.log('fingerId/ItemId:', fingerId);
+    //console.log('fingerId/ItemId:', fingerId);
     
     const existingRing = document.getElementById(`placed-${fingerId}`);
     if (existingRing)
@@ -476,7 +484,7 @@ class RingMapUi
     const mapName = area.parentElement.getAttribute('name');
     const targetContainerId = mapName === 'left-hand-map' ? 'left-hand-container' : 'right-hand-container';
     const activeContainer = document.getElementById(targetContainerId);
-    console.log('activeContainer', targetContainerId);
+    //console.log('activeContainer', targetContainerId);
     
     if (!activeContainer) return;
     
@@ -500,6 +508,15 @@ class RingMapUi
     }
     
     const wrapper = document.createElement('div');
+    //wrapper.dataset = this.#draggedRingDataset;
+    //console.log(this.#draggedRingDataset)
+    Object.assign(wrapper.dataset, this.#draggedRingDataset);
+    
+    //Add score popup element
+    let scoreEl = document.createElement("div");
+		scoreEl.classList.add("popup-score");
+    wrapper.appendChild(scoreEl);
+    
     wrapper.classList.add('ring-wrapper');
     wrapper.id = `placed-${fingerId}`;
     wrapper.style.position = 'absolute';
@@ -508,8 +525,6 @@ class RingMapUi
       wrapper.style.transform = 'translate(-50%, -50%)';
     wrapper.style.pointerEvents = 'none';
     wrapper.style.rotate = ringRotateAngle;
-    
-    
     
     // --- DYNAMIC BOUNDING BOX SIZING FROM MAP COORDS ---
     let targetWidth = 44;  // Safe defaults
@@ -586,5 +601,241 @@ class RingMapUi
 
 }
 
+
+class RingScoring 
+{
+  constructor()
+  {
+    this.initTestButtons();
+  }
+  
+  initTestButtons = () => 
+  {
+  	let physBtn = document.getElementById("btnTestPhysicalAttack");
+  	physBtn.addEventListener("click", (ev) =>
+  	{
+  		this.triggerPhysicalAttack();
+  	});
+  	let magicBtn = document.getElementById("btnTestMagicalAttack");
+  	let clearBtn = document.getElementById("btnClearTxt");
+  	clearBtn.addEventListener("click", () => 
+  	{
+  		this.clearTxt().bind(this);
+  	});
+  }
+  
+  triggerPhysicalAttack = () => 
+  {
+  	outputToTxt("physical attack");
+  	//Reset scores
+  	this.resetScores();
+  	//Get ring data
+  	//let rings = document.querySelectorAll(".ring");
+  	let rings = [];
+  	//Correct approach - get left hand, then each ring on that hand in order
+  	let lhRings = document.querySelectorAll("#left-hand-container > .ring-wrapper");
+  	//console.log('lhRings', lhRings);
+  	rings.push(...lhRings);
+  	let rhRings = document.querySelectorAll("#right-hand-container > .ring-wrapper");
+  	rings.push(...rhRings);
+  	//console.log('rhRings', rhRings);
+  	//console.log('rings', rings);
+  	let damage = new Damage();
+  	damage.base = 10;
+  	damage.power = 1;
+  	let delay = 0;
+  	for(let i = 0; i < rings.length; i++)
+  	{
+  		let ring = rings[i];
+  		//console.log(ring.dataset);
+  		//Get score popup for this ring
+  		let popupEl = ring.firstElementChild;
+  		//Extract ring data
+  		let rarityName = ring.dataset.rarityName;
+  		let rarityMultiplier = ring.dataset.rarityMultiplier;
+  		let effectValue = ring.dataset.effectValue;
+  		let effectName = ring.dataset.effectName;
+  		let effectOp = ring.dataset.effectOperation;
+  		outputToTxt("Scoring " + ring.id + " from base=" + damage.base + ", power=" + damage.power);
+  		let scoringTypes = ["base", "power"];
+  		let scoreContribution = 0;
+  		let ringScores = false;
+  		if(scoringTypes.includes(effectName))
+  		{
+  			outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
+  			//Calculate score contribution based on operation
+  			switch(effectOp)
+  			{
+  				case "add":
+  					ringScores = true;
+  					scoreContribution = (effectValue * rarityMultiplier); 
+  					damage[effectName] += scoreContribution;
+  					break;
+  				case "multiply":
+  					ringScores = true;
+  					scoreContribution = (effectValue * rarityMultiplier);
+  					damage[effectName] *= scoreContribution;
+  					break;
+  			}
+  		}
+  		if(ringScores)
+  		{
+  			//Display popups with 0.5s delay
+  			setTimeout(this.scoreRing, delay, ring);
+  			//Add 500ms to delay
+  			delay += 500;
+  		}
+  	}
+  	
+  	//Calculate total damage
+  	damage.total = damage.base * damage.power;
+  	//Update total score
+  	setTimeout(updateTotalScore, delay, damage.total);
+  
+  	outputToTxt("Final Base = " + damage.base);
+  	outputToTxt("Final Power = " + damage.power);
+  	outputToTxt("Total Damage = " + damage.total);
+  	//Add 1s to delay to allow popups to finish animating
+  	delay += 1000;
+  	//Clear popups classes for next scoring
+  	setTimeout(clearPopups, delay);
+  }
+  
+  resetScores = () =>
+  {
+    document.getElementById("baseScore").innerHTML = 10;
+    document.getElementById("powerScore").innerHTML = 1;
+    document.getElementById("totalScore").innerHTML = 0;
+  }
+  
+  scoreRing = (ring) =>
+  {
+    let popupEl = ring.firstElementChild;
+    console.log('scoring', ring, popupEl);
+    //Extract ring data
+    let rarityName = ring.dataset.rarityName;
+    let rarityMultiplier = ring.dataset.rarityMultiplier;
+    let effectValue = ring.dataset.effectValue;
+    let effectName = ring.dataset.effectName;
+    let effectOp = ring.dataset.effectOperation;
+    let scoringTypes = ["base", "power"];
+    let scoreContribution = 0;
+    let popupString = "";
+    if (scoringTypes.includes(effectName))
+    {
+      //Calculate score contribution based on operation
+      switch (effectOp)
+      {
+        case "add":
+          scoreContribution = (effectValue * rarityMultiplier);
+          popupString = "+" + scoreContribution;
+          switch (effectName)
+          {
+            case "base":
+              addBaseScore(scoreContribution);
+              break;
+            case "power":
+              addPowerScore(scoreContribution);
+              break;
+          }
+          break;
+        case "multiply":
+          scoreContribution = (effectValue * rarityMultiplier);
+          popupString = "x" + scoreContribution;
+          switch (effectName)
+          {
+            case "base":
+              multiplyBaseScore(scoreContribution);
+              break;
+            case "power":
+              multiplyPowerScore(scoreContribution);
+              break;
+          }
+          break;
+      }
+    }
+    
+    if (popupString !== "")
+    {
+      //Show the popup element
+      popupEl.innerHTML = popupString;
+      switch (effectName) {
+        case "base":
+          popupEl.style.backgroundColor = "var(--base-score-color)";
+          break;
+        case "power":
+          popupEl.style.backgroundColor = "var(--power-score-color)";
+          break;
+      }
+      popupEl.classList.add("show");
+    }
+  }
+  
+}
+
+
+const addBaseScore = (base) =>
+{
+	let previous = parseInt(document.getElementById("baseScore").innerHTML);
+	base = previous + base;
+	document.getElementById("baseScore").innerHTML = base;
+}
+const multiplyBaseScore = (multiplier) =>
+{
+	let previous = parseInt(document.getElementById("baseScore").innerHTML);
+	let newBase = previous * multiplier;
+	document.getElementById("baseScore").innerHTML = newBase;
+}
+
+const addPowerScore = (power) => 
+{
+	let previous = parseInt(document.getElementById("powerScore").innerHTML);
+	power = previous + power;
+	document.getElementById("powerScore").innerHTML = power;
+}
+const multiplyPowerScore = (multiplier) =>
+{
+	let previous = parseInt(document.getElementById("powerScore").innerHTML);
+	let newPower = previous * multiplier;
+	document.getElementById("powerScore").innerHTML = newPower;
+}
+
+const updateTotalScore = (total) => 
+{
+	let previous = parseInt(document.getElementById("totalScore").innerHTML);
+	total = previous + total;
+	document.getElementById("totalScore").innerHTML = total;
+}
+
+const clearPopups = () => 
+{
+	let rings = document.querySelectorAll(".ring-wrapper");
+	for(let i = 0; i < rings.length; i++)
+	{
+		let ring = rings[i];
+		//Get score popup for this ring
+		let popupEl = ring.firstElementChild;
+		//Clear data and show class
+		popupEl.innerHTML = "";
+		popupEl.classList.remove("show");
+	}
+}
+
+const scoreDamage = (damage, ring) => 
+{
+	
+}
+
+const outputToTxt = (msg) => 
+{
+	document.getElementById("txtTestOutput").value += msg + "\n";
+}
+
+const clearTxt = () => 
+{
+	document.getElementById("txtTestOutput").value = "";
+}
+
 // Automatically instantiate the application scope
 let ringUi = new RingMapUi();
+let ringScoring = new RingScoring();

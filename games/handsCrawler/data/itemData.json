@@ -114,14 +114,42 @@
 				"name": "Basic Chain Bracelet",
 				"description": "A basic chain bracelet",
 				"type": "bracelet",
-				"icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='minGold' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFF5C0' /%3E%3Cstop offset='40%25' stop-color='%23D4AF37' /%3E%3Cstop offset='70%25' stop-color='%23AA7C11' /%3E%3Cstop offset='100%25' stop-color='%23F3E5AB' /%3E%3C/linearGradient%3E%3Cg id='chain-link'%3E%3Crect x='-6' y='-3' width='12' height='6' rx='3' fill='none' stroke='url(%23minGold)' stroke-width='1.75' /%3E%3Crect x='-4.5' y='-1.7' width='9' height='3.4' rx='1.7' fill='none' stroke='%23FFF' stroke-width='0.3' opacity='0.4' /%3E%3C/g%3E%3C/defs%3E%3Cg id='bracelet-loop' transform='translate(50, 50)'%3E%3Cg opacity='0.55'%3E%3Cuse href='%23chain-link' transform='translate(0, -22) rotate(0)' /%3E%3Cuse href='%23chain-link' transform='translate(-11, -20) rotate(12)' /%3E%3Cuse href='%23chain-link' transform='translate(11, -20) rotate(-12)' /%3E%3Cuse href='%23chain-link' transform='translate(-21, -15) rotate(26)' /%3E%3Cuse href='%23chain-link' transform='translate(21, -15) rotate(-26)' /%3E%3Cuse href='%23chain-link' transform='translate(-28, -7) rotate(45)' /%3E%3Cuse href='%23chain-link' transform='translate(28, -7) rotate(-45)' /%3E%3C/g%3E%3Cg%3E%3Cuse href='%23chain-link' transform='translate(-31, 2) rotate(68)' /%3E%3Cuse href='%23chain-link' transform='translate(31, 2) rotate(-68)' /%3E%3Cuse href='%23chain-link' transform='translate(-29, 11) rotate(105)' /%3E%3Cuse href='%23chain-link' transform='translate(29, 11) rotate(-105)' /%3E%3Cuse href='%23chain-link' transform='translate(-22, 18) rotate(140)' /%3E%3Cuse href='%23chain-link' transform='translate(22, 18) rotate(-140)' /%3E%3Cuse href='%23chain-link' transform='translate(-12, 22) rotate(162)' /%3E%3Cuse href='%23chain-link' transform='translate(12, 22) rotate(-162)' /%3E%3Cuse href='%23chain-link' transform='translate(0, 23) rotate(180)' /%3E%3C/g%3E%3Ccircle cx='2' cy='22' r='0.7' fill='%23FFF' /%3E%3Cline x1='2' y1='20.5' x2='2' y2='23.5' stroke='%23FFF' stroke-width='0.3' /%3E%3Cline x1='0.5' y1='22' x2='3.5' y2='22' stroke='%23FFF' stroke-width='0.3' /%3E%3C/g%3E%3C/svg%3E"
+				"icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='minGold' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFF5C0' /%3E%3Cstop offset='40%25' stop-color='%23D4AF37' /%3E%3Cstop offset='70%25' stop-color='%23AA7C11' /%3E%3Cstop offset='100%25' stop-color='%23F3E5AB' /%3E%3C/linearGradient%3E%3Cg id='chain-link'%3E%3Crect x='-6' y='-3' width='12' height='6' rx='3' fill='none' stroke='url(%23minGold)' stroke-width='1.75' /%3E%3Crect x='-4.5' y='-1.7' width='9' height='3.4' rx='1.7' fill='none' stroke='%23FFF' stroke-width='0.3' opacity='0.4' /%3E%3C/g%3E%3C/defs%3E%3Cg id='bracelet-loop' transform='translate(50, 50)'%3E%3Cg opacity='0.55'%3E%3Cuse href='%23chain-link' transform='translate(0, -22) rotate(0)' /%3E%3Cuse href='%23chain-link' transform='translate(-11, -20) rotate(12)' /%3E%3Cuse href='%23chain-link' transform='translate(11, -20) rotate(-12)' /%3E%3Cuse href='%23chain-link' transform='translate(-21, -15) rotate(26)' /%3E%3Cuse href='%23chain-link' transform='translate(21, -15) rotate(-26)' /%3E%3Cuse href='%23chain-link' transform='translate(-28, -7) rotate(45)' /%3E%3Cuse href='%23chain-link' transform='translate(28, -7) rotate(-45)' /%3E%3C/g%3E%3Cg%3E%3Cuse href='%23chain-link' transform='translate(-31, 2) rotate(68)' /%3E%3Cuse href='%23chain-link' transform='translate(31, 2) rotate(-68)' /%3E%3Cuse href='%23chain-link' transform='translate(-29, 11) rotate(105)' /%3E%3Cuse href='%23chain-link' transform='translate(29, 11) rotate(-105)' /%3E%3Cuse href='%23chain-link' transform='translate(-22, 18) rotate(140)' /%3E%3Cuse href='%23chain-link' transform='translate(22, 18) rotate(-140)' /%3E%3Cuse href='%23chain-link' transform='translate(-12, 22) rotate(162)' /%3E%3Cuse href='%23chain-link' transform='translate(12, 22) rotate(-162)' /%3E%3Cuse href='%23chain-link' transform='translate(0, 23) rotate(180)' /%3E%3C/g%3E%3Ccircle cx='2' cy='22' r='0.7' fill='%23FFF' /%3E%3Cline x1='2' y1='20.5' x2='2' y2='23.5' stroke='%23FFF' stroke-width='0.3' /%3E%3Cline x1='0.5' y1='22' x2='3.5' y2='22' stroke='%23FFF' stroke-width='0.3' /%3E%3C/g%3E%3C/svg%3E",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "common",
+					"multiplier": 1
+				},
+				"effect": {
+					"name": "damage",
+					"operation": "multiply",
+					"value": 2,
+					"description": "x2 Damage"
+				}
 			},
 			{
 				"id": "basic-spell-fireball",
 				"name": "Basic Spell Fireball",
 				"description": "A basic fireball spell",
 				"type": "held",
-				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><radialGradient id='coreGlow' cx='50%' cy='50%' r='50%' fx='40%' fy='40%'><stop offset='0%' stop-color='%23FFFFFF' /><stop offset='25%' stop-color='%23FFF066' /><stop offset='55%' stop-color='%23FF6600' /><stop offset='85%' stop-color='%23CC0000' /><stop offset='100%' stop-color='%23121316' stop-opacity='0' /></radialGradient><linearGradient id='trailGrad' x1='100%' y1='30%' x2='0%' y2='70%'><stop offset='0%' stop-color='%23FFB300' /><stop offset='45%' stop-color='%23FF3D00' /><stop offset='80%' stop-color='%23990000' /><stop offset='100%' stop-color='%23121316' stop-opacity='0' /></linearGradient></defs><g id='fireball-graphic'><path d='M 75,35 C 88,40 92,60 78,72 C 60,88 30,78 22,62 C 16,50 25,32 45,26 C 58,22 68,20 75,35 Z' fill='url(%23trailGrad)' opacity='0.4' transform='scale(1.1) translate(-6, -6)' /><path d='M 12,78 C 25,72 32,76 42,66 C 55,54 48,32 66,24 C 80,18 90,34 85,52 C 78,74 52,92 28,88 C 18,86 8,82 12,78 Z' fill='url(%23trailGrad)' /><path d='M 35,72 C 48,64 52,42 68,36 C 80,32 86,45 82,58 C 76,74 54,84 38,82 C 28,80 25,76 35,72 Z' fill='url(%23coreGlow)' /><circle cx='62' cy='48' r='14' fill='url(%23coreGlow)' /><circle cx='65' cy='45' r='6' fill='%23FFFFFF' opacity='0.7' filter='blur(1px)' /><path d='M 78,32 Q 88,20 84,12 Q 74,20 78,32 Z' fill='%23FFCC00' /><path d='M 54,68 Q 42,82 28,86 Q 44,74 54,68 Z' fill='%23FF3D00' /><circle cx='82' cy='28' r='1.5' fill='%23FFE082' /><circle cx='48' cy='82' r='2' fill='%23FF3D00' /><circle cx='24' cy='74' r='1.2' fill='%23FF7A00' /></g></svg>"
+				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><radialGradient id='coreGlow' cx='50%' cy='50%' r='50%' fx='40%' fy='40%'><stop offset='0%' stop-color='%23FFFFFF' /><stop offset='25%' stop-color='%23FFF066' /><stop offset='55%' stop-color='%23FF6600' /><stop offset='85%' stop-color='%23CC0000' /><stop offset='100%' stop-color='%23121316' stop-opacity='0' /></radialGradient><linearGradient id='trailGrad' x1='100%' y1='30%' x2='0%' y2='70%'><stop offset='0%' stop-color='%23FFB300' /><stop offset='45%' stop-color='%23FF3D00' /><stop offset='80%' stop-color='%23990000' /><stop offset='100%' stop-color='%23121316' stop-opacity='0' /></linearGradient></defs><g id='fireball-graphic'><path d='M 75,35 C 88,40 92,60 78,72 C 60,88 30,78 22,62 C 16,50 25,32 45,26 C 58,22 68,20 75,35 Z' fill='url(%23trailGrad)' opacity='0.4' transform='scale(1.1) translate(-6, -6)' /><path d='M 12,78 C 25,72 32,76 42,66 C 55,54 48,32 66,24 C 80,18 90,34 85,52 C 78,74 52,92 28,88 C 18,86 8,82 12,78 Z' fill='url(%23trailGrad)' /><path d='M 35,72 C 48,64 52,42 68,36 C 80,32 86,45 82,58 C 76,74 54,84 38,82 C 28,80 25,76 35,72 Z' fill='url(%23coreGlow)' /><circle cx='62' cy='48' r='14' fill='url(%23coreGlow)' /><circle cx='65' cy='45' r='6' fill='%23FFFFFF' opacity='0.7' filter='blur(1px)' /><path d='M 78,32 Q 88,20 84,12 Q 74,20 78,32 Z' fill='%23FFCC00' /><path d='M 54,68 Q 42,82 28,86 Q 44,74 54,68 Z' fill='%23FF3D00' /><circle cx='82' cy='28' r='1.5' fill='%23FFE082' /><circle cx='48' cy='82' r='2' fill='%23FF3D00' /><circle cx='24' cy='74' r='1.2' fill='%23FF7A00' /></g></svg>",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "common",
+					"multiplier": 1
+				},
+				"effect": {
+					"name": "damage",
+					"operation": "multiply",
+					"value": 2,
+					"description": "x2 Damage"
+				}
 			}
 		]
 	}

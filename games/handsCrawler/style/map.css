@@ -1,3 +1,10 @@
+:root 
+{
+	--base-score-color: #3498db;
+	--power-score-color: #e74c3c;
+	--total-score-color: #2ecc71;
+}
+
 body
 {
 	font-family: Arial, sans-serif;
@@ -164,4 +171,85 @@ img
 {
 	border-color: #00ff00 !important;
 	background-color: rgba(0, 255, 0, 0.3) !important;
+}
+
+section#sidePanel
+{
+	width: 100%;
+	padding: 10px;
+	background-color: #177d85;
+	color: white;
+	flex-shrink: 0;
+	text-align: center;
+}
+section#scoringArea 
+{
+  background: #222;
+  padding: 10px 15px 20px 20px;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 2rem;
+}
+
+#baseScore, #powerScore, #totalScore 
+{
+	font-size: 1.25rem;
+	font-weight: bold;
+	padding: 4px;
+	border-radius: 5px;
+	color: white;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#baseScore 
+{
+	background-color: var(--base-score-color);
+}
+
+#powerScore 
+{
+	background-color: var(--power-score-color);
+}
+
+#totalScore 
+{
+	background-color: var(--total-score-color);
+}
+
+.popup-score {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	font-weight: bold;
+	padding: 10px 5px;
+	border-radius: 5px;
+	background-color: #2ecc71;
+	color: #fff;
+	opacity: 0; 
+	pointer-events: none;
+	z-index: 100;
+}
+
+.popup-score.show {
+	animation: slideUpAndFade 1s ease-in-out forwards;
+}
+
+@keyframes slideUpAndFade {
+	0% {
+		top: 100%;
+		opacity: 0;
+	}
+	15% {
+		top: -30px;
+		opacity: 1;
+	}
+	85% {
+		top: -40px;
+		opacity: 1;
+	}
+	100% {
+		top: -50px;
+		opacity: 0;
+	}
 }
