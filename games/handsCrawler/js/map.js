@@ -8,8 +8,9 @@ class RingMapUi
   //The hands element target dimensions
   #targetWidth = 540;
   #targetHeight = 420;
+  
   //SET CLASS NAMES / TAGS / IDs
-  #ringItemsClassName = 'ring-item';
+  #ringItemsClassName = 'item';
   #dragVisualElementId = 'drag-visual';
   #dropAreaTagName = 'area';
   #ringHighlightClassName = 'ring-highlight-overlay';
@@ -45,7 +46,7 @@ class RingMapUi
   {
     try
     {
-      console.log(this.#itemDataJsonPath);
+      //console.log(this.#itemDataJsonPath);
       
       const response = await fetch(this.#itemDataJsonPath);
       
@@ -57,16 +58,23 @@ class RingMapUi
       this.#itemData = await response.json();
       let ringsInfo = this.#itemData.items.rings;
       
-      ringsInfo.forEach(r => {
+      ringsInfo.forEach(r => 
+      {
         let ringImg = document.createElement('img');
         ringImg.src = r.icon;
-        ringImg.className = this.#ringItemsClassName;
+        //ringImg.className = this.#ringItemsClassName;
+        //Add class '.item'
+        ringImg.classList.add('item');
+        //Add class '.ring'/'.bracelet' etc
+        ringImg.classList.add(r.type);
+        ringImg.dataset.itemType = r.type;
         ringImg.draggable = true;
         ringImg.id = r.id;
         ringImg.alt = r.name;
-        ringImg.title = r.name; // Fixed tooltip assignment using standard title attribute
+        ringImg.title = r.name;
         
-        if (this.#ringOptionsAreaEl) {
+        if (this.#ringOptionsAreaEl)
+        {
           this.#ringOptionsAreaEl.appendChild(ringImg);
         }
       });
@@ -94,14 +102,15 @@ class RingMapUi
   {
     //APPLY DRAG EVENTS FOR EACH RING
     document.querySelectorAll('.' + this.#ringItemsClassName)
-    .forEach(ring => {
-  
+    .forEach(ring => 
+    {
       //==================
       // DRAG START 
       //==================
   
       // --- DESKTOP LOGIC ---
-      ring.addEventListener('dragstart', (e) => {
+      ring.addEventListener('dragstart', (e) => 
+      {
         const imgElement = e.currentTarget.tagName === 'IMG' 
           ? e.currentTarget 
           : e.currentTarget.querySelector('img');
@@ -116,7 +125,8 @@ class RingMapUi
       });
   
       // --- MOBILE FALLBACK INITIALIZATION ---
-      ring.addEventListener('pointerdown', (e) => {
+      ring.addEventListener('pointerdown', (e) => 
+      {
         const imgElement = e.currentTarget.tagName === 'IMG' 
           ? e.currentTarget 
           : e.currentTarget.querySelector('img');
@@ -149,7 +159,8 @@ class RingMapUi
       //==================
   
       // --- DESKTOP NATIVE CLEANUP ---
-      ring.addEventListener('dragend', () => {
+      ring.addEventListener('dragend', () => 
+      {
         this.#isDragging = false;
         this.highlightDropAreas(false);
         
@@ -162,7 +173,8 @@ class RingMapUi
       });
   
       // --- MOBILE RELEASE LOGIC ---
-      ring.addEventListener('pointerup', (e) => {
+      ring.addEventListener('pointerup', (e) => 
+      {
         if (!this.#isDragging) return;
         this.highlightDropAreas(false);
         this.#isDragging = false;
@@ -181,6 +193,9 @@ class RingMapUi
           this.#dragVisualElement.remove();
           this.#dragVisualElement = null;
         }
+        
+        //Get dropped item type
+        let droppedItemType = ring.dataset.itemType;
         
         const fingerX = e.clientX;
         const fingerY = e.clientY;
@@ -230,10 +245,23 @@ class RingMapUi
           }
         }
         
-        if (targetArea) {
-          this.executeDropLogic(targetArea);
-        } else {
-          console.log("Dropped outside a valid finger area slot");
+        if (targetArea) 
+        {
+          let dropAreaType = targetArea.dataset.itemType;
+          console.log('dropAreaType', dropAreaType);
+          console.log('droppedItemType', droppedItemType);
+          if(dropAreaType === droppedItemType)
+          {
+            this.executeDropLogic(targetArea);
+          }
+          else
+          {
+            console.log('Tried to drop a', droppedItemType,'onto a',dropAreaType,'slot!');
+          }
+        }
+        else
+        {
+          console.log("Dropped outside a valid area slot");
         }
         this.clearDragVisualElements();
       });
@@ -424,31 +452,50 @@ class RingMapUi
     this.clearDragVisualElements();
     const coords = area.coords.split(',').map(Number);
     
-    // Calculate accurate spatial target mapping points based on shape variations
     let centerX = 0;
     let centerY = 0;
     if (area.shape === 'circle') {
       centerX = coords[0];
       centerY = coords[1];
     } else {
+      // Correctly calculates midpoints for standard bounding box rectangles
       centerX = (coords[0] + coords[2]) / 2;
       centerY = (coords[1] + coords[3]) / 2;
     }
-
-    const fingerId = area.getAttribute('data-finger');
-
+  
+    // Use data-finger or fallback to item-type so bracelets target properly
+    const fingerId = area.getAttribute('data-finger') || area.getAttribute('data-item-type');
+    console.log('fingerId/ItemId:', fingerId);
+    
     const existingRing = document.getElementById(`placed-${fingerId}`);
     if (existingRing)
     {
       existingRing.remove();
     }
-
+  
     const mapName = area.parentElement.getAttribute('name');
     const targetContainerId = mapName === 'left-hand-map' ? 'left-hand-container' : 'right-hand-container';
     const activeContainer = document.getElementById(targetContainerId);
+    console.log('activeContainer', targetContainerId);
     
     if (!activeContainer) return;
-
+    
+    let ringRotateAngle = '0deg';
+    
+    // Custom positional/spatial offsets for different gear types
+    if (fingerId === "right-thumb")
+    {
+      ringRotateAngle = '-40deg';
+      centerX += 6;
+      centerY -= 20;
+    }
+    else if (fingerId === "left-thumb")
+    {
+      ringRotateAngle = '40deg';
+      centerX -= 20;
+      centerY += 10;
+    }
+    
     const wrapper = document.createElement('div');
     wrapper.classList.add('ring-wrapper');
     wrapper.id = `placed-${fingerId}`;
@@ -457,29 +504,82 @@ class RingMapUi
     wrapper.style.top = `${centerY}px`;
     wrapper.style.transform = 'translate(-50%, -50%)';
     wrapper.style.pointerEvents = 'none';
+    wrapper.style.rotate = ringRotateAngle;
     
-    let ringRotateAngle = '0deg';
-		if (fingerId === "right-thumb") {
-			ringRotateAngle = '-30deg';
-			centerX += 6;
-			centerY -= 10;
-		} else if (fingerId === "left-thumb") {
-			ringRotateAngle = '30deg';
-			centerX -= 10;
-			centerY += 6;
-		}
-		
-		wrapper.style.rotate = ringRotateAngle;
-		wrapper.style.left = `${centerX}px`;
-		wrapper.style.top = `${centerY}px`;
+    const isBracelet = fingerId.includes('bracelet');
+    const isThumb = fingerId.includes('thumb');
+    
+    // --- DYNAMIC BOUNDING BOX SIZING FROM MAP COORDS ---
+    let targetWidth = 44;  // Safe defaults
+    let targetHeight = 44;
+
+    if (area.shape !== 'circle') {
+      // Calculate exactly how big the target hit-box is
+      const areaWidth = Math.abs(coords[2] - coords[0]);
+      const areaHeight = Math.abs(coords[3] - coords[1]);
+      
+      if (isBracelet) 
+      {
+        targetWidth = areaWidth * 2; 
+        targetHeight = areaHeight * 1.5;
+      } 
+      else if (isThumb)
+      {
+        targetWidth = 0.8 * areaWidth;
+        targetHeight = 0.8 * areaWidth;
+      }
+      else {
+        // Tight structural match to finger width (32px)
+        targetWidth = areaWidth;
+        targetHeight = areaWidth;
+      }
+    }
+
+    wrapper.style.width = `${targetWidth}px`;
+    wrapper.style.height = `${targetHeight}px`;
+    wrapper.style.overflow = 'hidden'; 
     
     const ringImg = document.createElement('img');
-    ringImg.src = this.#draggedRingSrc;
     ringImg.className = 'placed-ring-graphic';
+    ringImg.style.width = '100%';
+    ringImg.style.height = '100%';
+    ringImg.style.display = 'block';
+    
+    if (isBracelet) 
+    {
+      ringImg.style.clipPath = 'inset(47% 0% 0% 0%)'; 
+      ringImg.style.transform = 'translateY(-40%) scale(3)'; 
+    } else {
+      ringImg.style.clipPath = 'inset(0% 0% 45% 0%)'; 
+      ringImg.style.transform = 'translateY(22%)'; 
+    }
+    
+    // --- BLOB STREAM GENERATOR ---
+    try {
+      let rawStr = this.#draggedRingSrc;
+      let cleanSvgText = '';
+
+      if (rawStr.startsWith('data:image/svg+xml,%3C')) {
+        const content = rawStr.replace(/^data:image\/svg\+xml,/, '');
+        cleanSvgText = decodeURIComponent(content);
+      } else {
+        const content = rawStr.replace(/^data:image\/svg\+xml;utf8,/, '');
+        cleanSvgText = decodeURIComponent(content);
+      }
+
+      const blob = new Blob([cleanSvgText], { type: 'image/svg+xml' });
+      ringImg.src = URL.createObjectURL(blob);
+      ringImg.onload = () => URL.revokeObjectURL(ringImg.src);
+      
+    } catch (e) {
+      console.warn("Blob pipeline failed, shifting to fallback data string parsing:", e);
+      ringImg.src = this.#draggedRingSrc;
+    }
 
     wrapper.appendChild(ringImg);
     activeContainer.appendChild(wrapper);
   }
+
 }
 
 // Automatically instantiate the application scope
