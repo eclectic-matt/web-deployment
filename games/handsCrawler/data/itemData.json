@@ -82,16 +82,16 @@
 					"multiplier": 1
 				},
 				"effect": {
-					"name": "damage",
-					"operation": "add",
-					"value": 10,
-					"description": "+10 Damage"
+					"name": "power",
+					"operation": "multiply",
+					"value": 2,
+					"description": "x2 Power"
 				}
 			},
 			{
 				"id": "common-boost-ring",
 				"name": "Ring of Boost",
-				"description": "A ring which deals damage twice",
+				"description": "A ring which doubles base damage",
 				"type": "ring",
 				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23aa00bb' stroke-width='10' fill='none'/></svg>",
 				"action": {
@@ -103,10 +103,10 @@
 					"multiplier": 1
 				},
 				"effect": {
-					"name": "damage",
+					"name": "base",
 					"operation": "multiply",
 					"value": 2,
-					"description": "x2 Damage"
+					"description": "x2 Base"
 				}
 			},
 			{
