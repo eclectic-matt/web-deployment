@@ -607,6 +607,11 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 class RingScoring 
 {
+  //Element references
+  #physicalAttackBtnEl = null;
+  #magicalAttackBtnEl = null;
+  #clearHandsBtnEl = null;
+  
   constructor()
   {
     this.initTestButtons();
@@ -614,19 +619,20 @@ class RingScoring
   
   initTestButtons = () => 
   {
-    let physBtn = document.getElementById("btnTestPhysicalAttack");
-    if (physBtn) {
-      physBtn.addEventListener("click", (ev) => {
+    this.#physicalAttackBtnEl = document.getElementById("btnTestPhysicalAttack");
+    if (this.#physicalAttackBtnEl) {
+      this.#physicalAttackBtnEl.addEventListener("click", (ev) => {
         this.triggerPhysicalAttack();
       });
     }
     
-    let magicBtn = document.getElementById("btnTestMagicalAttack");
+    this.#magicalAttackBtnEl = document.getElementById("btnTestMagicalAttack");
     
-    let clearBtn = document.getElementById("btnClearTxt");
-    if (clearBtn) {
-      clearBtn.addEventListener("click", () => {
-        this.clearTxt();
+    this.#clearHandsBtnEl = document.getElementById("btnClearHands");
+    if (this.#clearHandsBtnEl) {
+      this.#clearHandsBtnEl.addEventListener("click", () => {
+        //this.clearTxt();
+        this.clearHands();
       });
     }
   }
@@ -860,6 +866,15 @@ class RingScoring
     let txtOutput = document.getElementById("txtTestOutput");
     if (txtOutput) {
       txtOutput.value = "";
+    }
+  }
+  clearHands = () => 
+  {
+    let handElements = document.querySelectorAll('.ring-wrapper');
+    for(let i = 0; i < handElements.length; i++)
+    {
+      let handEl = handElements[i];
+      handEl.parentElement.removeChild(handEl);
     }
   }
 }

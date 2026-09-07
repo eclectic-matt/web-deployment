@@ -279,3 +279,14 @@ button
 	border-radius: 10px;
 	flex: 1 1 auto;
 }
+
+/* TESTING COLOURS FOR RARITY 
+[data-rarity-name="common"] 
+{
+  filter: 
+    sepia(0.8)
+    hue-rotate(5deg)
+    saturate(1.2)
+    brightness(0.75)
+    contrast(1.1);
+}*/
