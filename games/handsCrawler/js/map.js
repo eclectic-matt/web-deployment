@@ -431,18 +431,27 @@ class RingMapUi
 
 			if (rawStr.startsWith('data:image/svg+xml,%3C'))
 			{
+			  //URL-encoded SVG
 				const content = rawStr.replace(/^data:image\/svg\+xml,/, '');
 				cleanSvgText = decodeURIComponent(content);
+				const blob = new Blob([cleanSvgText], { type: 'image/svg+xml' });
+  			ringImg.src = URL.createObjectURL(blob);
+  			ringImg.onload = () => URL.revokeObjectURL(ringImg.src);
+			}
+			else if(rawStr.startsWith('data:image'))
+			{
+			  //Raw SVG
+				const content = rawStr.replace(/^data:image\/svg\+xml;utf8,/, '');
+				cleanSvgText = decodeURIComponent(content);
+				const blob = new Blob([cleanSvgText], { type: 'image/svg+xml' });
+        ringImg.src = URL.createObjectURL(blob);
+        ringImg.onload = () => URL.revokeObjectURL(ringImg.src);
 			}
 			else
 			{
-				const content = rawStr.replace(/^data:image\/svg\+xml;utf8,/, '');
-				cleanSvgText = decodeURIComponent(content);
+			  //Img Path
+			  ringImg.src = rawStr;
 			}
-
-			const blob = new Blob([cleanSvgText], { type: 'image/svg+xml' });
-			ringImg.src = URL.createObjectURL(blob);
-			ringImg.onload = () => URL.revokeObjectURL(ringImg.src);
 		
 		}
 		catch (e) 
