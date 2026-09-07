@@ -1,7 +1,7 @@
 :root 
 {
-	--base-score-color: #3498db;
-	--power-score-color: #e74c3c;
+	--power-score-color: #3498db;
+	--base-score-color: #e74c3c;
 	--total-score-color: #2ecc71;
 }
 
@@ -202,7 +202,7 @@ section#scoringArea
 {
   background: #222;
   /* top | right | bottom | left */
-  padding: 10px 30px 50px 60px;
+  padding: 10px 30px 50px 40px;
   width: 100%;
   margin: 0 auto;
   font-size: 2rem;
@@ -247,6 +247,7 @@ div.equationPart
 #totalScore 
 {
 	background-color: var(--total-score-color);
+	width: 75px;
 }
 
 .popup-score {
