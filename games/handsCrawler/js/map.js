@@ -138,6 +138,7 @@ class RingMapUi
 		
 				if (imgElement)
 				{
+					console.log(`Drag Start Event Triggered for ${imgElement.id}`);
 					this.#isDragging = true;
 					this.#draggedRingSrc = imgElement.src;
 					e.dataTransfer.setData('text/plain', imgElement.src);
@@ -155,6 +156,7 @@ class RingMapUi
 		
 				if (imgElement)
 				{
+					console.log(`Pointer Down Event Triggered for ${imgElement.id}`);
 					this.#isDragging = true;
 					this.#draggedRingSrc = imgElement.src;
 					this.#draggedRingDataset = imgElement.dataset;
