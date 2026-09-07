@@ -125,206 +125,64 @@ class RingMapUi
 		document.querySelectorAll('.' + this.#ringItemsClassName)
 		.forEach(ring => 
 		{
-			//==================
-			// DRAG START 
-			//==================
-		
-			// --- DESKTOP LOGIC ---
-			//NOW HANDLED BY UNIFIED pointerdown EVENT BELOW
-			ring.addEventListener('dragstart', (e) => 
-			{
-				/*
-				const imgElement = e.currentTarget.tagName === 'IMG' 
-				? e.currentTarget 
-				: e.currentTarget.querySelector('img');
-		
-				if (imgElement)
-				{
-					console.log(`Drag Start Event Triggered for ${imgElement.id}`);
-					this.#isDragging = true;
-					this.#draggedRingSrc = imgElement.src;
-					e.dataTransfer.setData('text/plain', imgElement.src);
-					this.#draggedRingDataset = imgElement.dataset;
-					this.highlightDropAreas(true);
-				}
-				*/
-			});
-		
-			// --- MOBILE FALLBACK INITIALIZATION ---
-			ring.addEventListener('pointerdown', (e) => 
-			{
-				const imgElement = e.currentTarget.tagName === 'IMG' 
-				? e.currentTarget 
-				: e.currentTarget.querySelector('img');
-		
-				if (imgElement)
-				{
-					console.log(`Pointer Down Event Triggered for ${imgElement.id}`);
-					this.#isDragging = true;
-					this.#draggedRingSrc = imgElement.src;
-					this.#draggedRingDataset = imgElement.dataset;
-					this.highlightDropAreas(true);
-			
-					// Capture pointer focus to ensure movement tracking continues if finger slips
-					ring.setPointerCapture(e.pointerId);
-					this.clearDragVisualElements();
-					// Create the visual proxy element immediately on down action
-					this.#dragVisualElement = document.createElement('img');
-					this.#dragVisualElement.id = this.#dragVisualElementId;
-					this.#dragVisualElement.src = this.#draggedRingSrc; // FIX: Prefixed with 'this.'
-					this.#dragVisualElement.style.position = 'fixed'; // Fixed positioning scales better across layouts
-					this.#dragVisualElement.style.width = `${imgElement.offsetWidth}px`;
-					this.#dragVisualElement.style.height = `${imgElement.offsetHeight}px`;
-					this.#dragVisualElement.style.pointerEvents = 'none'; // Critical: allows dropping beneath itself
-					this.#dragVisualElement.style.zIndex = '9999';
-					this.updateVisualPosition(e.clientX, e.clientY);
-					document.body.appendChild(this.#dragVisualElement);
-				}
-			});
-		
-			//==================
-			// DRAG END (DROP) 
-			//==================
-		
-			// --- DESKTOP NATIVE CLEANUP ---
-			ring.addEventListener('dragend', () => 
-			{
-				console.log(`Drag End Event Triggered for ${this.#dragVisualElement.id}`);
-				this.#isDragging = false;
-				this.highlightDropAreas(false);
-				
-				// Clean up any proxy images abandoned by pointerdown
-				if (this.#dragVisualElement)
-				{
-					this.#dragVisualElement.remove();
-					this.#dragVisualElement = null;
-				}
-			});
-		
-			// --- MOBILE RELEASE LOGIC ---
-			ring.addEventListener('pointerup', (e) => 
-			{
-				if (!this.#isDragging) return;
-				console.log(`Pointer Up Event Triggered for ${this.#dragVisualElement.id}`);
+			// --- UNIFIED POINTER DOWN (Mouse & Touch) ---
+			ring.addEventListener('pointerdown', (e) => {
+				const imgElement = e.currentTarget.tagName === 'IMG' ? e.currentTarget : e.currentTarget.querySelector('img');
+				if (!imgElement) return;
 
-				this.highlightDropAreas(false);
-				this.#isDragging = false;
-				if (e.pointerId === undefined)
-				{
-					if (this.#dragVisualElement)
-					{
-						this.#dragVisualElement.remove();
-						this.#dragVisualElement = null;
-					}
-					return;
-				}
-				ring.releasePointerCapture(e.pointerId);
-				
-				if (this.#dragVisualElement)
-				{
-					this.#dragVisualElement.remove();
-					this.#dragVisualElement = null;
-				}
-				
-				//Get dropped item type
-				let droppedItemType = ring.dataset.itemType;
-				
-				const fingerX = e.clientX;
-				const fingerY = e.clientY;
-				
-				let targetArea = null;
-				
-				for (let area of document.querySelectorAll(this.#dropAreaTagName))
-				{
-					const map = area.parentElement;
-					const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
-					
-					if (!linkedImg) continue;
-					
-					const rect = linkedImg.getBoundingClientRect();
-					
-					// Calculate the responsive layout scaling ratios
-					const scaleX = rect.width / linkedImg.naturalWidth;
-					const scaleY = rect.height / linkedImg.naturalHeight;
-					
-					const coords = area.coords.split(',').map(Number);
-					
-					if (area.shape === 'rect' || !area.shape)
-					{
-						// Apply scale ratios directly to HTML coordinates
-						const left = rect.left + (coords[0] * scaleX);
-						const top = rect.top + (coords[1] * scaleY);
-						const right = rect.left + (coords[2] * scaleX);
-						const bottom = rect.top + (coords[3] * scaleY);
-						
-						if (fingerX >= left && fingerX <= right && fingerY >= top && fingerY <= bottom)
-						{
-							targetArea = area;
-							break;
-						}
-					}
-					else if (area.shape === 'circle')
-					{
-						// Apply scale ratios to the center coordinates and radius length
-						const centerX = rect.left + (coords[0] * scaleX);
-						const centerY = rect.top + (coords[1] * scaleY);
-						const radius = coords[2] * scaleX; // Assumes proportional uniform scaling
-						
-						const distance = Math.sqrt(Math.pow(fingerX - centerX, 2) + Math.pow(fingerY - centerY, 2));
-						if (distance <= radius)
-						{
-							targetArea = area;
-							break;
-						}
-					}
-				}
-				
-				if (targetArea) 
-				{
-					let dropAreaType = targetArea.dataset.itemType;
-					//console.log('dropAreaType', dropAreaType);
-					//console.log('droppedItemType', droppedItemType);
-					if(dropAreaType === droppedItemType)
-					{
-						this.executeDropLogic(targetArea);
-					}
-					else
-					{
-						//console.log('Tried to drop a', droppedItemType,'onto a',dropAreaType,'slot!');
-					}
-				}
-				else
-				{
-					//console.log("Dropped outside a valid area slot");
-				}
+				this.#isDragging = true;
+				this.#draggedRingSrc = imgElement.src;
+				this.#draggedRingDataset = imgElement.dataset;
+				this.highlightDropAreas(true);
+		
+				ring.setPointerCapture(e.pointerId);
 				this.clearDragVisualElements();
-			});
-		
-			//==================
-			// DRAG MOVE 
-			//==================
-		
-			// --- DESKTOP EVENT ---
-			ring.addEventListener('drag', (e) => 
-			{ 
-				console.log(`Drag Event Triggered for ${this.#dragVisualElement.id}`);
-				// Updated from custom non-standard 'dragmove' to native 'drag'
-				if (!this.#isDragging || e.clientX === 0) return;
+
+				this.#dragVisualElement = document.createElement('img');
+				this.#dragVisualElement.id = this.#dragVisualElementId;
+				this.#dragVisualElement.src = this.#draggedRingSrc;
+				this.#dragVisualElement.style.position = 'fixed';
+				this.#dragVisualElement.style.width = `${imgElement.offsetWidth}px`;
+				this.#dragVisualElement.style.height = `${imgElement.offsetHeight}px`;
+				this.#dragVisualElement.style.pointerEvents = 'none';
+				this.#dragVisualElement.style.zIndex = '9999';
 				this.updateVisualPosition(e.clientX, e.clientY);
-				this.updateActiveHoverState(e.clientX, e.clientY);
+				document.body.appendChild(this.#dragVisualElement);
 			});
 		
-			// --- MOBILE EVENT TRACKING ---
-			ring.addEventListener('pointermove', (e) =>
-			{
-				console.log(`Pointer Move Event Triggered for ${this.#dragVisualElement.id}`);
+			// --- UNIFIED POINTER MOVE ---
+			ring.addEventListener('pointermove', (e) => {
 				if (!this.#isDragging || !this.#dragVisualElement) return;
 				this.updateVisualPosition(e.clientX, e.clientY);
-				
-				// Tracks hover positions on mobile layout views in real-time
 				this.updateActiveHoverState(e.clientX, e.clientY);
 			});
 		
+			// --- UNIFIED POINTER UP / RELEASE ---
+			ring.addEventListener('pointerup', (e) => {
+				if (!this.#isDragging) return;
+				
+				this.highlightDropAreas(false);
+				this.#isDragging = false;
+				
+				try {
+					ring.releasePointerCapture(e.pointerId);
+				} catch (err) {
+					// Ignore if capture was already released
+				}
+				
+				if (this.#dragVisualElement) {
+					this.#dragVisualElement.remove();
+					this.#dragVisualElement = null;
+				}
+				
+				let targetArea = this.findTargetAreaAtCoordinates(e.clientX, e.clientY);
+				if (targetArea) {
+					this.executeDropLogic(targetArea);
+				} else {
+					console.log("Dropped outside a valid area slot");
+				}
+			});
+			
 			// Prevent context menu interactions blocking dragging
 			ring.addEventListener('contextmenu', (e) => e.preventDefault());
 		});
