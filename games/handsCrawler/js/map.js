@@ -130,8 +130,10 @@ class RingMapUi
 			//==================
 		
 			// --- DESKTOP LOGIC ---
+			//NOW HANDLED BY UNIFIED pointerdown EVENT BELOW
 			ring.addEventListener('dragstart', (e) => 
 			{
+				/*
 				const imgElement = e.currentTarget.tagName === 'IMG' 
 				? e.currentTarget 
 				: e.currentTarget.querySelector('img');
@@ -145,6 +147,7 @@ class RingMapUi
 					this.#draggedRingDataset = imgElement.dataset;
 					this.highlightDropAreas(true);
 				}
+				*/
 			});
 		
 			// --- MOBILE FALLBACK INITIALIZATION ---
@@ -607,10 +610,13 @@ class RingMapUi
 			let rawStr = this.#draggedRingSrc;
 			let cleanSvgText = '';
 
-			if (rawStr.startsWith('data:image/svg+xml,%3C')) {
+			if (rawStr.startsWith('data:image/svg+xml,%3C'))
+			{
 				const content = rawStr.replace(/^data:image\/svg\+xml,/, '');
 				cleanSvgText = decodeURIComponent(content);
-			} else {
+			}
+			else
+			{
 				const content = rawStr.replace(/^data:image\/svg\+xml;utf8,/, '');
 				cleanSvgText = decodeURIComponent(content);
 			}
