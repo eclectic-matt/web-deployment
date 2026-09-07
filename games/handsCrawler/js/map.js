@@ -189,6 +189,7 @@ class RingMapUi
 			// --- DESKTOP NATIVE CLEANUP ---
 			ring.addEventListener('dragend', () => 
 			{
+				console.log(`Drag End Event Triggered for ${this.#dragVisualElement.id}`);
 				this.#isDragging = false;
 				this.highlightDropAreas(false);
 				
@@ -204,6 +205,8 @@ class RingMapUi
 			ring.addEventListener('pointerup', (e) => 
 			{
 				if (!this.#isDragging) return;
+				console.log(`Pointer Up Event Triggered for ${this.#dragVisualElement.id}`);
+
 				this.highlightDropAreas(false);
 				this.#isDragging = false;
 				if (e.pointerId === undefined)
@@ -304,6 +307,7 @@ class RingMapUi
 			// --- DESKTOP EVENT ---
 			ring.addEventListener('drag', (e) => 
 			{ 
+				console.log(`Drag Event Triggered for ${this.#dragVisualElement.id}`);
 				// Updated from custom non-standard 'dragmove' to native 'drag'
 				if (!this.#isDragging || e.clientX === 0) return;
 				this.updateVisualPosition(e.clientX, e.clientY);
@@ -313,6 +317,7 @@ class RingMapUi
 			// --- MOBILE EVENT TRACKING ---
 			ring.addEventListener('pointermove', (e) =>
 			{
+				console.log(`Pointer Move Event Triggered for ${this.#dragVisualElement.id}`);
 				if (!this.#isDragging || !this.#dragVisualElement) return;
 				this.updateVisualPosition(e.clientX, e.clientY);
 				
