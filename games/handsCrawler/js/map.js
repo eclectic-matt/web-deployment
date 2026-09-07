@@ -9,7 +9,7 @@ class RingMapUi
   //The hands element target dimensions
   #targetWidth = 540;
   #targetHeight = 420;
-  
+  #inventoryTypes = ['ring', 'bracelet', 'held', 'tattoo'];
   //SET CLASS NAMES / TAGS / IDs
   #ringItemsClassName = 'item';
   #dragVisualElementId = 'drag-visual';
@@ -21,6 +21,10 @@ class RingMapUi
   #itemDataJsonPath = './data/itemData.json';
   //ELEMENT REFERENCES
   #ringOptionsAreaEl = null;
+  #inventoryRingsEl = null;
+  #inventoryBraceletEl = null;
+  #inventoryHeldEl = null;
+  #inventoryTattooEl = null;
   #scalerEl = null;
   #visualEls = null;
   
@@ -59,6 +63,28 @@ class RingMapUi
       this.#itemData = await response.json();
       let ringsInfo = this.#itemData.items.rings;
       
+      //Create inventory sections
+      for(let i = 0; i < this.#inventoryTypes.length; i++)
+      {
+        let typeName = this.#inventoryTypes[i];
+        //Skip type if not found
+        if(ringsInfo.filter(r => { return r.type === typeName}).length < 1) continue;
+        let inventorySection = document.createElement('section');
+        inventorySection.id = 'inventory-' + typeName;
+        let inventorySectionHeading = document.createElement('h4');
+        inventorySectionHeading.innerHTML = typeName.toUpperCase();
+        inventorySection.appendChild(inventorySectionHeading);
+        this.#ringOptionsAreaEl.appendChild(inventorySection);
+      }
+      /*
+      let ringSection = document.createElement('section');
+        ringSection.id = 'inventory-rings';
+        let ringSectionHeading = document.createElement('h4');
+        ringSectionHeading.innerHTML = 'Rings';
+        ringSection.appendChild(ringSectionHeading);
+        this.#ringOptionsAreaEl.appendChild(ringSection);
+        this.#inventoryRingsEl = document.getElementById('inventory-rings');
+      */
       ringsInfo.forEach(r => 
       {
         let ringImg = document.createElement('img');
@@ -78,11 +104,13 @@ class RingMapUi
         ringImg.dataset.effectValue = r.effect.value;
         ringImg.dataset.effectName = r.effect.name;
         ringImg.dataset.effectOperation = r.effect.operation;
-
+        
+        document.getElementById('inventory-' + r.type).appendChild(ringImg);
+        /*
         if (this.#ringOptionsAreaEl)
         {
           this.#ringOptionsAreaEl.appendChild(ringImg);
-        }
+        }*/
       });
     }
     catch (error)

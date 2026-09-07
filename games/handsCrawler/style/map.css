@@ -94,6 +94,7 @@ h1
 	border-radius: 8px;
 	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 	min-width: 150px;
+	width: 95%;
 }
 
 .ring-palette h3
@@ -106,6 +107,15 @@ h1
 {
 	display: flex;
 	gap: 15px;
+}
+.ring-options section 
+{
+	padding: 10px;
+	border: 1px dotted white;
+}
+.ring-options section h4 
+{
+	text-align: center;
 }
 
 .item
@@ -137,8 +147,8 @@ h1
 }
 .bracelet
 {
-	width: 120px;
-	height: 60px;
+	width: 60px;
+	height: 40px;
 }
 
 .ring-wrapper
