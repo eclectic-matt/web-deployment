@@ -193,118 +193,17 @@ class RingMapUi
 	updateVisualPosition(clientX, clientY)
 	{
 		if (!this.#dragVisualElement) return;
-		// Align the center of the elements tracking graphic directly to the mouse cursor position
-		const offsetX = this.#dragVisualElement.offsetWidth / 2;
-		const offsetY = this.#dragVisualElement.offsetHeight / 2;
-		this.#dragVisualElement.style.left = `${clientX - offsetX}px`;
-		this.#dragVisualElement.style.top = `${clientY - offsetY}px`;
+		this.#dragVisualElement.style.left = `${clientX - this.#dragVisualElement.offsetWidth / 2}px`;
+		this.#dragVisualElement.style.top = `${clientY - this.#dragVisualElement.offsetHeight / 2}px`;
 	}
-	
-	resizeGameViewport()
-	{
-		//Skip if not initialized
-		if (!this.#scalerEl) return;
-		//Calculate view multipliers
-		const scaleX = window.innerWidth / this.#targetWidth;
-		const scaleY = window.innerHeight / this.#targetHeight;
-		//Calculate best scale
-		let optimalScale = Math.min(scaleX, scaleY);
-		//No scaling if already large enough
-		if (optimalScale > 1) optimalScale = 1;
-		//Scale element
-		this.#scalerEl.style.transform = `scale(${optimalScale})`;
-	}
-	
+
 	clearDragVisualElements()
 	{
-		this.#visualEls = document.querySelectorAll('#' + this.#dragVisualElementId);
-		this.#visualEls.forEach(el =>
-		{
-			if (el.parentNode)
-			{
-				el.parentNode.removeChild(el);
-			}
-		});
+		document.querySelectorAll('#' + this.#dragVisualElementId).forEach(el => el.remove());
 	}
-	
-	highlightDropAreas(showHighlight = false)
+
+	findTargetAreaAtCoordinates(clientX, clientY)
 	{
-		//Clear out previous highlight elements
-		document.querySelectorAll('.' + this.#ringHighlightClassName).forEach(box => box.remove());
-		if (!showHighlight) return;
-
-		// Grab your scaling container element
-		if (!this.#scalerEl) return;
-
-		document.querySelectorAll(this.#dropAreaTagName).forEach((area, index) =>
-		{
-			const map = area.parentElement;
-			const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
-			if (!linkedImg) return;
-
-			// Find the parent hand-wrapper element
-			const handWrapper = linkedImg.closest('.hand-wrapper');
-			if (!handWrapper) return;
-
-			const coords = area.coords.split(',').map(Number);
-
-			const overlay = document.createElement('div');
-			overlay.classList.add(this.#ringHighlightClassName); 
-			
-			overlay.setAttribute('data-area-index', index);
-			area.setAttribute('data-area-index', index);
-
-			// Layout positions relative to the container frame
-			overlay.style.position = 'absolute';
-			overlay.style.pointerEvents = 'none'; 
-			overlay.style.border = '2px dashed #ff0000';
-			overlay.style.backgroundColor = 'rgba(255, 0, 0, 0.15)'; 
-			overlay.style.zIndex = '999';
-
-			if (area.shape === 'circle')
-			{
-				const centerX = coords[0];
-				const centerY = coords[1];
-				const radius = coords[2];
-
-				overlay.style.borderRadius = '50%'; 
-				overlay.style.width = `${radius * 2}px`;
-				overlay.style.height = `${radius * 2}px`;
-				overlay.style.left = `${centerX - radius}px`;
-				overlay.style.top = `${centerY - radius}px`;
-			}
-			else if (area.shape === 'rect' || !area.shape)
-			{
-				overlay.style.borderRadius = '4px'; 
-				overlay.style.left = `${coords[0]}px`;
-				overlay.style.top = `${coords[1]}px`;
-				overlay.style.width = `${coords[2] - coords[0]}px`;
-				overlay.style.height = `${coords[3] - coords[1]}px`;
-			}
-
-			//Append to unscaled parent container
-			handWrapper.appendChild(overlay);
-		});
-	}
-	
-	updateActiveHoverState(clientX, clientY)
-	{
-		//Remove hover class from active overlays
-		document.querySelectorAll('.' + this.#ringHighlightClassName).forEach(box => box.classList.remove('is-hovered'));
-		
-		//Get scaling factor from game scaler
-		let currentScale = 1;
-		if (this.#scalerEl && this.#scalerEl.style.transform)
-		{
-			// Extracts the numerical value out of "scale(0.75)"
-			const match = this.#scalerEl.style.transform.match(/scale\(([^)]+)\)/);
-			if (match && match[1])
-			{
-				currentScale = parseFloat(match[1]);
-			}
-		}
-		
-		//Scan bounds to see if coords sit inside any finger zone
 		for (let area of document.querySelectorAll(this.#dropAreaTagName))
 		{
 			const map = area.parentElement;
@@ -312,41 +211,81 @@ class RingMapUi
 			if (!linkedImg) continue;
 			
 			const rect = linkedImg.getBoundingClientRect();
+			const scaleX = rect.width / linkedImg.naturalWidth;
+			const scaleY = rect.height / linkedImg.naturalHeight;
 			const coords = area.coords.split(',').map(Number);
-			let isInside = false;
 			
-			if (area.shape === 'circle')
+			if (area.shape === 'rect' || !area.shape)
 			{
-				// Apply scale multiplier directly to your area map coordinates parameters
-				const centerX = rect.left + (coords[0] * currentScale);
-				const centerY = rect.top + (coords[1] * currentScale);
-				const radius = coords[2] * currentScale;
-				
+				const left = rect.left + (coords[0] * scaleX);
+				const top = rect.top + (coords[1] * scaleY);
+				const right = rect.left + (coords[2] * scaleX);
+				const bottom = rect.top + (coords[3] * scaleY);
+				if (clientX >= left && clientX <= right && clientY >= top && clientY <= bottom) return area;
+			}
+			else if (area.shape === 'circle')
+			{
+				const centerX = rect.left + (coords[0] * scaleX);
+				const centerY = rect.top + (coords[1] * scaleY);
+				const radius = coords[2] * Math.min(scaleX, scaleY);
 				const distance = Math.sqrt(Math.pow(clientX - centerX, 2) + Math.pow(clientY - centerY, 2));
-				if (distance <= radius) isInside = true;
-			}
-			else if (area.shape === 'rect' || !area.shape)
-			{
-				// Apply scale multiplier directly to your area map coordinates parameters
-				const left = rect.left + (coords[0] * currentScale);
-				const top = rect.top + (coords[1] * currentScale);
-				const right = rect.left + (coords[2] * currentScale);
-				const bottom = rect.top + (coords[3] * currentScale);
-				
-				if (clientX >= left && clientX <= right && clientY >= top && clientY <= bottom) isInside = true;
-			}
-			
-			if (isInside)
-			{
-				const index = area.getAttribute('data-area-index');
-				const matchingOverlay = document.querySelector(`.` + this.#ringHighlightClassName + `[data-area-index="${index}"]`);
-				if (matchingOverlay)
-				{
-					matchingOverlay.classList.add('is-hovered');
-				}
-				break;
+				if (distance <= radius) return area;
 			}
 		}
+		return null;
+	}
+
+	updateActiveHoverState(clientX, clientY)
+	{
+		document.querySelectorAll('.' + this.#ringHighlightClassName).forEach(box => box.classList.remove('is-hovered'));
+		let targetArea = this.findTargetAreaAtCoordinates(clientX, clientY);
+		if (targetArea)
+		{
+			const index = targetArea.getAttribute('data-area-index');
+			const matchingOverlay = document.querySelector(`.${this.#ringHighlightClassName}[data-area-index="${index}"]`);
+			if (matchingOverlay) matchingOverlay.classList.add('is-hovered');
+		}
+	}
+
+	highlightDropAreas(showHighlight = false)
+	{
+		document.querySelectorAll('.' + this.#ringHighlightClassName).forEach(box => box.remove());
+		if (!showHighlight) return;
+
+		document.querySelectorAll(this.#dropAreaTagName).forEach((area, index) => {
+			const map = area.parentElement;
+			const linkedImg = document.querySelector(`img[usemap="#${map.name}"]`);
+			if (!linkedImg) return;
+			const handWrapper = linkedImg.closest('.hand-wrapper');
+			if (!handWrapper) return;
+
+			const coords = area.coords.split(',').map(Number);
+			const overlay = document.createElement('div');
+			overlay.classList.add(this.#ringHighlightClassName);
+			overlay.setAttribute('data-area-index', index);
+			area.setAttribute('data-area-index', index);
+
+			overlay.style.position = 'absolute';
+			overlay.style.pointerEvents = 'none';
+			overlay.style.border = '2px dashed #ff0000';
+			overlay.style.backgroundColor = 'rgba(255, 0, 0, 0.15)';
+			overlay.style.zIndex = '999';
+
+			if (area.shape === 'circle') {
+				overlay.style.borderRadius = '50%';
+				overlay.style.width = `${coords[2] * 2}px`;
+				overlay.style.height = `${coords[2] * 2}px`;
+				overlay.style.left = `${coords[0] - coords[2]}px`;
+				overlay.style.top = `${coords[1] - coords[2]}px`;
+			} else {
+				overlay.style.borderRadius = '4px';
+				overlay.style.left = `${coords[0]}px`;
+				overlay.style.top = `${coords[1]}px`;
+				overlay.style.width = `${coords[2] - coords[0]}px`;
+				overlay.style.height = `${coords[3] - coords[1]}px`;
+			}
+			handWrapper.appendChild(overlay);
+		});
 	}
 	
 	executeDropLogic(area) 
