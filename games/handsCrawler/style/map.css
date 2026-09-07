@@ -94,7 +94,7 @@ h1
 	border-radius: 8px;
 	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 	min-width: 150px;
-	width: 95%;
+	width: 100%;
 }
 
 .ring-palette h3
@@ -110,7 +110,7 @@ h1
 }
 .ring-options section 
 {
-	padding: 10px;
+	padding: 5px;
 	border: 1px dotted white;
 }
 .ring-options section h4 

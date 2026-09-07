@@ -72,7 +72,7 @@
 				"name": "Ring of Damage",
 				"description": "A ring which increases your total damage",
 				"type": "ring",
-				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23b87333' stroke-width='10' fill='none'/></svg>",
+				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%233333ff' stroke-width='10' fill='none'/></svg>",
 				"action": {
 					"type": "score",
 					"condition": null
@@ -93,7 +93,7 @@
 				"name": "Ring of Boost",
 				"description": "A ring which doubles base damage",
 				"type": "ring",
-				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23aa00bb' stroke-width='10' fill='none'/></svg>",
+				"icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%23aa0000' stroke-width='10' fill='none'/></svg>",
 				"action": {
 					"type": "score",
 					"condition": null
