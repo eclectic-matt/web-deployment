@@ -183,8 +183,10 @@ class RingMapUi
 				}
 			});
 			
-			// Prevent context menu interactions blocking dragging
-			ring.addEventListener('contextmenu', (e) => e.preventDefault());
+			// Prevent native context menus from interfering
+			document.addEventListener('contextmenu', (e) => {
+				if (e.target.classList.contains(this.#ringItemsClassName)) e.preventDefault();
+			});
 		});
 	}
 	
