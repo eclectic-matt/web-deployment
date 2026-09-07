@@ -196,6 +196,21 @@ class RingMapUi
 		this.#dragVisualElement.style.left = `${clientX - this.#dragVisualElement.offsetWidth / 2}px`;
 		this.#dragVisualElement.style.top = `${clientY - this.#dragVisualElement.offsetHeight / 2}px`;
 	}
+	
+	resizeGameViewport()
+	{
+		//Skip if not initialized
+		if (!this.#scalerEl) return;
+		//Calculate view multipliers
+		const scaleX = window.innerWidth / this.#targetWidth;
+		const scaleY = window.innerHeight / this.#targetHeight;
+		//Calculate best scale
+		let optimalScale = Math.min(scaleX, scaleY);
+		//No scaling if already large enough
+		if (optimalScale > 1) optimalScale = 1;
+		//Scale element
+		this.#scalerEl.style.transform = `scale(${optimalScale})`;
+	}
 
 	clearDragVisualElements()
 	{
