@@ -142,7 +142,7 @@ h1
 }
 .held 
 {
-  width: 60px;
+	width: 60px;
 	height: 60px;
 }
 .bracelet
@@ -152,7 +152,7 @@ h1
 }
 .tattoo 
 {
-  background-color: #555;
+	background-color: #555;
 }
 .ring-wrapper
 {
@@ -203,25 +203,36 @@ section#sidePanel
 }
 section#scoringArea 
 {
-  background: #222;
-  /* top | right | bottom | left */
-  padding: 10px 30px 50px 40px;
-  width: 100%;
-  margin: 0 auto;
-  font-size: 2rem;
+	background: #222;
+	/* top | right | bottom | left */
+	/*padding: 10px 30px 50px 40px;*/
+	width: 100%;
+	margin: 0 auto;
+	font-size: 2rem;
 }
 
-div.scorePart 
+table.scoreTable
 {
-  float: left;
-  padding: 0;
-  margin: 0;
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	border: 0;
 }
-div.equationPart 
+.scorePart 
 {
-  float: left;
-  padding: 0 10px;
-  margin: 0;
+	padding: 0 10px;
+	width: 50px;
+	/*float: left;
+	padding: 0;
+	margin: 0;*/
+}
+.equationPart 
+{
+	padding: 0 10px;
+	width: 30px;
+	/*float: left;
+	padding: 0 10px;
+	margin: 0;*/
 }
 
 #baseScore, #powerScore, #totalScore 
@@ -232,9 +243,9 @@ div.equationPart
 	border-radius: 5px;
 	color: white;
 	text-align: center;
-	margin-bottom: 10px;
+	/*margin-bottom: 10px;*/
 	/* Make fixed widths to stop moving around*/
-	width: 50px;
+	/*width: 50px;*/
 }
 
 #baseScore 
