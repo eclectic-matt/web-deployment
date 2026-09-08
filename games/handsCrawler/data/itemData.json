@@ -173,6 +173,27 @@
 				}
 			},
 			{
+				"id": "common-held-axe",
+				"name": "Common Axe",
+				"description": "A common axe",
+				"type": "held",
+				"icon": "./assets/img/basic_held_axe.png",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "common",
+					"multiplier": 1
+				},
+				"effect": {
+					"name": "base",
+					"operation": "add",
+					"value": 10,
+					"description": "+10 Base Score"
+				}
+			},
+			{
 			  
 				"id": "common-tattoo-skull",
 				"name": "Common Skull Tattoo",

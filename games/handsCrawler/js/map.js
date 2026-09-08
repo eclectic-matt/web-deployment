@@ -428,7 +428,16 @@ class RingMapUi
 			ringImg.style.transform = 'translateY(22%)'; 
 		}else if(isHeld)
 		{
-			ringImg.style.transform = 'translateY(0%) scale(2)'; 
+			//Assume held items face right (correct for the left hand)
+			if(fingerId.includes('right'))
+			{
+			  //Mirror horizontal
+			  ringImg.style.transform = 'translateY(0%) scale(2) rotateY(180deg)';
+			}
+			else
+			{
+			  ringImg.style.transform = 'translateY(0%) scale(2)';
+			}
 		}
 		
 		// --- BLOB STREAM GENERATOR ---
