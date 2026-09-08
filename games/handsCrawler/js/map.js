@@ -311,10 +311,13 @@ class RingMapUi
 		
 		let centerX = 0;
 		let centerY = 0;
-		if (area.shape === 'circle') {
+		if (area.shape === 'circle')
+		{
 			centerX = coords[0];
 			centerY = coords[1];
-		} else {
+		}
+		else
+		{
 			// Correctly calculates midpoints for standard bounding box rectangles
 			centerX = (coords[0] + coords[2]) / 2;
 			centerY = (coords[1] + coords[3]) / 2;
@@ -338,8 +341,9 @@ class RingMapUi
 		if (!activeContainer) return;
 		
 		let ringRotateAngle = '0deg';
-		const isBracelet = fingerId.includes('bracelet');
-		const isRing = area.getAttribute('data-item-type') == 'ring';
+		const isBracelet = area.getAttribute('data-item-type') == 'bracelet';
+		const isRing = area.getAttribute('data-item-type') === 'ring';
+		const isHeld = area.getAttribute('data-item-type') === 'held';
 		const isThumb = fingerId.includes('thumb');
 		
 		// Custom positional/spatial offsets for different gear types
@@ -412,6 +416,7 @@ class RingMapUi
 		ringImg.style.height = '100%';
 		ringImg.style.display = 'block';
 		
+		//Update style of img when dropped based on type
 		if (isBracelet) 
 		{
 			ringImg.style.clipPath = 'inset(47% 0% 0% 0%)'; 
@@ -421,6 +426,9 @@ class RingMapUi
 		{
 			ringImg.style.clipPath = 'inset(0% 0% 45% 0%)'; 
 			ringImg.style.transform = 'translateY(22%)'; 
+		}else if(isHeld)
+		{
+			ringImg.style.transform = 'translateY(0%) scale(2)'; 
 		}
 		
 		// --- BLOB STREAM GENERATOR ---
