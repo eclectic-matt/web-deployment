@@ -556,12 +556,12 @@ class ItemScoring
 		"placed-right-middle",
 		"placed-right-ring",
 		"placed-right-pinky",
-		//THEN WRIST ITEMS (BRACELETS)
-		"placed-left-bracelet",
-		"placed-right-bracelet",
-		//THEN TATTOOS (IF ANY)
+		//THEN TATTOOS
 		"placed-left-tattoo",
-		"placed-right-tattoo"
+		"placed-right-tattoo",
+		//THEN BRACELETS
+		"placed-left-bracelet",
+		"placed-right-bracelet"
 	];
 	
 	constructor()

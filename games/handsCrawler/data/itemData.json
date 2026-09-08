@@ -124,10 +124,10 @@
 					"multiplier": 1
 				},
 				"effect": {
-					"name": "totalMultiplier",
+					"name": "power",
 					"operation": "multiply",
 					"value": 5,
-					"description": "x5 Total Score"
+					"description": "x5 Power"
 				}
 			},
 			{
@@ -208,10 +208,10 @@
 					"multiplier": 1
 				},
 				"effect": {
-					"name": "totalMultiplier",
+					"name": "power",
 					"operation": "multiply",
 					"value": 3,
-					"description": "x3 Total Score"
+					"description": "x3 Power"
 				}
 			}
 		]
