@@ -337,6 +337,15 @@ class RingMapUi
 		const targetContainerId = mapName === 'left-hand-map' ? 'left-hand-container' : 'right-hand-container';
 		const activeContainer = document.getElementById(targetContainerId);
 		//console.log('activeContainer', targetContainerId);
+
+		//Check that the dropped item matches the container it is being dropped into 
+		let areaType = area.getAttribute('data-item-type');
+		let dropType = this.#draggedRingDataset.itemType;
+		if(areaType !== dropType)
+		{
+			console.log("Drop mismatch - tried to drop " + dropType + " into " + areaType + " slot. Aborting placement.");
+			return;
+		} 
 		
 		if (!activeContainer) return;
 		
