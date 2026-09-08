@@ -431,12 +431,12 @@ class RingMapUi
 			//Assume held items face right (correct for the left hand)
 			if(fingerId.includes('right'))
 			{
-			  //Mirror horizontal
-			  ringImg.style.transform = 'translateY(0%) scale(2) rotateY(180deg)';
+				//Mirror horizontal
+				ringImg.style.transform = 'translateY(0%) scale(2) rotateY(180deg)';
 			}
 			else
 			{
-			  ringImg.style.transform = 'translateY(0%) scale(2)';
+				ringImg.style.transform = 'translateY(0%) scale(2)';
 			}
 		}
 		
@@ -448,26 +448,26 @@ class RingMapUi
 
 			if (rawStr.startsWith('data:image/svg+xml,%3C'))
 			{
-			  //URL-encoded SVG
+				//URL-encoded SVG
 				const content = rawStr.replace(/^data:image\/svg\+xml,/, '');
 				cleanSvgText = decodeURIComponent(content);
 				const blob = new Blob([cleanSvgText], { type: 'image/svg+xml' });
-  			ringImg.src = URL.createObjectURL(blob);
-  			ringImg.onload = () => URL.revokeObjectURL(ringImg.src);
+				ringImg.src = URL.createObjectURL(blob);
+				ringImg.onload = () => URL.revokeObjectURL(ringImg.src);
 			}
 			else if(rawStr.startsWith('data:image'))
 			{
-			  //Raw SVG
+				//Raw SVG
 				const content = rawStr.replace(/^data:image\/svg\+xml;utf8,/, '');
 				cleanSvgText = decodeURIComponent(content);
 				const blob = new Blob([cleanSvgText], { type: 'image/svg+xml' });
-        ringImg.src = URL.createObjectURL(blob);
-        ringImg.onload = () => URL.revokeObjectURL(ringImg.src);
+				ringImg.src = URL.createObjectURL(blob);
+				ringImg.onload = () => URL.revokeObjectURL(ringImg.src);
 			}
 			else
 			{
-			  //Img Path
-			  ringImg.src = rawStr;
+				//Img Path
+				ringImg.src = rawStr;
 			}
 		
 		}
@@ -531,46 +531,57 @@ class RingScoring
 		
 		// --- EXACT ANATOMICAL SCORING ORDER MATRIX ---
 		const targetOrderIDs = [
+			//HELD ITEMS TRIGGER FIRST
+			"placed-held-left",
+			"placed-held-right",
+			//THEN LEFT HAND FINGERS
 			"placed-left-pinky",
 			"placed-left-ring",
 			"placed-left-middle",
 			"placed-left-index",
 			"placed-left-thumb",
+			//THEN RIGHT HAND FINGERS
 			"placed-right-thumb",
 			"placed-right-index",
 			"placed-right-middle",
 			"placed-right-ring",
-			"placed-right-pinky"
+			"placed-right-pinky",
+			//THEN WRIST ITEMS (BRACELETS)
+			"placed-left-wrist",
+			"placed-right-wrist",
+			//THEN TATTOOS (IF ANY)
+			"placed-left-tattoo",
+			"placed-right-tattoo"
 		];
 		
-		let rings = [];
+		let scoringItems = [];
 		
 		// Scan through the exact order tracking index matrix
 		targetOrderIDs.forEach(id =>
 		{
 			const foundRingElement = document.getElementById(id);
 			if (foundRingElement) {
-				rings.push(foundRingElement);
+				scoringItems.push(foundRingElement);
 			}
 		});
 		
-		console.log('Aggregated active items sorted in exact order:', rings.map(r => r.id));
+		console.log('Aggregated active items sorted in exact order:', scoringItems.map(r => r.id));
 
 		let damage = new Damage();
 		damage.base = 10;
 		damage.power = 1;
 		
-		for(let i = 0; i < rings.length; i++)
+		for(let i = 0; i < scoringItems.length; i++)
 		{
-			let ring = rings[i];
+			let scoringItem = scoringItems[i];
 			
 			// Target Debugging Lookups
-			console.log(`Inspecting element [Index: ${i}, ID: ${ring.id}]:`, ring.dataset);
+			console.log(`Inspecting element [Index: ${i}, ID: ${scoringItem.id}]:`, scoringItem.dataset);
 			
-			let rarityMultiplier = Number(ring.dataset.rarityMultiplier || 1);
-			let effectValue = Number(ring.dataset.effectValue || 0);
-			let effectName = ring.dataset.effectName;
-			let effectOp = ring.dataset.effectOperation;
+			let rarityMultiplier = Number(scoringItem.dataset.rarityMultiplier || 1);
+			let effectValue = Number(scoringItem.dataset.effectValue || 0);
+			let effectName = scoringItem.dataset.effectName;
+			let effectOp = scoringItem.dataset.effectOperation;
 			
 			let scoringTypes = ["base", "power"];
 			let scoreContribution = 0;
@@ -578,7 +589,7 @@ class RingScoring
 			
 			if(scoringTypes.includes(effectName))
 			{
-				console.log(`Matched valid scoring type "${effectName}" for item ${ring.id}. Value: ${effectValue}, Multiplier: ${rarityMultiplier}`);
+				console.log(`Matched valid scoring type "${effectName}" for item ${scoringItem.id}. Value: ${effectValue}, Multiplier: ${rarityMultiplier}`);
 				this.outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
 				
 				switch(effectOp)
@@ -596,20 +607,20 @@ class RingScoring
 						console.log(`Operation [MULTIPLY]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
 					break;
 					default:
-						console.warn(`Unrecognised effect operation type "${effectOp}" on element ${ring.id}`);
+						console.warn(`Unrecognised effect operation type "${effectOp}" on element ${scoringItem.id}`);
 					break;
 				}
 			}
 			else
 			{
-				console.log(`Skipping item ${ring.id}: effect classification "${effectName}" does not match targeted scoring groups [base, power]`);
+				console.log(`Skipping item ${scoringItem.id}: effect classification "${effectName}" does not match targeted scoring groups [base, power]`);
 			}
 			
 			if(ringScores)
 			{
-				this.outputToTxt("Scoring " + ring.id + " from base=" + damage.base + ", power=" + damage.power);
-				console.log(`Triggering visual score animation for ${ring.id}`);
-				this.scoreRing(ring);
+				this.outputToTxt("Scoring " + scoringItem.id + " from base=" + damage.base + ", power=" + damage.power);
+				console.log(`Triggering visual score animation for ${scoringItem.id}`);
+				this.scoreRing(scoringItem);
 				
 				// This holds the loop frame open for 500ms so you can view the changes update incrementally
 				await sleep(500);
@@ -642,19 +653,19 @@ class RingScoring
 		document.getElementById("totalScore").innerHTML = 0;
 	}
 	
-	scoreRing = (ring) =>
+	scoreRing = (scoringItem) =>
 	{
-		let popupEl = ring.firstElementChild;
+		let popupEl = scoringItem.firstElementChild;
 		if (!popupEl)
 		{
-			console.error(`Popup structural layout anomaly: First child node missing inside wrapper element ${ring.id}`);
+			console.error(`Popup structural layout anomaly: First child node missing inside wrapper element ${scoringItem.id}`);
 			return;
 		}
 		
-		let rarityMultiplier = Number(ring.dataset.rarityMultiplier || 1);
-		let effectValue = Number(ring.dataset.effectValue || 0);
-		let effectName = ring.dataset.effectName;
-		let effectOp = ring.dataset.effectOperation;
+		let rarityMultiplier = Number(scoringItem.dataset.rarityMultiplier || 1);
+		let effectValue = Number(scoringItem.dataset.effectValue || 0);
+		let effectName = scoringItem.dataset.effectName;
+		let effectOp = scoringItem.dataset.effectOperation;
 		let scoringTypes = ["base", "power"];
 		let scoreContribution = 0;
 		let popupString = "";
@@ -680,7 +691,7 @@ class RingScoring
 		
 		if (popupString !== "")
 		{
-			console.log(`Setting Popup markup contents for ${ring.id} to "${popupString}"`);
+			console.log(`Setting Popup markup contents for ${scoringItem.id} to "${popupString}"`);
 			popupEl.innerHTML = popupString;
 			popupEl.style.backgroundColor = effectName === "base" ? "var(--base-score-color)" : "var(--power-score-color)";
 			popupEl.classList.add("show");
