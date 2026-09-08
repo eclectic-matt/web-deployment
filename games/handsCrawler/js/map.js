@@ -494,12 +494,42 @@ class RingMapUi
 // Clean utility helper to delay execution in loop frames
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-class RingScoring 
+class ItemScoring 
 {
 	//Element references
 	#physicalAttackBtnEl = null;
 	#magicalAttackBtnEl = null;
 	#clearHandsBtnEl = null;
+	#scoreDelayMs = 500;
+	//The types of effect that change scoring
+	#scoringTypes = [
+		"base",   //Add/Multiply Base
+		"power",  //Add/Multiply Power
+		"totalMultiplier"		//Multiply Total
+	];
+	#targetOrderIDs = [
+		//HELD ITEMS TRIGGER FIRST
+		"placed-left-held-item",
+		"placed-right-held-item",
+		//THEN LEFT HAND FINGERS
+		"placed-left-pinky",
+		"placed-left-ring",
+		"placed-left-middle",
+		"placed-left-index",
+		"placed-left-thumb",
+		//THEN RIGHT HAND FINGERS
+		"placed-right-thumb",
+		"placed-right-index",
+		"placed-right-middle",
+		"placed-right-ring",
+		"placed-right-pinky",
+		//THEN WRIST ITEMS (BRACELETS)
+		"placed-left-bracelet",
+		"placed-right-bracelet",
+		//THEN TATTOOS (IF ANY)
+		"placed-left-tattoo",
+		"placed-right-tattoo"
+	];
 	
 	constructor()
 	{
@@ -538,82 +568,68 @@ class RingScoring
 		this.outputToTxt("physical attack");
 		this.resetScores();
 		
-		// --- EXACT ANATOMICAL SCORING ORDER MATRIX ---
-		const targetOrderIDs = [
-			//HELD ITEMS TRIGGER FIRST
-			"placed-held-left",
-			"placed-held-right",
-			//THEN LEFT HAND FINGERS
-			"placed-left-pinky",
-			"placed-left-ring",
-			"placed-left-middle",
-			"placed-left-index",
-			"placed-left-thumb",
-			//THEN RIGHT HAND FINGERS
-			"placed-right-thumb",
-			"placed-right-index",
-			"placed-right-middle",
-			"placed-right-ring",
-			"placed-right-pinky",
-			//THEN WRIST ITEMS (BRACELETS)
-			"placed-left-wrist",
-			"placed-right-wrist",
-			//THEN TATTOOS (IF ANY)
-			"placed-left-tattoo",
-			"placed-right-tattoo"
-		];
-		
 		let scoringItems = [];
 		
 		// Scan through the exact order tracking index matrix
-		targetOrderIDs.forEach(id =>
+		this.#targetOrderIDs.forEach(id =>
 		{
 			const foundRingElement = document.getElementById(id);
-			if (foundRingElement) {
+			if (foundRingElement)
+			{
 				scoringItems.push(foundRingElement);
 			}
 		});
 		
-		console.log('Aggregated active items sorted in exact order:', scoringItems.map(r => r.id));
+		//console.log('Aggregated active items sorted in exact order:', scoringItems.map(r => r.id));
 
 		let damage = new Damage();
 		damage.base = 10;
 		damage.power = 1;
+		damage.totalMultiplier = 1;
+		damage.total = 0;
 		
 		for(let i = 0; i < scoringItems.length; i++)
 		{
 			let scoringItem = scoringItems[i];
 			
 			// Target Debugging Lookups
-			console.log(`Inspecting element [Index: ${i}, ID: ${scoringItem.id}]:`, scoringItem.dataset);
+			//console.log(`Inspecting element [Index: ${i}, ID: ${scoringItem.id}]:`, scoringItem.dataset);
 			
 			let rarityMultiplier = Number(scoringItem.dataset.rarityMultiplier || 1);
 			let effectValue = Number(scoringItem.dataset.effectValue || 0);
 			let effectName = scoringItem.dataset.effectName;
 			let effectOp = scoringItem.dataset.effectOperation;
 			
-			let scoringTypes = ["base", "power"];
 			let scoreContribution = 0;
 			let ringScores = false;
 			
-			if(scoringTypes.includes(effectName))
+			if(this.#scoringTypes.includes(effectName))
 			{
-				console.log(`Matched valid scoring type "${effectName}" for item ${scoringItem.id}. Value: ${effectValue}, Multiplier: ${rarityMultiplier}`);
+				//console.log(`Matched valid scoring type "${effectName}" for item ${scoringItem.id}. Value: ${effectValue}, Multiplier: ${rarityMultiplier}`);
 				this.outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
 				
 				switch(effectOp)
 				{
+				  //Set the current value (overwrite)
+				  case "set":
+				    ringScores = true;
+						scoreContribution = (effectValue * rarityMultiplier); 
+						damage[effectName] = scoreContribution;
+						//console.log(`Operation [SET]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
+				  break;
+				  //Add to the current value
 					case "add":
 						ringScores = true;
 						scoreContribution = (effectValue * rarityMultiplier); 
 						damage[effectName] += scoreContribution;
-						console.log(`Operation [ADD]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
+						//console.log(`Operation [ADD]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
 					break;
+					//Multiply the current value
 					case "multiply":
 						ringScores = true;
 						scoreContribution = (effectValue * rarityMultiplier);
 						damage[effectName] *= scoreContribution;
-						console.log(`Operation [MULTIPLY]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
+						//console.log(`Operation [MULTIPLY]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
 					break;
 					default:
 						console.warn(`Unrecognised effect operation type "${effectOp}" on element ${scoringItem.id}`);
@@ -628,28 +644,37 @@ class RingScoring
 			if(ringScores)
 			{
 				this.outputToTxt("Scoring " + scoringItem.id + " from base=" + damage.base + ", power=" + damage.power);
-				console.log(`Triggering visual score animation for ${scoringItem.id}`);
+				//console.log(`Triggering visual score animation for ${scoringItem.id}`);
 				this.scoreRing(scoringItem);
 				
+				//Calculate the total at each step
+				damage.total = damage.totalMultiplier * damage.base * damage.power;
+				
+				this.setTotalScore(damage.total);
+				
+				console.log('Calculation Step Complete. Current Stats:', damage);
 				// This holds the loop frame open for 500ms so you can view the changes update incrementally
-				await sleep(500);
+				await sleep(this.#scoreDelayMs);
 			}
 		}
 		
+		/*
 		// Calculate final total damage numbers
-		damage.total = damage.base * damage.power;
+		damage.total = damage.totalMultiplier * damage.base * damage.power;
 		console.log('Calculation Step Complete. Final Stats Computed:', damage);
 		
 		// Update visual layouts to display total sum metrics
 		this.updateTotalScore(damage.total);
-	
+	  */
+	  
 		this.outputToTxt("Final Base = " + damage.base);
 		this.outputToTxt("Final Power = " + damage.power);
+		this.outputToTxt("Final TotalMultiplier = " + damage.totalMultiplier);
 		this.outputToTxt("Total Damage = " + damage.total);
 		
 		// Allow 1s for final total text to be read/animated before cleaning up components
 		console.log('All updates pushed to DOM view layers. Pausing execution before clearing temporary overlay popups...');
-		await sleep(1000);
+		await sleep(2 * this.#scoreDelayMs);
 		this.clearPopups();
 		console.log('--- Scoring Cycle Execution Loop Completed Cleanly ---');
 	}
@@ -675,25 +700,33 @@ class RingScoring
 		let effectValue = Number(scoringItem.dataset.effectValue || 0);
 		let effectName = scoringItem.dataset.effectName;
 		let effectOp = scoringItem.dataset.effectOperation;
-		let scoringTypes = ["base", "power"];
 		let scoreContribution = 0;
 		let popupString = "";
 		
-		if (scoringTypes.includes(effectName))
+		if (this.#scoringTypes.includes(effectName))
 		{
-		switch (effectOp)
+			switch (effectOp)
 			{
+				case "set":
+					scoreContribution = (effectValue * rarityMultiplier);
+					popupString = "=" + scoreContribution;
+					if (effectName === "base") this.setBaseScore(scoreContribution);
+					if (effectName === "power") this.setPowerScore(scoreContribution);
+					//if (effectName === "totalMultiplier") this.setTotalScore(scoreContribution);
+				break;
 				case "add":
 					scoreContribution = (effectValue * rarityMultiplier);
 					popupString = "+" + scoreContribution;
 					if (effectName === "base") this.addBaseScore(scoreContribution);
 					if (effectName === "power") this.addPowerScore(scoreContribution);
+					//if (effectName === "totalMultiplier") this.addTotalScore(scoreContribution);
 				break;
 				case "multiply":
 					scoreContribution = (effectValue * rarityMultiplier);
 					popupString = "x" + scoreContribution;
 					if (effectName === "base") this.multiplyBaseScore(scoreContribution);
 					if (effectName === "power") this.multiplyPowerScore(scoreContribution);
+					//if (effectName === "totalMultiplier") this.multiplyTotalScore(scoreContribution);
 				break;
 			}
 		}
@@ -702,45 +735,90 @@ class RingScoring
 		{
 			console.log(`Setting Popup markup contents for ${scoringItem.id} to "${popupString}"`);
 			popupEl.innerHTML = popupString;
-			popupEl.style.backgroundColor = effectName === "base" ? "var(--base-score-color)" : "var(--power-score-color)";
+			switch(effectName)
+			{
+				case "base":
+					popupEl.style.backgroundColor = "var(--base-score-color)";
+				break;
+				case "power":
+					popupEl.style.backgroundColor = "var(--power-score-color)";
+				break;
+				case "totalMultiplier":
+					popupEl.style.backgroundColor = "var(--total-score-color)";
+				break;
+			}
 			popupEl.classList.add("show");
 		}
 	}
 
+	setBaseScore = (base) =>
+	{
+		document.getElementById("baseScore").innerHTML = this.numberWithCommas(base);
+	}
+	
 	addBaseScore = (base) =>
 	{
-		let previous = parseInt(document.getElementById("baseScore").innerHTML) || 0;
+		let previous = parseInt(document.getElementById("baseScore").innerHTML.replaceAll(",","")) || 0;
 		base = previous + base;
-		document.getElementById("baseScore").innerHTML = base;
+		document.getElementById("baseScore").innerHTML = this.numberWithCommas(base);
 	}
 
 	multiplyBaseScore = (multiplier) =>
 	{
-		let previous = parseInt(document.getElementById("baseScore").innerHTML) || 0;
-		let newBase = previous * multiplier;
-		document.getElementById("baseScore").innerHTML = newBase;
+		let previous = parseInt(document.getElementById("baseScore").innerHTML.replaceAll(",","")) || 0;
+		let base = previous * multiplier;
+		document.getElementById("baseScore").innerHTML = this.numberWithCommas(base);
 	}
 
+	setPowerScore = (power) =>
+	{
+		document.getElementById("powerScore").innerHTML = this.numberWithCommas(power);
+	}
+	
 	addPowerScore = (power) => 
 	{
-		let previous = parseInt(document.getElementById("powerScore").innerHTML) || 0;
+		let previous = parseInt(document.getElementById("powerScore").innerHTML.replaceAll(",","")) || 0;
 		power = previous + power;
-		document.getElementById("powerScore").innerHTML = power;
+		document.getElementById("powerScore").innerHTML = this.numberWithCommas(power);
 	}
 
 	multiplyPowerScore = (multiplier) =>
 	{
-		let previous = parseInt(document.getElementById("powerScore").innerHTML) || 0;
-		let newPower = previous * multiplier;
-		document.getElementById("powerScore").innerHTML = newPower;
+		let previous = parseInt(document.getElementById("powerScore").innerHTML.replaceAll(",","")) || 0;
+		let power = previous * multiplier;
+		document.getElementById("powerScore").innerHTML = this.numberWithCommas(power);
+	}
+	
+	setTotalScore = (total) =>
+	{
+		document.getElementById("totalScore").innerHTML = this.numberWithCommas(total);
+	}
+	
+	addTotalScore = (total) => 
+	{
+		let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
+		total = previous + total;
+		document.getElementById("totalScore").innerHTML = this.numberWithCommas(total);
 	}
 
+	multiplyTotalScore = (multiplier) =>
+	{
+		let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
+		let total = previous * multiplier;
+		document.getElementById("totalScore").innerHTML = this.numberWithCommas(total);
+	}
+	
 	updateTotalScore = (total) => 
 	{
-		let previous = parseInt(document.getElementById("totalScore").innerHTML) || 0;
+		let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
 		total = previous + total;
-		document.getElementById("totalScore").innerHTML = total;
+		document.getElementById("totalScore").innerHTML = this.numberWithCommas(total);
 	}
+
+  numberWithCommas = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
 
 	clearPopups = () => 
 	{
@@ -758,11 +836,6 @@ class RingScoring
 		}
 	}
 
-	scoreDamage = (damage, ring) => 
-	{
-		// Placeholder method preserved from original code hook
-	}
-
 	outputToTxt = (msg) => 
 	{
 		let txtOutput = document.getElementById("txtTestOutput");
@@ -778,6 +851,7 @@ class RingScoring
 			txtOutput.value = "";
 		}
 	}
+	
 	clearHands = () => 
 	{
 		let handElements = document.querySelectorAll('.ring-wrapper');
@@ -789,6 +863,6 @@ class RingScoring
 	}
 }
 
-// Automatically instantiate the application scope
+// Instantiate the application scope
 let ringUi = new RingMapUi();
-let ringScoring = new RingScoring();
+let itemScoring = new ItemScoring();

@@ -4,6 +4,8 @@ class Damage
   base = 0;
   //Power is increased by effects
   power = 0;
+  //The total multiplier for "total" effects
+  totalMultiplier = 1;
   //The total damage for the attack
   total = 0;
   

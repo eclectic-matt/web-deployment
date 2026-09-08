@@ -124,10 +124,10 @@
 					"multiplier": 1
 				},
 				"effect": {
-					"name": "damage",
+					"name": "totalMultiplier",
 					"operation": "multiply",
-					"value": 2,
-					"description": "x2 Damage"
+					"value": 5,
+					"description": "x5 Total Score"
 				}
 			},
 			{
@@ -145,10 +145,10 @@
 					"multiplier": 1
 				},
 				"effect": {
-					"name": "damage",
-					"operation": "multiply",
-					"value": 2,
-					"description": "x2 Damage"
+					"name": "base",
+					"operation": "add",
+					"value": 100,
+					"description": "+100 Base Damage"
 				}
 			},
 			{
@@ -168,8 +168,8 @@
 				"effect": {
 					"name": "base",
 					"operation": "add",
-					"value": 10,
-					"description": "+10 Base Score"
+					"value": 25,
+					"description": "+25 Base Score"
 				}
 			},
 			{
@@ -189,12 +189,11 @@
 				"effect": {
 					"name": "base",
 					"operation": "add",
-					"value": 10,
-					"description": "+10 Base Score"
+					"value": 50,
+					"description": "+50 Base Score"
 				}
 			},
 			{
-			  
 				"id": "common-tattoo-skull",
 				"name": "Common Skull Tattoo",
 				"description": "A common tattoo of a skull",
@@ -209,12 +208,11 @@
 					"multiplier": 1
 				},
 				"effect": {
-					"name": "base",
-					"operation": "add",
-					"value": 10,
-					"description": "+10 Base Score"
+					"name": "totalMultiplier",
+					"operation": "multiply",
+					"value": 3,
+					"description": "x3 Total Score"
 				}
-			
 			}
 		]
 	}
