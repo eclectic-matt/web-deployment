@@ -120,6 +120,17 @@ h1
 	margin: 2px 0;
 }
 
+.item-wrapper
+{
+    position: relative;
+    /*display: inline-block;*/
+}
+.item-wrapper .popup-score
+{
+  padding: 15px;
+  width: 250%;
+}
+
 .item
 {
 	cursor: grab;
@@ -266,7 +277,8 @@ table.scoreTable
 	width: 95px;
 }
 
-.popup-score {
+.popup-score 
+{
 	position: absolute;
 	min-height: 20px;
 	min-width: 20px;
@@ -274,9 +286,10 @@ table.scoreTable
 	transform: translateX(-50%);
 	font-weight: bold;
 	font-size: 1.25rem;
+	text-align: center;
 	padding: 10px 5px;
 	border-radius: 5px;
-	background-color: #2ecc71;
+	background-color: var(--total-score-color);
 	color: #fff;
 	opacity: 0; 
 	overflow: visible;
@@ -284,24 +297,30 @@ table.scoreTable
 	z-index: 100;
 }
 
-.popup-score.show {
+.popup-score.show 
+{
 	animation: slideUpAndFade 1s ease-in-out forwards;
 }
 
-@keyframes slideUpAndFade {
-	0% {
+@keyframes slideUpAndFade 
+{
+	0% 
+	{
 		top: 100%;
 		opacity: 0;
 	}
-	15% {
+	15% 
+	{
 		top: -30px;
 		opacity: 1;
 	}
-	85% {
+	85% 
+	{
 		top: -40px;
 		opacity: 1;
 	}
-	100% {
+	100% 
+	{
 		top: -50px;
 		opacity: 0;
 	}

@@ -79,6 +79,9 @@ class RingMapUi
 			
 			ringsInfo.forEach(r => 
 			{
+			  let ringWrapper = document.createElement("div");
+			  ringWrapper.classList.add("item-wrapper");
+			  
 				let ringImg = document.createElement('img');
 				ringImg.src = r.icon;
 				//ringImg.className = this.#ringItemsClassName;
@@ -96,8 +99,13 @@ class RingMapUi
 				ringImg.dataset.effectValue = r.effect.value;
 				ringImg.dataset.effectName = r.effect.name;
 				ringImg.dataset.effectOperation = r.effect.operation;
-				
-				document.getElementById('inventory-' + r.type).appendChild(ringImg);
+				ringImg.dataset.description = r.name + "<br><br>" + r.effect.description;
+				let scoreEl = document.createElement("div");
+		    scoreEl.classList.add("popup-score");
+		    ringWrapper.appendChild(scoreEl);
+		    ringWrapper.appendChild(ringImg);
+		    
+				document.getElementById('inventory-' + r.type).appendChild(ringWrapper);
 			});
 		}
 		catch (error)
@@ -126,7 +134,8 @@ class RingMapUi
 		.forEach(ring => 
 		{
 			// --- UNIFIED POINTER DOWN (Mouse & Touch) ---
-			ring.addEventListener('pointerdown', (e) => {
+			ring.addEventListener('pointerdown', (e) => 
+			{
 				const imgElement = e.currentTarget.tagName === 'IMG' ? e.currentTarget : e.currentTarget.querySelector('img');
 				if (!imgElement) return;
 
@@ -149,16 +158,35 @@ class RingMapUi
 				this.updateVisualPosition(e.clientX, e.clientY);
 				document.body.appendChild(this.#dragVisualElement);
 			});
+			
+			ring.addEventListener('pointerover', (e) => 
+			{
+        // Specifically target the score element inside this ring
+        let popupEl = ring.parentElement.querySelector(".popup-score");
+        
+        if (popupEl)
+        {
+          popupEl.innerHTML = ring.dataset.description || "";
+          popupEl.style.backgroundColor = "var(--total-score-color)";
+          popupEl.classList.add("show");
+          
+          console.log('Showing', popupEl.innerHTML);
+          
+          setTimeout(() => this.clearPopup(popupEl), 5000);
+        }
+      });
 		
 			// --- UNIFIED POINTER MOVE ---
-			ring.addEventListener('pointermove', (e) => {
+			ring.addEventListener('pointermove', (e) => 
+			{
 				if (!this.#isDragging || !this.#dragVisualElement) return;
 				this.updateVisualPosition(e.clientX, e.clientY);
 				this.updateActiveHoverState(e.clientX, e.clientY);
 			});
 		
 			// --- UNIFIED POINTER UP / RELEASE ---
-			ring.addEventListener('pointerup', (e) => {
+			ring.addEventListener('pointerup', (e) => 
+			{
 				if (!this.#isDragging) return;
 				
 				this.highlightDropAreas(false);
@@ -188,6 +216,11 @@ class RingMapUi
 				if (e.target.classList.contains(this.#ringItemsClassName)) e.preventDefault();
 			});
 		});
+	}
+	
+	clearPopup(el)
+	{
+	  el.classList.remove("show");
 	}
 	
 	updateVisualPosition(clientX, clientY)
