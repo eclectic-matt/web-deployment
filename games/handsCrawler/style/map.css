@@ -80,11 +80,11 @@ section#main
 .game-scaler
 {
 	margin: 0;
+	padding: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;	
 	align-items: center;
-	/*transform-origin: center center;*/
 	width: auto;
 	height: auto;
 }
@@ -149,7 +149,8 @@ section#main
 }
 
 /* Main Parent Layout: Handles the 4 columns side-by-side */
-.ring-options {
+.ring-options 
+{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -159,7 +160,8 @@ section#main
 }
 
 /* Individual Columns: Equal width and stacks header above items */
-.ring-options section {
+.ring-options section 
+{
 	display: flex;
 	flex-direction: column;
 	flex: 1;
@@ -175,7 +177,8 @@ section#main
 }
 
 /* AUTOMATIC ROWS: Groups items horizontally and wraps them natively */
-.ring-options section .item-wrapper-container {
+.ring-options section .item-wrapper-container
+{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap; /* Essential: creates automatic rows */
@@ -184,7 +187,8 @@ section#main
 }
 
 /* Items stay relative so your absolute popup positioning works */
-.ring-options section .item-wrapper-container .item-wrapper {
+.ring-options section .item-wrapper-container .item-wrapper
+{
 	position: relative;
 	display: inline-block;
 	flex: 0 0 auto;  /* Prevents individual items from stretching out of shape */
@@ -425,7 +429,7 @@ button
 button#mainMenuBtn 
 {
 	position: relative;
-	margin-left: 75%;
+	margin: 0 0 0 70%;
 }
 
 #mainMenu

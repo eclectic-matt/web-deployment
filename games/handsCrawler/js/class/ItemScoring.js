@@ -37,9 +37,9 @@ class ItemScoring
 	
 	constructor()
 	{
-		this.initTestButtons();
+		//this.initTestButtons();
 	}
-	
+	/*
 	initTestButtons = () => 
 	{
 		this.#physicalAttackBtnEl = document.getElementById("btnTestPhysicalAttack");
@@ -63,6 +63,7 @@ class ItemScoring
 			});
 		}
 	}
+	*/
 	
 	triggerPhysicalAttack = async () => 
 	{

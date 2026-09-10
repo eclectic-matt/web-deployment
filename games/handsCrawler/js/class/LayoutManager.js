@@ -59,10 +59,17 @@ class LayoutManager
 				this.#mainEl.appendChild(testTopMenu);
 				let testSidePanel = this.generateSidePanel();
 				this.#mainEl.appendChild(testSidePanel);
+				let gameScaler = document.createElement('section');
+				gameScaler.id = 'game-scaler';
+				gameScaler.className = 'game-scaler';
 				let testHands = this.generateHandsSection();
-				this.#mainEl.appendChild(testHands);
+				//this.#mainEl.appendChild(testHands);
+				gameScaler.appendChild(testHands);
+				this.#mainEl.appendChild(gameScaler);
 				let testItems = this.generateItemsSection();
 				this.#mainEl.appendChild(testItems);
+				//gameScaler.appendChild(testItems);
+				//this.#mainEl.appendChild(gameScaler);
 				let testButtons = this.generateButtonsRow();
 				this.#mainEl.appendChild(testButtons);
 				//Now init drag-drop events
@@ -164,8 +171,8 @@ class LayoutManager
 	
 	generateHandsSection()
 	{
-		let gameScaler = document.createElement('section');
-		gameScaler.className = 'game-scaler';
+		//let gameScaler = document.createElement('section');
+		//gameScaler.className = 'game-scaler';
 
 		let section = document.createElement('section');
 		section.id = 'hands-section';
@@ -210,8 +217,9 @@ class LayoutManager
 			handWrapperDiv.appendChild(handMap);
 			section.appendChild(handWrapperDiv);
 		}
-		gameScaler.appendChild(section);
-		return gameScaler;
+		//gameScaler.appendChild(section);
+		//return gameScaler;
+		return section;
 	}
 	
 	generateItemsSection()
@@ -225,7 +233,7 @@ class LayoutManager
 		{
 			let typeName = Object.keys(this.#itemData.items)[typeId];
 			let typeData = this.#itemData.items[typeName];
-			console.log(typeName, typeData);
+			//console.log(typeName, typeData);
 			if(typeData.filter(item => { return item.type === typeName; }).length < 1) continue;
 			let inventorySection = document.createElement('section');
 			inventorySection.id = 'inventory-' + typeName;
@@ -278,6 +286,9 @@ class LayoutManager
 		let atkBtn = document.createElement('button');
 		atkBtn.id = 'btnTestPhysicalAttack';
 		atkBtn.innerHTML = 'Physical Attack';
+		atkBtn.addEventListener('click', (e) => {
+			itemScoring.triggerPhysicalAttack();
+		});
 		section.appendChild(atkBtn);
 		//Magical attack button? Not used
 		let magBtn = document.createElement('button');
@@ -288,6 +299,9 @@ class LayoutManager
 		let clrBtn = document.createElement('button');
 		clrBtn.id = 'btnClearHands';
 		clrBtn.innerHTML = 'Clear Hands';
+		clrBtn.addEventListener('click', (e) => {
+			itemScoring.clearHands();
+		});
 		section.appendChild(clrBtn);
 		return section;
 	}

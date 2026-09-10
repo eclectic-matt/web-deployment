@@ -9,6 +9,8 @@ class RingMapUi
 	//The hands element target dimensions
 	#targetWidth = 540;
 	#targetHeight = 420;
+	//#targetWidth = 480;
+	//#targetHeight = 400;
 	#inventoryTypes = ['ring', 'bracelet', 'held', 'tattoo'];
 	//SET CLASS NAMES / TAGS / IDs
 	#ringItemsClassName = 'item';
@@ -293,6 +295,8 @@ class RingMapUi
 	
 	resizeGameViewport()
 	{
+		//Set game scaler elemnent
+		this.#scalerEl = document.getElementById(this.#gameScalerId);
 		//Skip if not initialized
 		if (!this.#scalerEl) return;
 		//Calculate view multipliers
