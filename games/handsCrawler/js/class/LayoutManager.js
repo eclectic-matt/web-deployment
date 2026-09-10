@@ -65,6 +65,8 @@ class LayoutManager
 				this.#mainEl.appendChild(testItems);
 				let testButtons = this.generateButtonsRow();
 				this.#mainEl.appendChild(testButtons);
+				//Now init drag-drop events
+				addItemEvents();
 			break;
 			case 'mainMenu':
 				let mainMenu = this.generateMainMenu();
@@ -171,7 +173,7 @@ class LayoutManager
 		{
 			//Get hand data
 			let hand = this.#itemData.hands[i];
-				
+			
 			//Output hand wrapper div
 			let handWrapperDiv = document.createElement('div');
 			handWrapperDiv.className = 'hand-wrapper';

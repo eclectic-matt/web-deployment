@@ -12,6 +12,9 @@ const showScreen = (name) =>
 const passDataToLayout = (data) => 
 {
 	layoutMgr.setItemData(data);
+}
+
+const addItemEvents = () => {
 	ringUi.init();
 }
 
