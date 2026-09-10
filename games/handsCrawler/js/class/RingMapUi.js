@@ -63,6 +63,8 @@ class RingMapUi
 			
 			this.#itemData = await response.json();
 			
+			passDataToLayout(this.#itemData);
+			
 			//Generate hands
 			this.generateHands();
 			
@@ -143,6 +145,10 @@ class RingMapUi
 				let inventorySectionHeading = document.createElement('h4');
 				inventorySectionHeading.innerHTML = typeName.toUpperCase();
 				inventorySection.appendChild(inventorySectionHeading);
+				let itemWrapContainer = document.createElement('div');
+				itemWrapContainer.className = 'item-wrapper-container';
+				itemWrapContainer.id = 'inventory-wrapper-' + typeName;
+				inventorySection.appendChild(itemWrapContainer);
 				this.#ringOptionsAreaEl.appendChild(inventorySection);
 			}
 			
@@ -174,7 +180,7 @@ class RingMapUi
 		    itemWrapper.appendChild(scoreEl);
 		    itemWrapper.appendChild(itemImg);
 		    
-				document.getElementById('inventory-' + r.type).appendChild(itemWrapper);
+				document.getElementById('inventory-wrapper-' + r.type).appendChild(itemWrapper);
 			});
 	}
 	

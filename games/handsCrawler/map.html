@@ -11,44 +11,43 @@
 	<script src="./js/class/Damage.js" defer></script>
 	<script src="./js/map.js" defer></script>
 </head>
+
 <body>
 
 <section id="sidePanel">
 	<section id="scoringArea" class="scoring-area">
-		<table class="scoreTable">
+		<table class="score-table">
 			<tr>
-				<td class="scorePart" id="baseScore">0</td>
-				<td class="equationPart">x</td>
-				<td class="scorePart" id="powerScore">1</td>
-				<td class="equationPart">=</td>
-				<td class="scorePart" id="totalScore">0</td>
+				<td class="score-part" id="baseScore">0</td>
+				<td class="equation-part">x</td>
+				<td class="score-part" id="powerScore">1</td>
+				<td class="equation-part">=</td>
+				<td class="score-part" id="totalScore">0</td>
 			</tr>
 		</table>
 	</section>
 </section>
 
-<div class="game-scaler" id="game-scaler">
-	
-		<!-- Hands Maps -->
-		<div id="hands-section" class="hands-section">
-				<!-- filled by itemData.json -->
-		</div>
+<section class="game-scaler" id="game-scaler">
+	<!-- Hands Maps -->
+	<div id="hands-section" class="hands-section">
+			<!-- filled by itemData.json -->
+	</div>
 		
-		<!-- Item Palette -->
-		<div class="ring-palette">
-			<h3>Select an item:</h3>
-			<div class="ring-options" id="ring-options">
-				<!-- filled by itemData.json -->
-			</div>
+	<!-- Item Palette -->
+	<div class="ring-palette">
+		<h3>Select an item:</h3>
+		<div class="ring-options" id="ring-options">
+			<!-- filled by itemData.json -->
 		</div>
-		
-</div>
+	</div>
+</section>
 
-<div id="buttonRow">
+<section id="buttonRow">
 	<button id="btnTestPhysicalAttack">Physical</button>
 	<button id="btnTestMagicalAttack">Magical</button>
 	<button id="btnClearHands">Empty Hands</button>
-</div>
+</section>
 	
 </body>
 </html>

@@ -139,29 +139,48 @@ h1
 	font-size: 16px;
 }
 
-.ring-options
-{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	gap: 15px;
+/* Main Parent Layout: Handles the 4 columns side-by-side */
+.ring-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+  width: 100%;
+  box-sizing: border-box;
 }
-.ring-options section 
-{
-	padding: 5px;
-	border: 1px dotted white;
+
+/* Individual Columns: Equal width and stacks header above items */
+.ring-options section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 5px;
+  border: 1px dotted white;
 }
+
 .ring-options section h4 
 {
 	text-align: center;
 	margin: 2px 0;
 }
 
-.item-wrapper
-{
-    position: relative;
-    /*display: inline-block;*/
+/* AUTOMATIC ROWS: Groups items horizontally and wraps them natively */
+.ring-options section .item-wrapper-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Essential: creates automatic rows */
+  gap: 1px;       /* Horizontal and vertical spacing between items */
+  width: 100%;
 }
+
+/* Items stay relative so your absolute popup positioning works */
+.ring-options .item-wrapper {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;  /* Prevents individual items from stretching out of shape */
+}
+
 .item-wrapper .popup-score
 {
   padding: 15px;
@@ -262,14 +281,14 @@ section#scoringArea
 	font-size: 2rem;
 }
 
-table.scoreTable
+table.score-table
 {
 	width: 90%;
 	margin: 0 auto;
 	text-align: center;
 	border: 0;
 }
-.scorePart 
+.score-part 
 {
 	padding: 0 10px;
 	width: 40px;
@@ -277,7 +296,7 @@ table.scoreTable
 	padding: 0;
 	margin: 0;*/
 }
-.equationPart 
+.equation-part 
 {
 	padding: 0 10px;
 	width: 20px;

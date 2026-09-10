@@ -173,9 +173,9 @@
 	],
 	"items": {
 		"rings": [
-			{
+		  {
 				"id": "common-base-add-ring",
-				"name": "Ring of Add Base",
+				"name": "Common Ring of Add Base",
 				"description": "A ring which increases your base damage",
 				"icon": "./assets/img/basic_base_ring.png",
 				"type": "ring",
@@ -190,8 +190,50 @@
 				"effect": {
 					"name": "base",
 					"operation": "add",
-					"value": 5,
-					"description": "+5 Base"
+					"value": 1,
+					"description": "+1 Base"
+				}
+		  },
+			{
+				"id": "uncommon-base-add-ring",
+				"name": "Uncommon Ring of Add Base",
+				"description": "A ring which increases your base damage",
+				"icon": "./assets/img/basic_base_ring.png",
+				"type": "ring",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "uncommon",
+					"multiplier": 2
+				},
+				"effect": {
+					"name": "base",
+					"operation": "add",
+					"value": 1,
+					"description": "+2 Base"
+				}
+			},
+			{
+				"id": "rare-base-add-ring",
+				"name": "Rare Ring of Add Base",
+				"description": "A ring which increases your base damage",
+				"icon": "./assets/img/basic_base_ring.png",
+				"type": "ring",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "rare",
+					"multiplier": 4
+				},
+				"effect": {
+					"name": "base",
+					"operation": "add",
+					"value": 1,
+					"description": "+4 Base"
 				}
 			},
 			{
