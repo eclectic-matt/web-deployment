@@ -79,6 +79,10 @@ class LayoutManager
 				let mainMenu = this.generateMainMenu();
 				this.#mainEl.appendChild(mainMenu);
 			break;
+			case 'newGame':
+				let newGameTopMenu = this.generateTopMenu();
+				this.#mainEl.appendChild(newGameTopMenu);
+			break;
 		}
 	}
 	
@@ -89,6 +93,13 @@ class LayoutManager
 	{
 		let section = document.createElement('section');
 		section.id = 'mainMenu';
+		//Logo
+		let logoImg = document.createElement('img');
+		logoImg.src = './assets/img/dbl_dgt_logo.png';
+		section.appendChild(logoImg);
+		//Button list
+		let buttonsSection = document.createElement('section');
+		buttonsSection.className = 'buttons';
 		//Test button
 		let testButton = document.createElement('button');
 		testButton.innerHTML = 'Show Test Screen';
@@ -96,14 +107,15 @@ class LayoutManager
 		testButton.addEventListener('click', (e) => {
 			showScreen('test');
 		});
-		section.appendChild(testButton);
+		buttonsSection.appendChild(testButton);
 		let newGameButton = document.createElement('button');
 		newGameButton.innerHTML = 'New Game';
 		newGameButton.className = 'main-menu-button';
 		newGameButton.addEventListener('click', (e) => {
 			showScreen('newGame');
 		});
-		section.appendChild(newGameButton);
+		buttonsSection.appendChild(newGameButton);
+		section.appendChild(buttonsSection);
 		return section;
 	}
 

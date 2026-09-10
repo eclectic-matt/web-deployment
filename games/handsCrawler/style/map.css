@@ -289,15 +289,16 @@ section#scoringArea
 	background: #222;
 	/* top | right | bottom | left */
 	/*padding: 10px 30px 50px 40px;*/
-	width: 100%;
+	width: calc(100% - 60px);
 	margin: 0 auto;
 	font-size: 2rem;
 }
 
 table.score-table
 {
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
+	padding: 5px;
 	text-align: center;
 	border: 0;
 }
@@ -434,7 +435,22 @@ button#mainMenuBtn
 
 #mainMenu
 {
-	display: flex;
+	
+}
+
+#mainMenu img 
+{
+  position: relative;
+  display: block;
+  width: calc(100vw - 50px);
+  height: auto;
+  margin: 0;
+  padding: 25px;
+}
+
+#mainMenu .buttons
+{
+  display: flex;
 	justify-content: space-between;
 	gap: 25px;
 	width: 100%;
