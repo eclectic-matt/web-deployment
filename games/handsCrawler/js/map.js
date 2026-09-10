@@ -6,12 +6,13 @@ const layoutMgr = new LayoutManager();
 //Utility methods
 const showScreen = (name) => 
 {
-  layoutMgr.setCurrentScreen(name);
+	layoutMgr.setCurrentScreen(name);
 }
 
 const passDataToLayout = (data) => 
 {
-  layoutMgr.setItemData(data);
+	layoutMgr.setItemData(data);
+	ringUi.init();
 }
 
 // Clean utility helper to delay execution in loop frames

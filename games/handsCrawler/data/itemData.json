@@ -24,156 +24,156 @@
 		"Shield (1/2 damage taken)"
 	],
 	"hands": [
-	  {
-	    "name": "left",
-	    "src": "assets/img/left_hand.png",
-	    "alt": "Left Hand",
+		{
+			"name": "left",
+			"src": "assets/img/left_hand.png",
+			"alt": "Left Hand",
 			"usemap": "left-hand-map",
 			"class": "hand-image",
-	    "areas": [
-	      {
-	        "name": "Left Pinky Finger",
-	        "finger": "left-pinky",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "48,25,80,118",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Left Ring Finger",
-	        "finger": "left-ring",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "85,16,117,115",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Left Middle Finger",
-	        "finger": "left-middle",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "120,5,152,112",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Left Index Finger",
-	        "finger": "left-index",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "155,16,187,135",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Left Thumb Finger",
-	        "finger": "left-thumb",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "190,96,240,150",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Left Tattoo",
-	        "finger": "left-tattoo",
-	        "itemType": "tattoo",
-	        "shape": "rect",
-	        "coords": "65,140,170,175",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Left Bracelet",
-	        "finger": "left-bracelet",
-	        "itemType": "bracelet",
-	        "shape": "rect",
-	        "coords": "65,200,170,240",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Left Held",
-	        "finger": "left-held-item",
-	        "itemType": "held",
-	        "shape": "circle",
-	        "coords": "220,50,35",
-	        "href": "#"
-	      }
-	    ]
-	  },
-	  {
-	    "name": "right",
-	    "src": "assets/img/right_hand.png",
-	    "alt": "Right Hand",
+			"areas": [
+				{
+					"name": "Left Pinky Finger",
+					"finger": "left-pinky",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "48,25,80,118",
+					"href": "#"
+				},
+				{
+					"name": "Left Ring Finger",
+					"finger": "left-ring",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "85,16,117,115",
+					"href": "#"
+				},
+				{
+					"name": "Left Middle Finger",
+					"finger": "left-middle",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "120,5,152,112",
+					"href": "#"
+				},
+				{
+					"name": "Left Index Finger",
+					"finger": "left-index",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "155,16,187,135",
+					"href": "#"
+				},
+				{
+					"name": "Left Thumb Finger",
+					"finger": "left-thumb",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "190,96,240,150",
+					"href": "#"
+				},
+				{
+					"name": "Left Tattoo",
+					"finger": "left-tattoo",
+					"itemType": "tattoo",
+					"shape": "rect",
+					"coords": "65,140,170,175",
+					"href": "#"
+				},
+				{
+					"name": "Left Bracelet",
+					"finger": "left-bracelet",
+					"itemType": "bracelet",
+					"shape": "rect",
+					"coords": "65,200,170,240",
+					"href": "#"
+				},
+				{
+					"name": "Left Held",
+					"finger": "left-held-item",
+					"itemType": "held",
+					"shape": "circle",
+					"coords": "220,50,35",
+					"href": "#"
+				}
+			]
+		},
+		{
+			"name": "right",
+			"src": "assets/img/right_hand.png",
+			"alt": "Right Hand",
 			"usemap": "#right-hand-map",
 			"class": "hand-image",
-	    "areas": [
-	      {
-	        "name": "Right Pinky Finger",
-	        "finger": "right-pinky",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "176,25,208,118",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Right Ring Finger",
-	        "finger": "right-ring",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "139,16,171,115",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Right Middle Finger",
-	        "finger": "right-middle",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "104,5,136,112",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Right Index Finger",
-	        "finger": "right-index",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "69,16,101,135",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Right Thumb Finger",
-	        "finger": "right-thumb",
-	        "itemType": "ring",
-	        "shape": "rect",
-	        "coords": "16,96,66,150",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Right Tattoo",
-	        "finger": "right-tattoo",
-	        "itemType": "tattoo",
-	        "shape": "rect",
-	        "coords": "85,140,190,175",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Right Bracelet",
-	        "finger": "right-bracelet",
-	        "itemType": "bracelet",
-	        "shape": "rect",
-	        "coords": "85,200,190,240",
-	        "href": "#"
-	      },
-	      {
-	        "name": "Right Held",
-	        "finger": "right-held-item",
-	        "itemType": "held",
-	        "shape": "circle",
-	        "coords": "35,50,35",
-	        "href": "#"
-	      }
-	    ]
-	  }
+			"areas": [
+				{
+					"name": "Right Pinky Finger",
+					"finger": "right-pinky",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "176,25,208,118",
+					"href": "#"
+				},
+				{
+					"name": "Right Ring Finger",
+					"finger": "right-ring",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "139,16,171,115",
+					"href": "#"
+				},
+				{
+					"name": "Right Middle Finger",
+					"finger": "right-middle",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "104,5,136,112",
+					"href": "#"
+				},
+				{
+					"name": "Right Index Finger",
+					"finger": "right-index",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "69,16,101,135",
+					"href": "#"
+				},
+				{
+					"name": "Right Thumb Finger",
+					"finger": "right-thumb",
+					"itemType": "ring",
+					"shape": "rect",
+					"coords": "16,96,66,150",
+					"href": "#"
+				},
+				{
+					"name": "Right Tattoo",
+					"finger": "right-tattoo",
+					"itemType": "tattoo",
+					"shape": "rect",
+					"coords": "85,140,190,175",
+					"href": "#"
+				},
+				{
+					"name": "Right Bracelet",
+					"finger": "right-bracelet",
+					"itemType": "bracelet",
+					"shape": "rect",
+					"coords": "85,200,190,240",
+					"href": "#"
+				},
+				{
+					"name": "Right Held",
+					"finger": "right-held-item",
+					"itemType": "held",
+					"shape": "circle",
+					"coords": "35,50,35",
+					"href": "#"
+				}
+			]
+		}
 	],
 	"items": {
-		"rings": [
-		  {
+		"ring": [
+			{
 				"id": "common-base-add-ring",
 				"name": "Common Ring of Add Base",
 				"description": "A ring which increases your base damage",
@@ -193,7 +193,7 @@
 					"value": 1,
 					"description": "+1 Base"
 				}
-		  },
+			},
 			{
 				"id": "uncommon-base-add-ring",
 				"name": "Uncommon Ring of Add Base",
@@ -298,7 +298,9 @@
 					"value": 2,
 					"description": "x2 Power"
 				}
-			},
+			}
+		],
+		"bracelet": [
 			{
 				"id": "basic-chain-bracelet",
 				"name": "Basic Chain Bracelet",
@@ -319,7 +321,9 @@
 					"value": 5,
 					"description": "x5 Power"
 				}
-			},
+			}
+		],
+		"held": [
 			{
 				"id": "basic-spell-fireball",
 				"name": "Basic Spell Fireball",
@@ -382,7 +386,9 @@
 					"value": 50,
 					"description": "+50 Base Score"
 				}
-			},
+			}
+		],
+		"tattoo": [
 			{
 				"id": "common-tattoo-skull",
 				"name": "Common Skull Tattoo",

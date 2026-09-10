@@ -66,10 +66,10 @@ class RingMapUi
 			passDataToLayout(this.#itemData);
 			
 			//Generate hands
-			this.generateHands();
+			//this.generateHands();
 			
 			//Generate items
-			this.generateItems();
+			//this.generateItems();
 		}
 		catch (error)
 		{
@@ -114,14 +114,14 @@ class RingMapUi
 				//Output areas
 				for(let a = 0; a < hand.areas.length; a++)
 				{
-				  let areaData = hand.areas[a];
-				  let area = document.createElement('area');
-				  area.shape = areaData.shape;
-				  area.coords = areaData.coords;
-				  area.alt = areaData.alt;
-				  area.dataset.finger = areaData.finger;
-				  area.dataset.itemType = areaData.itemType;
-				  handMap.appendChild(area);
+					let areaData = hand.areas[a];
+					let area = document.createElement('area');
+					area.shape = areaData.shape;
+					area.coords = areaData.coords;
+					area.alt = areaData.alt;
+					area.dataset.finger = areaData.finger;
+					area.dataset.itemType = areaData.itemType;
+					handMap.appendChild(area);
 				}
 				
 				handWrapperDiv.appendChild(handMap);
@@ -154,9 +154,9 @@ class RingMapUi
 			
 			itemInfo.forEach(r => 
 			{
-			  let itemWrapper = document.createElement("div");
-			  itemWrapper.classList.add("item-wrapper");
-			  
+				let itemWrapper = document.createElement("div");
+				itemWrapper.classList.add("item-wrapper");
+				
 				let itemImg = document.createElement('img');
 				itemImg.src = r.icon;
 				//ringImg.className = this.#ringItemsClassName;
@@ -176,10 +176,10 @@ class RingMapUi
 				itemImg.dataset.effectOperation = r.effect.operation;
 				itemImg.dataset.description = r.name + "<br><br>" + r.effect.description;
 				let scoreEl = document.createElement("div");
-		    scoreEl.classList.add("popup-score");
-		    itemWrapper.appendChild(scoreEl);
-		    itemWrapper.appendChild(itemImg);
-		    
+				scoreEl.classList.add("popup-score");
+				itemWrapper.appendChild(scoreEl);
+				itemWrapper.appendChild(itemImg);
+				
 				document.getElementById('inventory-wrapper-' + r.type).appendChild(itemWrapper);
 			});
 	}
