@@ -16,6 +16,7 @@ const passDataToLayout = (data) =>
 
 const addItemEvents = () => {
 	ringUi.init();
+	ringUi.resizeGameViewport();
 }
 
 // Clean utility helper to delay execution in loop frames

@@ -222,20 +222,20 @@ class RingMapUi
 			
 			ring.addEventListener('pointerover', (e) => 
 			{
-        // Specifically target the score element inside this ring
-        let popupEl = ring.parentElement.querySelector(".popup-score");
-        
-        if (popupEl)
-        {
-          popupEl.innerHTML = ring.dataset.description || "";
-          popupEl.style.backgroundColor = "var(--total-score-color)";
-          popupEl.classList.add("show");
-          
-          //console.log('Showing', popupEl.innerHTML);
-          
-          setTimeout(() => this.clearPopup(popupEl), 5000);
-        }
-      });
+				// Specifically target the score element inside this ring
+				let popupEl = ring.parentElement.querySelector(".popup-score");
+				
+				if (popupEl)
+				{
+					popupEl.innerHTML = ring.dataset.description || "";
+					popupEl.style.backgroundColor = "var(--total-score-color)";
+					popupEl.classList.add("show");
+					
+					//console.log('Showing', popupEl.innerHTML);
+					
+					setTimeout(() => this.clearPopup(popupEl), 5000);
+				}
+			});
 		
 			// --- UNIFIED POINTER MOVE ---
 			ring.addEventListener('pointermove', (e) => 
@@ -281,7 +281,7 @@ class RingMapUi
 	
 	clearPopup(el)
 	{
-	  el.classList.remove("show");
+		el.classList.remove("show");
 	}
 	
 	updateVisualPosition(clientX, clientY)
