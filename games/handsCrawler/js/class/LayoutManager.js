@@ -164,6 +164,9 @@ class LayoutManager
 	
 	generateHandsSection()
 	{
+		let gameScaler = document.createElement('section');
+		gameScaler.className = 'game-scaler';
+
 		let section = document.createElement('section');
 		section.id = 'hands-section';
 		section.className = 'hands-section';
@@ -207,7 +210,8 @@ class LayoutManager
 			handWrapperDiv.appendChild(handMap);
 			section.appendChild(handWrapperDiv);
 		}
-		return section;
+		gameScaler.appendChild(section);
+		return gameScaler;
 	}
 	
 	generateItemsSection()
