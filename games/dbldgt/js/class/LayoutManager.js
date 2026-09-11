@@ -17,7 +17,12 @@ class LayoutManager
 	#mainElId = 'main';
 	#mainEl = null;
 	#itemData = null;
-	#inventoryTypes = ['ring', 'bracelet', 'held', 'tattoo'];
+	#inventoryTypes = [
+		'ring', 
+		'bracelet', 
+		'held', 
+		'tattoo'
+	];
 	
 	constructor()
 	{
@@ -82,6 +87,8 @@ class LayoutManager
 			case 'newGame':
 				let newGameTopMenu = this.generateTopMenu();
 				this.#mainEl.appendChild(newGameTopMenu);
+				let newGameMap = this.generateMap();
+				this.#mainEl.appendChild(newGameMap);
 			break;
 		}
 	}
@@ -315,6 +322,16 @@ class LayoutManager
 			itemScoring.clearHands();
 		});
 		section.appendChild(clrBtn);
+		return section;
+	}
+	
+	generateMap()
+	{
+		let section = document.createElement('section');
+		section.id = 'map';
+		section.style.width = '600px';
+		section.style.height = '400px'
+		createMapForTarget(section);
 		return section;
 	}
 }

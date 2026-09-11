@@ -45,7 +45,7 @@ body
 	color: #eee;
 	margin: 0;
 	/* top | right | bottom | left */
-	padding: 20px 0 0 0;
+	padding: 0 0 20px 0;
 	width: 100%;
 	height: 100%;
 	overflow: hidden; 
@@ -156,6 +156,7 @@ section#main
 	justify-content: space-between;
 	gap: 5px;
 	width: 100%;
+	padding: 0 10px;
 	box-sizing: border-box;
 }
 
@@ -470,4 +471,18 @@ button#mainMenuBtn
 	padding: 10px 25px;
 	gap: 25px;
 	border: 5px outset white;
+}
+
+/*
+MAP
+*/
+.map-node 
+{
+	border: 1px solid white;
+	padding: 1px;
+	position: absolute;
+}
+.map-line 
+{
+	position: absolute;
 }

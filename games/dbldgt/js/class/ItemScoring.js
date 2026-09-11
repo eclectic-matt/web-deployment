@@ -39,32 +39,7 @@ class ItemScoring
 	{
 		//this.initTestButtons();
 	}
-	/*
-	initTestButtons = () => 
-	{
-		this.#physicalAttackBtnEl = document.getElementById("btnTestPhysicalAttack");
-		if (this.#physicalAttackBtnEl)
-		{
-			this.#physicalAttackBtnEl.addEventListener("click", (ev) =>
-			{
-				this.triggerPhysicalAttack();
-			});
-		}
-		
-		this.#magicalAttackBtnEl = document.getElementById("btnTestMagicalAttack");
-		
-		this.#clearHandsBtnEl = document.getElementById("btnClearHands");
-		if (this.#clearHandsBtnEl)
-		{
-			this.#clearHandsBtnEl.addEventListener("click", () =>
-			{
-				//this.clearTxt();
-				this.clearHands();
-			});
-		}
-	}
-	*/
-	
+
 	triggerPhysicalAttack = async () => 
 	{
 		// Clear old text first so you can clearly see the new calculations run step-by-step
