@@ -596,4 +596,23 @@ class RingMapUi
 		wrapper.appendChild(ringImg);
 		activeContainer.appendChild(wrapper);
 	}
+	
+	getItems(maxRarity = 0, count = 0)
+	{
+		let items = [];
+		let allItems = [
+			...this.#itemData.items.ring, 
+			...this.#itemData.items.bracelet,
+			...this.#itemData.items.held,
+			...this.#itemData.items.tattoo
+		];
+		allItems = allItems.filter((i) => { return i.rarity.multiplier <= maxRarity;});
+		console.log(allItems);
+		if(allItems.length == count) return allItems;
+		for(let i = 0; i < count; i++)
+		{
+			let item = allItems[Math.floor(Math.random() * allItems.length)];
+			items.push(item);
+		}
+	}
 }

@@ -6,6 +6,13 @@
 	--total-score-color: #2ecc71;
 	--scoring-font-size: 2rem;
 	--other-font-size: 1rem;
+	
+	/* Symbols */
+	--symbol-chest: '\1fa8e';
+	--symbol-battle : '\1f44a';
+	--symbol-event: '\2049';
+	--symbol-shop: '\1f6d2';
+	--symbol-boss: '\1f451';
 }
 
 @media screen and (min-width < 500px) 
@@ -483,9 +490,9 @@ button#mainMenuBtn
 	border: 5px outset white;
 }
 
-/*
-MAP
-*/
+/****************
+*   MAP SCREEN 
+****************/
 #map 
 {
 	position: absolute;
@@ -497,8 +504,9 @@ MAP
 {
 	border: 1px solid white;
 	border-radius: 10px;
-	background-color: #999;
-	padding: 10px;
+	background-color: #222;
+	/* top | right | bottom | left */
+	padding: 12px 5px 5px 12px;
 	position: absolute;
 	z-index: 10;
 }
@@ -516,10 +524,110 @@ MAP
 }
 .map-node.chest::before
 {
-	content: 'C';
+	content: var(--symbol-chest);
 }
-
+.map-node.battle::before
+{
+	content: var(--symbol-battle);
+}
+.map-node.event::before
+{
+	content: var(--symbol-event);
+}
+.map-node.shop::before
+{
+	content: var(--symbol-shop);
+}
+.map-node.boss::before
+{
+	content: var(--symbol-boss);
+}
 .map-line 
 {
 	position: absolute;
+}
+
+/****************
+*  ABOUT SCREEN 
+****************/
+
+.about 
+{
+	padding: 20%;
+}
+
+/****************
+*  CHEST SCREEN 
+****************/
+
+section.chest 
+{
+	display: flex;
+	flex-direction: column;
+}
+
+#chest_lid 
+{
+   position: absolute;
+   top: 175px;
+   left: 20px;
+   width: 300px;
+   height: 200px;
+   z-index: 10;
+}
+#chest_lid.animate 
+{
+  animation: chestLidOff 5s linear forwards;
+}
+
+#chest_base 
+{
+  position: absolute;
+  top: 300px;
+  left: 20px;
+  width: 300px;
+  height: 200px;
+  z-index: 5;
+}
+#chest_base.animate 
+{
+  animation: chestBaseFade 5s linear forwards;
+}
+
+@keyframes chestLidOff 
+{
+	0% 
+	{
+		top: 175px;
+		left: 20px;
+		opacity: 1;
+	}
+	50% 
+	{
+		top: 165px;
+    left: 100px;
+		opacity: 0.5;
+	}
+	100% 
+	{
+		top: 155px;
+    left: 180px;
+		opacity: 0;
+	}
+}
+
+@keyframes chestBaseFade
+{
+	0% 
+	{
+		opacity: 1;
+	}
+	50% 
+	{
+		opacity: 0.5;
+	}
+	100% 
+	{
+		opacity: 0;
+	}
 }

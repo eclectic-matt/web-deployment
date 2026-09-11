@@ -4,7 +4,7 @@ class MapGenerator
 		'chest',    // 0
 		'battle',   // 1
 		'event',    // 2
-		'merchant', // 3
+		'shop',			// 3
 		'boss'      // 4
 	];
 	
@@ -18,37 +18,36 @@ class MapGenerator
 		let node0 = { id: 0, x: 0, y: 50, type: 0, connections: [1, 2] };
 		nodeMap.push(node0);
 		
-		nodeType = this.getRandomNode(0,3);
+		nodeType = this.getRandomNode(0, this.#nodeTypes.length);
 		let node1 = { id: 1, x: 25, y: 25, type: nodeType, connections: [3, 4] };
 		nodeMap.push(node1);
 		
-		nodeType = this.getRandomNode(0,3);
+		nodeType = this.getRandomNode(0, this.#nodeTypes.length);
 		let node2 = { id: 2, x: 25, y: 75, type: nodeType, connections: [4, 5] };
 		nodeMap.push(node2);
 		
-		nodeType = this.getRandomNode(0,3);
+		nodeType = this.getRandomNode(0, this.#nodeTypes.length);
 		let node3 = { id: 3, x: 50, y: 0, type: nodeType, connections: [6] };
 		nodeMap.push(node3);
 		
-		nodeType = this.getRandomNode(0,3);
+		nodeType = this.getRandomNode(0, this.#nodeTypes.length);
 		let node4 = { id: 4, x: 50, y: 50, type: nodeType, connections: [6, 7] };
 		nodeMap.push(node4);
 		
-		nodeType = this.getRandomNode(0,3);
+		nodeType = this.getRandomNode(0, this.#nodeTypes.length);
 		let node5 = { id: 5, x: 50, y: 100, type: nodeType, connections: [7] };
 		nodeMap.push(node5);
 		
-		// Fixed: Corrected X and Y positions based on your diagram map grid
-		nodeType = this.getRandomNode(0,3);
+		nodeType = this.getRandomNode(0, this.#nodeTypes.length);
 		let node6 = { id: 6, x: 75, y: 25, type: nodeType, connections: [8] };
 		nodeMap.push(node6);
 		
-		nodeType = this.getRandomNode(0,3);
+		nodeType = this.getRandomNode(0, this.#nodeTypes.length);
 		let node7 = { id: 7, x: 75, y: 75, type: nodeType, connections: [8] };
 		nodeMap.push(node7);
 		
-		nodeType = this.getRandomNode(0,3);
-		let node8 = { id: 8, x: 100, y: 50, type: nodeType, connections: [] };
+		//Final node is type boss
+		let node8 = { id: 8, x: 100, y: 50, type: 4, connections: [] };
 		nodeMap.push(node8);
 		
 		return nodeMap;
@@ -70,12 +69,14 @@ class MapGenerator
 			div.classList.add('map-node');
 			div.classList.add(this.#nodeTypes[node.type]);
 			div.id = 'node' + node.id;
+			div.dataset.type = node.type;
 			
 			//If no node (completed) then only allow click on node0
 			if(currentNode === false && i === 0)
 			{
 				div.classList.add('moveable');
 				div.addEventListener('click', (e) => {
+					//console.log('moving',e.target);
 					moveToMapNode(e.target);
 				});
 			}

@@ -2,6 +2,7 @@ class LayoutManager
 {
 	#screenNames = [
 		'mainMenu',
+		'about',
 		'pauseMenu',
 		'test',
 		'newGame',
@@ -91,6 +92,14 @@ class LayoutManager
 				this.#mainEl.appendChild(newGameMap);
 				this.generateMap(newGameMap);
 			break;
+			case 'about':
+				let aboutSection = this.generateAbout();
+				this.#mainEl.appendChild(aboutSection);
+				break;
+			case 'chest':
+				let chestSection = this.generateChestScreen();
+				this.#mainEl.appendChild(chestSection);
+				break;
 		}
 	}
 	
@@ -116,6 +125,7 @@ class LayoutManager
 			showScreen('test');
 		});
 		buttonsSection.appendChild(testButton);
+		//New Game
 		let newGameButton = document.createElement('button');
 		newGameButton.innerHTML = 'New Game';
 		newGameButton.className = 'main-menu-button';
@@ -123,6 +133,15 @@ class LayoutManager
 			showScreen('newGame');
 		});
 		buttonsSection.appendChild(newGameButton);
+		//About section
+		let aboutButton = document.createElement('button');
+		aboutButton.innerHTML = 'About';
+		aboutButton.className = 'main-menu-button';
+		aboutButton.addEventListener('click', (e) => {
+			showScreen('about');
+		});
+		buttonsSection.appendChild(aboutButton);
+		//Add buttons list to section
 		section.appendChild(buttonsSection);
 		return section;
 	}
@@ -338,4 +357,45 @@ class LayoutManager
 	{
 		createMapForTarget(section)
 	}
+	
+	generateAbout()
+	{
+		let section = document.createElement('section');
+		let backToMenuBtn = document.createElement('button');
+		backToMenuBtn.id = 'mainMenuBtn';
+		backToMenuBtn.innerHTML = 'Main Menu &#8617;';
+		backToMenuBtn.addEventListener('click', (e) => {
+			showScreen('mainMenu');
+		});
+		section.appendChild(backToMenuBtn);
+		let infoSection = document.createElement('section');
+		infoSection.className = 'about';
+		infoSection.innerHTML = 'Developed by EclecticMatt ©2026';
+		section.appendChild(infoSection);
+		return section;
+	}
+	
+	generateChestScreen()
+	{
+		let section = document.createElement('section');
+		section.classList.add('chest');
+		//section.innerHTML = '&#1fa8e;';
+		let chestLidImg = document.createElement('img');
+		chestLidImg.src = './assets/img/chest_lid.png';
+		chestLidImg.id = 'chest_lid';
+		section.appendChild(chestLidImg);
+		let chestBaseImg = document.createElement('img');
+		chestBaseImg.src = './assets/img/chest_base.png';
+		chestBaseImg.id = 'chest_base';
+		section.appendChild(chestBaseImg);
+		//Get two items to offer
+		let items = getItems(0.5,2);
+		
+		section.addEventListener('click', (e) => {
+		  chestBaseImg.classList.add('animate');
+		  chestLidImg.classList.add('animate');
+		});
+		return section;
+	}
+
 }
