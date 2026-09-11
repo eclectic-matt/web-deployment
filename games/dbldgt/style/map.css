@@ -1,5 +1,6 @@
 :root 
 {
+	--bg-color: #000;
 	--power-score-color: #3498db;
 	--base-score-color: #e74c3c;
 	--total-score-color: #2ecc71;
@@ -41,7 +42,7 @@ body
 	align-items: center;
 	justify-content: flex-start;
 	align-content: flex-start;
-	background-color: #222;
+	background-color: var(--bg-color);
 	color: #eee;
 	margin: 0;
 	/* top | right | bottom | left */
@@ -436,22 +437,21 @@ button#mainMenuBtn
 
 #mainMenu
 {
-	
 }
 
 #mainMenu img 
 {
-  position: relative;
-  display: block;
-  width: calc(100vw - 50px);
-  height: auto;
-  margin: 0;
-  padding: 25px;
+	position: relative;
+	display: block;
+	width: calc(100vw - 50px);
+	height: auto;
+	margin: 0;
+	padding: 25px;
 }
 
 #mainMenu .buttons
 {
-  display: flex;
+	display: flex;
 	justify-content: space-between;
 	gap: 25px;
 	width: 100%;

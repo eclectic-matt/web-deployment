@@ -1,3 +1,7 @@
+/**
+ * The Game class holds saved data, stats, achievements between games.
+ * Use the Session class for one instance of a game (one run).
+ */
 class Game 
 {
 	#saveName = "HandsCrawlerData";
@@ -10,7 +14,8 @@ class Game
 			lastRunStarted: ""
 		},
 		runs: [],
-		achievements: []
+		achievements: [],
+		currentSession: null
 	}
 
 	constructor()
@@ -19,7 +24,14 @@ class Game
 		this.#saveData = loadFromSavedData();
 		if(this.#saveData == {})
 		{
-
+			this.#saveData = this.#defaultData;
+		}
+		else
+		{
+			if(this.#saveData.currentSession?.InProgress === true)
+			{
+				//Load session in progress
+			}
 		}
 	}
 
