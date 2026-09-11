@@ -27,5 +27,10 @@ const createMapForTarget = (target) =>
 	mapGenerator.outputMap(target, map);
 }
 
+const moveToMapNode = (node) => 
+{
+	console.log('Clicked to move to',node.id);
+}
+
 // Clean utility helper to delay execution in loop frames
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
