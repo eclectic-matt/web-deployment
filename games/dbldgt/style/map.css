@@ -4,6 +4,16 @@
 	--power-score-color: #3498db;
 	--base-score-color: #e74c3c;
 	--total-score-color: #2ecc71;
+	--scoring-font-size: 2rem;
+	--other-font-size: 1rem;
+}
+
+@media screen and (min-width < 500px) 
+{
+	:root {
+		--scoring-font-size: 1rem;
+		--other-font-size: 0.5rem;
+	}
 }
 
 /*
@@ -292,7 +302,7 @@ section#scoringArea
 	/* top | right | bottom | left */
 	/*padding: 10px 30px 50px 40px;*/
 	width: calc(100% - 60px);
-	margin: 0 auto;
+	margin: 0 1%;
 	font-size: 2rem;
 }
 
