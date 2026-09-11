@@ -476,12 +476,39 @@ button#mainMenuBtn
 /*
 MAP
 */
+#map 
+{
+	position: absolute;
+	top: 50px;
+	left: 25px;
+}
+
 .map-node 
 {
 	border: 1px solid white;
-	padding: 1px;
+	border-radius: 10px;
+	background-color: #999;
+	padding: 10px;
 	position: absolute;
+	z-index: 10;
 }
+.map-node.current 
+{
+	background-color: red;
+}
+.map-node.current::before 
+{
+	content: 'YOU';
+}
+.map-node.moveable 
+{
+	background-color: green;
+}
+.map-node.chest::before
+{
+	content: 'C';
+}
+
 .map-line 
 {
 	position: absolute;

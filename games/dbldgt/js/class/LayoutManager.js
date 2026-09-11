@@ -87,8 +87,9 @@ class LayoutManager
 			case 'newGame':
 				let newGameTopMenu = this.generateTopMenu();
 				this.#mainEl.appendChild(newGameTopMenu);
-				let newGameMap = this.generateMap();
+				let newGameMap = this.generateMapSection();
 				this.#mainEl.appendChild(newGameMap);
+				this.generateMap(newGameMap);
 			break;
 		}
 	}
@@ -325,13 +326,16 @@ class LayoutManager
 		return section;
 	}
 	
-	generateMap()
+	generateMapSection()
 	{
 		let section = document.createElement('section');
 		section.id = 'map';
-		section.style.width = '600px';
-		section.style.height = '400px'
-		createMapForTarget(section);
+		section.style.width = '300px';
+		section.style.height = '200px'
 		return section;
+	}
+	generateMap(section)
+	{
+		createMapForTarget(section)
 	}
 }
