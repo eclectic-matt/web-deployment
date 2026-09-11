@@ -138,14 +138,13 @@ class ItemScoring
 			}
 		}
 		
-		/*
-		// Calculate final total damage numbers
-		damage.total = damage.totalMultiplier * damage.base * damage.power;
-		console.log('Calculation Step Complete. Final Stats Computed:', damage);
-		
-		// Update visual layouts to display total sum metrics
-		this.updateTotalScore(damage.total);
-	  */
+		if(damage.total === 0)
+		{
+			// Update total (if no rings scored)
+			damage.total = damage.totalMultiplier * damage.base * damage.power;
+			
+			this.updateTotalScore(damage.total);
+		}
 	  
 		this.outputToTxt("Final Base = " + damage.base);
 		this.outputToTxt("Final Power = " + damage.power);
