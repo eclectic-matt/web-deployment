@@ -55,6 +55,8 @@ class MapGenerator
 	
 	outputMap(target, map, currentNode = false)
 	{
+	  //console.log('outputMap', target, map, currentNode);
+	  
 		target.innerHTML = '';
 		
 		// Safely capture target dimensions

@@ -86,11 +86,15 @@ class LayoutManager
 				this.#mainEl.appendChild(mainMenu);
 			break;
 			case 'newGame':
-				let newGameTopMenu = this.generateTopMenu();
-				this.#mainEl.appendChild(newGameTopMenu);
-				let newGameMap = this.generateMapSection();
-				this.#mainEl.appendChild(newGameMap);
-				this.generateMap(newGameMap);
+				this.#currentScreen = 'map';
+				this.loadScreen();
+			break;
+			case 'map':
+			  let newGameTopMenu = this.generateTopMenu();
+        this.#mainEl.appendChild(newGameTopMenu);
+			  let newGameMap = this.generateMapSection();
+        this.#mainEl.appendChild(newGameMap);
+        this.generateMap(newGameMap);
 			break;
 			case 'about':
 				let aboutSection = this.generateAbout();
@@ -376,56 +380,90 @@ class LayoutManager
 	}
 	
 	generateChestScreen()
-	{
-		let section = document.createElement('section');
-		section.classList.add('chest');
-		let backToMenuBtn = document.createElement('button');
-		backToMenuBtn.id = 'mainMenuBtn';
-		backToMenuBtn.innerHTML = 'Main Menu &#8617;';
-		backToMenuBtn.addEventListener('click', (e) => {
-			showScreen('mainMenu');
-		});
-		section.appendChild(backToMenuBtn);
-		//section.innerHTML = '&#1fa8e;';
-		let chestLidImg = document.createElement('img');
-		chestLidImg.src = './assets/img/chest_lid.png';
-		chestLidImg.id = 'chestLid';
-		section.appendChild(chestLidImg);
-		let chestBaseImg = document.createElement('img');
-		chestBaseImg.src = './assets/img/chest_base.png';
-		chestBaseImg.id = 'chestBase';
-		section.appendChild(chestBaseImg);
-		//Get two items to offer
-		let items = getItems(0.5,2);
-		let optionsSection = document.createElement('section');
-		optionsSection.classList.add('chest-options');
-		let optionsHead = document.createElement('h4');
+  {
+    let section = document.createElement('section');
+    section.classList.add('chest');
+    
+    let backToMenuBtn = document.createElement('button');
+    backToMenuBtn.id = 'mainMenuBtn';
+    backToMenuBtn.innerHTML = 'Main Menu ↩';
+    backToMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevents this button click from opening the chest
+        showScreen('mainMenu');
+    });
+    section.appendChild(backToMenuBtn);
+
+    let chestLidImg = document.createElement('img');
+    chestLidImg.src = './assets/img/chest_lid.png';
+    chestLidImg.id = 'chestLid';
+    section.appendChild(chestLidImg);
+
+    let chestBaseImg = document.createElement('img');
+    chestBaseImg.src = './assets/img/chest_base.png';
+    chestBaseImg.id = 'chestBase';
+    section.appendChild(chestBaseImg);
+
+    // Get two items to offer
+    let items = getItems(0.5, 2);
+    let optionsSection = document.createElement('section');
+    optionsSection.classList.add('chest-options');
+    
+    let optionsHead = document.createElement('h4');
     optionsHead.innerHTML = 'Choose 1:';
     optionsSection.appendChild(optionsHead);
+    
     let optionsBoxes = document.createElement('section');
     optionsBoxes.classList.add('chest-options-boxes');
-		items.forEach((item) => 
-		{
-		  let itemBox = document.createElement('section');
-		  itemBox.classList.add('item-box');
-		  let itemImg = document.createElement('img');
-      itemImg.src = item.icon;
-      itemBox.appendChild(itemImg);
-      //Add line break between img/name?
-      itemBox.appendChild(document.createElement('br'));
-      let itemName = document.createElement('p');
-      itemName.innerHTML = item.name;
-      itemBox.appendChild(itemName);
-      optionsBoxes.appendChild(itemBox);
-		});
-		optionsSection.appendChild(optionsBoxes);
-		section.appendChild(optionsSection);
-		section.addEventListener('click', (e) => {
-		  chestBaseImg.classList.add('animate');
-		  chestLidImg.classList.add('animate');
-		  optionsSection.classList.add('animate');
-		});
-		return section;
-	}
+
+    items.forEach((item) => 
+    {
+        let itemBox = document.createElement('section');
+        itemBox.classList.add('item-box');
+        
+        let itemImg = document.createElement('img');
+        itemImg.src = item.icon;
+        itemBox.appendChild(itemImg);
+        
+        itemBox.appendChild(document.createElement('br'));
+        
+        let itemName = document.createElement('p');
+        itemName.innerHTML = item.name;
+        itemBox.appendChild(itemName);
+        
+        let addBtn = document.createElement('button');
+        addBtn.id = 'addItem' + item.name.replace(' ', '');
+        addBtn.classList.add('add-item-button');
+        addBtn.innerHTML = 'Select';
+        
+        addBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log('adding', item.name);
+            itemBox.classList.add('zoom');
+            // Disable all item selection buttons
+            section.querySelectorAll('.add-item-button').forEach((btn) => {
+                btn.disabled = true;
+            });
+            // Add item to inventory 
+            addItemToInventory(item);
+            setTimeout(advanceSession, 5000);
+        });
+        
+        itemBox.appendChild(addBtn);
+        optionsBoxes.appendChild(itemBox);
+    });
+
+    optionsSection.appendChild(optionsBoxes);
+    section.appendChild(optionsSection);
+
+    // Handles opening the chest
+    section.addEventListener('click', (e) => {
+        chestBaseImg.classList.add('animate');
+        chestLidImg.classList.add('animate');
+        optionsSection.classList.add('animate');
+    });
+
+    return section;
+  }
+
 
 }

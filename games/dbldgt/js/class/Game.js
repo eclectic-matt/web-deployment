@@ -4,7 +4,7 @@
  */
 class Game 
 {
-	#saveName = "HandsCrawlerData";
+	#saveName = "DblDgtData";
 	#saveData = {};
 	#defaultData = {
 		stats: {
@@ -16,37 +16,61 @@ class Game
 		runs: [],
 		achievements: [],
 		currentSession: null
-	}
+	};
+	stats = {
+		runCount: 0,
+		highestFloor: 0,
+		highestScore: 0,
+		lastRunStarted: ""
+	};
+	runs = [];
+	achievements = [];
+	currentSession = null;
 
 	constructor()
 	{
 		// Load saved data
-		this.#saveData = loadFromSavedData();
+		this.#saveData = this.loadData();
 		if(this.#saveData == {})
 		{
 			this.#saveData = this.#defaultData;
 		}
 		else
 		{
-			if(this.#saveData.currentSession?.InProgress === true)
+			if(this.#saveData.currentSession?.inProgress === true)
 			{
 				//Load session in progress
 			}
 		}
 	}
+	
+	get currentSession()
+	{
+	  return this.currentSession;
+	}
 
 	saveData(data)
 	{
-		saveLocalStorageItem(this.#saveName, JSON.stringify(data));
+		this.saveLocalStorageItem(this.#saveName, JSON.stringify(data));
 	}
 
 	loadData()
 	{
-		let savedData = loadLocalStorageItem(this.#saveName);
+		let savedData = this.loadLocalStorageItem(this.#saveName);
 		if(savedData)
 		{
 			return savedData;
 		}
 		return {};
+	}
+	
+	loadLocalStorageItem(name)
+	{
+	  return false;
+	}
+	
+	saveLocalStorageItem(name, data)
+	{
+	  
 	}
 }
