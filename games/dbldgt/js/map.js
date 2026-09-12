@@ -24,9 +24,17 @@ const showScreen = (name) =>
 	layoutMgr.setCurrentScreen(name);
 }
 
-const passDataToLayout = (data) => 
+const passDataToLayout = (data, type) => 
 {
-	layoutMgr.setItemData(data);
+  switch(type)
+  {
+    case 'item':
+	    layoutMgr.setItemData(data);
+	    break;
+	   case 'enemy':
+	     layoutMgr.setEnemyData(data);
+	    break;
+  }
 }
 
 const addItemEvents = () => 
@@ -65,7 +73,7 @@ const moveToMapNode = (node) =>
 			layoutMgr.setCurrentScreen('event');
 		break;
 		case 3:
-			layoutMgr.setCurrentScreen('merchant');
+			layoutMgr.setCurrentScreen('shop');
 		break;
 		case 4:
 			layoutMgr.setCurrentScreen('boss');

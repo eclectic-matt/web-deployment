@@ -12,18 +12,21 @@ class LayoutManager
 		'battleResult',
 		'chest',
 		'event',
-		'merchant'
+		'shop'
 	];
 	#currentScreen = null;
 	#mainElId = 'main';
 	#mainEl = null;
 	#itemData = null;
+	#enemyData = null;
+	/*
 	#inventoryTypes = [
 		'ring', 
 		'bracelet', 
 		'held', 
 		'tattoo'
 	];
+	*/
 	
 	constructor()
 	{
@@ -35,6 +38,11 @@ class LayoutManager
 		this.#itemData = data;
 		this.loadScreen();
 	}
+	
+	setEnemyData(data)
+	{
+	  this.#enemyData = data;
+	}
 
 	initLayout()
 	{
@@ -42,6 +50,10 @@ class LayoutManager
 		this.#mainEl = document.getElementById(this.#mainElId);
 	}
 	
+	//======================
+  // SCREEN MANAGEMENT 
+  //======================
+  
 	setCurrentScreen(name)
 	{
 		if(!this.#screenNames.includes(name))
@@ -60,6 +72,7 @@ class LayoutManager
 		this.#mainEl.innerHTML = null;
 		switch(this.#currentScreen)
 		{
+		  
 			case 'test':
 				let testTopMenu = this.generateTopMenu();
 				this.#mainEl.appendChild(testTopMenu);
@@ -81,14 +94,17 @@ class LayoutManager
 				//Now init drag-drop events
 				addItemEvents();
 			break;
+			
 			case 'mainMenu':
 				let mainMenu = this.generateMainMenu();
 				this.#mainEl.appendChild(mainMenu);
 			break;
+			
 			case 'newGame':
 				this.#currentScreen = 'map';
 				this.loadScreen();
 			break;
+			
 			case 'map':
 			  let newGameTopMenu = this.generateTopMenu();
         this.#mainEl.appendChild(newGameTopMenu);
@@ -96,13 +112,40 @@ class LayoutManager
         this.#mainEl.appendChild(newGameMap);
         this.generateMap(newGameMap);
 			break;
+			
 			case 'about':
 				let aboutSection = this.generateAbout();
 				this.#mainEl.appendChild(aboutSection);
 				break;
+				
 			case 'chest':
 				let chestSection = this.generateChestScreen();
 				this.#mainEl.appendChild(chestSection);
+				break;
+				
+			case 'shop':
+				let shopSection = this.generateShopScreen();
+				this.#mainEl.appendChild(shopSection);
+				break;
+				
+			case 'battle':
+				let battleSection = this.generateBattleScreen();
+				this.#mainEl.appendChild(battleSection);
+				break;
+				
+			case 'battleResult':
+				let battleResultSection = this.generateBattleResultScreen();
+				this.#mainEl.appendChild(battleResultSection);
+				break;
+				
+			case 'event':
+				let eventSection = this.generateEventScreen();
+				this.#mainEl.appendChild(eventSection);
+				break;
+				
+			case 'boss':
+				let bossSection = this.generateBossScreen();
+				this.#mainEl.appendChild(bossSection);
 				break;
 		}
 	}
@@ -110,6 +153,11 @@ class LayoutManager
 	//===============
 	// SECTIONS
 	//===============
+	
+	//---------------
+	// MENUS
+	//---------------
+	
 	generateMainMenu()
 	{
 		let section = document.createElement('section');
@@ -163,6 +211,10 @@ class LayoutManager
 		section.appendChild(backToMenuBtn);
 		return section;
 	}
+	
+	//---------------
+	// PARTIALS
+	//---------------
 	
 	generateSidePanel()
 	{
@@ -353,8 +405,8 @@ class LayoutManager
 	{
 		let section = document.createElement('section');
 		section.id = 'map';
-		section.style.width = '300px';
-		section.style.height = '200px'
+		section.style.width = '75%';
+		section.style.height = '50%'
 		return section;
 	}
 	generateMap(section)
@@ -465,5 +517,69 @@ class LayoutManager
     return section;
   }
 
+  generateShopScreen()
+  {
+    let name = 'shop';
+    let section = document.createElement('section');
+    section.classList.add(name);
+    let topMenu = this.generateTopMenu();
+    section.appendChild(topMenu);
+    let head = document.createElement('h4');
+    head.innerHTML = name;
+    section.appendChild(head);
+    return section;
+  }
+  
+  generateBattleScreen()
+  {
+    let name = 'battle';
+    let section = document.createElement('section');
+    section.classList.add(name);
+    let topMenu = this.generateTopMenu();
+    section.appendChild(topMenu);
+    let head = document.createElement('h4');
+    head.innerHTML = name;
+    section.appendChild(head);
+    return section;
+  }
+	
+	generateBattleResultScreen()
+	{
+	  let name = 'battleResult';
+    let section = document.createElement('section');
+    section.classList.add(name);
+    let topMenu = this.generateTopMenu();
+    section.appendChild(topMenu);
+    let head = document.createElement('h4');
+    head.innerHTML = name;
+    section.appendChild(head);
+    return section;
+	}
+	
+	generateEventScreen()
+	{
+	  let name = 'event';
+    let section = document.createElement('section');
+    section.classList.add(name);
+    let topMenu = this.generateTopMenu();
+    section.appendChild(topMenu);
+    let head = document.createElement('h4');
+    head.innerHTML = name;
+    section.appendChild(head);
+    return section;
+	}
+	
+	generateBossScreen()
+	{
+	  let name = 'boss';
+    let section = document.createElement('section');
+    section.classList.add(name);
+    let topMenu = this.generateTopMenu();
+    section.appendChild(topMenu);
+    let head = document.createElement('h4');
+    head.innerHTML = name;
+    section.appendChild(head);
+    return section;
+	}
 
 }

@@ -747,3 +747,12 @@ section.chest
 	}
 }
 
+section h4 
+{
+  text-align: center;
+}
+
+section.shop, section.event, section.battle, section.battleResult
+{
+  padding: 25px;
+}

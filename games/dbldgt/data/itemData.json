@@ -177,7 +177,7 @@
 				"id": "common-base-add-ring",
 				"name": "Common Ring of Add Base",
 				"description": "A ring which increases your base damage",
-				"icon": "./assets/img/basic_base_ring.png",
+				"icon": "./assets/img/items/rings/basic_base_ring.png",
 				"type": "ring",
 				"action": {
 					"type": "score",
@@ -198,7 +198,7 @@
 				"id": "uncommon-base-add-ring",
 				"name": "Uncommon Ring of Add Base",
 				"description": "A ring which increases your base damage",
-				"icon": "./assets/img/basic_base_ring.png",
+				"icon": "./assets/img/items/rings/basic_base_ring.png",
 				"type": "ring",
 				"action": {
 					"type": "score",
@@ -219,7 +219,7 @@
 				"id": "rare-base-add-ring",
 				"name": "Rare Ring of Add Base",
 				"description": "A ring which increases your base damage",
-				"icon": "./assets/img/basic_base_ring.png",
+				"icon": "./assets/img/items/rings/basic_base_ring.png",
 				"type": "ring",
 				"action": {
 					"type": "score",
@@ -261,7 +261,7 @@
 				"id": "common-add-power-ring",
 				"name": "Ring of Add Power",
 				"description": "A ring which increases your power damage",
-				"icon": "./assets/img/basic_power_ring.png",
+				"icon": "./assets/img/items/rings/basic_power_ring.png",
 				"type": "ring",
 				"action": {
 					"type": "score",
@@ -392,7 +392,7 @@
 				"name": "Common Axe",
 				"description": "A common axe",
 				"type": "held",
-				"icon": "./assets/img/basic_held_axe.png",
+				"icon": "./assets/img/items/held/basic_held_axe.png",
 				"action": {
 					"type": "score",
 					"condition": null
@@ -415,7 +415,7 @@
 				"name": "Common Skull Tattoo",
 				"description": "A common tattoo of a skull",
 				"type": "tattoo",
-				"icon": "./assets/img/basic_skull_tattoo.png",
+				"icon": "./assets/img/items/tattoos/basic_skull_tattoo.png",
 				"action": {
 					"type": "score",
 					"condition": null

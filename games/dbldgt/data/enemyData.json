@@ -1,0 +1,126 @@
+{
+  "version": "0.1",
+	"ideas": [
+		""
+	],
+	"abilities": [
+		{
+			"name": "attack",
+			"type": "basic",
+			"description": "Deals damage",
+			"icon": "./assets/img/icons/attack.png"
+		},
+		{
+			"name": "heal",
+			"type": "basic",
+			"description": "Heals damage",
+			"icon": "./assets/img/icons/heal.png"
+		},
+		{
+			"name": "block",
+			"type": "basic",
+			"description": "Prevents damage",
+			"icon": "./assets/img/icons/block.png"
+		},
+		{
+			"name": "shield",
+			"type": "basic",
+			"description": "Gains shield",
+			"icon": "./assets/img/icons/shield.png"
+		},
+		{
+			"name": "poison",
+			"type": "special",
+			"description": "Take additional damage when attacked",
+			"icon": "./assets/img/icons/poison.png"
+		},
+		{
+			"name": "burn",
+			"type": "special",
+			"description": "Deals damage each turn",
+			"icon": "./assets/img/icons/burn.png"
+		}
+	],
+	"basic": [
+		{
+			"name": "Fancy Rat",
+			"type": "creature",
+			"icon": "./assets/img/enemies/fancy_rat.png",
+			"health": 20,
+			"abilities": [
+				{
+					"type": "attack",
+					"value": 10,
+					"special": null
+				},
+				{
+					"type": "block",
+					"value": 10,
+					"special": null
+				},
+				{
+					"type": "heal",
+					"value": 5,
+					"special": null
+				}
+			]
+		},
+		{
+			"name": "Flame Snake",
+			"type": "creature",
+			"icon": "./assets/img/enemies/flame_snake.png",
+			"health": 40,
+			"abilities": [
+				{
+					"type": "attack",
+					"value": 15,
+					"special": null
+				},
+				{
+					"type": "attack",
+					"value": 10,
+					"special": {
+						"type": "burn",
+						"value": 5,
+						"duration": 3
+					}
+				},
+				{
+					"type": "block",
+					"value": 15,
+					"special": null
+				}
+			]
+		},
+		{
+			"name": "Poison Cube",
+			"type": "creature",
+			"icon": "./assets/img/enemies/poison_cube.png",
+			"health": 40,
+			"abilities": [
+				{
+					"type": "attack",
+					"value": 20,
+					"special": {
+						"type": "poison",
+						"value": 5,
+						"duration": 5
+					}
+				},
+				{
+					"type": "attack",
+					"value": 30,
+					"special": null
+				},
+				{
+					"type": "heal",
+					"value": 30,
+					"special": null
+				}
+			]
+		}
+	],
+	"boss": [
+		
+	]
+}

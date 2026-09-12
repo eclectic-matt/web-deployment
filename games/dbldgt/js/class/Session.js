@@ -1,9 +1,8 @@
 class Session 
 {
-	inProgress = true;
 	currentFloor = 0;
 	currentFloorMap = [];
-	currentNode = -1;
+	currentNode = false;
 	inventory = {
 		items: [],
 		gold: 0,
@@ -12,6 +11,7 @@ class Session
 		left: {},
 		right: {}
 	};
+	inProgress = true;
 
 	constructor()
 	{

@@ -65,7 +65,7 @@ class RingMapUi
 			
 			this.#itemData = await response.json();
 			
-			passDataToLayout(this.#itemData);
+			passDataToLayout(this.#itemData, 'item');
 			
 			//Generate hands
 			//this.generateHands();
