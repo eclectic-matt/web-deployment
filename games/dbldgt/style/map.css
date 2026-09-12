@@ -323,7 +323,7 @@ section#scoringArea
 	background: #222;
 	/* top | right | bottom | left */
 	/*padding: 10px 30px 50px 40px;*/
-	width: calc(100% - 60px);
+	width: calc(98% - 20px);
 	margin: 0 1%;
 	font-size: 2rem;
 }
@@ -631,25 +631,22 @@ section.chest
 .chest-options-boxes .item-box 
 {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 auto;
   box-sizing: border-box;
   border: 5px outset green;
   background-color: #777;
-  color: black;
+  color: white;
+  padding: 10px;
 }
-/*
-.chest-options-boxes .item-box img
-{
-  width: 50%;
-  height: 35%;
-  margin: 0 auto;
-}
-*/
 
 .chest-options-boxes .item-box p
 {
-  float: left;
-  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  margin: 5px 0 0 0;
 }
 
 .chest-options.animate
