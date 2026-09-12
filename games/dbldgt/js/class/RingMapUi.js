@@ -607,7 +607,7 @@ class RingMapUi
 			...this.#itemData.items.tattoo
 		];
 		allItems = allItems.filter((i) => { return i.rarity.multiplier <= maxRarity;});
-		console.log(allItems);
+		//console.log(allItems);
 		if(allItems.length == count) return allItems;
 		for(let i = 0; i < count; i++)
 		{
