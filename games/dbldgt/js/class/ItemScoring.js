@@ -294,8 +294,28 @@ class ItemScoring
 		document.getElementById("totalScore").innerHTML = this.numberWithCommas(total);
 	}
 
-  numberWithCommas = (num) => {
+  /*numberWithCommas = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }*/
+  numberWithCommas = (num) => {
+    //Number < 1million
+    if(num < 1000000)
+    {
+      //Just commas
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    //Else return exponential 3E7
+    //return num.toExponential().replace('e+', 'E');
+    return this.bigNumber(num);
+  }
+
+  bigNumber = (num) => {
+    const formatter = new Intl.NumberFormat('en-US', {
+      maximumFractionDigits: 3,
+      notation: 'compact',
+      compactDisplay: 'short'
+    });
+    return formatter.format(num);
   }
 
 
