@@ -5,9 +5,11 @@
 }
 .enemy-row 
 {
+  width: 100vw;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  align-content: center;
+  justify-content: space-evenly;
   gap: 25px;
 }
 .enemy-box 
@@ -33,4 +35,47 @@
 .enemy-box .ability-intent
 {
   
+}
+
+.hands-row 
+{
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-evenly;
+  gap: 25px;
+}
+
+.hands-row .hand 
+{
+  flex: 1 0 auto;
+  max-width: 50%;
+  height: auto;
+  margin: 0 auto;
+  text-align: center;
+}
+.hands-row .hand img 
+{
+  width: 50%;
+}
+
+/* TARGET DRAG LINES */
+#drag-line-svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Allows cards/enemies to be clicked through the SVG */
+  z-index: 999;
+}
+
+#active-drag-line {
+  fill: none;
+  stroke: var(--line-color, #ff3838);
+  stroke-width: 4px;
+  stroke-dasharray: 8, 8; /* Makes the line dotted by default */
+  marker-end: url(#arrow); /* Adds the arrowhead to the end of the line */
+  display: none;          /* Hidden until drag starts */
 }
