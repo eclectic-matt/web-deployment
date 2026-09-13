@@ -1,5 +1,5 @@
 // Instantiate the application scope
-const ringUi = new RingMapUi();
+const itemUi = new ItemMapUi();
 const itemScoring = new ItemScoring();
 const layoutMgr = new LayoutManager();
 const mapGenerator = new MapGenerator();
@@ -39,8 +39,8 @@ const passDataToLayout = (data, type) =>
 
 const addItemEvents = () => 
 {
-	ringUi.init();
-	ringUi.resizeGameViewport();
+	itemUi.init();
+	itemUi.resizeGameViewport();
 }
 
 const createMapForTarget = (target) => 
@@ -83,7 +83,7 @@ const moveToMapNode = (node) =>
 
 const getItems = (rarity = 0, count = 2) =>
 {
-	return ringUi.getItems(rarity, count);
+	return itemUi.getItems(rarity, count);
 }
 
 const addItemToInventory = (item) =>

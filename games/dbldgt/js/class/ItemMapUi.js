@@ -1,4 +1,4 @@
-class RingMapUi
+class ItemMapUi
 {
 	//INIT MAIN VARS
 	#draggedRingSrc = null;
@@ -222,6 +222,7 @@ class RingMapUi
 				document.body.appendChild(this.#dragVisualElement);
 			});
 			
+			/*
 			ring.addEventListener('pointerover', (e) => 
 			{
 				// Specifically target the score element inside this ring
@@ -237,8 +238,10 @@ class RingMapUi
 					
 					setTimeout(() => this.clearPopup(popupEl), 5000);
 				}
+				
 			});
-		
+		  */
+		  
 			// --- UNIFIED POINTER MOVE ---
 			ring.addEventListener('pointermove', (e) => 
 			{
@@ -251,6 +254,36 @@ class RingMapUi
 			ring.addEventListener('pointerup', (e) => 
 			{
 				if (!this.#isDragging) return;
+				
+				//console.log('pointerup', e.currentTarget.id, ring.id);
+				
+				//Are we dropping (releasing) on itself? Treat as a click
+				let noTargetArea = this.findTargetAreaAtCoordinates(e.clientX, e.clientY);
+				if (!noTargetArea) 
+				{
+				  let popupEl = ring.parentElement.querySelector(".popup-score");
+				
+  				if (popupEl)
+  				{
+  					popupEl.innerHTML = ring.dataset.description || "";
+  					popupEl.style.backgroundColor = "var(--total-score-color)";
+  					popupEl.classList.add("show");
+  					
+  					//console.log('Showing', popupEl.innerHTML);
+  					
+  					setTimeout(() => this.clearPopup(popupEl), 5000);
+  				}
+  				
+  				this.highlightDropAreas(false);
+  				this.#isDragging = false;
+  			  
+  			  if (this.#dragVisualElement) 
+  			  {
+            this.#dragVisualElement.remove();
+            this.#dragVisualElement = null;
+          }
+  			  return;
+				}
 				
 				this.highlightDropAreas(false);
 				this.#isDragging = false;
