@@ -19,9 +19,21 @@ class BattleManager
 	//Just setup initial document references
 	constructor()
 	{
-		//Init references to document
+		this.svgCanvas = document.getElementById('drag-line-svg');
+		this.dragLine = document.getElementById('active-drag-line');
 		
-		//Explicitly bind the init function context so it preserves 'this' inside promises
+		// Internal state tracking
+		this.isDragging = false;
+		this.activeSource = null;
+		this.leftHandTarget = null;
+		this.rightHandTarget = null;
+
+		//Setup drag event handlers
+		this.handlePointerDown = this.handlePointerDown.bind(this);
+		this.handlePointerMove = this.handlePointerMove.bind(this);
+		this.handlePointerUp = this.handlePointerUp.bind(this);
+
+		//Load the json data
 		this.loadEnemyData().then(this.init.bind(this));
 	}
 	
@@ -50,6 +62,10 @@ class BattleManager
 	init()
 	{
     this.initEvents();
+  	// Attach universal listeners bound directly to class scopes
+		document.addEventListener('pointerdown', this.handlePointerDown);
+		document.addEventListener('pointermove', this.handlePointerMove);
+		document.addEventListener('pointerup', this.handlePointerUp);
 	}
 	
 	
@@ -166,39 +182,13 @@ class BattleManager
 		container.appendChild(textOverlay);
 		return container;
 	}
-}
-
-class CombatTargetingSystem 
-{
-	constructor() 
-	{
-		this.svgCanvas = document.getElementById('drag-line-svg');
-		this.dragLine = document.getElementById('active-drag-line');
-		
-		// Internal state tracking
-		this.isDragging = false;
-		this.activeSource = null;
-		this.leftHandTarget = null;
-		this.rightHandTarget = null;
-
-		// BIND CONTEXT: Essential for class listeners to access "this" properly
-		this.handlePointerDown = this.handlePointerDown.bind(this);
-		this.handlePointerMove = this.handlePointerMove.bind(this);
-		this.handlePointerUp = this.handlePointerUp.bind(this);
-
-		this.init();
-	}
-
-	init() 
-	{
-		// Attach universal listeners bound directly to class scopes
-		document.addEventListener('pointerdown', this.handlePointerDown);
-		document.addEventListener('pointermove', this.handlePointerMove);
-		document.addEventListener('pointerup', this.handlePointerUp);
-	}
-
+	
+	//======================
+	// Drag target methods
+	//======================
+	
 	// Helper method to pull precise element bounds
-	getCenterCoords(element) 
+	getCenterCoords(element)
 	{
 		const rect = element.getBoundingClientRect();
 		return {
@@ -206,12 +196,12 @@ class CombatTargetingSystem
 			y: rect.top + rect.height / 2
 		};
 	}
-
-	handlePointerDown(e) 
+	
+	handlePointerDown(e)
 	{
 		const handItem = e.target.closest('.hand');
 		if (!handItem) return;
-
+		
 		this.isDragging = true;
 		this.activeSource = handItem;
 		
@@ -221,15 +211,15 @@ class CombatTargetingSystem
 		
 		handItem.setPointerCapture(e.pointerId);
 	}
-
-	handlePointerMove(e) 
+	
+	handlePointerMove(e)
 	{
 		if (!this.isDragging || !this.activeSource) return;
-
+		
 		const start = this.getCenterCoords(this.activeSource);
 		let targetX = e.clientX;
 		let targetY = e.clientY;
-
+		
 		// Snapping magnetism filter
 		const targetEnemy = e.target.closest('.enemy-box');
 		if (targetEnemy) {
@@ -237,62 +227,66 @@ class CombatTargetingSystem
 			targetX = enemyCenter.x;
 			targetY = enemyCenter.y;
 		}
-
+		
 		this.dragLine.setAttribute('d', `M ${start.x} ${start.y} L ${targetX} ${targetY}`);
 	}
-
-	handlePointerUp(e) 
+	
+	handlePointerUp(e)
 	{
 		if (!this.isDragging) return;
 		this.isDragging = false;
-
+		
 		const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
 		const validEnemy = dropTarget ? dropTarget.closest('.enemy-box') : null;
-
+		
 		//Only allow 1 targeting link per hand (each hand can target a single enemy)
-		if(this.activeSource.classList.contains('left'))
+		if (this.activeSource.classList.contains('left'))
 		{
-			//console.log('left hand source', this.activeSource, validEnemy, 'prev', this.leftHandTarget);
 			//Check if left hand has a target
-			if(this.leftHandTarget !== null)
+			if (this.leftHandTarget !== null)
 			{
-				//console.log('clear links for', this.activeSource.id);
 				this.clearLinksForEntity(this.activeSource.id);
 			}
-			this.leftHandTarget = validEnemy.id;
+			
+			if (validEnemy)
+			{
+				this.leftHandTarget = validEnemy.id;
+			}
 		}
 		else
 		{
-			//console.log('right hand source', this.activeSource, validEnemy, 'prev', this.leftHandTarget);
 			//Check if right hand has a target
-			if(this.rightHandTarget !== null)
+			if (this.rightHandTarget !== null)
 			{
-				//console.log('clear links for', this.activeSource.id);
 				this.clearLinksForEntity(this.activeSource.id);
 			}
-			this.rightHandTarget = validEnemy.id;
+			
+			if (validEnemy)
+			{
+				this.rightHandTarget = validEnemy.id;
+			}
 		}
-
+		
 		if (validEnemy && this.activeSource)
 		{
 			this.createPermanentLink(this.activeSource, validEnemy);
 		}
-
+		
 		// Clean up active tracker frame
 		this.dragLine.style.display = 'none';
 		this.dragLine.setAttribute('d', '');
 		
-		if (this.activeSource) 
+		if (this.activeSource)
 		{
 			this.activeSource.releasePointerCapture(e.pointerId);
 			this.activeSource = null;
 		}
 	}
-
+	
 	createPermanentLink(source, enemy)
 	{
 		//console.log(`Connecting class entities: ${source.id} ➔ ${enemy.id}`);
-
+		
 		const finalLine = this.dragLine.cloneNode(true);
 		finalLine.removeAttribute('id');
 		finalLine.classList.add('permanent-targeting-link');
@@ -301,21 +295,21 @@ class CombatTargetingSystem
 		// Tag references directly on the element node so you can clean them up later
 		finalLine.dataset.sourceId = source.id;
 		finalLine.dataset.enemyId = enemy.id;
-
+		
 		const start = this.getCenterCoords(source);
 		const end = this.getCenterCoords(enemy);
 		finalLine.setAttribute('d', `M ${start.x} ${start.y} L ${end.x} ${end.y}`);
 		
 		this.svgCanvas.appendChild(finalLine);
 		//console.log('Target line created: ',finalLine);
-
+		
 		// OPTIONAL: Call out to outer engine workflow methods if they exist
-		if (typeof this.onSuccessfulTarget === 'function') 
+		if (typeof this.onSuccessfulTarget === 'function')
 		{
 			//this.onSuccessfulTarget(source, enemy);
 		}
 	}
-
+	
 	// Call this if a card or an enemy dies to sweep dead vector paths out of the SVG
 	clearLinksForEntity(entityId)
 	{
@@ -326,9 +320,9 @@ class CombatTargetingSystem
 			}
 		});
 	}
-
+	
 	// Call this if the combat screen unmounts/destroys to prevent memory leaks
-	destroy() 
+	destroy()
 	{
 		document.removeEventListener('pointerdown', this.handlePointerDown);
 		document.removeEventListener('pointermove', this.handlePointerMove);
