@@ -1,81 +1,94 @@
 .battle 
 {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 .enemy-row 
 {
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-evenly;
-  gap: 25px;
+	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	justify-content: space-evenly;
+	gap: 25px;
 }
 .enemy-box 
 {
-  flex: 1 1 auto;
-  max-width: 50%;
-  margin: 0 auto;
-  text-align: center;
+	flex: 1 1 auto;
+	max-width: 50%;
+	margin: 0 auto;
+	text-align: center;
 }
 .enemy-box .health-bar-container 
 {
-  width: 50%;
-  margin: 0 auto;
+	width: 50%;
+	margin: 0 auto;
 }
 .health-bar-text
 {
-  
+
 }
 .enemy-box img 
 {
-  
+
 }
 .enemy-box .ability-intent
 {
-  
+
 }
 
 .hands-row 
 {
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-evenly;
-  gap: 25px;
+	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	justify-content: space-evenly;
+	gap: 25px;
 }
 
 .hands-row .hand 
 {
-  flex: 1 0 auto;
-  max-width: 50%;
-  height: auto;
-  margin: 0 auto;
-  text-align: center;
+	flex: 1 0 auto;
+	max-width: 50%;
+	height: auto;
+	margin: 0 auto;
+	text-align: center;
+	user-select: none;
+	touch-action: none; 
+	-webkit-overflow-scrolling: auto; 
 }
 .hands-row .hand img 
 {
-  width: 50%;
+	width: 50%;
+	/* Prevents text or element highlighting selections */
+	-webkit-user-select: none; /* Safari */
+	-moz-user-select: none;    /* Firefox */
+	-ms-user-select: none;     /* Legacy IE/Edge */
+	user-select: none;         /* Standard modern syntax */
+
+	/* Prevents the browser's default imagery highlighting behaviors */
+	-webkit-user-drag: none;   
 }
 
 /* TARGET DRAG LINES */
-#drag-line-svg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none; /* Allows cards/enemies to be clicked through the SVG */
-  z-index: 999;
+#drag-line-svg 
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none; /* Allows cards/enemies to be clicked through the SVG */
+	z-index: 999;
 }
 
-#active-drag-line {
-  fill: none;
-  stroke: var(--line-color, #ff3838);
-  stroke-width: 4px;
-  stroke-dasharray: 8, 8; /* Makes the line dotted by default */
-  marker-end: url(#arrow); /* Adds the arrowhead to the end of the line */
-  display: none;          /* Hidden until drag starts */
+#active-drag-line
+{
+	fill: none;
+	stroke: var(--line-color, #ff3838);
+	stroke-width: 4px;
+	stroke-dasharray: 8, 8; /* Makes the line dotted by default */
+	marker-end: url(#arrow); /* Adds the arrowhead to the end of the line */
+	display: none;          /* Hidden until drag starts */
 }

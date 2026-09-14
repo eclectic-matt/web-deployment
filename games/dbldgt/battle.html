@@ -21,6 +21,19 @@
 		btlMgr.generateBattle('basic', 2);
 		let btlSec = btlMgr.outputBattle();
 		document.getElementById('main').appendChild(btlSec);
+		let clearLinesBtn = document.createElement('button');
+		clearLinesBtn.innerHTML = 'Clear Targets';
+		clearLinesBtn.style.position = 'absolute';
+		clearLinesBtn.style.top = '50%';
+		clearLinesBtn.style.left = '50%';
+		clearLinesBtn.addEventListener('click', (e) => 
+		{
+			document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
+			{
+				line.parentElement.removeChild(line);
+			})
+		});
+		document.getElementById('main').appendChild(clearLinesBtn);
 	}
 	</script>
 </head>
