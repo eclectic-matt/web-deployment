@@ -111,7 +111,8 @@ class BattleManager
 		handsRow.classList.add('hands-row');
 		//left
 		let leftHand = document.createElement('div');
-		leftHand.className = 'hand';
+		leftHand.classList.add('hand');
+		leftHand.classList.add('left');
 		leftHand.id = 'left-hand-container';
 		let leftHandImg = document.createElement('img');
 		leftHandImg.src = './assets/img/left_hand.png';
@@ -119,8 +120,9 @@ class BattleManager
 		handsRow.appendChild(leftHand);
 		//right
 		let rightHand = document.createElement('div');
-		rightHand.className = 'hand';
-		rightHand.id = 'left-hand-container';
+		rightHand.classList.add('hand');
+		rightHand.classList.add('right');
+		rightHand.id = 'right-hand-container';
 		let rightHandImg = document.createElement('img');
 		rightHandImg.src = './assets/img/right_hand.png';
 		rightHand.appendChild(rightHandImg);
@@ -176,6 +178,8 @@ class CombatTargetingSystem
 		// Internal state tracking
 		this.isDragging = false;
 		this.activeSource = null;
+		this.leftHandTarget = null;
+		this.rightHandTarget = null;
 
 		// BIND CONTEXT: Essential for class listeners to access "this" properly
 		this.handlePointerDown = this.handlePointerDown.bind(this);
@@ -244,6 +248,30 @@ class CombatTargetingSystem
 
 		const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
 		const validEnemy = dropTarget ? dropTarget.closest('.enemy-box') : null;
+
+		//Only allow 1 targeting link per hand (each hand can target a single enemy)
+		if(this.activeSource.classList.contains('left'))
+		{
+			//console.log('left hand source', this.activeSource, validEnemy, 'prev', this.leftHandTarget);
+			//Check if left hand has a target
+			if(this.leftHandTarget !== null)
+			{
+				//console.log('clear links for', this.activeSource.id);
+				this.clearLinksForEntity(this.activeSource.id);
+			}
+			this.leftHandTarget = validEnemy.id;
+		}
+		else
+		{
+			//console.log('right hand source', this.activeSource, validEnemy, 'prev', this.leftHandTarget);
+			//Check if right hand has a target
+			if(this.rightHandTarget !== null)
+			{
+				//console.log('clear links for', this.activeSource.id);
+				this.clearLinksForEntity(this.activeSource.id);
+			}
+			this.rightHandTarget = validEnemy.id;
+		}
 
 		if (validEnemy && this.activeSource)
 		{
