@@ -86,7 +86,7 @@ class BattleManager
 			{
 				this.#battleData.enemies.push(enemy);
 			}
-			console.log(this.#battleData.enemies);
+			//console.log(this.#battleData.enemies);
 			break;
 		}
 	}
