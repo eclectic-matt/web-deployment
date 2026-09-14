@@ -14,14 +14,14 @@
 }
 .enemy-box 
 {
-	flex: 1 1 auto;
+	flex: 1 1 1;
 	max-width: 50%;
 	margin: 0 auto;
 	text-align: center;
 }
 .enemy-box .health-bar-container 
 {
-	width: 50%;
+	width: 100%;
 	margin: 0 auto;
 }
 .health-bar-text
@@ -49,7 +49,7 @@
 
 .hands-row .hand 
 {
-	flex: 1 0 auto;
+	flex: 1 1 1;
 	max-width: 50%;
 	height: auto;
 	margin: 0 auto;
