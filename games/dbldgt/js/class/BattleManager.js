@@ -62,6 +62,10 @@ class BattleManager
 	init()
 	{
     this.initEvents();
+    console.log(window.innerWidth, window.innerHeight);
+    let targetW = 300;
+    let targetH = 600;
+    this.resizeViewport(targetW, targetH);
 	}
 	
 	
@@ -75,6 +79,24 @@ class BattleManager
 		document.addEventListener('pointerdown', this.handlePointerDown);
 		document.addEventListener('pointermove', this.handlePointerMove);
 		document.addEventListener('pointerup', this.handlePointerUp);
+	}
+	
+	resizeViewport(targetW, targetH)
+	{
+	  //Set game scaler elemnent
+		let scaledEl = document.querySelector('.battle');
+		//Skip if not initialized
+		if (!scaledEl) return;
+		//Calculate view multipliers
+		const scaleX = window.innerWidth / targetW;
+		const scaleY = window.innerHeight / targetH;
+		//Calculate best scale
+		let optimalScale = Math.min(scaleX, scaleY);
+		//No scaling if already large enough
+		if (optimalScale > 1) optimalScale = 1;
+		console.log('optimalScale', optimalScale);
+		//Scale element
+		scaledEl.style.transform = `scale(${optimalScale})`;
 	}
 	
 	loadBattle(data)

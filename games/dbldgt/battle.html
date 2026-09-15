@@ -16,7 +16,8 @@
 	}
 	const generateBattle = () => 
 	{
-		btlMgr.generateBattle('basic', 2);
+		let enemyCountMinusOne = 3;
+		btlMgr.generateBattle('basic', enemyCountMinusOne);
 		let btlSec = btlMgr.outputBattle();
 		document.getElementById('main').appendChild(btlSec);
 		let clearLinesBtn = document.createElement('button');
@@ -41,14 +42,6 @@
 <!-- Full screen transparent layer for vector drawing -->
 <svg id="drag-line-svg" xmlns="http://w3.org">
 	<defs>
-		<!-- Reusable Arrow Marker Head -->
-		<!--marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-		<path d="M 0 1 L 10 5 L 0 9 z" fill="var(--line-color, #ff3838)" />
-		<linearGradient id="targeting-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ff1818" />
-            <stop offset="100%" stop-color="#cc1818" />
-        </linearGradient>
-		</marker-->
 		
 		<!-- Reusable white arrowhead border -->
     <marker id="arrow-border" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
