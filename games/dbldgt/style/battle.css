@@ -106,9 +106,58 @@ body, section
 #active-drag-line
 {
 	fill: none;
-	stroke: var(--line-color, #ff3838);
+	/*stroke: var(--line-color, #ff3838);*/
+	stroke: url(#targeting-gradient);
 	stroke-width: 4px;
 	stroke-dasharray: 8, 8; /* Makes the line dotted by default */
 	marker-end: url(#arrow); /* Adds the arrowhead to the end of the line */
 	display: none;          /* Hidden until drag starts */
+}
+
+/* Ensure the active group is hidden by default, but permanent links are shown */
+#active-targeting-group 
+{
+    display: none;
+}
+
+.permanent-targeting-link 
+{
+    display: block !important;
+}
+
+/* Base styles for paths inside ANY targeting layer group */
+#active-targeting-group path,
+.permanent-targeting-link path 
+{
+    fill: none;
+    stroke-linecap: round;
+}
+
+/* 1. THICK SOLID WHITE BORDER BACKGROUND */
+#active-targeting-group .line-border,
+.permanent-targeting-link .line-border 
+{
+    stroke: #ffffff;
+    stroke-width: 8px;
+    marker-end: url(#arrow-border);
+}
+
+/* 2. FIRST COLOR DASH PATTERN (RED) */
+#active-targeting-group .line-dash-color1,
+.permanent-targeting-link .line-dash-color1 
+{
+    stroke: #ff3838;
+    stroke-width: 4px;
+    stroke-dasharray: 12, 12;
+    marker-end: url(#arrow-tip);
+}
+
+/* 3. SECOND COLOR DASH PATTERN (BLUE) */
+#active-targeting-group .line-dash-color2,
+.permanent-targeting-link .line-dash-color2 
+{
+    stroke: #ff2;
+    stroke-width: 4px;
+    stroke-dasharray: 12, 12;
+    stroke-dashoffset: 12;
 }

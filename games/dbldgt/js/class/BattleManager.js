@@ -199,21 +199,37 @@ class BattleManager
 	handlePointerDown(e)
 	{
 		const handItem = e.target.closest('.hand');
-		if (!handItem) return;
+		if (!handItem) 
+		{
+			return;
+		}
 		
 		this.isDragging = true;
 		this.activeSource = handItem;
 		
 		const start = this.getCenterCoords(this.activeSource);
-		this.dragLine.setAttribute('d', `M ${start.x} ${start.y} L ${e.clientX} ${e.clientY}`);
-		this.dragLine.style.display = 'block';
+		const pathData = `M ${start.x} ${start.y} L ${e.clientX} ${e.clientY}`;
+		
+		// Target the entire group wrapper to show it
+		const group = document.getElementById('active-targeting-group');
+		if (group)
+		{
+			group.style.display = 'block';
+			group.querySelectorAll('path').forEach((path) => 
+			{
+				path.setAttribute('d', pathData);
+			});
+		}
 		
 		handItem.setPointerCapture(e.pointerId);
 	}
 	
 	handlePointerMove(e)
 	{
-		if (!this.isDragging || !this.activeSource) return;
+		if (!this.isDragging || !this.activeSource) 
+		{
+			return;
+		}
 		
 		const start = this.getCenterCoords(this.activeSource);
 		let targetX = e.clientX;
@@ -221,27 +237,40 @@ class BattleManager
 		
 		// Snapping magnetism filter
 		const targetEnemy = e.target.closest('.enemy-box');
-		if (targetEnemy) {
+		if (targetEnemy) 
+		{
 			const enemyCenter = this.getCenterCoords(targetEnemy);
 			targetX = enemyCenter.x;
 			targetY = enemyCenter.y;
 		}
 		
-		this.dragLine.setAttribute('d', `M ${start.x} ${start.y} L ${targetX} ${targetY}`);
+		const pathData = `M ${start.x} ${start.y} L ${targetX} ${targetY}`;
+
+		const group = document.getElementById('active-targeting-group');
+		if (group)
+		{
+			group.style.display = 'block';
+			group.querySelectorAll('path').forEach((path) => 
+			{
+				path.setAttribute('d', pathData);
+			});
+		}
 	}
 	
 	handlePointerUp(e)
 	{
-		if (!this.isDragging) return;
+		if (!this.isDragging) 
+		{
+			return;
+		}
 		this.isDragging = false;
 		
 		const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
 		const validEnemy = dropTarget ? dropTarget.closest('.enemy-box') : null;
 		
-		//Only allow 1 targeting link per hand (each hand can target a single enemy)
+		// Only allow 1 targeting link per hand (each hand can target a single enemy)
 		if (this.activeSource.classList.contains('left'))
 		{
-			//Check if left hand has a target
 			if (this.leftHandTarget !== null)
 			{
 				this.clearLinksForEntity(this.activeSource.id);
@@ -251,10 +280,13 @@ class BattleManager
 			{
 				this.leftHandTarget = validEnemy.id;
 			}
+			else
+			{
+				this.leftHandTarget = null;
+			}
 		}
 		else
 		{
-			//Check if right hand has a target
 			if (this.rightHandTarget !== null)
 			{
 				this.clearLinksForEntity(this.activeSource.id);
@@ -264,6 +296,10 @@ class BattleManager
 			{
 				this.rightHandTarget = validEnemy.id;
 			}
+			else
+			{
+				this.rightHandTarget = null;
+			}
 		}
 		
 		if (validEnemy && this.activeSource)
@@ -271,9 +307,16 @@ class BattleManager
 			this.createPermanentLink(this.activeSource, validEnemy);
 		}
 		
-		// Clean up active tracker frame
-		this.dragLine.style.display = 'none';
-		this.dragLine.setAttribute('d', '');
+		// Clean up active tracker group frame
+		const group = document.getElementById('active-targeting-group');
+		if (group)
+		{
+			group.style.display = 'none';
+			group.querySelectorAll('path').forEach((path) => 
+			{
+				path.setAttribute('d', '');
+			});
+		}
 		
 		if (this.activeSource)
 		{
@@ -284,37 +327,41 @@ class BattleManager
 	
 	createPermanentLink(source, enemy)
 	{
-		//console.log(`Connecting class entities: ${source.id} ➔ ${enemy.id}`);
+		const activeGroup = document.getElementById('active-targeting-group');
+		if (!activeGroup) 
+		{
+			return;
+		}
+
+		// FIXED: Clone the whole multi-layered SVG group instead of a single path line
+		const finalGroup = activeGroup.cloneNode(true);
+		finalGroup.removeAttribute('id');
+		finalGroup.classList.add('permanent-targeting-link');
 		
-		const finalLine = this.dragLine.cloneNode(true);
-		finalLine.removeAttribute('id');
-		finalLine.classList.add('permanent-targeting-link');
-		finalLine.id = 'active-drag-line';
-		
-		// Tag references directly on the element node so you can clean them up later
-		finalLine.dataset.sourceId = source.id;
-		finalLine.dataset.enemyId = enemy.id;
+		// Tag references directly on the element group node so you can clean them up later
+		finalGroup.dataset.sourceId = source.id;
+		finalGroup.dataset.enemyId = enemy.id;
 		
 		const start = this.getCenterCoords(source);
 		const end = this.getCenterCoords(enemy);
-		finalLine.setAttribute('d', `M ${start.x} ${start.y} L ${end.x} ${end.y}`);
+		const pathData = `M ${start.x} ${start.y} L ${end.x} ${end.y}`;
 		
-		this.svgCanvas.appendChild(finalLine);
-		//console.log('Target line created: ',finalLine);
-		
-		// OPTIONAL: Call out to outer engine workflow methods if they exist
-		if (typeof this.onSuccessfulTarget === 'function')
+		// Update all subpaths within the cloned group to stay locked onto centers
+		finalGroup.querySelectorAll('path').forEach((path) => 
 		{
-			//this.onSuccessfulTarget(source, enemy);
-		}
+			path.setAttribute('d', pathData);
+		});
+		
+		this.svgCanvas.appendChild(finalGroup);
 	}
-	
-	// Call this if a card or an enemy dies to sweep dead vector paths out of the SVG
+
 	clearLinksForEntity(entityId)
 	{
-		const links = this.svgCanvas.querySelectorAll(`.permanent-targeting-link`);
-		links.forEach(link => {
-			if (link.dataset.sourceId === entityId || link.dataset.enemyId === entityId) {
+		const links = this.svgCanvas.querySelectorAll('.permanent-targeting-link');
+		links.forEach((link) => 
+		{
+			if (link.dataset.sourceId === entityId || link.dataset.enemyId === entityId) 
+			{
 				link.remove();
 			}
 		});
