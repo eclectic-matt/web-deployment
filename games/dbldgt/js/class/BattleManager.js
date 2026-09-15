@@ -62,10 +62,6 @@ class BattleManager
 	init()
 	{
     this.initEvents();
-  	// Attach universal listeners bound directly to class scopes
-		document.addEventListener('pointerdown', this.handlePointerDown);
-		document.addEventListener('pointermove', this.handlePointerMove);
-		document.addEventListener('pointerup', this.handlePointerUp);
 	}
 	
 	
@@ -75,7 +71,10 @@ class BattleManager
 
 	initEvents()
 	{
-		
+		// Attach universal listeners bound directly to class scopes
+		document.addEventListener('pointerdown', this.handlePointerDown);
+		document.addEventListener('pointermove', this.handlePointerMove);
+		document.addEventListener('pointerup', this.handlePointerUp);
 	}
 	
 	loadBattle(data)
