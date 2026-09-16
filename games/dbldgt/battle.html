@@ -16,12 +16,14 @@
 	}
 	const generateBattle = () => 
 	{
+		let main = document.getElementById('main');
+		main.innerHTML = null;
+		btlMgr.resetPlayerHealth();
 		let enemyCountMinusOne = 3;
 		btlMgr.generateBattle('basic', enemyCountMinusOne);
 		let btlSec = btlMgr.outputBattle();
-		document.getElementById('main').appendChild(btlSec);
+		main.appendChild(btlSec);
 		let enemyRow = btlMgr.outputEnemyRow();
-
 		//Generate a button row
 		let btnRow = document.createElement('section');
 		btnRow.classList.add('button-row');
@@ -35,23 +37,37 @@
 				line.parentElement.removeChild(line);
 			})
 		});
-		//document.getElementById('main').appendChild(clearLinesBtn);
 		btnRow.appendChild(clearLinesBtn);
 		//Output an "Use Hands" button
 		let useHandsBtn = document.createElement('button');
+		useHandsBtn.id = 'useHandsBtn';
 		useHandsBtn.innerHTML = 'Use hands';
 		useHandsBtn.addEventListener('click', (e) => 
 		{
 			btlMgr.useHands();
 		});
-		//document.getElementById('main').appendChild(useHandsBtn);
 		btnRow.appendChild(useHandsBtn);
-		document.getElementById('main').appendChild(btnRow);
+				//Output an "Generate" button
+		let genBtlBtn = document.createElement('button');
+		genBtlBtn.innerHTML = 'Generate Enemies';
+		genBtlBtn.addEventListener('click', (e) =>
+		{
+			generateBattle();
+		});
+		btnRow.appendChild(genBtlBtn);
+		main.appendChild(btnRow);
 	}
 	const removeDamageClasses = () => {
 		document.querySelectorAll('.enemy-box').forEach((el) => 
 		{
 			el.classList.remove('damaged');
+		});
+	}
+	
+	const removeActingClasses = () => {
+		document.querySelectorAll('.enemy-box').forEach((el) => 
+		{
+			el.classList.remove('acting');
 		});
 	}
 	</script>

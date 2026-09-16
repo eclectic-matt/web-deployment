@@ -36,10 +36,11 @@ body, section
 	box-sizing: border-box;
 }
 
-.enemy-box .health-bar-container 
+.health-bar-container 
 {
 	position: relative;
 	width: 90%;
+	max-width: 150px;
 	margin: 0 auto; 
 	height: 20px;
 	background-color: #e74c3c;
@@ -89,7 +90,8 @@ body, section
 
 .hands-row 
 {
-	width: 100%;
+	width: 90%;
+  padding: 0 15px;
 	margin-top: 100px;
 	display: flex;
 	flex-direction: row;
@@ -101,7 +103,7 @@ body, section
 
 .hands-row .hand 
 {
-	flex: 0 1 auto;
+	flex: 1 1 0;
 	max-width: 100%;
 	height: auto;
 	margin: 0 auto;
@@ -225,6 +227,31 @@ body, section
 	}
 }
 
+.enemy-box.acting 
+{
+	animation: enemyActing 2s linear forwards;
+	transition: scale 0.2s ease;
+}
+
+@keyframes enemyActing
+{
+	0% 
+	{
+		transform: scale(1);
+		blur: 5px;
+	}
+	50%
+	{
+    transform: scale(1.5);
+		blur: 25px;
+	}
+	100% 
+	{
+		transform: scale(1);
+    blur: 0;
+	}
+}
+
 .button-row 
 {
 	width: 100%;
@@ -249,4 +276,23 @@ body, section
 	user-select: none;
 	touch-action: none; 
 	-webkit-overflow-scrolling: auto; 
+}
+.button-row button#useHandsBtn 
+{
+  flex: 2 1 auto;
+  background-color: green;
+  color: white;
+}
+/*
+#healthPlayer 
+{
+  width: 100%;
+  height: 30px;
+  z-index: 10;
+}
+#healthPlayer .health-bar-fill
+{
+  width: 100%;
+  height: 30px;
+  z-index: 10;
 }

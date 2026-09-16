@@ -11,6 +11,13 @@ class BattleManager
 		'event',
 		'boss'
 	];
+	#player = {
+	  id: 'player',
+	  health: {
+	    current: 100,
+	    max: 100
+	  }
+	};
 
 	//===================
 	// INIT
@@ -136,6 +143,7 @@ class BattleManager
 	{
 		let section = document.createElement('section');
 		section.classList.add('battle');
+		section.id = 'battle';
 
 		//Output enemies row
 		let enemyRow = document.createElement('section');
@@ -165,6 +173,10 @@ class BattleManager
 		rightHand.appendChild(rightHandImg);
 		handsRow.appendChild(rightHand);
 		section.appendChild(handsRow);
+		
+		let healthBar = this.createHealthBar(this.#player.id, this.#player.health.current, this.#player.health.max);
+    section.appendChild(healthBar);
+    
 		return section;
 	}
 
@@ -465,6 +477,9 @@ class BattleManager
 		{
 			line.parentElement.removeChild(line);
 		});
+		
+		//Enemies attack back
+		this.enemiesTurn();
 	}
 
 	//Attack the enemy with ID by the amount specified,
@@ -502,5 +517,37 @@ class BattleManager
 			document.getElementById(id).classList.add('damaged');
 		});
 		setTimeout(removeDamageClasses, 2000);
+	}
+	
+	enemiesTurn()
+	{
+	  this.#battleData.enemies.forEach((enemy, i) => {
+	    let attack = enemy.abilities[0];
+	    let atkValue = attack.value;
+	    setTimeout(() => {
+	      this.attackPlayer(enemy.id, atkValue);
+	    }, i * 1000);
+	  });
+	  setTimeout(removeActingClasses, 3000);
+	}
+	
+	attackPlayer(enemyId, amount)
+	{
+	  document.getElementById(enemyId).classList.add('acting');
+	  this.#player.health.current -= amount;
+	  if(this.#player.health.current <= 0)
+	  {
+	    alert('You lost the battle!');
+	  }
+	  else
+	  {
+	    this.updateHealthBar(this.#player.id, this.#player.health.current);
+	  }
+	}
+	
+	resetPlayerHealth()
+	{
+	  this.#player.health.current = this.#player.health.max;
+	  this.updateHealthBar(this.#player.id, this.#player.health.current);
 	}
 }
