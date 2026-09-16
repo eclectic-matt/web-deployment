@@ -21,12 +21,13 @@
 		let btlSec = btlMgr.outputBattle();
 		document.getElementById('main').appendChild(btlSec);
 		let enemyRow = btlMgr.outputEnemyRow();
+
+		//Generate a button row
+		let btnRow = document.createElement('section');
+		btnRow.classList.add('button-row');
 		//Output a "clear" button
 		let clearLinesBtn = document.createElement('button');
 		clearLinesBtn.innerHTML = 'Clear Targets';
-		clearLinesBtn.style.position = 'absolute';
-		clearLinesBtn.style.top = '75%';
-		clearLinesBtn.style.left = '30%';
 		clearLinesBtn.addEventListener('click', (e) => 
 		{
 			document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
@@ -34,18 +35,18 @@
 				line.parentElement.removeChild(line);
 			})
 		});
-		document.getElementById('main').appendChild(clearLinesBtn);
+		//document.getElementById('main').appendChild(clearLinesBtn);
+		btnRow.appendChild(clearLinesBtn);
 		//Output an "Use Hands" button
-		let attackBtn = document.createElement('button');
-		attackBtn.innerHTML = 'Use hands';
-		attackBtn.style.position = 'absolute';
-		attackBtn.style.top = '75%';
-		attackBtn.style.left = '70%';
-		attackBtn.addEventListener('click', (e) => 
+		let useHandsBtn = document.createElement('button');
+		useHandsBtn.innerHTML = 'Use hands';
+		useHandsBtn.addEventListener('click', (e) => 
 		{
 			btlMgr.useHands();
 		});
-		document.getElementById('main').appendChild(attackBtn);
+		//document.getElementById('main').appendChild(useHandsBtn);
+		btnRow.appendChild(useHandsBtn);
+		document.getElementById('main').appendChild(btnRow);
 	}
 	const removeDamageClasses = () => {
 		document.querySelectorAll('.enemy-box').forEach((el) => 
