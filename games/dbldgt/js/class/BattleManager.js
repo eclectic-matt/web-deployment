@@ -188,7 +188,7 @@ class BattleManager
 		section.classList.add('enemy-box');
 		section.id = enemy.id;
 		//Health Bar
-		let healthBar = this.createHealthBar(enemy.health.current, enemy.health.max);
+		let healthBar = this.createHealthBar(enemy.id, enemy.health.current, enemy.health.max);
 		section.appendChild(healthBar);
 		//Enemy Image
 		let enemyImg = document.createElement('img');
@@ -201,23 +201,52 @@ class BattleManager
 		return section;
 	}
 	
-	createHealthBar(currentHealth, maxHealth)
+	createHealthBar(enemyId, currentHealth, maxHealth)
 	{
-		//Calculate the percentage of remaining health
-		const healthPercent = Math.max(0, Math.min(100, (currentHealth / maxHealth) * 100));
-		//Create the container element
+		// 1. Create the base container element (Red by default via CSS)
 		const container = document.createElement('div');
+		container.id = 'health' + enemyId;
 		container.className = 'health-bar-container';
-		//Set style
-		container.style.background = `linear-gradient(to right, #2ecc71 ${healthPercent}%, #e74c3c ${healthPercent}%)`;
-		//Create the text overlay (e.g., "20/20")
+		
+		// 2. Create the interactive inner green fill layer
+		const fill = document.createElement('div');
+		fill.className = 'health-bar-fill';
+		
+		// Calculate initial fill state percentage
+		const healthPercent = Math.max(0, Math.min(100, (currentHealth / maxHealth) * 100));
+		fill.style.width = `${healthPercent}%`;
+		container.appendChild(fill);
+		
+		// 3. Create the text overlay string layer
 		const textOverlay = document.createElement('span');
 		textOverlay.className = 'health-bar-text';
 		textOverlay.textContent = `${currentHealth}/${maxHealth}`;
 		container.appendChild(textOverlay);
+		
+		// Attach references directly to the DOM node object so your update script can easily find them
+		container._fillEl = fill;
+		container._textEl = textOverlay;
+		container._maxHealth = maxHealth;
+		
 		return container;
 	}
-	
+
+	updateHealthBar(enemyId, newHealth)
+	{
+		let barContainer = document.getElementById('health' + enemyId);
+
+		if (!barContainer || !barContainer._fillEl) return;
+		
+		const maxHealth = barContainer._maxHealth;
+		const healthPercent = Math.max(0, Math.min(100, (newHealth / maxHealth) * 100));
+		
+		// 1. Update the green bar width. CSS handles the 1-second transition slide smoothly!
+		barContainer._fillEl.style.width = `${healthPercent}%`;
+		
+		// 2. Update the text string layout value instantly
+		barContainer._textEl.textContent = `${newHealth}/${maxHealth}`;
+	}
+
 	//======================
 	// Drag target methods
 	//======================
@@ -444,7 +473,8 @@ class BattleManager
 		let enemy = this.#battleData.enemies.find(
 			(e) => { return e.id == id; }
 		);
-		console.log(enemy);
+		//console.log(enemy);
+		let damagedEnemies = [];
 		//Apply block/shield effects first
 		enemy.health.current -= amount;
 		if(enemy.health.current <= 0)
@@ -453,12 +483,24 @@ class BattleManager
 			this.#battleData.enemies = this.#battleData.enemies.filter( 
 				(e) => { return e.id != id; }
 			);
+			let enemyBox = document.getElementById(enemy.id);
+			enemyBox.parentElement.removeChild(enemyBox);
+		}
+		else
+		{
+			this.updateHealthBar(enemy.id, enemy.health.current);
+			damagedEnemies.push(enemy.id);
 		}
 		if(this.#battleData.enemies.length === 0)
 		{
 			alert("You win the battle!");
 		}
 		//Redraw enemy row to apply visual changes
-		this.outputEnemyRow();
+		//this.outputEnemyRow();
+		//Now apply damage effects on newly-created enemy boxes
+		damagedEnemies.forEach((id) => {
+			document.getElementById(id).classList.add('damaged');
+		});
+		setTimeout(removeDamageClasses, 2000);
 	}
 }
