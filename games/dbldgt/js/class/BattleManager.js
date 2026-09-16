@@ -61,11 +61,11 @@ class BattleManager
 	
 	init()
 	{
-    this.initEvents();
-    console.log(window.innerWidth, window.innerHeight);
-    let targetW = 300;
-    let targetH = 600;
-    this.resizeViewport(targetW, targetH);
+		this.initEvents();
+		console.log(window.innerWidth, window.innerHeight);
+		let targetW = 300;
+		let targetH = 600;
+		this.resizeViewport(targetW, targetH);
 	}
 	
 	
@@ -118,9 +118,13 @@ class BattleManager
 			//let enemyTypeArr = this.#enemyData.enemies.filter((e) => {return e.type == type;});
 			let enemyTypeArr = this.#enemyData[type];
 			let rndEnemyIndex = Math.floor(Math.random() * enemyTypeArr.length);
-			let enemy = enemyTypeArr[rndEnemyIndex];
 			for(let i = 0; i < (level + 1); i++)
 			{
+				//Clone the current enemy type object to generate a new unique enemy
+				let enemy = structuredClone(enemyTypeArr[rndEnemyIndex]);
+				//Set a unique ID for this enemy
+				enemy.id = enemy.name.replace(" ","-") + "-" + i;
+				enemy.index = i;
 				this.#battleData.enemies.push(enemy);
 			}
 			//console.log(this.#battleData.enemies);
@@ -132,15 +136,11 @@ class BattleManager
 	{
 		let section = document.createElement('section');
 		section.classList.add('battle');
+
 		//Output enemies row
 		let enemyRow = document.createElement('section');
+		enemyRow.id = 'enemyRow';
 		enemyRow.classList.add('enemy-row');
-		let enemies = this.#battleData.enemies;
-		for(let i = 0; i < enemies.length; i++)
-		{
-			let enemyBox = this.getEnemyBox(enemies[i], i);
-			enemyRow.appendChild(enemyBox);
-		}
 		section.appendChild(enemyRow);
 		
 		//Hands row
@@ -167,12 +167,26 @@ class BattleManager
 		section.appendChild(handsRow);
 		return section;
 	}
+
+	outputEnemyRow()
+	{
+		//Clear any existing row
+		let enemyRow = document.getElementById('enemyRow');
+		enemyRow.innerHTML = null;
+		let enemies = this.#battleData.enemies;
+		console.log(enemies);
+		for(let i = 0; i < enemies.length; i++)
+		{
+			let enemyBox = this.getEnemyBox(enemies[i], enemies[i].index);
+			enemyRow.appendChild(enemyBox);
+		}
+	}
 	
 	getEnemyBox(enemy, index)
 	{
 		let section = document.createElement('section');
 		section.classList.add('enemy-box');
-		section.id = 'enemy' + index;
+		section.id = enemy.id;
 		//Health Bar
 		let healthBar = this.createHealthBar(enemy.health.current, enemy.health.max);
 		section.appendChild(healthBar);
@@ -395,5 +409,56 @@ class BattleManager
 		document.removeEventListener('pointerdown', this.handlePointerDown);
 		document.removeEventListener('pointermove', this.handlePointerMove);
 		document.removeEventListener('pointerup', this.handlePointerUp);
+	}
+
+	//====================
+	// BATTLE ACTIONS
+	//====================
+	//Trigger both hand effects (attack their current targets or block/other)
+	useHands()
+	{
+		const attackDamage = 10;
+		//Left hand effect
+		if(this.leftHandTarget != null)
+		{
+			//Attack the left hand target
+			this.attackEnemy(this.leftHandTarget, attackDamage);
+			this.leftHandTarget = null;
+		}
+		if(this.rightHandTarget != null)
+		{
+			this.attackEnemy(this.rightHandTarget, attackDamage);
+			this.rightHandTarget = null;
+		}
+
+		//Clear targets and target lines
+		document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
+		{
+			line.parentElement.removeChild(line);
+		});
+	}
+
+	//Attack the enemy with ID by the amount specified,
+	attackEnemy(id, amount)
+	{
+		let enemy = this.#battleData.enemies.find(
+			(e) => { return e.id == id; }
+		);
+		console.log(enemy);
+		//Apply block/shield effects first
+		enemy.health.current -= amount;
+		if(enemy.health.current <= 0)
+		{
+			//Enemy dies - remove from the enemies list
+			this.#battleData.enemies = this.#battleData.enemies.filter( 
+				(e) => { return e.id != id; }
+			);
+		}
+		if(this.#battleData.enemies.length === 0)
+		{
+			alert("You win the battle!");
+		}
+		//Redraw enemy row to apply visual changes
+		this.outputEnemyRow();
 	}
 }

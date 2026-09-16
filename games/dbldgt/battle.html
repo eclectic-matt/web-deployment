@@ -20,11 +20,13 @@
 		btlMgr.generateBattle('basic', enemyCountMinusOne);
 		let btlSec = btlMgr.outputBattle();
 		document.getElementById('main').appendChild(btlSec);
+		let enemyRow = btlMgr.outputEnemyRow();
+		//Output a "clear" button
 		let clearLinesBtn = document.createElement('button');
 		clearLinesBtn.innerHTML = 'Clear Targets';
 		clearLinesBtn.style.position = 'absolute';
-		clearLinesBtn.style.top = '50%';
-		clearLinesBtn.style.left = '50%';
+		clearLinesBtn.style.top = '75%';
+		clearLinesBtn.style.left = '30%';
 		clearLinesBtn.addEventListener('click', (e) => 
 		{
 			document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
@@ -33,6 +35,17 @@
 			})
 		});
 		document.getElementById('main').appendChild(clearLinesBtn);
+		//Output an "Use Hands" button
+		let attackBtn = document.createElement('button');
+		attackBtn.innerHTML = 'Use hands';
+		attackBtn.style.position = 'absolute';
+		attackBtn.style.top = '75%';
+		attackBtn.style.left = '70%';
+		attackBtn.addEventListener('click', (e) => 
+		{
+			btlMgr.useHands();
+		});
+		document.getElementById('main').appendChild(attackBtn);
 	}
 	</script>
 </head>
@@ -41,24 +54,33 @@
 
 <!-- Full screen transparent layer for vector drawing -->
 <svg id="drag-line-svg" xmlns="http://w3.org">
+	
 	<defs>
-		
 		<!-- Reusable white arrowhead border -->
-    <marker id="arrow-border" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-    	<path d="M 0 0 L 10 5 L 0 10 z" fill="#ff1818" />
-    </marker>
-    <!-- Reusable primary color arrowhead tip -->
-    <marker id="arrow-tip" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="2" markerHeight="2" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ff3838" />
-    </marker>
-  </defs>
-    
-    <!-- Grouped path stack (JavaScript can clone this entire group on drop) -->
-    <g id="active-targeting-group">
-        <path class="line-border" d="" />
-        <path class="line-dash-color1" d="" />
-        <path class="line-dash-color2" d="" />
-    </g>
+		<marker 
+			id="arrow-border" viewBox="0 0 10 10" 
+			refX="5" refY="5" 
+			markerWidth="4" markerHeight="4" 
+			orient="auto-start-reverse">
+			<path d="M 0 0 L 10 5 L 0 10 z" fill="#ff1818" />
+		</marker>
+		<!-- Reusable primary color arrowhead tip -->
+		<marker 
+			id="arrow-tip" viewBox="0 0 10 10" 
+			refX="6" refY="5" 
+			markerWidth="2" markerHeight="2" 
+			orient="auto-start-reverse">
+			<path d="M 0 1 L 10 5 L 0 9 z" fill="#ff3838" />
+		</marker>
+	</defs>
+		
+	<!-- Grouped path stack (JavaScript can clone this entire group on drop) -->
+	<g id="active-targeting-group">
+		<path class="line-border" d="" />
+		<path class="line-dash-color1" d="" />
+		<path class="line-dash-color2" d="" />
+	</g>
+
 	<!-- The dynamic path element -->
 	<path id="active-drag-line" d="" />
 </svg>

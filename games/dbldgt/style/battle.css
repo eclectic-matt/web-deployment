@@ -1,7 +1,7 @@
 body, section 
 {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 .battle 
@@ -16,27 +16,27 @@ body, section
 
 .enemy-row 
 {
-    margin-top: 50px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    box-sizing: border-box;
+	margin-top: 50px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 25px;
+	box-sizing: border-box;
 }
 
 .enemy-box 
 {
-    flex: 0 1 auto;
-    max-width: 50%;
-    text-align: center;
+	flex: 0 1 auto;
+	max-width: 100%;
+	text-align: center;
 }
 
 .enemy-box .health-bar-container 
 {
-    width: 100%;
-    margin: 5px auto 0 auto;
+	width: 100%;
+	margin: 5px auto 0 auto;
 }
 
 .health-bar-text
@@ -46,8 +46,8 @@ body, section
 
 .enemy-box img 
 {
-    display: block;
-    margin: 0 auto;
+	display: block;
+	margin: 0 auto;
 }
 
 .enemy-box .ability-intent
@@ -60,17 +60,17 @@ body, section
 	width: 100%;
 	margin-top: 100px;
 	display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 25px;
 	box-sizing: border-box;
 }
 
 .hands-row .hand 
 {
 	flex: 0 1 auto;
-	max-width: 50%;
+	max-width: 100%;
 	height: auto;
 	margin: 0 auto;
 	text-align: center;
@@ -80,7 +80,7 @@ body, section
 }
 .hands-row .hand img 
 {
-	width: 50%;
+	width: 100%;
 	/* Prevents text or element highlighting selections */
 	-webkit-user-select: none; /* Safari */
 	-moz-user-select: none;    /* Firefox */
@@ -117,47 +117,47 @@ body, section
 /* Ensure the active group is hidden by default, but permanent links are shown */
 #active-targeting-group 
 {
-    display: none;
+	display: none;
 }
 
 .permanent-targeting-link 
 {
-    display: block !important;
+	display: block !important;
 }
 
 /* Base styles for paths inside ANY targeting layer group */
 #active-targeting-group path,
 .permanent-targeting-link path 
 {
-    fill: none;
-    stroke-linecap: round;
+	fill: none;
+	stroke-linecap: round;
 }
 
 /* 1. THICK SOLID WHITE BORDER BACKGROUND */
 #active-targeting-group .line-border,
 .permanent-targeting-link .line-border 
 {
-    stroke: #ffffff;
-    stroke-width: 8px;
-    marker-end: url(#arrow-border);
+	stroke: #ffffff;
+	stroke-width: 8px;
+	marker-end: url(#arrow-border);
 }
 
 /* 2. FIRST COLOR DASH PATTERN (RED) */
 #active-targeting-group .line-dash-color1,
 .permanent-targeting-link .line-dash-color1 
 {
-    stroke: #ff3838;
-    stroke-width: 4px;
-    stroke-dasharray: 12, 12;
-    marker-end: url(#arrow-tip);
+	stroke: #ff3838;
+	stroke-width: 4px;
+	stroke-dasharray: 12, 12;
+	marker-end: url(#arrow-tip);
 }
 
 /* 3. SECOND COLOR DASH PATTERN (BLUE) */
 #active-targeting-group .line-dash-color2,
 .permanent-targeting-link .line-dash-color2 
 {
-    stroke: #ff2;
-    stroke-width: 4px;
-    stroke-dasharray: 12, 12;
-    stroke-dashoffset: 12;
+	stroke: #ff2;
+	stroke-width: 4px;
+	stroke-dasharray: 12, 12;
+	stroke-dashoffset: 12;
 }
