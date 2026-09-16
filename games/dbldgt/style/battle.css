@@ -39,8 +39,8 @@ body, section
 .enemy-box .health-bar-container 
 {
 	position: relative;
-	width: 80%;
-	margin-left: 10%; 
+	width: 90%;
+	margin: 0 auto; 
 	height: 20px;
 	background-color: #e74c3c;
 	border: 1px solid white;
@@ -68,7 +68,8 @@ body, section
 	transform: translate(-50%, -50%);
 	color: white;
 	font-weight: bold;
-	font-size: 0.9rem;
+	font-size: 0.75rem;
+	white-space: nowrap;
 	pointer-events: none; /* Let clicks pass through if needed */
 	z-index: 2;
 }
