@@ -12,19 +12,19 @@ class BattleManager
 		'boss'
 	];
 	#player = {
-	  id: 'player',
-	  health: {
-	    current: 100,
-	    max: 100
-	  }
+		id: 'player',
+		health: {
+			current: 100,
+			max: 100
+		}
 	};
 	#battleStates = [
-	  'init',
-	  'playerDecide',
-	  'playerAct',
-	  'enemyDecide',
-	  'enemyAct',
-	  'complete'
+		'init',
+		'playerDecide',
+		'playerAct',
+		'enemyDecide',
+		'enemyAct',
+		'complete'
 	];
 
 	//===================
@@ -414,7 +414,7 @@ class BattleManager
 		}
 	}
 	
-	createPermanentLink(source, enemy)
+	createPermanentLink(source, enemy, amount = null)
 	{
 		const activeGroup = document.getElementById('active-targeting-group');
 		if (!activeGroup) 
@@ -422,12 +422,12 @@ class BattleManager
 			return;
 		}
 
-		// FIXED: Clone the whole multi-layered SVG group instead of a single path line
+		//Clone the whole multi-layered SVG group instead of a single path line
 		const finalGroup = activeGroup.cloneNode(true);
 		finalGroup.removeAttribute('id');
 		finalGroup.classList.add('permanent-targeting-link');
 		
-		// Tag references directly on the element group node so you can clean them up later
+		//Tag references directly on the element group node so you can clean them up later
 		finalGroup.dataset.sourceId = source.id;
 		finalGroup.dataset.enemyId = enemy.id;
 		
@@ -435,11 +435,76 @@ class BattleManager
 		const end = this.getCenterCoords(enemy);
 		const pathData = `M ${start.x} ${start.y} L ${end.x} ${end.y}`;
 		
-		// Update all subpaths within the cloned group to stay locked onto centers
+		//Update all subpaths within the cloned group to stay locked onto centers
 		finalGroup.querySelectorAll('path').forEach((path) => 
 		{
 			path.setAttribute('d', pathData);
 		});
+
+		//If amount passed in to show damage value
+		if (amount !== null)
+		{
+			const midX = (start.x + end.x) / 2;
+			const midY = (start.y + end.y) / 2;
+
+			const svgNS = "http://www.w3.org/2000/svg";
+
+			const badgeGroup = document.createElementNS(svgNS, "g");
+			badgeGroup.classList.add("path-amount-badge");
+			badgeGroup.setAttribute("transform", `translate(${midX}, ${midY})`);
+
+			//Create text element layout definitions
+			const text = document.createElementNS(svgNS, "text");
+			text.textContent = amount;
+			text.setAttribute("fill", "#ffffff");
+			text.setAttribute("font-weight", "bold");
+			text.setAttribute("font-size", "24px");
+			text.setAttribute("font-family", "Arial, sans-serif");
+			text.setAttribute("text-anchor", "middle");
+			text.setAttribute("dominant-baseline", "central"); 
+			text.setAttribute("style", "user-select: none; pointer-events: none;");
+
+			//Create the background box container layer definition
+			const rect = document.createElementNS(svgNS, "rect");
+			rect.setAttribute("fill", "#af0000"); 
+			rect.setAttribute("stroke", "#ffffff");
+			rect.setAttribute("stroke-width", "1");
+			rect.setAttribute("rx", "4"); 
+			rect.setAttribute("ry", "4");
+			rect.setAttribute("style", "pointer-events: none;");
+
+			//Append text first ONLY to allow measurement engine to calculate bounds
+			badgeGroup.appendChild(text);
+			finalGroup.appendChild(badgeGroup);
+			this.svgCanvas.appendChild(finalGroup); 
+			
+			//Default fallback layout box sizing parameters
+			let rectWidth = 40;
+			let rectHeight = 20;
+
+			//Read real-time text measurements safely
+			if (typeof text.getBBox === 'function')
+			{
+				const textBounds = text.getBBox();
+				const padX = 24; 
+				const padY = 18;  
+				
+				rectWidth = textBounds.width + padX;
+				rectHeight = textBounds.height + padY;
+			}
+
+			//Apply the dimensions to the rectangle element
+			rect.setAttribute("x", (-rectWidth / 2).toString());
+			rect.setAttribute("y", (-rectHeight / 2).toString());
+			rect.setAttribute("width", rectWidth.toString());
+			rect.setAttribute("height", rectHeight.toString());
+
+			//Insert the rectangle *BEFORE* the text in the DOM tree hierarchy layer
+			//This moves the background box underneath the text so the font content shows on top
+			badgeGroup.insertBefore(rect, text);
+
+			return; 
+		}
 		
 		this.svgCanvas.appendChild(finalGroup);
 	}
@@ -533,41 +598,46 @@ class BattleManager
 	
 	enemiesTurn()
 	{
-	  const attackDelayMs = 1000;
-	  let playerTargetEl = document.getElementById('playerTarget');
-	  this.#battleData.enemies.forEach((enemy, i) => {
-	    let attack = enemy.abilities[0];
-	    let atkValue = attack.value;
-	    let enemyEl = document.getElementById(enemy.id);
-	    setTimeout(() => {
-	      
-	      this.createPermanentLink(enemyEl, playerTargetEl);
-	      this.attackPlayer(enemy.id, atkValue);
-	    }, i * attackDelayMs);
-	  });
-	  setTimeout(removeActingClasses, (this.#battleData.enemies.length + 1) * attackDelayMs);
+		const attackDelayMs = 1000;
+		let playerTargetEl = document.getElementById('playerTarget');
+		this.#battleData.enemies.forEach((enemy, i) => 
+		{
+			let attack = enemy.abilities[0];
+			let atkValue = attack.value;
+			let enemyEl = document.getElementById(enemy.id);
+			setTimeout(() => {
+			
+			this.createPermanentLink(enemyEl, playerTargetEl, atkValue);
+			this.attackPlayer(enemy.id, atkValue);
+			}, i * attackDelayMs);
+		});
+		setTimeout(removeActingClasses, (this.#battleData.enemies.length + 1) * attackDelayMs);
 	}
 	
 	attackPlayer(enemyId, amount)
 	{
-	  document.getElementById(enemyId).classList.add('acting');
-	  this.#player.health.current -= amount;
-	  if(this.#player.health.current <= 0)
-	  {
-	    alert('You lost the battle!');
-	  }
-	  else
-	  {
-	    this.updateHealthBar(this.#player.id, this.#player.health.current);
-	  }
-	  setTimeout(() => {
-	    this.clearLinksForEntity(enemyId);
-	  }, 500);
+		//If player is already defeated, just clean up
+		if(this.#player.health.current <= 0)
+		{
+			this.clearLinksForEntity(enemyId);
+			return;
+		}
+		document.getElementById(enemyId).classList.add('acting');
+		this.#player.health.current -= amount;
+		this.updateHealthBar(this.#player.id, this.#player.health.current);
+		if(this.#player.health.current <= 0)
+		{
+			alert('You lost the battle!');
+		}
+		setTimeout(() => 
+		{
+			this.clearLinksForEntity(enemyId);
+		}, 500);
 	}
 	
 	resetPlayerHealth()
 	{
-	  this.#player.health.current = this.#player.health.max;
-	  this.updateHealthBar(this.#player.id, this.#player.health.current);
+		this.#player.health.current = this.#player.health.max;
+		this.updateHealthBar(this.#player.id, this.#player.health.current);
 	}
 }
