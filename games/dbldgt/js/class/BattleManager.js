@@ -625,13 +625,13 @@ class BattleManager
 		document.getElementById(enemyId).classList.add('acting');
 		this.#player.health.current -= amount;
 		this.updateHealthBar(this.#player.id, this.#player.health.current);
-		if(this.#player.health.current <= 0)
-		{
-			alert('You lost the battle!');
-		}
 		setTimeout(() => 
 		{
 			this.clearLinksForEntity(enemyId);
+			if(this.#player.health.current <= 0)
+			{
+				alert('You lost the battle!');
+			}
 		}, 500);
 	}
 	
