@@ -34,19 +34,19 @@
 		clearLinesBtn.innerHTML = 'Clear Targets';
 		clearLinesBtn.addEventListener('click', (e) => 
 		{
-			clearTargetLines();
+			btlMgr.clearTargetLines();
 		});
 		btnRow.appendChild(clearLinesBtn);
 		//Output an "Use Hands" button
 		let useHandsBtn = document.createElement('button');
 		useHandsBtn.id = 'useHandsBtn';
-		useHandsBtn.innerHTML = 'Use hands';
+		useHandsBtn.innerHTML = 'Use hands (no attacks)';
 		useHandsBtn.addEventListener('click', (e) => 
 		{
 			btlMgr.useHands();
 		});
 		btnRow.appendChild(useHandsBtn);
-				//Output an "Generate" button
+		//Output an "Generate" button
 		let genBtlBtn = document.createElement('button');
 		genBtlBtn.innerHTML = 'Generate Enemies';
 		genBtlBtn.addEventListener('click', (e) =>
@@ -57,27 +57,7 @@
 		main.appendChild(btnRow);
 	}
 	
-	const removeDamageClasses = () => {
-		document.querySelectorAll('.enemy-box').forEach((el) => 
-		{
-			el.classList.remove('damaged');
-		});
-	}
 	
-	const removeActingClasses = () => {
-		clearTargetLines();
-		document.querySelectorAll('.enemy-box').forEach((el) => 
-		{
-			el.classList.remove('acting');
-		});
-	}
-	
-	const clearTargetLines = () => {
-		document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
-			{
-				line.parentElement.removeChild(line);
-			});
-	}
 	</script>
 </head>
 

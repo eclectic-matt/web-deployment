@@ -18,14 +18,14 @@ class BattleManager
 			max: 100
 		}
 	};
+	//These are the loop sequence of states
 	#battleStates = [
-		'init',
 		'playerDecide',
 		'playerAct',
 		'enemyDecide',
 		'enemyAct',
-		'complete'
 	];
+	#currentBattleStateIndex = 0;
 
 	//===================
 	// INIT
@@ -76,12 +76,43 @@ class BattleManager
 	
 	init()
 	{
+		this.#currentBattleStateIndex = 0;
 		this.initEvents();
 		console.log(window.innerWidth, window.innerHeight);
 		let targetW = 300;
 		let targetH = 600;
 		this.resizeViewport(targetW, targetH);
 	}
+
+	//===================
+	// STATE BASED
+	//===================
+	processState()
+	{
+		switch(this.#battleStates[this.#currentBattleStateIndex])
+		{
+			case 'playerDecide':
+				//No action needed - the player will target and then click the button
+			break;
+			case 'playerAct':
+				this.useHands();
+			break;
+			case 'enemyDecide':
+				this.enemiesTurn();
+			break;
+			case 'enemyAct':
+				//to do
+			break;
+		}
+		//Increment and wrap around if complete
+		this.#currentBattleStateIndex += 1;
+		if(this.#currentBattleStateIndex > this.#battleStates.length)
+		{
+			this.#currentBattleStateIndex = 0;
+		}
+	}
+
+
 	
 	
 	//===================
@@ -187,8 +218,8 @@ class BattleManager
 		section.appendChild(handsRow);
 		
 		let healthBar = this.createHealthBar(this.#player.id, this.#player.health.current, this.#player.health.max);
-    section.appendChild(healthBar);
-    
+		section.appendChild(healthBar);
+		
 		return section;
 	}
 
@@ -395,6 +426,19 @@ class BattleManager
 		{
 			this.createPermanentLink(this.activeSource, validEnemy);
 		}
+
+		//Also update the button
+		if(this.leftHandTarget && this.rightHandTarget)
+		{
+			this.updateHandsButton(2);
+		}
+		else if (this.leftHandTarget || this.rightHandTarget){
+			this.updateHandsButton(1);
+		}
+		else
+		{
+			this.updateHandsButton(0);
+		}
 		
 		// Clean up active tracker group frame
 		const group = document.getElementById('active-targeting-group');
@@ -412,6 +456,32 @@ class BattleManager
 			this.activeSource.releasePointerCapture(e.pointerId);
 			this.activeSource = null;
 		}
+	}
+
+	updateHandsButton(targetCount = 0)
+	{
+		let handsMsg = 'Use Hands';
+		if(targetCount === 0)
+		{
+			handsMsg += ' (no attacks)';
+		}
+		else if(targetCount === 1)
+		{
+			if(this.leftHandTarget != null)
+			{
+				handsMsg += ' (left hand attack)';
+			}
+			else if(this.rightHandTarget != null)
+			{
+				handsMsg += ' (right hand attack)';
+			}
+		}
+		else
+		{
+			handsMsg += ' (both hands attack)';
+		}
+
+		document.getElementById('useHandsBtn').innerHTML = handsMsg;
 	}
 	
 	createPermanentLink(source, enemy, amount = null)
@@ -529,6 +599,29 @@ class BattleManager
 		document.removeEventListener('pointerup', this.handlePointerUp);
 	}
 
+	removeDamageClasses = () => {
+		document.querySelectorAll('.enemy-box').forEach((el) => 
+		{
+			el.classList.remove('damaged');
+		});
+	}
+	
+	removeActingClasses = () => {
+		this.clearTargetLines();
+		document.querySelectorAll('.enemy-box').forEach((el) => 
+		{
+			el.classList.remove('acting');
+		});
+	}
+	
+	clearTargetLines = () => {
+		document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
+		{
+			line.parentElement.removeChild(line);
+		});
+		this.updateHandsButton(0);
+	}
+
 	//====================
 	// BATTLE ACTIONS
 	//====================
@@ -555,8 +648,11 @@ class BattleManager
 			line.parentElement.removeChild(line);
 		});
 		
-		//Enemies attack back
-		this.enemiesTurn();
+		//Enemy turn after 2s delay
+		setTimeout(() => {
+			//Enemies attack back
+			this.enemiesTurn();
+		}, 2000);
 	}
 
 	//Attack the enemy with ID by the amount specified,
@@ -593,7 +689,7 @@ class BattleManager
 		damagedEnemies.forEach((id) => {
 			document.getElementById(id).classList.add('damaged');
 		});
-		setTimeout(removeDamageClasses, 2000);
+		setTimeout(() => { this.removeDamageClasses}, 2000);
 	}
 	
 	enemiesTurn()
@@ -605,13 +701,15 @@ class BattleManager
 			let attack = enemy.abilities[0];
 			let atkValue = attack.value;
 			let enemyEl = document.getElementById(enemy.id);
-			setTimeout(() => {
-			
-			this.createPermanentLink(enemyEl, playerTargetEl, atkValue);
-			this.attackPlayer(enemy.id, atkValue);
-			}, i * attackDelayMs);
+			setTimeout(() => 
+				{
+					this.createPermanentLink(enemyEl, playerTargetEl, atkValue);
+					this.attackPlayer(enemy.id, atkValue);
+				},
+				i * attackDelayMs
+			);
 		});
-		setTimeout(removeActingClasses, (this.#battleData.enemies.length + 1) * attackDelayMs);
+		setTimeout(() => {this.removeActingClasses()}, (this.#battleData.enemies.length + 1) * attackDelayMs);
 	}
 	
 	attackPlayer(enemyId, amount)
@@ -626,13 +724,15 @@ class BattleManager
 		this.#player.health.current -= amount;
 		this.updateHealthBar(this.#player.id, this.#player.health.current);
 		setTimeout(() => 
-		{
-			this.clearLinksForEntity(enemyId);
-			if(this.#player.health.current <= 0)
 			{
-				alert('You lost the battle!');
-			}
-		}, 500);
+				this.clearLinksForEntity(enemyId);
+				if(this.#player.health.current <= 0)
+				{
+					alert('You lost the battle!');
+				}
+			},
+			500
+		);
 	}
 	
 	resetPlayerHealth()
