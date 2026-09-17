@@ -10,10 +10,12 @@
 	<script>
 	var btlMgr;
 	var cts;
+	
 	const init = () => 
 	{
 		btlMgr = new BattleManager();
 	}
+	
 	const generateBattle = () => 
 	{
 		let main = document.getElementById('main');
@@ -32,10 +34,7 @@
 		clearLinesBtn.innerHTML = 'Clear Targets';
 		clearLinesBtn.addEventListener('click', (e) => 
 		{
-			document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
-			{
-				line.parentElement.removeChild(line);
-			})
+			clearTargetLines();
 		});
 		btnRow.appendChild(clearLinesBtn);
 		//Output an "Use Hands" button
@@ -57,6 +56,7 @@
 		btnRow.appendChild(genBtlBtn);
 		main.appendChild(btnRow);
 	}
+	
 	const removeDamageClasses = () => {
 		document.querySelectorAll('.enemy-box').forEach((el) => 
 		{
@@ -65,10 +65,18 @@
 	}
 	
 	const removeActingClasses = () => {
+		clearTargetLines();
 		document.querySelectorAll('.enemy-box').forEach((el) => 
 		{
 			el.classList.remove('acting');
 		});
+	}
+	
+	const clearTargetLines = () => {
+		document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
+			{
+				line.parentElement.removeChild(line);
+			});
 	}
 	</script>
 </head>

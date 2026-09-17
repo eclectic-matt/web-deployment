@@ -18,6 +18,14 @@ class BattleManager
 	    max: 100
 	  }
 	};
+	#battleStates = [
+	  'init',
+	  'playerDecide',
+	  'playerAct',
+	  'enemyDecide',
+	  'enemyAct',
+	  'complete'
+	];
 
 	//===================
 	// INIT
@@ -163,6 +171,10 @@ class BattleManager
 		leftHandImg.src = './assets/img/left_hand.png';
 		leftHand.appendChild(leftHandImg);
 		handsRow.appendChild(leftHand);
+		//Player targeting element
+		let playerTarget = document.createElement('div');
+		playerTarget.id = "playerTarget";
+		handsRow.appendChild(playerTarget);
 		//right
 		let rightHand = document.createElement('div');
 		rightHand.classList.add('hand');
@@ -521,14 +533,19 @@ class BattleManager
 	
 	enemiesTurn()
 	{
+	  const attackDelayMs = 1000;
+	  let playerTargetEl = document.getElementById('playerTarget');
 	  this.#battleData.enemies.forEach((enemy, i) => {
 	    let attack = enemy.abilities[0];
 	    let atkValue = attack.value;
+	    let enemyEl = document.getElementById(enemy.id);
 	    setTimeout(() => {
+	      
+	      this.createPermanentLink(enemyEl, playerTargetEl);
 	      this.attackPlayer(enemy.id, atkValue);
-	    }, i * 1000);
+	    }, i * attackDelayMs);
 	  });
-	  setTimeout(removeActingClasses, 3000);
+	  setTimeout(removeActingClasses, (this.#battleData.enemies.length + 1) * attackDelayMs);
 	}
 	
 	attackPlayer(enemyId, amount)
@@ -543,6 +560,9 @@ class BattleManager
 	  {
 	    this.updateHealthBar(this.#player.id, this.#player.health.current);
 	  }
+	  setTimeout(() => {
+	    this.clearLinksForEntity(enemyId);
+	  }, 500);
 	}
 	
 	resetPlayerHealth()
