@@ -84,8 +84,13 @@ class ItemMapUi
 		// Setup scaling view recalculation events using .bind(this) to avoid context crashes
 		window.addEventListener('resize', this.resizeGameViewport.bind(this));
 		window.addEventListener('DOMContentLoaded', this.resizeGameViewport.bind(this));
+
+		this.handlePointerDown = this.handlePointerDown.bind(this);
+		this.handlePointerMove = this.handlePointerMove.bind(this);
+		this.handlePointerUp = this.handlePointerUp.bind(this);
+
 		this.initEvents();
-		this.resizeGameViewport(); // Run an initial setup execution immediately
+		//this.resizeGameViewport(); // Run an initial setup execution immediately
 	}
 	
 	generateHands()
@@ -192,126 +197,139 @@ class ItemMapUi
 
 	initEvents()
 	{
-		//APPLY DRAG EVENTS FOR EACH RING
-		document.querySelectorAll('.' + this.#ringItemsClassName)
-		.forEach(ring => 
-		{
-			// --- UNIFIED POINTER DOWN (Mouse & Touch) ---
-			ring.addEventListener('pointerdown', (e) => 
-			{
-				const imgElement = e.currentTarget.tagName === 'IMG' ? e.currentTarget : e.currentTarget.querySelector('img');
-				if (!imgElement) return;
-
-				this.#isDragging = true;
-				this.#draggedRingSrc = imgElement.src;
-				this.#draggedRingDataset = imgElement.dataset;
-				this.highlightDropAreas(true);
-		
-				ring.setPointerCapture(e.pointerId);
-				this.clearDragVisualElements();
-
-				this.#dragVisualElement = document.createElement('img');
-				this.#dragVisualElement.id = this.#dragVisualElementId;
-				this.#dragVisualElement.src = this.#draggedRingSrc;
-				this.#dragVisualElement.style.position = 'fixed';
-				this.#dragVisualElement.style.width = `${imgElement.offsetWidth}px`;
-				this.#dragVisualElement.style.height = `${imgElement.offsetHeight}px`;
-				this.#dragVisualElement.style.pointerEvents = 'none';
-				this.#dragVisualElement.style.zIndex = '9999';
-				this.updateVisualPosition(e.clientX, e.clientY);
-				document.body.appendChild(this.#dragVisualElement);
-			});
-			
-			/*
-			ring.addEventListener('pointerover', (e) => 
-			{
-				// Specifically target the score element inside this ring
-				let popupEl = ring.parentElement.querySelector(".popup-score");
-				
-				if (popupEl)
-				{
-					popupEl.innerHTML = ring.dataset.description || "";
-					popupEl.style.backgroundColor = "var(--total-score-color)";
-					popupEl.classList.add("show");
-					
-					//console.log('Showing', popupEl.innerHTML);
-					
-					setTimeout(() => this.clearPopup(popupEl), 5000);
-				}
-				
-			});
-		  */
-		  
-			// --- UNIFIED POINTER MOVE ---
-			ring.addEventListener('pointermove', (e) => 
-			{
-				if (!this.#isDragging || !this.#dragVisualElement) return;
-				this.updateVisualPosition(e.clientX, e.clientY);
-				this.updateActiveHoverState(e.clientX, e.clientY);
-			});
-		
-			// --- UNIFIED POINTER UP / RELEASE ---
-			ring.addEventListener('pointerup', (e) => 
-			{
-				if (!this.#isDragging) return;
-				
-				//console.log('pointerup', e.currentTarget.id, ring.id);
-				
-				//Are we dropping (releasing) on itself? Treat as a click
-				let noTargetArea = this.findTargetAreaAtCoordinates(e.clientX, e.clientY);
-				if (!noTargetArea) 
-				{
-				  let popupEl = ring.parentElement.querySelector(".popup-score");
-				
-  				if (popupEl)
-  				{
-  					popupEl.innerHTML = ring.dataset.description || "";
-  					popupEl.style.backgroundColor = "var(--total-score-color)";
-  					popupEl.classList.add("show");
-  					
-  					//console.log('Showing', popupEl.innerHTML);
-  					
-  					setTimeout(() => this.clearPopup(popupEl), 5000);
-  				}
-  				
-  				this.highlightDropAreas(false);
-  				this.#isDragging = false;
-  			  
-  			  if (this.#dragVisualElement) 
-  			  {
-            this.#dragVisualElement.remove();
-            this.#dragVisualElement = null;
-          }
-  			  return;
-				}
-				
-				this.highlightDropAreas(false);
-				this.#isDragging = false;
-				
-				try {
-					ring.releasePointerCapture(e.pointerId);
-				} catch (err) {
-					// Ignore if capture was already released
-				}
-				
-				if (this.#dragVisualElement) {
-					this.#dragVisualElement.remove();
-					this.#dragVisualElement = null;
-				}
-				
-				let targetArea = this.findTargetAreaAtCoordinates(e.clientX, e.clientY);
-				if (targetArea) {
-					this.executeDropLogic(targetArea);
-				} else {
-					console.log("Dropped outside a valid area slot");
-				}
-			});
-			
-			// Prevent native context menus from interfering
-			document.addEventListener('contextmenu', (e) => {
-				if (e.target.classList.contains(this.#ringItemsClassName)) e.preventDefault();
-			});
+		// Attach universal listeners bound directly to class scopes
+		document.addEventListener('pointerdown', this.handlePointerDown);
+		document.addEventListener('pointermove', this.handlePointerMove);
+		document.addEventListener('pointerup', this.handlePointerUp);
+		// Prevent native context menus from interfering
+		document.addEventListener('contextmenu', (e) => {
+			if (e.target.classList.contains(this.#ringItemsClassName)) e.preventDefault();
 		});
+	}
+
+	handlePointerDown(e)
+	{
+		//Do not trigger if already dragging
+		if(this.#isDragging) return;
+		//If the user has clicked (pointerdown) on an item
+		if(e.target.className.includes('item'))
+		{
+			//const imgElement = e.currentTarget.tagName === 'IMG' ? e.currentTarget : e.currentTarget.querySelector('img');
+			const imgElement = e.target.tagName === 'IMG' ? e.target : e.currentTarget.querySelector('img');
+			if (!imgElement) return;
+			
+			//console.log('dragging', imgElement);
+
+			//Set flag that we are currently dragging
+			this.#isDragging = true;
+			//Highlight the drop areas on the hand map
+			this.highlightDropAreas(true);
+			//Set the pointerCapture to the element we selected
+			e.target.setPointerCapture(e.pointerId);
+			this.clearDragVisualElements();
+
+			//Create drag visual for the clicked item
+			this.#dragVisualElement = document.createElement('img');
+			this.#draggedRingDataset = imgElement.dataset;
+			this.#dragVisualElement.id = this.#dragVisualElementId;
+			this.#draggedRingSrc = imgElement.src;
+			this.#dragVisualElement.src = this.#draggedRingSrc;
+			//console.log('drag visual src', this.#draggedRingSrc);
+			this.#dragVisualElement.style.position = 'fixed';
+			this.#dragVisualElement.style.width = `${imgElement.offsetWidth}px`;
+			this.#dragVisualElement.style.height = `${imgElement.offsetHeight}px`;
+			this.#dragVisualElement.style.pointerEvents = 'none';
+			this.#dragVisualElement.style.zIndex = '9999';
+			this.updateVisualPosition(e.clientX, e.clientY);
+			document.body.appendChild(this.#dragVisualElement);
+		}
+	}
+
+	handlePointerMove(e)
+	{
+		if (!this.#isDragging || !this.#dragVisualElement) return;
+		this.updateVisualPosition(e.clientX, e.clientY);
+		this.updateActiveHoverState(e.clientX, e.clientY);
+	}
+
+	handlePointerUp(e)
+	{
+		if (!this.#isDragging) return;
+
+		//console.log('drop visual', this.#dragVisualElement);
+		//console.log('drop dataset', this.#draggedRingDataset);
+
+		const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
+		const validDropArea = dropTarget ? dropTarget.closest('.ring-highlight-overlay') : null;
+		//console.log('pointer up', dropTarget, validDropArea);
+
+		/*
+		//Are we dropping (releasing) on itself? Treat as a click
+		let noTargetArea = this.findTargetAreaAtCoordinates(e.clientX, e.clientY);
+		console.log('drop current target', e.currentTarget);
+		console.log('drop ring', ring);
+		console.log('drop noTargetArea', noTargetArea);
+
+		//Dropping outside of a valid target area?
+		if (!noTargetArea) 
+		{
+			let popupEl = ring.parentElement.querySelector(".popup-score");
+			//If there is a popup element
+			if (popupEl)
+			{
+				popupEl.innerHTML = ring.dataset.description || "";
+				popupEl.style.backgroundColor = "var(--total-score-color)";
+				popupEl.classList.add("show");
+				setTimeout(() => this.clearPopup(popupEl), 5000);
+			}
+		
+			this.highlightDropAreas(false);
+			this.#isDragging = false;
+		
+			if (this.#dragVisualElement) 
+			{
+				this.#dragVisualElement.remove();
+				this.#dragVisualElement = null;
+			}
+			return;
+		}
+		*/
+		
+		this.highlightDropAreas(false);
+		this.#isDragging = false;
+		
+		try 
+		{
+			this.currentTarget.releasePointerCapture(e.pointerId);
+		}
+		catch (err) 
+		{
+			// Ignore if capture was already released
+		}
+		
+		if (this.#dragVisualElement) 
+		{
+			this.#dragVisualElement.remove();
+			this.#dragVisualElement = null;
+		}
+		
+		let targetArea = this.findTargetAreaAtCoordinates(e.clientX, e.clientY);
+		if (targetArea) 
+		{
+			this.executeDropLogic(targetArea);
+		}
+		else
+		{
+			console.log("Dropped outside a valid area slot");
+		}
+	}
+
+	// Call this if the combat screen unmounts/destroys to prevent memory leaks
+	destroy()
+	{
+		document.removeEventListener('pointerdown', this.handlePointerDown);
+		document.removeEventListener('pointermove', this.handlePointerMove);
+		document.removeEventListener('pointerup', this.handlePointerUp);
 	}
 	
 	clearPopup(el)
