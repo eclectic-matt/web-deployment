@@ -260,6 +260,24 @@ class ItemMapUi
 		//console.log('drop dataset', this.#draggedRingDataset);
 
 		const dropTarget = document.elementFromPoint(e.clientX, e.clientY);
+		
+		if(this.#draggedRingDataset == dropTarget.dataset)
+		{
+			let popupEl = dropTarget.parentElement.querySelector(".popup-score");
+			//If there is a popup element
+			if (popupEl)
+			{
+				popupEl.innerHTML = dropTarget.dataset.description || "";
+				popupEl.style.backgroundColor = "var(--total-score-color)";
+				popupEl.classList.add("show");
+				setTimeout(() => this.clearPopup(popupEl), 5000);
+			}
+			this.#isDragging = false;
+			this.clearDragVisualElements();
+			this.highlightDropAreas(false);
+			return;
+		}
+		
 		const validDropArea = dropTarget ? dropTarget.closest('.ring-highlight-overlay') : null;
 		//console.log('pointer up', dropTarget, validDropArea);
 

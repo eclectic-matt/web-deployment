@@ -68,7 +68,7 @@ section#scoringArea
 
 #baseScore, #powerScore, #totalScore 
 {
-	font-size: 1.25rem;
+	font-size: 1.05rem;
 	font-weight: bold;
 	padding: 4px;
 	border-radius: 5px;

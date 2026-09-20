@@ -380,16 +380,18 @@ class LayoutManager
 		section.id = 'buttonRow';
 		let atkBtn = document.createElement('button');
 		atkBtn.id = 'btnTestPhysicalAttack';
-		atkBtn.innerHTML = 'Physical Attack';
+		atkBtn.innerHTML = 'Attack';
 		atkBtn.addEventListener('click', (e) => {
 			itemScoring.triggerPhysicalAttack();
 		});
 		section.appendChild(atkBtn);
+		/*
 		//Magical attack button? Not used
 		let magBtn = document.createElement('button');
 		magBtn.id = 'btnTestMagicalAttack';
 		magBtn.innerHTML = 'Magical Attack';
 		section.appendChild(magBtn);
+		*/
 		//Clear hands button 
 		let clrBtn = document.createElement('button');
 		clrBtn.id = 'btnClearHands';
