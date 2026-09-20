@@ -7,9 +7,10 @@ class ItemScoring
 	#scoreDelayMs = 500;
 	//The types of effect that change scoring
 	#scoringTypes = [
-		"base",   //Add/Multiply Base
-		"power",  //Add/Multiply Power
-		"totalMultiplier"		//Multiply Total
+		"base",   					//Add/Multiply Base
+		"power",  					//Add/Multiply Power
+		"totalMultiplier",	//Multiply Total,
+		"ring",							//Retrigger rings
 	];
 	#targetOrderIDs = [
 		//HELD ITEMS TRIGGER FIRST
@@ -44,11 +45,12 @@ class ItemScoring
 	{
 		// Clear old text first so you can clearly see the new calculations run step-by-step
 		this.clearTxt();
-		console.log('--- Starting Physical Attack Scoring Cycle ---');
-		this.outputToTxt("physical attack");
+		//console.log('--- Starting Physical Attack Scoring Cycle ---');
+		//this.outputToTxt("physical attack");
 		this.resetScores();
 		
 		let scoringItems = [];
+		let currentScoreDelay = this.#scoreDelayMs;
 		
 		// Scan through the exact order tracking index matrix
 		this.#targetOrderIDs.forEach(id =>
@@ -67,6 +69,9 @@ class ItemScoring
 		damage.power = 1;
 		damage.totalMultiplier = 1;
 		damage.total = 0;
+		//
+		let scoringItemsCount = scoringItems.length;
+		const originalScoringItems = [...scoringItems];
 		
 		for(let i = 0; i < scoringItems.length; i++)
 		{
@@ -86,7 +91,7 @@ class ItemScoring
 			if(this.#scoringTypes.includes(effectName))
 			{
 				//console.log(`Matched valid scoring type "${effectName}" for item ${scoringItem.id}. Value: ${effectValue}, Multiplier: ${rarityMultiplier}`);
-				this.outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
+				//this.outputToTxt("Scoring possible for " + effectName + " for value = " + effectValue + ", rarity = " + rarityMultiplier);
 				
 				switch(effectOp)
 				{
@@ -111,6 +116,18 @@ class ItemScoring
 						damage[effectName] *= scoreContribution;
 						//console.log(`Operation [MULTIPLY]: Contribution calculated as ${scoreContribution}. New damage.${effectName} running total = ${damage[effectName]}`);
 					break;
+					case "retrigger":
+						ringScores = true;
+						const currentItems = [...originalScoringItems];
+						//console.log('retrigger', currentItems);
+						let retriggerItems = [...scoringItems.filter((item) => {
+							return item.dataset.itemType == effectName;
+							})];
+						scoringItems.splice(i+1, 0, ...retriggerItems);
+						scoringItemsCount += retriggerItems.length;
+						const newItems = [...scoringItems];
+						//console.log('after retrigger', newItems);
+					break;
 					default:
 						console.warn(`Unrecognised effect operation type "${effectOp}" on element ${scoringItem.id}`);
 					break;
@@ -123,7 +140,7 @@ class ItemScoring
 			
 			if(ringScores)
 			{
-				this.outputToTxt("Scoring " + scoringItem.id + " from base=" + damage.base + ", power=" + damage.power);
+				//this.outputToTxt("Scoring " + scoringItem.id + " from base=" + damage.base + ", power=" + damage.power);
 				//console.log(`Triggering visual score animation for ${scoringItem.id}`);
 				this.scoreRing(scoringItem);
 				
@@ -132,9 +149,11 @@ class ItemScoring
 				
 				this.setTotalScore(damage.total);
 				
-				console.log('Calculation Step Complete. Current Stats:', damage);
+				//console.log('Calculation Step Complete. Current Stats:', damage);
 				// This holds the loop frame open for 500ms so you can view the changes update incrementally
-				await sleep(this.#scoreDelayMs);
+				await sleep(currentScoreDelay);
+				//Speed up by 5ms each score
+				currentScoreDelay = Math.max(1, currentScoreDelay - 5);
 			}
 		}
 		
@@ -152,10 +171,10 @@ class ItemScoring
 		this.outputToTxt("Total Damage = " + damage.total);
 		
 		// Allow 1s for final total text to be read/animated before cleaning up components
-		console.log('All updates pushed to DOM view layers. Pausing execution before clearing temporary overlay popups...');
+		//console.log('All updates pushed to DOM view layers. Pausing execution before clearing temporary overlay popups...');
 		await sleep(2 * this.#scoreDelayMs);
 		this.clearPopups();
-		console.log('--- Scoring Cycle Execution Loop Completed Cleanly ---');
+		//console.log('--- Scoring Cycle Execution Loop Completed Cleanly ---');
 	}
 	
 	resetScores = () =>
@@ -207,6 +226,9 @@ class ItemScoring
 					if (effectName === "power") this.multiplyPowerScore(scoreContribution);
 					//if (effectName === "totalMultiplier") this.multiplyTotalScore(scoreContribution);
 				break;
+				case "retrigger":
+					popupString = "Retrigger " + effectName + " items!";
+				break;
 			}
 		}
 		
@@ -227,6 +249,9 @@ class ItemScoring
 				break;
 			}
 			popupEl.classList.add("show");
+			setTimeout(() => {
+				popupEl.classList.remove("show");
+			}, 500);
 		}
 	}
 
@@ -237,14 +262,18 @@ class ItemScoring
 	
 	addBaseScore = (base) =>
 	{
-		let previous = parseInt(document.getElementById("baseScore").innerHTML.replaceAll(",","")) || 0;
+		//let previous = parseInt(document.getElementById("baseScore").innerHTML.replaceAll(",","")) || 0;
+		let previousStr = document.getElementById("baseScore").innerHTML;
+		let previous = this.parseCompactNumber(previousStr);
 		base = previous + base;
 		document.getElementById("baseScore").innerHTML = this.numberWithCommas(base);
 	}
 
 	multiplyBaseScore = (multiplier) =>
 	{
-		let previous = parseInt(document.getElementById("baseScore").innerHTML.replaceAll(",","")) || 0;
+		//let previous = parseInt(document.getElementById("baseScore").innerHTML.replaceAll(",","")) || 0;
+		let previousStr = document.getElementById("baseScore").innerHTML;
+		let previous = this.parseCompactNumber(previousStr);
 		let base = previous * multiplier;
 		document.getElementById("baseScore").innerHTML = this.numberWithCommas(base);
 	}
@@ -256,14 +285,18 @@ class ItemScoring
 	
 	addPowerScore = (power) => 
 	{
-		let previous = parseInt(document.getElementById("powerScore").innerHTML.replaceAll(",","")) || 0;
+		//let previous = parseInt(document.getElementById("powerScore").innerHTML.replaceAll(",","")) || 0;
+		let previousStr = document.getElementById("powerScore").innerHTML;
+		let previous = this.parseCompactNumber(previousStr);
 		power = previous + power;
 		document.getElementById("powerScore").innerHTML = this.numberWithCommas(power);
 	}
 
 	multiplyPowerScore = (multiplier) =>
 	{
-		let previous = parseInt(document.getElementById("powerScore").innerHTML.replaceAll(",","")) || 0;
+		//let previous = parseInt(document.getElementById("powerScore").innerHTML.replaceAll(",","")) || 0;
+		let previousStr = document.getElementById("powerScore").innerHTML;
+		let previous = this.parseCompactNumber(previousStr);
 		let power = previous * multiplier;
 		document.getElementById("powerScore").innerHTML = this.numberWithCommas(power);
 	}
@@ -275,24 +308,32 @@ class ItemScoring
 	
 	addTotalScore = (total) => 
 	{
-		let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
+		//let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
+		let previousStr = document.getElementById("totalScore").innerHTML;
+		let previous = this.parseCompactNumber(previousStr);
 		total = previous + total;
 		document.getElementById("totalScore").innerHTML = this.numberWithCommas(total);
 	}
 
 	multiplyTotalScore = (multiplier) =>
 	{
-		let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
+		//let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
+		let previousStr = document.getElementById("totalScore").innerHTML;
+		let previous = this.parseCompactNumber(previousStr);	
 		let total = previous * multiplier;
 		document.getElementById("totalScore").innerHTML = this.numberWithCommas(total);
 	}
 	
 	updateTotalScore = (total) => 
 	{
-		let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
+		//let previous = parseInt(document.getElementById("totalScore").innerHTML.replaceAll(",","")) || 0;
+		let previousStr = document.getElementById("totalScore").innerHTML;
+		let previous = this.parseCompactNumber(previousStr);
 		total = previous + total;
 		document.getElementById("totalScore").innerHTML = this.numberWithCommas(total);
 	}
+	
+	
 
   /*numberWithCommas = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -317,6 +358,34 @@ class ItemScoring
     });
     return formatter.format(num);
   }
+  
+  parseCompactNumber(stringNumber) 
+  {
+  if (typeof stringNumber !== 'string') return NaN;
+
+  // 1. Clean the string by removing commas (thousands separators) and whitespace
+  const cleanString = stringNumber.replace(/,/g, '').trim();
+
+  // 2. Define the multiplier map for en-US 'short' compact notation
+  const multipliers = {
+    'K': 1e3,  // Thousands
+    'M': 1e6,  // Millions
+    'B': 1e9,  // Billions
+    'T': 1e12  // Trillions
+  };
+
+  // 3. Extract the trailing letter multiplier if it exists
+  const suffix = cleanString.slice(-1).toUpperCase();
+  
+  if (multipliers[suffix]) {
+    // Extract everything except the last character and multiply it
+    const value = parseFloat(cleanString.slice(0, -1));
+    return value * multipliers[suffix];
+  }
+
+  // 4. If no compact suffix is found, parse it as a regular float
+  return parseFloat(cleanString);
+}
 
 
 	clearPopups = () => 

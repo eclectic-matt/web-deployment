@@ -430,6 +430,27 @@
 					"value": 3,
 					"description": "x3 Power"
 				}
+			},
+			{
+				"id": "common-tattoo-retrigger",
+				"name": "Common Retrigger Tattoo",
+				"description": "A common tattoo of a retrigger",
+				"type": "tattoo",
+				"icon": "./assets/img/items/tattoos/basic_retrigger_tattoo.png",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "common",
+					"multiplier": 1
+				},
+				"effect": {
+					"name": "ring",
+					"operation": "retrigger",
+					"value": 1,
+					"description": "Retrigger all rings"
+				}
 			}
 		]
 	}
