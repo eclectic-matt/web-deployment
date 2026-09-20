@@ -118,14 +118,14 @@ class ItemScoring
 					break;
 					case "retrigger":
 						ringScores = true;
-						const currentItems = [...originalScoringItems];
+						//const currentItems = [...originalScoringItems];
 						//console.log('retrigger', currentItems);
 						let retriggerItems = [...scoringItems.filter((item) => {
 							return item.dataset.itemType == effectName;
 							})];
-						scoringItems.splice(i+1, 0, ...retriggerItems);
+						scoringItems.splice(i + 1, 0, ...retriggerItems);
 						scoringItemsCount += retriggerItems.length;
-						const newItems = [...scoringItems];
+						//const newItems = [...scoringItems];
 						//console.log('after retrigger', newItems);
 					break;
 					default:
