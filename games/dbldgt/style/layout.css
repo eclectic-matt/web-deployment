@@ -59,11 +59,11 @@ section#sidePanel
 }
 section#scoringArea 
 {
-  background: #222;
-  padding: 10px 15px 20px 20px;
-  width: 50%;
-  margin: 0 auto;
-  font-size: 2rem;
+	background: #222;
+	padding: 10px 15px 20px 20px;
+	width: 50%;
+	margin: 0 auto;
+	font-size: 2rem;
 }
 
 #baseScore, #powerScore, #totalScore 

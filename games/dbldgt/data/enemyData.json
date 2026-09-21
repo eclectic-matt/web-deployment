@@ -1,9 +1,11 @@
 {
-  "version": "0.1",
-	"ideas": [
+	"version": "0.1",
+	"ideas": 
+	[
 		""
 	],
-	"abilities": [
+	"abilities": 
+	[
 		{
 			"name": "attack",
 			"type": "basic",
@@ -39,18 +41,27 @@
 			"type": "special",
 			"description": "Deals damage each turn",
 			"icon": "./assets/img/icons/burn.png"
+		},
+		{
+			"name": "freeze",
+			"type": "special",
+			"description": "Target skips their next turn",
+			"icon": "./assets/img/icons/freeze.png"
 		}
 	],
-	"basic": [
+	"basic": 
+	[
 		{
 			"name": "Fancy Rat",
 			"type": "creature",
 			"icon": "./assets/img/enemies/fancy_rat.png",
-			"health": {
+			"health": 
+			{
 				"current": 20,
 				"max": 20
 			},
-			"abilities": [
+			"abilities": 
+			[
 				{
 					"type": "attack",
 					"value": 10,
@@ -72,11 +83,13 @@
 			"name": "Flame Snake",
 			"type": "creature",
 			"icon": "./assets/img/enemies/flame_snake.png",
-			"health": {
+			"health": 
+			{
 				"current": 40,
 				"max": 40
 			},
-			"abilities": [
+			"abilities": 
+			[
 				{
 					"type": "attack",
 					"value": 15,
@@ -102,11 +115,13 @@
 			"name": "Poison Cube",
 			"type": "creature",
 			"icon": "./assets/img/enemies/poison_cube.png",
-			"health": {
+			"health": 
+			{
 				"current": 60,
 				"max": 60
 			},
-			"abilities": [
+			"abilities": 
+			[
 				{
 					"type": "attack",
 					"value": 20,
@@ -129,7 +144,8 @@
 			]
 		}
 	],
-	"boss": [
+	"boss": 
+	[
 		
 	]
 }

@@ -496,10 +496,10 @@ button#mainMenuBtn
 	justify-content: space-between;
 	gap: 25px;
 	width: 100%;
-	padding: 10% 25%;
+	padding: 25px 25%;
 	box-sizing: border-box;
 	flex-direction: column;
-	margin-top: 10%;
+	margin-top: 10px;
 }
 
 #mainMenu .main-menu-button 
