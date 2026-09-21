@@ -4,7 +4,10 @@ class ItemScoring
 	#physicalAttackBtnEl = null;
 	#magicalAttackBtnEl = null;
 	#clearHandsBtnEl = null;
+	//How long between each scoring item (initially)
 	#scoreDelayMs = 500;
+	//How much to decrement the delay between each score (-10ms per scored item, minimum 1ms)
+	#scoreDelayDecrement = 10;
 	//The types of effect that change scoring
 	#scoringTypes = [
 		"base",   					//Add/Multiply Base
@@ -173,7 +176,7 @@ class ItemScoring
 				// This holds the loop frame open for 500ms so you can view the changes update incrementally
 				await sleep(currentScoreDelay);
 				//Speed up by 5ms each score
-				currentScoreDelay = Math.max(1, currentScoreDelay - 5);
+				currentScoreDelay = Math.max(1, currentScoreDelay - this.#scoreDelayDecrement);
 			}
 		}
 		
