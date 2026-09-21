@@ -120,9 +120,29 @@ class ItemScoring
 						ringScores = true;
 						//const currentItems = [...originalScoringItems];
 						//console.log('retrigger', currentItems);
+						/*
 						let retriggerItems = [...scoringItems.filter((item) => {
 							return item.dataset.itemType == effectName;
 							})];
+						*/
+						//Get map of unique items
+						let uniqueItemsMap = new Map();
+						//Get all retriggered items, ensuring we only get each item once (in case of multiple retriggers)
+						scoringItems
+						    .filter((item) => 
+						    {
+						        return item.dataset.itemType == effectName;
+						    })
+						    .forEach((item) => 
+						    {
+						        if (!uniqueItemsMap.has(item.id))
+						        {
+						            uniqueItemsMap.set(item.id, item);
+						        }
+						    });
+						//Then get the filtered items
+						let retriggerItems = [...uniqueItemsMap.values()];
+						//Add filtered retriggers to the scoring items array
 						scoringItems.splice(i + 1, 0, ...retriggerItems);
 						scoringItemsCount += retriggerItems.length;
 						//const newItems = [...scoringItems];
@@ -227,7 +247,7 @@ class ItemScoring
 					//if (effectName === "totalMultiplier") this.multiplyTotalScore(scoreContribution);
 				break;
 				case "retrigger":
-					popupString = "Retrigger " + effectName + " items!";
+					popupString = "Retrigger " + effectName + "s!";
 				break;
 			}
 		}
