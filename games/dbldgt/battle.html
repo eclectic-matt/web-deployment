@@ -15,84 +15,44 @@
 	{
 		btlMgr = new BattleManager();
 	}
-	
-	const generateBattle = () => 
-	{
-		let main = document.getElementById('main');
-		main.innerHTML = null;
-		btlMgr.resetPlayerHealth();
-		let enemyCountMinusOne = 3;
-		btlMgr.generateBattle('basic', enemyCountMinusOne);
-		let btlSec = btlMgr.outputBattle();
-		main.appendChild(btlSec);
-		let enemyRow = btlMgr.outputEnemyRow();
-		//Generate a button row
-		let btnRow = document.createElement('section');
-		btnRow.classList.add('button-row');
-		//Output a "clear" button
-		let clearLinesBtn = document.createElement('button');
-		clearLinesBtn.innerHTML = 'Clear Targets';
-		clearLinesBtn.addEventListener('click', (e) => 
-		{
-			btlMgr.clearTargetLines();
-		});
-		btnRow.appendChild(clearLinesBtn);
-		//Output an "Use Hands" button
-		let useHandsBtn = document.createElement('button');
-		useHandsBtn.id = 'useHandsBtn';
-		useHandsBtn.innerHTML = 'Use hands (no attacks)';
-		useHandsBtn.addEventListener('click', (e) => 
-		{
-			btlMgr.useHands();
-		});
-		btnRow.appendChild(useHandsBtn);
-		//Output an "Generate" button
-		let genBtlBtn = document.createElement('button');
-		genBtlBtn.innerHTML = 'Generate Enemies';
-		genBtlBtn.addEventListener('click', (e) =>
-		{
-			generateBattle();
-		});
-		btnRow.appendChild(genBtlBtn);
-		main.appendChild(btnRow);
-	}
-	
-	
+
 	</script>
 </head>
 
 <body onload="init()">
 
-<!-- Full screen transparent layer for vector drawing -->
 <svg id="drag-line-svg" xmlns="http://w3.org">
 	
 	<defs>
-		<!-- Reusable white arrowhead border -->
-		<marker 
+	  
+    <marker 
 			id="arrow-border" viewBox="0 0 10 10" 
 			refX="5" refY="5" 
 			markerWidth="2" markerHeight="2" 
 			orient="auto-start-reverse">
-			<path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff" />
+		  
+			<path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+			
 		</marker>
-		<!-- Reusable primary color arrowhead tip -->
+		
 		<marker 
 			id="arrow-tip" viewBox="0 0 10 10" 
 			refX="6" refY="5" 
 			markerWidth="2" markerHeight="2" 
 			orient="auto-start-reverse">
+			
 			<path d="M 0 1 L 10 5 L 0 9 z" fill="#ffff22" />
+			
 		</marker>
-	</defs>
 		
-	<!-- Grouped path stack (JavaScript can clone this entire group on drop) -->
+	</defs>
+	
 	<g id="active-targeting-group">
 		<path class="line-border" d="" />
 		<path class="line-dash-color1" d="" />
 		<path class="line-dash-color2" d="" />
 	</g>
 
-	<!-- The dynamic path element -->
 	<path id="active-drag-line" d="" />
 </svg>
 

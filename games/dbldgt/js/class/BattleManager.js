@@ -34,6 +34,9 @@ class BattleManager
 	//Just setup initial document references
 	constructor()
 	{
+		//NOT WORKING AT PRESENT - HAVE REWORKED SOME OF THE JS LOGIC BUT LINE DRAWING EVENTS NOT WORKING WHEN SVG IS GENERATED SO HAVE REINSTATED THE HARD-CODED SVG IN THE battle.html BODY
+		//this.initSVG();
+		
 		this.svgCanvas = document.getElementById('drag-line-svg');
 		this.dragLine = document.getElementById('active-drag-line');
 		
@@ -65,7 +68,9 @@ class BattleManager
 			
 			this.#enemyData = await response.json();
 			
-			generateBattle();
+			this.startBattle();
+			
+			//generateBattle();
 			//passDataToLayout(this.#enemyData, 'enemy');
 		}
 		catch (error)
@@ -301,6 +306,129 @@ class BattleManager
 		// 2. Update the text string layout value instantly
 		barContainer._textEl.textContent = `${newHealth}/${maxHealth}`;
 	}
+	
+	
+	startBattle() 
+	{
+		let main = document.getElementById('main');
+		main.innerHTML = null;
+		btlMgr.resetPlayerHealth();
+		let enemyCountMinusOne = 3;
+		btlMgr.generateBattle('basic', enemyCountMinusOne);
+		let btlSec = btlMgr.outputBattle();
+		main.appendChild(btlSec);
+		let enemyRow = btlMgr.outputEnemyRow();
+		//Generate a button row
+		let btnRow = document.createElement('section');
+		btnRow.classList.add('button-row');
+		//Output a "clear" button
+		let clearLinesBtn = document.createElement('button');
+		clearLinesBtn.innerHTML = 'Clear Targets';
+		clearLinesBtn.addEventListener('click', (e) => 
+		{
+			btlMgr.clearTargetLines();
+		});
+		btnRow.appendChild(clearLinesBtn);
+		//Output an "Use Hands" button
+		let useHandsBtn = document.createElement('button');
+		useHandsBtn.id = 'useHandsBtn';
+		useHandsBtn.innerHTML = 'Use hands (no attacks)';
+		useHandsBtn.addEventListener('click', (e) => 
+		{
+			btlMgr.useHands();
+		});
+		btnRow.appendChild(useHandsBtn);
+		//Output an "Generate" button
+		let genBtlBtn = document.createElement('button');
+		genBtlBtn.innerHTML = 'Generate Enemies';
+		genBtlBtn.addEventListener('click', (e) =>
+		{
+			generateBattle();
+		});
+		btnRow.appendChild(genBtlBtn);
+		main.appendChild(btnRow);
+	}
+	
+	initSVG()
+	{
+    // Define the required SVG Namespace URI
+    const svgNS = "http://w3.org";
+
+    // Full screen transparent layer for vector drawing
+    let svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('id', 'drag-line-svg');
+
+    // Marker definitions
+    let defs = document.createElementNS(svgNS, 'defs');
+
+    // Reusable white arrowhead border
+    let arrowBorderMarker = document.createElementNS(svgNS, 'marker');
+    arrowBorderMarker.setAttribute('id', 'arrow-border');
+    arrowBorderMarker.setAttribute('viewBox', '0 0 10 10');
+    arrowBorderMarker.setAttribute('refX', '5');
+    arrowBorderMarker.setAttribute('refY', '5');
+    arrowBorderMarker.setAttribute('markerWidth', '2');
+    arrowBorderMarker.setAttribute('markerHeight', '2');
+    arrowBorderMarker.setAttribute('orient', 'auto-start-reverse');
+
+    // Arrowhead border path
+    let arrowBorderPath = document.createElementNS(svgNS, 'path');
+    arrowBorderPath.setAttribute('d', 'M 0 0 L 10 5 L 0 10 z');
+    arrowBorderPath.setAttribute('fill', '#ffffff');
+
+    arrowBorderMarker.appendChild(arrowBorderPath);
+    defs.appendChild(arrowBorderMarker);
+
+    // Reusable primary color arrowhead tip
+    let arrowTipMarker = document.createElementNS(svgNS, 'marker');
+    arrowTipMarker.setAttribute('id', 'arrow-tip');
+    arrowTipMarker.setAttribute('viewBox', '0 0 10 10');
+    arrowTipMarker.setAttribute('refX', '6');
+    arrowTipMarker.setAttribute('refY', '5');
+    arrowTipMarker.setAttribute('markerWidth', '2');
+    arrowTipMarker.setAttribute('markerHeight', '2');
+    arrowTipMarker.setAttribute('orient', 'auto-start-reverse');
+
+    // Tip path
+    let arrowTipPath = document.createElementNS(svgNS, 'path');
+    arrowTipPath.setAttribute('d', 'M 0 1 L 10 5 L 0 9 z');
+    arrowTipPath.setAttribute('fill', '#ffff22');
+
+    arrowTipMarker.appendChild(arrowTipPath);
+    defs.appendChild(arrowTipMarker);
+
+    svg.appendChild(defs);
+
+    // Grouped path stack
+    let activeTargetGroup = document.createElementNS(svgNS, 'g');
+    activeTargetGroup.setAttribute('id', 'active-targeting-group');
+
+    let lineBorderPath = document.createElementNS(svgNS, 'path');
+    lineBorderPath.setAttribute('class', 'line-border');
+    lineBorderPath.setAttribute('d', '');
+    activeTargetGroup.appendChild(lineBorderPath);
+
+    let lineDashColor1 = document.createElementNS(svgNS, 'path');
+    lineDashColor1.setAttribute('class', 'line-dash-color1');
+    lineDashColor1.setAttribute('d', '');
+    activeTargetGroup.appendChild(lineDashColor1);
+
+    let lineDashColor2 = document.createElementNS(svgNS, 'path');
+    lineDashColor2.setAttribute('class', 'line-dash-color2');
+    lineDashColor2.setAttribute('d', '');
+    activeTargetGroup.appendChild(lineDashColor2);
+    
+    svg.appendChild(activeTargetGroup);
+
+    // The dynamic path element
+    let activeTargetLine = document.createElementNS(svgNS, 'path');
+    activeTargetLine.setAttribute('id', 'active-drag-line');
+    activeTargetLine.setAttribute('d', '');
+    svg.appendChild(activeTargetLine);
+
+    document.body.appendChild(svg);
+	}
+
 
 	//======================
 	// Drag target methods
@@ -334,7 +462,8 @@ class BattleManager
 		const group = document.getElementById('active-targeting-group');
 		if (group)
 		{
-			group.style.display = 'block';
+			group.setAttribute('style', 'display: block;');
+			//group.style.display = 'block';
 			group.querySelectorAll('path').forEach((path) => 
 			{
 				path.setAttribute('d', pathData);
@@ -369,7 +498,8 @@ class BattleManager
 		const group = document.getElementById('active-targeting-group');
 		if (group)
 		{
-			group.style.display = 'block';
+			//group.style.display = 'block';
+			group.setAttribute('style', 'display: block;');
 			group.querySelectorAll('path').forEach((path) => 
 			{
 				path.setAttribute('d', pathData);
@@ -444,7 +574,8 @@ class BattleManager
 		const group = document.getElementById('active-targeting-group');
 		if (group)
 		{
-			group.style.display = 'none';
+			//group.style.display = 'none';
+			group.setAttribute('style', 'display: block;');
 			group.querySelectorAll('path').forEach((path) => 
 			{
 				path.setAttribute('d', '');
@@ -496,10 +627,12 @@ class BattleManager
 		const finalGroup = activeGroup.cloneNode(true);
 		finalGroup.removeAttribute('id');
 		finalGroup.classList.add('permanent-targeting-link');
-		
+    finalGroup.setAttribute('style', 'display: block;');
 		//Tag references directly on the element group node so you can clean them up later
-		finalGroup.dataset.sourceId = source.id;
-		finalGroup.dataset.enemyId = enemy.id;
+		//finalGroup.dataset.sourceId = source.id;
+		//finalGroup.dataset.enemyId = enemy.id;
+		finalGroup.setAttribute('data-source-id', source.id);
+		finalGroup.setAttribute('data-enemy-id', enemy.id);
 		
 		const start = this.getCenterCoords(source);
 		const end = this.getCenterCoords(enemy);
@@ -584,7 +717,10 @@ class BattleManager
 		const links = this.svgCanvas.querySelectorAll('.permanent-targeting-link');
 		links.forEach((link) => 
 		{
-			if (link.dataset.sourceId === entityId || link.dataset.enemyId === entityId) 
+			let sourceId = link.getAttribute('data-source-id');
+			let enemyId = link.getAttribute('data-enemy-id');
+		
+		if(sourceId === entityId || enemyId === entityId)
 			{
 				link.remove();
 			}
