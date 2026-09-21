@@ -25,7 +25,7 @@ class Item
 	}
 	/**
 	 * Getters and setters (private fields)
- 	*/
+	*/
  	//#id
 	get id()
 	{
@@ -33,20 +33,20 @@ class Item
 	}
 	set id(newId)
 	{
-	  this.#id = newId;
+		this.#id = newId;
 	}
 	//#type
 	get type()
 	{
-	  return this.#type;
+		return this.#type;
 	}
 	set type(newType)
 	{
-	  this.#type = newType;
+		this.#type = newType;
 	}
 	/**
 	 * Getters and setters (public fields)
- 	*/
+	*/
 	//name
 	get name()
 	{
@@ -76,6 +76,7 @@ class Item
 	}
 }
 
+/*
 static class Rarity 
 {
 	Common = 1;
@@ -93,3 +94,4 @@ static class EffectTypes
 	Retrigger = 3;
 	Special = 4;
 }
+*/
