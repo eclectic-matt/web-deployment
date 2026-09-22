@@ -11,6 +11,8 @@ class ItemMapUi
 	#targetHeight = 420;
 	//#targetWidth = 480;
 	//#targetHeight = 400;
+	#braceletScale = 3;
+  #ringScale = 2;
 	#inventoryTypes = ['ring', 'bracelet', 'held', 'tattoo'];
 	//SET CLASS NAMES / TAGS / IDs
 	#ringItemsClassName = 'item';
@@ -281,38 +283,7 @@ class ItemMapUi
 		const validDropArea = dropTarget ? dropTarget.closest('.ring-highlight-overlay') : null;
 		//console.log('pointer up', dropTarget, validDropArea);
 
-		/*
-		//Are we dropping (releasing) on itself? Treat as a click
-		let noTargetArea = this.findTargetAreaAtCoordinates(e.clientX, e.clientY);
-		console.log('drop current target', e.currentTarget);
-		console.log('drop ring', ring);
-		console.log('drop noTargetArea', noTargetArea);
 
-		//Dropping outside of a valid target area?
-		if (!noTargetArea) 
-		{
-			let popupEl = ring.parentElement.querySelector(".popup-score");
-			//If there is a popup element
-			if (popupEl)
-			{
-				popupEl.innerHTML = ring.dataset.description || "";
-				popupEl.style.backgroundColor = "var(--total-score-color)";
-				popupEl.classList.add("show");
-				setTimeout(() => this.clearPopup(popupEl), 5000);
-			}
-		
-			this.highlightDropAreas(false);
-			this.#isDragging = false;
-		
-			if (this.#dragVisualElement) 
-			{
-				this.#dragVisualElement.remove();
-				this.#dragVisualElement = null;
-			}
-			return;
-		}
-		*/
-		
 		this.highlightDropAreas(false);
 		this.#isDragging = false;
 		
@@ -596,7 +567,8 @@ class ItemMapUi
 		if (isBracelet) 
 		{
 			ringImg.style.clipPath = 'inset(47% 0% 0% 0%)'; 
-			ringImg.style.transform = 'translateY(-40%) scale(3)'; 
+			ringImg.style.transform = 'translateY(-40%) scale(' + this.#braceletScale + ')'; 
+
 		}
 		else if (isRing)
 		{
@@ -608,11 +580,11 @@ class ItemMapUi
 			if(fingerId.includes('right'))
 			{
 				//Mirror horizontal
-				ringImg.style.transform = 'translateY(0%) scale(2) rotateY(180deg)';
+				ringImg.style.transform = 'translateY(0%) scale(' + this.#ringScale + ') rotateY(180deg)';
 			}
 			else
 			{
-				ringImg.style.transform = 'translateY(0%) scale(2)';
+				ringImg.style.transform = 'translateY(0%) scale(' + this.#ringScale + ')';
 			}
 		}
 		

@@ -14,6 +14,7 @@ class ItemScoring
 		"power",  					//Add/Multiply Power
 		"totalMultiplier",	//Multiply Total,
 		"ring",							//Retrigger rings
+		"hand",							//Retrigger hand
 	];
 	#targetOrderIDs = [
 		//HELD ITEMS TRIGGER FIRST
@@ -121,13 +122,10 @@ class ItemScoring
 					break;
 					case "retrigger":
 						ringScores = true;
-						//const currentItems = [...originalScoringItems];
-						//console.log('retrigger', currentItems);
-						/*
-						let retriggerItems = [...scoringItems.filter((item) => {
-							return item.dataset.itemType == effectName;
-							})];
-						*/
+						if(effectName === "hand")
+						{
+							
+						}
 						//Get map of unique items
 						let uniqueItemsMap = new Map();
 						//Get all retriggered items, ensuring we only get each item once (in case of multiple retriggers)
@@ -158,7 +156,7 @@ class ItemScoring
 			}
 			else
 			{
-				console.log(`Skipping item ${scoringItem.id}: effect classification "${effectName}" does not match targeted scoring groups [base, power]`);
+				console.log(`Skipping item ${scoringItem.id}: effect classification "${effectName}" does not match targeted scoring groups ${ this.#scoringTypes.join(',')}`);
 			}
 			
 			if(ringScores)

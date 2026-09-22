@@ -321,6 +321,27 @@
 					"value": 5,
 					"description": "x5 Power"
 				}
+			},
+			{
+			  "id": "retrigger-hand-bracelet",
+				"name": "Retrigger Hand Bracelet",
+				"description": "A basic chain bracelet",
+				"type": "bracelet",
+				"icon": "./assets/img/items/bracelets/retrigger_hand_bracelet.png",
+				"action": {
+					"type": "score",
+					"condition": null
+				},
+				"rarity": {
+					"name": "common",
+					"multiplier": 1
+				},
+				"effect": {
+					"name": "hand",
+					"operation": "retrigger",
+					"value": 1,
+					"description": "Retrigger Hand"
+				}
 			}
 		],
 		"held": [

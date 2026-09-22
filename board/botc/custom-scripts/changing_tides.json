@@ -1,0 +1,40 @@
+[
+  {
+    "id":"_meta",
+    "name":"Changing Tides",
+    "author":"EclecticMatt"
+  },
+  "investigator",
+  "grandmother",
+  "pixie",
+  "balloonist",
+  "snakecharmer",
+  "king",
+  "dreamer",
+  "undertaker",
+  "engineer",
+  "huntsman",
+  "juggler",
+  "cannibal",
+  "choirboy",
+  "recluse",
+  "barber",
+  "hatter",
+  "damsel",
+  "devilsadvocate",
+  "spy",
+  "pithag",
+  "scarletwoman",
+  "imp",
+  "kazali",
+  "fanggu",
+  "lleech",
+  "cacklejack",
+  "hindu",
+  {
+    "id":"changeling",
+    "name":"Changeling",
+    "team": "loric",
+    "ability": "Each dawn, the Storyteller announces the previous character of one player who has changed character since dusk. If none have, this information is false."
+  }
+]
