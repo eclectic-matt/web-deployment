@@ -170,8 +170,7 @@ class BattleManager
 		{
 			case 'basic':
 			//Same enemy up to (level + 1)
-			//let enemyTypeArr = this.#enemyData.enemies.filter((e) => {return e.type == type;});
-			let enemyTypeArr = this.#enemyData[type];
+			let enemyTypeArr = this.#enemyData[this.#battleType];
 			let rndEnemyIndex = Math.floor(Math.random() * enemyTypeArr.length);
 			for(let i = 0; i < (this.#battleLevel + 1); i++)
 			{
