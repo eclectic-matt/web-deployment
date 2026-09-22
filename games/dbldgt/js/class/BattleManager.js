@@ -1,5 +1,7 @@
 class BattleManager
 {
+	#battleType = 'basic';
+	#battleLevel = 0;
 	#enemyDataJsonPath = './data/enemyData.json';
 	#enemyData = null;
 	#battleData = {
@@ -32,10 +34,12 @@ class BattleManager
 	//===================
 	
 	//Just setup initial document references
-	constructor()
+	constructor(type = 'basic', level = 0)
 	{
-		//NOT WORKING AT PRESENT - HAVE REWORKED SOME OF THE JS LOGIC BUT LINE DRAWING EVENTS NOT WORKING WHEN SVG IS GENERATED SO HAVE REINSTATED THE HARD-CODED SVG IN THE battle.html BODY
-		//this.initSVG();
+		this.#battleType = type;
+		this.#battleLevel = level;
+		
+		this.initSVG();
 		
 		this.svgCanvas = document.getElementById('drag-line-svg');
 		this.dragLine = document.getElementById('active-drag-line');
@@ -83,7 +87,7 @@ class BattleManager
 	{
 		this.#currentBattleStateIndex = 0;
 		this.initEvents();
-		console.log(window.innerWidth, window.innerHeight);
+		//console.log(window.innerWidth, window.innerHeight);
 		let targetW = 300;
 		let targetH = 600;
 		this.resizeViewport(targetW, targetH);
@@ -145,7 +149,7 @@ class BattleManager
 		let optimalScale = Math.min(scaleX, scaleY);
 		//No scaling if already large enough
 		if (optimalScale > 1) optimalScale = 1;
-		console.log('optimalScale', optimalScale);
+		//console.log('optimalScale', optimalScale);
 		//Scale element
 		scaledEl.style.transform = `scale(${optimalScale})`;
 	}
@@ -155,21 +159,21 @@ class BattleManager
 		this.#battleData = data;
 	}
 	
-	generateBattle(type = 'basic', level = 0)
+	generateBattle()
 	{
 		this.#battleData = {
 			enemies: [],
 			round: 0
 		};
 		
-		switch(type)
+		switch(this.#battleType)
 		{
 			case 'basic':
 			//Same enemy up to (level + 1)
 			//let enemyTypeArr = this.#enemyData.enemies.filter((e) => {return e.type == type;});
 			let enemyTypeArr = this.#enemyData[type];
 			let rndEnemyIndex = Math.floor(Math.random() * enemyTypeArr.length);
-			for(let i = 0; i < (level + 1); i++)
+			for(let i = 0; i < (this.#battleLevel + 1); i++)
 			{
 				//Clone the current enemy type object to generate a new unique enemy
 				let enemy = structuredClone(enemyTypeArr[rndEnemyIndex]);
@@ -181,6 +185,8 @@ class BattleManager
 			//console.log(this.#battleData.enemies);
 			break;
 		}
+		
+		//console.log('generated', this.#battleData);
 	}
 	
 	outputBattle()
@@ -234,7 +240,7 @@ class BattleManager
 		let enemyRow = document.getElementById('enemyRow');
 		enemyRow.innerHTML = null;
 		let enemies = this.#battleData.enemies;
-		console.log(enemies);
+		//console.log(enemies);
 		for(let i = 0; i < enemies.length; i++)
 		{
 			let enemyBox = this.getEnemyBox(enemies[i], enemies[i].index);
@@ -312,12 +318,13 @@ class BattleManager
 	{
 		let main = document.getElementById('main');
 		main.innerHTML = null;
-		btlMgr.resetPlayerHealth();
-		let enemyCountMinusOne = 3;
-		btlMgr.generateBattle('basic', enemyCountMinusOne);
-		let btlSec = btlMgr.outputBattle();
+		this.resetPlayerHealth();
+		//let enemyCountMinusOne = 3;
+		//this.generateBattle('basic', enemyCountMinusOne);
+		this.generateBattle();
+		let btlSec = this.outputBattle();
 		main.appendChild(btlSec);
-		let enemyRow = btlMgr.outputEnemyRow();
+		let enemyRow = this.outputEnemyRow();
 		//Generate a button row
 		let btnRow = document.createElement('section');
 		btnRow.classList.add('button-row');
@@ -326,7 +333,7 @@ class BattleManager
 		clearLinesBtn.innerHTML = 'Clear Targets';
 		clearLinesBtn.addEventListener('click', (e) => 
 		{
-			btlMgr.clearTargetLines();
+			this.clearTargetLines();
 		});
 		btnRow.appendChild(clearLinesBtn);
 		//Output an "Use Hands" button
@@ -335,7 +342,7 @@ class BattleManager
 		useHandsBtn.innerHTML = 'Use hands (no attacks)';
 		useHandsBtn.addEventListener('click', (e) => 
 		{
-			btlMgr.useHands();
+			this.useHands();
 		});
 		btnRow.appendChild(useHandsBtn);
 		//Output an "Generate" button
@@ -343,7 +350,7 @@ class BattleManager
 		genBtlBtn.innerHTML = 'Generate Enemies';
 		genBtlBtn.addEventListener('click', (e) =>
 		{
-			generateBattle();
+			this.startBattle();
 		});
 		btnRow.appendChild(genBtlBtn);
 		main.appendChild(btnRow);
@@ -352,12 +359,13 @@ class BattleManager
 	initSVG()
 	{
     // Define the required SVG Namespace URI
-    const svgNS = "http://w3.org";
+    const svgNS = "http://www.w3.org/2000/svg";
 
     // Full screen transparent layer for vector drawing
     let svg = document.createElementNS(svgNS, 'svg');
     svg.setAttribute('id', 'drag-line-svg');
-
+    svg.setAttribute('xmlns', svgNS);
+    
     // Marker definitions
     let defs = document.createElementNS(svgNS, 'defs');
 
@@ -426,7 +434,8 @@ class BattleManager
     activeTargetLine.setAttribute('d', '');
     svg.appendChild(activeTargetLine);
 
-    document.body.appendChild(svg);
+    //document.body.appendChild(svg);
+    document.body.prepend(svg);
 	}
 
 
@@ -720,7 +729,7 @@ class BattleManager
 			let sourceId = link.getAttribute('data-source-id');
 			let enemyId = link.getAttribute('data-enemy-id');
 		
-		if(sourceId === entityId || enemyId === entityId)
+		if (sourceId === entityId || enemyId === entityId)
 			{
 				link.remove();
 			}
@@ -735,14 +744,16 @@ class BattleManager
 		document.removeEventListener('pointerup', this.handlePointerUp);
 	}
 
-	removeDamageClasses = () => {
+	removeDamageClasses = () => 
+	{
 		document.querySelectorAll('.enemy-box').forEach((el) => 
 		{
 			el.classList.remove('damaged');
 		});
 	}
 	
-	removeActingClasses = () => {
+	removeActingClasses = () => 
+	{
 		this.clearTargetLines();
 		document.querySelectorAll('.enemy-box').forEach((el) => 
 		{
@@ -750,7 +761,8 @@ class BattleManager
 		});
 	}
 	
-	clearTargetLines = () => {
+	clearTargetLines = () => 
+	{
 		document.querySelectorAll('.permanent-targeting-link').forEach((line) =>
 		{
 			line.parentElement.removeChild(line);
@@ -766,13 +778,13 @@ class BattleManager
 	{
 		const attackDamage = 10;
 		//Left hand effect
-		if(this.leftHandTarget != null)
+		if (this.leftHandTarget != null)
 		{
 			//Attack the left hand target
 			this.attackEnemy(this.leftHandTarget, attackDamage);
 			this.leftHandTarget = null;
 		}
-		if(this.rightHandTarget != null)
+		if (this.rightHandTarget != null)
 		{
 			this.attackEnemy(this.rightHandTarget, attackDamage);
 			this.rightHandTarget = null;
@@ -785,7 +797,8 @@ class BattleManager
 		});
 		
 		//Enemy turn after 2s delay
-		setTimeout(() => {
+		setTimeout(() => 
+		{
 			//Enemies attack back
 			this.enemiesTurn();
 		}, 2000);
@@ -817,7 +830,8 @@ class BattleManager
 		}
 		if(this.#battleData.enemies.length === 0)
 		{
-			alert("You win the battle!");
+			//alert("You win the battle!");
+			setTimeout(advanceSession, 5000);
 		}
 		//Redraw enemy row to apply visual changes
 		//this.outputEnemyRow();

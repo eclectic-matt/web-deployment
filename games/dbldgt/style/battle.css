@@ -128,13 +128,14 @@ body, section
 /* TARGET DRAG LINES */
 #drag-line-svg 
 {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	pointer-events: none; /* Allows cards/enemies to be clicked through the SVG */
-	z-index: 100;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 99999 !important;
+  overflow: visible !important;
 }
 
 #active-drag-line
@@ -157,6 +158,8 @@ body, section
 .permanent-targeting-link 
 {
 	display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Base styles for paths inside ANY targeting layer group */

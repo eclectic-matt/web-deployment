@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="./style/battle.css" />
 	<script>
 	var btlMgr;
-	var cts;
 	
 	const init = () => 
 	{
@@ -21,44 +20,8 @@
 
 <body onload="init()">
 
-<svg id="drag-line-svg" xmlns="http://w3.org">
-	
-	<defs>
-
-	<marker 
-			id="arrow-border" viewBox="0 0 10 10" 
-			refX="5" refY="5" 
-			markerWidth="2" markerHeight="2" 
-			orient="auto-start-reverse">
-
-			<path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
-			
-		</marker>
-		
-		<marker 
-			id="arrow-tip" viewBox="0 0 10 10" 
-			refX="6" refY="5" 
-			markerWidth="2" markerHeight="2" 
-			orient="auto-start-reverse">
-			
-			<path d="M 0 1 L 10 5 L 0 9 z" fill="#ffff22" />
-			
-		</marker>
-		
-	</defs>
-	
-	<g id="active-targeting-group">
-		<path class="line-border" d="" />
-		<path class="line-dash-color1" d="" />
-		<path class="line-dash-color2" d="" />
-	</g>
-
-	<path id="active-drag-line" d="" />
-</svg>
-
-<!-- Filled in by LayoutManager.js -->
 <section id="main">
-
+  <!-- Filled in by LayoutManager.js -->
 </section>
 </body>
 </html>

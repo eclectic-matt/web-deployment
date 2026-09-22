@@ -4,12 +4,14 @@ const itemScoring = new ItemScoring();
 const layoutMgr = new LayoutManager();
 const mapGenerator = new MapGenerator();
 
-//Game is for save/load and stats/
+//Game is for save/load and stats/achievements
 const game = new Game();
 
 //Session is the current game session/run
 var session;
-if(game.currentSession !== null)
+
+//If there is a current session in progress
+if (game.currentSession !== null)
 {
 	session = game.currentSession;
 }
@@ -57,25 +59,42 @@ const createMapForTarget = (target) =>
 	mapGenerator.outputMap(target, session.currentFloorMap, session.currentNode);
 }
 
+const Rooms = Object.freeze
+({
+  CHEST: 0,
+  BATTLE: 1,
+  EVENT: 2,
+  SHOP: 3,
+  BLACKSMITH: 4,
+  CAMPFIRE: 5,
+  BOSS: 6
+});
+
 const moveToMapNode = (node) => 
 {
   session.currentNode = parseInt(node.id.replace('node',''));
 	//console.log('Clicked to move to',node.id);
 	switch(parseInt(node.dataset.type))
 	{
-		case 0:
+		case Rooms.CHEST:
 			layoutMgr.setCurrentScreen('chest');
 		break;
-		case 1:
+		case Rooms.BATTLE:
 			layoutMgr.setCurrentScreen('battle');
 		break;
-		case 2:
+		case Rooms.EVENT:
 			layoutMgr.setCurrentScreen('event');
 		break;
-		case 3:
+		case Rooms.SHOP:
 			layoutMgr.setCurrentScreen('shop');
 		break;
-		case 4:
+		case Rooms.BLACKSMITH:
+			layoutMgr.setCurrentScreen('blacksmith');
+		break;
+		case Rooms.CAMPFIRE:
+			layoutMgr.setCurrentScreen('campfire');
+		break;
+		case Rooms.BOSS:
 			layoutMgr.setCurrentScreen('boss');
 		break;
 	}

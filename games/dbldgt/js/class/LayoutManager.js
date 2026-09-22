@@ -129,8 +129,9 @@ class LayoutManager
 				break;
 				
 			case 'battle':
-				let battleSection = this.generateBattleScreen();
-				this.#mainEl.appendChild(battleSection);
+				/*let battleSection = this.generateBattleScreen();
+				this.#mainEl.appendChild(battleSection);*/
+				let btlMgr = new BattleManager();
 				break;
 				
 			case 'battleResult':
