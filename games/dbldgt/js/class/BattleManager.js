@@ -316,7 +316,20 @@ class BattleManager
 	startBattle() 
 	{
 		let main = document.getElementById('main');
-		main.innerHTML = null;
+		
+		//Clear any previous battle
+		let oldBtlSec = document.getElementById('battle');
+		if(oldBtlSec)
+		{
+			main.removeChild(oldBtlSec);
+		}
+		let oldBtnRow = document.getElementById('battleButtonRow');
+		if(oldBtnRow)
+		{
+			main.removeChild(oldBtnRow);
+		}
+		
+		//main.innerHTML = null;
 		this.resetPlayerHealth();
 		//let enemyCountMinusOne = 3;
 		//this.generateBattle('basic', enemyCountMinusOne);
@@ -326,6 +339,7 @@ class BattleManager
 		let enemyRow = this.outputEnemyRow();
 		//Generate a button row
 		let btnRow = document.createElement('section');
+		btnRow.id = 'battleButtonRow';
 		btnRow.classList.add('button-row');
 		//Output a "clear" button
 		let clearLinesBtn = document.createElement('button');

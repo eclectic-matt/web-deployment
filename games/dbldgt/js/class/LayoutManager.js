@@ -5,6 +5,7 @@ class LayoutManager
 		'about',
 		'pauseMenu',
 		'test',
+		'testBattle',
 		'newGame',
 		'map',
 		'inventory',
@@ -95,6 +96,12 @@ class LayoutManager
 				addItemEvents();
 			break;
 			
+			case 'testBattle':
+				let testBattleTopMenu = this.generateTopMenu();
+				this.#mainEl.appendChild(testBattleTopMenu);
+				let testBtlMgr = new BattleManager();
+			break;
+			
 			case 'mainMenu':
 				let mainMenu = this.generateMainMenu();
 				this.#mainEl.appendChild(mainMenu);
@@ -170,14 +177,22 @@ class LayoutManager
 		//Button list
 		let buttonsSection = document.createElement('section');
 		buttonsSection.className = 'buttons';
-		//Test button
+		//Test Scoring button
 		let testButton = document.createElement('button');
-		testButton.innerHTML = 'Show Test Screen';
+		testButton.innerHTML = 'Show Test Scoring';
 		testButton.className = 'main-menu-button';
 		testButton.addEventListener('click', (e) => {
 			showScreen('test');
 		});
 		buttonsSection.appendChild(testButton);
+		//Test Battle button
+		let testBtlButton = document.createElement('button');
+		testBtlButton.innerHTML = 'Show Test Battle';
+		testBtlButton.className = 'main-menu-button';
+		testBtlButton.addEventListener('click', (e) => {
+			showScreen('testBattle');
+		});
+		buttonsSection.appendChild(testBtlButton)
 		//New Game
 		let newGameButton = document.createElement('button');
 		newGameButton.innerHTML = 'New Game';
