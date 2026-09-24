@@ -369,6 +369,11 @@ class BattleManager
 		main.appendChild(btnRow);
 	}
 	
+	
+	
+	
+	
+	
 	initSVG()
 	{
     // Define the required SVG Namespace URI

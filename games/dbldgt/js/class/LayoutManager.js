@@ -16,6 +16,7 @@ class LayoutManager
 		'shop'
 	];
 	#currentScreen = null;
+	#previousScreen = null;
 	#mainElId = 'main';
 	#mainEl = null;
 	#itemData = null;
@@ -55,7 +56,7 @@ class LayoutManager
   // SCREEN MANAGEMENT 
   //======================
   
-	setCurrentScreen(name)
+	setCurrentScreen(name, previous = null)
 	{
 		if(!this.#screenNames.includes(name))
 		{
@@ -63,6 +64,7 @@ class LayoutManager
 			return;
 		}
 		this.#currentScreen = name;
+		this.#previousScreen = previous;
 		this.loadScreen();
 	}
 
@@ -141,6 +143,22 @@ class LayoutManager
 				let btlMgr = new BattleManager();
 				break;
 				
+			case 'inventory':
+				let invTopMenu = this.generateTopMenu();
+        this.#mainEl.appendChild(invTopMenu);
+				let inventoryGameScaler = document.createElement('section');
+				inventoryGameScaler.id = 'game-scaler';
+				inventoryGameScaler.className = 'game-scaler';
+				let inventoryHands = this.generateHandsSection();
+				//this.#mainEl.appendChild(testHands);
+				inventoryGameScaler.appendChild(inventoryHands);
+				this.#mainEl.appendChild(inventoryGameScaler);
+				let inventoryItems = this.generateItemsSection();
+				this.#mainEl.appendChild(inventoryItems);
+				//Now init drag-drop events
+				addItemEvents();
+				break;
+				
 			case 'battleResult':
 				let battleResultSection = this.generateBattleResultScreen();
 				this.#mainEl.appendChild(battleResultSection);
@@ -182,7 +200,7 @@ class LayoutManager
 		testButton.innerHTML = 'Show Test Scoring';
 		testButton.className = 'main-menu-button';
 		testButton.addEventListener('click', (e) => {
-			showScreen('test');
+			this.setCurrentScreen('test', this.#currentScreen);
 		});
 		buttonsSection.appendChild(testButton);
 		//Test Battle button
@@ -190,7 +208,7 @@ class LayoutManager
 		testBtlButton.innerHTML = 'Show Test Battle';
 		testBtlButton.className = 'main-menu-button';
 		testBtlButton.addEventListener('click', (e) => {
-			showScreen('testBattle');
+			this.setCurrentScreen('testBattle', this.#currentScreen);
 		});
 		buttonsSection.appendChild(testBtlButton)
 		//New Game
@@ -198,7 +216,7 @@ class LayoutManager
 		newGameButton.innerHTML = 'New Game';
 		newGameButton.className = 'main-menu-button';
 		newGameButton.addEventListener('click', (e) => {
-			showScreen('newGame');
+			this.setCurrentScreen('newGame', this.#currentScreen);
 		});
 		buttonsSection.appendChild(newGameButton);
 		//About section
@@ -206,7 +224,7 @@ class LayoutManager
 		aboutButton.innerHTML = 'About';
 		aboutButton.className = 'main-menu-button';
 		aboutButton.addEventListener('click', (e) => {
-			showScreen('about');
+			this.setCurrentScreen('about', this.#currentScreen);
 		});
 		buttonsSection.appendChild(aboutButton);
 		//Add buttons list to section
@@ -218,11 +236,32 @@ class LayoutManager
 	{
 		let section = document.createElement('section');
 		section.id = 'topMenu';
+		if(this.#currentScreen == 'inventory')
+		{
+			//Add back to current screen button 
+			let prevBtn = document.createElement('button');
+			prevBtn.id = 'previousBtn';
+			prevBtn.innerHTML = 'Go Back';
+			prevBtn.addEventListener('click', (e) => {
+				this.setCurrentScreen(this.#previousScreen, this.#currentScreen);
+			});
+			section.appendChild(prevBtn);	
+		}
+		else
+		{
+			let inventoryBtn = document.createElement('button');
+			inventoryBtn.id = 'inventoryBtn';
+			inventoryBtn.innerHTML = 'Inventory';
+			inventoryBtn.addEventListener('click', (e) => {
+				this.setCurrentScreen('inventory', this.#currentScreen);
+			});
+			section.appendChild(inventoryBtn);
+		}
 		let backToMenuBtn = document.createElement('button');
 		backToMenuBtn.id = 'mainMenuBtn';
 		backToMenuBtn.innerHTML = 'Main Menu &#8617;';
 		backToMenuBtn.addEventListener('click', (e) => {
-			showScreen('mainMenu');
+			this.setCurrentScreen('mainMenu', this.#currentScreen);
 		});
 		section.appendChild(backToMenuBtn);
 		return section;
@@ -427,6 +466,7 @@ class LayoutManager
 		section.style.height = '50%'
 		return section;
 	}
+	
 	generateMap(section)
 	{
 		createMapForTarget(section)
@@ -439,7 +479,7 @@ class LayoutManager
 		backToMenuBtn.id = 'mainMenuBtn';
 		backToMenuBtn.innerHTML = 'Main Menu &#8617;';
 		backToMenuBtn.addEventListener('click', (e) => {
-			showScreen('mainMenu');
+			this.setCurrentScreen('mainMenu', this.#currentScreen);
 		});
 		section.appendChild(backToMenuBtn);
 		let infoSection = document.createElement('section');
@@ -459,7 +499,7 @@ class LayoutManager
     backToMenuBtn.innerHTML = 'Main Menu ↩';
     backToMenuBtn.addEventListener('click', (e) => {
         e.stopPropagation(); // Prevents this button click from opening the chest
-        showScreen('mainMenu');
+        this.setCurrentScreen('mainMenu', this.#currentScreen);
     });
     section.appendChild(backToMenuBtn);
 
@@ -548,18 +588,28 @@ class LayoutManager
     return section;
   }
   
+  /*
+   * BATTLE SCREEN
+   */
+   
   generateBattleScreen()
   {
     let name = 'battle';
     let section = document.createElement('section');
-    section.classList.add(name);
+    //section.classList.add(name);
+    section.classList.add('game-wrapper');
     let topMenu = this.generateTopMenu();
+    topMenu.classList.add('menu-row');
     section.appendChild(topMenu);
-    let head = document.createElement('h4');
-    head.innerHTML = name;
-    section.appendChild(head);
+    let battleArea = document.createElement('section');
+    battleArea.classList.add('battle');
+    section.appendChild(battleArea);
+    let sidePanel = document.createElement('side-panel');
+    section.appendChild(sidePanel);
     return section;
   }
+  
+  
 	
 	generateBattleResultScreen()
 	{

@@ -9,7 +9,7 @@
 	
 	/* Symbols */
 	--symbol-chest: '\1fa8e';
-	--symbol-battle : '\1f44a';
+	--symbol-battle: '\1f44a';
 	--symbol-event: '\2049';
 	--symbol-shop: '\1f6d2';
 	--symbol-boss: '\1f451';
@@ -51,6 +51,9 @@ FLEX
 }
 */
 
+/*
+ * DEFAULT TAGS
+ */
 body
 {
 	font-family: Arial, sans-serif;
@@ -83,6 +86,41 @@ h1
 	color: #fff;
 	margin: 5px 0 0 0;
 	text-align: center;
+}
+
+button 
+{
+	padding: 10px;
+	background: var(--base-score-color);
+	color: white;
+	border-radius: 10px;
+	flex: 1 1 auto;
+}
+
+img
+{ 
+	user-select: none;
+	background: none;
+}
+
+
+
+
+section#topMenu 
+{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  gap: 25px;
+  height: auto;
+}
+
+section#topMenu button
+{
+  flex: 1;
+	min-width: 30vw;
+  max-width: 50vw;
+  height: auto;
 }
 
 section#main
@@ -347,11 +385,7 @@ section#main
 	left: 0;
 }
 
-img
-{ 
-	user-select: none;
-	background: none;
-}
+
 
 .ring-highlight-overlay
 {
@@ -450,14 +484,7 @@ table.score-table
 	gap: 25px;
 }
 
-button 
-{
-	padding: 10px;
-	background: var(--base-score-color);
-	color: white;
-	border-radius: 10px;
-	flex: 1 1 auto;
-}
+
 
 /* TESTING COLOURS FOR RARITY 
 [data-rarity-name="common"] 
@@ -472,8 +499,8 @@ button
 
 button#mainMenuBtn 
 {
-	position: relative;
-	margin: 0 0 0 70%;
+	/*position: relative;
+	margin: 0 0 0 70%;*/
 }
 
 #mainMenu
@@ -653,7 +680,8 @@ section.chest
   padding: 10px;
 }
 
-.item-box.zoom {
+.item-box.zoom 
+{
 	animation: zoom 3s linear forwards;
 }
 

@@ -288,3 +288,74 @@ body, section
 	background-color: green;
 	color: white;
 }
+
+/* ========================================================
+   BASE LAYOUT (Mobile / Small Screen Sizes under 600px)
+   ======================================================== */
+   
+.game-layout 
+{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevents unwanted bounce scrolling */
+}
+
+.menu-row 
+{
+    width: 100%;
+    flex: 0 0 auto; /* Keeps the menu at its natural content height */
+    box-sizing: border-box;
+}
+
+.battle 
+{
+    width: 100%;
+    height: 50%;   /* Split remaining screen space down the middle vertically */
+    flex: 1 1 auto;
+    box-sizing: border-box;
+}
+
+.side-panel 
+{
+    width: 100%;
+    height: 50%;   /* Split remaining screen space down the middle vertically */
+    flex: 1 1 auto;
+    box-sizing: border-box;
+}
+
+
+/* ========================================================
+   WIDE LAYOUT (Screens 600px wide and over)
+   ======================================================== */
+   
+@media (min-width: 600px) 
+{
+    .game-layout 
+    {
+        /* Allow the content under the menu to sit side-by-side */
+        flex-wrap: wrap; 
+        flex-direction: row; 
+    }
+
+    .menu-row 
+    {
+        width: 100%; /* Spans full screen width across the top row */
+    }
+
+    .battle 
+    {
+        width: 50%;  /* Split screen width right down the center */
+        height: 0;   /* Collapses height defaults to let flex-grow take over */
+        flex: 1 1 50%; /* Automatically calculates and fills the remaining height */
+    }
+
+    .side-panel 
+    {
+        width: 50%;  /* Split screen width right down the center */
+        height: 0;   /* Collapses height defaults to let flex-grow take over */
+        flex: 1 1 50%; /* Automatically calculates and fills the remaining height */
+    }
+}
