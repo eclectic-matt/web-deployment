@@ -512,6 +512,9 @@ class ItemMapUi
 		//console.log(this.#draggedRingDataset)
 		Object.assign(wrapper.dataset, this.#draggedRingDataset);
 		
+		//Set to inventory
+		addItemToHandSlot(this.#draggedRingDataset, fingerId);
+		
 		//Add score popup element
 		let scoreEl = document.createElement("div");
 		scoreEl.classList.add("popup-score");

@@ -110,6 +110,11 @@ const addItemToInventory = (item) =>
   
 }
 
+const addItemToHandSlot = (item, slot) => 
+{
+  session.addItemToHandSlot(item, slot);
+}
+
 const advanceSession = () => 
 {
   layoutMgr.setCurrentScreen('map');
