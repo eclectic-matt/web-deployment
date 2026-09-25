@@ -69,7 +69,7 @@ class MapGenerator
 			let node = map[i];
 			let div = document.createElement('div');
 			div.classList.add('map-node');
-			div.classList.add(this.#nodeTypes[node.type]);
+			div.classList.add(this.#nodeTypes[node.type] + 'Node');
 			div.id = 'node' + node.id;
 			div.dataset.type = node.type;
 			

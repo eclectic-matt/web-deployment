@@ -87,7 +87,7 @@ class LayoutManager
 				//this.#mainEl.appendChild(testHands);
 				gameScaler.appendChild(testHands);
 				this.#mainEl.appendChild(gameScaler);
-				let testItems = this.generateItemsSection();
+				let testItems = this.generateItemsSection(true);
 				this.#mainEl.appendChild(testItems);
 				//gameScaler.appendChild(testItems);
 				//this.#mainEl.appendChild(gameScaler);
@@ -152,7 +152,7 @@ class LayoutManager
 				//this.#mainEl.appendChild(testHands);
 				inventoryGameScaler.appendChild(inventoryHands);
 				this.#mainEl.appendChild(inventoryGameScaler);
-				let inventoryItems = this.generateItemsSection();
+				let inventoryItems = this.generateItemsSection(false);
 				this.#mainEl.appendChild(inventoryItems);
 				//Now init drag-drop events
 				addItemEvents();
@@ -377,17 +377,31 @@ class LayoutManager
 		section.id = 'ring-options';
 		section.className = 'ring-options';
 
-		//If in test mode 
-		if(testMode)
+		let items = this.#itemData.items;
+		//If not in test mode 
+		if (!testMode)
 		{
-
+			items = [];
+			let invItems = getInventoryItems();
+			invItems.forEach( (invItem) => {
+				let thisItem = this.#itemData.items[invItem.type].find((item) => { return item.id == invItem.id;});
+				if(items[invItem.type] === undefined)
+				{
+					items[invItem.type] = [thisItem];
+				}
+				else
+				{
+					items[invItem.type].push(thisItem);
+				}
+			});
+			console.log(items);
 		}
 
 		//SPLIT INTO TYPES BASED ON THE itemData.json AND GENERATE EACH SECTION IN TURN?
-		for(let typeId = 0; typeId < Object.keys(this.#itemData.items).length; typeId++)
+		for(let typeId = 0; typeId < Object.keys(items).length; typeId++)
 		{
-			let typeName = Object.keys(this.#itemData.items)[typeId];
-			let typeData = this.#itemData.items[typeName];
+			let typeName = Object.keys(items)[typeId];
+			let typeData = items[typeName];
 			//console.log(typeName, typeData);
 			if(typeData.filter(item => { return item.type === typeName; }).length < 1) continue;
 			let inventorySection = document.createElement('section');

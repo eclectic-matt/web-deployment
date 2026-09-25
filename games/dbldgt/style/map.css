@@ -13,6 +13,7 @@
 	--symbol-event: '\2049';
 	--symbol-shop: '\1f6d2';
 	--symbol-boss: '\1f451';
+	--symbol-blacksmith: '\1f528';
 }
 
 @media screen and (min-width < 500px) 
@@ -574,25 +575,29 @@ button#mainMenuBtn
 	background-color: green;
 	border: 5px outset white;
 }
-.map-node.chest::before
+.map-node.chestNode::before
 {
 	content: var(--symbol-chest);
 }
-.map-node.battle::before
+.map-node.battleNode::before
 {
 	content: var(--symbol-battle);
 }
-.map-node.event::before
+.map-node.eventNode::before
 {
 	content: var(--symbol-event);
 }
-.map-node.shop::before
+.map-node.shopNode::before
 {
 	content: var(--symbol-shop);
 }
-.map-node.boss::before
+.map-node.bossNode::before
 {
 	content: var(--symbol-boss);
+}
+.map-node.blacksmithNode::before
+{
+	content: var(--symbol-blacksmith);
 }
 .map-line 
 {
@@ -727,6 +732,8 @@ section.chest
 		top: 155px;
     left: 180px;
 		opacity: 0;
+		display: none;
+		z-index: -50;
 	}
 }
 
@@ -789,7 +796,10 @@ section h4
   text-align: center;
 }
 
-section.shop, section.event, section.battle, section.battleResult
+section.shop, 
+section.event, 
+section.battle, 
+section.battleResult
 {
   padding: 25px;
 }

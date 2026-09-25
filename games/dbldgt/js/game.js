@@ -104,7 +104,11 @@ const getItems = (rarity = 0, count = 2) =>
 {
 	return itemUi.getItems(rarity, count);
 }
-
+const addItemToInventory = (item) => 
+{
+	//console.log(item);
+	session.addItemToInventory(item);
+}
 const getInventoryItems = () => 
 {
 	return session.items;
