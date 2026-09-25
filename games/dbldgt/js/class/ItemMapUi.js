@@ -12,7 +12,7 @@ class ItemMapUi
 	//#targetWidth = 480;
 	//#targetHeight = 400;
 	#braceletScale = 3;
-  #ringScale = 2;
+	#ringScale = 2;
 	#inventoryTypes = ['ring', 'bracelet', 'held', 'tattoo'];
 	//SET CLASS NAMES / TAGS / IDs
 	#ringItemsClassName = 'item';
@@ -38,7 +38,7 @@ class ItemMapUi
 	//===================
 	
 	//Just setup initial document references
-	constructor()
+	constructor(testMode = true)
 	{
 		//Init references to document
 		this.#ringOptionsAreaEl = document.getElementById(this.#ringOptionsElementId);
@@ -49,8 +49,17 @@ class ItemMapUi
 		this.#scalerEl = document.getElementById(this.#gameScalerId);
 		this.#visualEls = document.querySelectorAll('#' + this.#dragVisualElementId);
 		
-		// Explicitly bind the init function context so it preserves 'this' inside promises
-		this.loadItemData().then(this.init.bind(this));
+		//If in testMode (test screen) load all items
+		if(testMode)
+		{
+			// Explicitly bind the init function context so it preserves 'this' inside promises
+			this.loadItemData().then(this.init.bind(this));
+		}
+		else
+		{
+			this.#itemData = getInventoryItems();
+			this.init.bind(this);
+		}
 	}
 	
 	async loadItemData()

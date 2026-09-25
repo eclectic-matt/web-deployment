@@ -28,15 +28,15 @@ const showScreen = (name) =>
 
 const passDataToLayout = (data, type) => 
 {
-  switch(type)
-  {
-    case 'item':
-	    layoutMgr.setItemData(data);
-	    break;
-	   case 'enemy':
-	     layoutMgr.setEnemyData(data);
-	    break;
-  }
+	switch(type)
+	{
+		case 'item':
+			layoutMgr.setItemData(data);
+			break;
+		case 'enemy':
+			layoutMgr.setEnemyData(data);
+			break;
+	}
 }
 
 const addItemEvents = () => 
@@ -61,18 +61,18 @@ const createMapForTarget = (target) =>
 
 const Rooms = Object.freeze
 ({
-  CHEST: 0,
-  BATTLE: 1,
-  EVENT: 2,
-  SHOP: 3,
-  BLACKSMITH: 4,
-  CAMPFIRE: 5,
-  BOSS: 6
+	CHEST: 0,
+	BATTLE: 1,
+	EVENT: 2,
+	SHOP: 3,
+	BLACKSMITH: 4,
+	CAMPFIRE: 5,
+	BOSS: 6
 });
 
 const moveToMapNode = (node) => 
 {
-  session.currentNode = parseInt(node.id.replace('node',''));
+	session.currentNode = parseInt(node.id.replace('node',''));
 	//console.log('Clicked to move to',node.id);
 	switch(parseInt(node.dataset.type))
 	{
@@ -105,19 +105,18 @@ const getItems = (rarity = 0, count = 2) =>
 	return itemUi.getItems(rarity, count);
 }
 
-const addItemToInventory = (item) =>
+const getInventoryItems = () => 
 {
-  
+	return session.items;
 }
-
 const addItemToHandSlot = (item, slot) => 
 {
-  session.addItemToHandSlot(item, slot);
+	session.setItemToSlot(item, slot);
 }
 
 const advanceSession = () => 
 {
-  layoutMgr.setCurrentScreen('map');
+	layoutMgr.setCurrentScreen('map');
 }
 
 // Clean utility helper to delay execution in loop frames

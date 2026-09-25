@@ -20,26 +20,26 @@ class Session
 		this.currentNode = false;
 		this.inventory = { items: [], gold: 0 };
 		this.hands = { 
-		  left: {
-		    held: null,
-		    pinky: null,
-		    ring: null,
-		    middle: null,
-		    index: null,
-		    thumb: null,
-		    tattoo: null,
-		    bracelet: null
-		  }, 
-		  right: {
-		    held: null,
-        pinky: null,
-        ring: null,
-        middle: null,
-        index: null,
-        thumb: null,
-        tattoo: null,
-        bracelet: null
-		  } 
+			left: {
+				held: null,
+				pinky: null,
+				ring: null,
+				middle: null,
+				index: null,
+				thumb: null,
+				tattoo: null,
+				bracelet: null
+			}, 
+			right: {
+				held: null,
+				pinky: null,
+				ring: null,
+				middle: null,
+				index: null,
+				thumb: null,
+				tattoo: null,
+				bracelet: null
+			} 
 		};
 		this.inProgress = true;
 	}

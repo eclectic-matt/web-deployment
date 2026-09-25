@@ -43,7 +43,7 @@ class LayoutManager
 	
 	setEnemyData(data)
 	{
-	  this.#enemyData = data;
+		this.#enemyData = data;
 	}
 
 	initLayout()
@@ -55,7 +55,7 @@ class LayoutManager
 	//======================
   // SCREEN MANAGEMENT 
   //======================
-  
+
 	setCurrentScreen(name, previous = null)
 	{
 		if(!this.#screenNames.includes(name))
@@ -75,7 +75,6 @@ class LayoutManager
 		this.#mainEl.innerHTML = null;
 		switch(this.#currentScreen)
 		{
-		  
 			case 'test':
 				let testTopMenu = this.generateTopMenu();
 				this.#mainEl.appendChild(testTopMenu);
@@ -115,11 +114,11 @@ class LayoutManager
 			break;
 			
 			case 'map':
-			  let newGameTopMenu = this.generateTopMenu();
-        this.#mainEl.appendChild(newGameTopMenu);
-			  let newGameMap = this.generateMapSection();
-        this.#mainEl.appendChild(newGameMap);
-        this.generateMap(newGameMap);
+				let newGameTopMenu = this.generateTopMenu();
+				this.#mainEl.appendChild(newGameTopMenu);
+				let newGameMap = this.generateMapSection();
+				this.#mainEl.appendChild(newGameMap);
+				this.generateMap(newGameMap);
 			break;
 			
 			case 'about':
@@ -145,7 +144,7 @@ class LayoutManager
 				
 			case 'inventory':
 				let invTopMenu = this.generateTopMenu();
-        this.#mainEl.appendChild(invTopMenu);
+				this.#mainEl.appendChild(invTopMenu);
 				let inventoryGameScaler = document.createElement('section');
 				inventoryGameScaler.id = 'game-scaler';
 				inventoryGameScaler.className = 'game-scaler';
@@ -372,11 +371,17 @@ class LayoutManager
 		return section;
 	}
 	
-	generateItemsSection()
+	generateItemsSection(testMode = true)
 	{
 		let section = document.createElement('section');
 		section.id = 'ring-options';
 		section.className = 'ring-options';
+
+		//If in test mode 
+		if(testMode)
+		{
+
+		}
 
 		//SPLIT INTO TYPES BASED ON THE itemData.json AND GENERATE EACH SECTION IN TURN?
 		for(let typeId = 0; typeId < Object.keys(this.#itemData.items).length; typeId++)
