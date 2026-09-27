@@ -169,6 +169,8 @@ class LayoutManager
     		this.#mainEl.appendChild(clrBtn);
 				//Now init drag-drop events
 				addItemEvents();
+				//Now load hand slots data
+				loadHandSlots();
 				break;
 				
 			case 'battleResult':
@@ -381,6 +383,7 @@ class LayoutManager
 		}
 		//gameScaler.appendChild(section);
 		//return gameScaler;
+		
 		return section;
 	}
 	

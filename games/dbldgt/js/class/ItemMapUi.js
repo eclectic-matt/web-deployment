@@ -470,9 +470,18 @@ class ItemMapUi
 	
 	placeItemInHandSlot(item, hand, slot)
 	{
+	  console.log('placeItem', item, hand, slot);
 	  //Fake "dragging" this item
 	  this.#draggedRingSrc = item.src;
-	  this.#draggedRingDataset = item.dataset;
+	  if (item.dataset === undefined)
+	  {
+	    //item.dataset = item;
+	    Object.assign(item.dataset, item);
+	  }
+	  item.dataset.src = item.src;
+	  this.#draggedRingDataset = item;
+	  
+	  //this.#draggedRingDataset.itemType = item.type;
 	  //Find matching drop zone
 	  let slotFinger = hand + '-' + slot;
 	  let area = document.querySelector('[data-finger="' + slotFinger + '"]');
@@ -553,6 +562,9 @@ class ItemMapUi
 		//wrapper.dataset = this.#draggedRingDataset;
 		//console.log(this.#draggedRingDataset)
 		Object.assign(wrapper.dataset, this.#draggedRingDataset);
+		
+		//Set img src as well
+		this.#draggedRingDataset.src = this.#draggedRingSrc;
 		
 		//Set to inventory
 		addItemToHandSlot(this.#draggedRingDataset, fingerId);

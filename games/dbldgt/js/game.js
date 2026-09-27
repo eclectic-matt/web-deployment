@@ -116,7 +116,7 @@ const getInventoryItems = () =>
 //Inventory screen - handle item change
 const addItemToHandSlot = (item, slot) => 
 {
-  if(layoutMgr.currentScreen !== 'test')
+  if (layoutMgr.currentScreen !== 'test')
   {
     //Store in the hand slot data
   	session.setItemToSlot(item, slot);
@@ -127,12 +127,23 @@ const addItemToHandSlot = (item, slot) =>
   }
 }
 const loadHandSlots = () => {
-  session.hands.forEach((hand) => {
-    let slots = Object(session.hands[hand]).keys();
+  //let hands = session.hands;
+  //console.log(hands);
+  let hands = Object.keys(session.hands);
+  
+  hands.forEach((hand) => {
+    let slots = Object.keys(session.hands[hand]);
     slots.forEach((slot) => {
-      console.log('Placing', item, 'in', hand, slot);
       let item = session.hands[hand][slot];
-      itemUi.placeItemInHandSlot(item, hand, slot);
+      if(item !== null)
+      {
+        if(slot === "held")
+        {
+          slot = "held-item";
+        }
+        console.log('Placing', item, 'in', hand, slot);
+        itemUi.placeItemInHandSlot(item, hand, slot);
+      }
     });
   })
 }
