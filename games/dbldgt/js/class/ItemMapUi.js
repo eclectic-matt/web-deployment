@@ -182,17 +182,21 @@ class ItemMapUi
 				itemImg.classList.add('item');
 				//Add class '.ring'/'.bracelet' etc
 				itemImg.classList.add(r.type);
-				itemImg.dataset.itemType = r.type;
+				//itemImg.dataset.itemType = r.type;
 				itemImg.draggable = true;
 				itemImg.id = r.id;
 				itemImg.alt = r.name;
 				itemImg.title = r.name;
+				itemImg.dataset = generateItemDataset(r);
+				/*
+				itemImg.dataset.id = r.id;
 				itemImg.dataset.rarityName = r.rarity.name;
 				itemImg.dataset.rarityMultiplier = r.rarity.multiplier;
 				itemImg.dataset.effectValue = r.effect.value;
 				itemImg.dataset.effectName = r.effect.name;
 				itemImg.dataset.effectOperation = r.effect.operation;
 				itemImg.dataset.description = r.name + "<br><br>" + r.effect.description;
+				*/
 				let scoreEl = document.createElement("div");
 				scoreEl.classList.add("popup-score");
 				itemWrapper.appendChild(scoreEl);
@@ -200,6 +204,20 @@ class ItemMapUi
 				
 				document.getElementById('inventory-wrapper-' + r.type).appendChild(itemWrapper);
 			});
+	}
+	
+	generateItemDataset(r)
+	{
+	  let dataset = {};
+	  dataset.id = r.id;
+	  dataset.itemType = r.type;
+		dataset.rarityName = r.rarity.name;
+		dataset.rarityMultiplier = r.rarity.multiplier;
+		dataset.effectValue = r.effect.value;
+	  dataset.effectName = r.effect.name;
+		dataset.effectOperation = r.effect.operation;
+	  dataset.description = r.name + "<br><br>" + r.effect.description;
+	  return dataset;
 	}
 	
 	//===================
@@ -450,8 +468,21 @@ class ItemMapUi
 		});
 	}
 	
+	placeItemInHandSlot(item, hand, slot)
+	{
+	  //Fake "dragging" this item
+	  this.#draggedRingSrc = item.src;
+	  this.#draggedRingDataset = item.dataset;
+	  //Find matching drop zone
+	  let slotFinger = hand + '-' + slot;
+	  let area = document.querySelector('[data-finger="' + slotFinger + '"]');
+	  //Pass to standard drop logic
+	  this.executeDropLogic(area);
+	}
+	
 	executeDropLogic(area) 
 	{
+	  //console.log('dropping on', area);
 		this.highlightDropAreas(false);
 		this.clearDragVisualElements();
 		const coords = area.coords.split(',').map(Number);
@@ -478,6 +509,8 @@ class ItemMapUi
 		if (existingRing)
 		{
 			existingRing.remove();
+			console.log('returning to inventory', existingRing.dataset);
+			addItemToInventory(existingRing.dataset);
 		}
 	
 		const mapName = area.parentElement.getAttribute('name');
@@ -661,10 +694,12 @@ class ItemMapUi
 		];
 		allItems = allItems.filter((i) => { return i.rarity.multiplier <= maxRarity;});
 		//console.log(allItems);
+		//console.log('getItemsAll', allItems);
 		if(allItems.length == count) return allItems;
 		for(let i = 0; i < count; i++)
 		{
 			let item = allItems[Math.floor(Math.random() * allItems.length)];
+			//console.log('getItems', i, item);
 			items.push(item);
 		}
 	}

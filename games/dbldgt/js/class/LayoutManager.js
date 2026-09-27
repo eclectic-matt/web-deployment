@@ -67,6 +67,10 @@ class LayoutManager
 		this.#previousScreen = previous;
 		this.loadScreen();
 	}
+	get currentScreen()
+	{
+	  return this.#currentScreen;
+	}
 
 	loadScreen()
 	{
@@ -154,6 +158,15 @@ class LayoutManager
 				this.#mainEl.appendChild(inventoryGameScaler);
 				let inventoryItems = this.generateItemsSection(false);
 				this.#mainEl.appendChild(inventoryItems);
+				//Clear hands button 
+    		let clrBtn = document.createElement('button');
+    		clrBtn.id = 'btnClearHands';
+    		clrBtn.innerHTML = 'Clear Hands';
+    		clrBtn.addEventListener('click', (e) => {
+    			//itemScoring.clearHands();
+    			emptyHands();
+    		});
+    		this.#mainEl.appendChild(clrBtn);
 				//Now init drag-drop events
 				addItemEvents();
 				break;
@@ -235,7 +248,7 @@ class LayoutManager
 	{
 		let section = document.createElement('section');
 		section.id = 'topMenu';
-		if(this.#currentScreen == 'inventory')
+		if (this.#currentScreen == 'inventory')
 		{
 			//Add back to current screen button 
 			let prevBtn = document.createElement('button');
@@ -373,28 +386,50 @@ class LayoutManager
 	
 	generateItemsSection(testMode = true)
 	{
-		let section = document.createElement('section');
-		section.id = 'ring-options';
-		section.className = 'ring-options';
-
+	  let section = document.createElement('section');
+	  //Check if redrawing
+	  if(document.getElementById('ring-options'))
+	  {
+	    section = document.getElementById('ring-options');
+	    section.innerHTML = null;
+	  }
+	  else
+	  {
+  		section.id = 'ring-options';
+  		section.className = 'ring-options';
+	  }
+	  
+    //ALL ITEMS
 		let items = this.#itemData.items;
+		//console.log('all items', this.#itemData.items);
 		//If not in test mode 
 		if (!testMode)
 		{
+		  //Available inventory items
 			items = [];
 			let invItems = getInventoryItems();
-			invItems.forEach( (invItem) => {
+			//console.log('invItems', invItems);
+			//Iterate through inventory items
+			invItems.forEach( (invItem) => 
+			{
+			  //Map properties to support find
+			  if(invItem.type === undefined)
+			  {
+			    invItem.type = invItem.itemType;
+			  }
+			  //console.log('invItem', invItem, invItem.itemType);
+			  //If the items has no array for the current item type
+			  if(items[invItem.type] === undefined)
+			  {
+			    //init type array
+			    items[invItem.type] = [];
+			  }
+			  //Find this item in the data
 				let thisItem = this.#itemData.items[invItem.type].find((item) => { return item.id == invItem.id;});
-				if(items[invItem.type] === undefined)
-				{
-					items[invItem.type] = [thisItem];
-				}
-				else
-				{
-					items[invItem.type].push(thisItem);
-				}
+				//Add matching item to items array
+			  items[invItem.type].push(thisItem);
 			});
-			console.log(items);
+			//console.log(items);
 		}
 
 		//SPLIT INTO TYPES BASED ON THE itemData.json AND GENERATE EACH SECTION IN TURN?
@@ -424,17 +459,25 @@ class LayoutManager
 				itemImg.classList.add('item');
 				//Add class '.ring'/'.bracelet' etc
 				itemImg.classList.add(item.type);
-				itemImg.dataset.itemType = item.type;
+				
 				itemImg.draggable = true;
 				itemImg.id = item.id;
 				itemImg.alt = item.name;
 				itemImg.title = item.name;
+				
+				//TypeError: Cannot set property dataset of # which has only a getter???
+				//itemImg.dataset = this.getItemDataset(item);
+				
+				itemImg.dataset.id = item.id;
+				itemImg.dataset.itemType = item.type;
 				itemImg.dataset.rarityName = item.rarity.name;
 				itemImg.dataset.rarityMultiplier = item.rarity.multiplier;
 				itemImg.dataset.effectValue = item.effect.value;
 				itemImg.dataset.effectName = item.effect.name;
 				itemImg.dataset.effectOperation = item.effect.operation;
 				itemImg.dataset.description = item.name + "<br><br>" + item.effect.description;
+				itemImg.dataset.src = item.src;
+				
 				let scoreEl = document.createElement("div");
 				scoreEl.classList.add("popup-score");
 				itemWrapper.appendChild(scoreEl);
@@ -446,6 +489,21 @@ class LayoutManager
 			section.appendChild(inventorySection);
 		}
 		return section;
+	}
+	
+	//Not working?
+	getItemDataset(r)
+	{
+	  let dataset = {};
+	  dataset.id = r.id;
+	  dataset.itemType = r.type;
+		dataset.rarityName = r.rarity.name;
+		dataset.rarityMultiplier = r.rarity.multiplier;
+		dataset.effectValue = r.effect.value;
+	  dataset.effectName = r.effect.name;
+		dataset.effectOperation = r.effect.operation;
+	  dataset.description = r.name + "<br><br>" + r.effect.description;
+	  return dataset;
 	}
 	
 	generateButtonsRow()

@@ -113,11 +113,41 @@ const getInventoryItems = () =>
 {
 	return session.items;
 }
+//Inventory screen - handle item change
 const addItemToHandSlot = (item, slot) => 
 {
-	session.setItemToSlot(item, slot);
+  if(layoutMgr.currentScreen !== 'test')
+  {
+    //Store in the hand slot data
+  	session.setItemToSlot(item, slot);
+  	//Remove from inventory
+  	session.removeItemFromInventory(item);
+  	//Redraw inventory items section
+  	layoutMgr.generateItemsSection(false);
+  }
 }
-
+const loadHandSlots = () => {
+  session.hands.forEach((hand) => {
+    let slots = Object(session.hands[hand]).keys();
+    slots.forEach((slot) => {
+      console.log('Placing', item, 'in', hand, slot);
+      let item = session.hands[hand][slot];
+      itemUi.placeItemInHandSlot(item, hand, slot);
+    });
+  })
+}
+//Remove all items from hands and put back into inventory
+const emptyHands = () => 
+{
+  let handElements = document.querySelectorAll('.ring-wrapper');
+		for(let i = 0; i < handElements.length; i++)
+		{
+			let handEl = handElements[i];
+			addItemToInventory(handEl.dataset);
+			handEl.parentElement.removeChild(handEl);
+		}
+		layoutMgr.generateItemsSection(false);
+}
 const advanceSession = () => 
 {
 	layoutMgr.setCurrentScreen('map');

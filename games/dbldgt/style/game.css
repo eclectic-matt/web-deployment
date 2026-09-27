@@ -137,7 +137,7 @@ section#main
 .game-scaler
 {
 	margin: 0;
-	padding: 10px;
+	padding: 5px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;	
@@ -163,7 +163,7 @@ section#main
 {
 	display: flex;
 	margin: 0;
-	gap: 10px;
+	gap: 5px;
 }
 
 .hand-wrapper
@@ -338,18 +338,6 @@ section#main
 	width: 40px;
 	height: 40px;
 }
-/*
-.held 
-{
-	width: 60px;
-	height: 60px;
-}
-.bracelet
-{
-	width: 60px;
-	height: 40px;
-}
-*/
 .held 
 {
 	width: 40px;
@@ -385,8 +373,6 @@ section#main
 	top: 0;
 	left: 0;
 }
-
-
 
 .ring-highlight-overlay
 {
@@ -750,6 +736,8 @@ section.chest
 	100% 
 	{
 		opacity: 0;
+		display: none;
+    z-index: -50;
 	}
 }
 
@@ -763,7 +751,7 @@ section.chest
 	}
 	50% 
 	{
-		opacity: 0;
+		opacity: 0.2;
     width: 0%;
     height: 0%;
 	}
@@ -783,11 +771,12 @@ section.chest
 	}
 	50% 
 	{
-		transform: scale(1.75);
+		transform: scale(1.25);
 	}
 	100% 
 	{
-		transform: scale(2);
+		transform: scale(1.5);
+		background-color: green;
 	}
 }
 

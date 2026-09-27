@@ -101,6 +101,7 @@ class Session
 	}
 	addItemToInventory(item)
 	{
+	  //console.log('addItemToInv', item);
 	  this.inventory.items.push(item);
 	}
 	removeItemFromInventory(item)
