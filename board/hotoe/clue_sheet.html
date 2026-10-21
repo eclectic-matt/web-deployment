@@ -7,9 +7,10 @@
 	<title>Token Tracker Board</title>
 	<link rel="stylesheet" href="style.css">
 	<script>
+	  const localStorageName = 'tokenTrackerState';
+	  
 		function init()
 		{
-			const localStorageName = 'tokenTrackerState';
 			let savedState = JSON.parse(localStorage.getItem(localStorageName)) || {};
 			if(savedState[0] !== undefined) 
 			{
@@ -29,8 +30,17 @@
 						checked: cb.checked
 					}));
 					localStorage.setItem(localStorageName, JSON.stringify(savedState));
-					//localStorage.setItem(checkbox.parentElement.id, checkbox.checked);
 				});
+			});
+		}
+		function reset()
+		{
+			//Reset localStorage data
+			localStorage.setItem(localStorageName, JSON.stringify({}));
+			//Uncheck all checkboxes
+			const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+			checkboxes.forEach(checkbox => {
+				checkbox.checked = false;
 			});
 		}
 	</script>
@@ -39,7 +49,10 @@
 <body onload="init()">
 
 	<div class="tracker-board">
-
+    <button onclick="reset()">RESET</button>
+    
+    <br>
+    
 		<!-- Column 1: Locations -->
 		<div class="tracker-column column-beige">
 			<div class="column-header">
