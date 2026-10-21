@@ -134,7 +134,7 @@ body {
 
 /* Checkmark Visual State Adjustments when active */
 .token-item input:checked ~ .token-content {
-    background-color: rgba(0, 0, 0, 0.55);
+    background-color: rgba(255, 0, 0, 0.664);
 }
 
 .token-item input:checked {
@@ -147,7 +147,30 @@ body {
     position: absolute;
     top: 4px;
     right: 6px;
-    font-size: 0.85rem;
+    font-size: 1.85rem;
     color: #ffd700;
     text-shadow: 0 0 3px #000;
+}
+
+
+/* Responsive Layout Adjustments */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px; /* Reduces body space to give your layout more room on small screens */
+    }
+
+    .tracker-board {
+        flex-direction: column; /* Forces the columns to stack vertically on top of each other */
+        gap: 8px; /* Adds space between the stacked columns */
+    }
+
+    .tracker-column {
+        min-height: auto; /* Removes the rigid 650px height requirement so it fits your contents cleanly */
+        padding: 25px 15px; /* Optimises structural cushions for narrow displays */
+    }
+    
+    .token-grid {
+        /* Optional adjustment: changes to 4 columns if your tokens look too stretched out on mobile */
+        /* grid-template-columns: repeat(4, 1fr); */
+    }
 }

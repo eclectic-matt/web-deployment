@@ -1,184 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Token Tracker Board</title>
-    <link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Token Tracker Board</title>
+	<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="tracker-board">
-    
-    <!-- Column 1: Locations -->
-    <div class="tracker-column column-beige">
-        <div class="column-header">
-            <div class="header-icon-box">🎫</div>
-        </div>
-        <div class="token-grid">
-            <label class="token-item group-green">
-                <input type="checkbox">
-                <span class="token-content">BELGRADE</span>
-            </label>
-            <label class="token-item group-green">
-                <input type="checkbox">
-                <span class="token-content">CONSTANTINOPLE</span>
-            </label>
-            <label class="token-item group-green">
-                <input type="checkbox">
-                <span class="token-content">SOFIA</span>
-            </label>
-            <label class="token-item group-green">
-                <input type="checkbox">
-                <span class="token-content">CONSTANTINOPLE</span>
-            </label>
-            <label class="token-item group-white">
-                <input type="checkbox">
-                <span class="token-content">MILAN</span>
-            </label>
-            <label class="token-item group-white">
-                <input type="checkbox">
-                <span class="token-content">CONSTANTINOPLE</span>
-            </label>
-        </div>
-    </div>
+	<div class="tracker-board">
 
-    <!-- Column 2: Signs & Relics -->
-    <div class="tracker-column column-teal">
-        <div class="column-header">
-            <div class="header-icon-box">👂</div>
-        </div>
-        <div class="token-grid cols-3">
-            <!-- Row 1 -->
-            <label class="token-item group-green icon-token">
-                <input type="checkbox">
-                <span class="token-content">🏆</span>
-            </label>
-            <label class="token-item group-green icon-token">
-                <input type="checkbox">
-                <span class="token-content">🏆</span>
-            </label>
-            <label class="token-item group-purple icon-token">
-                <input type="checkbox">
-                <span class="token-content">📜</span>
-            </label>
-            <!-- Row 2 -->
-            <label class="token-item group-green icon-token">
-                <input type="checkbox">
-                <span class="token-content">📖</span>
-            </label>
-            <label class="token-item group-green icon-token">
-                <input type="checkbox">
-                <span class="token-content">📖</span>
-            </label>
-            <label class="token-item group-black icon-token">
-                <input type="checkbox">
-                <span class="token-content">🌀</span>
-            </label>
-            <!-- Row 3 -->
-            <label class="token-item group-white icon-token">
-                <input type="checkbox">
-                <span class="token-content">🎭</span>
-            </label>
-            <label class="token-item group-pink icon-token">
-                <input type="checkbox">
-                <span class="token-content">🎭</span>
-            </label>
-            <label class="token-item group-white icon-token">
-                <input type="checkbox">
-                <span class="token-content">💀</span>
-            </label>
-            <!-- Row 4 -->
-            <label class="token-item group-white icon-token">
-                <input type="checkbox">
-                <span class="token-content">👥</span>
-            </label>
-            <label class="token-item group-white icon-token">
-                <input type="checkbox">
-                <span class="token-content">🐙</span>
-            </label>
-            <label class="token-item group-white icon-token">
-                <input type="checkbox">
-                <span class="token-content">🤝</span>
-            </label>
-        </div>
-    </div>
+		<!-- Column 1: Locations -->
+		<div class="tracker-column column-beige">
+			<div class="column-header">
+				<div class="header-icon-box">🎫</div>
+			</div>
+			<div class="token-grid">
+				<label class="token-item group-green">
+					<input type="checkbox">
+					<span class="token-content">BELGRADE</span>
+				</label>
+				<label class="token-item group-green">
+					<input type="checkbox">
+					<span class="token-content">CONSTANTINOPLE</span>
+				</label>
+				<label class="token-item group-green">
+					<input type="checkbox">
+					<span class="token-content">SOFIA</span>
+				</label>
+				<label class="token-item group-green">
+					<input type="checkbox">
+					<span class="token-content">CONSTANTINOPLE</span>
+				</label>
+				<label class="token-item group-white">
+					<input type="checkbox">
+					<span class="token-content">MILAN</span>
+				</label>
+				<label class="token-item group-white">
+					<input type="checkbox">
+					<span class="token-content">CONSTANTINOPLE</span>
+				</label>
+			</div>
+		</div>
 
-    <!-- Column 3: Items & Signs -->
-    <div class="tracker-column column-blue">
-        <div class="column-header">
-            <div class="header-icon-box">👁️</div>
-        </div>
-        <div class="token-grid cols-3">
-            <!-- Row 1 -->
-            <label class="token-item group-green icon-token">
-                <input type="checkbox">
-                <span class="token-content">🔮</span>
-            </label>
-            <label class="token-item group-green icon-token">
-                <input type="checkbox">
-                <span class="token-content">🔮</span>
-            </label>
-            <label class="token-item group-green icon-token">
-                <input type="checkbox">
-                <span class="token-content">🔮</span>
-            </label>
-            <!-- Row 2 -->
-            <label class="token-item group-green text-token">
-                <input type="checkbox">
-                <span class="token-content">WEIRD TATTOO</span>
-            </label>
-            <label class="token-item group-green text-token">
-                <input type="checkbox">
-                <span class="token-content">WEIRD TATTOO</span>
-            </label>
-            <label class="token-item group-green text-token">
-                <input type="checkbox">
-                <span class="token-content">WEIRD TATTOO</span>
-            </label>
-            <!-- Row 3 -->
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">BLOOD RED</span>
-            </label>
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">FACELESS WATCH</span>
-            </label>
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">TALKING PARROT</span>
-            </label>
-            <!-- Row 4 -->
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">BRASS KNOCKER</span>
-            </label>
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">VENETIAN MASK</span>
-            </label>
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">MATRYOSHKA DOLLS</span>
-            </label>
-            <!-- Row 5 -->
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">STAINED BINO</span>
-            </label>
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">SPHINX MOTH</span>
-            </label>
-            <label class="token-item group-white text-token">
-                <input type="checkbox">
-                <span class="token-content">ORNATE SHIP</span>
-            </label>
-        </div>
-    </div>
+		<!-- Column 2: Signs & Relics -->
+		<div class="tracker-column column-teal">
+			<div class="column-header">
+				<div class="header-icon-box">👂</div>
+			</div>
+			<div class="token-grid cols-3">
+				<!-- Row 1 -->
+				<label class="token-item group-green icon-token">
+					<input type="checkbox">
+					<span class="token-content">🏆</span>
+				</label>
+				<label class="token-item group-green icon-token">
+					<input type="checkbox">
+					<span class="token-content">🏆</span>
+				</label>
+				<label class="token-item group-purple icon-token">
+					<input type="checkbox">
+					<span class="token-content">📜</span>
+				</label>
+				<!-- Row 2 -->
+				<label class="token-item group-green icon-token">
+					<input type="checkbox">
+					<span class="token-content">📖</span>
+				</label>
+				<label class="token-item group-green icon-token">
+					<input type="checkbox">
+					<span class="token-content">📖</span>
+				</label>
+				<label class="token-item group-black icon-token">
+					<input type="checkbox">
+					<span class="token-content">🌀</span>
+				</label>
+				<!-- Row 3 -->
+				<label class="token-item group-white icon-token">
+					<input type="checkbox">
+					<span class="token-content">🎭</span>
+				</label>
+				<label class="token-item group-pink icon-token">
+					<input type="checkbox">
+					<span class="token-content">🎭</span>
+				</label>
+				<label class="token-item group-white icon-token">
+					<input type="checkbox">
+					<span class="token-content">💀</span>
+				</label>
+				<!-- Row 4 -->
+				<label class="token-item group-white icon-token">
+					<input type="checkbox">
+					<span class="token-content">👥</span>
+				</label>
+				<label class="token-item group-white icon-token">
+					<input type="checkbox">
+					<span class="token-content">🐙</span>
+				</label>
+				<label class="token-item group-white icon-token">
+					<input type="checkbox">
+					<span class="token-content">🤝</span>
+				</label>
+			</div>
+		</div>
 
-</div>
+		<!-- Column 3: Items & Signs -->
+		<div class="tracker-column column-blue">
+			<div class="column-header">
+				<div class="header-icon-box">👁️</div>
+			</div>
+			<div class="token-grid cols-3">
+				<!-- Row 1 -->
+				<label class="token-item group-green icon-token">
+					<input type="checkbox">
+					<span class="token-content">🔮</span>
+				</label>
+				<label class="token-item group-green icon-token">
+					<input type="checkbox">
+					<span class="token-content">🔮</span>
+				</label>
+				<label class="token-item group-green icon-token">
+					<input type="checkbox">
+					<span class="token-content">🔮</span>
+				</label>
+				<!-- Row 2 -->
+				<label class="token-item group-green text-token">
+					<input type="checkbox">
+					<span class="token-content">WEIRD TATTOO</span>
+				</label>
+				<label class="token-item group-green text-token">
+					<input type="checkbox">
+					<span class="token-content">WEIRD TATTOO</span>
+				</label>
+				<label class="token-item group-green text-token">
+					<input type="checkbox">
+					<span class="token-content">WEIRD TATTOO</span>
+				</label>
+				<!-- Row 3 -->
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">BLOOD RED</span>
+				</label>
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">FACELESS WATCH</span>
+				</label>
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">TALKING PARROT</span>
+				</label>
+				<!-- Row 4 -->
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">BRASS KNOCKER</span>
+				</label>
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">VENETIAN MASK</span>
+				</label>
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">MATRYOSHKA DOLLS</span>
+				</label>
+				<!-- Row 5 -->
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">STAINED BINO</span>
+				</label>
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">SPHINX MOTH</span>
+				</label>
+				<label class="token-item group-white text-token">
+					<input type="checkbox">
+					<span class="token-content">ORNATE SHIP</span>
+				</label>
+			</div>
+		</div>
+
+	</div>
 
 </body>
+
 </html>
