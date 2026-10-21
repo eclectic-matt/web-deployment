@@ -1,0 +1,153 @@
+/* Base Styles & Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #1a1c1e;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Master Board Container */
+.tracker-board {
+    display: flex;
+    gap: 4px;
+    background-color: #111;
+    padding: 4px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* Column Specific Backdrops */
+.tracker-column {
+    flex: 1;
+    min-height: 650px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.column-beige { background-color: #c9c5be; }
+.column-teal { background-color: #92b0ad; }
+.column-blue { background-color: #6a7d8a; }
+
+/* Upper Category Header Portrait Boxes */
+.column-header {
+    margin-bottom: 30px;
+}
+
+.header-icon-box {
+    width: 90px;
+    height: 90px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+}
+
+/* Grids for holding tokens */
+.token-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+
+/* Token Item Labels functioning as Checkboxes */
+.token-item {
+    aspect-ratio: 1 / 1;
+    position: relative;
+    cursor: pointer;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.2);
+    transition: transform 0.15s ease, filter 0.2s ease;
+}
+
+.token-item:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* Hide default html checkbox input completely */
+.token-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Inner Token Core Text / Icon Centering */
+.token-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 700;
+    padding: 4px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    user-select: none;
+}
+
+/* Token Variant Font Sizing definitions */
+.icon-token .token-content { font-size: 1.8rem; }
+.text-token .token-content { font-size: 0.65rem; letter-spacing: -0.2px; line-height: 1.1; }
+.column-beige .token-content { font-size: 0.55rem; font-weight: 800; }
+
+/* Base Background Group Themes matching token borders */
+.group-green  { background: linear-gradient(135deg, #426346, #2d4530); color: #e2ebe3; border: 2px solid #5a8a60; }
+.group-purple { background: linear-gradient(135deg, #593e63, #3f2c47); color: #faefff; border: 2px solid #7d588a; }
+.group-black  { background: linear-gradient(135deg, #2b2b2b, #141414); color: #e0e0e0; border: 2px solid #444444; }
+.group-pink   { background: linear-gradient(135deg, #7c485c, #593140); color: #ffeef4; border: 2px solid #ad6380; }
+.group-white  { background: linear-gradient(135deg, #878c8e, #5f6366); color: #ffffff; border: 2px solid #a3aab0; }
+
+/* Corner Triangle Accent Ribbons */
+.token-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 16px 16px;
+    border-color: transparent transparent #eddca4 transparent;
+    opacity: 0.85;
+    transition: border-color 0.2s;
+}
+
+/* Checkmark Visual State Adjustments when active */
+.token-item input:checked ~ .token-content {
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+.token-item input:checked {
+    box-shadow: 0 0 12px #eddca4;
+}
+
+/* Transform the lower corner ribbon to gold/yellow upon selection */
+.token-item input:checked ~ .token-content::before {
+    content: '✓';
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 0.85rem;
+    color: #ffd700;
+    text-shadow: 0 0 3px #000;
+}

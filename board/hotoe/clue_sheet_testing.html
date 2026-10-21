@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			let data = {
+				"backgrounds": [
+
+				],
+				"tickets": [
+					{
+						"bg": "green",
+						"burned": false,
+						"name": "Belgrade",
+						"img": "./img/ticket_green_noburn_fg.png"
+					},
+					{
+						"bg": "green",
+						"burned": true,
+						"name": "Constantinople",
+						"img": "./img/ticket_green_burned_fg.png"
+					},
+					{
+						"bg": "green",
+						"burned": false,
+						"name": "Sofia",
+						"img": "./img/ticket_green_noburn_fg.png"
+					},
+					{
+						"bg": "grey",
+						"burned": true,
+						"name": "Constantinople",
+						"img": "./img/ticket_grey_burned_fg.png"
+					},
+					{
+						"bg": "grey",
+						"burned": false,
+						"name": "Milan",
+						"img": "./img/ticket_grey_noburn_fg.png"
+					},
+					{
+						"bg": "grey",
+						"burned": true,
+						"name": "Constantinople",
+						"img": "./img/ticket_grey_burned_fg.png"
+					}
+				]
+			};
+
+			function init()
+			{
+				let main = document.getElementById('main');
+				main.innerHTML = null;
+
+				//Tickets (3 x 2)
+				//Desires (3 x 4)
+				//Features (3 x 5)
+
+				//Always 3 columns for each section
+				let columnCount = 3;
+				//The number of rows differs based on token type
+				let ticketRows = 2;
+				let desireRows = 4;
+				let featureRows = 5;
+
+				//OUTPUT TICKETS 
+				let ticketsSection = document.createElement('section');
+				ticketsSection.id = 'ticketsSection';
+				let ticketsHead = document.createElement('h2');
+				ticketsHead.innerHTML = 'Tickets';
+				ticketsSection.appendChild(ticketsHead);
+				for(let row = 0; row < ticketRows; row++){
+					for(let col = 0; col < columnCount; col++)
+					{
+						let ticketIndex = (row * columnCount) + col;
+						let ticketData = data.tickets[ticketIndex];
+						console.log('Row',row,'Col',col,'Data',ticketData);
+						let ticketDiv = document.createElement('div');
+						let ticketCheck = document.createElement('input');
+						ticketCheck.type = 'checkbox';
+						ticketDiv.appendChild(ticketCheck);
+						let ticketImg = document.createElement('img');
+						ticketImg.src = ticketData.img;
+						ticketDiv.appendChild(ticketImg);
+						let ticketTitle = document.createElement('h3');
+						ticketTitle.innerHTML = ticketData.name;
+						ticketDiv.appendChild(ticketTitle);
+						ticketsSection.appendChild(ticketDiv);
+					}
+				}
+				main.appendChild(ticketsSection);
+			}
+		</script>
+
+		<style>
+			div h3 {
+				font-family: sans-serif;
+				position: relative;
+				color: white;
+				top: -120px;
+				width: 166px;
+				text-align: center;
+				z-index: 100;
+			}
+			div input 
+			{
+				z-index: 200;
+				position: relative;
+				top: 50%;
+				left: -10%;
+				width: 100%;
+				height: 100%;
+				visibility: hidden;
+			}
+			div input:checked
+			{
+				visibility: visible;
+			}
+		</style>
+	</head>
+<body onload="init()">
+	<main id="main">
+
+	</main>
+</body>
+</html>
