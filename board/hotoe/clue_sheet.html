@@ -7,8 +7,8 @@
 	<title>Token Tracker Board</title>
 	<link rel="stylesheet" href="style.css">
 	<script>
-	  const localStorageName = 'tokenTrackerState';
-	  
+		const localStorageName = 'tokenTrackerState';
+		
 		function init()
 		{
 			let savedState = JSON.parse(localStorage.getItem(localStorageName)) || {};
@@ -48,179 +48,183 @@
 
 <body onload="init()">
 
-	<div class="tracker-board">
-    <button onclick="reset()">RESET</button>
-    
-    <br>
-    
-		<!-- Column 1: Locations -->
-		<div class="tracker-column column-beige">
-			<div class="column-header">
-				<div class="header-icon-box">🎫</div>
+	<!-- NEW MASTER WRAPPER CONTAINER -->
+	<div class="tracker-wrapper">
+
+		<div class="tracker-board">
+
+			<!-- Column 1: Locations -->
+			<div class="tracker-column column-beige">
+				<div class="column-header">
+					<div class="header-icon-box">🎫</div>
+				</div>
+				<div class="token-grid">
+					<label class="token-item group-green" id="ticket-belgrade">
+						<input type="checkbox">
+						<span class="token-content">BELGRADE</span>
+					</label>
+					<label class="token-item group-green" id="ticket-constantinople">
+						<input type="checkbox">
+						<span class="token-content">CONSTANTINOPLE</span>
+					</label>
+					<label class="token-item group-green" id="ticket-sofia">
+						<input type="checkbox">
+						<span class="token-content">SOFIA</span>
+					</label>
+					<label class="token-item group-white" id="ticket-constantinople-2">
+						<input type="checkbox">
+						<span class="token-content">CONSTANTINOPLE</span>
+					</label>
+					<label class="token-item group-white" id="ticket-milan">
+						<input type="checkbox">
+						<span class="token-content">MILAN</span>
+					</label>
+					<label class="token-item group-white" id="ticket-constantinople-3">
+						<input type="checkbox">
+						<span class="token-content">CONSTANTINOPLE</span>
+					</label>
+				</div>
 			</div>
-			<div class="token-grid">
-				<label class="token-item group-green" id="ticket-belgrade">
-					<input type="checkbox">
-					<span class="token-content">BELGRADE</span>
-				</label>
-				<label class="token-item group-green" id="ticket-constantinople">
-					<input type="checkbox">
-					<span class="token-content">CONSTANTINOPLE</span>
-				</label>
-				<label class="token-item group-green" id="ticket-sofia">
-					<input type="checkbox">
-					<span class="token-content">SOFIA</span>
-				</label>
-				<label class="token-item group-white" id="ticket-constantinople-2">
-					<input type="checkbox">
-					<span class="token-content">CONSTANTINOPLE</span>
-				</label>
-				<label class="token-item group-white" id="ticket-milan">
-					<input type="checkbox">
-					<span class="token-content">MILAN</span>
-				</label>
-				<label class="token-item group-white" id="ticket-constantinople-3">
-					<input type="checkbox">
-					<span class="token-content">CONSTANTINOPLE</span>
-				</label>
+
+			<!-- Column 2: Desire Clues -->
+			<div class="tracker-column column-teal">
+				<div class="column-header">
+					<div class="header-icon-box">👂</div>
+				</div>
+				<div class="token-grid cols-3">
+					<!-- Row 1 -->
+					<label class="token-item group-green icon-token" id="desire-artifact-1">
+						<input type="checkbox">
+						<span class="token-content">🏆</span>
+					</label>
+					<label class="token-item group-green icon-token" id="desire-artifact-2">
+						<input type="checkbox">
+						<span class="token-content">🏆</span>
+					</label>
+					<label class="token-item group-purple icon-token" id="desire-document-1">
+						<input type="checkbox">
+						<span class="token-content">📜</span>
+					</label>
+					<!-- Row 2 -->
+					<label class="token-item group-green icon-token" id="desire-book-1">
+						<input type="checkbox">
+						<span class="token-content">📖</span>
+					</label>
+					<label class="token-item group-green icon-token" id="desire-book-2">
+						<input type="checkbox">
+						<span class="token-content">📖</span>
+					</label>
+					<label class="token-item group-black icon-token" id="desire-object-1">
+						<input type="checkbox">
+						<span class="token-content">🌀</span>
+					</label>
+					<!-- Row 3 -->
+					<label class="token-item group-white icon-token" id="desire-theater-1">
+						<input type="checkbox">
+						<span class="token-content">🎭</span>
+					</label>
+					<label class="token-item group-pink icon-token" id="desire-theater-2">
+						<input type="checkbox">
+						<span class="token-content">🎭</span>
+					</label>
+					<label class="token-item group-white icon-token" id="desire-theater-3">
+						<input type="checkbox">
+						<span class="token-content">💀</span>
+					</label>
+					<!-- Row 4 -->
+					<label class="token-item group-white icon-token" id="desire-person-1">
+						<input type="checkbox">
+						<span class="token-content">👥</span>
+					</label>
+					<label class="token-item group-white icon-token" id="desire-person-2">
+						<input type="checkbox">
+						<span class="token-content">🐙</span>
+					</label>
+					<label class="token-item group-white icon-token" id="desire-person-3">
+						<input type="checkbox">
+						<span class="token-content">🤝</span>
+					</label>
+				</div>
 			</div>
+
+			<!-- Column 3: Feature Clues -->
+			<div class="tracker-column column-blue">
+				<div class="column-header">
+					<div class="header-icon-box">👁️</div>
+				</div>
+				<div class="token-grid cols-3">
+					<!-- Row 1 -->
+					<label class="token-item group-green text-token" id="desire-feature-1">
+						<input type="checkbox">
+						<span class="token-content">ELDER SIGN</span>
+					</label>
+					<label class="token-item group-green text-token" id="desire-feature-2">
+						<input type="checkbox">
+						<span class="token-content">ELDER SIGN</span>
+					</label>
+					<label class="token-item group-green text-token" id="desire-feature-3">
+						<input type="checkbox">
+						<span class="token-content">ELDER SIGN</span>
+					</label>
+					<!-- Row 2 -->
+					<label class="token-item group-green text-token" id="desire-feature-4">
+						<input type="checkbox">
+						<span class="token-content">WEIRD TATTOO</span>
+					</label>
+					<label class="token-item group-green text-token" id="desire-feature-5">
+						<input type="checkbox">
+						<span class="token-content">WEIRD TATTOO</span>
+					</label>
+					<label class="token-item group-green text-token" id="desire-feature-6">
+						<input type="checkbox">
+						<span class="token-content">WEIRD TATTOO</span>
+					</label>
+					<!-- Row 3 -->
+					<label class="token-item group-white text-token" id="desire-feature-7">
+						<input type="checkbox">
+						<span class="token-content">BLOOD RED FEZ</span>
+					</label>
+					<label class="token-item group-white text-token" id="desire-feature-8">
+						<input type="checkbox">
+						<span class="token-content">HANDLESS POCKET WATCH</span>
+					</label>
+					<label class="token-item group-white text-token" id="desire-feature-9">
+						<input type="checkbox">
+						<span class="token-content">TALKING PARROT</span>
+					</label>
+					<!-- Row 4 -->
+					<label class="token-item group-white text-token" id="desire-feature-10">
+						<input type="checkbox">
+						<span class="token-content">BRASS DOOR KNOCKER</span>
+					</label>
+					<label class="token-item group-white text-token" id="desire-feature-11">
+						<input type="checkbox">
+						<span class="token-content">VENETIAN MASK</span>
+					</label>
+					<label class="token-item group-white text-token" id="desire-feature-12">
+						<input type="checkbox">
+						<span class="token-content">MATRYOSHKA DOLLS</span>
+					</label>
+					<!-- Row 5 -->
+					<label class="token-item group-white text-token" id="desire-feature-13">
+						<input type="checkbox">
+						<span class="token-content">STAINED BINOCULARS</span>
+					</label>
+					<label class="token-item group-white text-token" id="desire-feature-14">
+						<input type="checkbox">
+						<span class="token-content">SPHINX'S NOSE</span>
+					</label>
+					<label class="token-item group-white text-token" id="desire-feature-15">
+						<input type="checkbox">
+						<span class="token-content">ORNATE TIN OF SNUFF</span>
+					</label>
+				</div>
+			</div>
+			
 		</div>
 
-		<!-- Column 2: Desire Clues -->
-		<div class="tracker-column column-teal">
-			<div class="column-header">
-				<div class="header-icon-box">👂</div>
-			</div>
-			<div class="token-grid cols-3">
-				<!-- Row 1 -->
-				<label class="token-item group-green icon-token" id="desire-artifact-1">
-					<input type="checkbox">
-					<span class="token-content">🏆</span>
-				</label>
-				<label class="token-item group-green icon-token" id="desire-artifact-2">
-					<input type="checkbox">
-					<span class="token-content">🏆</span>
-				</label>
-				<label class="token-item group-purple icon-token" id="desire-document-1">
-					<input type="checkbox">
-					<span class="token-content">📜</span>
-				</label>
-				<!-- Row 2 -->
-				<label class="token-item group-green icon-token" id="desire-book-1">
-					<input type="checkbox">
-					<span class="token-content">📖</span>
-				</label>
-				<label class="token-item group-green icon-token" id="desire-book-2">
-					<input type="checkbox">
-					<span class="token-content">📖</span>
-				</label>
-				<label class="token-item group-black icon-token" id="desire-object-1">
-					<input type="checkbox">
-					<span class="token-content">🌀</span>
-				</label>
-				<!-- Row 3 -->
-				<label class="token-item group-white icon-token" id="desire-theater-1">
-					<input type="checkbox">
-					<span class="token-content">🎭</span>
-				</label>
-				<label class="token-item group-pink icon-token" id="desire-theater-2">
-					<input type="checkbox">
-					<span class="token-content">🎭</span>
-				</label>
-				<label class="token-item group-white icon-token" id="desire-theater-3">
-					<input type="checkbox">
-					<span class="token-content">💀</span>
-				</label>
-				<!-- Row 4 -->
-				<label class="token-item group-white icon-token" id="desire-person-1">
-					<input type="checkbox">
-					<span class="token-content">👥</span>
-				</label>
-				<label class="token-item group-white icon-token" id="desire-person-2">
-					<input type="checkbox">
-					<span class="token-content">🐙</span>
-				</label>
-				<label class="token-item group-white icon-token" id="desire-person-3">
-					<input type="checkbox">
-					<span class="token-content">🤝</span>
-				</label>
-			</div>
-		</div>
-
-		<!-- Column 3: Feature Clues -->
-		<div class="tracker-column column-blue">
-			<div class="column-header">
-				<div class="header-icon-box">👁️</div>
-			</div>
-			<div class="token-grid cols-3">
-				<!-- Row 1 -->
-				<label class="token-item group-green text-token" id="desire-feature-1">
-					<input type="checkbox">
-					<span class="token-content">ELDER SIGN</span>
-				</label>
-				<label class="token-item group-green text-token" id="desire-feature-2">
-					<input type="checkbox">
-					<span class="token-content">ELDER SIGN</span>
-				</label>
-				<label class="token-item group-green text-token" id="desire-feature-3">
-					<input type="checkbox">
-					<span class="token-content">ELDER SIGN</span>
-				</label>
-				<!-- Row 2 -->
-				<label class="token-item group-green text-token" id="desire-feature-4">
-					<input type="checkbox">
-					<span class="token-content">WEIRD TATTOO</span>
-				</label>
-				<label class="token-item group-green text-token" id="desire-feature-5">
-					<input type="checkbox">
-					<span class="token-content">WEIRD TATTOO</span>
-				</label>
-				<label class="token-item group-green text-token" id="desire-feature-6">
-					<input type="checkbox">
-					<span class="token-content">WEIRD TATTOO</span>
-				</label>
-				<!-- Row 3 -->
-				<label class="token-item group-white text-token" id="desire-feature-7">
-					<input type="checkbox">
-					<span class="token-content">BLOOD RED FEZ</span>
-				</label>
-				<label class="token-item group-white text-token" id="desire-feature-8">
-					<input type="checkbox">
-					<span class="token-content">HANDLESS POCKET WATCH</span>
-				</label>
-				<label class="token-item group-white text-token" id="desire-feature-9">
-					<input type="checkbox">
-					<span class="token-content">TALKING PARROT</span>
-				</label>
-				<!-- Row 4 -->
-				<label class="token-item group-white text-token" id="desire-feature-10">
-					<input type="checkbox">
-					<span class="token-content">BRASS DOOR KNOCKER</span>
-				</label>
-				<label class="token-item group-white text-token" id="desire-feature-11">
-					<input type="checkbox">
-					<span class="token-content">VENETIAN MASK</span>
-				</label>
-				<label class="token-item group-white text-token" id="desire-feature-12">
-					<input type="checkbox">
-					<span class="token-content">MATRYOSHKA DOLLS</span>
-				</label>
-				<!-- Row 5 -->
-				<label class="token-item group-white text-token" id="desire-feature-13">
-					<input type="checkbox">
-					<span class="token-content">STAINED BINOCULARS</span>
-				</label>
-				<label class="token-item group-white text-token" id="desire-feature-14">
-					<input type="checkbox">
-					<span class="token-content">SPHINX'S NOSE</span>
-				</label>
-				<label class="token-item group-white text-token" id="desire-feature-15">
-					<input type="checkbox">
-					<span class="token-content">ORNATE TIN OF SNUFF</span>
-				</label>
-			</div>
-		</div>
-
+		<button class="action-button" onclick="reset()">RESET</button>
+		
 	</div>
 
 </body>
