@@ -1,0 +1,101 @@
+{
+	"name": "TerrorScape Data File",
+	"maps": [
+		{
+			"name": "Mansion",
+			"expansion": "base"
+		},
+		{
+			"name": "Cabin",
+			"expansion": "feral_instincts"
+		},
+		{
+			"name": "Laboratory",
+			"expansion": "amophous_peril"
+		},
+		{
+			"name": "Castle",
+			"expansion": "lethal_immortals"
+		},
+		{
+			"name": "Tomb",
+			"expansion": "putrefied_enmity"
+		}
+	],
+	"survivors": [
+		{
+			"name": "William Hooper",
+			"expansion": "base"
+		},
+		{
+			"name": "Marco Carven",
+			"expansion": "base"
+		},
+		{
+			"name": "Anna Kendrick",
+			"expansion": "base"
+		},
+		{
+			"name": "Sophia Scott",
+			"expansion": "base"
+		},
+		{
+			"name": "Johnson Nispel",
+			"expansion": "base"
+		},
+		{
+			"name": "Ophelia",
+			"expansion": "putrefied_enmity"
+		},
+		{
+			"name": "Dylan",
+			"expansion": "putrefied_enmity"
+		},
+		{
+			"name": "Caleb",
+			"expansion": "putrefied_enmity"
+		},
+		{
+			"name": "George",
+			"expansion": "lethal_immortals"
+		}
+	],
+	"killers": [
+		{
+			"name": "Butcher",
+			"expansion": "base"
+		},
+		{
+			"name": "Murderer",
+			"expansion": "base"
+		},
+		{
+			"name": "Spectre",
+			"expansion": "base"
+		},
+		{
+			"name": "Werewolf",
+			"expansion": "feral_instincts"
+		},
+		{
+			"name": "Huntress",
+			"expansion": "feral_instincts"
+		},
+		{
+			"name": "Strangler",
+			"expansion": "amophous_peril"
+		},
+		{
+			"name": "Unidentified",
+			"expansion": "amophous_peril"
+		},
+		{
+			"name": "Statues",
+			"expansion": "lethal_immortals"
+		},
+		{
+			"name": "Queen",
+			"expansion": "putrefied_enmity"
+		}
+	]
+}
