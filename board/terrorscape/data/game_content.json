@@ -1,0 +1,195 @@
+{
+	"name": "TerrorScape Data File",
+	"maps": [
+		{
+			"id": "m01",
+			"name": "Mansion",
+			"expansion": "base",
+			"special_rules": [],
+			"special_rooms": [],
+			"key_rooms": [],
+			"radio_rooms": [],
+			"main_exit": "m01r01",
+			"hidden_exit": "m01r02"
+		},
+		{
+			"id": "m02",
+			"name": "Cabin",
+			"expansion": "feral_instincts"
+		},
+		{
+			"id": "m03",
+			"name": "Laboratory",
+			"expansion": "amophous_peril"
+		},
+		{
+			"id": "m04",
+			"name": "Castle",
+			"expansion": "lethal_immortals"
+		},
+		{
+			"id": "m05",
+			"name": "Tomb",
+			"expansion": "putrefied_enmity"
+		}
+	],
+	"survivors": [
+		{
+			"id": "s01",
+			"name": "William Hooper",
+			"expansion": "base",
+			"starts_with": [
+
+			],
+			"special_abilities": [
+				{
+					"name": "Persistence",
+					"description": "+1 defense if you are not using any item to increase your defense."
+				},
+				{
+					"name": "Sprint",
+					"description": "Special Action: [MOVE] x3 (Make noise in the destination)."
+				}
+			],
+			"colour": "yellow"
+		},
+		{
+			"id": "s02",
+			"name": "Marco Carven",
+			"expansion": "base",
+			"starts_with": [],
+			"special_abilities": [],
+			"colour": "yellow"
+		},
+		{
+			"id": "s03",
+			"name": "Anna Kendrick",
+			"expansion": "base",
+			"starts_with": [],
+			"special_abilities": [],
+			"colour": "yellow"
+		},
+		{
+			"id": "s04",
+			"name": "Sophia Scott",
+			"expansion": "base",
+			"starts_with": [
+				"Sophia's Camera"
+			],
+			"special_abilities": [
+				{
+					"name": "Ingenious",
+					"description": "Starts with Sophia's Camera."
+				},
+				{
+					"name": "Observative",
+					"description": "Travel through a Secret Passage (this becomes an Extra Action if you are holding a Flashlight)."
+				}
+			],
+			"colour": "red"
+		},
+		{
+			"id": "s05",
+			"name": "Johnson Nispel",
+			"expansion": "base",
+			"starts_with": [],
+			"special_abilities": [],
+			"colour": "yellow"
+		},
+		{
+			"id": "s06",
+			"name": "Ophelia Rumero",
+			"expansion": "putrefied_enmity",
+			"starts_with": [],
+			"special_abilities": [],
+			"colour": "yellow"
+		},
+		{
+			"id": "s07",
+			"name": "Dylan Wan",
+			"expansion": "putrefied_enmity",
+			"starts_with": [],
+			"special_abilities": [],
+			"colour": "yellow"
+		},
+		{
+			"id": "s08",
+			"name": "Caleb Peele",
+			"expansion": "putrefied_enmity",
+			"starts_with": [],
+			"special_abilities": [],
+			"colour": "yellow"
+		},
+		{
+			"id": "s09",
+			"name": "George Carpenter",
+			"expansion": "lethal_immortals",
+			"starts_with": [],
+			"special_abilities": [],
+			"colour": "yellow"
+		}
+	],
+	"killers": [
+		{
+			"id": "k01",
+			"name": "Butcher",
+			"expansion": "base",
+			"description": "The Butcher is a terrifying killer who hunts survivors with relentless ferocity. His presence instills fear, and his abilities allow him to track and eliminate survivors efficiently.",
+			"starting_strength": 3,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "The Butcher can XXX."
+				},
+				{
+					"level": 2,
+					"ability": "The Butcher can XXX."
+				},
+				{
+					"level": 3,
+					"ability": "The Butcher can XXX."
+				}
+			]
+		},
+		{
+			"id": "k02",
+			"name": "Murderer",
+			"expansion": "base"
+		},
+		{
+			"id": "k03",
+			"name": "Spectre",
+			"expansion": "base"
+		},
+		{
+			"id": "k04",
+			"name": "Werewolf",
+			"expansion": "feral_instincts"
+		},
+		{
+			"id": "k05",
+			"name": "Huntress",
+			"expansion": "feral_instincts"
+		},
+		{
+			"id": "k06",
+			"name": "Strangler",
+			"expansion": "amophous_peril"
+		},
+		{
+			"id": "k07",
+			"name": "Unidentified",
+			"expansion": "amophous_peril"
+		},
+		{
+			"id": "k08",
+			"name": "Statues",
+			"expansion": "lethal_immortals"
+		},
+		{
+			"id": "k09",
+			"name": "Queen",
+			"expansion": "putrefied_enmity"
+		}
+	]
+}

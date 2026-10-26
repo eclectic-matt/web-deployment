@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="./js/terrorscape.js" defer></script>
+</head>
+<body onload="init()">
+	<h1>Terrorscape Summary</h1>
+	<section id="map">
+		<section id="choose-map">
+			<h2>Choose a Map</h2>
+			<select id="map-options" onchange="updateMap()"></select>
+		</section>
+	</section>
+	<section id="killer">
+		<section id="choose-killer">
+			<h2>Choose a Killer</h2>
+			<select id="killer-options" onchange="updateKiller()"></select>
+		</section>
+	</section>
+	<section id="survivors">
+		<section id="choose-survivors">
+			<h2>Choose Survivors</h2>
+			<select id="survivor-options" multiple max="3" onchange="updateSurvivors()"></select>
+		</section>
+		<section id="survivors-summary">
+			<h2>Survivors Summary</h2>
+		</section>
+	</section>
+</body>
+</html>
