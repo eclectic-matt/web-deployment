@@ -12,7 +12,8 @@ function init()
 //Called in init() to load JSON data
 async function getData() 
 {
-	const url = "/board/terrorscape/data/terrorscape.json";
+	const url = "https://eclectic-matt.github.io/web-deployment/board/terrorscape/data/terrorscape.json";
+	console.log(`Fetching data from ${url}...`);
 	try 
 	{
 		const response = await fetch(url);
@@ -23,6 +24,7 @@ async function getData()
 
 		const result = await response.json();
 		//console.log(result);
+		console.log(`Data fetched successfully from ${url}`);
 		populateData(result);
 	}
 	catch (error)
