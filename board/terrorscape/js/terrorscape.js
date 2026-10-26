@@ -13,7 +13,7 @@ function init()
 async function getData() 
 {
 	//const url = "https://eclectic-matt.github.io/web-deployment/board/terrorscape/data/terrorscape.json";
-	const url = "../data/terrorscape.json";
+	const url = "../terrorscape/data/terrorscape.json";
 	console.log(`Fetching data from ${url}...`);
 	try 
 	{
