@@ -12,7 +12,7 @@ function init()
 //Called in init() to load JSON data
 async function getData() 
 {
-	const url = "../data/terrorscape.json";
+	const url = "/board/terrorscape/data/terrorscape.json";
 	try 
 	{
 		const response = await fetch(url);
