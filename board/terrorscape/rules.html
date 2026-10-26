@@ -12,21 +12,33 @@
 			<h2>Choose a Map</h2>
 			<select id="map-options" onchange="updateMap()"></select>
 		</section>
+		<section id="map-summary">
+			<h2>Map Summary</h2>
+		</section>
 	</section>
 	<section id="killer">
 		<section id="choose-killer">
 			<h2>Choose a Killer</h2>
 			<select id="killer-options" onchange="updateKiller()"></select>
 		</section>
+		<section id="killer-summary">
+			<h2>Killer Summary</h2>
+		</section>
 	</section>
 	<section id="survivors">
 		<section id="choose-survivors">
 			<h2>Choose Survivors</h2>
-			<select id="survivor-options" multiple max="3" onchange="updateSurvivors()"></select>
+			<select id="survivor-options" multiple onchange="updateSurvivors()"></select>
 		</section>
 		<section id="survivors-summary">
 			<h2>Survivors Summary</h2>
 		</section>
+	</section>
+	<section id="actions">
+		<button id="reset-button" onclick="resetSelections()">Reset Selections</button>
+		<button id="generate-button" onclick="generateSummary()">Generate Summary</button>
+		<button id="generate-link-button" onclick="generateLink()">Generate Link</button>
+		<p id="generated-link"></p>
 	</section>
 </body>
 </html>
