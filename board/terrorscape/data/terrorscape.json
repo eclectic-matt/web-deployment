@@ -1,36 +1,127 @@
 {
 	"name": "TerrorScape Data File",
+	"expansions": [
+	  {
+	    "id": "base",
+	    "full_name": "Base Game - TerrorScape",
+	    "name": "Base Game"
+	  },
+	  {
+	    "id": "putrefied_enmity",
+	    "full_name": "TerrorScape Expansion: Putrefied Emnity",
+	    "name": "Putrefied Emnity"
+	  },
+	  {
+	    "id": "feral_instincts",
+	    "full_name": "TerrorScape Expansion: Feral Instincts",
+	    "name": "Feral Instincts"
+	  },
+	  {
+	    "id": "amorphous_peril",
+	    "full_name": "TerrorScape Expansion: Amorphous Peril",
+	    "name": "Amorphous Peril"
+	  },
+	  {
+	    "id": "lethal_immortals",
+	    "full_name": "TerrorScape Expansion: Lethal Immortals",
+	    "name": "Lethal Immortals"
+	  }
+	],
 	"maps": [
 		{
 			"id": "m01",
 			"name": "Mansion",
 			"expansion": "base",
-			"special_rules": [],
+			"special_rules": [
+			  "Secret Passages: B1-G2, B5-G5"
+			],
 			"special_rooms": [],
-			"key_rooms": [],
-			"radio_rooms": [],
-			"main_exit": "m01r01",
-			"hidden_exit": "m01r02"
+			"key_rooms": [
+			  "R2", 
+			  "G4", 
+			  "B4"
+			],
+			"radio_rooms": [
+			  "B1"
+			],
+			"main_exit": "R1",
+			"hidden_exit": "G5"
 		},
 		{
 			"id": "m02",
 			"name": "Cabin",
-			"expansion": "feral_instincts"
+			"expansion": "feral_instincts",
+			"special_rules": [
+			  "Secret Passages: B1-G2, B5-G5"
+			],
+			"special_rooms": [],
+			"key_rooms": [
+			  "R2", 
+			  "G4", 
+			  "B4"
+			],
+			"radio_rooms": [
+			  "B1"
+			],
+			"main_exit": "R1",
+			"hidden_exit": "G5"
 		},
 		{
 			"id": "m03",
 			"name": "Laboratory",
-			"expansion": "amophous_peril"
+			"expansion": "amorphous_peril",
+						"special_rules": [
+			  "Secret Passages: B1-G2, B5-G5"
+			],
+			"special_rooms": [],
+			"key_rooms": [
+			  "R2",
+			  "G4",
+			  "B4"
+			],
+			"radio_rooms": [
+			  "B1"
+			],
+			"main_exit": "R1",
+			"hidden_exit": "G5"
 		},
 		{
 			"id": "m04",
 			"name": "Castle",
-			"expansion": "lethal_immortals"
+			"expansion": "lethal_immortals",
+						"special_rules": [
+			  "Secret Passages: B1-G2, B5-G5"
+			],
+			"special_rooms": [],
+			"key_rooms": [
+			  "R2",
+			  "G4",
+			  "B4"
+			],
+			"radio_rooms": [
+			  "B1"
+			],
+			"main_exit": "R1",
+			"hidden_exit": "G5"
 		},
 		{
 			"id": "m05",
 			"name": "Tomb",
-			"expansion": "putrefied_enmity"
+			"expansion": "putrefied_enmity",
+						"special_rules": [
+			  "Secret Passages: B1-G2, B5-G5"
+			],
+			"special_rooms": [],
+			"key_rooms": [
+			  "R2",
+			  "G4",
+			  "B4"
+			],
+			"radio_rooms": [
+			  "B1"
+			],
+			"main_exit": "R1",
+			"hidden_exit": "G5"
 		}
 	],
 	"survivors": [
@@ -134,7 +225,7 @@
 			"id": "k01",
 			"name": "Butcher",
 			"expansion": "base",
-			"description": "The Butcher is a terrifying killer who hunts survivors with relentless ferocity. His presence instills fear, and his abilities allow him to track and eliminate survivors efficiently.",
+			"description": "The Butcher is a terrifying killer who hunts survivors with relentless ferocity. He does not use stealth but instead relies on his fear-inducing abilities to track the Survivors.",
 			"starting_strength": 3,
 			"level_abilities": [
 				{
@@ -174,12 +265,12 @@
 		{
 			"id": "k06",
 			"name": "Strangler",
-			"expansion": "amophous_peril"
+			"expansion": "amorphous_peril"
 		},
 		{
 			"id": "k07",
 			"name": "Unidentified",
-			"expansion": "amophous_peril"
+			"expansion": "amorphous_peril"
 		},
 		{
 			"id": "k08",

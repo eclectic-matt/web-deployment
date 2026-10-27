@@ -1,13 +1,13 @@
 var killers = [];
 var survivors = [];
 var maps = [];
+var expansions = [];
 
 //Called on body.onload
 function init()
 {
 	getData();
 	//populateData(result);
-	applyQueryParams();
 }
 
 //Called in init() to load JSON data
@@ -27,7 +27,10 @@ async function getData()
 		const result = await response.json();
 		//console.log(result);
 		console.log(`Data fetched successfully from ${url}`);
+		//Then populate options
 		populateData(result);
+		//Then apply URL filters
+		applyQueryParams();
 	}
 	catch (error)
 	{
@@ -38,36 +41,50 @@ async function getData()
 function applyQueryParams()
 {
 	const urlParams = new URLSearchParams(window.location.search);
-	if(urlParams.length === 0) return; //No query params, nothing to do
+	// FIX: Use .size instead of .length
+	if (urlParams.size === 0) return; 
 
-	//Set selected map
+  console.log('Query Param Parsing on', window.location.path + window.location.search);
+	// Cache DOM elements to avoid querying the document repeatedly
+	const mapSelect = document.getElementById("map-options");
+	const killerSelect = document.getElementById("killer-options");
+	const survivorSelect = document.getElementById("survivor-options");
+
+	// Set selected map
 	const mapParam = urlParams.get('map');
-	let selectedMapIndex = Array.from(document.getElementById("map-options").options).findIndex(option => option.value === mapParam);
-	document.getElementById("map-options").selectedIndex = selectedMapIndex;
-	//Set selected killer
+	console.log('queryParamsLoaded - map', mapParam);
+	if (mapParam && mapSelect) {
+		let selectedMapIndex = Array.from(mapSelect.options).findIndex(option => option.value === mapParam);
+		if (selectedMapIndex !== -1) mapSelect.selectedIndex = selectedMapIndex;
+	}
+
+	// Set selected killer
 	const killerParam = urlParams.get('killer');
-	let selectedKillerIndex = Array.from(document.getElementById("killer-options").options).findIndex(option => option.value === killerParam);
-	document.getElementById("killer-options").selectedIndex = selectedKillerIndex;
-	//Set selected survivors
+	console.log('queryParamsLoaded - killer', killerParam);
+	if (killerParam && killerSelect) {
+		let selectedKillerIndex = Array.from(killerSelect.options).findIndex(option => option.value === killerParam);
+		if (selectedKillerIndex !== -1) killerSelect.selectedIndex = selectedKillerIndex;
+	}
+
+	// Set selected survivors
 	const survivorsParam = urlParams.get('survivors');
-	if (survivorsParam)
+	console.log('queryParamsLoaded - survivors', survivorsParam);
+	if (survivorsParam && survivorSelect)
 	{
-		console.log(`Survivors param: ${survivorsParam}`);
 		let selectedSurvivorIds = survivorsParam.split(',');
-		console.log(`All survivor IDs: ${Array.from(document.getElementById("survivor-options").options).map(option => option.value)}`);
-		let selectedSurvivorIndices = selectedSurvivorIds.map(
-			id => Array.from(
-				document.getElementById("survivor-options").options
-			).findIndex(
-				option => option.value === id
-			)
-		);
-		console.log(`Selected survivor indices: ${selectedSurvivorIndices}`);
+		let selectedSurvivorIndices = selectedSurvivorIds
+			.map(id => Array.from(survivorSelect.options).findIndex(option => option.value === id))
+			.filter(index => index !== -1); // FIX: Filter out missing/invalid options
+
 		selectedSurvivorIndices.forEach(index => {
-			document.getElementById("survivor-options").options[index].selected = true;
+			survivorSelect.options[index].selected = true;
 		});
 	}
-	generateSummary();
+
+	// Ensure the summary function exists before calling
+	if (typeof generateSummary === "function") {
+		generateSummary();
+	}
 }
 
 //Fill the JS global vars with data from the JSON file and populate the select elements
@@ -77,10 +94,17 @@ function populateData(data)
 	killers = data.killers;
 	survivors = data.survivors;
 	maps = data.maps;
+	expansions = data.expansions;
+	
 	//Populate choices for the user to select from
 	populateSelect(maps, "map");
 	populateSelect(killers, "killer");
 	populateSelect(survivors, "survivor");
+}
+
+function getExpansionName(id)
+{
+  return expansions.find(i => i.id === id).name;
 }
 
 //Populate the select elements with options from the data
@@ -90,7 +114,7 @@ function populateSelect(data, type)
 	let options = "";
 
 	data.forEach(item => {
-		options += `<option value="${item.id}">${item.name} (${item.expansion})</option>`;
+		options += `<option value="${item.id}">${item.name} (${getExpansionName(item.expansion)})</option>`;
 	});
 
 	select.innerHTML = options;
@@ -114,7 +138,24 @@ function updateKiller()
 	let selectedKillerContainer = document.getElementById("killer-summary");
 	let selectedKillerId = document.getElementById("killer-options").value;
 	let selectedKiller = killers.find(k => k.id === selectedKillerId);
-	selectedKillerContainer.innerHTML = "<h2>Selected Killer</h2>" + (selectedKiller ? `<p>${selectedKiller.name} (${selectedKiller.expansion})</p>` : '');
+	
+	if(selectedKiller != undefined)
+	{
+	  selectedKillerContainer.innerHTML = "<h2>Selected Killer</h2>";
+  	//killer details
+  	selectedKillerContainer.innerHTML += `<p>${selectedKiller.name} (${selectedKiller.expansion})</p>`;
+  	selectedKillerContainer.innerHTML += `<em>${selectedKiller.description}</em>`;
+  	selectedKillerContainer.innerHTML += `<p><b>Starting Strength: ${selectedKiller.starting_strength}</b></p>`;
+  	//levels
+    let rows = "";
+    for(let i = 0; i < selectedKiller.level_abilities.length; i++)
+    {
+      let level = selectedKiller.level_abilities[i];
+      rows += `<tr><td>${level.level}</td><td>${level.ability}</td></tr>`;
+    }
+    selectedKillerContainer.innerHTML += `<table><tr><th>Level</th><th>Ability</th></tr>${rows}</table>`;
+	}
+	//selectedKillerContainer.innerHTML = "<h2>Selected Killer</h2>" + (selectedKiller ? `<p>${selectedKiller.name} (${selectedKiller.expansion})</p>` : '');
 }
 
 function updateMap()
@@ -149,7 +190,7 @@ function generateLink()
 	let selectedMapId = document.getElementById("map-options").value;
 	let selectedKillerId = document.getElementById("killer-options").value;
 	let selectedSurvivorIds = Array.from(document.getElementById("survivor-options").selectedOptions).map(option => option.value);
-	//alert(`Generated link: ` + window.location.origin + window.location.pathname + `?map=${selectedMapId}&killer=${selectedKillerId}&survivors=${selectedSurvivorIds.join(',')}`);
+	let linkUrl = `${window.location.origin}${window.location.pathname}?map=${selectedMapId}&killer=${selectedKillerId}&survivors=${selectedSurvivorIds.join(',')}`;
 	let generatedLinkContainer = document.getElementById("generated-link");
-	generatedLinkContainer.innerHTML = `<p>Generated link: <a href="${window.location.origin}${window.location.pathname}?map=${selectedMapId}&killer=${selectedKillerId}&survivors=${selectedSurvivorIds.join(',')}">${window.location.origin}${window.location.pathname}?map=${selectedMapId}&killer=${selectedKillerId}&survivors=${selectedSurvivorIds.join(',')}</a></p>`;
+	generatedLinkContainer.innerHTML = `<p>Generated link: <a href="${linkUrl}">${linkUrl}</a></p>`;
 }
