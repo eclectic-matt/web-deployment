@@ -1,31 +1,31 @@
 {
 	"name": "TerrorScape Data File",
 	"expansions": [
-	  {
-	    "id": "base",
-	    "full_name": "Base Game - TerrorScape",
-	    "name": "Base Game"
-	  },
-	  {
-	    "id": "putrefied_enmity",
-	    "full_name": "TerrorScape Expansion: Putrefied Emnity",
-	    "name": "Putrefied Emnity"
-	  },
-	  {
-	    "id": "feral_instincts",
-	    "full_name": "TerrorScape Expansion: Feral Instincts",
-	    "name": "Feral Instincts"
-	  },
-	  {
-	    "id": "amorphous_peril",
-	    "full_name": "TerrorScape Expansion: Amorphous Peril",
-	    "name": "Amorphous Peril"
-	  },
-	  {
-	    "id": "lethal_immortals",
-	    "full_name": "TerrorScape Expansion: Lethal Immortals",
-	    "name": "Lethal Immortals"
-	  }
+		{
+			"id": "base",
+			"full_name": "Base Game - TerrorScape",
+			"name": "Base Game"
+		},
+		{
+			"id": "putrefied_enmity",
+			"full_name": "TerrorScape Expansion: Putrefied Emnity",
+			"name": "Putrefied Emnity"
+		},
+		{
+			"id": "feral_instincts",
+			"full_name": "TerrorScape Expansion: Feral Instincts",
+			"name": "Feral Instincts"
+		},
+		{
+			"id": "amorphous_peril",
+			"full_name": "TerrorScape Expansion: Amorphous Peril",
+			"name": "Amorphous Peril"
+		},
+		{
+			"id": "lethal_immortals",
+			"full_name": "TerrorScape Expansion: Lethal Immortals",
+			"name": "Lethal Immortals"
+		}
 	],
 	"maps": [
 		{
@@ -33,16 +33,16 @@
 			"name": "Mansion",
 			"expansion": "base",
 			"special_rules": [
-			  "Secret Passages: B1-G2, B5-G5"
+				"Secret Passages: B1-G2, B5-G5"
 			],
 			"special_rooms": [],
 			"key_rooms": [
-			  "R2", 
-			  "G4", 
-			  "B4"
+				"R2",
+				"G4",
+				"B4"
 			],
 			"radio_rooms": [
-			  "B1"
+				"B1"
 			],
 			"main_exit": "R1",
 			"hidden_exit": "G5"
@@ -52,16 +52,16 @@
 			"name": "Cabin",
 			"expansion": "feral_instincts",
 			"special_rules": [
-			  "Secret Passages: B1-G2, B5-G5"
+				"Secret Passages: B1-G2, B5-G5"
 			],
 			"special_rooms": [],
 			"key_rooms": [
-			  "R2", 
-			  "G4", 
-			  "B4"
+				"R2",
+				"G4",
+				"B4"
 			],
 			"radio_rooms": [
-			  "B1"
+				"B1"
 			],
 			"main_exit": "R1",
 			"hidden_exit": "G5"
@@ -70,17 +70,17 @@
 			"id": "m03",
 			"name": "Laboratory",
 			"expansion": "amorphous_peril",
-						"special_rules": [
-			  "Secret Passages: B1-G2, B5-G5"
+			"special_rules": [
+				"Secret Passages: B1-G2, B5-G5"
 			],
 			"special_rooms": [],
 			"key_rooms": [
-			  "R2",
-			  "G4",
-			  "B4"
+				"R2",
+				"G4",
+				"B4"
 			],
 			"radio_rooms": [
-			  "B1"
+				"B1"
 			],
 			"main_exit": "R1",
 			"hidden_exit": "G5"
@@ -89,17 +89,17 @@
 			"id": "m04",
 			"name": "Castle",
 			"expansion": "lethal_immortals",
-						"special_rules": [
-			  "Secret Passages: B1-G2, B5-G5"
+			"special_rules": [
+				"Secret Passages: B1-G2, B5-G5"
 			],
 			"special_rooms": [],
 			"key_rooms": [
-			  "R2",
-			  "G4",
-			  "B4"
+				"R2",
+				"G4",
+				"B4"
 			],
 			"radio_rooms": [
-			  "B1"
+				"B1"
 			],
 			"main_exit": "R1",
 			"hidden_exit": "G5"
@@ -108,17 +108,17 @@
 			"id": "m05",
 			"name": "Tomb",
 			"expansion": "putrefied_enmity",
-						"special_rules": [
-			  "Secret Passages: B1-G2, B5-G5"
+			"special_rules": [
+				"Secret Passages: B1-G2, B5-G5"
 			],
 			"special_rooms": [],
 			"key_rooms": [
-			  "R2",
-			  "G4",
-			  "B4"
+				"R2",
+				"G4",
+				"B4"
 			],
 			"radio_rooms": [
-			  "B1"
+				"B1"
 			],
 			"main_exit": "R1",
 			"hidden_exit": "G5"
@@ -129,9 +129,7 @@
 			"id": "s01",
 			"name": "William Hooper",
 			"expansion": "base",
-			"starts_with": [
-
-			],
+			"starts_with": [],
 			"special_abilities": [
 				{
 					"name": "Persistence",
@@ -226,26 +224,58 @@
 			"name": "Butcher",
 			"expansion": "base",
 			"description": "The Butcher is a terrifying killer who hunts survivors with relentless ferocity. He does not use stealth but instead relies on his fear-inducing abilities to track the Survivors.",
-			"starting_strength": 3,
+			"starting_strength": 5,
 			"level_abilities": [
 				{
 					"level": 1,
-					"ability": "The Butcher can XXX."
+					"ability": "N/A."
 				},
 				{
 					"level": 2,
-					"ability": "The Butcher can XXX."
+					"ability": "+1 Strength."
 				},
 				{
 					"level": 3,
-					"ability": "The Butcher can XXX."
+					"ability": "Unlock 'Brutal Rage'."
+				},
+				{
+					"level": 4,
+					"ability": "'Revving Chainsaw' becomes fast."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
 				}
 			]
 		},
 		{
 			"id": "k02",
 			"name": "Murderer",
-			"expansion": "base"
+			"expansion": "base",
+			"description": "The Murderer XXX.",
+			"starting_strength": 4,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "N/A"
+				},
+				{
+					"level": 2,
+					"ability": "If you encounter any Survivor when you are reappearing, +3 Strength this turn."
+				},
+				{
+					"level": 3,
+					"ability": "Unlock 'Death Blossom'."
+				},
+				{
+					"level": 4,
+					"ability": "+1 Strength. [BLOCK] x4 in any location (can be used in multiple locations)."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
+				}
+			]
 		},
 		{
 			"id": "k03",

@@ -1,29 +1,53 @@
-body {
-  box-sizing: border-box;
+body 
+{
+	box-sizing: border-box;
 }
 
-section#map, section#killer, section#survivors {
-  padding: 0 10px;
-  border: 3px outset grey;
-  border-radius: 15px;
+section#map,
+section#killer,
+section#survivors 
+{
+	padding: 0 10px;
+	border: 3px outset grey;
+	border-radius: 15px;
 }
-section#map {
-  background-color: #777;
-  color: black;
+
+section#map 
+{
+	background-color: #777;
+	color: black;
 }
-section#killer {
-  background-color: #333;
-  color: white;
+
+section#killer 
+{
+	background-color: #333;
+	color: white;
 }
-section#survivors {
-  background-color: #ddd;
-  color: black;
+
+section#survivors
+{
+	background-color: #ddd;
+	color: black;
 }
 
 
-select {
-  /*width: calc(100% - 30px);*/
-  width: 90%;
-  padding: 5px;
-  margin: 0 10px;
+select 
+{
+	/*width: calc(100% - 30px);*/
+	width: 90%;
+	padding: 5px;
+	margin: 0 10px;
+}
+
+table 
+{
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+tr, td, th 
+{
+	border: 1px solid white;
+	border-collapse: collapse;
+	text-align: center;
+	padding: 2px 5px;
 }
