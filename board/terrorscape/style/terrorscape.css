@@ -1,24 +1,24 @@
-body 
+body
 {
 	box-sizing: border-box;
 }
 
 section#map,
 section#killer,
-section#survivors 
+section#survivors
 {
 	padding: 0 10px;
 	border: 3px outset grey;
 	border-radius: 15px;
 }
 
-section#map 
+section#map
 {
 	background-color: #777;
 	color: black;
 }
 
-section#killer 
+section#killer
 {
 	background-color: #333;
 	color: white;
@@ -31,7 +31,7 @@ section#survivors
 }
 
 
-select 
+select
 {
 	/*width: calc(100% - 30px);*/
 	width: 90%;
@@ -39,12 +39,15 @@ select
 	margin: 0 10px;
 }
 
-table 
+table
 {
 	border: 1px solid white;
 	border-collapse: collapse;
 }
-tr, td, th 
+
+tr,
+td,
+th
 {
 	border: 1px solid white;
 	border-collapse: collapse;

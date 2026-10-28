@@ -280,37 +280,205 @@
 		{
 			"id": "k03",
 			"name": "Spectre",
-			"expansion": "base"
+			"expansion": "base",
+			"description": "The Murderer XXX.",
+			"starting_strength": 4,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "N/A"
+				},
+				{
+					"level": 2,
+					"ability": "If you encounter any Survivor when you are reappearing, +3 Strength this turn."
+				},
+				{
+					"level": 3,
+					"ability": "Unlock 'Death Blossom'."
+				},
+				{
+					"level": 4,
+					"ability": "+1 Strength. [BLOCK] x4 in any location (can be used in multiple locations)."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
+				}
+			]
 		},
 		{
 			"id": "k04",
 			"name": "Werewolf",
-			"expansion": "feral_instincts"
+			"expansion": "feral_instincts",
+			"description": "The Murderer XXX.",
+			"starting_strength": 4,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "N/A"
+				},
+				{
+					"level": 2,
+					"ability": "If you encounter any Survivor when you are reappearing, +3 Strength this turn."
+				},
+				{
+					"level": 3,
+					"ability": "Unlock 'Death Blossom'."
+				},
+				{
+					"level": 4,
+					"ability": "+1 Strength. [BLOCK] x4 in any location (can be used in multiple locations)."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
+				}
+			]
 		},
 		{
 			"id": "k05",
 			"name": "Huntress",
-			"expansion": "feral_instincts"
+			"expansion": "feral_instincts",
+			"description": "The Murderer XXX.",
+			"starting_strength": 4,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "N/A"
+				},
+				{
+					"level": 2,
+					"ability": "If you encounter any Survivor when you are reappearing, +3 Strength this turn."
+				},
+				{
+					"level": 3,
+					"ability": "Unlock 'Death Blossom'."
+				},
+				{
+					"level": 4,
+					"ability": "+1 Strength. [BLOCK] x4 in any location (can be used in multiple locations)."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
+				}
+			]
 		},
 		{
 			"id": "k06",
 			"name": "Strangler",
-			"expansion": "amorphous_peril"
+			"expansion": "amorphous_peril",
+			"description": "The Murderer XXX.",
+			"starting_strength": 4,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "N/A"
+				},
+				{
+					"level": 2,
+					"ability": "If you encounter any Survivor when you are reappearing, +3 Strength this turn."
+				},
+				{
+					"level": 3,
+					"ability": "Unlock 'Death Blossom'."
+				},
+				{
+					"level": 4,
+					"ability": "+1 Strength. [BLOCK] x4 in any location (can be used in multiple locations)."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
+				}
+			]
 		},
 		{
 			"id": "k07",
 			"name": "Unidentified",
-			"expansion": "amorphous_peril"
+			"expansion": "amorphous_peril",
+			"description": "The Murderer XXX.",
+			"starting_strength": 4,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "N/A"
+				},
+				{
+					"level": 2,
+					"ability": "If you encounter any Survivor when you are reappearing, +3 Strength this turn."
+				},
+				{
+					"level": 3,
+					"ability": "Unlock 'Death Blossom'."
+				},
+				{
+					"level": 4,
+					"ability": "+1 Strength. [BLOCK] x4 in any location (can be used in multiple locations)."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
+				}
+			]
 		},
 		{
 			"id": "k08",
 			"name": "Statues",
-			"expansion": "lethal_immortals"
+			"expansion": "lethal_immortals",
+			"description": "The Murderer XXX.",
+			"starting_strength": 4,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "N/A"
+				},
+				{
+					"level": 2,
+					"ability": "If you encounter any Survivor when you are reappearing, +3 Strength this turn."
+				},
+				{
+					"level": 3,
+					"ability": "Unlock 'Death Blossom'."
+				},
+				{
+					"level": 4,
+					"ability": "+1 Strength. [BLOCK] x4 in any location (can be used in multiple locations)."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
+				}
+			]
 		},
 		{
 			"id": "k09",
 			"name": "Queen",
-			"expansion": "putrefied_enmity"
+			"expansion": "putrefied_enmity",
+			"description": "The Murderer XXX.",
+			"starting_strength": 4,
+			"level_abilities": [
+				{
+					"level": 1,
+					"ability": "N/A"
+				},
+				{
+					"level": 2,
+					"ability": "If you encounter any Survivor when you are reappearing, +3 Strength this turn."
+				},
+				{
+					"level": 3,
+					"ability": "Unlock 'Death Blossom'."
+				},
+				{
+					"level": 4,
+					"ability": "+1 Strength. [BLOCK] x4 in any location (can be used in multiple locations)."
+				},
+				{
+					"level": 5,
+					"ability": "When an encounter occurs, damage all target(s) before you attack."
+				}
+			]
 		}
 	]
 }
